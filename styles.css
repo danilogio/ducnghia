@@ -149,10 +149,19 @@ h3 {
 	margin-bottom: 10px;
 }
 
+
 h4 {
 	padding-bottom: 10px;
 	font-size: 15px;
 	color: #999;
+}
+
+h4 span span
+{
+	color: Black;
+	padding-bottom: 10px;
+	font-size: 13px;
+	font-weight:normal;
 }
 
 h5 {
@@ -452,4 +461,13 @@ div.block_details_text
     width: 14px;
     border: 0;
     background: none;
+}
+
+#other_news a
+{
+	color: Blue;
+}
+#other_news a:hover
+{
+	color: #0B519A;
 }
