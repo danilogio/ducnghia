@@ -1,0 +1,151 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Trung tâm luyện thi đại học Đức Nghĩa</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="outer-container">
+            <div id="container">
+        <div id="header">
+            <h1><a href="/">Trung tâm Luyện thi Đức Nghĩa</a></h1>
+        </div>
+        <div id="nav">
+        	<div id="center-ul">
+                <ul>
+                    <li><asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="./default.aspx">Trang chủ</asp:HyperLink></li>
+            	    <li><asp:HyperLink ID="HpkLogin" runat="server" NavigateUrl="#">Gửi bài</asp:HyperLink></li>
+            	    <li><asp:HyperLink ID="HykSearch" runat="server" NavigateUrl="#">Tìm kiếm</asp:HyperLink></li>
+            	    <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#" Visible="true">Admin</asp:HyperLink></li>
+            	    <li><asp:HyperLink ID="HpkInformation" runat="server" NavigateUrl="#">Thông tin</asp:HyperLink></li>
+            	    <li><asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
+                </ul>
+			</div>
+        </div>
+        <div id="body">
+        
+            <div id="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+                               
+            </div>
+            
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <h4>Tìm kiếm</h4>
+                        <ul>
+                            <li>
+                                <asp:DropDownList ID="ltsItem" runat="server" ></asp:DropDownList>
+                            </li>
+                            
+                            <li>
+                                <form method="get" class="searchform" action="Default.aspx">
+                                    <p>
+                                        <asp:TextBox ID="txtBoxSearch" runat="server">Nhập nội dung</asp:TextBox>
+                                        <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton"/>
+                                    </p>
+                                </form>	
+                            </li>
+                        </ul>
+                    </li>
+                    
+					<li>
+                        <h4><span>Luyện thi đại học</span></h4>
+                        <ul class="blocklist">
+                            <li><asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <h4><span>Tin học</span></h4>
+                        <ul class="blocklist">
+                            <li><asp:HyperLink ID="HpkITLibLecture" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkITLibExercise" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkITLibSubject" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <h4><span>Anh văn</span></h4>
+                        <ul class="blocklist">
+                            <li><asp:HyperLink ID="HpkELLibLecture" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkELLibExercise" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkELLibSubject" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <h4>Tài liệu mới</h4>
+                        <ul>
+                            <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
+                            <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
+                            <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a> - brilliant premium templates</li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <h4>About</h4>
+                        <ul>
+                            <li>
+                                <p style="margin: 0;">Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <h4>Sponsors</h4>
+                        <ul>
+                            <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
+                            <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
+                            <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a> - brilliant premium templates</li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <center>
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/1.gif"/>
+                        </center>
+                    </li>
+                    
+                     <li>
+                        <center>
+                        <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/2.gif"/>
+                        </center>
+                         
+                    </li>
+                    
+                     <li>
+                        <center>
+                        <asp:Image ID="Image3" runat="server" ImageUrl="~/imagesAd/3.gif" DescriptionUrl="www.google.com"/>
+                        </center>
+                    </li>
+                    
+                </ul> 
+            </div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="footer">
+            <div class="footer-content">
+                <p>&copy; DucNghia 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a></p>
+                <p>Trung tâm luyện thi Đức Nghĩa 119/4 Trần Phú, Quận 5 - ĐT: 090.959.6002</p>
+            </div>
+        </div>
+    </div>
+        </div>
+<div style="text-align: center; font-size: 0.75em; color:Maroon">Design by Do viet trung 2011.</div>
+</form>
+</body>
+</html>
