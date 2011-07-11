@@ -26,12 +26,14 @@
                     <h3>Cơ chế gửi bài tại thư viện trực tuyến Đức Nghĩa</h3>
                     <h5>Post ngày 9/7/1011 bởi <b>Thầy Đức Nghĩa</b></h5>
                     <p>Để đảm bảo sự trong sạch và nâng cao chất lượng nội dung Thư viện trực tuyến Violet, BQT xin thông báo rõ một số quy chế mới sau: *Không được đăng các tài liệu phản động hoặc mang nội dung chính trị nhạy cảm, các tác phẩm văn học bị cấm phát hành, phim ảnh khiêu dâm. *Không được đăng các tài liệu hoặc gửi ý kiến mang thông tin lừa đảo, ví dụ như lừa người dùng chuyển tiền vào tài khoản điện thoại. *Không được gửi các tài liệu mang thông tin nói xấu, bôi...
-                    <a href="#">Xem tiếp>></a></p>
+                    <a href="News.aspx">Xem tiếp>></a></p>
                     <ul>
                         <li><a href="#">Trung Tâm Đức Nghĩa chào mừng ngày Nhà giáo Việt Nam</a><div class="date"> (20-11-2011)</div></li>
                         <li><a href="#">Trung tâm Đức Nghĩa chào mừng năm học mới</a><div class="date"> (20-11-2011)</div></li>
                         <li><a href="#">Thông báo địa điểm họp mặt thành viên</a><div class="date"> (19-11-2011)</div></li>
                     </ul>
+                    <br />
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#">Xem tất cả>></asp:HyperLink>
                 </div>
                 
                 

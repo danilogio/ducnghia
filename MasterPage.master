@@ -18,7 +18,7 @@
                 <div id="nav">
         	        <div id="center-ul">
                         <ul>
-                            <li><asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="./default.aspx">Trang chủ</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HpkLogin" runat="server" NavigateUrl="#">Gửi bài</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HykSearch" runat="server" NavigateUrl="#">Tìm kiếm</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#" Visible="true">Admin</asp:HyperLink></li>
@@ -57,7 +57,8 @@
                                                 </div>
                                             </div>
                                             
-                                            <div id="divLoginButton" style="text-align:center;" >
+                                            <p></p>
+                                            <div id="divLoginButton" style="text-align:center;margin-top:5px;" >
                                                 <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" CssClass="searchsubmit formbutton"/>
                                                 <asp:Button ID="btnSendLesson" runat="server" Text="Gửi bài" Visible="false" CssClass="searchsubmit formbutton"/>
                                             </div>
