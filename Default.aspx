@@ -16,7 +16,7 @@
                         <li>IE 7 and 8</li>
                         <li>Chrome</li>
                     </ul>
-                    <p>Mọi thắc mắc xin liện hệ email: <a href="@mailto:trungtamducnghia@gmail.com">trungtamducnghia@gmail.com</a></p>
+                    <p>Mọi thắc mắc xin liện hệ email: <a href="mailto:trungtamducnghia@gmail.com">trungtamducnghia@gmail.com</a></p>
                     <p>Hoặc gửi mail cho chúng tôi tại phần Liên hệ</p>  
                 </div>
                 
