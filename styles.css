@@ -446,9 +446,10 @@ div.block_details_text
 { width: 310px;}
 
 .form_settings .checkbox
-{ margin: 4px 0; 
-  padding: 0; 
-  width: 14px;
-  border: 0;
-  background: none;}
-  
+{ 
+    margin: 4px 0;
+    padding: 0; 
+    width: 14px;
+    border: 0;
+    background: none;
+}

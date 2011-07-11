@@ -13,6 +13,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
         ltsItem.Items.Add("Luyện thi đại học");
         ltsItem.Items.Add("Anh văn");
         ltsItem.Items.Add("Tin học");
-        ltsItem.Width = 163;
+        ltsItem.Width = 150;
     }
 }
