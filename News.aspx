@@ -23,7 +23,7 @@
                 <li>Các nội dung được đưa vào các thư mục môn học (Toán, Ngữ Văn, Vật lý,…) thì phải đúng là nội dung chuyên môn tương ứng. Các thông tin tham khảo không mang tính chuyên môn phải được đưa vào thư mục “Bài giảng khác” hoặc “Tư liệu khác”.</li>
                 <li>Các thành viên đưa bài giảng của người khác phải đề rõ thông tin tác giả (mục Nguồn gốc), đồng thời trước khi đăng bài thì cần tìm kiếm xem bài đó đã đăng chưa. Tuyệt đối không được download bài của người khác rồi upload lại để lấy điểm, trừ khi đã được sửa đổi, đóng góp ý tưởng của riêng mình khoảng 30%.</li>
                 <li>Trước đây, điểm của các thành viên được cộng 10 điểm mỗi tuần (nếu dùng hết). Từ nay, hệ thống sẽ cộng thêm 30 điểm mỗi tuần (nếu dùng hết). Như vậy, mỗi thành viên có thể download từ 1 đến 30 bài giảng mỗi tuần mà không mất điểm nào.</li>
-                <li>Thành viên nào vi phạm quy định trên thì các tài liệu sẽ được xóa mà không cần thông báo, đồng thời nếu vi phạm nhiều lần thì sẽ bị khóa tài khoản.
+                <li>Thành viên nào vi phạm quy định trên thì các tài liệu sẽ được xóa mà không cần thông báo, đồng thời nếu vi phạm nhiều lần thì sẽ bị khóa tài khoản.</li>
             </ul>
             <p>
             Rất mong được sự hỗ trợ của các thành viên
@@ -47,7 +47,14 @@
         </div>
         <hr />
         <div id="linhk_news">
-            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/News.aspx?action=news&id=3">Thông báo địa điểm họp mặt thành viên</asp:HyperLink><div class="date"> (19-11-2011)</div>
+            <ul>
+                <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/News.aspx?action=news&id=4">Thông báo địa điểm họp mặt thành viên</asp:HyperLink><div class="date"> (19-11-2011)</div></li>
+                <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/News.aspx?action=news&id=5">Thông báo bảo trì server</asp:HyperLink><div class="date"> (19-11-2011)</div></li>
+            </ul>
+        </div>
+        <hr />
+        <div id="older_news">
+            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/News.aspx?action=oldernews&id=5">Các tin cũ hơn>></asp:HyperLink>
         </div>
     </div>
 </asp:Content>

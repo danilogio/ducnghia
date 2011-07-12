@@ -7,6 +7,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Trung tâm luyện thi đại học Đức Nghĩa</title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link type="text/css" href="css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />	
+	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	        $('#datepicker').datepicker({
+	            inline: true
+	        });
+
+	        $("#accordion").accordion();
+
+	    });
+    </script>
 </head>
 <body>
     <form id="frmMain" runat="server">
@@ -39,7 +52,7 @@
                                 <h4>Đăng nhập để gửi bài</h4>
                                 <ul>
                                     <li id="idLogin">
-                                        <form method="get" class="searchform" action="Default.aspx">
+                                        <form method="get" class="searchform" action="Home.aspx">
                                             <div id="divUsername">
                                                 <div id="divUsernameLabel" style="float: left; width: 40%">
                                                     <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:" ></asp:Label>
@@ -75,7 +88,7 @@
                                     </li>
                                     
                                     <li>
-                                        <form method="get" class="searchform" action="Default.aspx">
+                                        <form method="get" class="searchform" action="Home.aspx">
                                             <p>
                                                 <asp:TextBox ID="txtBoxSearch" runat="server">Nhập nội dung</asp:TextBox>
                                                 <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton"/>
@@ -84,7 +97,29 @@
                                     </li>
                                 </ul>
                             </li>
-                    
+                            
+                           <%-- <li visible="false">
+                                <h4>Chức năng</h4>
+                                <div id="accordion">
+                                   <h3><a href="#">Luyện thi đại học</a></h3>
+                                   <div>
+                                      <ul class="blocklist">
+                                        <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
+                                        <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
+                                        <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                                    </ul>
+                                   </div>
+                                   <h3><a href="#">Section 2</a></h3>
+                                   <div>
+                                      Section 2 content
+                                   </div>
+                                   <h3><a href="#">Section 3</a></h3>
+                                   <div>
+                                      Section 3 content
+                                   </div>
+                                </div>
+                            </li>--%>
+                            
 					        <li>
                                 <h4><span>Luyện thi đại học</span></h4>
                                 <ul class="blocklist">
@@ -140,6 +175,10 @@
                             </li>
                             
                             <li>
+                                <div id="datepicker"></div>
+                            </li>
+                            
+                            <li>
                                 <center>
                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/1.gif"/>
                                 </center>
@@ -154,7 +193,7 @@
                             
                              <li>
                                 <center>
-                                <asp:Image ID="Image3" runat="server" ImageUrl="~/imagesAd/3.gif" DescriptionUrl="www.google.com"/>
+                                <asp:Image ID="Image3" runat="server" ImageUrl="~/imagesAd/3.gif"/>
                                 </center>
                             </li>
                     
