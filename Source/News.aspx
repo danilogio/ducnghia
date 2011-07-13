@@ -34,7 +34,7 @@
     <br />
     <h4><span><span><b>Các tin tức khác:</b></span></span></h4>    
     <div id="other_news">
-        <div class="block_text">
+        <%--<div class="block_text">
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/News.aspx?action=news&id=2"><h3>Đức Nghĩa chào mừng ngày Nhà giáo Việt Nam</h3></asp:HyperLink>
             <h4><span><span>Hòa chung không khí tưng bừng chào mừng ngày Nhà giáo Việt Nam 20-11, công ty Cổ phần Tin học Bạch Kim xin gửi tới quý thầy, cô lời chúc sức khỏe, niềm vui và hạnh phúc!</span></span></h4>
             <h5>Post ngày 9/7/1011 bởi <b>Thầy Đức Nghĩa</b></h5>
@@ -44,7 +44,7 @@
             <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/News.aspx?action=news&id=3"><h3>Đức Nghĩa chào mừng năm học mới</h3></asp:HyperLink>
             <h4><span><span>Sau khi ra mắt vào 10/05/2010, phần mềm Violet 1.7 với nhiều tính năng mới so với các phiên bản trước đã nhận được sự quan tâm rất lớn của các thầy, cô giáo trên toàn quốc. Bộ GD&ĐT cũng đã trang bị phần mềm Violet 1.7 cho một số trường khó khăn thông qua các Dự án Phát triển THCS và THPT.</span></span></h4>
             <h5>Post ngày 8/7/1011 bởi <b>Thầy Đức Nghĩa</b></h5>
-        </div>
+        </div>--%>
         <hr />
         <div id="linhk_news">
             <ul>
