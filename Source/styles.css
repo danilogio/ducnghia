@@ -383,6 +383,10 @@ li ol, li ul {
 	margin-bottom:13px;
 	margin-left:5px;
 }
+#div_boudarySignupForm.block_text
+{
+	height:200px;
+}
 #ExamLesson.block_text, #ItLesson.block_text, #EnglishLesson.block_text
 {
 	height:200px;
