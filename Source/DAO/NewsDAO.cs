@@ -5,8 +5,7 @@ using System.Text;
 
 namespace DAO
 {
-    public class DBHelper
+    class NewsDAO
     {
-        
     }
 }
