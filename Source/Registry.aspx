@@ -42,11 +42,13 @@
                 </div>
             </div>
             
-            <div style="width: 30%;float:left">
-                <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
-            </div>
-            <div style="width: 69%;float:left">
-                <asp:TextBox ID="txtboxEmail" runat="server" Width="250px"></asp:TextBox>
+            <div>
+                <div style="width: 30%;float:left">
+                    <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
+                </div>
+                <div style="width: 69%;float:left">
+                    <asp:TextBox ID="txtboxEmail" runat="server" Width="250px"></asp:TextBox>
+                </div>
             </div>
         </div>    
         
