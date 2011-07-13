@@ -21,10 +21,10 @@
                              </asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" 
                                                 runat="server" 
-                                                ErrorMessage="Tên đăng nhập không được chứa khoảng trắng"
+                                                ErrorMessage="Tên đăng nhập từ 6 tới 20 kí tự và không được chứa khoảng trắng"
                                                 ControlToValidate="txtboxLoginName"
                                                 Display="None"
-                                                ValidationExpression="^[a-zA-Z'.\S]{1,40}$">
+                                                ValidationExpression="^[a-zA-Z'.\S]{6,20}$">
                 </asp:RegularExpressionValidator>
             </p>
             <p><span>Tên hiển thị:</span><asp:TextBox ID="txtboxDisplayName" runat="server"></asp:TextBox>
@@ -38,14 +38,14 @@
             <p><span>Mật khẩu:</span><asp:TextBox ID="txtboxPassword" runat="server" TextMode="Password" MaxLength="30"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" 
                                             runat="server" 
-                                            ErrorMessage="Vui lòng nhập tên hiển thị"
+                                            ErrorMessage="Vui lòng nhập mật khẩu"
                                             ControlToValidate="txtboxPassword"
                                             Display="none">
                                             </asp:RequiredFieldValidator>
             </p>
-            <p><span>Nhập lại mật khẩu:</span><asp:TextBox ID="txtboxContactMessage" runat="server" TextMode="Password"></asp:TextBox>
+            <p><span>Nhập lại mật khẩu:</span><asp:TextBox ID="txtboxConfirmPassword" runat="server" TextMode="Password"></asp:TextBox>
                 <asp:CompareValidator ID="compPass" runat="server"
-                                      ControlToValidate="txtboxContactMessage"
+                                      ControlToValidate="txtboxConfirmPassword"
                                       Operator="Equal"
                                       ControlToCompare="txtboxPassword"
                                       Text="Mật khẩu được nhập lại không giống nhau."
