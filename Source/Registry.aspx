@@ -84,7 +84,11 @@
                                             CaptchaWidth="200" 
                                             CaptchaLineNoise="High" 
                                             CaptchaMinTimeout="5" 
-                                            CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" CaptchaFontWarping="Medium" /></center>
+                                            CaptchaMaxTimeout="240" 
+                                            BorderColor="#333300" 
+                                            BorderWidth="2px" 
+                                            CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"
+                                            CaptchaFontWarping="Low" /></center>
                 <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha"
                                                       runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" 
