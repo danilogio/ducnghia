@@ -19,9 +19,81 @@
 	        $("#accordion").accordion();
 
 	    });
+
+
+	    function setPosition(id, position) {
+	        var store = {
+	            ram: {
+	                top: 0,
+	                left: 0,
+	                right: 0,
+	                bottom: 0
+	            },
+	            rom: {
+	                top: null,
+	                left: null,
+	                right: null,
+	                bottom: null
+	            }
+	        };
+
+	        for (var i in position) { store.rom[i] = position[i]; }
+	        var element = document.getElementById(id);
+	        for (i in store) { element[i] = store[i]; }
+	        element.rom.move = function() {
+	            if (window.innerHeight) {
+	                var topPage = window.pageYOffset;
+	                var leftPage = window.pageXOffset;
+	                var rightPage = leftPage + window.innerWidth - element.offsetWidth;
+	                var bottomPage = topPage + window.innerHeight - element.offsetHeight;
+	            }
+	            else {
+	                var topPage = document.body.scrollTop;
+	                var leftPage = document.body.scrollLeft;
+	                var rightPage = leftPage + document.body.clientWidth - element.offsetWidth;
+	                var bottomPage = topPage + document.body.clientHeight - element.offsetHeight;
+	            }
+
+	            element.style.position = "absolute";
+	            if (element.rom.top != null) {
+	                element.ram.top += Math.round((topPage + element.rom.top - element.ram.top) / 20);
+	                element.style.top = element.ram.top;
+	            }
+	            if (element.rom.left != null) {
+	                element.ram.left += Math.round((leftPage + element.rom.left - element.ram.left) / 20);
+	                element.style.left = element.ram.left;
+	            }
+	            if (element.rom.right != null) {
+	                element.ram.right += Math.round((rightPage - element.rom.right - element.ram.right) / 20);
+	                element.style.left = element.ram.right;
+	            }
+	            if (element.rom.bottom != null) {
+	                element.ram.bottom += Math.round((bottomPage - element.rom.bottom - element.ram.bottom) / 20);
+	                element.style.top = element.ram.bottom;
+	            }
+	            setTimeout("document.getElementById('" + element.id + "').rom.move()", 10);
+	        };
+	        element.rom.move();
+	    }
+
+	    setPosition("a", { top: 0, left: 903 });
+	    setPosition("c", { top: 0, left: 0 });
+
     </script>
+    
+    <style type="text/css">
+        .float {
+        width: 108px;
+        height: 780px;
+        border: solid 1px white;
+        }
+</style>
 </head>
 <body>
+<%--<div style="width: 992px;height: 0px;">
+<div id="a" class="float"><a HREF="http://r26.imgfast.net/users/2615/25/32/47/avatars/4368-13.jpg" TARGET="_blank"><img src="imagesAd/2.gif" border="0"></a><br><a HREF="http://timnhac.6vn.biz[URL="http://files.myopera.com/hahuy2008/trangchu/hack.htm"] (http://files.myopera.com/hahuy2008/trangchu/hack.htm)" TARGET="_blank"><img src="imagesAd/3.gif" border="0"></a></div>
+<div id="c" class="float"><a href="http://media.6vn.biz" target="_blank"><img src="anhnen/qc2.jpg" border="0"></a></div>
+</div>--%>
     <form id="frmMain" runat="server">
         <div id="outer-container">
             <div id="container">
@@ -202,11 +274,22 @@
                     <div class="clear"></div>
                 </div>
                 <div id="footer">
-            <div class="footer-content">
-                <p>&copy; DucNghia 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a></p>
-                <p>Trung tâm luyện thi Đức Nghĩa 119/4 Trần Phú, Quận 5 - ĐT: 090.959.6002</p>
-            </div>
-        </div>
+                    <div class="footer-content">
+                        <p>&copy; DucNghia 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a></p>
+                        <p>Trung tâm luyện thi Đức Nghĩa 119/4 Trần Phú, Quận 5 - ĐT: 090.959.6002</p>
+                    </div>
+               </div>
+               
+               <div style="position: fixed; bottom: 50px; left: 0px;background-color:transparent;">
+<a href="main_image3.jpg"><img src="http://r26.imgfast.net/users/2615/25/32/47/avatars/4368-13.jpg" alt=""></a>
+</div>
+<p>
+<div style="position: fixed; bottom: 50px; right: 0px;background-color:transparent;">
+<a href="main_image3.jpg"><img src="http://r26.imgfast.net/users/2615/25/32/47/avatars/4368-13.jpg" alt=""></a>
+</div></p>
+
+
+               
             </div>
         </div>
         <div style="text-align: center; font-size: 0.75em; color:gray">Design by Do viet trung 2011.</div>
