@@ -47,7 +47,7 @@
                                                 ErrorMessage="Mật khẩu phải có từ 6 ký tự trở lên"
                                                 ControlToValidate="txtboxPassword"
                                                 Display="None"
-                                                ValidationExpression="^{6,30}$">
+                                                ValidationExpression="^.{6,30}$">
                 </asp:RegularExpressionValidator>
             </p>
             <p><span>Nhập lại mật khẩu:</span><asp:TextBox ID="txtboxConfirmPassword" runat="server" TextMode="Password"></asp:TextBox>
