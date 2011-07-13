@@ -50,8 +50,13 @@
                                       ControlToCompare="txtboxPassword"
                                       Text="Mật khẩu được nhập lại không giống nhau."
                                       Display="None" />
-            </p>
-            <p><span>Email:</span><asp:TextBox ID="txtboxEmail" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" 
+                                            runat="server" 
+                                            ErrorMessage="Vui lòng nhập xác nhận mật khẩu"
+                                            ControlToValidate="txtboxConfirmPassword"
+                                            Display="none"></asp:RequiredFieldValidator>
+                                            
+                <p><span>Email:</span><asp:TextBox ID="txtboxEmail" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" 
                                             runat="server" 
                                             ErrorMessage="Vui lòng nhập email liên lạc"
@@ -64,13 +69,25 @@
                                                 ErrorMessage="Enter a valid Email"
                                                 Display="None"/>
             </p>
-            <p><center><cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5" CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5" CaptchaMaxTimeout="240" /></center><span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server"></asp:TextBox>
+            <p><center><cc1:CaptchaControl ID="ccJoin" 
+                                            runat="server" 
+                                            CaptchaBackgroundNoise="High" 
+                                            CaptchaLength="5" 
+                                            CaptchaHeight="60" 
+                                            CaptchaWidth="200" 
+                                            CaptchaLineNoise="High" 
+                                            CaptchaMinTimeout="5" 
+                                            CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" /></center>
+                <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha"
+                                                      runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" 
                                             runat="server" 
                                             ErrorMessage="Vui lòng nhập mã xác nhận"
                                             ControlToValidate="txtboxCaptcha"
                                             Display="none">
                                             </asp:RequiredFieldValidator> 
+                
+                
             </p>
             <p style="padding-top: 15px"><span>&nbsp;</span><asp:Button ID="btnSubmitSignup" runat="server" Text="Đăng ký" CssClass="submit" OnClick="btnRegistry_Click" /></p>
             
