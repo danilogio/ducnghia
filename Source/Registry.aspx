@@ -24,7 +24,7 @@
                                                 ErrorMessage="Tên đăng nhập không được chứa khoảng trắng"
                                                 ControlToValidate="txtboxLoginName"
                                                 Display="None"
-                                                ValidationExpression="[ ]">
+                                                ValidationExpression="^[a-zA-Z'.\S]{1,40}$">
                 </asp:RegularExpressionValidator>
             </p>
             <p><span>Tên hiển thị:</span><asp:TextBox ID="txtboxDisplayName" runat="server"></asp:TextBox>
