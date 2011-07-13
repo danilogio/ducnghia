@@ -55,7 +55,7 @@
                                       ControlToValidate="txtboxConfirmPassword"
                                       Operator="Equal"
                                       ControlToCompare="txtboxPassword"
-                                      Text="Mật khẩu được nhập lại không giống nhau."
+                                      ErrorMessage="Mật khẩu được nhập lại không giống nhau."
                                       Display="None" />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" 
                                             runat="server" 
