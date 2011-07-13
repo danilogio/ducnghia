@@ -55,7 +55,7 @@
                                             ErrorMessage="Vui lòng nhập xác nhận mật khẩu"
                                             ControlToValidate="txtboxConfirmPassword"
                                             Display="none"></asp:RequiredFieldValidator>
-                                            
+                 </p>                           
                 <p><span>Email:</span><asp:TextBox ID="txtboxEmail" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" 
                                             runat="server" 
@@ -66,7 +66,7 @@
                 <asp:RegularExpressionValidator ID="valEmail" runat="server"
                                                 ControlToValidate="txtboxEmail"
                                                 ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                                                ErrorMessage="Enter a valid Email"
+                                                ErrorMessage="Email không đúng định dạng"
                                                 Display="None"/>
             </p>
             <p><center><cc1:CaptchaControl ID="ccJoin" 
@@ -77,7 +77,7 @@
                                             CaptchaWidth="200" 
                                             CaptchaLineNoise="High" 
                                             CaptchaMinTimeout="5" 
-                                            CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" /></center>
+                                            CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" CaptchaFontWarping="Medium" /></center>
                 <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha"
                                                       runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" 

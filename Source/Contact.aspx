@@ -13,7 +13,7 @@
             <p><span>Tên:</span><asp:TextBox ID="txtboxContactName" runat="server" CssClass="contact"></asp:TextBox></p>
             <p><span>Email:</span><asp:TextBox ID="txtboxcontactEmail" runat="server" CssClass="contact"></asp:TextBox></p>
             <p><span>Lời gửi:</span><asp:TextBox ID="txtboxContactMessage" runat="server" Columns="50" Rows="8" CssClass="contact textarea" TextMode="MultiLine"></asp:TextBox></p>
-            <p><center><cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5" CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5" CaptchaMaxTimeout="240" /></center><span>Mã xác nhận:</span><asp:TextBox ID="TextBox1" runat="server" CssClass="contact"></asp:TextBox></p>
+            <p><center><cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5" CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5" CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"/></center><span>Mã xác nhận:</span><asp:TextBox ID="TextBox1" runat="server" CssClass="contact"></asp:TextBox></p>
             <p style="padding-top: 15px"><span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit" /></p>
           </div>
         </form>
