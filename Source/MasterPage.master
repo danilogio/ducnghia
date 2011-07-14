@@ -124,7 +124,7 @@
                                 <h4>Đăng nhập để gửi bài</h4>
                                 <ul>
                                     <li id="idLogin">
-                                        <form method="post" class="searchform" action="Login.aspx">
+                                        <form method="post" class="searchform" action="Home.aspx">
                                             <div id="divUsername">
                                                 <div id="divUsernameLabel" style="float: left; width: 40%">
                                                     <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:" ></asp:Label>
@@ -143,9 +143,9 @@
                                             </div>
                                             
                                             <p></p>
-                                            <div id="divLoginButton" style="text-align:center;margin-top:5px;" >
+                                            <div id="divLoginButton" style="text-align:center;margin-top:5px" >
                                                 <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" CssClass="searchsubmit formbutton"/>
-                                                <asp:Button ID="btnSendLesson" runat="server" Text="Đăng ký" Visible="true" CssClass="searchsubmit formbutton" PostBackUrl="~/Registry.aspx"/>
+                                                <asp:Button ID="btnSendLesson" runat="server" Text="Đăng ký" Visible="true" CssClass="searchsubmit formbutton" PostBackUrl="~/Home.aspx"/>
                                             </div>
                                         </form>	
                                     </li>
