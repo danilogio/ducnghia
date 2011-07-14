@@ -105,10 +105,9 @@
         	        <div id="center-ul">
                         <ul>
                             <li><asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
-            	            <li><asp:HyperLink ID="HpkLogin" runat="server" NavigateUrl="#">Gửi bài</asp:HyperLink></li>
-            	            <li><asp:HyperLink ID="HykSearch" runat="server" NavigateUrl="#">Tìm kiếm</asp:HyperLink></li>
-            	            <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#" Visible="true">Admin</asp:HyperLink></li>
-            	            <li><asp:HyperLink ID="HpkInformation" runat="server" NavigateUrl="#">Thông tin</asp:HyperLink></li>
+            	            <li><asp:HyperLink ID="HpkLogin" runat="server" NavigateUrl="~/Upload.aspx">Gửi bài</asp:HyperLink></li>
+            	            <li><asp:HyperLink ID="HykSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
+            	            <li><asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="#" Visible="false">Admin</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
                         </ul>
 			        </div>
@@ -125,7 +124,7 @@
                                 <h4>Đăng nhập để gửi bài</h4>
                                 <ul>
                                     <li id="idLogin">
-                                        <form method="get" class="searchform" action="Home.aspx">
+                                        <form method="post" class="searchform" action="Login.aspx">
                                             <div id="divUsername">
                                                 <div id="divUsernameLabel" style="float: left; width: 40%">
                                                     <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:" ></asp:Label>
@@ -167,7 +166,9 @@
                                                 <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton"/>
                                             </p>
                                         </form>	
+                                        <asp:HyperLink ID="hpkAdvanceSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm nâng cao</asp:HyperLink>
                                     </li>
+                                   
                                 </ul>
                             </li>
                             
