@@ -382,14 +382,23 @@ li ol, li ul {
 	padding:5px 5px 1px 5px;
 	margin-bottom:13px;
 	margin-left:5px;
+	border-color:#a6c9e2;
+}
+hr
+{
+	border-color:#a6c9e2;
 }
 #div_boudarySignupForm.block_text
 {
 	height:500px;
 }
+#tabs.block_text
+{
+	height:300px;
+}
 #ExamLesson.block_text, #ItLesson.block_text, #EnglishLesson.block_text
 {
-	height:200px;
+	height:300px;
 }
 
 .block_details
@@ -467,11 +476,19 @@ div.block_details_text
     background: none;
 }
 
-#other_news a
+#EnglishLesson a,#ItLesson a,#ExamLesson a,#other_news a
 {
-	color: Blue;
+	color: #1962A5;
 }
-#other_news a:hover
+#EnglishLesson a:hover,#ItLesson a:hover,#ExamLesson a:hover,#other_news a:hover
+{
+	color: #FA297D;
+}
+.block_text a
+{
+	color: #1962A5;
+}
+.block_text a:hover
 {
 	color: #FA297D;
 }

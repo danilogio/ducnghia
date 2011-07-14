@@ -1,7 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
+                <script type="text/javascript">
+			        $(function(){
+				        // Tabs
+			        $('#ExamLesson').tabs();
+			        $('#ItLesson').tabs();
+			        $('#EnglishLesson').tabs();
+				        });
+				</script>
+				
                 <div id="block_text" class="block_text">
                     <h2>Chào mừng quý vị đến với Thư viện trực tuyến Đức Nghĩa</h2>
                     <hr /> 
@@ -36,184 +44,325 @@
                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#">Xem tất cả>></asp:HyperLink>
                 </div>
                 
-                
                 <div id="ExamLesson" class="block_text">
                     <h2>Thư viện đề thi đại học, cao đẳng</h2>
-                    <hr /> 
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+			        <ul>
+				        <li><a href="#ExamLesson-1">Đề thi</a></li>
+				        <li><a href="#ExamLesson-2">Gợi ý giải</a></li>
+			        </ul>
+			        <div id="ExamLesson-1">
+			            <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2011</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Toán<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2011</a>
+                            <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2010</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Lý<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_text">
-                            Môn Toán<br />
-                            Khối A
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
-                        </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2010</a>
-                        </div>
-                        <div class="block_details_text">
-                            Môn Lý<br />
-                            Khối A
-                        </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
-                        </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2009</a>
-                        </div>
-                        <div class="block_details_text">
-                            Môn Hóa<br />
-                            Khối B
-                        </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/zip.png" alt="Eden"/>
-                        </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2009</a>
-                        </div>
-                        <div class="block_details_text">
-                            Môn Hóa<br />
-                            Khối B
-                        </div>
-                    </div>
-                    
-                    <br /><a href="#">Xem tất cả</a>
-                    
-                </div>
-                
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/zip.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
+                        </div>             
+                        <div><a href="#">Xem thêm</a></div>
+			        </div>
+			        <div id="ExamLesson-2">Hiện chưa có bài viết nào
+			        </div>
+			        
+		        </div>
+		        
+		        
                  <div id="ItLesson" class="block_text">
-                    <h2>Thư viện bài học Tin học</h2>
-                    <hr /> 
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                    <h2>Thư viện Tin học</h2>
+		            <ul>
+			            <li><a href="#ItLesson-1">Bài giảng</a></li>
+			            <li><a href="#ItLesson-2">Bài tập</a></li>
+			            <li><a href="#ItLesson-3">Đề thi</a></li>
+		            </ul>
+		         <!-- start ItLesson-1-->
+		            <div id="ItLesson-1">
+		                <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2011</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Toán<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2011</a>
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2010</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Lý<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_text">
-                            Môn Toán<br />
-                            Khối A
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/zip.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2010</a>
+                        
+                        <br /><a href="#">Xem thêm</a>
+		            </div>
+		         <!-- start ItLesson-2-->
+		            <div id="ItLesson-2">
+		                <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2011</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Toán<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_text">
-                            Môn Lý<br />
-                            Khối A
+                        
+                       
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/zip.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2009</a>
+                        
+                         <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2010</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Lý<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_text">
-                            Môn Hóa<br />
-                            Khối B
-                        </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/zip.png" alt="Eden"/>
-                        </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2009</a>
-                        </div>
-                        <div class="block_details_text">
-                            Môn Hóa<br />
-                            Khối B
-                        </div>
-                    </div>
-                    
-                    <br /><a href="#">Xem tất cả</a>
-                </div>
+                        
+                        <br /><a href="#">Xem thêm</a>
+		                </div>
+		         <!-- start ItLesson-3-->
+	                <div id="ItLesson-3">Hiện chưa có bài viết nào
+	                </div>
+                 </div>
                 
+                
+                 
                  <div id="EnglishLesson" class="block_text">
                     <h2>Thư viện bài học Anh Văn</h2> 
-                    <hr />
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                     <ul>
+			            <li><a href="#EnglishLesson-1">Bài giảng</a></li>
+			            <li><a href="#EnglishLesson-2">Bài tập</a></li>
+			            <li><a href="#EnglishLesson-3">Đề thi</a></li>
+		            </ul>
+		        <!-- start EglishLesson-1-->
+		            <div id="EnglishLesson-1">
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2011</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Toán<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2011</a>
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2010</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Lý<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_text">
-                            Môn Toán<br />
-                            Khối A
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/pp.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
+                        </div>
+                        
+                        <br /><a href="#">Xem thêm</a>
                     </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                <!-- start EglishLesson-2-->
+                    <div id="EnglishLesson-2">
+		                <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2011</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Toán<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2010</a>
+                        
+                       
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                        <div class="block_details_text">
-                            Môn Lý<br />
-                            Khối A
+                        
+                        <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/zip.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2009</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Hóa<br />
+                                Khối B
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/acroread.png" alt="Eden"/>
+                        
+                         <div class="block_details">
+                            <div class="block_details_img"> 
+                                <img width="50px" height="50px" src="images/Word.png" alt="Eden"/>
+                            </div>
+                            <div class="block_details_title">
+                                 <a href="#">Đề thi đại học năm 2010</a>
+                            </div>
+                            <div class="block_details_text">
+                                Môn Lý<br />
+                                Khối A
+                            </div>
                         </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2009</a>
-                        </div>
-                        <div class="block_details_text">
-                            Môn Hóa<br />
-                            Khối B
-                        </div>
-                    </div>
-                    
-                    <div class="block_details">
-                        <div class="block_details_img"> 
-                            <img width="50px" height="50px" src="images/pp.png" alt="Eden"/>
-                        </div>
-                        <div class="block_details_title">
-                             <a href="#">Đề thi đại học năm 2009</a>
-                        </div>
-                        <div class="block_details_text">
-                            Môn Hóa<br />
-                            Khối B
-                        </div>
-                    </div>
-                    
-                    <br /><a href="#">Xem tất cả</a>
+                        
+                        <br /><a href="#">Xem thêm</a>
+		           </div>
+		        <!-- start EglishLesson-3-->
+		            <div id="EnglishLesson-3">Hiện chưa có bài viết nào
+	                </div>
                 </div>
                 
                 
  
 </asp:Content>
-
