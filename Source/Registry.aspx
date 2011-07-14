@@ -11,7 +11,7 @@
                                         runat="server" 
                                         ShowSummary="true" 
                                         HeaderText="Lỗi"/>
-                                        </p>
+            </p>
             <p><span>Tên đăng nhập:</span><asp:TextBox ID="txtboxLoginName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
                                             runat="server" 
