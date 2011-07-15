@@ -11,7 +11,7 @@
 				</script>
 				
                 <div id="block_text" class="block_text">
-                    <h2>Chào mừng quý vị đến với Thư viện trực tuyến Đức Nghĩa</h2>
+                    <h2>Chào mừng quý vị đến với Website Luyện thi Kinh tế</h2>
                     <hr /> 
                     <p>Tại đây các bạn sẽ được cung cấp kho tư liệu về đề thi cũng như các giải đáp thắc mắc về đề thi các năm.<br /> 
                     Chúng tôi tập trung vào 3 mảng chính: Luyện thi, Tin học và Anh văn</p>
@@ -238,7 +238,7 @@
                 
                  
                  <div id="EnglishLesson" class="block_text">
-                    <h2>Thư viện bài học Anh Văn</h2> 
+                    <h2>Thư viện Anh Văn</h2> 
                      <ul>
 			            <li><a href="#EnglishLesson-1">Bài giảng</a></li>
 			            <li><a href="#EnglishLesson-2">Bài tập</a></li>
