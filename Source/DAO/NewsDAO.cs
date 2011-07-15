@@ -261,7 +261,7 @@ namespace DAO
         /// <summary>
         /// Lấy ra số lượng tin tức
         /// </summary>
-        /// <returns></returns>
+        /// <returns>int</returns>
         public static int countNews()
         {
             LTDHDataContext DB = new LTDHDataContext();
@@ -273,8 +273,8 @@ namespace DAO
         /// Thêm tin tức
         /// </summary>
         /// <param name="record"></param>
-        /// <returns>bool</returns>
-        public static bool insertNews(tblNew record)
+        /// <returns>Boolean</returns>
+        public static Boolean insertNews(tblNew record)
         {
             LTDHDataContext DB = new LTDHDataContext();
 
@@ -287,6 +287,29 @@ namespace DAO
                     DB.SubmitChanges();
 
                     ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Cập nhật tin tức
+        /// </summary>
+        /// <param name="recordUpdate"></param>
+        /// <returns></returns>
+        public static Boolean updateNews(tblNew recordUpdate, int newsID)
+        {
+            LTDHDataContext DB = new LTDHDataContext();
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    
                 }
             }
             catch (Exception e)
