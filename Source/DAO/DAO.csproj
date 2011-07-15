@@ -38,6 +38,7 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContestForUniversityDAO.cs" />
     <Compile Include="DBHelper.cs" />
+    <Compile Include="EnglishDAO.cs" />
+    <Compile Include="InformaticsDAO.cs" />
     <Compile Include="LTDH.cs">
       <DependentUpon>LTDH.dbml</DependentUpon>
     </Compile>
@@ -64,6 +68,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UsersDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LTDH.dbml">

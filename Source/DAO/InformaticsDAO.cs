@@ -7,5 +7,15 @@ namespace DAO
 {
     class InformaticsDAO
     {
+        #region Property
+        #region Get Property
+        #endregion
+
+        #region Set Property
+        #endregion
+        #endregion
+
+        #region Method
+        #endregion
     }
 }

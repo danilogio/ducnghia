@@ -7,5 +7,15 @@ namespace DAO
 {
     class ContestForUniversityDAO
     {
+        #region Property
+        #region Get Property
+        #endregion
+
+        #region Set Property
+        #endregion
+        #endregion
+
+        #region Method
+        #endregion
     }
 }

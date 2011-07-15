@@ -98,7 +98,7 @@ namespace DAO
         {
             LTDHDataContext DB = new LTDHDataContext();
             var lst = from author in DB.tblUsers
-                      join news in DB.tblNews on author.ID equals news.Author
+                      join news in DB.tblNews on author.Username equals news.Author
                       where news.ID == newsID
                       select author;
 
@@ -197,14 +197,14 @@ namespace DAO
         /// <param name="newsID"></param>
         /// <param name="authorID"></param>
         /// <returns></returns>
-        public static Boolean setAuthor(int newsID, int authorID)
+        public static Boolean setAuthor(int newsID, string author)
         {
             LTDHDataContext DB = new LTDHDataContext();
 
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblNews.Single(TB => TB.ID == newsID);
-                record.Author = authorID;
+                record.Author = author;
                 DB.SubmitChanges();
 
                 ts.Complete();

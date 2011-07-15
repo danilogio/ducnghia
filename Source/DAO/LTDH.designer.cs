@@ -310,13 +310,11 @@ namespace DAO
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
-		
-		private string _DisplayName;
-		
 		private string _Username;
 		
 		private string _Password;
+		
+		private string _DisplayName;
 		
 		private string _Email;
 		
@@ -346,14 +344,12 @@ namespace DAO
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDisplayNameChanging(string value);
-    partial void OnDisplayNameChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
+    partial void OnDisplayNameChanging(string value);
+    partial void OnDisplayNameChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
     partial void OnTypeChanging(bool value);
@@ -381,47 +377,7 @@ namespace DAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisplayName", DbType="NVarChar(50)")]
-		public string DisplayName
-		{
-			get
-			{
-				return this._DisplayName;
-			}
-			set
-			{
-				if ((this._DisplayName != value))
-				{
-					this.OnDisplayNameChanging(value);
-					this.SendPropertyChanging();
-					this._DisplayName = value;
-					this.SendPropertyChanged("DisplayName");
-					this.OnDisplayNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string Username
 		{
 			get
@@ -457,6 +413,26 @@ namespace DAO
 					this._Password = value;
 					this.SendPropertyChanged("Password");
 					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisplayName", DbType="NVarChar(50)")]
+		public string DisplayName
+		{
+			get
+			{
+				return this._DisplayName;
+			}
+			set
+			{
+				if ((this._DisplayName != value))
+				{
+					this.OnDisplayNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisplayName = value;
+					this.SendPropertyChanged("DisplayName");
+					this.OnDisplayNameChanged();
 				}
 			}
 		}
@@ -601,7 +577,7 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Note", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Note", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string Note
 		{
 			get
@@ -621,7 +597,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="ID", OtherKey="Author")]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities
 		{
 			get
@@ -634,7 +610,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="ID", OtherKey="Author")]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblEnglish> tblEnglishes
 		{
 			get
@@ -647,7 +623,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="ID", OtherKey="Author")]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblInformatic> tblInformatics
 		{
 			get
@@ -660,7 +636,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="ID", OtherKey="Author")]
+		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblNew> tblNews
 		{
 			get
@@ -864,7 +840,7 @@ namespace DAO
 		
 		private string _Contents;
 		
-		private int _Author;
+		private string _Author;
 		
 		private System.DateTime _Posted;
 		
@@ -894,7 +870,7 @@ namespace DAO
     partial void OnTitleChanged();
     partial void OnContentsChanging(string value);
     partial void OnContentsChanged();
-    partial void OnAuthorChanging(int value);
+    partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     partial void OnPostedChanging(System.DateTime value);
     partial void OnPostedChanged();
@@ -980,8 +956,8 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Author", DbType="Int NOT NULL")]
-		public int Author
+		[Column(Storage="_Author", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string Author
 		{
 			get
 			{
@@ -1164,7 +1140,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="ID", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1187,11 +1163,11 @@ namespace DAO
 					if ((value != null))
 					{
 						value.tblContestForUniversities.Add(this);
-						this._Author = value.ID;
+						this._Author = value.Username;
 					}
 					else
 					{
-						this._Author = default(int);
+						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
 				}
@@ -1233,7 +1209,7 @@ namespace DAO
 		
 		private string _Contents;
 		
-		private int _Author;
+		private string _Author;
 		
 		private System.DateTime _Posted;
 		
@@ -1257,7 +1233,7 @@ namespace DAO
     partial void OnTypeChanged();
     partial void OnContentsChanging(string value);
     partial void OnContentsChanged();
-    partial void OnAuthorChanging(int value);
+    partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     partial void OnPostedChanging(System.DateTime value);
     partial void OnPostedChanged();
@@ -1355,8 +1331,8 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Author", DbType="Int NOT NULL")]
-		public int Author
+		[Column(Storage="_Author", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string Author
 		{
 			get
 			{
@@ -1459,7 +1435,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="ID", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1482,11 +1458,11 @@ namespace DAO
 					if ((value != null))
 					{
 						value.tblEnglishes.Add(this);
-						this._Author = value.ID;
+						this._Author = value.Username;
 					}
 					else
 					{
-						this._Author = default(int);
+						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
 				}
@@ -1528,7 +1504,7 @@ namespace DAO
 		
 		private string _Contents;
 		
-		private int _Author;
+		private string _Author;
 		
 		private System.DateTime _Posted;
 		
@@ -1552,7 +1528,7 @@ namespace DAO
     partial void OnChapeauChanged();
     partial void OnContentsChanging(string value);
     partial void OnContentsChanged();
-    partial void OnAuthorChanging(int value);
+    partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     partial void OnPostedChanging(System.DateTime value);
     partial void OnPostedChanged();
@@ -1650,8 +1626,8 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Author", DbType="Int NOT NULL")]
-		public int Author
+		[Column(Storage="_Author", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string Author
 		{
 			get
 			{
@@ -1754,7 +1730,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", OtherKey="ID", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1777,11 +1753,11 @@ namespace DAO
 					if ((value != null))
 					{
 						value.tblInformatics.Add(this);
-						this._Author = value.ID;
+						this._Author = value.Username;
 					}
 					else
 					{
-						this._Author = default(int);
+						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
 				}
@@ -1825,7 +1801,7 @@ namespace DAO
 		
 		private System.Nullable<System.DateTime> _Posted;
 		
-		private int _Author;
+		private string _Author;
 		
 		private EntityRef<tblUser> _tblUser;
 		
@@ -1843,7 +1819,7 @@ namespace DAO
     partial void OnContentsChanged();
     partial void OnPostedChanging(System.Nullable<System.DateTime> value);
     partial void OnPostedChanged();
-    partial void OnAuthorChanging(int value);
+    partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     #endregion
 		
@@ -1853,7 +1829,7 @@ namespace DAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -1953,8 +1929,8 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Author", DbType="Int NOT NULL")]
-		public int Author
+		[Column(Storage="_Author", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string Author
 		{
 			get
 			{
@@ -1977,7 +1953,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", OtherKey="ID", IsForeignKey=true)]
+		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -2000,11 +1976,11 @@ namespace DAO
 					if ((value != null))
 					{
 						value.tblNews.Add(this);
-						this._Author = value.ID;
+						this._Author = value.Username;
 					}
 					else
 					{
-						this._Author = default(int);
+						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
 				}
