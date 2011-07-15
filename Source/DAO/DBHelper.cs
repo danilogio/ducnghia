@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DAO
 {
-    public class DBHelper
+    partial class DBHelper
     {
-        
+        static string strPathDB = System.IO.Directory.GetCurrentDirectory();
     }
 }
