@@ -248,27 +248,21 @@
                                 </ul>
                             </li>
                             
-                            <li>
+                            <%--<li>
                                 <div id="datepicker"></div>
                             </li>
-                            
+                            --%>
                             <li>
                                 <center>
-                                <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/1.gif"/>
+                                    <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="#" runat="server"><asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/bottom.gif"/></asp:HyperLink>
                                 </center>
                             </li>
                                                          
                              <li>
                                 <center>
-                                <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/2.gif"/>
+                                    <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="#" runat="server"><asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/bottom.gif"/></asp:HyperLink>
                                 </center>
                                  
-                            </li>
-                            
-                             <li>
-                                <center>
-                                <asp:Image ID="Image3" runat="server" ImageUrl="~/imagesAd/3.gif"/>
-                                </center>
                             </li>
                     
                         </ul> 
@@ -292,13 +286,27 @@
 
 
 
-<div id="divAdRight" style="display: none; position: absolute; top: 0px"> 
-<a href="#"><img src="imagesAd/thuvien.gif" width="125" alt=""/></a>
+<div id="divAdRight" style="display: none; position: absolute; top: 0px">
+    <p> 
+       <asp:HyperLink ID="HyperLink1" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+    </p>
+    <p>
+         <asp:HyperLink ID="HyperLink2" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+    </p>
+    <p>
+         <asp:HyperLink ID="HyperLink3" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+    </p>
 </div> 
-<div id="divAdLeft" style="DISPLAY: none; position: absolute; top: 0px"> 
-<a href="#"><img src="imagesAd/violet17.gif" width="125" alt=""/></a><p>
-<a href="#"><img src="imagesAd/thuvien.gif" width="125" alt=""/></a>    
-</p>   
+<div id="divAdLeft" style="display: none; position: absolute; top: 0px"> 
+    <p>
+         <asp:HyperLink ID="HyperLink4" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+    </p>
+    <p>
+         <asp:HyperLink ID="HyperLink5" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+    </p>
+    <p>
+         <asp:HyperLink ID="HyperLink6" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+    </p>
 </div> 
            
             </div>      
