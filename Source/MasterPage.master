@@ -231,7 +231,7 @@
                             </li>
                             
                              <li>
-                                <h4>Chủ đề được quan tâm</h4>
+                                <h4>Tài liệu được quan tâm</h4>
                                 <ul>
                                     <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
                                     <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
@@ -239,14 +239,14 @@
                                 </ul>
                             </li>
                             
-                            <li>
+                            <%--<li>
                                 <h4>About</h4>
                                 <ul>
                                     <li>
                                         <p style="margin: 0;">Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus.</p>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>--%>
                     
                            
                             
@@ -256,7 +256,7 @@
                             --%>
                             <li>
                                 <center>
-                                    <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="#" runat="server"><asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/bottom.gif"/></asp:HyperLink>
+                                    <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/AdContact.aspx" runat="server"><asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/bottom.gif"/></asp:HyperLink>
                                 </center>
                             </li>
                                                          
