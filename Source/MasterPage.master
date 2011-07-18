@@ -273,8 +273,8 @@
                 </div>
                 <div id="footer">
                     <div class="footer-content">
-                        <p>&copy; DucNghia 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a></p>
-                        <p>Trung tâm luyện thi Đức Nghĩa 119/4 Trần Phú, Quận 5 - ĐT: 090.959.6002</p>
+                        <p>&copy; Website Luyện Thi Kinh Tế 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a></p>
+                        <p>ĐC: 119/4 Trần Phú, Quận 5 - ĐT: 090.959.6002</p>
                     </div>
                </div>
                
@@ -313,7 +313,7 @@
            
             </div>      
         </div>
-        <div style="text-align: center; font-size: 0.75em; color:gray">Design by Do viet trung 2011.</div>
+        <div style="text-align: center; font-size: 0.75em; color:gray">Design by <a href="mailto:doviettrung1802@gmail.com">Do viet trung</a> 2011.</div>
     </form>
 </body>
 </html>
