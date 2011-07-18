@@ -19,9 +19,14 @@ public partial class Upload : System.Web.UI.Page
              selectedIndex = Int32.Parse(selIndex);
             if (selectedIndex == 1)
             {
-                Response.Write("<span>Email:</span><asp:TextBox ID='txtboxcontactEmail' runat='server' CssClass='contact'></asp:TextBox>");
-                Response.End();
+                //Response.Write("123");
+                txtboxcontactEmail.Visible = false;
             }
+            else if (selectedIndex == 2)
+            {
+                txtboxcontactEmail.Visible = true;
+            }
+            Response.End();
         }
     }
 }
