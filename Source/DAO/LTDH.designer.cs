@@ -60,7 +60,7 @@ namespace DAO
     #endregion
 		
 		public LTDHDataContext() : 
-				base(global::DAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
+				base(global::Settings.Default.LTDHConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -105,11 +105,27 @@ namespace DAO
 			}
 		}
 		
+		public System.Data.Linq.Table<tblAdvertisement> tblAdvertisements
+		{
+			get
+			{
+				return this.GetTable<tblAdvertisement>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tblComment> tblComments
 		{
 			get
 			{
 				return this.GetTable<tblComment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblContact> tblContacts
+		{
+			get
+			{
+				return this.GetTable<tblContact>();
 			}
 		}
 		
@@ -718,6 +734,195 @@ namespace DAO
 		}
 	}
 	
+	[Table(Name="dbo.tblAdvertisement")]
+	public partial class tblAdvertisement
+	{
+		
+		private int _ID;
+		
+		private string _Company;
+		
+		private string _Address;
+		
+		private string _Email;
+		
+		private string _Phone;
+		
+		private System.DateTime _fromDate;
+		
+		private System.DateTime _toDate;
+		
+		private int _Price;
+		
+		private string _Location;
+		
+		private string _Description;
+		
+		public tblAdvertisement()
+		{
+		}
+		
+		[Column(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Company", DbType="NVarChar(254) NOT NULL", CanBeNull=false)]
+		public string Company
+		{
+			get
+			{
+				return this._Company;
+			}
+			set
+			{
+				if ((this._Company != value))
+				{
+					this._Company = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Address", DbType="NVarChar(254)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="NChar(30)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Phone", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this._Phone = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_fromDate", DbType="DateTime NOT NULL")]
+		public System.DateTime fromDate
+		{
+			get
+			{
+				return this._fromDate;
+			}
+			set
+			{
+				if ((this._fromDate != value))
+				{
+					this._fromDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_toDate", DbType="DateTime NOT NULL")]
+		public System.DateTime toDate
+		{
+			get
+			{
+				return this._toDate;
+			}
+			set
+			{
+				if ((this._toDate != value))
+				{
+					this._toDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Price", DbType="Int NOT NULL")]
+		public int Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Location", DbType="NChar(254) NOT NULL", CanBeNull=false)]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this._Location = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Description", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
+			}
+		}
+	}
+	
 	[Table(Name="dbo.tblComments")]
 	public partial class tblComment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -824,6 +1029,105 @@ namespace DAO
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.tblContact")]
+	public partial class tblContact
+	{
+		
+		private int _ID;
+		
+		private string _Email;
+		
+		private string _Contents;
+		
+		private bool _isRead;
+		
+		private System.DateTime _Posted;
+		
+		public tblContact()
+		{
+		}
+		
+		[Column(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="NChar(30) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Contents", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Contents
+		{
+			get
+			{
+				return this._Contents;
+			}
+			set
+			{
+				if ((this._Contents != value))
+				{
+					this._Contents = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_isRead", DbType="Bit NOT NULL")]
+		public bool isRead
+		{
+			get
+			{
+				return this._isRead;
+			}
+			set
+			{
+				if ((this._isRead != value))
+				{
+					this._isRead = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Posted", DbType="DateTime NOT NULL")]
+		public System.DateTime Posted
+		{
+			get
+			{
+				return this._Posted;
+			}
+			set
+			{
+				if ((this._Posted != value))
+				{
+					this._Posted = value;
+				}
 			}
 		}
 	}

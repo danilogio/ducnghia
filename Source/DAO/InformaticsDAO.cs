@@ -439,21 +439,28 @@ namespace DAO
         public static Boolean updateInformatic(int _id, tblInformatic update)
         {
             LTDHDataContext DB = new LTDHDataContext();
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var informatic = DB.tblInformatics.Single(info => info.ID == _id);
-                informatic.Title = update.Title;
-                informatic.Type = update.Type;
-                informatic.Chapeau = update.Chapeau;
-                informatic.Contents = update.Contents;
-                informatic.Author = update.Author;
-                informatic.Posted = update.Posted;
-                informatic.State = update.State;
-                informatic.Point = update.Point;
-                informatic.Tag = update.Tag;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var informatic = DB.tblInformatics.Single(info => info.ID == _id);
+                    informatic.Title = update.Title;
+                    informatic.Type = update.Type;
+                    informatic.Chapeau = update.Chapeau;
+                    informatic.Contents = update.Contents;
+                    informatic.Author = update.Author;
+                    informatic.Posted = update.Posted;
+                    informatic.State = update.State;
+                    informatic.Point = update.Point;
+                    informatic.Tag = update.Tag;
 
-                DB.SubmitChanges();
-                ts.Complete();
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
             return true;
         }

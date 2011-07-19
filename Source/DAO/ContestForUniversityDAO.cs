@@ -544,23 +544,30 @@ namespace DAO
         public static Boolean updateContest(int _id, tblContestForUniversity update)
         {
             LTDHDataContext DB = new LTDHDataContext();
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
-                contest.Title = update.Title;
-                contest.Contents = update.Contents;
-                contest.Author = update.Author;
-                contest.Posted = update.Posted;
-                contest.State = update.State;
-                contest.isUniversity = update.isUniversity;
-                contest.Branch = update.Branch;
-                contest.Year = update.Year;
-                contest.Solving = update.Solving;
-                contest.Point = update.Point;
-                contest.Tag = update.Tag;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
+                    contest.Title = update.Title;
+                    contest.Contents = update.Contents;
+                    contest.Author = update.Author;
+                    contest.Posted = update.Posted;
+                    contest.State = update.State;
+                    contest.isUniversity = update.isUniversity;
+                    contest.Branch = update.Branch;
+                    contest.Year = update.Year;
+                    contest.Solving = update.Solving;
+                    contest.Point = update.Point;
+                    contest.Tag = update.Tag;
 
-                DB.SubmitChanges();
-                ts.Complete();
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
             return true;
         }

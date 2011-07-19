@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="LTDH" Class="LTDHDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Career\ducnghia\Source\App_Data\LTDH.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="DAO.Properties.Settings" SettingsPropertyName="LTDHConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Career\ducnghia\Source\App_Data\LTDH.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="Settings" SettingsPropertyName="LTDHConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblAdmin" Member="tblAdmins">
     <Type Name="tblAdmin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -28,11 +28,34 @@
       <Association Name="tblUser_tblNew" Member="tblNews" ThisKey="Username" OtherKey="Author" Type="tblNew" />
     </Type>
   </Table>
+  <Table Name="dbo.tblAdvertisement" Member="tblAdvertisements">
+    <Type Name="tblAdvertisement">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Company" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="fromDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="toDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="NChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
   <Table Name="dbo.tblComments" Member="tblComments">
     <Type Name="tblComment">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Articles" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Contents" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblContact" Member="tblContacts">
+    <Type Name="tblContact">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Contents" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="isRead" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Posted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.tblContestForUniversity" Member="tblContestForUniversities">

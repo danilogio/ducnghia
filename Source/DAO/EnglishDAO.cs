@@ -403,21 +403,28 @@ namespace DAO
         {
             LTDHDataContext DB = new LTDHDataContext();
 
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var english = DB.tblEnglishes.Single(e => e.ID == _id);
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var english = DB.tblEnglishes.Single(e => e.ID == _id);
 
-                english.Title = update.Title;
-                english.Type = update.Type;
-                english.Contents = update.Contents;
-                english.Author = update.Author;
-                english.Posted = update.Posted;
-                english.State = update.State;
-                english.Point = update.Point;
-                english.Tag = update.Tag;
+                    english.Title = update.Title;
+                    english.Type = update.Type;
+                    english.Contents = update.Contents;
+                    english.Author = update.Author;
+                    english.Posted = update.Posted;
+                    english.State = update.State;
+                    english.Point = update.Point;
+                    english.Tag = update.Tag;
 
-                DB.SubmitChanges();
-                ts.Complete();
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
             return true;
         }

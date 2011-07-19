@@ -414,8 +414,36 @@ namespace DAO
             return true;
         }
 
-        public static Boolean updateUser(tblUser record)
+        /// <summary>
+        /// Cập nhật user
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        public static Boolean updateUser(string _username, tblUser update)
         {
+            LTDHDataContext DB = new LTDHDataContext();
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var user = DB.tblUsers.Single(u => u.Username == _username);
+                    user.Password = update.Password;
+                    user.DisplayName = update.DisplayName;
+                    user.Email = update.Email;
+                    user.Type = update.Type;
+                    user.Role = update.Role;
+                    user.Permission = update.Permission;
+                    user.State = update.State;
+                    user.RegisterDate = update.RegisterDate;
+                    user.NumberOfArticles = update.NumberOfArticles;
+                    user.Note = update.Note;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
