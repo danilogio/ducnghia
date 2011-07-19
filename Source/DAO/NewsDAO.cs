@@ -301,7 +301,7 @@ namespace DAO
         /// </summary>
         /// <param name="recordUpdate"></param>
         /// <returns></returns>
-        public static Boolean updateNews(tblNew recordUpdate, int newsID)
+        public static Boolean updateNews(int newsID, tblNew recordUpdate)
         {
             LTDHDataContext DB = new LTDHDataContext();
 
@@ -309,7 +309,15 @@ namespace DAO
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    
+                    var news = DB.tblNews.Single(n => n.ID == newsID);
+                    news.Title = recordUpdate.Title;
+                    news.Chapaeu = recordUpdate.Chapaeu;
+                    news.Contents = recordUpdate.Contents;
+                    news.Posted = recordUpdate.Posted;
+                    news.Author = recordUpdate.Author;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
                 }
             }
             catch (Exception e)

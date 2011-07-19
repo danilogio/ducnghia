@@ -20,7 +20,7 @@
       <Column Name="Permission" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RegisterDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="NumberOfArticles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberOfArticles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="tblUser_tblContestForUniversity" Member="tblContestForUniversities" ThisKey="Username" OtherKey="Author" Type="tblContestForUniversity" />
       <Association Name="tblUser_tblEnglish" Member="tblEnglishes" ThisKey="Username" OtherKey="Author" Type="tblEnglish" />
@@ -48,7 +48,7 @@
       <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Solving" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Point" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tag" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Tag" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
       <Association Name="tblUser_tblContestForUniversity" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
@@ -62,7 +62,7 @@
       <Column Name="Posted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Point" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tag" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Tag" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
       <Association Name="tblUser_tblEnglish" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
@@ -70,13 +70,14 @@
     <Type Name="tblInformatic">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Chapeau" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Contents" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Author" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="Posted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Point" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tag" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Tag" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
       <Association Name="tblUser_tblInformatic" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>

@@ -328,7 +328,7 @@ namespace DAO
 		
 		private System.DateTime _RegisterDate;
 		
-		private System.Nullable<int> _NumberOfArticles;
+		private int _NumberOfArticles;
 		
 		private string _Note;
 		
@@ -362,7 +362,7 @@ namespace DAO
     partial void OnStateChanged();
     partial void OnRegisterDateChanging(System.DateTime value);
     partial void OnRegisterDateChanged();
-    partial void OnNumberOfArticlesChanging(System.Nullable<int> value);
+    partial void OnNumberOfArticlesChanging(int value);
     partial void OnNumberOfArticlesChanged();
     partial void OnNoteChanging(string value);
     partial void OnNoteChanged();
@@ -557,8 +557,8 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_NumberOfArticles", DbType="Int")]
-		public System.Nullable<int> NumberOfArticles
+		[Column(Storage="_NumberOfArticles", DbType="Int NOT NULL")]
+		public int NumberOfArticles
 		{
 			get
 			{
@@ -1120,7 +1120,7 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Tag", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Tag", DbType="NVarChar(254)")]
 		public string Tag
 		{
 			get
@@ -1415,7 +1415,7 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Tag", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Tag", DbType="NVarChar(254)")]
 		public string Tag
 		{
 			get
@@ -1500,6 +1500,8 @@ namespace DAO
 		
 		private string _Title;
 		
+		private int _Type;
+		
 		private string _Chapeau;
 		
 		private string _Contents;
@@ -1524,6 +1526,8 @@ namespace DAO
     partial void OnIDChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
+    partial void OnTypeChanging(int value);
+    partial void OnTypeChanged();
     partial void OnChapeauChanging(string value);
     partial void OnChapeauChanged();
     partial void OnContentsChanging(string value);
@@ -1582,6 +1586,26 @@ namespace DAO
 					this._Title = value;
 					this.SendPropertyChanged("Title");
 					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Type", DbType="Int NOT NULL")]
+		public int Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
 				}
 			}
 		}
@@ -1710,7 +1734,7 @@ namespace DAO
 			}
 		}
 		
-		[Column(Storage="_Tag", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Tag", DbType="NVarChar(254)")]
 		public string Tag
 		{
 			get
