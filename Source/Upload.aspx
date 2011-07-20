@@ -6,15 +6,33 @@
 	<script type="text/javascript">
 	    $(document).ready(function() {
 	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
-
 	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
 
-	            if (selectedIndex == 1) {
+	            if (selectedIndex == 0) {
+	                $('#lessonType').css("display", "none");
+	                $('#<%= ddlType.ClientID%>').hide();
+
+	                $('#Contest').css("display", "block");
+	                $('#<%= ddlTypeContest.ClientID%>').show();
+	                $('#<%= ddlBranch.ClientID%>').show();
+	                $('#<%= ddlYear.ClientID%>').show();
+
+	                $('#Solving').css("display", "block");
+	                $('#<%= fileSolving.ClientID%>').show();
 	            }
-	            else if (selectedIndex == 2) {
+	            else {
+	                $('#lessonType').css("display", "block");
+	                $('#<%= ddlType.ClientID%>').show();
+
+	                $('#Contest').css("display", "none");
+	                $('#<%= ddlTypeContest.ClientID%>').hide();
+	                $('#<%= ddlBranch.ClientID%>').hide();
+	                $('#<%= ddlYear.ClientID%>').hide();
+
+	                $('#Solving').css("display", "none");
+	                $('#<%= fileSolving.ClientID%>').hide();
 	            }
-	            else if (selectedIndex == 3) {
-	            }
+
 
 	        });
 	    }); 
@@ -27,17 +45,16 @@
         <form method="post" >
           <div class="form_settings">
             <p><span>Chủ đề:</span><asp:DropDownList ID="ddlSubject" runat="server">
-                                        <asp:ListItem Text="Vui lòng chọn chủ đề" Value="0"></asp:ListItem>
-                                        <asp:ListItem Text="Luyện thi đại học" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="Tin học" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="Anh văn" Value="3"></asp:ListItem>
+                                        <asp:ListItem Text="Luyện thi đại học" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Tin học" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Anh văn" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
             </p>
             
             <p><span>Tiêu đề:</span><asp:TextBox ID="txtboxTitle" runat="server" CssClass="contact"></asp:TextBox></p>
             
             <%--Đối với Anh văn, Tin học--%>
-            <p><span>Loại bài viết: </span><asp:DropDownList ID="ddlType" runat="server" >
+            <p id="lessonType" runat="server"><span>Loại bài viết: </span><asp:DropDownList ID="ddlType" runat="server" >
                                         <asp:ListItem Text="Bài giảng" Value="0"></asp:ListItem>
                                         <asp:ListItem Text="Đề thi" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Bài tập" Value="2"></asp:ListItem>
@@ -49,7 +66,7 @@
             
             
             <%--Đối với loại 1: Luyện thi đại học--%>
-            <p><span>Đề thi : </span><asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%">
+            <p id="Contest"><span>Đề thi : </span><asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%">
                                         <asp:ListItem Text="Đại học" Value="0"></asp:ListItem>
                                         <asp:ListItem Text="Cao đẳng" Value="1"></asp:ListItem>
                                     </asp:DropDownList>
@@ -74,7 +91,7 @@
                                             <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
                                         </asp:DropDownList>
             </p>
-            <p><span>Hướng dẫn giải:</span><asp:FileUpload ID="fileSolving" runat="server" CssClass="contact"></asp:FileUpload></p>
+            <p id="Solving"><span>Hướng dẫn giải:</span><asp:FileUpload ID="fileSolving" runat="server" CssClass="contact"></asp:FileUpload></p>
             
              <%--Chung--%>
             <p><span>Tag:</span><asp:TextBox ID="txtboxTag" runat="server" CssClass="contact"></asp:TextBox></p>

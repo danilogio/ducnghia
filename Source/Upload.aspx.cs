@@ -11,20 +11,23 @@ public partial class Upload : System.Web.UI.Page
     {
         string selIndex = Request["selIndex"];
         int selectedIndex;
+
         if (selIndex == null)
         {
-            selectedIndex=0;
+            selectedIndex = 0;
         }
         else{
-             selectedIndex = Int32.Parse(selIndex);
-            if (selectedIndex == 1)
+            selectedIndex = Int32.Parse(selIndex);
+            
+            if (selectedIndex == 0)
             {
-                //Response.Write("123");
-                //txtboxcontactEmail.Visible = false;
+                //ddlType.Visible = false;
+                //lessonType.Visible = false;
             }
-            else if (selectedIndex == 2)
+            else
             {
-                //txtboxcontactEmail.Visible = true;
+                //ddlType.Visible = true;
+                //lessonType.Visible = true;
             }
             Response.End();
         }
