@@ -20,11 +20,11 @@ public partial class Upload : System.Web.UI.Page
             if (selectedIndex == 1)
             {
                 //Response.Write("123");
-                txtboxcontactEmail.Visible = false;
+                //txtboxcontactEmail.Visible = false;
             }
             else if (selectedIndex == 2)
             {
-                txtboxcontactEmail.Visible = true;
+                //txtboxcontactEmail.Visible = true;
             }
             Response.End();
         }

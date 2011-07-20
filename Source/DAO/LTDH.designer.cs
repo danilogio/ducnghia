@@ -60,7 +60,7 @@ namespace DAO
     #endregion
 		
 		public LTDHDataContext() : 
-				base(global::Settings.Default.LTDHConnectionString, mappingSource)
+				base(global::DAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

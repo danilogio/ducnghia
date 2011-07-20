@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="News.aspx.cs" Inherits="News" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="newsContent" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="news" class="block_text">
         <h2>Cơ chế gửi bài tại thư viện trực tuyến Đức Nghĩa</h2>
         <h5>Post ngày 9/7/1011 bởi <b>Thầy Đức Nghĩa</b></h5>
