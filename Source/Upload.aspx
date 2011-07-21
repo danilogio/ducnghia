@@ -77,7 +77,7 @@
                                             <asp:ListItem Text="khối D" Value="3"></asp:ListItem>
                                             <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>
                                         </asp:DropDownList>
-                năm <asp:DropDownList ID="ddlYear" runat="server" Width="15%">
+                năm <asp:DropDownList ID="ddlYear" runat="server" Width="15%" >
                                             <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
                                             <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
                                             <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
@@ -99,7 +99,7 @@
             
             
             <p><center><cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5" CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5" CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"/></center><span>Mã xác nhận:</span><asp:TextBox ID="TextBox1" runat="server" CssClass="contact"></asp:TextBox></p>
-            <p style="padding-top: 15px"><span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit" /></p>
+            <p style="padding-top: 15px"><span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit" OnClick="btnSubmit_Click"/></p>
           </div>
         </form>
     </div>
