@@ -82,7 +82,7 @@
         }
 </style>
 </head>
-<body>
+<body onload="init()">
 <%--<div style="width: 992px;height: 0px;">
     <div id="a" class="float">
         <a href="http://r26.imgfast.net/users/2615/25/32/47/avatars/4368-13.jpg" target="_blank">

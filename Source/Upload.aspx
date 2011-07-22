@@ -9,36 +9,44 @@
 	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
 
 	            if (selectedIndex == 0) {
-	                $('#lessonType').css("display", "none");
-	                $('#<%= ddlType.ClientID%>').hide();
+	                //$('#lessonType').css("display", "none");
+	                //$('#<%= ddlType.ClientID%>').hide();
+	                $('#divLessonType').hide();
 
-	                $('#Contest').css("display", "block");
-	                $('#<%= ddlTypeContest.ClientID%>').show();
-	                $('#<%= ddlBranch.ClientID%>').show();
-	                $('#<%= ddlYear.ClientID%>').show();
+	                $('#divContest').show();
 
-	                $('#Solving').css("display", "block");
-	                $('#<%= fileSolving.ClientID%>').show();
+	                //$('#Contest').css("display", "block");
+	                //$('#<%= ddlTypeContest.ClientID%>').show();
+	                //$('#<%= ddlBranch.ClientID%>').show();
+	                //$('#<%= ddlYear.ClientID%>').show();
+
+	                //$('#Solving').css("display", "block");
+	                //$('#<%= fileSolving.ClientID%>').show();
 	            }
 	            else {
-	                $('#lessonType').css("display", "block");
-	                $('#<%= ddlType.ClientID%>').show();
+	                //$('#lessonType').css("display", "block");
+	                //$('#<%= ddlType.ClientID%>').show();
+	                $('#divLessonType').show();
 
-	                $('#Contest').css("display", "none");
-	                $('#<%= ddlTypeContest.ClientID%>').hide();
-	                $('#<%= ddlBranch.ClientID%>').hide();
-	                $('#<%= ddlYear.ClientID%>').hide();
+	                $('#divContest').hide();
 
-	                $('#Solving').css("display", "none");
-	                $('#<%= fileSolving.ClientID%>').hide();
+	                //$('#Contest').css("display", "none");
+	                //$('#<%= ddlTypeContest.ClientID%>').hide();
+	                //$('#<%= ddlBranch.ClientID%>').hide();
+	                //$('#<%= ddlYear.ClientID%>').hide();
+
+	                //$('#Solving').css("display", "none");
+	                //$('#<%= fileSolving.ClientID%>').hide();
 	            }
-
-
 	        });
-	    }); 
+	    });
+
+	    function init() {
+	        $('#divLessonType').hide();
+	    }
     </script>
         
-    <div id="contact" class="block_text">
+    <div id="divContact" class="block_text" >
         <h2>Gửi bài</h2>
         <hr />
         <p>Mọi thắc mắc/góp ý các bạn vui lòng gửi lại cho chúng tôi để có thể phục vụ các bạn tốt hơn:</p>
@@ -54,18 +62,21 @@
             <p><span>Tiêu đề:</span><asp:TextBox ID="txtboxTitle" runat="server" CssClass="contact"></asp:TextBox></p>
             
             <%--Đối với Anh văn, Tin học--%>
-            <p id="lessonType" runat="server"><span>Loại bài viết: </span><asp:DropDownList ID="ddlType" runat="server" >
+            <div id="divLessonType">
+            <p id="lessonType"><span>Loại bài viết: </span><asp:DropDownList ID="ddlType" runat="server" >
                                         <asp:ListItem Text="Bài giảng" Value="0"></asp:ListItem>
                                         <asp:ListItem Text="Đề thi" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Bài tập" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
             </p>   
+            </div>
             
             <%-- Chung --%>
             <p><span>Tập tin nội dung:</span><asp:FileUpload ID="fileContent" runat="server" CssClass="contact"></asp:FileUpload></p>
             
             
             <%--Đối với loại 1: Luyện thi đại học--%>
+            <div id="divContest">
             <p id="Contest"><span>Đề thi : </span><asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%">
                                         <asp:ListItem Text="Đại học" Value="0"></asp:ListItem>
                                         <asp:ListItem Text="Cao đẳng" Value="1"></asp:ListItem>
@@ -92,13 +103,14 @@
                                         </asp:DropDownList>
             </p>
             <p id="Solving"><span>Hướng dẫn giải:</span><asp:FileUpload ID="fileSolving" runat="server" CssClass="contact"></asp:FileUpload></p>
+            </div>
             
              <%--Chung--%>
             <p><span>Tag:</span><asp:TextBox ID="txtboxTag" runat="server" CssClass="contact"></asp:TextBox></p>
                                  
             
             
-            <p><center><cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5" CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5" CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"/></center><span>Mã xác nhận:</span><asp:TextBox ID="TextBox1" runat="server" CssClass="contact"></asp:TextBox></p>
+            <p><center><cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5" CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5" CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"/></center><span>Mã xác nhận:</span><asp:TextBox ID="txtboxConfirmCaptcha" runat="server" CssClass="contact"></asp:TextBox></p>
             <p style="padding-top: 15px"><span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit" OnClick="btnSubmit_Click"/></p>
           </div>
         </form>
