@@ -105,7 +105,7 @@
                                 Khối B
                             </div>
                         </div>             
-                        <div><a href="ContestForUniversity.aspx">Xem thêm</a></div>
+                        <div><a href="~/">Xem thêm</a></div>
 			        </div>
 			        <div id="ExamLesson-2">Hiện chưa có bài viết nào
 			        </div>
