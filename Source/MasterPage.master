@@ -74,13 +74,20 @@
     <script type="text/javascript">
         document.write("<script type='text/javascript' language='javascript'>MainContentW = 1000;LeftBannerW = 125;RightBannerW = 125;LeftAdjust = 5;RightAdjust = 5;TopAdjust = 10;ShowAdDiv();window.onresize=ShowAdDiv;;<\/script>"); 
     </script>
+    
+    <script type="text/javascript">
+        function init() {
+        }
+    </script>
+    
     <style type="text/css">
         .float {
         width: 135px;
         height: 780px;
         border: solid 1px white;
         }
-</style>
+        
+    </style>
 </head>
 <body onload="init()">
 <%--<div style="width: 992px;height: 0px;">
@@ -103,8 +110,9 @@
                 </div>
                 <div id="nav">
         	        <div id="center-ul">
-                        <ul>
+                        <ul type="disc">
                             <li><asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/News.aspx">Tin tức</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HpkLogin" runat="server" NavigateUrl="~/Upload.aspx">Gửi bài</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HykSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
             	            <li><asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="#" Visible="false">Admin</asp:HyperLink></li>
@@ -145,7 +153,7 @@
                                             <p></p>
                                             <div id="divLoginButton" style="text-align:center;margin-top:5px" >
                                                 <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" CssClass="searchsubmit formbutton"/>
-                                                <asp:Button ID="btnSendLesson" runat="server" Text="Đăng ký" Visible="true" CssClass="searchsubmit formbutton" PostBackUrl="~/Home.aspx"/>
+                                                <asp:Button ID="btnSendLesson" runat="server" Text="Đăng ký" Visible="true" CssClass="searchsubmit formbutton" PostBackUrl="~/Registry.aspx"/>
                                             </div>
                                         </form>	
                                     </li>
@@ -162,7 +170,7 @@
                                     <li>
                                         <form method="get" class="searchform" action="Home.aspx">
                                             <p>
-                                                <asp:TextBox ID="txtBoxSearch" runat="server">Nhập nội dung</asp:TextBox>
+                                                <asp:TextBox ID="txtBoxSearch" OnClick="this.value=''" runat="server" >Nhập nội dung</asp:TextBox>
                                                 <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton"/>
                                             </p>
                                         </form>	

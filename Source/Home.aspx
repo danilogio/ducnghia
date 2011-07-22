@@ -10,6 +10,8 @@
 				        });
 				</script>
 				
+				<!-- 
+				
                 <div id="block_text" class="block_text">
                     <h2>Chào mừng quý vị đến với Website Luyện thi Kinh tế</h2>
                     <hr /> 
@@ -43,6 +45,8 @@
                     <br />
                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#">Xem tất cả>></asp:HyperLink>
                 </div>
+                
+                -->
                 
                 <div id="ExamLesson" class="block_text">
                     <h2>Thư viện đề thi đại học, cao đẳng</h2>
@@ -101,7 +105,7 @@
                                 Khối B
                             </div>
                         </div>             
-                        <div><a href="#">Xem thêm</a></div>
+                        <div><a href="ContestForUniversity.aspx">Xem thêm</a></div>
 			        </div>
 			        <div id="ExamLesson-2">Hiện chưa có bài viết nào
 			        </div>
