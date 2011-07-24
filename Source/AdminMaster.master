@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMaster.master.cs" Inherits="AdminMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <style type="text/css">
+       body {
+	            background: white;
+	            margin:0;
+	            padding:0;
+	            font-family: Arial, Helvetica, sans-serif;
+	            font-size: 13px;
+	            color: #444;
+            }
+   .footer-content1 {
+	       
+	        padding: 20px 5px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="headerAdmin" style="width:100%;height:70px;float:left;margin-top:10px; border-color:black;border-width:1px">
+        
+            <center><h2>Trang quản lý Website</h2></center>
+            
+        </div>
+       
+        <div id="leftsidebar" style="width:22%;height:80%;float:left; border-color:black;border-bottom-width:1px">
+          <%--  <div style="width:100%;float:left">
+                <h3>Chức năng</h3>
+            </div>--%>
+            <div style="width:100%;float:left">
+             
+                <div class="sidebar" style="margin-left:0px;">
+                    <ul>
+                        <li>
+                            <h4><span>Chức năng</span></h4>
+                            <ul class="blocklist">
+                                <li><asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="~/Admin/General.aspx">Chung</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="~/Admin/ManagementUser.aspx">Người dùng</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/Admin/News.aspx">Tin tức</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Admin/Humanlity.aspx">Phân quyền</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Admin/Comment.aspx">Comment</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/ContestUniversity.aspx">LTĐH</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Admin/English.aspx">Tiếng Anh</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Admin/It.aspx">Tin học</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Admin/Advertisement.aspx">Quảng cáo</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Admin/Contact.aspx">Liên hệ/góp ý</asp:HyperLink></li>
+                            </ul>
+                            </li>
+                      </ul>
+                 </div>
+             </div>
+            
+        </div>
+        
+        <div id="rightsidebar" style="width:77%;height:80%;float:left; border-color:black;border-width:1px">
+            <div style="width:100%;float:left;background-color:#dddddd">
+                <center><h3>Nội dung</h3></center>
+            </div>
+            <div style="width:100%;float:left">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+   
+        
+        <div id="footer1" style="width:100%;height:10%;float:left; border-color:black;border-width:4px;margin-bottom:0px">
+            <div class="footer-content1">
+                <center><p>&copy; Website Luyện Thi Kinh Tế 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a></p>
+                            <p>ĐC: 119/4 Trần Phú, Quận 5 - ĐT: 090.959.6002</p></center>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
