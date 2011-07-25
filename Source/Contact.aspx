@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Contact" ContentPlaceHolderID="cphContent" Runat="Server">
     
     <div id="contact" class="block_text">
         <h2>Liên hệ/Góp ý</h2>

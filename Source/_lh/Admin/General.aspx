@@ -2,7 +2,8 @@
     CodeFile="General.aspx.cs" Inherits="Admin_General" %>
 
 <asp:Content ID="GeneralAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
-    <link rel="stylesheet" href="../../styles.css" type="text/css" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    
     <style type="text/css">
         body
         {

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ResetPassword.aspx.cs" Inherits="ResetPassword" %>
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
-<asp:Content ID="ResetPassword" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="ResetPassword" ContentPlaceHolderID="cphContent" Runat="Server">
     <div id="contact" class="block_text">
         <h2>Lấy lại mật khẩu</h2>
         <hr />

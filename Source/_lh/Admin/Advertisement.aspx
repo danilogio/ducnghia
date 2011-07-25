@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Advertisement.aspx.cs" Inherits="Advertisement" %>
 
 <asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
-    <link rel="stylesheet" href="../../styles.css" type="text/css" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
        body {
 	            background: white;

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Registry.aspx.cs" Inherits="Registry" %>
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
-<asp:Content ID="Register" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Register" ContentPlaceHolderID="cphContent" Runat="Server">
     <div id="signupForm" class="block_text" runat="server">
         <h2>Đăng ký tài khoản</h2>
         <hr />

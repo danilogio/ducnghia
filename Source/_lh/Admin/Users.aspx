@@ -2,7 +2,7 @@
     CodeFile="Users.aspx.cs" Inherits="ManagementUser" %>
 
 <asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
-    <link rel="stylesheet" href="../../styles.css" type="text/css" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
         {

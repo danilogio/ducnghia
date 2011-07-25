@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Upload.aspx.cs" Inherits="Upload" %>
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
-<asp:Content ID="Upload" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Upload" ContentPlaceHolderID="cphContent" Runat="Server">
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
 	<script type="text/javascript">

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Default" %>
 
-<asp:Content ID="Home" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Home" ContentPlaceHolderID="cphContent" Runat="Server">
                 <script type="text/javascript">
 			        $(function(){
 				        // Tabs
