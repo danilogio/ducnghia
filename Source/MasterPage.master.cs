@@ -23,9 +23,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         string strUsername = txtUsername.Text;
         string strPassword = txtPassword.Text;
 
-        DAO.UsersDAO user = new UsersDAO();
-
-        
+        Boolean loginState = DAO.UsersDAO.isUser(strUsername, strPassword);        
         
     }
 }
