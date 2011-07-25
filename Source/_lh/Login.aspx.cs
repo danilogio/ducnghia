@@ -9,6 +9,7 @@ public partial class _lh_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         return;
     }
     protected void BtnLogin_Click(object sender, EventArgs e)
@@ -22,7 +23,9 @@ public partial class _lh_Login : System.Web.UI.Page
         }
         else
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "redirectMe", "alert('Lỗi: Tên đăng nhập không tồn tại');", true);
             Response.Redirect("./Admin/General.aspx");
         }
+
     }
 }
