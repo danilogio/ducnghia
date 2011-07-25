@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Contact.aspx.cs" Inherits="Admin_Contact" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Permisson.aspx.cs" Inherits="Admin_Humanlity" %>
 
-<asp:Content ID="ContactAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
-<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<asp:Content ID="PermissonAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
+    <link rel="stylesheet" href="../../styles.css" type="text/css" />
     <style type="text/css">
        body {
 	            background: white;
@@ -18,7 +18,7 @@
     </style>
     
     <div id="div_content">
-        <h4>Liên hệ</h4>
+        <h4>Phân quyền</h4>
     </div>
 </asp:Content>
 
