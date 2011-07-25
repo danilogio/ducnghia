@@ -20,7 +20,7 @@
     </style>
     
     
-    <div id="div_content" style='padding: 15px;'>
+    <div id="div_content">
         <h4>Người dùng</h4>
         
     </div>

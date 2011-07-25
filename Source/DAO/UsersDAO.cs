@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace DAO
 {
-    class UsersDAO
+    public class UsersDAO
     {
         #region Property
         #region Get Property
@@ -444,6 +444,17 @@ namespace DAO
             {
                 return false;
             }
+            return true;
+        }
+
+        /// <summary>
+        /// Kiểm tra xem có phải user hay k?
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_password"></param>
+        /// <returns></returns>
+        public static Boolean isUser(string _username, string _password)
+        {
             return true;
         }
 
