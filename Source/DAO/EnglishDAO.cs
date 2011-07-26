@@ -8,6 +8,9 @@ namespace DAO
 {
     class EnglishDAO
     {
+        // Lấy đường dẫn cơ sở dữ liệu
+        static string strPathDB = DBHelper.strPathDB;
+
         #region Property
         #region Get Property
         /// <summary>
@@ -17,7 +20,7 @@ namespace DAO
         /// <returns></returns>
         public static string getTitle(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -32,7 +35,7 @@ namespace DAO
         /// <returns></returns>
         public static string getType(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -70,7 +73,7 @@ namespace DAO
         /// <returns></returns>
         public static string getContent (int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -85,7 +88,7 @@ namespace DAO
         /// <returns></returns>
         public static string getAuthor(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from author in DB.tblUsers
                       join record in DB.tblEnglishes on author.Username equals record.Author
                       where record.ID == ID
@@ -101,7 +104,7 @@ namespace DAO
         /// <returns></returns>
         public static DateTime getPosted(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -116,7 +119,7 @@ namespace DAO
         /// <returns></returns>
         public static string getState(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -154,7 +157,7 @@ namespace DAO
         /// <returns></returns>
         public static int getPoint(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -169,7 +172,7 @@ namespace DAO
         /// <returns></returns>
         public static string getTag(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblEnglishes
                       where record.ID == ID
                       select record;
@@ -188,7 +191,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setTitle(int ID, string _title)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -213,7 +216,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setType(int ID, int _type)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -235,7 +238,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setAuthor(int ID, string _author)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -257,7 +260,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setContent(int ID, string _content)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -282,7 +285,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setState(int ID, int _state)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -304,7 +307,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setPosted(int ID, DateTime _posted)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -326,7 +329,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setPoint(int ID, int _point)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -348,7 +351,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setTag(int ID, string _tag)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -373,7 +376,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean insertEnglish(tblEnglish record)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             try
             {
@@ -401,7 +404,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean updateEnglish(int _id, tblEnglish update)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             try
             {

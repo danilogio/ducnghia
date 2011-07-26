@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DAO
 {
-    partial class DBHelper
+    public class DBHelper
     {
-        static string strPathDB = System.IO.Directory.GetCurrentDirectory();
+        public static string strPathDB = "D:/Career/ducnghia/Source/App_Data/LTDH.mdf";
     }
 }

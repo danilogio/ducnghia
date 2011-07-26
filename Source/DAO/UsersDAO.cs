@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
+using System.Security.Cryptography;
 
 namespace DAO
 {
     public class UsersDAO
     {
+        // Lấy đường dẫn cơ sở dữ liệu
+        static string strPathDB = DBHelper.strPathDB;
+
         #region Property
         #region Get Property
         /// <summary>
@@ -19,8 +23,8 @@ namespace DAO
         {
             LTDHDataContext DB = new LTDHDataContext();
             IEnumerable<tblUser> lst = from record in DB.tblUsers
-                                      where record.Username == username
-                                      select record;
+                                       where record.Username == username
+                                       select record;
             if (lst.Count() > 0)
             {
                 return lst.ElementAt(0).DisplayName;
@@ -57,7 +61,7 @@ namespace DAO
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
-         
+
             return lst.ElementAt(0).RegisterDate;
         }
 
@@ -191,7 +195,7 @@ namespace DAO
                                        select record;
 
             return lst.ElementAt(0).Role;
- 
+
         }
 
         #endregion
@@ -240,7 +244,7 @@ namespace DAO
 
             return true;
         }
-        
+
         /// <summary>
         /// Xét email cho user
         /// </summary>
@@ -394,7 +398,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean insertUser(tblUser record)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(strPathDB);
 
             try
             {
@@ -448,6 +452,20 @@ namespace DAO
         }
 
         /// <summary>
+        /// Mã hóa mật khẩu
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public string encryptPassword(string password)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] originalText = ASCIIEncoding.Default.GetBytes(password);
+            byte[] cipherText = md5.ComputeHash(originalText);
+            return BitConverter.ToString(cipherText);
+        }
+
+
+        /// <summary>
         /// Kiểm tra xem có phải user hay k?
         /// </summary>
         /// <param name="_username"></param>
@@ -455,7 +473,76 @@ namespace DAO
         /// <returns></returns>
         public static Boolean isUser(string _username, string _password)
         {
-            return true;
+            LTDHDataContext DB = new LTDHDataContext();
+            var r = (from e in DB.tblUsers where e.Username == _username select e).Take(1);
+
+            foreach (tblUser item in r)
+            {
+                int temp = string.Compare(item.Password.Trim(), _password.Trim());
+                if (temp == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Kiểm tra xem đã có username này hay chưa?
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <returns></returns>
+        public static Boolean existedUser(string _username)
+        {
+            LTDHDataContext DB = new LTDHDataContext();
+
+            //tìm user trong bảng user
+            var user = from record in DB.tblUsers
+                       where record.Username == _username
+                       select record;
+
+            // nếu tồn tại it nhất 1 user
+            if (user.Count() > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Kiểm tra xem đã có email này đăng ký hay chưa?
+        /// </summary>
+        /// <param name="_email"></param>
+        /// <returns></returns>
+        public static Boolean existedEmail(string _email)
+        {
+            LTDHDataContext DB = new LTDHDataContext();
+
+            //tìm user trong bảng user
+            var user = from record in DB.tblUsers
+                       where record.Email == _email
+                       select record;
+
+            // nếu tồn tại it nhất 1 user
+            if (user.Count() > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Đăng ký user mới
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="_password"></param>
+        /// <returns></returns>
+        public static string register(tblUser user, string _password)
+        {
+            return "";
         }
 
         #endregion

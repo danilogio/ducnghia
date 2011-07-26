@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 using DAO;
 
@@ -24,8 +25,15 @@ public partial class MasterPage : System.Web.UI.MasterPage
         string strPassword = txtPassword.Text;
 
         Boolean loginState = DAO.UsersDAO.isUser(strUsername, strPassword);
-        
-        
+
+        if (loginState)
+        {
+            //Đăng nhập thành công
+        }
+        else
+        {
+            //Đăng nhập thất bại
+        }
         
     }
 }

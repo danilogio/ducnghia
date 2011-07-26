@@ -102,7 +102,7 @@
                                             <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
                                         </asp:DropDownList>
             </p>
-            <p id="Solving"><span>Hướng dẫn giải:</span><asp:FileUpload ID="fileSolving" runat="server" CssClass="contact"></asp:FileUpload></p>
+            <p id="Solving"><span>Hướng dẫn giải (nếu có):</span><asp:FileUpload ID="fileSolving" runat="server" CssClass="contact"></asp:FileUpload></p>
             </div>
             
              <%--Chung--%>

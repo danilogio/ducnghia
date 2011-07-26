@@ -8,6 +8,9 @@ namespace DAO
 {
     partial class NewsDAO
     {
+        // Lấy đường dẫn cơ sở dữ liệu
+        static string strPathDB = DBHelper.strPathDB;
+
         #region Property
         
         #region Get Property
@@ -18,7 +21,7 @@ namespace DAO
         /// <returns></returns>
         public static string getTitle(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -36,7 +39,7 @@ namespace DAO
         /// <returns></returns>
         public static string getChapeau(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -56,7 +59,7 @@ namespace DAO
         /// <returns></returns>
         public static string getContent(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -76,7 +79,7 @@ namespace DAO
         /// <returns></returns>
         public static string getPosted(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -96,7 +99,7 @@ namespace DAO
         /// <returns></returns>
         public static string getAuthor(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from author in DB.tblUsers
                       join news in DB.tblNews on author.Username equals news.Author
                       where news.ID == newsID
@@ -112,7 +115,7 @@ namespace DAO
         /// <returns></returns>
         public static tblNew getNews(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             IEnumerable<tblNew> news = from record in DB.tblNews
                                        where record.ID == newsID
@@ -133,7 +136,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setTitle(int newsID, string strTitle)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -155,7 +158,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setChapeau(int newsID, string strChapeau)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -177,7 +180,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setPosted(int newsID, DateTime timePosted)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -199,7 +202,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setAuthor(int newsID, string author)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -221,7 +224,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setContent(int newsID, string strContent)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -246,7 +249,7 @@ namespace DAO
         /// <returns></returns>
         public static bool checkNewsExists(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -264,7 +267,7 @@ namespace DAO
         /// <returns>int</returns>
         public static int countNews()
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             return DB.tblNews.Count();
         }
@@ -276,7 +279,7 @@ namespace DAO
         /// <returns>Boolean</returns>
         public static Boolean insertNews(tblNew record)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             try
             {
@@ -303,7 +306,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean updateNews(int newsID, tblNew recordUpdate)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             try
             {

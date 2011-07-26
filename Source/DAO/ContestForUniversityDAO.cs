@@ -8,6 +8,9 @@ namespace DAO
 {
     class ContestForUniversityDAO
     {
+        // Lấy đường dẫn cơ sở dữ liệu
+        static string strPathDB = DBHelper.strPathDB;
+        
         #region Property
         #region Get Property
         /// <summary>
@@ -17,7 +20,7 @@ namespace DAO
         /// <returns></returns>
         public static string getTitle(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                       where record.ID == ID
                                       select record;
@@ -36,7 +39,7 @@ namespace DAO
         /// <returns></returns>
         public static string getContent(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -55,7 +58,7 @@ namespace DAO
         /// <returns></returns>
         public static string getSolving(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -70,7 +73,7 @@ namespace DAO
         /// <returns></returns>
         public static string getAuthor(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from author in DB.tblUsers
                       join record in DB.tblContestForUniversities on author.Username equals record.Author
                       where record.ID == ID
@@ -86,7 +89,7 @@ namespace DAO
         /// <returns></returns>
         public static DateTime getPosted(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -104,7 +107,7 @@ namespace DAO
         /// <returns></returns>
         public static string getState(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -142,7 +145,7 @@ namespace DAO
         /// <returns></returns>
         public static string getContestType(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -162,7 +165,7 @@ namespace DAO
         /// <returns></returns>
         public static string getBranch(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -210,7 +213,7 @@ namespace DAO
         /// <returns></returns>
         public static int getYear(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -224,7 +227,7 @@ namespace DAO
         /// <returns></returns>
         public static int getPoint(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -239,7 +242,7 @@ namespace DAO
         /// <returns></returns>
         public static string getTag(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             var lst = from record in DB.tblContestForUniversities
                       where record.ID == ID
                       select record;
@@ -259,7 +262,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setTitle(int ID, string _title)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -281,7 +284,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setContent(int ID, string _content)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -303,7 +306,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setAuthor(int ID, string _author)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -325,7 +328,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setPosted(int ID, DateTime _posted)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -350,7 +353,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setState(int ID, int _state)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -374,7 +377,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setContestType(int ID, bool _isUniversity)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -401,7 +404,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setBranch(int ID, int _branch)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -423,7 +426,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setYear (int ID, int _year)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -445,7 +448,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setSolving (int ID, string _solving)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -467,7 +470,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setPoint(int ID, int _point)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -489,7 +492,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setTag(int ID, string _tag)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -515,7 +518,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean insertContest(tblContestForUniversity record)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
 
             try
             {
@@ -543,7 +546,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean updateContest(int _id, tblContestForUniversity update)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext ();
             try
             {
                 using (TransactionScope ts = new TransactionScope())

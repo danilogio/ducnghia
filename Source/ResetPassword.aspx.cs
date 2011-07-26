@@ -11,4 +11,15 @@ public partial class ResetPassword : System.Web.UI.Page
     {
 
     }
+
+    protected void btnResetPassword_Click(object sender, EventArgs e)
+    {
+        string strEmail = txtboxRegistryEmail.Text;
+
+        // Phát sinh mật khẩu bất kỳ
+
+        // Gửi mật khẩu đến email
+
+        // Thông báo cho người dùng
+    }
 }

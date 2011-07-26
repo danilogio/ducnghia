@@ -10,7 +10,7 @@
 				        });
 				</script>
 				
-				<!-- 
+				 
 				
                 <div id="block_text" class="block_text">
                     <h2>Chào mừng quý vị đến với Website Luyện thi Kinh tế</h2>
@@ -29,6 +29,8 @@
                     <p>Mọi thắc mắc xin liện hệ email: <a href="mailto:trungtamducnghia@gmail.com">trungtamducnghia@gmail.com</a></p>
                     <p>Hoặc gửi mail cho chúng tôi tại phần Liên hệ</p>  
                 </div>
+                
+                <!--
                 
                 <div id="news" class="block_text">
                     <h2>Tin tức thư viện</h2>
