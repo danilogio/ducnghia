@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Transactions;
 using System.Security.Cryptography;
+using System.Web;
+using System.Web.Mail;
+using System.Web.Security;
 
 namespace DAO
 {
@@ -432,6 +435,7 @@ namespace DAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var user = DB.tblUsers.Single(u => u.Username == _username);
+                    
                     user.Password = update.Password;
                     user.DisplayName = update.DisplayName;
                     user.Email = update.Email;
@@ -442,6 +446,9 @@ namespace DAO
                     user.RegisterDate = update.RegisterDate;
                     user.NumberOfArticles = update.NumberOfArticles;
                     user.Note = update.Note;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
                 }
             }
             catch (Exception e)
@@ -456,7 +463,7 @@ namespace DAO
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public string encryptPassword(string password)
+        public static string encryptPassword(string password)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             byte[] originalText = ASCIIEncoding.Default.GetBytes(password);
@@ -516,22 +523,22 @@ namespace DAO
         /// </summary>
         /// <param name="_email"></param>
         /// <returns></returns>
-        public static Boolean existedEmail(string _email)
+        public static string existedEmail(string _email)
         {
             LTDHDataContext DB = new LTDHDataContext();
 
             //tìm user trong bảng user
-            var user = from record in DB.tblUsers
+            IEnumerable<tblUser> user = from record in DB.tblUsers
                        where record.Email == _email
                        select record;
 
             // nếu tồn tại it nhất 1 user
             if (user.Count() > 0)
             {
-                return true;
+                return user.ElementAt(0).Username;
             }
 
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -543,6 +550,100 @@ namespace DAO
         public static string register(tblUser user, string _password)
         {
             return "";
+        }
+
+        /// <summary>
+        /// Phát sinh chuỗi mật khẩu bất kỳ
+        /// </summary>
+        /// <returns></returns>
+        public static string generatePassword()
+        {
+            //var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            //var stringChars = new char[8];
+            //var random = new Random();
+
+            //for (int i = 0; i < stringChars.Length; i++)
+            //{
+            //    stringChars[i] = chars[random.Next(chars.Length)];
+            //}
+
+            //return new String(stringChars);
+
+            return Membership.GeneratePassword(8, 0);
+        }
+
+        /// <summary>
+        /// Cập nhật mật khẩu mới
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_newPassword"></param>
+        public static Boolean updateUserPassword(string _username, string _newPassword)
+        {
+            LTDHDataContext DB = new LTDHDataContext();
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var user = DB.tblUsers.Single(u => u.Username == _username);
+
+                    user.Note = "New password: " + _newPassword;
+                    user.Password = encryptPassword(_newPassword);
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Gửi mật khẩu mới tới user
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_newPassword"></param>
+        /// <param name="_email"></param>
+        /// <returns></returns>
+        public static Boolean sendNewPassword(string _username, string _newPassword, string _email)
+        {
+            try
+            {
+                // Cập nhật mật khẩu
+                Boolean isOK = updateUserPassword(_username, _newPassword);
+
+                if (isOK)
+                {
+                    MailMessage message = new MailMessage();
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", "smtp.gmail.com");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", "465");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusing", "2");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
+                    //Use 0 for anonymous
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", "trungtamducnghia@gmail.com");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", "123456987");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
+                    message.From = "trungtamducnghia@gmail.com";
+                    message.To = _email;
+                    message.Subject = "Mật khẩu mới tại trang web luyện thi kinh tế";
+                    message.BodyFormat = MailFormat.Text;
+                    message.BodyEncoding = Encoding.UTF8;
+                    message.Body = "Tên đăng nhập: " + _username + "\n" + "Mật khẩu: " + _newPassword;
+                    SmtpMail.SmtpServer = "smtp.gmail.com:465";
+
+                    SmtpMail.Send(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         #endregion

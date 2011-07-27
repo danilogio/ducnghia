@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
+
+using DAO;
 
 public partial class ResetPassword : System.Web.UI.Page
 {
@@ -16,9 +19,27 @@ public partial class ResetPassword : System.Web.UI.Page
     {
         string strEmail = txtboxRegistryEmail.Text;
 
-        // Phát sinh mật khẩu bất kỳ
+        // Kiểm tra sự tồn tại của email
+        string strUsername = DAO.UsersDAO.existedEmail(strEmail);
 
-        // Gửi mật khẩu đến email
+
+        if (strUsername != null)
+        {
+            // Phát sinh mật khẩu bất kỳ
+            string strNewPassword = DAO.UsersDAO.generatePassword();
+
+            // Gửi mật khẩu đến email
+            DAO.UsersDAO.sendNewPassword(strUsername, strNewPassword, strEmail);
+
+            liMessage.Text = "Mật khẩu mới đã được gửi tới email của bạn. Xin vui lòng kiểm tra email.";
+            liMessage.Visible = true;
+            requestPassword.Visible = false;
+        }
+        else
+        {
+            liMessage.Text = "Lỗi: Không tìm thấy email của bạn!";
+            liMessage.Visible = true;
+        }
 
         // Thông báo cho người dùng
     }
