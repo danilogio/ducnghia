@@ -225,27 +225,27 @@
 					        <li>
                                 <h4><span>Luyện thi đại học</span></h4>
                                 <ul class="blocklist">
-                                    <li><asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
-                                    <li><asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
-                                    <li><asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
                                 </ul>
                             </li>
                     
                             <li>
                                 <h4><span>Tin học</span></h4>
                                 <ul class="blocklist">
-                                    <li><asp:HyperLink ID="HpkITLibLecture" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
-                                    <li><asp:HyperLink ID="HpkITLibExercise" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
-                                    <li><asp:HyperLink ID="HpkITLibSubject" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkITLibLecture" runat="server" NavigateUrl="~/Informatics.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkITLibExercise" runat="server" NavigateUrl="~/Informatics.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkITLibSubject" runat="server" NavigateUrl="~/Informatics.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
                                 </ul>
                             </li>
                         
                             <li>
                                 <h4><span>Anh văn</span></h4>
                                 <ul class="blocklist">
-                                    <li><asp:HyperLink ID="HpkELLibLecture" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
-                                    <li><asp:HyperLink ID="HpkELLibExercise" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
-                                    <li><asp:HyperLink ID="HpkELLibSubject" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkELLibLecture" runat="server" NavigateUrl="~/English.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkELLibExercise" runat="server" NavigateUrl="~/English.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HpkELLibSubject" runat="server" NavigateUrl="~/English.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
                                 </ul>
                             </li>
                         
