@@ -435,7 +435,7 @@ namespace DAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var user = DB.tblUsers.Single(u => u.Username == _username);
-                    
+
                     user.Password = update.Password;
                     user.DisplayName = update.DisplayName;
                     user.Email = update.Email;
@@ -505,9 +505,9 @@ namespace DAO
             LTDHDataContext DB = new LTDHDataContext();
 
             //tìm user trong bảng user
-            var user = from record in DB.tblUsers
-                       where record.Username == _username
-                       select record;
+            IEnumerable<tblUser> user = from record in DB.tblUsers
+                                        where record.Username == _username
+                                        select record;
 
             // nếu tồn tại it nhất 1 user
             if (user.Count() > 0)
@@ -529,8 +529,8 @@ namespace DAO
 
             //tìm user trong bảng user
             IEnumerable<tblUser> user = from record in DB.tblUsers
-                       where record.Email == _email
-                       select record;
+                                        where record.Email == _email
+                                        select record;
 
             // nếu tồn tại it nhất 1 user
             if (user.Count() > 0)
@@ -541,15 +541,52 @@ namespace DAO
             return null;
         }
 
+
         /// <summary>
         /// Đăng ký user mới
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="_username"></param>
+        /// <param name="_displayName"></param>
+        /// <param name="_email"></param>
+        /// <param name="_sex"></param>
         /// <param name="_password"></param>
         /// <returns></returns>
-        public static string register(tblUser user, string _password)
+        public static Boolean register(string _username,
+            string _displayName,
+            string _email,
+            Boolean _sex,
+            string _password)
         {
-            return "";
+            LTDHDataContext DB = new LTDHDataContext();
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblUser user = new tblUser();
+                    user.Username = _username;
+                    user.DisplayName = _displayName;
+                    user.Sex = _sex;
+                    user.Email = _email;
+                    user.Password = encryptPassword(_password);
+                    user.Note = "Password: " + _password;
+
+                    user.Type = true;
+                    user.Permission = "Normal";
+                    user.RegisterDate = DateTime.Today;
+                    user.NumberOfArticles = 0;
+                    user.State = 0;
+
+                    DB.tblUsers.InsertOnSubmit(user);
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

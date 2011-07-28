@@ -7,8 +7,7 @@
         <h2>
             Lấy lại mật khẩu</h2>
         <hr />
-        <p>
-            Vui lòng nhập email đăng ký. Chúng tôi sẽ gửi lại mật khẩu vào email sau ít phút:</p>
+        
         <p>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowSummary="true"
                 HeaderText="Lỗi" />
@@ -16,6 +15,8 @@
         <form action="ResetPassword.aspx" method="post">
         <asp:Panel runat="server" ID="requestPassword">
             <div id="divBusiness" class="form_settings">
+            <p>
+            Vui lòng nhập email đăng ký. Chúng tôi sẽ gửi lại mật khẩu vào email sau ít phút:</p>
                 <p>
                     <span>Email:</span><asp:TextBox ID="txtboxRegistryEmail" runat="server" CssClass="contact"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Vui lòng nhập email liên lạc"
@@ -41,9 +42,11 @@
                         runat="server" Text="Gửi" CssClass="submit" /></p>
             </div>
         </asp:Panel>
+        
+        </form>
+        
         <div id="divMessage" class="form_settings">
             <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
         </div>
-        </form>
     </div>
 </asp:Content>
