@@ -473,6 +473,29 @@ namespace DAO
 
 
         /// <summary>
+        /// Lấy user
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_password"></param>
+        /// <returns></returns>
+        public static tblUser getUser(string _username, string _password)
+        {
+            LTDHDataContext DB = new LTDHDataContext();
+            string pwd = encryptPassword(_password);
+
+            IEnumerable<tblUser> lst = from record in DB.tblUsers
+                                       where record.Username == _username && record.Password == pwd
+                                       select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Kiểm tra xem có phải user hay k?
         /// </summary>
         /// <param name="_username"></param>
@@ -481,17 +504,15 @@ namespace DAO
         public static Boolean isUser(string _username, string _password)
         {
             LTDHDataContext DB = new LTDHDataContext();
-            var r = (from e in DB.tblUsers where e.Username == _username select e).Take(1);
+            string pwd = encryptPassword(_password);
 
-            foreach (tblUser item in r)
+            IEnumerable<tblUser> lst = from record in DB.tblUsers
+                                       where record.Username == _username && record.Password == pwd
+                                       select record;
+            if (lst.Count() > 0)
             {
-                int temp = string.Compare(item.Password.Trim(), _password.Trim());
-                if (temp == 0)
-                {
-                    return true;
-                }
+                return true;
             }
-
             return false;
         }
 

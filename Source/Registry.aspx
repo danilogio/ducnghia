@@ -39,9 +39,6 @@
                         <asp:ListItem Text="Nam" Value="false"></asp:ListItem>
                         <asp:ListItem Text="Nữ" Value="true"></asp:ListItem>
                     </asp:DropDownList>
-                    <%--<asp:RequiredFieldValidator ID="reqSex" runat="server" ErrorMessage="Vui lòng nhập tên hiển thị"
-                        ControlToValidate="ddlSex" Display="none">
-                    </asp:RequiredFieldValidator>--%>
                 </p>
                 <p>
                     <span>Mật khẩu:</span><asp:TextBox ID="txtboxPassword" runat="server" TextMode="Password"

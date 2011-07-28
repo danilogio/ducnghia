@@ -12,7 +12,12 @@ public partial class Contact : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["User"] != null)
+        {
+            tblUser user = (tblUser)Session["User"];
+            txtboxContactName.Text = user.DisplayName;
+            txtboxContactEmail.Text = user.Email.Trim();
+        }
     }
 
     protected void btnSubmitContact_Click(object sender, EventArgs e)

@@ -17,6 +17,31 @@ public partial class MasterPage : System.Web.UI.MasterPage
         ltsItem.Items.Add("Anh văn");
         ltsItem.Items.Add("Tin học");
         ltsItem.Width = 150;
+
+        if (Session["User"] == null)
+        {
+            userStateTitle.Text = "Đăng nhập";
+            loginPanel.Visible = true;
+            userPanel.Visible = false;
+        }
+        else
+        {
+            tblUser user = (tblUser)Session["User"];
+            userStateTitle.Text = "Thông tin tài khoản";
+            loginUser.Text = user.DisplayName;
+            loginPanel.Visible = false;
+            userPanel.Visible = true;
+        }
+
+    }
+
+    public void updateAccount(tblUser  _user)
+    {
+        Session["User"] = _user;
+        loginUser.Text = _user.DisplayName;
+        userStateTitle.Text = "Thông tin tài khoản";
+        loginPanel.Visible = false;
+        userPanel.Visible = true;
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -24,16 +49,31 @@ public partial class MasterPage : System.Web.UI.MasterPage
         string strUsername = txtUsername.Text;
         string strPassword = txtPassword.Text;
 
-        Boolean loginState = DAO.UsersDAO.isUser(strUsername, strPassword);
+        tblUser user = DAO.UsersDAO.getUser(strUsername, strPassword);
 
-        if (loginState)
+        if (user != null)
         {
             //Đăng nhập thành công
+            updateAccount(user);
         }
         else
         {
             //Đăng nhập thất bại
+            Response.Redirect("~/Login.aspx");
         }
         
     }
+
+    protected void btnLogout_Click(object sender, EventArgs e)
+    {
+        Session["User"] = null;
+        
+        userStateTitle.Text = "Đăng nhập";
+        loginPanel.Visible = true;
+        userPanel.Visible = false;
+
+        Response.Redirect("~/Home.aspx");
+    }
+
+    
 }
