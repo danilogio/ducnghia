@@ -50,7 +50,7 @@ public partial class Registry : System.Web.UI.Page
                 {
                     liMessage.Text = "Bạn đã đăng ký thành công. ";
                     liMessage.Text += "Xin vui lòng kiểm tra email để kích hoạt tài khoản!";
-                    liMessage.Text += "\r\n\r\n <a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
                     liMessage.Visible = true;
                     registerPanel.Visible = false;
                 }
