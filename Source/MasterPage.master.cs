@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
-using DAO;
+using DucNghia.DAO;
 
 namespace DucNghia
 {
@@ -37,6 +37,11 @@ namespace DucNghia
 
         }
 
+        public void hideLoginSidebar()
+        {
+            loginSidebar.Visible = false;
+        }
+
         public void updateAccount(tblUser _user)
         {
             Session["User"] = _user;
@@ -51,14 +56,14 @@ namespace DucNghia
             string strUsername = txtUsername.Text;
             string strPassword = txtPassword.Text;
 
-            tblUser user = DAO.UsersDAO.getUser(strUsername, strPassword);
+            tblUser user = DucNghia.DAO.UsersDAO.getUser(strUsername, strPassword);
 
             if (user != null)
             {
 
                 updateAccount(user);
 
-                /*
+                
                 switch (user.State)
                 {
                     case 0: //Tài khoản chưa kích hoạt
@@ -88,7 +93,7 @@ namespace DucNghia
                             break;
                         }
                 }
-                 */
+                 
             }
             else
             {

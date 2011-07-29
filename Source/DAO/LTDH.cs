@@ -1,4 +1,4 @@
-namespace DAO
+namespace DucNghia.DAO
 {
     partial class LTDHDataContext
     {

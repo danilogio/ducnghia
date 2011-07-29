@@ -104,7 +104,7 @@
         <img src="imagesAd/thuvien.gif" border="0"/></a>
     </div>
 </div>--%>
-    <form id="frmMain" runat="server" >
+    <form id="frmMain" runat="server">
     <div id="outer-container">
         <div id="container">
             <div id="header">
@@ -134,14 +134,15 @@
                     <asp:ContentPlaceHolder ID="cphContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
+                
                 <div class="sidebar">
                     <ul>
-                        <li>
+                        <li id="loginSidebar" runat="server">
                             <h4>
                                 <asp:Literal ID="userStateTitle" runat="server" Text="Đăng nhập"></asp:Literal>
                             </h4>
                             <ul>
-                                <li id="idLogin">
+                                <li id="idlogin">
                                     <asp:Panel ID="loginPanel" runat="server" Visible="true">
                                         <form method="post" class="searchform" action="Home.aspx">
                                         <div id="divUsername">
@@ -181,29 +182,30 @@
                                             </div>
                                         </div>
                                     </asp:Panel>
-                                    
                                     <asp:Panel ID="userPanel" runat="server" Visible="false">
-                                        <div style="float: left; width: 75%;">
-                                            <div id="divInfo" style="width: 100%;">
-                                                <label>
-                                                    Xin chào
-                                                </label>
-                                                <asp:Literal ID="loginUser" runat="server"></asp:Literal>
+                                        <div>
+                                            <div style="float: left; width: 75%;">
+                                                <div id="divInfo" style="width: 100%;">
+                                                    <label>
+                                                        Xin chào
+                                                    </label>
+                                                    <asp:Literal ID="loginUser" runat="server"></asp:Literal>
+                                                </div>
+                                                <div style="width: 100%;">
+                                                    <div style="float: left; width: 60%;">
+                                                        <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
+                                                            Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
+                                                    </div>
+                                                    <div>
+                                                        <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
+                                                            Font-Italic="True">Gửi bài</asp:HyperLink>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div>
-                                                <div style="float: left; width: 60%;">
-                                                    <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
-                                                        Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
-                                                </div>
-                                                <div>
-                                                    <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
-                                                        Font-Italic="True">Gửi bài</asp:HyperLink>
-                                                </div>
+                                                <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"
+                                                    CssClass="searchsubmit formbutton" />
                                             </div>
-                                        </div>
-                                        <div>
-                                            <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"
-                                                CssClass="searchsubmit formbutton" />
                                         </div>
                                     </asp:Panel>
                                 </li>
@@ -336,6 +338,7 @@
                         </li>
                     </ul>
                 </div>
+                
                 <div class="clear">
                 </div>
             </div>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using DAO;
+using DucNghia.DAO;
 using System.Web.Mail;
 
 public partial class Contact : System.Web.UI.Page

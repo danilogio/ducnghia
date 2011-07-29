@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mail;
 using System.Web.Security;
 
-namespace DAO
+namespace DucNghia.DAO
 {
     public class UsersDAO
     {

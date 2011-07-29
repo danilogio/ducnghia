@@ -4,24 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DAO;
+using DucNghia.DAO;
 
 public partial class ResetPassword : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        tblUser user = (tblUser)Session["User"];
+        if (Session["User"] != null)
+        {
+            tblUser user = (tblUser)Session["User"];
 
-        lLogonUser.Text = user.Username;
-        lDisplayName.Text = user.DisplayName;
-        lSex.Text = (user.Sex == false ? "Nam" : "Nữ");
-        lEmail.Text = user.Email;
-        lNumberOfArticles.Text = user.NumberOfArticles.ToString();
+            lLogonUser.Text = user.Username;
+            lDisplayName.Text = user.DisplayName;
+            lSex.Text = (user.Sex == false ? "Nam" : "Nữ");
+            lEmail.Text = user.Email;
+            lNumberOfArticles.Text = user.NumberOfArticles.ToString();
+        }
+        else
+        {
+            Response.Redirect("~/Home.aspx");
+        }
 
-        viewPanel.Visible = true;
-        messagePanel.Visible = false;
-        editPanel.Visible = false;
-        changePasswordPanel.Visible = false;
     }
     
     protected void btnSubmitChangePassword_Click (object sender, EventArgs e)
@@ -31,13 +34,13 @@ public partial class ResetPassword : System.Web.UI.Page
         // Kiểm tra xem có đúng password hay không?
         tblUser user = (tblUser)Session["User"];
 
-        Boolean isExist = DAO.UsersDAO.isUser(user.Username, oldPassword);
+        Boolean isExist = DucNghia.DAO.UsersDAO.isUser(user.Username, oldPassword);
 
         if (isExist)
         {
             string newPassword = txtboxNewPassword.Text;
 
-            Boolean isOK = DAO.UsersDAO.updateUserPassword(user.Username, newPassword);
+            Boolean isOK = DucNghia.DAO.UsersDAO.updateUserPassword(user.Username, newPassword);
 
             // Thành công
             if (isOK)
@@ -79,6 +82,24 @@ public partial class ResetPassword : System.Web.UI.Page
 
     protected void btnSubmitUpdateProfile_Click(object sender, EventArgs e)
     {
+        tblUser user = (tblUser)Session["User"];
+
+        string strDisplayName = txtboxDisplayName.Text;
+        string strEmail = txtboxEmail.Text;
+
+        user.Email = strEmail;
+        user.DisplayName = strDisplayName;
+
+        Boolean isOK = DucNghia.DAO.UsersDAO.updateUser(user.Username, user);
+        if (isOK)
+        {
+            lMessage.Text = "Bạn đã cập nhật hồ sơ thành công!";
+            lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+            lMessage.Visible = true;
+
+            messagePanel.Visible = true;
+            editPanel.Visible = false;
+        }
     }
     
 }

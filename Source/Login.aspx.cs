@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using DAO;
+using DucNghia.DAO;
 
 namespace DucNghia
 {
@@ -13,6 +13,8 @@ namespace DucNghia
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            MasterPage page = (MasterPage)Master;
+            page.hideLoginSidebar();    
         }
 
 
@@ -28,7 +30,7 @@ namespace DucNghia
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
 
-            tblUser user = DAO.UsersDAO.getUser(strUsername, strPassword);
+            tblUser user = DucNghia.DAO.UsersDAO.getUser(strUsername, strPassword);
 
             if (user != null)
             {

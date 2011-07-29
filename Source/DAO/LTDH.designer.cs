@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAO
+namespace DucNghia.DAO
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -60,7 +60,7 @@ namespace DAO
     #endregion
 		
 		public LTDHDataContext() : 
-				base(global::DAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
+				base(global::DucNghia.DAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

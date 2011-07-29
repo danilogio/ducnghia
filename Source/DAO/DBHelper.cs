@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DAO
+namespace DucNghia.DAO
 {
     public class DBHelper
     {
