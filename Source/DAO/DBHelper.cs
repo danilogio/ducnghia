@@ -7,6 +7,6 @@ namespace DAO
 {
     public class DBHelper
     {
-        public static string strPathDB = "D:/Career/ducnghia/Source/App_Data/LTDH.mdf";
+        public static string strPathDB = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\LTDH.mdf";
     }
 }

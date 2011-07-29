@@ -7,32 +7,46 @@ using System.Web.UI.WebControls;
 
 using DAO;
 
-public partial class Login : System.Web.UI.Page
+namespace DucNghia
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Login : System.Web.UI.Page
     {
-
-    }
-
-    protected void btnSubmitLogin_Click(object sender, EventArgs e)
-    {
-        string strUsername = txtboxLoginName.Text;
-        string strPassword = txtboxPassword.Text;
-
-        tblUser user = DAO.UsersDAO.getUser(strUsername, strPassword);
-
-        if (user != null)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            //Đăng nhập thành công
-            MasterPage page = (MasterPage)Master;
-            page.updateAccount(user);
-
-            Response.Redirect("~/Home.aspx");
         }
-        else
+
+
+        public void updateMessage(string _message)
         {
-            //Đăng nhập thất bại
-            Response.Redirect("~/Login.aspx");
+            lMessage.Text = _message;
+            lMessage.Visible = true;
+            messagePanel.Visible = true;
+        }
+
+        protected void btnSubmitLogin_Click(object sender, EventArgs e)
+        {
+            string strUsername = txtboxLoginName.Text;
+            string strPassword = txtboxPassword.Text;
+
+            tblUser user = DAO.UsersDAO.getUser(strUsername, strPassword);
+
+            if (user != null)
+            {
+                //Đăng nhập thành công
+                MasterPage page = (MasterPage)Master;
+                page.updateAccount(user);
+
+                Response.Redirect("~/Home.aspx");
+            }
+            else
+            {
+                //Đăng nhập thất bại
+                lMessage.Text = "Tên đăng nhập hoặc mật khẩu không đúng. Xin vui lòng kiểm tra lại!";
+                lMessage.Visible = true;
+                messagePanel.Visible = true;
+
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }

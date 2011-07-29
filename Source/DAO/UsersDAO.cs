@@ -24,7 +24,7 @@ namespace DAO
         /// <returns></returns>
         public static string getDisplayName(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -42,7 +42,7 @@ namespace DAO
         /// <returns></returns>
         public static string getEmail(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -60,7 +60,7 @@ namespace DAO
         /// <returns></returns>
         public static DateTime getRegisterDate(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -77,7 +77,7 @@ namespace DAO
         /// <returns></returns>
         public static string getUserType(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -98,7 +98,7 @@ namespace DAO
         /// <returns></returns>
         public static string getUserState(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -162,7 +162,7 @@ namespace DAO
         /// <returns></returns>
         public static string getNote(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -177,7 +177,7 @@ namespace DAO
         /// <returns></returns>
         public static int getNumberOfArticles(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -192,7 +192,7 @@ namespace DAO
         /// <returns></returns>
         public static string getRole(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -212,7 +212,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setPassword(string username, string _password)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -234,7 +234,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setDisplayName(string username, string _displayName)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -256,7 +256,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setEmail(string username, string _email)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -280,7 +280,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setType(string username, Boolean _type)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -310,7 +310,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setUserState(string username, int _state)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -332,7 +332,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setRegisterDate(string username, DateTime _registerDate)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -354,7 +354,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setNumberOfArticles(string username, int _numberOfArticles)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -376,7 +376,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean setNote(string username, string _note)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -429,7 +429,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean updateUser(string _username, tblUser update)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -480,7 +480,7 @@ namespace DAO
         /// <returns></returns>
         public static tblUser getUser(string _username, string _password)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             string pwd = encryptPassword(_password);
 
             IEnumerable<tblUser> lst = from record in DB.tblUsers
@@ -503,7 +503,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean isUser(string _username, string _password)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             string pwd = encryptPassword(_password);
 
             IEnumerable<tblUser> lst = from record in DB.tblUsers
@@ -523,7 +523,7 @@ namespace DAO
         /// <returns></returns>
         public static Boolean existedUser(string _username)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             //tìm user trong bảng user
             IEnumerable<tblUser> user = from record in DB.tblUsers
@@ -546,7 +546,7 @@ namespace DAO
         /// <returns></returns>
         public static string existedEmail(string _email)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             //tìm user trong bảng user
             IEnumerable<tblUser> user = from record in DB.tblUsers
@@ -578,7 +578,7 @@ namespace DAO
             Boolean _sex,
             string _password)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -637,7 +637,7 @@ namespace DAO
         /// <param name="_newPassword"></param>
         public static Boolean updateUserPassword(string _username, string _newPassword)
         {
-            LTDHDataContext DB = new LTDHDataContext();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             try
             {

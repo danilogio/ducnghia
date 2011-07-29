@@ -30,12 +30,12 @@ namespace DAO
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InserttblAdmin(tblAdmin instance);
-    partial void UpdatetblAdmin(tblAdmin instance);
-    partial void DeletetblAdmin(tblAdmin instance);
     partial void InserttblUser(tblUser instance);
     partial void UpdatetblUser(tblUser instance);
     partial void DeletetblUser(tblUser instance);
+    partial void InserttblAdmin(tblAdmin instance);
+    partial void UpdatetblAdmin(tblAdmin instance);
+    partial void DeletetblAdmin(tblAdmin instance);
     partial void InserttblComment(tblComment instance);
     partial void UpdatetblComment(tblComment instance);
     partial void DeletetblComment(tblComment instance);
@@ -89,19 +89,19 @@ namespace DAO
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<tblAdmin> tblAdmins
-		{
-			get
-			{
-				return this.GetTable<tblAdmin>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tblUser> tblUsers
 		{
 			get
 			{
 				return this.GetTable<tblUser>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblAdmin> tblAdmins
+		{
+			get
+			{
+				return this.GetTable<tblAdmin>();
 			}
 		}
 		
@@ -186,140 +186,6 @@ namespace DAO
 		}
 	}
 	
-	[Table(Name="dbo.tblAdmin")]
-	public partial class tblAdmin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Name;
-		
-		private string _Message;
-		
-		private bool _State;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnMessageChanging(string value);
-    partial void OnMessageChanged();
-    partial void OnStateChanging(bool value);
-    partial void OnStateChanged();
-    #endregion
-		
-		public tblAdmin()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Message", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this.OnMessageChanging(value);
-					this.SendPropertyChanging();
-					this._Message = value;
-					this.SendPropertyChanged("Message");
-					this.OnMessageChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_State", DbType="Bit NOT NULL")]
-		public bool State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[Table(Name="dbo.tblUsers")]
 	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -347,6 +213,8 @@ namespace DAO
 		private int _State;
 		
 		private System.DateTime _RegisterDate;
+		
+		private System.Nullable<System.DateTime> _KIADate;
 		
 		private int _NumberOfArticles;
 		
@@ -386,6 +254,8 @@ namespace DAO
     partial void OnStateChanged();
     partial void OnRegisterDateChanging(System.DateTime value);
     partial void OnRegisterDateChanged();
+    partial void OnKIADateChanging(System.Nullable<System.DateTime> value);
+    partial void OnKIADateChanged();
     partial void OnNumberOfArticlesChanging(int value);
     partial void OnNumberOfArticlesChanged();
     partial void OnNoteChanging(string value);
@@ -621,6 +491,26 @@ namespace DAO
 			}
 		}
 		
+		[Column(Storage="_KIADate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> KIADate
+		{
+			get
+			{
+				return this._KIADate;
+			}
+			set
+			{
+				if ((this._KIADate != value))
+				{
+					this.OnKIADateChanging(value);
+					this.SendPropertyChanging();
+					this._KIADate = value;
+					this.SendPropertyChanged("KIADate");
+					this.OnKIADateChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_NumberOfArticles", DbType="Int NOT NULL")]
 		public int NumberOfArticles
 		{
@@ -779,6 +669,140 @@ namespace DAO
 		{
 			this.SendPropertyChanging();
 			entity.tblUser = null;
+		}
+	}
+	
+	[Table(Name="dbo.tblAdmin")]
+	public partial class tblAdmin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private string _Message;
+		
+		private bool _State;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnMessageChanging(string value);
+    partial void OnMessageChanged();
+    partial void OnStateChanging(bool value);
+    partial void OnStateChanged();
+    #endregion
+		
+		public tblAdmin()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Message", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this.OnMessageChanging(value);
+					this.SendPropertyChanging();
+					this._Message = value;
+					this.SendPropertyChanged("Message");
+					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_State", DbType="Bit NOT NULL")]
+		public bool State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
