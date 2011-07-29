@@ -30,12 +30,12 @@ namespace DAO
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InserttblUser(tblUser instance);
-    partial void UpdatetblUser(tblUser instance);
-    partial void DeletetblUser(tblUser instance);
     partial void InserttblAdmin(tblAdmin instance);
     partial void UpdatetblAdmin(tblAdmin instance);
     partial void DeletetblAdmin(tblAdmin instance);
+    partial void InserttblUser(tblUser instance);
+    partial void UpdatetblUser(tblUser instance);
+    partial void DeletetblUser(tblUser instance);
     partial void InserttblComment(tblComment instance);
     partial void UpdatetblComment(tblComment instance);
     partial void DeletetblComment(tblComment instance);
@@ -89,19 +89,19 @@ namespace DAO
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<tblUser> tblUsers
-		{
-			get
-			{
-				return this.GetTable<tblUser>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tblAdmin> tblAdmins
 		{
 			get
 			{
 				return this.GetTable<tblAdmin>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblUser> tblUsers
+		{
+			get
+			{
+				return this.GetTable<tblUser>();
 			}
 		}
 		
@@ -186,11 +186,147 @@ namespace DAO
 		}
 	}
 	
+	[Table(Name="dbo.tblAdmin")]
+	public partial class tblAdmin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private string _Message;
+		
+		private bool _State;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnMessageChanging(string value);
+    partial void OnMessageChanged();
+    partial void OnStateChanging(bool value);
+    partial void OnStateChanged();
+    #endregion
+		
+		public tblAdmin()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Message", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this.OnMessageChanging(value);
+					this.SendPropertyChanging();
+					this._Message = value;
+					this.SendPropertyChanged("Message");
+					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_State", DbType="Bit NOT NULL")]
+		public bool State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[Table(Name="dbo.tblUsers")]
 	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
 		
 		private string _Username;
 		
@@ -228,6 +364,8 @@ namespace DAO
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
@@ -261,6 +399,26 @@ namespace DAO
 			this._tblInformatics = new EntitySet<tblInformatic>(new Action<tblInformatic>(this.attach_tblInformatics), new Action<tblInformatic>(this.detach_tblInformatics));
 			this._tblNews = new EntitySet<tblNew>(new Action<tblNew>(this.attach_tblNews), new Action<tblNew>(this.detach_tblNews));
 			OnCreated();
+		}
+		
+		[Column(Storage="_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
 		}
 		
 		[Column(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
@@ -503,7 +661,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", OtherKey="Author")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities
 		{
 			get
@@ -516,7 +674,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", OtherKey="Author")]
 		public EntitySet<tblEnglish> tblEnglishes
 		{
 			get
@@ -529,7 +687,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", OtherKey="Author")]
 		public EntitySet<tblInformatic> tblInformatics
 		{
 			get
@@ -542,7 +700,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblNew", Storage="_tblNews", OtherKey="Author")]
 		public EntitySet<tblNew> tblNews
 		{
 			get
@@ -621,140 +779,6 @@ namespace DAO
 		{
 			this.SendPropertyChanging();
 			entity.tblUser = null;
-		}
-	}
-	
-	[Table(Name="dbo.tblAdmin")]
-	public partial class tblAdmin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Name;
-		
-		private string _Message;
-		
-		private bool _State;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnMessageChanging(string value);
-    partial void OnMessageChanged();
-    partial void OnStateChanging(bool value);
-    partial void OnStateChanged();
-    #endregion
-		
-		public tblAdmin()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Message", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this.OnMessageChanging(value);
-					this.SendPropertyChanging();
-					this._Message = value;
-					this.SendPropertyChanged("Message");
-					this.OnMessageChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_State", DbType="Bit NOT NULL")]
-		public bool State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1180,6 +1204,8 @@ namespace DAO
 		
 		private int _Year;
 		
+		private string _Thumbnail;
+		
 		private string _Solving;
 		
 		private System.Nullable<int> _Point;
@@ -1210,6 +1236,8 @@ namespace DAO
     partial void OnBranchChanged();
     partial void OnYearChanging(int value);
     partial void OnYearChanged();
+    partial void OnThumbnailChanging(string value);
+    partial void OnThumbnailChanged();
     partial void OnSolvingChanging(string value);
     partial void OnSolvingChanged();
     partial void OnPointChanging(System.Nullable<int> value);
@@ -1224,7 +1252,7 @@ namespace DAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -1408,6 +1436,26 @@ namespace DAO
 			}
 		}
 		
+		[Column(Storage="_Thumbnail", DbType="NChar(254)")]
+		public string Thumbnail
+		{
+			get
+			{
+				return this._Thumbnail;
+			}
+			set
+			{
+				if ((this._Thumbnail != value))
+				{
+					this.OnThumbnailChanging(value);
+					this.SendPropertyChanging();
+					this._Thumbnail = value;
+					this.SendPropertyChanged("Thumbnail");
+					this.OnThumbnailChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_Solving", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string Solving
 		{
@@ -1468,7 +1516,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1537,6 +1585,8 @@ namespace DAO
 		
 		private string _Contents;
 		
+		private string _Thumbnail;
+		
 		private string _Author;
 		
 		private System.DateTime _Posted;
@@ -1561,6 +1611,8 @@ namespace DAO
     partial void OnTypeChanged();
     partial void OnContentsChanging(string value);
     partial void OnContentsChanged();
+    partial void OnThumbnailChanging(string value);
+    partial void OnThumbnailChanged();
     partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     partial void OnPostedChanging(System.DateTime value);
@@ -1579,7 +1631,7 @@ namespace DAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -1655,6 +1707,26 @@ namespace DAO
 					this._Contents = value;
 					this.SendPropertyChanged("Contents");
 					this.OnContentsChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Thumbnail", DbType="NChar(254)")]
+		public string Thumbnail
+		{
+			get
+			{
+				return this._Thumbnail;
+			}
+			set
+			{
+				if ((this._Thumbnail != value))
+				{
+					this.OnThumbnailChanging(value);
+					this.SendPropertyChanging();
+					this._Thumbnail = value;
+					this.SendPropertyChanged("Thumbnail");
+					this.OnThumbnailChanged();
 				}
 			}
 		}
@@ -1763,7 +1835,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1834,6 +1906,8 @@ namespace DAO
 		
 		private string _Contents;
 		
+		private string _Thumbnail;
+		
 		private string _Author;
 		
 		private System.DateTime _Posted;
@@ -1860,6 +1934,8 @@ namespace DAO
     partial void OnChapeauChanged();
     partial void OnContentsChanging(string value);
     partial void OnContentsChanged();
+    partial void OnThumbnailChanging(string value);
+    partial void OnThumbnailChanged();
     partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     partial void OnPostedChanging(System.DateTime value);
@@ -1878,7 +1954,7 @@ namespace DAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -1978,6 +2054,26 @@ namespace DAO
 			}
 		}
 		
+		[Column(Storage="_Thumbnail", DbType="NChar(254)")]
+		public string Thumbnail
+		{
+			get
+			{
+				return this._Thumbnail;
+			}
+			set
+			{
+				if ((this._Thumbnail != value))
+				{
+					this.OnThumbnailChanging(value);
+					this.SendPropertyChanging();
+					this._Thumbnail = value;
+					this.SendPropertyChanged("Thumbnail");
+					this.OnThumbnailChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_Author", DbType="NChar(20) NOT NULL", CanBeNull=false)]
 		public string Author
 		{
@@ -2082,7 +2178,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -2305,7 +2401,7 @@ namespace DAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
