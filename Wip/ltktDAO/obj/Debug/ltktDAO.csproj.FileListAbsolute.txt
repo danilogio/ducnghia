@@ -8,3 +8,4 @@ D:\Career\LTKT\Wip\ltktDAO\bin\Debug\ltktDAO.pdb
 D:\Career\LTKT\Wip\ltktDAO\obj\Debug\ResolveAssemblyReference.cache
 D:\Career\LTKT\Wip\ltktDAO\obj\Debug\ltktDAO.dll
 D:\Career\LTKT\Wip\ltktDAO\obj\Debug\ltktDAO.pdb
+D:\Career\LTKT\Wip\ltktDAO\bin\Debug\ltktDAO.dll.config

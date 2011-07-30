@@ -5,7 +5,8 @@ using System.Text;
 
 namespace ltktDAO
 {
-    public class UserDAO
+    public class DBHelper
     {
+        public static string strPathDB = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\LTDH.mdf";
     }
 }
