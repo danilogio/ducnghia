@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{BC852627-71D1-481F-9810-305C8707B155}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ltkt", "ltkt\ltkt.csproj", "{3D1DFA21-0AB3-4583-83C8-75A62792436F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC852627-71D1-481F-9810-305C8707B155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC852627-71D1-481F-9810-305C8707B155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC852627-71D1-481F-9810-305C8707B155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC852627-71D1-481F-9810-305C8707B155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D1DFA21-0AB3-4583-83C8-75A62792436F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D1DFA21-0AB3-4583-83C8-75A62792436F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D1DFA21-0AB3-4583-83C8-75A62792436F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D1DFA21-0AB3-4583-83C8-75A62792436F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

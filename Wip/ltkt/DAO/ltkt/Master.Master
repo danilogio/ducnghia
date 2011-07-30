@@ -1,0 +1,184 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="ltkt.Master" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Website Luyện thi Kinh tế</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link type="text/css" href="css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#datepicker').datepicker({
+                inline: true
+            });
+
+            $("#accordion").accordion();
+            ShowAdDiv();
+        });
+
+        function FloatTopDiv() {
+            startLX = ((document.body.clientWidth - MainContentW) / 2) - LeftBannerW - LeftAdjust, startLY = TopAdjust + 80;
+            startRX = ((document.body.clientWidth - MainContentW) / 2) + MainContentW + RightAdjust, startRY = TopAdjust + 0;
+            var d = document;
+            function ml(id) {
+                var el = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
+                el.sP = function(x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
+                el.x = startRX;
+                el.y = startRY;
+                return el;
+            }
+            function m2(id) {
+                var e2 = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
+                e2.sP = function(x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
+                e2.x = startLX;
+                e2.y = startLY;
+                return e2;
+            }
+            window.stayTopLeft = function() {
+                if (document.documentElement && document.documentElement.scrollTop)
+                    var pY = document.documentElement.scrollTop;
+                else if (document.body)
+                    var pY = document.body.scrollTop;
+                if (document.body.scrollTop > 30) { startLY = 3; startRY = 3; } else { startLY = TopAdjust; startRY = TopAdjust; };
+                ftlObj.y += (pY + startRY - ftlObj.y) / 46;
+                ftlObj.sP(ftlObj.x, ftlObj.y);
+                ftlObj2.y += (pY + startLY - ftlObj2.y) / 46;
+                ftlObj2.sP(ftlObj2.x, ftlObj2.y);
+                setTimeout("stayTopLeft()", 1);
+            }
+            ftlObj = ml("divAdRight");
+            //stayTopLeft(); 
+            ftlObj2 = m2("divAdLeft");
+            stayTopLeft();
+        }
+        function ShowAdDiv() {
+            var objAdDivRight = document.getElementById("divAdRight");
+            var objAdDivLeft = document.getElementById("divAdLeft");
+            if (document.body.clientWidth < 1000) {
+                objAdDivRight.style.display = "none";
+                objAdDivLeft.style.display = "none";
+            }
+            else {
+                objAdDivRight.style.display = "block";
+                objAdDivLeft.style.display = "block";
+                FloatTopDiv();
+            }
+        }  
+	 	   
+    </script>
+
+    <script type="text/javascript">
+        document.write("<script type='text/javascript' language='javascript'>MainContentW = 1000;LeftBannerW = 125;RightBannerW = 125;LeftAdjust = 5;RightAdjust = 5;TopAdjust = 10;ShowAdDiv();window.onresize=ShowAdDiv;;<\/script>"); 
+    </script>
+
+    <script type="text/javascript">
+        function init() {
+        }
+    </script>
+
+    <style type="text/css">
+        .float
+        {
+            width: 135px;
+            height: 780px;
+            border: solid 1px white;
+        }
+    </style>
+</head>
+<body>
+        <div id="outer-container">
+        <div id="container">
+            <div id="header">
+                <h1><a href="/">Trung tâm Luyện thi Đức Nghĩa</a></h1>
+            </div>
+            <div id="nav">
+        	    <div id="center-ul">
+                    <ul>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li><a href="examples.html">Tìm kiếm</a></li>
+                        <li><a href="#">Thông tin</a></li>
+                        <li><a href="#">Giới thiệu sách</a></li>
+                    </ul>
+			    </div>
+            </div>
+            <div id="body">
+                <div id="content">
+                    
+                    <asp:ContentPlaceHolder ID="cphContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                
+                <div class="sidebar">
+                    <ul>	
+                       <li>
+                            <h4><span>Navigate</span></h4>
+                            <ul class="blocklist">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="examples.html">Examples</a></li>
+                                <li><a href="#">Products</a></li>
+                                <li><a href="#">Solutions</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </li>
+    					
+					    <li>
+                            <h4><span>Luyện thi đại học</span></h4>
+                            <ul class="blocklist">
+                                <li><a href="index.html">Tài liệu bài giảng</a></li>
+                                <li><a href="examples.html">Bài tập</a></li>
+                                <li><a href="#">Đề thi</a></li>
+                                <li><a href="#">Solutions</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <h4>About</h4>
+                            <ul>
+                                <li>
+                                    <p style="margin: 0;">Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <h4>Search</h4>
+                            <ul>
+                                <li>
+                                    <form method="get" class="searchform" action="http://wpdemo.justfreetemplates.com/" >
+                                        <p>
+                                            <input type="text" size="24" value="" name="s" class="s" />
+                                            <input type="submit" class="searchsubmit formbutton" value="Search" />
+                                        </p>
+                                    </form>	
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <h4>Sponsors</h4>
+                            <ul>
+                                <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
+                                <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
+                                <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a> - brilliant premium templates</li>
+                            </ul>
+                        </li>
+                        
+                    </ul> 
+                </div>
+                <div class="clear"></div>
+            </div>
+        
+            <div id="footer">
+                <div class="footer-content">
+                    <p>&copy; YourSite 2010. Design by <a href="http://www.spyka.net">Free CSS Templates</a> | <a href="http://www.justfreetemplates.com">Free Web Templates</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; font-size: 0.75em;">Design downloaded from <a href="http://www.freewebtemplates.com/">free website templates</a>.</div>
+</body>
+</html>

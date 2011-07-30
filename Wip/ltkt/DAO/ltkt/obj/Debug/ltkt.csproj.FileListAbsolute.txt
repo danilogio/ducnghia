@@ -1,0 +1,5 @@
+E:\Data\Projects\ltkt\DAO\ltkt\bin\ltkt.dll
+E:\Data\Projects\ltkt\DAO\ltkt\bin\ltkt.pdb
+E:\Data\Projects\ltkt\DAO\ltkt\obj\Debug\ResolveAssemblyReference.cache
+E:\Data\Projects\ltkt\DAO\ltkt\obj\Debug\ltkt.dll
+E:\Data\Projects\ltkt\DAO\ltkt\obj\Debug\ltkt.pdb
