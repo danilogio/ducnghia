@@ -1,13 +1,16 @@
-﻿<%@ Page Title="Hồ sơ cá nhân" Language="C#" MasterPageFile="~/MasterPage.master"
-    AutoEventWireup="true" CodeFile="Profile.aspx.cs" Inherits="ResetPassword" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="ltkt.Profile"
+MasterPageFile="~/MasterPage.Master" %>
+
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 
 <asp:Content ID="Profile" ContentPlaceHolderID="cphContent" runat="Server">
+    <form id="frmProfile" action="Profile.aspx">
     <div id="loginForm" class="block_text">
         <h2>
             <asp:Literal ID="lTitle" runat="server" Text="Hồ sơ cá nhân"></asp:Literal>
         </h2>
         <hr />
+        
         <p>
             <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
         </p>
@@ -119,7 +122,6 @@
                 </p>
             </div>
         </asp:Panel>
-        
-        
     </div>
+    </form>
 </asp:Content>

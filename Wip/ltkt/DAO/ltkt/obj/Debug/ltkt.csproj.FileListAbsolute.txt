@@ -8,3 +8,12 @@ E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\bin\ltkt.pdb
 E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ResolveAssemblyReference.cache
 E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ltkt.dll
 E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ltkt.pdb
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ResolveAssemblyReference.cache
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\LTDH_log.ldf
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\LTDH.mdf
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\ltkt.dll
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\ltkt.pdb
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\DAO.dll
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\DAO.pdb
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ltkt.dll
+D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ltkt.pdb

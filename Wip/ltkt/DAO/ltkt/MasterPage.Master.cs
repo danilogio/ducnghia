@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DAO;
 
 namespace ltkt
 {
@@ -11,7 +12,6 @@ namespace ltkt
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             ltsItem.Width = 240;
 
             if (Session["User"] == null)
@@ -50,7 +50,7 @@ namespace ltkt
             string strUsername = txtUsername.Text;
             string strPassword = txtPassword.Text;
 
-            tblUser user = DucNghia.DAO.UsersDAO.getUser(strUsername, strPassword);
+            tblUser user = DAO.Users.getUser(strUsername, strPassword);
 
             if (user != null)
             {
