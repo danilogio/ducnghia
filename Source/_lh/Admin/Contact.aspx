@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Contact.aspx.cs" Inherits="Admin_Contact" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Contact.aspx.cs" Inherits="DucNghia.Admin.Admin_Contact" %>
 
 <asp:Content ID="ContactAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
 <link rel="stylesheet" href="styles.css" type="text/css" />

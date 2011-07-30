@@ -18,7 +18,7 @@
                     <p>Tại đây các bạn sẽ được cung cấp kho tư liệu về đề thi cũng như các giải đáp thắc mắc về đề thi các năm.<br /> 
                     Chúng tôi tập trung vào 3 mảng chính: Luyện thi, Tin học và Anh văn</p>
 
-                    <h3>Hướng dẫn</h3>
+<%--                    <h3>Hướng dẫn</h3>
                     <p>Trang web này chạy tốt với các trình duyệt:</p>
                     <ul>
                         <li>Firefox 3.5</li>
@@ -28,7 +28,7 @@
                     </ul>
                     <p>Mọi thắc mắc xin liện hệ email: <a href="mailto:trungtamducnghia@gmail.com">trungtamducnghia@gmail.com</a></p>
                     <p>Hoặc gửi mail cho chúng tôi tại phần Liên hệ</p>  
-                </div>
+--%>                </div>
                 
                 <!--
                 

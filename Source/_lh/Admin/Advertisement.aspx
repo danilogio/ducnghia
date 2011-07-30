@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Advertisement.aspx.cs" Inherits="Advertisement" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Advertisement.aspx.cs" Inherits="DucNghia.Admin.Advertisement" %>
 
 <asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
     <link rel="stylesheet" href="styles.css" type="text/css" />

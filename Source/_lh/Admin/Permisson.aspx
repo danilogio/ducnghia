@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Permisson.aspx.cs" Inherits="Admin_Humanlity" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Permisson.aspx.cs" Inherits="DucNghia.Admin.Permission" %>
 
 <asp:Content ID="PermissonAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
     <link rel="stylesheet" href="styles.css" type="text/css" />

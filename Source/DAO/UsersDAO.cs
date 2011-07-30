@@ -704,6 +704,21 @@ namespace DucNghia.DAO
             return true;
         }
 
+
+        /// <summary>
+        /// Tổng số user
+        /// </summary>
+        /// <returns></returns>
+        public static int numberOfUsers()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            var lst = from record in DB.tblUsers
+                      select record;
+
+            return lst.Count();
+        }
+
+       
         
         #endregion
     }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Comment.aspx.cs" Inherits="Admin_Comment" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true" CodeFile="Comment.aspx.cs" Inherits="DucNghia.Admin.Admin_Comment" %>
 
 <asp:Content ID="CommentAdmin" ContentPlaceHolderID="cphAdminContent" Runat="Server">
 <link rel="stylesheet" href="styles.css" type="text/css" />

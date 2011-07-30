@@ -5,10 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Admin_ContestUniversity : System.Web.UI.Page
+namespace DucNghia.Admin
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Admin_ContestUniversity : System.Web.UI.Page
     {
-
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            AdminMaster page = (AdminMaster)Master;
+            page.updateHeader("Quản lý chủ đề luyện thi đại học");
+        }
     }
 }

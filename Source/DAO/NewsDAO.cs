@@ -330,6 +330,18 @@ namespace DucNghia.DAO
             return true;
         }
 
+        /// <summary>
+        /// Tổng số tin
+        /// </summary>
+        /// <returns></returns>
+        public static int numberOfNews()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            var lst = from record in DB.tblNews
+                      select record;
+
+            return lst.Count();
+        }
         #endregion
 
     }
