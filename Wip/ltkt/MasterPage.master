@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="DucNghia.MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ltkt.MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -130,223 +130,222 @@
                 </div>
             </div>
             <div id="body">
-                <form id="frmMain" runat="server">
-                    <div id="content">
-                        <asp:ContentPlaceHolder ID="cphContent" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </div>
-                        
-                    <div class="sidebar">
-                        <ul>
-                            <li id="loginSidebar" runat="server">
-                                <h4>
-                                    <asp:Literal ID="userStateTitle" runat="server" Text="Đăng nhập"></asp:Literal>
-                                </h4>
-                                <ul>
-                                    <li id="idlogin">
-                                        <asp:Panel ID="loginPanel" runat="server" Visible="true">
-                                            <form method="post" action="Home.aspx">
-                                                <div id="divUsername" style="display:table-row">
-                                                    <div id="divUsernameLabel" style="float: left; width: 40%">
-                                                        <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:"></asp:Label>
-                                                    </div>
-                                                    
-                                                    <div id="divUsernameDetails" style="float: left; width: 59%">
-                                                        <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
-                                                    </div>
+                <div id="content">
+                    <asp:ContentPlaceHolder ID="cphContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                    <form id="frmMain" runat="server">
+                <div class="sidebar">
+                    <ul>
+                        <li id="loginSidebar" runat="server">
+                            <h4>
+                                <asp:Literal ID="userStateTitle" runat="server" Text="Đăng nhập"></asp:Literal>
+                            </h4>
+                            <ul>
+                                <li id="idlogin">
+                                    <asp:Panel ID="loginPanel" runat="server" Visible="true">
+                                        <form method="post" action="Home.aspx">
+                                            <div id="divUsername" style="display:table-row">
+                                                <div id="divUsernameLabel" style="float: left; width: 40%">
+                                                    <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:"></asp:Label>
                                                 </div>
-                                                <div id="divPassword" style="display:table-row">
-                                                    <div id="divPasswordLabel" style="float: left; width: 40%">
-                                                        <asp:Label ID="lblPassword" runat="server" Text="Mật khẩu:"></asp:Label>
-                                                    </div>
-                                                    <div id="divPasswordDetails" style="float: left; width: 59%">
-                                                        <asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div id="divLogin">
-                                                    <div id="divRemember" style="float: left; width: 56%">
-                                                        <asp:CheckBox ID="chxRemember" runat="server" />
-                                                        <asp:Label ID="lblRemember" runat="server" Text="Lưu thông tin"></asp:Label>
-                                                    </div>
-                                                    <div id="divLoginButton">
-                                                        <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" OnClick="btnLogin_Click"
-                                                            CssClass="searchsubmit formbutton" />
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            
-                                            <div id="divUlitiesLogin">
-                                                <div style="float: left; padding-left: 5px; width: 49%">
-                                                    <asp:HyperLink ID="hpkForgotPassword" NavigateUrl="~/ResetPassword.aspx" runat="server"
-                                                        Font-Underline="False">Quên mật khẩu?</asp:HyperLink>
-                                                </div>
-                                                <div>
-                                                    <asp:HyperLink ID="hpkRegister" NavigateUrl="~/Registry.aspx" runat="server" Font-Underline="False">Đăng ký thành viên</asp:HyperLink>
+                                                
+                                                <div id="divUsernameDetails" style="float: left; width: 59%">
+                                                    <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
                                                 </div>
                                             </div>
-                                        </asp:Panel>
-                                        <asp:Panel ID="userPanel" runat="server" Visible="false">
-                                            <div>
-                                                <div style="float: left; width: 75%;">
-                                                    <div id="divInfo" style="width: 100%;">
-                                                        <label>
-                                                            Xin chào
-                                                        </label>
-                                                        <asp:Literal ID="loginUser" runat="server"></asp:Literal>
-                                                    </div>
-                                                    <div style="width: 100%;">
-                                                        <div style="float: left; width: 60%;">
-                                                            <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
-                                                                Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
-                                                        </div>
-                                                        <div>
-                                                            <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
-                                                                Font-Italic="True">Gửi bài</asp:HyperLink>
-                                                        </div>
-                                                    </div>
+                                            <div id="divPassword" style="display:table-row">
+                                                <div id="divPasswordLabel" style="float: left; width: 40%">
+                                                    <asp:Label ID="lblPassword" runat="server" Text="Mật khẩu:"></asp:Label>
                                                 </div>
-                                                <div>
-                                                    <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"
+                                                <div id="divPasswordDetails" style="float: left; width: 59%">
+                                                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div id="divLogin">
+                                                <div id="divRemember" style="float: left; width: 56%">
+                                                    <asp:CheckBox ID="chxRemember" runat="server" />
+                                                    <asp:Label ID="lblRemember" runat="server" Text="Lưu thông tin"></asp:Label>
+                                                </div>
+                                                <div id="divLoginButton">
+                                                    <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" OnClick="btnLogin_Click"
                                                         CssClass="searchsubmit formbutton" />
                                                 </div>
                                             </div>
-                                        </asp:Panel>
+                                        </form>
+                                        
+                                        <div id="divUlitiesLogin">
+                                            <div style="float: left; padding-left: 5px; width: 49%">
+                                                <asp:HyperLink ID="hpkForgotPassword" NavigateUrl="~/ResetPassword.aspx" runat="server"
+                                                    Font-Underline="False">Quên mật khẩu?</asp:HyperLink>
+                                            </div>
+                                            <div>
+                                                <asp:HyperLink ID="hpkRegister" NavigateUrl="~/Registry.aspx" runat="server" Font-Underline="False">Đăng ký thành viên</asp:HyperLink>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                    <asp:Panel ID="userPanel" runat="server" Visible="false">
+                                        <div>
+                                            <div style="float: left; width: 75%;">
+                                                <div id="divInfo" style="width: 100%;">
+                                                    <label>
+                                                        Xin chào
+                                                    </label>
+                                                    <asp:Literal ID="loginUser" runat="server"></asp:Literal>
+                                                </div>
+                                                <div style="width: 100%;">
+                                                    <div style="float: left; width: 60%;">
+                                                        <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
+                                                            Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
+                                                    </div>
+                                                    <div>
+                                                        <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
+                                                            Font-Italic="True">Gửi bài</asp:HyperLink>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"
+                                                    CssClass="searchsubmit formbutton" />
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>
+                                Tìm kiếm
+                            </h4>
+                            <form method="get" class="searchform" action="Home.aspx">
+                                <ul>   
+                                    <li>
+                                        <asp:DropDownList ID="ltsItem" runat="server">
+                                            <asp:ListItem Text="--Tất cả danh mục--" Value="all" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text="Luyện thi đại học" Value="ltdh"></asp:ListItem>
+                                            <asp:ListItem Text="Anh văn" Value="av"></asp:ListItem>
+                                            <asp:ListItem Text="Tin học" Value="th"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </li>
+                                    <li>
+                                        
+                                        <p>
+                                            <asp:TextBox ID="txtBoxSearch" OnClick="this.value=''" runat="server">Nhập nội dung</asp:TextBox>
+                                            <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton" />
+                                        </p>
+                                        
+                                        <asp:HyperLink ID="hpkAdvanceSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm nâng cao</asp:HyperLink>
+                                    </li>                 
+                                </ul>
+                            </form>
+                        </li>
+                        <%-- <li visible="false">
+                                <h4>Chức năng</h4>
+                                <div id="accordion">
+                                   <h3><a href="#">Luyện thi đại học</a></h3>
+                                   <div>
+                                      <ul class="blocklist">
+                                        <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
+                                        <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
+                                        <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
+                                    </ul>
+                                   </div>
+                                   <h3><a href="#">Section 2</a></h3>
+                                   <div>
+                                      Section 2 content
+                                   </div>
+                                   <h3><a href="#">Section 3</a></h3>
+                                   <div>
+                                      Section 3 content
+                                   </div>
+                                </div>
+                            </li>--%>
+                        <li>
+                            <h4>
+                                <span>Luyện thi đại học</span></h4>
+                            <ul class="blocklist">
+                                <li>
+                                    <asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>
+                                <span>Tin học</span></h4>
+                            <ul class="blocklist">
+                                <li>
+                                    <asp:HyperLink ID="HpkITLibLecture" runat="server" NavigateUrl="~/Informatics.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="HpkITLibExercise" runat="server" NavigateUrl="~/Informatics.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="HpkITLibSubject" runat="server" NavigateUrl="~/Informatics.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>
+                                <span>Anh văn</span></h4>
+                            <ul class="blocklist">
+                                <li>
+                                    <asp:HyperLink ID="HpkELLibLecture" runat="server" NavigateUrl="~/English.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="HpkELLibExercise" runat="server" NavigateUrl="~/English.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="HpkELLibSubject" runat="server" NavigateUrl="~/English.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>
+                                Tài liệu mới</h4>
+                            <ul>
+                                <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
+                                    ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
+                                <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
+                                    hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
+                                <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a>
+                                    - brilliant premium templates</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>
+                                Tài liệu được quan tâm</h4>
+                            <ul>
+                                <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
+                                    ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
+                                <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
+                                    hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
+                                <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a>
+                                    - brilliant premium templates</li>
+                            </ul>
+                        </li>
+                        <%--<li>
+                                <h4>About</h4>
+                                <ul>
+                                    <li>
+                                        <p style="margin: 0;">Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus.</p>
                                     </li>
                                 </ul>
+                            </li>--%>
+                        <%--<li>
+                                <div id="datepicker"></div>
                             </li>
-                            <li>
-                                <h4>
-                                    Tìm kiếm
-                                </h4>
-                                <form method="get" class="searchform" action="Home.aspx">
-                                    <ul>   
-                                        <li>
-                                            <asp:DropDownList ID="ltsItem" runat="server">
-                                                <asp:ListItem Text="--Tất cả danh mục--" Value="all" Selected="True"></asp:ListItem>
-                                                <asp:ListItem Text="Luyện thi đại học" Value="ltdh"></asp:ListItem>
-                                                <asp:ListItem Text="Anh văn" Value="av"></asp:ListItem>
-                                                <asp:ListItem Text="Tin học" Value="th"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </li>
-                                        <li>
-                                            
-                                            <p>
-                                                <asp:TextBox ID="txtBoxSearch" OnClick="this.value=''" runat="server">Nhập nội dung</asp:TextBox>
-                                                <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton" />
-                                            </p>
-                                            
-                                            <asp:HyperLink ID="hpkAdvanceSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm nâng cao</asp:HyperLink>
-                                        </li>                 
-                                    </ul>
-                                </form>
-                            </li>
-                            <%-- <li visible="false">
-                                    <h4>Chức năng</h4>
-                                    <div id="accordion">
-                                       <h3><a href="#">Luyện thi đại học</a></h3>
-                                       <div>
-                                          <ul class="blocklist">
-                                            <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
-                                            <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
-                                            <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
-                                        </ul>
-                                       </div>
-                                       <h3><a href="#">Section 2</a></h3>
-                                       <div>
-                                          Section 2 content
-                                       </div>
-                                       <h3><a href="#">Section 3</a></h3>
-                                       <div>
-                                          Section 3 content
-                                       </div>
-                                    </div>
-                                </li>--%>
-                            <li>
-                                <h4>
-                                    <span>Luyện thi đại học</span></h4>
-                                <ul class="blocklist">
-                                    <li>
-                                        <asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
-                                    <li>
-                                        <asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                    <li>
-                                        <asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h4>
-                                    <span>Tin học</span></h4>
-                                <ul class="blocklist">
-                                    <li>
-                                        <asp:HyperLink ID="HpkITLibLecture" runat="server" NavigateUrl="~/Informatics.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
-                                    <li>
-                                        <asp:HyperLink ID="HpkITLibExercise" runat="server" NavigateUrl="~/Informatics.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                    <li>
-                                        <asp:HyperLink ID="HpkITLibSubject" runat="server" NavigateUrl="~/Informatics.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h4>
-                                    <span>Anh văn</span></h4>
-                                <ul class="blocklist">
-                                    <li>
-                                        <asp:HyperLink ID="HpkELLibLecture" runat="server" NavigateUrl="~/English.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
-                                    <li>
-                                        <asp:HyperLink ID="HpkELLibExercise" runat="server" NavigateUrl="~/English.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                    <li>
-                                        <asp:HyperLink ID="HpkELLibSubject" runat="server" NavigateUrl="~/English.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h4>
-                                    Tài liệu mới</h4>
-                                <ul>
-                                    <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
-                                        ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
-                                    <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
-                                        hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
-                                    <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a>
-                                        - brilliant premium templates</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h4>
-                                    Tài liệu được quan tâm</h4>
-                                <ul>
-                                    <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
-                                        ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
-                                    <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
-                                        hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
-                                    <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a>
-                                        - brilliant premium templates</li>
-                                </ul>
-                            </li>
-                            <%--<li>
-                                    <h4>About</h4>
-                                    <ul>
-                                        <li>
-                                            <p style="margin: 0;">Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus.</p>
-                                        </li>
-                                    </ul>
-                                </li>--%>
-                            <%--<li>
-                                    <div id="datepicker"></div>
-                                </li>
-                                --%>
-                            <li>
-                                <center>
-                                    <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/AdContact.aspx" runat="server">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/bottom.gif" /></asp:HyperLink>
-                                </center>
-                            </li>
-                            <li>
-                                <center>
-                                    <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="#" runat="server">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/bottom.gif" /></asp:HyperLink>
-                                </center>
-                            </li>
-                        </ul>
-                    </div>
+                            --%>
+                        <li>
+                            <center>
+                                <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/AdContact.aspx" runat="server">
+                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/bottom.gif" /></asp:HyperLink>
+                            </center>
+                        </li>
+                        <li>
+                            <center>
+                                <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="#" runat="server">
+                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/bottom.gif" /></asp:HyperLink>
+                            </center>
+                        </li>
+                    </ul>
+                </div>
                 </form>
                 <div class="clear">
                 </div>

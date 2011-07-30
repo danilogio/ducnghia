@@ -4,10 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ltktDAO;
 
-using DucNghia.DAO;
-
-namespace DucNghia
+namespace ltkt
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -30,7 +29,7 @@ namespace DucNghia
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
 
-            tblUser user = DucNghia.DAO.UsersDAO.getUser(strUsername, strPassword);
+            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
 
             if (user != null)
             {

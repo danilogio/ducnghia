@@ -51,7 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contest.cs" />
     <Compile Include="DBHelper.cs" />
+    <Compile Include="English.cs" />
+    <Compile Include="Informatics.cs" />
     <Compile Include="LTDH.cs">
       <DependentUpon>LTDH.dbml</DependentUpon>
     </Compile>
@@ -60,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LTDH.dbml</DependentUpon>
     </Compile>
+    <Compile Include="News.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

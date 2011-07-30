@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Login.aspx.cs" Inherits="DucNghia.Login" %>
+    CodeFile="Login.aspx.cs" Inherits="ltkt.Login" %>
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="Login" ContentPlaceHolderID="cphContent" runat="Server">

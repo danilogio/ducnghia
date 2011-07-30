@@ -5,10 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using ltktDAO;
 
-using DucNghia.DAO;
 
-namespace DucNghia
+namespace ltkt
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
@@ -53,7 +53,7 @@ namespace DucNghia
             string strUsername = txtUsername.Text;
             string strPassword = txtPassword.Text;
 
-            tblUser user = DucNghia.DAO.UsersDAO.getUser(strUsername, strPassword);
+            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
 
             if (user != null)
             {
