@@ -16,3 +16,6 @@ D:\Career\ducnghia\Wip\ltkt\DAO\DAO\bin\Debug\DAO.pdb
 D:\Career\ducnghia\Wip\ltkt\DAO\DAO\obj\Debug\ResolveAssemblyReference.cache
 D:\Career\ducnghia\Wip\ltkt\DAO\DAO\obj\Debug\DAO.dll
 D:\Career\ducnghia\Wip\ltkt\DAO\DAO\obj\Debug\DAO.pdb
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\bin\Debug\LTDH.mdf
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\bin\Debug\LTDH_log.ldf
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\bin\Debug\DAO.dll.config

@@ -17,3 +17,7 @@ D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\DAO.dll
 D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\bin\DAO.pdb
 D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ltkt.dll
 D:\Career\ducnghia\Wip\ltkt\DAO\ltkt\obj\Debug\ltkt.pdb
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\bin\LTDH_log.ldf
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\bin\LTDH.mdf
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\bin\DAO.dll
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\ltkt\bin\DAO.pdb

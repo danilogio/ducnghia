@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3D1DFA21-0AB3-4583-83C8-75A62792436F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -53,7 +53,6 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +88,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdContact.aspx" />
+    <Content Include="css\home.css" />
+    <Content Include="css\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="css\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="css\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="css\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="css\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="css\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="css\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="css\redmond\jquery-ui-1.8.14.custom.css" />
     <Content Include="Home.aspx" />
     <Content Include="imagesAd\1.gif" />
     <Content Include="imagesAd\2.gif" />
@@ -143,38 +158,6 @@
     <Content Include="saved\9.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\.svn\all-wcprops" />
-    <None Include="images\.svn\entries" />
-    <None Include="images\.svn\prop-base\acroread.png.svn-base" />
-    <None Include="images\.svn\prop-base\bodybg.png.svn-base" />
-    <None Include="images\.svn\prop-base\corebg.png.svn-base" />
-    <None Include="images\.svn\prop-base\h4-bg.png.svn-base" />
-    <None Include="images\.svn\prop-base\h4-bg2.png.svn-base" />
-    <None Include="images\.svn\prop-base\headerbg.png.svn-base" />
-    <None Include="images\.svn\prop-base\mainbg.png.svn-base" />
-    <None Include="images\.svn\prop-base\navbg.png.svn-base" />
-    <None Include="images\.svn\prop-base\online.gif.svn-base" />
-    <None Include="images\.svn\prop-base\pp.png.svn-base" />
-    <None Include="images\.svn\prop-base\staroffice.png.svn-base" />
-    <None Include="images\.svn\prop-base\unknown.png.svn-base" />
-    <None Include="images\.svn\prop-base\Word.png.svn-base" />
-    <None Include="images\.svn\prop-base\zip.png.svn-base" />
-    <None Include="images\.svn\text-base\acroread.png.svn-base" />
-    <None Include="images\.svn\text-base\bodybg.png.svn-base" />
-    <None Include="images\.svn\text-base\corebg.png.svn-base" />
-    <None Include="images\.svn\text-base\h4-bg.png.svn-base" />
-    <None Include="images\.svn\text-base\h4-bg2.png.svn-base" />
-    <None Include="images\.svn\text-base\headerbg.png.svn-base" />
-    <None Include="images\.svn\text-base\mainbg.png.svn-base" />
-    <None Include="images\.svn\text-base\navbg.png.svn-base" />
-    <None Include="images\.svn\text-base\online.gif.svn-base" />
-    <None Include="images\.svn\text-base\pp.png.svn-base" />
-    <None Include="images\.svn\text-base\staroffice.png.svn-base" />
-    <None Include="images\.svn\text-base\unknown.png.svn-base" />
-    <None Include="images\.svn\text-base\Word.png.svn-base" />
-    <None Include="images\.svn\text-base\zip.png.svn-base" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{BC852627-71D1-481F-9810-305C8707B155}</Project>
       <Name>DAO</Name>
@@ -182,10 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\.svn\props\" />
-    <Folder Include="images\.svn\tmp\prop-base\" />
-    <Folder Include="images\.svn\tmp\props\" />
-    <Folder Include="images\.svn\tmp\text-base\" />
     <Folder Include="_lh\Admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -208,6 +187,9 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
