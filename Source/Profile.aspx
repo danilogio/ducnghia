@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Hồ sơ cá nhân" Language="C#" MasterPageFile="~/MasterPage.master"
     AutoEventWireup="true" CodeFile="Profile.aspx.cs" Inherits="ResetPassword" %>
-<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 
+<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="Profile" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="loginForm" class="block_text">
         <h2>
@@ -11,11 +11,9 @@
         <p>
             <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
         </p>
-     
         <asp:Panel ID="messagePanel" runat="server" Visible="false">
             <asp:Literal ID="lMessage" runat="server"></asp:Literal>
         </asp:Panel>
-        
         <asp:Panel ID="viewPanel" runat="server" Visible="true">
             <div class="form_settings">
                 <span>Tên đăng nhập:</span><asp:Literal ID="lLogonUser" runat="server" Text="Tên đăng nhập"></asp:Literal>
@@ -47,7 +45,6 @@
                 </div>
             </div>
         </asp:Panel>
-       
         <asp:Panel ID="editPanel" runat="server" Visible="false">
             <div class="form_settings">
                 <p>
@@ -56,7 +53,6 @@
                         ControlToValidate="txtboxDisplayName" Display="none">
                     </asp:RequiredFieldValidator>
                 </p>
-                
                 <p>
                     <span>Email:</span><asp:TextBox ID="txtboxEmail" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqEmail" runat="server" ErrorMessage="Vui lòng nhập email liên lạc"
@@ -66,22 +62,21 @@
                         ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Email không đúng định dạng"
                         Display="None" />
                 </p>
-                    <center>
-                        <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
-                            CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
-                            CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"
-                            CaptchaFontWarping="Low" />
-                    </center>
-                    <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
-                        ControlToValidate="txtboxCaptcha" Display="none">
-                    </asp:RequiredFieldValidator>
+                <center>
+                    <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
+                        CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
+                        CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"
+                        CaptchaFontWarping="Low" />
+                </center>
+                <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
+                    ControlToValidate="txtboxCaptcha" Display="none">
+                </asp:RequiredFieldValidator>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSubmitUpdateProfile" runat="server" Text="Cập nhật"
                         CssClass="submit" OnClick="btnSubmitUpdateProfile_Click" /></p>
             </div>
         </asp:Panel>
-        
         <asp:Panel ID="changePasswordPanel" runat="server" Visible="false">
             <div class="form_settings">
                 <p>
@@ -119,7 +114,5 @@
                 </p>
             </div>
         </asp:Panel>
-        
-        
     </div>
 </asp:Content>

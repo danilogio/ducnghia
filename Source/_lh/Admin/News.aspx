@@ -18,7 +18,11 @@
     </style>
     
     <div id="div_content">
-        <h4>Tin tức</h4>
+        <asp:Panel ID="addNewsPanel" runat="server">
+        </asp:Panel>
+        
+        <asp:Panel ID="viewPanel" runat="server">
+        </asp:Panel>
     </div>
 </asp:Content>
 

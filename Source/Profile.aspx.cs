@@ -22,7 +22,7 @@ public partial class ResetPassword : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("~/Home.aspx");
+            Response.Redirect("~/Login.aspx");
         }
 
     }
