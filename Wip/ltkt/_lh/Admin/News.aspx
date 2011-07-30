@@ -19,7 +19,17 @@
         }
     </style>
     <div id="div_content">
-        <h4>
-            Tin tức</h4>
+        <asp:Panel ID="viewPanel" runat="server">
+            <div id="addButton">
+                <asp:Button ID="btnAddNews" runat="server" Text="Thêm tin tức" CssClass="searchform" />
+            </div>
+            <div id="viewNews" class="block_text">
+            </div>
+        </asp:Panel>
+        
+        <asp:Panel ID="editPanel" runat="server">
+        </asp:Panel>
+        
+        <asp:Panel ID="addPanel" runat="server"></asp:Panel>
     </div>
 </asp:Content>

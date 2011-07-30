@@ -24,10 +24,6 @@
     </style>
     
     <div id="div_content">
-        <h4>Chung</h4>
-        <hr />
         
-        <div id="divContent">
-        </div>
     </div>
 </asp:Content>
