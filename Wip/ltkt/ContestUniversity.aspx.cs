@@ -9,7 +9,7 @@ public partial class ContestUniversity : System.Web.UI.Page
 {
     public void Page_Load(object sender, EventArgs e)
     {
-       // productList.DataSource = DucNghia.DAO.UsersDAO.getAll();
+       // productList.DataSource = ltktDAO.Users.getAll();
         //productList.DataBind();
 
     }

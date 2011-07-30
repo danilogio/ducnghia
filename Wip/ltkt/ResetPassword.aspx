@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="ResetPassword.aspx.cs" Inherits="ResetPassword" %>
+    CodeFile="ResetPassword.aspx.cs" Inherits="ltkt.ResetPassword" %>
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="ResetPassword" ContentPlaceHolderID="cphContent" runat="Server">

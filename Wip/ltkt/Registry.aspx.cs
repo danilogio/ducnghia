@@ -20,7 +20,7 @@ public partial class Registry : System.Web.UI.Page
     {
         string strUsername = txtboxLoginName.Text;
 
-        Boolean isExistedUsername = DucNghia.DAO.UsersDAO.existedUser(strUsername);
+        Boolean isExistedUsername = ltktDAO.Users.existedUser(strUsername);
 
         if (isExistedUsername)
         {
@@ -34,7 +34,7 @@ public partial class Registry : System.Web.UI.Page
             string strPassword = txtboxPassword.Text;
             string strEmail = txtboxEmail.Text;
 
-            string user = DucNghia.DAO.UsersDAO.existedEmail(strEmail);
+            string user = ltktDAO.Users.existedEmail(strEmail);
             if (user != null)
             {
                 liMessage.Text = "Email của bạn đã được đăng ký. ";
@@ -44,7 +44,7 @@ public partial class Registry : System.Web.UI.Page
             }
             else
             { // Mọi điều kiện đã hợp lệ, bắt đầu đăng ký
-                Boolean success = DucNghia.DAO.UsersDAO.register(strUsername, strDisplayName, strEmail, isFemale, strPassword);
+                Boolean success = ltktDAO.Users.register(strUsername, strDisplayName, strEmail, isFemale, strPassword);
 
                 if (success)
                 {

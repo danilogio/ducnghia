@@ -45,13 +45,13 @@ namespace ltkt
             // Kiểm tra xem có đúng password hay không?
             tblUser user = (tblUser)Session["User"];
 
-            Boolean isExist = DucNghia.DAO.UsersDAO.isUser(user.Username, oldPassword);
+            Boolean isExist = ltktDAO.Users.isUser(user.Username, oldPassword);
 
             if (isExist)
             {
                 string newPassword = txtboxNewPassword.Text;
 
-                Boolean isOK = DucNghia.DAO.UsersDAO.updateUserPassword(user.Username, newPassword);
+                Boolean isOK = ltktDAO.Users.updateUserPassword(user.Username, newPassword);
 
                 // Thành công
                 if (isOK)

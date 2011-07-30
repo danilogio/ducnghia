@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ltktDAO;
 
-using DucNghia.DAO;
 
 namespace DucNghia.Admin
 {
@@ -23,7 +23,7 @@ namespace DucNghia.Admin
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
 
-            tblUser user = DucNghia.DAO.UsersDAO.getUser(strUsername, strPassword);
+            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
 
             if (user != null)
             {
