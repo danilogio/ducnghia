@@ -820,9 +820,9 @@ namespace ltktDAO
 		
 		private string _Phone;
 		
-		private System.DateTime _fromDate;
+		private System.Nullable<System.DateTime> _fromDate;
 		
-		private System.DateTime _toDate;
+		private System.Nullable<System.DateTime> _toDate;
 		
 		private int _Price;
 		
@@ -834,7 +834,7 @@ namespace ltktDAO
 		{
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL")]
+		[Column(Storage="_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -866,7 +866,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Address", DbType="NVarChar(254)")]
+		[Column(Storage="_Address", DbType="NVarChar(254) NOT NULL", CanBeNull=false)]
 		public string Address
 		{
 			get
@@ -882,7 +882,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="NChar(30)")]
+		[Column(Storage="_Email", DbType="NChar(30) NOT NULL", CanBeNull=false)]
 		public string Email
 		{
 			get
@@ -914,8 +914,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_fromDate", DbType="DateTime NOT NULL")]
-		public System.DateTime fromDate
+		[Column(Storage="_fromDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fromDate
 		{
 			get
 			{
@@ -930,8 +930,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_toDate", DbType="DateTime NOT NULL")]
-		public System.DateTime toDate
+		[Column(Storage="_toDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> toDate
 		{
 			get
 			{
@@ -978,7 +978,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Description", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Description", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string Description
 		{
 			get
