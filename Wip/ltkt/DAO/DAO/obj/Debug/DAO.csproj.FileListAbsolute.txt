@@ -3,3 +3,8 @@ E:\Data\Projects\ltkt\DAO\DAO\bin\Debug\DAO.pdb
 E:\Data\Projects\ltkt\DAO\DAO\obj\Debug\ResolveAssemblyReference.cache
 E:\Data\Projects\ltkt\DAO\DAO\obj\Debug\DAO.dll
 E:\Data\Projects\ltkt\DAO\DAO\obj\Debug\DAO.pdb
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\bin\Debug\DAO.dll
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\bin\Debug\DAO.pdb
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\obj\Debug\ResolveAssemblyReference.cache
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\obj\Debug\DAO.dll
+E:\Data\Projects\ducnghia\Wip\ltkt\DAO\DAO\obj\Debug\DAO.pdb
