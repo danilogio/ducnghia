@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace DucNghia.DAO
 {
-    class ContestForUniversityDAO
+    public class ContestForUniversityDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
@@ -511,6 +511,14 @@ namespace DucNghia.DAO
         #endregion
 
         #region Method
+
+        public static IEnumerable<tblContestForUniversity> getAll()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                                       select p;
+            return lst;
+        }
         /// <summary>
         /// Thêm một đề thi
         /// </summary>

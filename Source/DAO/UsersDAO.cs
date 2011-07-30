@@ -718,8 +718,18 @@ namespace DucNghia.DAO
             return lst.Count();
         }
 
-       
-        
+        /// <summary>
+        /// method of UniversityDAO
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<tblContestForUniversity> getAll()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                                       select p;
+            return lst;
+        }
+
         #endregion
     }
 }

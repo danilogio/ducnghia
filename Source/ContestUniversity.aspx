@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ContestForUniversity.aspx.cs" Inherits="ResetPassword" %>
-<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
-<asp:Content ID="ContestForUniversity" ContentPlaceHolderID="cphContent" Runat="Server">
-<style type="text/css">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ContestUniversity.aspx.cs" Inherits="ContestUniversity" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphContent" Runat="Server">
+    <style type="text/css">
     .productlist li
     {
     	display:inline;
@@ -19,7 +19,7 @@
         <h2>Luyện thi đại học</h2>
         <hr />
         <br />
-        <table class="style1" bgcolor="White">
+        <%--<table class="style1" bgcolor="White">
             <tr>
                 <td>  
                     <ul class="productlist">
@@ -42,7 +42,7 @@
                         <li><a href="#"><img src="saved/17.jpg" alt="" /></a><br /> abc</li>
                         <li><a href="#"><img src="saved/18.jpg" alt="" /></a><br /> abc</li>
                         <li><a href="#"><img src="saved/19.jpg" alt="" /></a><br /> abc</li>
-                        <li><a href="#"><img src="saved/20.jpg" alt="" /></a><br /> abc</li>
+                        <li><a href="#"><img src="saved/20.jpg" alt="" /></a> %><br /> abc</li>
                         <li><a href="#"><img src="saved/21.jpg" alt="" /></a><br /> abc</li>
                         <li><a href="#"><img src="saved/22.jpg" alt="" /></a><br /> abc</li>
                         <li><a href="#"><img src="saved/23.jpg" alt="" /></a><br /> abc</li>
@@ -57,8 +57,30 @@
                     </div>
                 </td>
             </tr>
-        </table>
+        </table>--%>
+        <asp:ListView ID="productList" runat="server">
             
+            <LayoutTemplate>
+                <ul class="productlist">
+                    <asp:PlaceHolder ID="itemContainer" runat="server" />
+                </ul>
+            </LayoutTemplate>
+            
+            <ItemTemplate>
+                <li><a href="#"><img src="<%#Eval("Thumbnail")%>" alt="" /> <br /> <%#Eval("Title")%></a></li>
+            </ItemTemplate>
+            
+            <EmptyDataTemplate>
+                <div>
+                    Hiện tại chưa có tài liệu nào
+                </div>
+            </EmptyDataTemplate>
+        </asp:ListView>        
+        <asp:DataPager ID="DataPager1" PageSize="5" PagedControlID="productList" runat="server">
+            <Fields>
+                <asp:NumericPagerField />
+            </Fields>
+        </asp:DataPager>
     </div>
 </asp:Content>
 

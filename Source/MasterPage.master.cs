@@ -14,11 +14,8 @@ namespace DucNghia
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ltsItem.Items.Add("-- Tất cả danh mục  --");
-            ltsItem.Items.Add("Luyện thi đại học");
-            ltsItem.Items.Add("Anh văn");
-            ltsItem.Items.Add("Tin học");
-            ltsItem.Width = 150;
+           
+            ltsItem.Width = 240;
 
             if (Session["User"] == null)
             {
