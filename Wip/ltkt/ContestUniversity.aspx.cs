@@ -5,12 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class ContestUniversity : System.Web.UI.Page
+namespace ltkt
 {
-    public void Page_Load(object sender, EventArgs e)
+    public partial class ContestUniversity : System.Web.UI.Page
     {
-       // productList.DataSource = ltktDAO.Users.getAll();
-        //productList.DataBind();
+        public void Page_Load(object sender, EventArgs e)
+        {
+            // productList.DataSource = ltktDAO.Users.getAll();
+            //productList.DataBind();
 
+        }
     }
 }

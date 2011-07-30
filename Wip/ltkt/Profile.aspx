@@ -45,7 +45,6 @@
                 </div>
             </div>
         </asp:Panel>
-        <form id="frmProfile" action="Profile.aspx" method="post">
         <asp:Panel ID="editPanel" runat="server" Visible="false">
             <div class="form_settings">
                 <p>
@@ -115,6 +114,5 @@
                 </p>
             </div>
         </asp:Panel>
-        </form>
     </div>
 </asp:Content>
