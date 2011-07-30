@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="ltkt.Home" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="ltkt.Home" %>
 
 <asp:Content ID="Home" ContentPlaceHolderID="cphContent" Runat="Server">
    <script type="text/javascript">
@@ -368,4 +368,5 @@
 		            <div id="EnglishLesson-3">Hiện chưa có bài viết nào
 	                </div>
                 </div>
+    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 </asp:Content>

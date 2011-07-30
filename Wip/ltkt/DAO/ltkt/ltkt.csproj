@@ -57,6 +57,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -64,12 +71,12 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Master.Master.cs">
-      <DependentUpon>Master.Master</DependentUpon>
+    <Compile Include="MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Master.Master.designer.cs">
-      <DependentUpon>Master.Master</DependentUpon>
+    <Compile Include="MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +86,7 @@
     <Content Include="App_Data\LTDH_log.ldf">
       <DependentUpon>LTDH.mdf</DependentUpon>
     </Content>
+    <Content Include="Contact.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="imagesAd\1.gif" />
     <Content Include="imagesAd\2.gif" />
@@ -101,7 +109,7 @@
     <Content Include="images\unknown.png" />
     <Content Include="images\Word.png" />
     <Content Include="images\zip.png" />
-    <Content Include="Master.Master" />
+    <Content Include="MasterPage.Master" />
     <Content Include="MSCaptcha.dll" />
     <Content Include="MSCaptcha.xml" />
     <Content Include="saved\1.jpg" />
