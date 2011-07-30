@@ -10,7 +10,7 @@
         <div id="divMessage" class="form_settings">
             <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
         </div>
-        <form action="Contact.aspx" method="post">
+        <%--<form action="Contact.aspx" method="post">--%>
         <asp:Panel ID="contactPanel" runat="server">
             <p>
                 Mọi thắc mắc/góp ý các bạn vui lòng gửi lại cho chúng tôi để có thể phục vụ các
@@ -57,6 +57,6 @@
                         OnClick="btnSubmitContact_Click" /></p>
             </div>
         </asp:Panel>
-        </form>
+       <%-- </form>--%>
     </div>
 </asp:Content>
