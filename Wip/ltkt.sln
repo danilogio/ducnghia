@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ltkt", "ltkt\", "{4F86EC40-F126-471D-A698-B8A43579ED00}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/ltkt"
+		Debug.AspNetCompiler.PhysicalPath = "ltkt\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ltkt\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ltkt"
+		Release.AspNetCompiler.PhysicalPath = "ltkt\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ltkt\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2235"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ltktDAO", "ltktDAO\ltktDAO.csproj", "{360AD783-82B9-4A2B-9573-CEC3ABC7F023}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F86EC40-F126-471D-A698-B8A43579ED00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F86EC40-F126-471D-A698-B8A43579ED00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F86EC40-F126-471D-A698-B8A43579ED00}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F86EC40-F126-471D-A698-B8A43579ED00}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{360AD783-82B9-4A2B-9573-CEC3ABC7F023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360AD783-82B9-4A2B-9573-CEC3ABC7F023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360AD783-82B9-4A2B-9573-CEC3ABC7F023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360AD783-82B9-4A2B-9573-CEC3ABC7F023}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
