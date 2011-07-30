@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DucNghia.Admin
+namespace ltkt.Admin
 {
     public partial class Advertisement : System.Web.UI.Page
     {

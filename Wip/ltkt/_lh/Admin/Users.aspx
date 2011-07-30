@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
-    CodeFile="Users.aspx.cs" Inherits="DucNghia.Admin.Users" %>
+    CodeFile="Users.aspx.cs" Inherits="ltkt.Admin.Users" %>
 
 <asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <link rel="stylesheet" href="styles.css" type="text/css" />

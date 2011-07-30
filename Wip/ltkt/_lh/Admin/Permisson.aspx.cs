@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DucNghia.Admin
+
+namespace ltkt.Admin
 {
     public partial class Permission : System.Web.UI.Page
     {

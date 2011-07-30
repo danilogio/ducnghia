@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Quản lý chung" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
-    CodeFile="General.aspx.cs" Inherits="DucNghia.Admin.Admin_General" %>
+    CodeFile="General.aspx.cs" Inherits="ltkt.Admin.General" %>
 
 <asp:Content ID="GeneralAdminHead" ContentPlaceHolderID="head" runat="server">
     <title>Quản lý chung</title>

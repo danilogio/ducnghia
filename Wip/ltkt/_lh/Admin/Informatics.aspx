@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
-    CodeFile="Comment.aspx.cs" Inherits="ltkt.Admin.Comment" %>
+    CodeFile="Informatics.aspx.cs" Inherits="ltkt.Admin.Informatics" %>
 
-<asp:Content ID="CommentAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -20,6 +20,6 @@
     </style>
     <div id="div_content">
         <h4>
-            Comment</h4>
+            Tin học</h4>
     </div>
 </asp:Content>

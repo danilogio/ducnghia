@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
-    CodeFile="ContestUniversity.aspx.cs" Inherits="DucNghia.Admin.Admin_ContestUniversity" %>
+    CodeFile="ContestUniversity.aspx.cs" Inherits="ltkt.Admin.ContestUniversity" %>
 
 <asp:Content ID="ContestForUniversityAdmin" ContentPlaceHolderID="cphAdminContent"
     runat="Server">

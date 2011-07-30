@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DucNghia.DAO;
+using ltktDAO;
 
-namespace DucNghia.Admin
+namespace ltkt.Admin
 {
     public partial class AdminMaster : System.Web.UI.MasterPage
     {
