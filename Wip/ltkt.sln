@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ltkt", "ltkt\", "{4F86EC40-F126-471D-A698-B8A43579ED00}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
+		ProjectReferences = "{360AD783-82B9-4A2B-9573-CEC3ABC7F023}|ltktDAO.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/ltkt"
 		Debug.AspNetCompiler.PhysicalPath = "ltkt\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ltkt\"
