@@ -11,4 +11,8 @@ public partial class AdContact : System.Web.UI.Page
     {
 
     }
+    protected void btnSubmitContact_Click(object sender, EventArgs e)
+    {
+
+    }
 }
