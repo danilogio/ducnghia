@@ -386,6 +386,10 @@ li ol, li ul {
 	margin-left:5px;
 	border-color:#a6c9e2;
 }
+.block_text #mailbox
+{
+	width:400px;
+}
 hr
 {
 	border-color:#a6c9e2;
