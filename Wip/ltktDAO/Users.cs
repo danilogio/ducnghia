@@ -393,6 +393,15 @@ namespace ltktDAO
         #endregion
 
         #region Method
+
+        public static IEnumerable<tblUser> getAll()
+        {
+            LTDHDataContext DB = new LTDHDataContext(strPathDB);
+            IEnumerable<tblUser> lst;
+            lst = from u in DB.tblUsers orderby u.Username
+                  select u;
+            return lst;
+        }
         /// <summary>
         /// Thêm một user mới
         /// </summary>
