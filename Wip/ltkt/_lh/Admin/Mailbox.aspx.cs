@@ -11,6 +11,9 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
+using ltktDAO;
+using System.Collections.Generic;
+
 namespace ltkt.Admin
 {
     public partial class Mailbox : System.Web.UI.Page
@@ -19,6 +22,20 @@ namespace ltkt.Admin
         {
             AdminMaster page = (AdminMaster)Master;
             page.updateHeader("Hộp thư");
+
+            //IEnumerable<tblContact> lst = ltktDAO.Contact.getAll();
+            //grdInbox.DataSource = lst;
+            //grdInbox.DataBind();
         }
+
+        protected void btnInbox_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void btnSent_Click(object sender, EventArgs e)
+        {
+        }
+
+
     }
 }

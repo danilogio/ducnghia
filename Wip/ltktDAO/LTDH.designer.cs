@@ -39,6 +39,9 @@ namespace ltktDAO
     partial void InserttblComment(tblComment instance);
     partial void UpdatetblComment(tblComment instance);
     partial void DeletetblComment(tblComment instance);
+    partial void InserttblContact(tblContact instance);
+    partial void UpdatetblContact(tblContact instance);
+    partial void DeletetblContact(tblContact instance);
     partial void InserttblContestForUniversity(tblContestForUniversity instance);
     partial void UpdatetblContestForUniversity(tblContestForUniversity instance);
     partial void DeletetblContestForUniversity(tblContestForUniversity instance);
@@ -1109,24 +1112,51 @@ namespace ltktDAO
 	}
 	
 	[Table(Name="dbo.tblContact")]
-	public partial class tblContact
+	public partial class tblContact : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private string _Email;
+		private string _EmailFrom;
+		
+		private string _EmailTo;
+		
+		private string _Subject;
 		
 		private string _Contents;
 		
+		private System.DateTime _Posted;
+		
 		private bool _isRead;
 		
-		private System.DateTime _Posted;
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnEmailFromChanging(string value);
+    partial void OnEmailFromChanged();
+    partial void OnEmailToChanging(string value);
+    partial void OnEmailToChanged();
+    partial void OnSubjectChanging(string value);
+    partial void OnSubjectChanged();
+    partial void OnContentsChanging(string value);
+    partial void OnContentsChanged();
+    partial void OnPostedChanging(System.DateTime value);
+    partial void OnPostedChanged();
+    partial void OnisReadChanging(bool value);
+    partial void OnisReadChanged();
+    #endregion
 		
 		public tblContact()
 		{
+			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL")]
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -1137,23 +1167,71 @@ namespace ltktDAO
 			{
 				if ((this._ID != value))
 				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
 					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="NChar(30) NOT NULL", CanBeNull=false)]
-		public string Email
+		[Column(Storage="_EmailFrom", DbType="NChar(30) NOT NULL", CanBeNull=false)]
+		public string EmailFrom
 		{
 			get
 			{
-				return this._Email;
+				return this._EmailFrom;
 			}
 			set
 			{
-				if ((this._Email != value))
+				if ((this._EmailFrom != value))
 				{
-					this._Email = value;
+					this.OnEmailFromChanging(value);
+					this.SendPropertyChanging();
+					this._EmailFrom = value;
+					this.SendPropertyChanged("EmailFrom");
+					this.OnEmailFromChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_EmailTo", DbType="NChar(30) NOT NULL", CanBeNull=false)]
+		public string EmailTo
+		{
+			get
+			{
+				return this._EmailTo;
+			}
+			set
+			{
+				if ((this._EmailTo != value))
+				{
+					this.OnEmailToChanging(value);
+					this.SendPropertyChanging();
+					this._EmailTo = value;
+					this.SendPropertyChanged("EmailTo");
+					this.OnEmailToChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Subject", DbType="NVarChar(254) NOT NULL", CanBeNull=false)]
+		public string Subject
+		{
+			get
+			{
+				return this._Subject;
+			}
+			set
+			{
+				if ((this._Subject != value))
+				{
+					this.OnSubjectChanging(value);
+					this.SendPropertyChanging();
+					this._Subject = value;
+					this.SendPropertyChanged("Subject");
+					this.OnSubjectChanged();
 				}
 			}
 		}
@@ -1169,23 +1247,11 @@ namespace ltktDAO
 			{
 				if ((this._Contents != value))
 				{
+					this.OnContentsChanging(value);
+					this.SendPropertyChanging();
 					this._Contents = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_isRead", DbType="Bit NOT NULL")]
-		public bool isRead
-		{
-			get
-			{
-				return this._isRead;
-			}
-			set
-			{
-				if ((this._isRead != value))
-				{
-					this._isRead = value;
+					this.SendPropertyChanged("Contents");
+					this.OnContentsChanged();
 				}
 			}
 		}
@@ -1201,8 +1267,52 @@ namespace ltktDAO
 			{
 				if ((this._Posted != value))
 				{
+					this.OnPostedChanging(value);
+					this.SendPropertyChanging();
 					this._Posted = value;
+					this.SendPropertyChanged("Posted");
+					this.OnPostedChanged();
 				}
+			}
+		}
+		
+		[Column(Storage="_isRead", DbType="Bit NOT NULL")]
+		public bool isRead
+		{
+			get
+			{
+				return this._isRead;
+			}
+			set
+			{
+				if ((this._isRead != value))
+				{
+					this.OnisReadChanging(value);
+					this.SendPropertyChanging();
+					this._isRead = value;
+					this.SendPropertyChanged("isRead");
+					this.OnisReadChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
