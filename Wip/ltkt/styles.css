@@ -504,3 +504,26 @@ div.block_details_text
 {
 	color: #FA297D;
 }
+
+.datapager
+{
+    display:block;
+    text-align:center;
+    clear: both;
+    font-size:medium;
+}
+
+.articleList li
+{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    margin-right:20px;
+    width: 150px;
+    height: 150px;
+}
+.activeText
+{
+	color: #3f84b4;
+}

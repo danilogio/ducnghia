@@ -13,63 +13,63 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
 
     <script type="text/javascript">
-	    $(document).ready(function() {
-	        $('#datepicker').datepicker({
-	            inline: true
-	        });
+        $(document).ready(function() {
+            $('#datepicker').datepicker({
+                inline: true
+            });
 
-	        $("#accordion").accordion();
-	        ShowAdDiv();
-	    });
+            $("#accordion").accordion();
+            ShowAdDiv();
+        });
 
-	    function FloatTopDiv() {
-	        startLX = ((document.body.clientWidth - MainContentW) / 2) - LeftBannerW - LeftAdjust, startLY = TopAdjust + 80;
-	        startRX = ((document.body.clientWidth - MainContentW) / 2) + MainContentW + RightAdjust, startRY = TopAdjust + 0;
-	        var d = document;
-	        function ml(id) {
-	            var el = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
-	            el.sP = function(x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
-	            el.x = startRX;
-	            el.y = startRY;
-	            return el;
-	        }
-	        function m2(id) {
-	            var e2 = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
-	            e2.sP = function(x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
-	            e2.x = startLX;
-	            e2.y = startLY;
-	            return e2;
-	        }
-	        window.stayTopLeft = function() {
-	            if (document.documentElement && document.documentElement.scrollTop)
-	                var pY = document.documentElement.scrollTop;
-	            else if (document.body)
-	                var pY = document.body.scrollTop;
-	            if (document.body.scrollTop > 30) { startLY = 3; startRY = 3; } else { startLY = TopAdjust; startRY = TopAdjust; };
-	            ftlObj.y += (pY + startRY - ftlObj.y) / 46;
-	            ftlObj.sP(ftlObj.x, ftlObj.y);
-	            ftlObj2.y += (pY + startLY - ftlObj2.y) / 46;
-	            ftlObj2.sP(ftlObj2.x, ftlObj2.y);
-	            setTimeout("stayTopLeft()", 1);
-	        }
-	        ftlObj = ml("divAdRight");
-	        //stayTopLeft(); 
-	        ftlObj2 = m2("divAdLeft");
-	        stayTopLeft();
-	    }
-	    function ShowAdDiv() {
-	        var objAdDivRight = document.getElementById("divAdRight");
-	        var objAdDivLeft = document.getElementById("divAdLeft");
-	        if (document.body.clientWidth < 1000) {
-	            objAdDivRight.style.display = "none";
-	            objAdDivLeft.style.display = "none";
-	        }
-	        else {
-	            objAdDivRight.style.display = "block";
-	            objAdDivLeft.style.display = "block";
-	            FloatTopDiv();
-	        }
-	    }  
+        function FloatTopDiv() {
+            startLX = ((document.body.clientWidth - MainContentW) / 2) - LeftBannerW - LeftAdjust, startLY = TopAdjust + 80;
+            startRX = ((document.body.clientWidth - MainContentW) / 2) + MainContentW + RightAdjust, startRY = TopAdjust + 0;
+            var d = document;
+            function ml(id) {
+                var el = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
+                el.sP = function(x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
+                el.x = startRX;
+                el.y = startRY;
+                return el;
+            }
+            function m2(id) {
+                var e2 = d.getElementById ? d.getElementById(id) : d.all ? d.all[id] : d.layers[id];
+                e2.sP = function(x, y) { this.style.left = x + 'px'; this.style.top = y + 'px'; };
+                e2.x = startLX;
+                e2.y = startLY;
+                return e2;
+            }
+            window.stayTopLeft = function() {
+                if (document.documentElement && document.documentElement.scrollTop)
+                    var pY = document.documentElement.scrollTop;
+                else if (document.body)
+                    var pY = document.body.scrollTop;
+                if (document.body.scrollTop > 30) { startLY = 3; startRY = 3; } else { startLY = TopAdjust; startRY = TopAdjust; };
+                ftlObj.y += (pY + startRY - ftlObj.y) / 46;
+                ftlObj.sP(ftlObj.x, ftlObj.y);
+                ftlObj2.y += (pY + startLY - ftlObj2.y) / 46;
+                ftlObj2.sP(ftlObj2.x, ftlObj2.y);
+                setTimeout("stayTopLeft()", 1);
+            }
+            ftlObj = ml("divAdRight");
+            //stayTopLeft(); 
+            ftlObj2 = m2("divAdLeft");
+            stayTopLeft();
+        }
+        function ShowAdDiv() {
+            var objAdDivRight = document.getElementById("divAdRight");
+            var objAdDivLeft = document.getElementById("divAdLeft");
+            if (document.body.clientWidth < 1000) {
+                objAdDivRight.style.display = "none";
+                objAdDivLeft.style.display = "none";
+            }
+            else {
+                objAdDivRight.style.display = "block";
+                objAdDivLeft.style.display = "block";
+                FloatTopDiv();
+            }
+        }  
 	 	   
     </script>
 
@@ -181,32 +181,36 @@
                                             </div>
                                         </div>
                                     </asp:Panel>
-                                    <asp:Panel ID="userPanel" runat="server" Visible="false">
-                                        <div>
-                                            <div style="float: left; width: 75%;">
-                                                <div id="divInfo" style="width: 100%;">
-                                                    <label>
-                                                        Xin chào
-                                                    </label>
-                                                    <asp:Literal ID="loginUser" runat="server"></asp:Literal>
-                                                </div>
-                                                <div style="width: 100%;">
-                                                    <div style="float: left; width: 60%;">
-                                                        <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
-                                                            Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
-                                                    </div>
-                                                    <div>
-                                                        <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
-                                                            Font-Italic="True">Gửi bài</asp:HyperLink>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div style="display: block; text-align: center; clear: both;">
+                                        <asp:Panel ID="userPanel" runat="server" Visible="false">
                                             <div>
-                                                <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"
-                                                    CssClass="searchsubmit formbutton" />
+                                                <div style="float: left; width: 75%;">
+                                                    <div id="divInfo" style="width: 100%; margin-top: 0px">
+                                                        <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
+                                                            Font-Italic="True">
+                                                            <label>
+                                                                Xin chào
+                                                            </label>
+                                                            <span class="activeText"><asp:Literal ID="loginUser" runat="server"></asp:Literal></span></asp:HyperLink>
+                                                    </div>
+                                                    <%-- <div style="width: 100%;">
+                                                        <div style="float: left; width: 60%;">
+                                                            <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
+                                                                Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
+                                                        </div>
+                                                        <div>
+                                                            <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
+                                                                Font-Italic="True">Gửi bài</asp:HyperLink>
+                                                        </div>
+                                                    </div>--%>
+                                                </div>
+                                                <div>
+                                                    <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"
+                                                        CssClass="searchsubmit formbutton" />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </asp:Panel>
+                                        </asp:Panel>
+                                    </div>
                                 </li>
                             </ul>
                         </li>
@@ -234,7 +238,6 @@
                             </ul>
                             </form>
                         </li>
-                       
                         <li>
                             <h4>
                                 <span>Luyện thi đại học</span></h4>
@@ -295,7 +298,6 @@
                                     - brilliant premium templates</li>
                             </ul>
                         </li>
-                       
                         <li>
                             <center>
                                 <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/AdContact.aspx" runat="server">

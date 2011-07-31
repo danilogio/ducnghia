@@ -11,28 +11,36 @@ namespace ltkt
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string selIndex = Request["selIndex"];
-            int selectedIndex;
-
-            if (selIndex == null)
+            if (Session["User"] == null)
             {
-                selectedIndex = 0;
+                Response.Redirect("Login.aspx");
             }
             else
             {
-                selectedIndex = Int32.Parse(selIndex);
+                string selIndex = Request["selIndex"];
+                int selectedIndex;
 
-                if (selectedIndex == 0)
+                if (selIndex == null)
                 {
-                    //ddlType.Visible = false;
-                    //lessonType.Visible = false;
+                    selectedIndex = 0;
                 }
                 else
                 {
-                    //ddlType.Visible = true;
-                    //lessonType.Visible = true;
+                    selectedIndex = Int32.Parse(selIndex);
+
+                    if (selectedIndex == 0)
+                    {
+                        //ddlType.Visible = false;
+                        //lessonType.Visible = false;
+                    }
+                    else
+                    {
+                        //ddlType.Visible = true;
+                        //lessonType.Visible = true;
+                    }
+                    Response.End();
                 }
-                Response.End();
+
             }
 
         }
