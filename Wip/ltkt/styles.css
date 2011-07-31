@@ -478,6 +478,12 @@ div.block_details_text
     background: none;
 }
 
+.form_settings .checkboxlist
+{
+	margin-left:0px;
+	display:block;
+	width:300px;
+}
 #EnglishLesson a,#ItLesson a,#ExamLesson a,#other_news a
 {
 	color: #1962A5;
