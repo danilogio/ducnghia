@@ -2,11 +2,10 @@
     CodeFile="Mailbox.aspx.cs" Inherits="ltkt.Admin.Mailbox" Title="Hộp thư" %>
 
 <asp:Content ID="MailboxHeader" ContentPlaceHolderID="head" runat="Server">
-    
 </asp:Content>
 <asp:Content ID="Mailbox" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <title>Hộp thư</title>
-    <div class="block_text" style="margin:5px;">
+    <div class="block_text" style="margin: 5px;">
         <div id="funtionHeader">
             <asp:Button ID="btnNewMail" runat="server" Text="Soạn thư" />
             <asp:Button ID="btnCheckMail" runat="server" Text="Kiểm tra thư" />
@@ -15,8 +14,13 @@
             <asp:Button ID="btnDelete" runat="server" Text="Xóa" />
             <hr />
         </div>
-        <div id="leftSidebar">
-            
+        <div id="leftSidebar" style="float: left; width: 20%;">
+            <p>
+                <asp:LinkButton ID="lnkInbox" runat="server">Hộp thư đến</asp:LinkButton>
+            </p>
+            <p>
+                <asp:LinkButton ID="lnkSent" runat="server">Hộp thư đi</asp:LinkButton>
+            </p>
         </div>
         <div id="rightSidebar">
         </div>
