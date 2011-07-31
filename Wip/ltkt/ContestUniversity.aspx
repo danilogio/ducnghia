@@ -8,6 +8,8 @@
     	float:left;
     	margin-left:15px;
     	margin-bottom:15px;
+    	width:150px;
+    	height:150px;
     }
     .style1
     {
@@ -62,7 +64,7 @@
             
             <LayoutTemplate>
                 <ul class="productlist">
-                    <asp:PlaceHolder ID="itemContainer" runat="server" />
+                    <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                 </ul>
             </LayoutTemplate>
             
@@ -75,7 +77,8 @@
                     Hiện tại chưa có tài liệu nào
                 </div>
             </EmptyDataTemplate>
-        </asp:ListView>        
+        </asp:ListView>
+                
         <asp:DataPager ID="DataPager1" PageSize="5" PagedControlID="productList" runat="server">
             <Fields>
                 <asp:NumericPagerField />

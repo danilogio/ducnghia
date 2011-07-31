@@ -11,8 +11,9 @@ namespace ltkt
     {
         public void Page_Load(object sender, EventArgs e)
         {
-            productList.DataSource = ltktDAO.
-            //productList.DataBind();
+            IEnumerable<tblContestForUniversity> lst = ltktDAO.Contest.getAll();
+            productList.DataSource = lst;
+            productList.DataBind();
 
         }
     }
