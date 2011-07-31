@@ -33,13 +33,12 @@
         }
     </style>
     <div id="div_content">
-        <h4>
-            Người dùng</h4>
+        <h4>Người dùng</h4>
         <div class="block_text">
             <h5>
                 Danh sách thành viên</h5>
             <div class="form_settings">
-                <form id="form1">
+                
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
                 <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" BackColor="Black"
@@ -94,13 +93,16 @@
                     <EditRowStyle Wrap="True"></EditRowStyle>
                     <AlternatingRowStyle BackColor="White" />
                 </asp:GridView>
-                <%--<asp:DataPager ID="DataPager1" runat="server" PagedControlID="gvUsers" PageSize="4">
-                <Fields>
-                    <asp:NumericPagerField />
-                </Fields>
-            </asp:DataPager>--%>
-                </form>
             </div>
+        </div>
+        
+        <div class="block_text">
+            <h5>Thành viên bị khóa</h5>
+            
+        </div>
+        
+        <div class="block_text">
+            <h5>Thành viên quản trị</h5>
         </div>
     </div>
 </asp:Content>
