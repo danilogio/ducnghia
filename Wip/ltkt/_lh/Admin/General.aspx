@@ -53,7 +53,7 @@
             </p>
             <p>
                 <span>Email mới:</span>
-                <asp:Literal ID="newsMails" runat="server" Text="asdfasdf"></asp:Literal>
+                <asp:Literal ID="newsMails" runat="server" Text="Không"></asp:Literal>
             </p>
             <p>
                 <span>Lượt truy cập:</span>
