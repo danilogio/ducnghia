@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using ltktDAO;
 namespace ltkt
 {
     public partial class ContestUniversity : System.Web.UI.Page
     {
         public void Page_Load(object sender, EventArgs e)
         {
-            // productList.DataSource = ltktDAO.Users.getAll();
+            productList.DataSource = ltktDAO.
             //productList.DataBind();
 
         }

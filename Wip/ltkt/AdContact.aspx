@@ -50,7 +50,7 @@
                     </asp:RequiredFieldValidator>
                    <%-- Address--%>
                     <p>
-                        <span>Địa chỉ(*):</span><asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
+                        <span>Địa chỉ(*):</span><asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                     </p>
                     <asp:RequiredFieldValidator ID="reqAddress" runat="server" ErrorMessage="Vui lòng nhập địa chỉ công ty"
                         ControlToValidate="txtAddress" Display="None">
@@ -94,14 +94,12 @@
                             <asp:ListItem Value="2" Text="Top Banner"></asp:ListItem>
                             <asp:ListItem Value="3" Text="Top Banner"></asp:ListItem>
                         </asp:CheckBoxList>--%>
-                        <%--<select multiple="multiple">
-                            <asp:CheckBox ID="CheckBox1" runat="server" Text="123" CssClass="checkbox"/>
-                        </select>--%>
+                       
                         <span id="location" class="checkboxlist">
-                            <input type="checkbox" name="option1" value="0" class="checkbox" checked="checked"/> Top Banner<br/>
-                            <input type="checkbox" name="option2" value="1" class="checkbox"/> Right Banner<br/>
-                            <input type="checkbox" name="option3" value="2"class="checkbox"/> Left Banner<br/>
-                            <input type="checkbox" name="option1" value="3" class="checkbox"/> Bottom Banner<br/>
+                            <input runat="server" type="checkbox" id="chkTop" value="0" class="checkbox" checked="checked"/> Top Banner<br/>
+                            <input runat="server" type="checkbox" id="chkRight" value="1" class="checkbox"/> Right Banner<br/>
+                            <input runat="server" type="checkbox" id="chkLeft" value="2" class="checkbox"/> Left Banner<br/>
+                            <input runat="server" type="checkbox" id="chkBot" value="3" class="checkbox"/> Bottom Banner<br/>
                         </span>
                         
                     </p>
@@ -112,9 +110,9 @@
                             CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
                             CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" />
                     </center>
-                    <span>Mã xác nhận:</span><asp:TextBox ID="txtboxConfirm" runat="server" CssClass="contact"></asp:TextBox>
+                    <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server" CssClass="contact"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqContactCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
-                        ControlToValidate="txtboxConfirm" Display="none">
+                        ControlToValidate="txtboxCaptcha" Display="none">
                     </asp:RequiredFieldValidator>
                     <p style="padding-top: 15px">
                         <span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit"
