@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace ltktDAO
 {
-    class Contest
+    public class Contest
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
@@ -583,6 +583,17 @@ namespace ltktDAO
             return true;
         }
 
+        /// <summary>
+        /// Tổng các đề thi
+        /// </summary>
+        /// <returns></returns>
+        public static int sumContest()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            return (from contest in DB.tblContestForUniversities
+                              select contest).Count();
+        }
         
         #endregion
     }

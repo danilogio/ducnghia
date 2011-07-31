@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace ltktDAO
 {
-    class English
+    public class English
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
@@ -431,6 +431,19 @@ namespace ltktDAO
             }
             return true;
         }
+
+        /// <summary>
+        /// Tổng các bài viết về chủ đề Anh văn (bài giảng, đề thi, bài tập).
+        /// </summary>
+        /// <returns></returns>
+        public static int sumEnglish()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            return (from english in DB.tblEnglishes
+                    select english).Count();
+
+        }
+
 
         #endregion
     }

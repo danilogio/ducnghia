@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace ltktDAO
 {
-    class Informatics
+    public class Informatics
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
@@ -467,6 +467,22 @@ namespace ltktDAO
             }
             return true;
         }
+
+
+        /// <summary>
+        /// Tổng số các bài viết về chủ đề tin học
+        /// </summary>
+        /// <returns></returns>
+        public static int sumInformatics()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            return (from informatics in DB.tblInformatics
+                    select informatics).Count();
+        }
+
+
+
         #endregion
     }
 }

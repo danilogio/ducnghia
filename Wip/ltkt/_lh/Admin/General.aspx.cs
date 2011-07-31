@@ -18,7 +18,11 @@ namespace ltkt.Admin
 
             sumUsers.Text = ltktDAO.Users.numberOfUsers().ToString();
             latestUser.Text = ltktDAO.Users.latestUser();
-            sumArticle.Text = ltktDAO.News.numberOfNews().ToString();
+            latestLogin.Text = ltktDAO.Admin.latestLogin();
+            sumArticle.Text = ltktDAO.Admin.sumArticle().ToString();
+            sumContest.Text = ltktDAO.Contest.sumContest().ToString();
+            sumEnglish.Text = ltktDAO.English.sumEnglish().ToString();
+            sumInformatics.Text = ltktDAO.Informatics.sumInformatics().ToString();
 
         }
     }

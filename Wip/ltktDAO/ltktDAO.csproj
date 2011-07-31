@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs" />
     <Compile Include="Contest.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="English.cs" />

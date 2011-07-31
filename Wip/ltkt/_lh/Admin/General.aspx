@@ -32,18 +32,28 @@
                 <asp:Literal ID="latestUser" runat="server"></asp:Literal>
             </p>
             <p>
-                <span>Thành viên đăng nhập gần nhất</span>
-                <asp:ListBox ID="lstLatestUsers" runat="server">
-                    <asp:ListItem Text="dvtrung" Value="dvtrung"></asp:ListItem>
-                    <asp:ListItem Text="dvtrung" Value="dvtrung"></asp:ListItem>
-                    <asp:ListItem Text="dvtrung" Value="dvtrung"></asp:ListItem>
-                    <asp:ListItem Text="dvtrung" Value="dvtrung"></asp:ListItem>
-                    <asp:ListItem Text="dvtrung" Value="dvtrung"></asp:ListItem>
-                </asp:ListBox>
+                <span>Thành viên đăng nhập gần nhất:</span>
+                <asp:Literal ID="latestLogin" runat="server" Text="asdf"></asp:Literal>
             </p>
             <p>
-                <span>Số bài viết:</span>
+                <span>Tổng số bài viết:</span>
                 <asp:Literal ID="sumArticle" runat="server"></asp:Literal>
+            </p>
+            <p>
+                <span>Tổng số đề thi đại học/cao đẳng:</span>
+                <asp:Literal ID="sumContest" runat="server"></asp:Literal>
+            </p>
+            <p>
+                <span>Tổng số bài viết anh văn:</span>
+                <asp:Literal ID="sumEnglish" runat="server"></asp:Literal>
+            </p>
+            <p>
+                <span>Tổng số bài viết tin học:</span>
+                <asp:Literal ID="sumInformatics" runat="server"></asp:Literal>
+            </p>
+            <p>
+                <span>Email mới:</span>
+                <asp:Literal ID="newsMails" runat="server" Text="asdfasdf"></asp:Literal>
             </p>
             <p>
                 <span>Lượt truy cập:</span>
