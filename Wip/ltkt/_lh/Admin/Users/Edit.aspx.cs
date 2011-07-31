@@ -13,6 +13,7 @@ public partial class _lh_Admin_Users_Edit : System.Web.UI.Page
         {
             TextBox lklDelete = (TextBox)Page.PreviousPage.Form.FindControl("txtEmail");
             string id = lklDelete.Text;
+            
         }
         
     }
