@@ -717,7 +717,24 @@ namespace ltktDAO
             return lst.Count();
         }
 
-        
+        /// <summary>
+        /// Tên user mới nhất
+        /// </summary>
+        /// <returns></returns>
+        public static string latestUser()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IQueryable<tblUser> lst = (from record in DB.tblUsers
+                                       orderby record.ID descending
+                                       select record).Take(1);
+
+            foreach (tblUser item in lst)
+            {
+                return item.Username;
+            }
+
+            return null;
+        }
 
         #endregion
     }

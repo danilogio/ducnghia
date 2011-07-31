@@ -129,13 +129,9 @@
   </Table>
   <Table Name="dbo.tblStatistic" Member="tblStatistics">
     <Type Name="tblStatistic">
-      <Column Name="Members" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ContestForUniversity" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="English" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Informatics" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Downloads" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Uploads" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Views" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.tblSticky" Member="tblStickies">

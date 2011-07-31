@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace ltktDAO
 {
-    class News
+    public class News
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;

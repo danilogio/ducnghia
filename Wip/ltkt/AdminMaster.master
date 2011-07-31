@@ -72,7 +72,7 @@
                                 <asp:HyperLink ID="HpkEnglish" runat="server" NavigateUrl="~/_lh/Admin/English.aspx">Tiếng Anh</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkIt" runat="server" NavigateUrl="~/_lh/Admin/It.aspx">Tin học</asp:HyperLink>
+                                <asp:HyperLink ID="HpkIt" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx">Tin học</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkAds" runat="server" NavigateUrl="~/_lh/Admin/Advertisement.aspx">Quảng cáo</asp:HyperLink>

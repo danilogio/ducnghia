@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using ltktDAO;
+
 namespace ltkt.Admin
 {
     public partial class General : System.Web.UI.Page
@@ -12,7 +14,12 @@ namespace ltkt.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster page = (AdminMaster)Master;
-            page.updateHeader("Quản lý chung");
+            page.updateHeader("Tổng quan");
+
+            sumUsers.Text = ltktDAO.Users.numberOfUsers().ToString();
+            latestUser.Text = ltktDAO.Users.latestUser();
+            sumArticle.Text = ltktDAO.News.numberOfNews().ToString();
+
         }
     }
 }

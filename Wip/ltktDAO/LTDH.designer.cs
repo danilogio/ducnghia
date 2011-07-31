@@ -54,6 +54,9 @@ namespace ltktDAO
     partial void InserttblPermission(tblPermission instance);
     partial void UpdatetblPermission(tblPermission instance);
     partial void DeletetblPermission(tblPermission instance);
+    partial void InserttblStatistic(tblStatistic instance);
+    partial void UpdatetblStatistic(tblStatistic instance);
+    partial void DeletetblStatistic(tblStatistic instance);
     partial void InserttblSticky(tblSticky instance);
     partial void UpdatetblSticky(tblSticky instance);
     partial void DeletetblSticky(tblSticky instance);
@@ -2567,136 +2570,111 @@ namespace ltktDAO
 	}
 	
 	[Table(Name="dbo.tblStatistic")]
-	public partial class tblStatistic
+	public partial class tblStatistic : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<int> _Members;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<long> _ContestForUniversity;
+		private int _ID;
 		
-		private System.Nullable<long> _English;
+		private string _Name;
 		
-		private System.Nullable<long> _Informatics;
+		private string _Value;
 		
-		private System.Nullable<long> _Downloads;
-		
-		private System.Nullable<long> _Uploads;
-		
-		private System.Nullable<long> _Views;
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnValueChanging(string value);
+    partial void OnValueChanged();
+    #endregion
 		
 		public tblStatistic()
 		{
+			OnCreated();
 		}
 		
-		[Column(Storage="_Members", DbType="Int")]
-		public System.Nullable<int> Members
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this._Members;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._Members != value))
+				if ((this._ID != value))
 				{
-					this._Members = value;
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_ContestForUniversity", DbType="BigInt")]
-		public System.Nullable<long> ContestForUniversity
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
 		{
 			get
 			{
-				return this._ContestForUniversity;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._ContestForUniversity != value))
+				if ((this._Name != value))
 				{
-					this._ContestForUniversity = value;
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_English", DbType="BigInt")]
-		public System.Nullable<long> English
+		[Column(Storage="_Value", DbType="NVarChar(254) NOT NULL", CanBeNull=false)]
+		public string Value
 		{
 			get
 			{
-				return this._English;
+				return this._Value;
 			}
 			set
 			{
-				if ((this._English != value))
+				if ((this._Value != value))
 				{
-					this._English = value;
+					this.OnValueChanging(value);
+					this.SendPropertyChanging();
+					this._Value = value;
+					this.SendPropertyChanged("Value");
+					this.OnValueChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_Informatics", DbType="BigInt")]
-		public System.Nullable<long> Informatics
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
 		{
-			get
+			if ((this.PropertyChanging != null))
 			{
-				return this._Informatics;
-			}
-			set
-			{
-				if ((this._Informatics != value))
-				{
-					this._Informatics = value;
-				}
+				this.PropertyChanging(this, emptyChangingEventArgs);
 			}
 		}
 		
-		[Column(Storage="_Downloads", DbType="BigInt")]
-		public System.Nullable<long> Downloads
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
-			get
+			if ((this.PropertyChanged != null))
 			{
-				return this._Downloads;
-			}
-			set
-			{
-				if ((this._Downloads != value))
-				{
-					this._Downloads = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_Uploads", DbType="BigInt")]
-		public System.Nullable<long> Uploads
-		{
-			get
-			{
-				return this._Uploads;
-			}
-			set
-			{
-				if ((this._Uploads != value))
-				{
-					this._Uploads = value;
-				}
-			}
-		}
-		
-		[Column(Storage="_Views", DbType="BigInt")]
-		public System.Nullable<long> Views
-		{
-			get
-			{
-				return this._Views;
-			}
-			set
-			{
-				if ((this._Views != value))
-				{
-					this._Views = value;
-				}
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
