@@ -118,6 +118,10 @@ namespace ltkt
 
                 updateAccount(user);
 
+                Application.Lock();
+                Application["UserOnline"] = (Int32)Application["UserOnline"] + 1;
+                Application.UnLock();
+
                 if (chxRemember.Checked)
                 {
                     saveInformationForNext(strUsername, strPassword);
@@ -177,6 +181,10 @@ namespace ltkt
             userStateTitle.Text = "Đăng nhập";
             loginPanel.Visible = true;
             userPanel.Visible = false;
+
+            Application.Lock();
+            Application["UserOnline"] = (Int32)Application["UserOnline"] - 1;
+            Application.UnLock();
 
             Response.Redirect("~/Home.aspx");
         }

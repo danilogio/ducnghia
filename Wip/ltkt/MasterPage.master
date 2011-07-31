@@ -234,27 +234,7 @@
                             </ul>
                             </form>
                         </li>
-                        <%-- <li visible="false">
-                                <h4>Chức năng</h4>
-                                <div id="accordion">
-                                   <h3><a href="#">Luyện thi đại học</a></h3>
-                                   <div>
-                                      <ul class="blocklist">
-                                        <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Thư viện bài giảng</asp:HyperLink></li>
-                                        <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="#">Thư viện bài tập</asp:HyperLink></li>
-                                        <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="#">Thư viện đề thi</asp:HyperLink></li>
-                                    </ul>
-                                   </div>
-                                   <h3><a href="#">Section 2</a></h3>
-                                   <div>
-                                      Section 2 content
-                                   </div>
-                                   <h3><a href="#">Section 3</a></h3>
-                                   <div>
-                                      Section 3 content
-                                   </div>
-                                </div>
-                            </li>--%>
+                       
                         <li>
                             <h4>
                                 <span>Luyện thi đại học</span></h4>
@@ -315,18 +295,7 @@
                                     - brilliant premium templates</li>
                             </ul>
                         </li>
-                        <%--<li>
-                                <h4>About</h4>
-                                <ul>
-                                    <li>
-                                        <p style="margin: 0;">Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus.</p>
-                                    </li>
-                                </ul>
-                            </li>--%>
-                        <%--<li>
-                                <div id="datepicker"></div>
-                            </li>
-                            --%>
+                       
                         <li>
                             <center>
                                 <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/AdContact.aspx" runat="server">
@@ -355,32 +324,32 @@
                 </div>
             </div>
             <%--<div id="divAdRight" style="position: fixed; bottom: 50px; left: 0px;background-color:transparent;">
-<a href="http://google.com"><img src="imagesAd/thuvien.gif" alt=""/></a>
-</div>
-<p>
-<div id="divAdLeft" style="position: fixed; bottom: 50px; right: 0px;background-color:transparent;">
-<a href="http://google.com"><img src="imagesAd/violet17.gif" alt=""/></a>
-</div></p>--%>
+                <a href="http://google.com"><img src="imagesAd/thuvien.gif" alt=""/></a>
+                </div>
+                <p>
+                <div id="divAdLeft" style="position: fixed; bottom: 50px; right: 0px;background-color:transparent;">
+                <a href="http://google.com"><img src="imagesAd/violet17.gif" alt=""/></a>
+                </div></p>--%>
             <div id="divAdRight" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HyperLink1" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HyperLink2" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdRightMiddle" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HyperLink3" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
                 </p>
             </div>
             <div id="divAdLeft" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HyperLink4" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HyperLink5" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HyperLink6" NavigateUrl="#" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
                 </p>
             </div>
         </div>
