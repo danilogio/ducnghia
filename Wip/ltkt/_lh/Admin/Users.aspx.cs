@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
+using System.Net;
+using System.IO;
 using ltktDAO;
 namespace ltkt.Admin
 {
@@ -36,7 +39,26 @@ namespace ltkt.Admin
         }
         protected void DeleteUser(object sender, EventArgs e)
         {
+            LinkButton lklDelete = sender as LinkButton;
+ 
+           // string strId = lklDelete.CommandArgument;
+           // //HttpContext.Current.Response.Write(
+           // ASCIIEncoding encoding = new ASCIIEncoding();
+           // string postData = "id=" + strId;
+           // byte[] data = encoding.GetBytes(postData);
 
+           //// Response.
+           // // Prepare web request...
+           // HttpWebRequest myRequest =
+           //   (HttpWebRequest)WebRequest.Create("~/Users/Edit.aspx");
+           // myRequest.Method = "POST";
+           // myRequest.ContentType = "application/x-www-form-urlencoded";
+           // myRequest.ContentLength = data.Length;
+           // Stream newStream = myRequest.GetRequestStream();
+           // // Send the data.
+           // newStream.Write(data, 0, data.Length);
+           // newStream.Close();
+            Server.Transfer("./Users/Edit.aspx");
         }
         protected void gvUsers_PageIndexChanging(object sender, EventArgs e)
         {
