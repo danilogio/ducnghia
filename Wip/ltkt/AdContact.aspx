@@ -2,6 +2,29 @@
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 
 <asp:Content ID="AdContact" ContentPlaceHolderID="cphContent" Runat="Server">
+    <script type="text/javascript" src="js/jquery.dynDateTime.js"></script>
+	<script type="text/javascript" src="js/lang/calendar-en.js"></script>
+
+	<link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue.css"  />
+    <script type="text/javascript">
+
+      
+        $(document).ready(function() {
+            $(".calendar").dynDateTime({
+                showsTime: true,
+                ifFormat: "%d/%m/%Y",
+                daFormat: "%l;%M %p, %e %m, %Y",
+                align: "BR",
+                electric: false,
+                singleClick: false,
+                displayArea: ".siblings('.dtcDisplayArea')",
+                button: ".next()"
+            });
+
+            
+        }); 
+    </script>
+   
 <%-- <form action="AdContact.aspx" method="post">--%>
     <div id="Advertisement" class="block_text">
         <h2>Liên hệ quảng cáo</h2>
@@ -51,10 +74,39 @@
                     </asp:RequiredFieldValidator>
                     <%--From date - To Date--%>
                     <p>
-                        <span>Từ ngày:</span><asp:TextBox ID="txtFromDate" runat="server" Width="18%">
-                        </asp:TextBox> -Đến ngày:<asp:TextBox ID="txtToDate" runat="server" Width="18%"></asp:TextBox>
+                        <span>Từ ngày(*):</span><asp:TextBox ID="txtFromDate" runat="server" CssClass="calendar"></asp:TextBox>
                     </p>
-                       
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Vui lòng nhập ngày bắt đầu"
+                        ControlToValidate="txtFromDate" Display="None">
+                    </asp:RequiredFieldValidator>
+                    
+                    <p>
+                        <span>Đến ngày(*):</span><asp:TextBox ID="txtToDate" runat="server" CssClass="calendar"></asp:TextBox>
+                    </p>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Vui lòng nhập ngày kêt thúc"
+                        ControlToValidate="txtToDate" Display="None">
+                    </asp:RequiredFieldValidator>
+                    
+                    <p>
+                        <span>Vị trí:</span>
+                        <%--<asp:CheckBoxList ID="CheckBoxList1" runat="server" CssClass="checkbox">
+                            <asp:ListItem Value="1" Text="Top Banner"></asp:ListItem>
+                            <asp:ListItem Value="2" Text="Top Banner"></asp:ListItem>
+                            <asp:ListItem Value="3" Text="Top Banner"></asp:ListItem>
+                        </asp:CheckBoxList>--%>
+                        <%--<select multiple="multiple">
+                            <asp:CheckBox ID="CheckBox1" runat="server" Text="123" CssClass="checkbox"/>
+                        </select>--%>
+                        <span id="location" class="checkboxlist">
+                            <input type="checkbox" name="option1" value="0" class="checkbox" checked="checked"/> Top Banner<br/>
+                            <input type="checkbox" name="option2" value="1" class="checkbox"/> Right Banner<br/>
+                            <input type="checkbox" name="option3" value="2"class="checkbox"/> Left Banner<br/>
+                            <input type="checkbox" name="option1" value="3" class="checkbox"/> Bottom Banner<br/>
+                        </span>
+                        
+                    </p>
+
+                    
                     <center>
                         <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
                             CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
@@ -71,6 +123,7 @@
                 </div>
             </asp:Panel>
     </div>
+    
 <%--    </form>--%>
 </asp:Content>
 
