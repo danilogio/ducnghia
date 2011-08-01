@@ -487,18 +487,7 @@ namespace ltktDAO
         /// <returns></returns>
         public static string decryptPassword(string password)
         {
-            byte[] buffer = Convert.FromBase64String(password);
-
-            TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
-
-            MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
-
-            des.Key = MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(cryptoKey));
-
-            des.IV = IV;
-
-            return Encoding.ASCII.GetString(
-                des.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length));
+            return "";
         }
 
 
