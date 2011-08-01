@@ -398,7 +398,8 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(strPathDB);
             IEnumerable<tblUser> lst;
-            lst = from u in DB.tblUsers orderby u.Username
+            lst = from u in DB.tblUsers
+                  orderby u.Username
                   select u;
             return lst;
         }
@@ -477,6 +478,27 @@ namespace ltktDAO
             byte[] originalText = ASCIIEncoding.Default.GetBytes(password);
             byte[] cipherText = md5.ComputeHash(originalText);
             return BitConverter.ToString(cipherText);
+        }
+
+        /// <summary>
+        /// Giải mã mật khẩu
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static string decryptPassword(string password)
+        {
+            byte[] buffer = Convert.FromBase64String(password);
+
+            TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
+
+            MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
+
+            des.Key = MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(cryptoKey));
+
+            des.IV = IV;
+
+            return Encoding.ASCII.GetString(
+                des.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length));
         }
 
 
