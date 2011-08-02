@@ -9,7 +9,7 @@
         Application["Domain"] = "www.luyenthikinhte.com";
         Application["UserOnline"] = 0;
         Application["TotalOnline"] = 0;
-        Session.Timeout = 10;
+        //Session.Timeout = 10;
 
     }
     

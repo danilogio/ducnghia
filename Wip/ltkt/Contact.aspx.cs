@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 using System.Web.Mail;
 using ltktDAO;
+using System.Text;
 
 public partial class Contact : System.Web.UI.Page
 {
@@ -24,7 +25,7 @@ public partial class Contact : System.Web.UI.Page
     {
         string strContactName = txtboxContactName.Text;
         string strContactEmail = txtboxContactEmail.Text;
-        string strContactTitle = "";
+        string strContactTitle = txtboxContactTitle.Text;
         string strContactMessage = txtboxContactMessage.Text;
 
         try
@@ -43,6 +44,7 @@ public partial class Contact : System.Web.UI.Page
             message.Subject = strContactTitle;
             message.BodyFormat = MailFormat.Text;
             message.Body = strContactEmail + ":\n " + strContactMessage;
+            message.BodyEncoding = Encoding.UTF8;
             SmtpMail.SmtpServer = "smtp.gmail.com:465";
 
             SmtpMail.Send(message);
@@ -50,6 +52,9 @@ public partial class Contact : System.Web.UI.Page
             liMessage.Visible = true;
             contactPanel.Visible = false;
             liMessage.Text = "Phản hồi của bạn đã được gửi thành công đến cho chúng tôi. Chân thành cảm ơn đóng góp của bạn!";
+
+            Boolean isOK = ltktDAO.Contact.insertEmail(strContactEmail, "trungtamducnghia@gmail.com",
+                strContactTitle, message.Body, DateTime.Now);
         }
         catch (Exception ex)
         {
