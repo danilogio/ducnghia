@@ -19,7 +19,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ltkt", "ltkt\", "{4F86EC40-
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "2235"
+		VWDPort = "60966"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ltktDAO", "ltktDAO\ltktDAO.csproj", "{360AD783-82B9-4A2B-9573-CEC3ABC7F023}"

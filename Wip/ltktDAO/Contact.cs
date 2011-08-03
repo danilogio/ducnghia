@@ -290,7 +290,17 @@ namespace ltktDAO
             return lst;
         }
 
-        
+        /// <summary>
+        /// Tổng số emails
+        /// </summary>
+        /// <returns></returns>
+        public static int sumEmails()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContact> lst = from record in DB.tblContacts
+                                          select record;
+            return lst.Count();
+        }
 
         #endregion
     }
