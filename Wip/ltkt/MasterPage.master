@@ -108,7 +108,8 @@
         <div id="container">
             <div id="header">
                 <h1>
-                    <a href="/">Website Luyện thi Kinh tế</a></h1>
+                    <a href="/" style="text-align:left">
+                        <img src="images/logo-4.png" alt="luyenthikinhte.com"/></a></h1>
             </div>
             <div id="nav">
                 <div id="center-ul">
