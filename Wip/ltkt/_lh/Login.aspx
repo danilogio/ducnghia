@@ -6,11 +6,19 @@
 <head runat="server">
     <title>Login to configuration website</title>
     <link type="text/css" href="../css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
-
+    <link rel="stylesheet" type="text/css" href="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.styles.css" />
     <script type="text/javascript" src="../js/jquery-1.5.1.min.js"></script>
-
-    <script type="text/javascript" src="../js/jquery-ui-1.8.14.custom.min.js"></script>
-
+    <script type="text/javascript" src="../js/jquery-ui-1.8.10.custom.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.min.js"></script>    <script type="text/javascript">
+        $(function() {
+        $("#btnSubmitLogin").buttonCaptcha({
+                codeWord: 5,
+                codeZone: false,
+                verifyMustBe: true,
+                verifyMustName: 'codeWordReal'
+            });
+        });
+    </script>
     <style type="text/css">
         body
         {
@@ -33,6 +41,7 @@
         {
             width: 100%;
         }
+        
     </style>
 </head>
 <body>
@@ -82,8 +91,9 @@
                             </asp:RequiredFieldValidator>
                         </td>
                     </tr>
-                    <tr>
+                    <%--<tr>
                         <td>
+                        
                         </td>
                         <td>
                             <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
@@ -102,7 +112,7 @@
                                 ControlToValidate="txtboxCaptcha" Display="none">
                             </asp:RequiredFieldValidator>
                         </td>
-                    </tr>
+                    </tr>--%>
                     <tr>
                         <td>
                         </td>
