@@ -404,7 +404,7 @@ hr
 }
 #ExamLesson.block_text, #ItLesson.block_text, #EnglishLesson.block_text
 {
-	height:300px;
+	height:500px;
 }
 
 .block_details
@@ -511,6 +511,14 @@ div.block_details_text
     text-align:center;
     clear: both;
     font-size:medium;
+}
+
+.referlink
+{
+	 display:block;
+    text-align:right;
+    clear: both;
+    font-size:small;
 }
 
 .articleList li

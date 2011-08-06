@@ -520,6 +520,42 @@ namespace ltktDAO
             return lst;
         }
         /// <summary>
+        /// get latest record
+        /// </summary>
+        /// <param name="Date"></param>
+        /// <param name="numberRecord"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblContestForUniversity> getArticleByDate(string Date, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            DateTime date = new DateTime();
+            bool isValid = DateTime.TryParse(Date,out date);
+            if(!isValid)
+            {
+                return null;
+            }
+            if (numberRecord <= 0)
+            {
+                numberRecord = 1;
+            }
+            IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
+                                                       where p.Posted == date
+                                                       select p).Take(numberRecord);
+            return lst;
+
+        }
+
+        public static IEnumerable<tblContestForUniversity> getLatestArticleByPostedDate(int number)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (number <= 0)
+                return getAll();
+            IEnumerable<tblContestForUniversity>lst = (from p in DB.tblContestForUniversities
+                                                       orderby p.Posted descending
+                                                       select p).Take(number) ;
+            return lst;
+        }
+        /// <summary>
         /// Thêm một đề thi
         /// </summary>
         /// <param name="record"></param>
