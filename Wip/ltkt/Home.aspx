@@ -24,10 +24,10 @@
         <h2>
             Thư viện đề thi đại học, cao đẳng</h2>
         <ul>
-            <li><a href="#ExamLesson-1">Đề thi</a></li>
-            <li><a href="#ExamLesson-2">Gợi ý giải</a></li>
+            <li><a href="#ExamLesson01">Đề thi</a></li>
+          <%--  <li><a href="#ExamLesson-2">Gợi ý giải</a></li>--%>
         </ul>
-        <div id="ExamLesson-1">
+        <div id="ExamLesson01" runat="server" >
         
             <div class="block_details">
                 <div class="block_details_img">
@@ -136,9 +136,9 @@
             <div class="referlink">
                 <a href="~/">Xem thêm</a></div>
         </div>
-        <div id="ExamLesson-2">
+        <%--<div id="ExamLesson-2">
             Hiện chưa có bài viết nào
-        </div>
+        </div>--%>
     </div>
     
     <div id="ItLesson" class="block_text">
