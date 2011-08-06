@@ -570,6 +570,7 @@ namespace ltktDAO
             if (number <= 0)
                 return getAll();
             IEnumerable<tblContestForUniversity>lst = (from p in DB.tblContestForUniversities
+                                                       where p.State != 0
                                                        orderby p.Posted descending
                                                        select p).Take(number) ;
             return lst;
