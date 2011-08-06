@@ -197,6 +197,26 @@ namespace ltktDAO
             return lst.ElementAt(0).Tag;
         }
 
+        /// <summary>
+        /// Lấy bài viết theo id
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static tblInformatic getInformatic(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == _id
+                                             select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Set Property

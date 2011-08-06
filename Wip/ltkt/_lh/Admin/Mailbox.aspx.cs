@@ -52,8 +52,9 @@ namespace ltkt.Admin
             {
                 EmailsTable.Visible = false;
                 EmailDetailTable.Visible = true;
-
+                
                 emailID = Convert.ToInt32(Request.QueryString["emailID"]);
+                ltktDAO.Contact.setRead(emailID, true);
                 showDetails(emailID);
             }
             else if (Request.QueryString["page"] == null)

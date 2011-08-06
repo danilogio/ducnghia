@@ -41,6 +41,7 @@ namespace ltkt
                 loginUser.Text = user.DisplayName;
                 loginPanel.Visible = false;
                 userPanel.Visible = true;
+                HpkUpload.Visible = true;
             }
 
         }
@@ -56,6 +57,7 @@ namespace ltkt
             loginUser.Text = _user.DisplayName;
             userStateTitle.Text = "Thông tin tài khoản";
             loginPanel.Visible = false;
+            HpkUpload.Visible = true;
             userPanel.Visible = true;
         }
 
@@ -181,6 +183,7 @@ namespace ltkt
             userStateTitle.Text = "Đăng nhập";
             loginPanel.Visible = true;
             userPanel.Visible = false;
+            HpkUpload.Visible = false;
 
             Application.Lock();
             Application["UserOnline"] = (Int32)Application["UserOnline"] - 1;

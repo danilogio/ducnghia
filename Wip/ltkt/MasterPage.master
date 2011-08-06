@@ -3,8 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <asp:ContentPlaceHolder ID="cphMasterHearder" runat="server">
+        <title>Website Luyện thi Kinh tế</title>
+    </asp:ContentPlaceHolder>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Website Luyện thi Kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <link type="text/css" href="css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
 
@@ -108,8 +112,8 @@
         <div id="container">
             <div id="header">
                 <h1>
-                    <a href="/" style="text-align:left">
-                        <img src="images/logo-4.png" alt="luyenthikinhte.com"/></a></h1>
+                    <a href="Home.aspx" style="text-align: left">
+                        <img src="images/logo-4.png" alt="luyenthikinhte.com" /></a></h1>
             </div>
             <div id="nav">
                 <div id="center-ul">
@@ -119,7 +123,7 @@
                         <li>
                             <asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/News.aspx">Tin tức</asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="HpkLogin" runat="server" NavigateUrl="~/Upload.aspx">Gửi bài</asp:HyperLink></li>
+                            <asp:HyperLink ID="HpkUpload" runat="server" NavigateUrl="~/Upload.aspx" Visible="false">Gửi bài</asp:HyperLink></li>
                         <li>
                             <asp:HyperLink ID="HpkSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
                         <li>
@@ -192,7 +196,8 @@
                                                             <label>
                                                                 Xin chào
                                                             </label>
-                                                            <span class="activeText"><asp:Literal ID="loginUser" runat="server"></asp:Literal></span></asp:HyperLink>
+                                                            <span class="activeText">
+                                                                <asp:Literal ID="loginUser" runat="server"></asp:Literal></span></asp:HyperLink>
                                                     </div>
                                                     <%-- <div style="width: 100%;">
                                                         <div style="float: left; width: 60%;">
@@ -243,12 +248,12 @@
                             <h4>
                                 <span>Luyện thi đại học</span></h4>
                             <ul class="blocklist">
-                                <li>
+                                <%--<li>
                                     <asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
                                 <li>
                                     <asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                <li>
-                                    <asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
+                                --%><li>
+                                    <asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/ContestUniversity.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
                             </ul>
                         </li>
                         <li>

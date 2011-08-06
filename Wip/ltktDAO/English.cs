@@ -180,6 +180,25 @@ namespace ltktDAO
             return lst.ElementAt(0).Tag;
         }
 
+        /// <summary>
+        /// Lấy bài dựa theo id
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static tblEnglish getEnglish(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
+                                          where record.ID == _id
+                                          select record;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Set Property

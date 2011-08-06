@@ -74,7 +74,7 @@ namespace ltktDAO
         public static string getAuthor(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from author in DB.tblUsers
+            IEnumerable<tblUser> lst = from author in DB.tblUsers
                       join record in DB.tblContestForUniversities on author.Username equals record.Author
                       where record.ID == ID
                       select author;
@@ -166,9 +166,9 @@ namespace ltktDAO
         public static string getBranch(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
             int branch = lst.ElementAt(0).Branch;
             string strBranch = "";
@@ -250,6 +250,25 @@ namespace ltktDAO
             return lst.ElementAt(0).Tag;
         }
 
+        /// <summary>
+        /// Lấy ra 1 đề thi theo id
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static tblContestForUniversity getContest(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == _id
+                                                       select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+
+            return null;
+        }
 
         #endregion
 
@@ -628,9 +647,51 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             return (from contest in DB.tblContestForUniversities
-                              select contest).Count();
+                    select contest).Count();
         }
-        
+
+        /// <summary>
+        /// Chuyển từ khối qua chuỗi (mặc định khối là số)
+        /// </summary>
+        /// <param name="_branch"></param>
+        /// <returns></returns>
+        public static string convertBranchToString(int _branch)
+        {
+            string strBranch = "";
+            switch (_branch)
+            {
+                case 0:
+                    {
+                        strBranch = "Khối A";
+                        break;
+                    }
+                case 1:
+                    {
+                        strBranch = "Khối B";
+                        break;
+                    }
+                case 2:
+                    {
+                        strBranch = "Khối C";
+                        break;
+                    }
+                case 3:
+                    {
+                        strBranch = "Khối D";
+                        break;
+                    }
+                case 4:
+                    {
+                        strBranch = "Khối khác";
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            return strBranch;
+        }
+
         #endregion
     }
 }
