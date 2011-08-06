@@ -32,10 +32,6 @@ namespace ltktDAO
     {
     }
 
-    partial class tblComment
-    {
-    }
-
     partial class tblAdvertisement
     {
     }

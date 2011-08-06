@@ -36,9 +36,6 @@ namespace ltktDAO
     partial void InserttblUser(tblUser instance);
     partial void UpdatetblUser(tblUser instance);
     partial void DeletetblUser(tblUser instance);
-    partial void InserttblComment(tblComment instance);
-    partial void UpdatetblComment(tblComment instance);
-    partial void DeletetblComment(tblComment instance);
     partial void InserttblContact(tblContact instance);
     partial void UpdatetblContact(tblContact instance);
     partial void DeletetblContact(tblContact instance);
@@ -116,14 +113,6 @@ namespace ltktDAO
 			get
 			{
 				return this.GetTable<tblAdvertisement>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tblComment> tblComments
-		{
-			get
-			{
-				return this.GetTable<tblComment>();
 			}
 		}
 		
@@ -1001,116 +990,6 @@ namespace ltktDAO
 		}
 	}
 	
-	[Table(Name="dbo.tblComments")]
-	public partial class tblComment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _Articles;
-		
-		private string _Contents;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnArticlesChanging(int value);
-    partial void OnArticlesChanged();
-    partial void OnContentsChanging(string value);
-    partial void OnContentsChanged();
-    #endregion
-		
-		public tblComment()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Articles", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Articles
-		{
-			get
-			{
-				return this._Articles;
-			}
-			set
-			{
-				if ((this._Articles != value))
-				{
-					this.OnArticlesChanging(value);
-					this.SendPropertyChanging();
-					this._Articles = value;
-					this.SendPropertyChanged("Articles");
-					this.OnArticlesChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Contents", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Contents
-		{
-			get
-			{
-				return this._Contents;
-			}
-			set
-			{
-				if ((this._Contents != value))
-				{
-					this.OnContentsChanging(value);
-					this.SendPropertyChanging();
-					this._Contents = value;
-					this.SendPropertyChanged("Contents");
-					this.OnContentsChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[Table(Name="dbo.tblContact")]
 	public partial class tblContact : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1345,9 +1224,17 @@ namespace ltktDAO
 		
 		private string _Solving;
 		
-		private System.Nullable<int> _Point;
+		private int _Point;
 		
 		private string _Tag;
+		
+		private string _Location;
+		
+		private string _Subject;
+		
+		private string _Comment;
+		
+		private System.Nullable<int> _Score;
 		
 		private EntityRef<tblUser> _tblUser;
 		
@@ -1377,10 +1264,18 @@ namespace ltktDAO
     partial void OnThumbnailChanged();
     partial void OnSolvingChanging(string value);
     partial void OnSolvingChanged();
-    partial void OnPointChanging(System.Nullable<int> value);
+    partial void OnPointChanging(int value);
     partial void OnPointChanged();
     partial void OnTagChanging(string value);
     partial void OnTagChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
+    partial void OnSubjectChanging(string value);
+    partial void OnSubjectChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanged();
     #endregion
 		
 		public tblContestForUniversity()
@@ -1613,8 +1508,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Point", DbType="Int")]
-		public System.Nullable<int> Point
+		[Column(Storage="_Point", DbType="Int NOT NULL")]
+		public int Point
 		{
 			get
 			{
@@ -1649,6 +1544,86 @@ namespace ltktDAO
 					this._Tag = value;
 					this.SendPropertyChanged("Tag");
 					this.OnTagChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Location", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Subject", DbType="NVarChar(20)")]
+		public string Subject
+		{
+			get
+			{
+				return this._Subject;
+			}
+			set
+			{
+				if ((this._Subject != value))
+				{
+					this.OnSubjectChanging(value);
+					this.SendPropertyChanging();
+					this._Subject = value;
+					this.SendPropertyChanged("Subject");
+					this.OnSubjectChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Score", DbType="Int")]
+		public System.Nullable<int> Score
+		{
+			get
+			{
+				return this._Score;
+			}
+			set
+			{
+				if ((this._Score != value))
+				{
+					this.OnScoreChanging(value);
+					this.SendPropertyChanging();
+					this._Score = value;
+					this.SendPropertyChanged("Score");
+					this.OnScoreChanged();
 				}
 			}
 		}
@@ -1734,6 +1709,12 @@ namespace ltktDAO
 		
 		private string _Tag;
 		
+		private string _Location;
+		
+		private System.Nullable<int> _Score;
+		
+		private string _Comment;
+		
 		private EntityRef<tblUser> _tblUser;
 		
     #region Extensibility Method Definitions
@@ -1760,6 +1741,12 @@ namespace ltktDAO
     partial void OnPointChanged();
     partial void OnTagChanging(string value);
     partial void OnTagChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
+    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
     #endregion
 		
 		public tblEnglish()
@@ -1972,6 +1959,66 @@ namespace ltktDAO
 			}
 		}
 		
+		[Column(Storage="_Location", DbType="NVarChar(200)")]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Score", DbType="Int")]
+		public System.Nullable<int> Score
+		{
+			get
+			{
+				return this._Score;
+			}
+			set
+			{
+				if ((this._Score != value))
+				{
+					this.OnScoreChanging(value);
+					this.SendPropertyChanging();
+					this._Score = value;
+					this.SendPropertyChanged("Score");
+					this.OnScoreChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
 		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
@@ -2055,6 +2102,12 @@ namespace ltktDAO
 		
 		private string _Tag;
 		
+		private string _Location;
+		
+		private System.Nullable<int> _Score;
+		
+		private string _Comment;
+		
 		private EntityRef<tblUser> _tblUser;
 		
     #region Extensibility Method Definitions
@@ -2083,6 +2136,12 @@ namespace ltktDAO
     partial void OnPointChanged();
     partial void OnTagChanging(string value);
     partial void OnTagChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
+    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
     #endregion
 		
 		public tblInformatic()
@@ -2311,6 +2370,66 @@ namespace ltktDAO
 					this._Tag = value;
 					this.SendPropertyChanged("Tag");
 					this.OnTagChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Location", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Score", DbType="Int")]
+		public System.Nullable<int> Score
+		{
+			get
+			{
+				return this._Score;
+			}
+			set
+			{
+				if ((this._Score != value))
+				{
+					this.OnScoreChanging(value);
+					this.SendPropertyChanging();
+					this._Score = value;
+					this.SendPropertyChanged("Score");
+					this.OnScoreChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
 				}
 			}
 		}
@@ -2618,7 +2737,7 @@ namespace ltktDAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
