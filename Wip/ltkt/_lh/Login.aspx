@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.styles.css" />
     <script type="text/javascript" src="../js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-1.8.10.custom.min.js"></script>
-    <script type="text/javascript" language="javascript" src="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.min.js"></script>    <script type="text/javascript">
+    <script type="text/javascript" language="javascript" src="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.js"></script>    <script type="text/javascript">
         $(function() {
         $("#btnSubmitLogin").buttonCaptcha({
                 codeWord: 5,

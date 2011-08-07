@@ -3,9 +3,22 @@
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="Login" ContentPlaceHolderID="cphContent" runat="Server">
+    <link rel="stylesheet" type="text/css" href="js/plugins/jquery.realperson.css" />
+    <script type="text/javascript" src="js/plugins/jquery.simpleCaptcha-0.2.js"></script>
+     <script type="text/javascript" src="js/plugins/jquery.simpleCaptcha-0.2.min.js"></script>
+     
+    <script type="text/javascript" src="js/plugins/jquery.realperson.js"></script>
+     <script type="text/javascript">
+         $(function() {
+             $("#txtboxCaptcha").realperson();
+         });
+     </script>
     <div id="loginForm" class="block_text">
         <h2>
             Đăng nhập tài khoản</h2>
+        <div id="captcha">
+        </div>
+        
         <hr />
         <p>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowSummary="true"
