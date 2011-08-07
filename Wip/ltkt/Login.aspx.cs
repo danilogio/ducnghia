@@ -13,7 +13,8 @@ namespace ltkt
         protected void Page_Load(object sender, EventArgs e)
         {
             MasterPage page = (MasterPage)Master;
-            page.hideLoginSidebar();    
+            page.hideLoginSidebar(); 
+
         }
 
 
@@ -28,7 +29,10 @@ namespace ltkt
         {
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
-
+            if (!recaptcha.IsValid)
+            {
+                return;
+            }
             tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
 
             if (user != null)

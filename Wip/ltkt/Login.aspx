@@ -1,24 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Login.aspx.cs" Inherits="ltkt.Login" %>
 
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="Login" ContentPlaceHolderID="cphContent" runat="Server">
-    <link rel="stylesheet" type="text/css" href="js/plugins/jquery.realperson.css" />
-    <script type="text/javascript" src="js/plugins/jquery.simpleCaptcha-0.2.js"></script>
-     <script type="text/javascript" src="js/plugins/jquery.simpleCaptcha-0.2.min.js"></script>
-     
-    <script type="text/javascript" src="js/plugins/jquery.realperson.js"></script>
-     <script type="text/javascript">
-         $(function() {
-             $("#txtboxCaptcha").realperson();
-         });
-     </script>
     <div id="loginForm" class="block_text">
         <h2>
             Đăng nhập tài khoản</h2>
-        <div id="captcha">
-        </div>
-        
         <hr />
         <p>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowSummary="true"
@@ -28,7 +16,7 @@
             <asp:Literal ID="lMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="loginPanel" runat="server">
-            <form action="Login.aspx" method="post">
+            <%--<form action="Login.aspx" method="post">--%>
             <div class="form_settings">
                 <p>
                     <span>Tên đăng nhập:</span><asp:TextBox ID="txtboxLoginName" runat="server">
@@ -47,7 +35,13 @@
                         ControlToValidate="txtboxPassword" Display="none">
                     </asp:RequiredFieldValidator>
                 </p>
-                <center>
+                <p>
+                    <div align="center" style="margin-top:10px; margin-left:100px">
+                   <recaptcha:RecaptchaControl ID="recaptcha" runat="server"  PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
+                        PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH"/>
+                    </div>
+                </p>
+                <%--<center>
                     <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
                         CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
                         CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" />
@@ -56,12 +50,13 @@
                 </asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
                     ControlToValidate="txtboxCaptcha" Display="none">
-                </asp:RequiredFieldValidator>
+                </asp:RequiredFieldValidator>--%>
+                
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSubmitLogin" runat="server" OnClick="btnSubmitLogin_Click"
                         Text="Đăng nhập" CssClass="submit" /></p>
             </div>
-            </form>
+           <%-- </form>--%>
             <p>
                 <br />
                 <br />
@@ -73,4 +68,5 @@
             </p>
         </asp:Panel>
     </div>
+    
 </asp:Content>

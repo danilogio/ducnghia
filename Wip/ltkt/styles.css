@@ -563,6 +563,14 @@ div.block_details_text
 	display: block;
 	width: 300px;
 }
+form_settings .captcha
+{
+	margin-left: 100px;
+	text-align:left;
+    clear: both;
+	display: block;
+	width: 300px;
+}
 #EnglishLesson a, #ItLesson a, #ExamLesson a, #other_news a
 {
 	color: #1962A5;
