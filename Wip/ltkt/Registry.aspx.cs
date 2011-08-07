@@ -19,7 +19,10 @@ namespace ltkt
         protected void btnRegistry_Click(object sender, EventArgs e)
         {
             string strUsername = txtboxLoginName.Text;
-
+            if (!recaptcha.IsValid)
+            {
+                return;
+            }
             Boolean isExistedUsername = ltktDAO.Users.existedUser(strUsername);
 
             if (isExistedUsername)

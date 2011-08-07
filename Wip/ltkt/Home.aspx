@@ -29,7 +29,7 @@
         </ul>
         <div id="ExamLesson01" runat="server" >
         
-            <div class="block_details">
+            <%--<div class="block_details">
                 <div class="block_details_img">
                     <img width="50px" height="50px" src="images/Word.png" alt="Eden" />
                 </div>
@@ -131,10 +131,8 @@
                     Môn Toán<br />
                     Khối A
                 </div>
-            </div>
+            </div>--%>
             
-            <div class="referlink">
-                <a href="~/">Xem thêm</a></div>
         </div>
         <%--<div id="ExamLesson-2">
             Hiện chưa có bài viết nào

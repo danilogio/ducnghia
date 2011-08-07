@@ -13,5 +13,13 @@ namespace ltkt
         {
 
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (!recaptcha.IsValid)
+            {
+                return;
+            }
+        }
     }
 }

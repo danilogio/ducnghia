@@ -1,5 +1,9 @@
 namespace ltktDAO
 {
+    partial class LTDHDataContext
+    {
+    }
+
     partial class tblSticky
     {
     }

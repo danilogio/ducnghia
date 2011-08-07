@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Contact.aspx.cs" Inherits="Contact" %>
 
-<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="Contact" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="contact" class="block_text">
         <h2>
@@ -43,7 +43,7 @@
                 <asp:RequiredFieldValidator ID="reqContactMessage" runat="server" ErrorMessage="Vui lòng nhập nội dung"
                     ControlToValidate="txtboxContactMessage" Display="None">
                 </asp:RequiredFieldValidator>
-                <center>
+                <%--<center>
                     <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
                         CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
                         CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" />
@@ -51,7 +51,13 @@
                 <span>Mã xác nhận:</span><asp:TextBox ID="txtboxConfirm" runat="server" CssClass="contact"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="reqContactCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
                     ControlToValidate="txtboxConfirm" Display="none">
-                </asp:RequiredFieldValidator>
+                </asp:RequiredFieldValidator>--%>
+                 <p>
+                    <div align="center" style="margin-top:10px; margin-left:100px">
+                   <recaptcha:RecaptchaControl ID="recaptcha" runat="server"  PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
+                        PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH"/>
+                    </div>
+                </p>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit"
                         OnClick="btnSubmitContact_Click" /></p>

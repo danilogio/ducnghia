@@ -25,6 +25,9 @@ public partial class _Default : System.Web.UI.Page
         {
             data = "Hiện tại chưa có đề thi nào";
         }
+        data += "<div class='referlink'>"
+                + "<a href='ContestUniversity.aspx'>Xem thêm</a></div>";
+
         ExamLesson01.InnerHtml = data;
     }
 
@@ -41,10 +44,10 @@ public partial class _Default : System.Web.UI.Page
                 + "                </div>"
                 + "                <div class='block_details_text'>"
                 + "                    " + item.Subject + "<br />"
-                +                       Contest.getBranch(item.ID)
+                + Contest.getBranch(item.ID)
                 + "                </div>"
                 + "            </div>";
-
+                
         return res;
     }
 

@@ -14,10 +14,9 @@ public partial class AdContact : System.Web.UI.Page
     }
     protected void btnSubmitContact_Click(object sender, EventArgs e)
     {
-        ccJoin.ValidateCaptcha(txtboxCaptcha.Text);
-        if (!ccJoin.UserValidated)
+        if (!recaptcha.IsValid)
         {
-            //do something
+            return;
         }
 
         string sDescription = getLocation(sender, e);

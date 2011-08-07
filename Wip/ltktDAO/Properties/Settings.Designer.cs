@@ -33,5 +33,16 @@ namespace ltktDAO.Properties {
                 return ((string)(this["LTDHConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=E:\\Data\\Projects\\ducnghia\\Wip\\ltkt\\App_" +
+            "Data\\LTDH.mdf;Integrated Security=True;User Instance=True")]
+        public string LTDHConnectionString1 {
+            get {
+                return ((string)(this["LTDHConnectionString1"]));
+            }
+        }
     }
 }

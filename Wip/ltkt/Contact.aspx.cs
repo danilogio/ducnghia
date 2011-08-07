@@ -27,7 +27,10 @@ public partial class Contact : System.Web.UI.Page
         string strContactEmail = txtboxContactEmail.Text;
         string strContactTitle = txtboxContactTitle.Text;
         string strContactMessage = txtboxContactMessage.Text;
-
+        if (!recaptcha.IsValid)
+        {
+            return;
+        }
         try
         {
             MailMessage message = new MailMessage();

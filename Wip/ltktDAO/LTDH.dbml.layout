@@ -2,98 +2,98 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12, 17" name="LTDH">
   <DataContextMoniker Name="/LTDHDataContext" />
   <nestedChildShapes>
-    <classShape Id="cdcd3b2f-cefc-4f61-b127-c42c72b5be94" absoluteBounds="6.75, 0.75, 2, 1.5785953776041666">
+    <classShape Id="2f539249-13cc-411f-802c-dfaffb0c4580" absoluteBounds="6.75, 0.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/LTDHDataContext/tblAdmin" />
       <nestedChildShapes>
-        <elementListCompartment Id="03ead668-0bb5-41ca-901f-f17005860bf1" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="10745a8e-a516-4a69-8e9f-e21167cad768" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b9b88d0d-e186-46c7-b900-fe15bf6fe02e" absoluteBounds="0.75, 7.375, 2, 3.5016097005208318">
+    <classShape Id="3bcfbde2-b50c-4834-b197-e68fa894b7e8" absoluteBounds="0.75, 7.375, 2, 3.5016097005208318">
       <DataClassMoniker Name="/LTDHDataContext/tblUser" />
       <nestedChildShapes>
-        <elementListCompartment Id="8b724fc2-423b-4f00-92c3-ffc97dd0a460" absoluteBounds="0.765, 7.835, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="48c3c6cb-dccf-417b-8d84-60dd21909416" absoluteBounds="0.765, 7.835, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f66e2bcb-cd4f-4b40-ba69-313a2a345b53" absoluteBounds="6.75, 3.75, 2, 2.7324039713541666">
+    <classShape Id="6fdfe6e5-cc5e-4cce-93b4-f770ab30ee12" absoluteBounds="6.75, 3.75, 2, 2.7324039713541666">
       <DataClassMoniker Name="/LTDHDataContext/tblAdvertisement" />
       <nestedChildShapes>
-        <elementListCompartment Id="b2860227-16c3-4d88-8c8c-c28c2a7fe582" absoluteBounds="6.765, 4.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d32960d2-3e7a-4063-9a24-053ea5c777d6" absoluteBounds="6.765, 4.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4657dfd3-b6f1-44f3-bc30-42871cb3331c" absoluteBounds="6.75, 7.75, 2, 2.1554996744791666">
+    <classShape Id="c6cf6b38-2282-49f5-a731-e8dcccdcd472" absoluteBounds="6.75, 7.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/LTDHDataContext/tblContact" />
       <nestedChildShapes>
-        <elementListCompartment Id="63e6821d-c1a1-4d04-bb1d-cf337420b9fd" absoluteBounds="6.765, 8.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9ff2c983-894f-4995-8e08-4141d9af39a8" absoluteBounds="6.765, 8.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fccffebd-8b9c-42d2-a3c2-e2ad445419a6" absoluteBounds="3.5, 12.625, 2, 4.0785139973958309">
+    <classShape Id="398b6f12-893a-4d13-b969-1c97961d996f" absoluteBounds="3.5, 12.625, 2, 4.0785139973958309">
       <DataClassMoniker Name="/LTDHDataContext/tblContestForUniversity" />
       <nestedChildShapes>
-        <elementListCompartment Id="d0ce4c6d-f549-4f77-ae4a-25f9739dcc3b" absoluteBounds="3.515, 13.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="337b559d-2f04-4d29-ab42-9da3ef581ae4" absoluteBounds="3.515, 13.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="50245074-1f95-4db2-87e7-f62832f4b051" absoluteBounds="3.5, 4.25, 2, 3.3093082682291666">
+    <classShape Id="bb65d7a4-b5c8-4aec-b516-8b13f1cf2acb" absoluteBounds="3.5, 4.25, 2, 3.3093082682291666">
       <DataClassMoniker Name="/LTDHDataContext/tblEnglish" />
       <nestedChildShapes>
-        <elementListCompartment Id="36636317-0f79-4961-bb26-e59a0255f958" absoluteBounds="3.515, 4.71, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1188242a-a70b-419d-828e-042352c79d74" absoluteBounds="3.515, 4.71, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f013ca88-7abe-42f7-ab7e-374f7f2b634b" absoluteBounds="3.5, 8.375, 2, 3.5016097005208309">
+    <classShape Id="ed191033-69b4-45a6-a7f5-e404948000bb" absoluteBounds="3.5, 8.375, 2, 3.5016097005208309">
       <DataClassMoniker Name="/LTDHDataContext/tblInformatic" />
       <nestedChildShapes>
-        <elementListCompartment Id="072ce9f0-3fdb-40e8-931d-34db7b52ab47" absoluteBounds="3.515, 8.835, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ee92a3a8-eed3-4dc3-8052-8dddc6631b0e" absoluteBounds="3.515, 8.835, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2c0bb03e-08c4-44cd-a4b2-27dcf6ba98f4" absoluteBounds="3.5, 1.625, 2, 1.9631982421875003">
+    <classShape Id="e0330074-4545-4ab0-8b98-08c509ad408d" absoluteBounds="3.5, 1.625, 2, 1.9631982421875003">
       <DataClassMoniker Name="/LTDHDataContext/tblNew" />
       <nestedChildShapes>
-        <elementListCompartment Id="0bfbadd1-583b-4ef2-ba97-707d0745e1a9" absoluteBounds="3.515, 2.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e490c60a-97e4-4a05-959a-855e6367716c" absoluteBounds="3.515, 2.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3ae71185-2f0a-4969-bb98-c445b3f2be4b" absoluteBounds="9.75, 0.75, 2, 1.1939925130208335">
+    <classShape Id="cc5a8da8-18c3-4af1-b0ba-51d856f81707" absoluteBounds="9.75, 0.75, 2, 1.1939925130208335">
       <DataClassMoniker Name="/LTDHDataContext/tblPermission" />
       <nestedChildShapes>
-        <elementListCompartment Id="46a40135-b1c9-449f-9ea8-5acc8cbb4f21" absoluteBounds="9.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ddb28edd-7d8b-4f9e-a330-f098d5d5517d" absoluteBounds="9.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="aa4dc1c0-5a3b-474c-b731-9251af93ccac" absoluteBounds="9.75, 2.75, 2, 1.3862939453125005">
+    <classShape Id="3136a1e7-c9de-4a10-9837-82280b5f57b8" absoluteBounds="9.75, 2.75, 2, 1.3862939453125005">
       <DataClassMoniker Name="/LTDHDataContext/tblStatistic" />
       <nestedChildShapes>
-        <elementListCompartment Id="a00d43cf-8705-4ff7-a953-b93f9a7bcd14" absoluteBounds="9.765, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="89341560-7833-49ad-bbe5-d2f770162840" absoluteBounds="9.765, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="eb2a10ec-149c-4688-8f4a-f970aa907dc5" absoluteBounds="9.75, 5.75, 2, 1.1939925130208344">
+    <classShape Id="aa50fd2a-692e-43d8-8d67-9657f5399c5f" absoluteBounds="9.75, 5.75, 2, 1.1939925130208344">
       <DataClassMoniker Name="/LTDHDataContext/tblSticky" />
       <nestedChildShapes>
-        <elementListCompartment Id="1335829d-1f56-49fa-a12e-789c06f33e6e" absoluteBounds="9.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9fa6c8eb-44ec-4a12-ae17-564e0009b77a" absoluteBounds="9.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(1.75 : 10.8766097005208); (1.75 : 14.6642569986979); (3.5 : 14.6642569986979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LTDHDataContext/tblUser/tblUser_tblContestForUniversity" />
       <nodes>
-        <classShapeMoniker Id="b9b88d0d-e186-46c7-b900-fe15bf6fe02e" />
-        <classShapeMoniker Id="fccffebd-8b9c-42d2-a3c2-e2ad445419a6" />
+        <classShapeMoniker Id="3bcfbde2-b50c-4834-b197-e68fa894b7e8" />
+        <classShapeMoniker Id="398b6f12-893a-4d13-b969-1c97961d996f" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.75 : 7.375); (1.75 : 5.8124995); (2.19791916666667 : 5.8124995 : JumpStart); (2.36458583333333 : 5.8124995 : JumpEnd); (3.5 : 5.8124995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LTDHDataContext/tblUser/tblUser_tblEnglish" />
       <nodes>
-        <classShapeMoniker Id="b9b88d0d-e186-46c7-b900-fe15bf6fe02e" />
-        <classShapeMoniker Id="50245074-1f95-4db2-87e7-f62832f4b051" />
+        <classShapeMoniker Id="3bcfbde2-b50c-4834-b197-e68fa894b7e8" />
+        <classShapeMoniker Id="bb65d7a4-b5c8-4aec-b516-8b13f1cf2acb" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 9.62580485026042); (3.5 : 9.62580485026042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LTDHDataContext/tblUser/tblUser_tblInformatic" />
       <nodes>
-        <classShapeMoniker Id="b9b88d0d-e186-46c7-b900-fe15bf6fe02e" />
-        <classShapeMoniker Id="f013ca88-7abe-42f7-ab7e-374f7f2b634b" />
+        <classShapeMoniker Id="3bcfbde2-b50c-4834-b197-e68fa894b7e8" />
+        <classShapeMoniker Id="ed191033-69b4-45a6-a7f5-e404948000bb" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.2812525 : 7.375); (2.2812525 : 2.60659912109375); (3.5 : 2.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LTDHDataContext/tblUser/tblUser_tblNew" />
       <nodes>
-        <classShapeMoniker Id="b9b88d0d-e186-46c7-b900-fe15bf6fe02e" />
-        <classShapeMoniker Id="2c0bb03e-08c4-44cd-a4b2-27dcf6ba98f4" />
+        <classShapeMoniker Id="3bcfbde2-b50c-4834-b197-e68fa894b7e8" />
+        <classShapeMoniker Id="e0330074-4545-4ab0-8b98-08c509ad408d" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
