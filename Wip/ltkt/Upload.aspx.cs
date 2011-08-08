@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using ltktDAO;
+using System.IO;
 
 
 namespace ltkt
@@ -82,10 +83,15 @@ namespace ltkt
 
                     folder += Convert.ToString(DateTime.Now.Year);
 
-                    string filename = Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName;
-                    fileContent.SaveAs(filename);
-
+                    fileContent.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName);
+                    if (fileSolving.HasFile)
+                    {
+                        fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" + 
+                            Path.GetFileNameWithoutExtension(fileContent.FileName) + 
+                            "_solved" + Path.GetExtension(fileSolving.FileName));
+                    }
                     // ghi xuống db
+                    
                     switch (type)
                     {
                         case 0:
@@ -94,11 +100,14 @@ namespace ltkt
                                     txtboxSummary.Text,
                                     user.Username,
                                     DateTime.Now,
-                                    Boolean.Parse (ddlTypeContest.SelectedValue),
+                                    Boolean.Parse(ddlTypeContest.SelectedValue),
                                     Convert.ToInt32(ddlBranch.SelectedValue),
                                     Convert.ToInt32(ddlYear.SelectedValue),
                                     folder,
                                     txtboxTag.Text);
+
+
+
                                 break;
                             }
                         case 1:
@@ -128,9 +137,8 @@ namespace ltkt
                     upload.Visible = false;
                     message.Visible = true;
                     liMessage.Text = "Upload thành công.";
-                    liMessage.Text += "<br />Cám ơn bạn đã đóng góp cho trung tâm!";
-                    liMessage.Text += "<br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                    liMessage.Text += filename;
+                    liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
+                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
                 }
             }
             else
@@ -139,7 +147,7 @@ namespace ltkt
             }
         }
 
-        
+
 
 
     }

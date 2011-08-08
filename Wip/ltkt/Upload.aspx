@@ -77,8 +77,8 @@
                 <p id="Contest">
                     <span>Đề thi : </span>
                     <asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%">
-                        <asp:ListItem Text="Đại học" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Cao đẳng" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Đại học" Value="false"></asp:ListItem>
+                        <asp:ListItem Text="Cao đẳng" Value="true"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlBranch" runat="server" Width="15%">
                         <asp:ListItem Text="khối A" Value="0"></asp:ListItem>
