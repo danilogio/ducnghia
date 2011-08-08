@@ -618,6 +618,22 @@ namespace ltktDAO
             return true;
         }
 
+        public static IEnumerable<tblEnglish> getLatestArticlesByPostedDate(int _type, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (numberRecord <= 0)
+                numberRecord = 1;
+            IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
+                                          where p.Type == _type
+                                          orderby p.Posted descending
+                                          select p).Take(numberRecord);
+            return lst;
+        }
+        /// <summary>
+        /// when check button dislike article
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
         public static Boolean Dislike(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
