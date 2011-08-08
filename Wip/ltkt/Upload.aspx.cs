@@ -45,9 +45,7 @@ namespace ltkt
                     }
                     Response.End();
                 }
-
             }
-
         }
 
         public void btnSubmitUpload_Click(object sender, EventArgs e)
@@ -67,23 +65,26 @@ namespace ltkt
                         case 0:
                             {
                                 folder += "\\University\\";
+                                folder += Convert.ToString(ddlYear.SelectedValue);
                                 break;
                             }
                         case 1:
                             {
                                 folder += "\\Informatics\\";
+                                folder += Convert.ToString(DateTime.Now.Year);
                                 break;
                             }
                         case 2:
                             {
                                 folder += "\\English\\";
+                                folder += Convert.ToString(DateTime.Now.Year);
                                 break;
                             }
                     }
 
-                    folder += Convert.ToString(DateTime.Now.Year);
-
-                    fileContent.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName);
+                    string filename = Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName;
+                    fileContent.SaveAs(filename);
+                    
                     if (fileSolving.HasFile)
                     {
                         fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" + 
@@ -105,9 +106,6 @@ namespace ltkt
                                     Convert.ToInt32(ddlYear.SelectedValue),
                                     folder,
                                     txtboxTag.Text);
-
-
-
                                 break;
                             }
                         case 1:
@@ -138,7 +136,7 @@ namespace ltkt
                     message.Visible = true;
                     liMessage.Text = "Upload thành công.";
                     liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
-                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a><br />";
                 }
             }
             else
@@ -146,8 +144,6 @@ namespace ltkt
                 Response.Redirect("Login.aspx");
             }
         }
-
-
 
 
     }
