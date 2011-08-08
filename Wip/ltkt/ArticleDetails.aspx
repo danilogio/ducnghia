@@ -39,16 +39,18 @@
     </style>
 </asp:Content>
 <asp:Content ID="ArticleDetails" ContentPlaceHolderID="cphContent" runat="Server">
-    <asp:Panel ID="invalidArticle" runat="server" Visible="false">
-        <div class="block_text">
+    <div id="main" class="block_text">
+        <asp:Panel ID="invalidArticle" runat="server" Visible="false">
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
-        </div>
-    </asp:Panel>
-    <asp:Panel ID="viewArticle" runat="server">
-        <div id="main" class="block_text">
+        </asp:Panel>
+        <asp:Panel ID="viewArticle" runat="server">
             <h2>
                 <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
             </h2>
+            <div id="feedback" style="float: right;">
+                <asp:Button ID="btnLike" runat="server" Text="Thích" CssClass="formbutton" OnClick="btnLike_Click" />
+                <asp:Button ID="btnDislike" runat="server" Text="Báo xấu" CssClass="formbutton" OnClick="btnDislike_Click" />
+            </div>
             <div id="overview">
                 <h5>
                     Có
@@ -70,10 +72,16 @@
                             <li>Người kiểm duyệt:<b>
                                 <asp:Label ID="lblChecker" runat="server" Text=""></asp:Label></b></li>
                             <li>Mục:<asp:Label ID="lblType" runat="server" Text=""></asp:Label></li>
-                            <li>Ngành:<asp:Label ID="lblBranch" runat="server" Text=""></asp:Label>
-                                <asp:Label ID="lblLevel" runat="server" Text=""></asp:Label>
-                                <asp:Label ID="lblSubject" runat="server" Text=""></asp:Label></li>
-                            <li>Năm tạo:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
+                            
+                            <asp:Panel ID="infoContest" runat="server">
+                                <li>Môn:<asp:Label ID="lblSubject" runat="server" Text=""></asp:Label>
+                                <li>Khối:<asp:Label ID="lblBranch" runat="server" Text=""></asp:Label></li>
+                                <li>Năm:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
+                            </asp:Panel>
+                            <asp:Panel ID="infoEnglish" runat="server" Visible="false">
+                            </asp:Panel>
+                            <asp:Panel ID="infoInformatic" runat="server" Visible="false">
+                            </asp:Panel>
                         </ul>
                     </li>
                     <li>
@@ -84,7 +92,7 @@
                     <li>
                         <h4>
                             Download Link:</h4>
-                        <asp:HyperLink ID="hpkDownloadlink" runat="server">Đề thi đại học 2007</asp:HyperLink>
+                        <asp:HyperLink ID="hpkDownloadlink" runat="server"></asp:HyperLink>
                     </li>
                     <li>
                         <h4>
@@ -93,34 +101,36 @@
                     </li>
                 </ul>
             </div>
-            <hr />
             <br />
-        </div>
-    </asp:Panel>
-    <asp:Panel ID="commentPanel" runat="server">
-        <div class="block_text">
+        </asp:Panel>
+        <asp:Panel ID="commentPanel" runat="server">
             <h4>
-                Bình luận</h4>
+                Gửi ý kiến thảo luận</h4>
             <hr />
             <br />
             <div id="postedComment">
                 <asp:Label ID="txtPostedComment" runat="server" TextMode="MultiLine" ReadOnly="true"
-                    Height="300px" Width="590px" BackColor="White" BorderColor="#444444" BorderWidth="1px">
+                    Height="300px" Width="590px" BackColor="White">
                 </asp:Label>
             </div>
             <p>
-                <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
-            </p>
-            <form method="post" action="ArticleDetails.aspx">
-            <div id="postingComment" class="form_settings" style="padding-left: 45px;">
-                <asp:Panel ID="nonUserPanel" runat="server">
-                    <p>
-                        <span>Họ tên:</span><asp:TextBox ID="txtName" runat="server"></asp:TextBox>
-                    </p>
-                    <p>
-                        <span>Email:</span><asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                    </p>
-                    <center>
+                &nbsp;<asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
+                <form action="ArticleDetails.aspx" method="post">
+                <div id="postingComment" class="form_settings" style="padding-left: 45px;">
+                    <asp:Panel ID="nonUserPanel" runat="server">
+                        <p>
+                            Hãy <a href="Registry.aspx" title="Đăng ký thành viên">đăng ký thành viên</a> để
+                            gửi ý kiến thảo luận đơn giản hơn.
+                            <br />
+                            Nếu bạn đã đăng ký, hãy <a href="Login.aspx" title="Đăng nhập">đăng nhập tại đây</a>.
+                        </p>
+                        <p>
+                            <span>Họ tên:</span><asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                        </p>
+                        <p>
+                            <span>Email:</span><asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                        </p>
+                        <%--<center>
                         <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
                             CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
                             CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"
@@ -129,25 +139,23 @@
                     <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
                         ControlToValidate="txtboxCaptcha" Display="none">
-                    </asp:RequiredFieldValidator>
-                </asp:Panel>
-                <p>
-                    <br />
-                    <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="5" Width="500px"></asp:TextBox>
-                </p>
-                <p>
-                    <asp:Button ID="btnSubmitComment" runat="server" Text="Gửi bình luận" CssClass="submit"
-                        OnClick="btnSubmitComment_Click" />
-                </p>
-            </div>
-            </form>
-        </div>
-    </asp:Panel>
-    <asp:Panel ID="relativePanel" runat="server">
-        <div class="block_text">
+                    </asp:RequiredFieldValidator>--%></asp:Panel>
+                    <p>
+                        <br />
+                        <asp:TextBox ID="txtContent" runat="server" Rows="5" TextMode="MultiLine" Width="500px"></asp:TextBox>
+                    </p>
+                    <p style="padding-left: 200px;">
+                        <asp:Button ID="btnSubmitComment" runat="server" CssClass="submit" OnClick="btnSubmitComment_Click"
+                            Text="Gửi bình luận" />
+                    </p>
+                </div>
+                </form>
+            </p>
+        </asp:Panel>
+        <asp:Panel ID="relativePanel" runat="server">
             <h4>
                 Bài viết liên quan</h4>
             <hr />
-        </div>
-    </asp:Panel>
+        </asp:Panel>
+    </div>
 </asp:Content>

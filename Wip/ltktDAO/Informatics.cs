@@ -21,11 +21,16 @@ namespace ltktDAO
         public static string getTitle(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
-            return lst.ElementAt(0).Title;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Title;
+            }
+
+            return null;
         }
 
 
@@ -37,11 +42,16 @@ namespace ltktDAO
         public static string getChapeau(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
-            return lst.ElementAt(0).Chapeau;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Chapeau;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -52,9 +62,9 @@ namespace ltktDAO
         public static string getType(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
             int type = lst.ElementAt(0).Type;
             string strType = "";
@@ -90,11 +100,16 @@ namespace ltktDAO
         public static string getContent(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
-            return lst.ElementAt(0).Contents;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Contents;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -105,12 +120,17 @@ namespace ltktDAO
         public static string getAuthor(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from author in DB.tblUsers
-                      join record in DB.tblInformatics on author.Username equals record.Author
-                      where record.ID == ID
-                      select author;
+            IEnumerable<tblUser> lst = from author in DB.tblUsers
+                                       join record in DB.tblInformatics on author.Username equals record.Author
+                                       where record.ID == ID
+                                       select author;
 
-            return lst.ElementAt(0).DisplayName;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).DisplayName;
+            }
+
+            return null;
         }
 
 
@@ -122,11 +142,16 @@ namespace ltktDAO
         public static DateTime getPosted(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
-            return lst.ElementAt(0).Posted;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Posted;
+            }
+
+            return new DateTime(1970, 1, 1);
         }
 
         /// <summary>
@@ -137,9 +162,9 @@ namespace ltktDAO
         public static string getState(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
             int state = lst.ElementAt(0).State;
             string strState = "";
@@ -175,11 +200,16 @@ namespace ltktDAO
         public static int getPoint(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
-            return (int)lst.ElementAt(0).Point;
+            if (lst.Count() > 0)
+            {
+                return (int)lst.ElementAt(0).Point;
+            }
+
+            return -1;
         }
 
         /// <summary>
@@ -190,11 +220,36 @@ namespace ltktDAO
         public static string getTag(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblInformatics
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == ID
+                                             select record;
 
-            return lst.ElementAt(0).Tag;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Tag;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Lay comment
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static string getComment(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.ID == _id
+                                             select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Comment;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -217,6 +272,8 @@ namespace ltktDAO
             return null;
         }
 
+
+
         #endregion
 
         #region Set Property
@@ -229,16 +286,21 @@ namespace ltktDAO
         public static Boolean setTitle(int ID, string _title)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Title = _title;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Title = _title;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -251,16 +313,21 @@ namespace ltktDAO
         public static Boolean setChapeau(int ID, string _chapeau)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Chapeau = _chapeau;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Chapeau = _chapeau;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -276,16 +343,21 @@ namespace ltktDAO
         public static Boolean setType(int ID, int _type)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Type = _type;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Type = _type;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -298,16 +370,21 @@ namespace ltktDAO
         public static Boolean setAuthor(int ID, string _author)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Author = _author;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Author = _author;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -345,16 +422,21 @@ namespace ltktDAO
         public static Boolean setState(int ID, int _state)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.State = _state;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.State = _state;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -367,14 +449,20 @@ namespace ltktDAO
         public static Boolean setPosted(int ID, DateTime _posted)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Posted = _posted;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Posted = _posted;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
 
             return true;
@@ -390,15 +478,21 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Point = _point;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Point = _point;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -411,14 +505,41 @@ namespace ltktDAO
         public static Boolean setTag(int ID, string _tag)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblInformatics.Single(TB => TB.ID == ID);
-                record.Tag = _tag;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == ID);
+                    record.Tag = _tag;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean setComment(int _id, string _comment)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblInformatics.Single(TB => TB.ID == _id);
+                    record.Tag = _comment;
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
 
             return true;
@@ -444,6 +565,48 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
 
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Thêm một bài giảng/bài tập/đề thi tin học
+        /// </summary>
+        /// <param name="_title"></param>
+        /// <param name="_type"></param>
+        /// <param name="_content"></param>
+        /// <param name="_author"></param>
+        /// <param name="_posted"></param>
+        /// <param name="_location"></param>
+        /// <returns></returns>
+        public static Boolean insertInformatic(string _title, int _type, string _content,
+            string _author, DateTime _posted, string _location, string _tag)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblInformatic record = new tblInformatic();
+                    record.Title = _title;
+                    record.Type = _type;
+                    record.Contents = _content;
+                    record.Author = _author;
+                    record.Posted = _posted;
+                    record.Point = 0;
+                    record.State = 0;
+                    record.Location = _location;
+                    record.Tag = _tag;
+
+                    DB.tblInformatics.InsertOnSubmit(record);
+                    DB.SubmitChanges();
                     ts.Complete();
                 }
             }
@@ -501,8 +664,80 @@ namespace ltktDAO
                     select informatics).Count();
         }
 
+        /// <summary>
+        /// Them 1 comment vao bai viet
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <param name="_newComment"></param>
+        /// <returns></returns>
+        public static Boolean insertComment(int _id, string _newComment)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var informatic = DB.tblInformatics.Single(info => info.ID == _id);
+                    informatic.Comment += _newComment;
+                    informatic.Comment += "<br /><br />";
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static Boolean Like(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var informatic = DB.tblInformatics.Single(info => info.ID == _id);
+                    informatic.Point += 1;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean Dislike(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var informatic = DB.tblInformatics.Single(info => info.ID == _id);
+                    informatic.Point -= 1;
+                    informatic.State = 2; // Bad
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
 
 
+        
         #endregion
     }
 }

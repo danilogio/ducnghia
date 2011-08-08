@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
+using System.Web.UI.HtmlControls;
+using ltktDAO;
+
 
 namespace ltkt
 {
@@ -45,28 +49,97 @@ namespace ltkt
 
         }
 
-        public void btnSubmit_Click(object sender, EventArgs e)
+        public void btnSubmitUpload_Click(object sender, EventArgs e)
         {
-            //if (FileUpload1.HasFile)
-            //    try
-            //    {
-            //        FileUpload1.SaveAs("C:\\Uploads\\" +
-            //             FileUpload1.FileName);
-            //        Label1.Text = "File name: " +
-            //             FileUpload1.PostedFile.FileName + "<br>" +
-            //             FileUpload1.PostedFile.ContentLength + " kb<br>" +
-            //             "Content type: " +
-            //             FileUpload1.PostedFile.ContentType;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Label1.Text = "ERROR: " + ex.Message.ToString();
-            //    }
-            //else
-            //{
-            //    Label1.Text = "You have not specified a file.";
-            //}
+            tblUser user = (tblUser)Session["User"];
+            if (user != null)
+            {
+                if (fileContent.HasFile)
+                {
+                    string folder = "Data";
+                    // 0 - ltdh
+                    // 1 - english
+                    // 2 - tin học
+                    int type = ddlSubject.SelectedIndex;
+                    switch (type)
+                    {
+                        case 0:
+                            {
+                                folder += "\\University\\";
+                                break;
+                            }
+                        case 1:
+                            {
+                                folder += "\\Informatics\\";
+                                break;
+                            }
+                        case 2:
+                            {
+                                folder += "\\English\\";
+                                break;
+                            }
+                    }
+
+                    folder += Convert.ToString(DateTime.Now.Year);
+
+                    string filename = Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName;
+                    fileContent.SaveAs(filename);
+
+                    // ghi xuống db
+                    switch (type)
+                    {
+                        case 0:
+                            {
+                                ltktDAO.Contest.insertContest(txtboxTitle.Text,
+                                    txtboxSummary.Text,
+                                    user.Username,
+                                    DateTime.Now,
+                                    Boolean.Parse (ddlTypeContest.SelectedValue),
+                                    Convert.ToInt32(ddlBranch.SelectedValue),
+                                    Convert.ToInt32(ddlYear.SelectedValue),
+                                    folder,
+                                    txtboxTag.Text);
+                                break;
+                            }
+                        case 1:
+                            {
+                                ltktDAO.Informatics.insertInformatic(txtboxTitle.Text,
+                                    Convert.ToInt32(ddlType.SelectedValue),
+                                    txtboxSummary.Text,
+                                    user.Username,
+                                    DateTime.Now,
+                                    folder,
+                                    txtboxTag.Text);
+                                break;
+                            }
+                        case 2:
+                            {
+                                ltktDAO.English.insertEnglish(txtboxTitle.Text,
+                                    Convert.ToInt32(ddlType.SelectedValue),
+                                    txtboxSummary.Text,
+                                    user.Username,
+                                    DateTime.Now,
+                                    folder,
+                                    txtboxTag.Text);
+                                break;
+                            }
+                    }
+
+                    upload.Visible = false;
+                    message.Visible = true;
+                    liMessage.Text = "Upload thành công.";
+                    liMessage.Text += "<br />Cám ơn bạn đã đóng góp cho trung tâm!";
+                    liMessage.Text += "<br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text += filename;
+                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
+
+        
 
 
     }

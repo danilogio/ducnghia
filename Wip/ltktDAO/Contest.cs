@@ -29,7 +29,7 @@ namespace ltktDAO
             {
                 return lst.ElementAt(0).Title;
             }
-            return "Not Exists";
+            return null;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace ltktDAO
             {
                 return lst.ElementAt(0).Contents;
             }
-            return "Not Exists";
+            return null;
         }
 
         /// <summary>
@@ -59,11 +59,16 @@ namespace ltktDAO
         public static string getSolving(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
-            return lst.ElementAt(0).Solving;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Solving;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -75,11 +80,16 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
-                      join record in DB.tblContestForUniversities on author.Username equals record.Author
-                      where record.ID == ID
-                      select author;
+                                       join record in DB.tblContestForUniversities on author.Username equals record.Author
+                                       where record.ID == ID
+                                       select author;
 
-            return lst.ElementAt(0).DisplayName;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).DisplayName;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -90,11 +100,16 @@ namespace ltktDAO
         public static DateTime getPosted(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
-            return lst.ElementAt(0).Posted;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Posted;
+            }
+
+            return new DateTime(1970, 1, 1);
         }
 
         /// <summary>
@@ -108,9 +123,9 @@ namespace ltktDAO
         public static string getState(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
             int state = lst.ElementAt(0).State;
             string strState = "";
@@ -146,9 +161,9 @@ namespace ltktDAO
         public static string getContestType(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
             if (lst.ElementAt(0).isUniversity == false)
             {
@@ -214,11 +229,16 @@ namespace ltktDAO
         public static int getYear(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
-            return lst.ElementAt(0).Year;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Year;
+            }
+
+            return -1;
         }
         /// <summary>
         /// Lấy điểm bài viết
@@ -228,11 +248,16 @@ namespace ltktDAO
         public static int getPoint(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
-            return (int)lst.ElementAt(0).Point;
+            if (lst.Count() > 0)
+            {
+                return (int)lst.ElementAt(0).Point;
+            }
+
+            return -1;
         }
 
         /// <summary>
@@ -243,11 +268,36 @@ namespace ltktDAO
         public static string getTag(int ID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from record in DB.tblContestForUniversities
-                      where record.ID == ID
-                      select record;
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
 
-            return lst.ElementAt(0).Tag;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Tag;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Lấy comment
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static string getComments(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == _id
+                                                       select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Comment;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -282,16 +332,21 @@ namespace ltktDAO
         public static Boolean setTitle(int ID, string _title)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Title = _title;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Title = _title;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -304,16 +359,21 @@ namespace ltktDAO
         public static Boolean setContent(int ID, string _content)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Contents = _content;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Contents = _content;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -326,16 +386,21 @@ namespace ltktDAO
         public static Boolean setAuthor(int ID, string _author)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Author = _author;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Author = _author;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -348,16 +413,21 @@ namespace ltktDAO
         public static Boolean setPosted(int ID, DateTime _posted)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Posted = _posted;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Posted = _posted;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -373,16 +443,21 @@ namespace ltktDAO
         public static Boolean setState(int ID, int _state)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.State = _state;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.State = _state;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -397,16 +472,21 @@ namespace ltktDAO
         public static Boolean setContestType(int ID, bool _isUniversity)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.isUniversity = _isUniversity;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.isUniversity = _isUniversity;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -424,16 +504,21 @@ namespace ltktDAO
         public static Boolean setBranch(int ID, int _branch)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Branch = _branch;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Branch = _branch;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -446,14 +531,20 @@ namespace ltktDAO
         public static Boolean setYear(int ID, int _year)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Year = _year;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Year = _year;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
 
             return true;
@@ -468,14 +559,20 @@ namespace ltktDAO
         public static Boolean setSolving(int ID, string _solving)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Solving = _solving;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Solving = _solving;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
 
             return true;
@@ -490,16 +587,21 @@ namespace ltktDAO
         public static Boolean setPoint(int ID, int _point)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Point = _point;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Point = _point;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
             }
-
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -512,14 +614,48 @@ namespace ltktDAO
         public static Boolean setTag(int ID, string _tag)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            using (TransactionScope ts = new TransactionScope())
+            try
             {
-                var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
-                record.Tag = _tag;
-                DB.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Tag = _tag;
+                    DB.SubmitChanges();
 
-                ts.Complete();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Xét comment
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="_comment"></param>
+        /// <returns></returns>
+        public static Boolean setComment(int ID, string _comment)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var record = DB.tblContestForUniversities.Single(TB => TB.ID == ID);
+                    record.Comment = _comment;
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
 
             return true;
@@ -548,8 +684,8 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             DateTime date = new DateTime();
-            bool isValid = DateTime.TryParse(Date,out date);
-            if(!isValid)
+            bool isValid = DateTime.TryParse(Date, out date);
+            if (!isValid)
             {
                 return null;
             }
@@ -558,8 +694,8 @@ namespace ltktDAO
                 numberRecord = 1;
             }
             IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
-                                                       where p.Posted == date
-                                                       select p).Take(numberRecord);
+                                                        where p.Posted == date
+                                                        select p).Take(numberRecord);
             return lst;
 
         }
@@ -569,10 +705,10 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (number <= 0)
                 return getAll();
-            IEnumerable<tblContestForUniversity>lst = (from p in DB.tblContestForUniversities
-                                                       where p.State != 0
-                                                       orderby p.Posted descending
-                                                       select p).Take(number) ;
+            IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
+                                                        where p.State != 0
+                                                        orderby p.Posted descending
+                                                        select p).Take(number);
             return lst;
         }
         /// <summary>
@@ -601,6 +737,55 @@ namespace ltktDAO
             }
             return true;
         }
+
+        /// <summary>
+        /// Thêm một đề thi
+        /// </summary>
+        /// <param name="_title"></param>
+        /// <param name="_content"></param>
+        /// <param name="_author"></param>
+        /// <param name="_posted"></param>
+        /// <param name="_isUniversity"></param>
+        /// <param name="_branch"></param>
+        /// <param name="_year"></param>
+        /// <param name="_location"></param>
+        /// <returns></returns>
+        public static Boolean insertContest(string _title, string _content, string _author,
+            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location, string _tag)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblContestForUniversity record = new tblContestForUniversity();
+                    record.Title = _title;
+                    record.Contents = _content;
+                    record.Author = _author;
+                    record.Posted = _posted;
+                    record.State = 0;//Chưa duyệt
+                    record.isUniversity = _isUniversity;
+                    record.Branch = _branch;
+                    record.Year = _year;
+                    record.Point = 0;//điểm
+                    record.Location = _location;
+                    record.Tag = _tag;
+
+                    DB.tblContestForUniversities.InsertOnSubmit(record);
+
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// Cập nhật đề thi
@@ -692,6 +877,79 @@ namespace ltktDAO
 
             return strBranch;
         }
+
+        /// <summary>
+        /// Thêm 1 comment vào bài viết
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <param name="_newComment"></param>
+        /// <returns></returns>
+        public static Boolean insertComment(int _id, string _newComment)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
+                    contest.Comment += _newComment;
+                    contest.Comment += "<br /><br />";
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static Boolean Like(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
+                    contest.Point += 1;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean Dislike(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
+                    contest.Point -= 1;
+                    contest.State = 2; // Bad
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
 
         #endregion
     }
