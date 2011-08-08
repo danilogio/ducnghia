@@ -98,6 +98,7 @@ namespace ltkt
                                 lblChecker.Text = informatic.Checker;
                                 lblType.Text = "<a href=\"./Informatics.aspx\">Tin học</a>";
 
+                                
 
                                 infoContest.Visible = false;
                                 infoEnglish.Visible = false;

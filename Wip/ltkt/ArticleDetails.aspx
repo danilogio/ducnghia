@@ -79,6 +79,8 @@
                                 <li>Năm:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
                             </asp:Panel>
                             <asp:Panel ID="infoEnglish" runat="server" Visible="false">
+                                <li>Loại tài liệu:<asp:Label ID="lblLessonType" runat="server"></asp:Label></li>
+                                
                             </asp:Panel>
                             <asp:Panel ID="infoInformatic" runat="server" Visible="false">
                             </asp:Panel>
