@@ -25,14 +25,11 @@
             Thư viện đề thi đại học, cao đẳng</h2>
         <ul>
             <li><a href="#ExamLesson01">Đề thi</a></li>
-          <%--  <li><a href="#ExamLesson-2">Gợi ý giải</a></li>--%>
         </ul>
         <div id="ExamLesson01">
             <%=loadDataForUniversityArticles() %>
         </div>
-        <%--<div id="ExamLesson-2">
-            Hiện chưa có bài viết nào
-        </div>--%>
+      
     </div>
     
     <div id="ItLesson" class="block_text">
@@ -45,115 +42,10 @@
         </ul>
         <!-- start ItLesson-1-->
         <div id="ItLesson01">
-            <%--<div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/Word.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2011</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Toán<br />
-                    Khối A
-                </div>
-            </div>
-            <div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/Word.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2010</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Lý<br />
-                    Khối A
-                </div>
-            </div>
-            <div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/acroread.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2009</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Hóa<br />
-                    Khối B
-                </div>
-            </div>
-            <div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/zip.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2009</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Hóa<br />
-                    Khối B
-                </div>
-            </div>
-            <br />
-            <div class="referlink">
-                <a href="ArticleDetails.aspx">Xem thêm</a>
-            </div>--%>
             <%=loadDataForELLectures() %>
         </div>
         <!-- start ItLesson-2-->
         <div id="ItLesson02">
-            <%--<div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/Word.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2011</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Toán<br />
-                    Khối A
-                </div>
-            </div>
-            <div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/acroread.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2009</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Hóa<br />
-                    Khối B
-                </div>
-            </div>
-            <div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/zip.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2009</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Hóa<br />
-                    Khối B
-                </div>
-            </div>
-            <div class="block_details">
-                <div class="block_details_img">
-                    <img width="50px" height="50px" src="images/Word.png" alt="Eden" />
-                </div>
-                <div class="block_details_title">
-                    <a href="#">Đề thi đại học năm 2010</a>
-                </div>
-                <div class="block_details_text">
-                    Môn Lý<br />
-                    Khối A
-                </div>
-            </div>
-            <br />
-            
-            <div class="referlink">
-                <a href="#">Xem thêm</a>
-            </div>--%>
             <%=loadDataForELPractise() %>
         </div>
         <!-- start ItLesson-3-->
