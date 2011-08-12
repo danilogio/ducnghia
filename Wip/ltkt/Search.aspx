@@ -35,91 +35,97 @@
             Tìm kiếm</h2>
         <hr />
         <%-- <form method="post">--%>
-        <div class="form_settings">
-            <p>
-                <span>Chuỗi tìm kiếm:</span><asp:TextBox ID="txtboxSearchString" runat="server" CssClass="contact"></asp:TextBox></p>
-            <p>
-                <span>Chủ đề:</span><asp:DropDownList ID="ddlSubject" runat="server">
-                    <asp:ListItem Text="Luyện thi đại học" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="Tin học" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="Anh văn" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="--Tất cả chủ đề--" Value="3"></asp:ListItem>
-                </asp:DropDownList>
-            </p>
-            <p>
-                <span>Tìm kiếm theo:</span><asp:DropDownList ID="ddlSearchingType" runat="server">
-                    <asp:ListItem Text="--Tất cả--" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="Tiêu đề" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="Tag" Value="2"></asp:ListItem>
-                </asp:DropDownList>
-            </p>
-            <%--Đối với Anh văn, Tin học--%>
-            <div id="divLessonType">
-                <p id="lessonType">
-                    <span>Loại bài viết: </span>
-                    <asp:DropDownList ID="ddlType" runat="server">
-                        <asp:ListItem Text="Bài giảng" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Đề thi" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Bài tập" Value="2"></asp:ListItem>
+        <asp:Panel ID="searchPanel" runat="server">
+            <div class="form_settings">
+                <p>
+                    <span>Chuỗi tìm kiếm:</span><asp:TextBox ID="txtboxSearchString" runat="server" CssClass="contact"></asp:TextBox></p>
+                <p>
+                    <span>Chủ đề:</span><asp:DropDownList ID="ddlSubject" runat="server">
+                        <asp:ListItem Text="Luyện thi đại học" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Tin học" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Anh văn" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="--Tất cả chủ đề--" Value="3"></asp:ListItem>
                     </asp:DropDownList>
                 </p>
-                <p id="P1">
-                    <span>Năm(+-3): </span>
-                    <asp:DropDownList ID="ddlYearSearch" runat="server" ToolTip="Tìm kiếm trong khoảng từ +3 năm tới -3 năm">
-                        <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
-                        <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
-                        <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
-                        <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
-                        <asp:ListItem Text="2006" Value="2006"></asp:ListItem>
-                        <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
-                        <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
-                        <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
-                        <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
-                        <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
-                        <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
+                <p>
+                    <span>Tìm kiếm theo:</span><asp:DropDownList ID="ddlSearchingType" runat="server">
+                        <asp:ListItem Text="--Tất cả--" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Tiêu đề" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Tag" Value="2"></asp:ListItem>
                     </asp:DropDownList>
                 </p>
-            </div>
-            <%--Đối với loại 1: Luyện thi đại học--%>
-            <div id="divContest">
-                <p id="Contest">
-                    <span>Đề thi : </span>
-                    <asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%" ToolTip="Loại trường">
-                        <asp:ListItem Text="Đại học" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Cao đẳng" Value="1"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="ddlBranch" runat="server" Width="15%" ToolTip="Khối của ngành học">
-                        <asp:ListItem Text="khối A" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="khối B" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="khối C" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="khối D" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>
-                    </asp:DropDownList>
-                    năm
-                    <asp:DropDownList ID="ddlYear" runat="server" Width="15%" ToolTip="Tìm kiếm trong khoảng từ +3 năm tới -3 năm">
-                        <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
-                        <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
-                        <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
-                        <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
-                        <asp:ListItem Text="2006" Value="2006"></asp:ListItem>
-                        <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
-                        <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
-                        <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
-                        <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
-                        <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
-                        <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
-                    </asp:DropDownList>
-                </p>
-            </div>
-            <p>
-                <div align="center" style="margin-top: 10px; margin-left: 100px">
-                    <recaptcha:recaptchacontrol id="recaptcha" runat="server" publickey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
-                        privatekey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
+                <%--Đối với Anh văn, Tin học--%>
+                <div id="divLessonType">
+                    <p id="lessonType">
+                        <span>Loại bài viết: </span>
+                        <asp:DropDownList ID="ddlType" runat="server">
+                            <asp:ListItem Text="Bài giảng" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Đề thi" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Bài tập" Value="2"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
+                    <p id="P1">
+                        <span>Năm(+-3): </span>
+                        <asp:DropDownList ID="ddlYearSearch" runat="server" ToolTip="Tìm kiếm trong khoảng từ +3 năm tới -3 năm">
+                            <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
+                            <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
+                            <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
+                            <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
+                            <asp:ListItem Text="2006" Value="2006"></asp:ListItem>
+                            <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
+                            <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
+                            <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
+                            <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
+                            <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
+                            <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
                 </div>
-            </p>
-            <p style="padding-top: 15px">
-                <span>&nbsp;</span><asp:Button ID="btnSubmitSearch" runat="server" Text="Tìm" CssClass="submit" OnClick="btnSearch_Click" /></p>
-        </div>
+                <%--Đối với loại 1: Luyện thi đại học--%>
+                <div id="divContest">
+                    <p id="Contest">
+                        <span>Đề thi : </span>
+                        <asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%" ToolTip="Loại trường">
+                            <asp:ListItem Text="Đại học" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Cao đẳng" Value="1"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlBranch" runat="server" Width="15%" ToolTip="Khối của ngành học">
+                            <asp:ListItem Text="khối A" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="khối B" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="khối C" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="khối D" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>
+                        </asp:DropDownList>
+                        năm
+                        <asp:DropDownList ID="ddlYear" runat="server" Width="15%" ToolTip="Tìm kiếm trong khoảng từ +3 năm tới -3 năm">
+                            <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
+                            <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
+                            <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
+                            <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
+                            <asp:ListItem Text="2006" Value="2006"></asp:ListItem>
+                            <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
+                            <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
+                            <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
+                            <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
+                            <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
+                            <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
+                </div>
+                <p>
+                    <div align="center" style="margin-top: 10px; margin-left: 100px">
+                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
+                            PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
+                    </div>
+                </p>
+                <p style="padding-top: 15px">
+                    <span>&nbsp;</span><asp:Button ID="btnSubmitSearch" runat="server" Text="Tìm" CssClass="submit"
+                        OnClick="btnSearch_Click" /></p>
+            </div>
+        </asp:Panel>
         <%--</form>--%>
+        
+        <asp:Panel ID="resultPanel" runat="server">
+        </asp:Panel>
     </div>
 </asp:Content>

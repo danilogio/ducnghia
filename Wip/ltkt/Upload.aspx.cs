@@ -84,15 +84,15 @@ namespace ltkt
 
                     string filename = Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName;
                     fileContent.SaveAs(filename);
-                    
+
                     if (fileSolving.HasFile)
                     {
-                        fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" + 
-                            Path.GetFileNameWithoutExtension(fileContent.FileName) + 
+                        fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
+                            Path.GetFileNameWithoutExtension(fileContent.FileName) +
                             "_solved" + Path.GetExtension(fileSolving.FileName));
                     }
                     // ghi xuống db
-                    
+
                     switch (type)
                     {
                         case 0:
@@ -104,7 +104,7 @@ namespace ltkt
                                     Boolean.Parse(ddlTypeContest.SelectedValue),
                                     Convert.ToInt32(ddlBranch.SelectedValue),
                                     Convert.ToInt32(ddlYear.SelectedValue),
-                                    folder,
+                                    filename,
                                     txtboxTag.Text);
                                 break;
                             }
@@ -115,7 +115,7 @@ namespace ltkt
                                     txtboxSummary.Text,
                                     user.Username,
                                     DateTime.Now,
-                                    folder,
+                                    filename,
                                     txtboxTag.Text);
                                 break;
                             }
@@ -126,7 +126,7 @@ namespace ltkt
                                     txtboxSummary.Text,
                                     user.Username,
                                     DateTime.Now,
-                                    folder,
+                                    filename,
                                     txtboxTag.Text);
                                 break;
                             }
