@@ -548,6 +548,22 @@ namespace ltktDAO
         #endregion
 
         #region Method
+
+        /// <summary>
+        /// Get amount of latest article by posted date
+        /// </summary>
+        /// <param name="numRecord"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblInformatic> getLatestArticleByPostedDate(int _type, int _numRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (_numRecord <= 0)
+                _numRecord = 1;
+            IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
+                                              where p.Type == _type orderby p.Posted descending
+                                                 select p).Take(_numRecord);
+            return lst;
+        }
         /// <summary>
         /// Thêm bài mới
         /// </summary>

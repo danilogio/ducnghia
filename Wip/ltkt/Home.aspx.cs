@@ -41,10 +41,37 @@ public partial class _Default : System.Web.UI.Page
         }
         return data;
     }
-    private void loadDataForITArticles()
+    /// <summary>
+    /// load data for Lecture Tab
+    /// </summary>
+    /// <returns></returns>
+    public string loadDataForITLectures()
     {
-
+        IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.ARTICLE_TYPE_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
+        IList<tblInformatic> items = lst.ToList();
+        return loadDetailsForITArticles(items);
     }
+    /// <summary>
+    /// load data for Practise Tab
+    /// </summary>
+    /// <returns></returns>
+    public string loadDataForITPractise()
+    {
+        IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.ARTICLE_TYPE_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
+        IList<tblInformatic> items = lst.ToList();
+        return loadDetailsForITArticles(items);
+    }
+    /// <summary>
+    /// Load data for Examination Tab
+    /// </summary>
+    /// <returns></returns>
+    public string loadDataForITExamination()
+    {
+        IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.ARTICLE_TYPE_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
+        IList<tblInformatic> items = lst.ToList();
+        return loadDetailsForITArticles(items);
+    }
+   
     /// <summary>
     /// load data for Lecture Tab
     /// </summary>
@@ -77,6 +104,57 @@ public partial class _Default : System.Web.UI.Page
         IList<tblEnglish> lst = items.ToList();
         return loadDetailsForELArticles(lst);
     }
+    public string loadLatestNews()
+    {
+        string data = "";
+        IEnumerable<tblNew> lst = ltktDAO.News.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB);
+        IList<tblNew> items = lst.ToList();
+        if (items.Count > 0)
+        {
+            //build top news
+            data += buildTopNews(items[0]);
+            //build list news
+            if (items.Count > 1)
+            {
+                data += buildListNews(items);
+            }
+        }
+        else
+        {
+            data = CommonConstants.ARTICLE_EMPTY_RECORD;
+        }
+        return data;
+    }
+    private string buildTopNews(tblNew item)
+    {
+        string data = "";
+        data+= "<h3>\n";
+        data += "                " + item.Title + "</h3>\n";
+        data += "            <h5>\n";
+        data += "                Post ngày " + item.Posted + " bởi <b>"+item.Author+"</b></h5>\n";
+        data += "            <p>\n";
+        data += item.Chapaeu + "...";
+        data += "              <a href='News.aspx?id='"+item.ID+">Xem tiếp >></a>\n";
+        data += "            </p>\n";
+        return data;
+    }
+
+    private string buildListNews(IList<tblNew> items)
+    {
+        string data = "";
+        data += "<ul>";
+        for (int i = 1; i < items.Count; i++)
+        {
+            data += "                <li>";
+            data += "                    <a href='News.aspx?id="+items[i].ID+"'>"+ items[i].Title +"</a><div";
+            data += "                        class='date'>";
+            data += "                        ("+items[i].Posted+")</div>";
+            data += "                </li>";
+
+        }
+        data += "</ul>";
+        return data;
+    }
     private string loadDetailsForELArticles(IList<tblEnglish> lst)
     {
         
@@ -98,7 +176,26 @@ public partial class _Default : System.Web.UI.Page
         }
         return data;
     }
+    private string loadDetailsForITArticles(IList<tblInformatic> lst)
+    {
+        string data = "";
+        if (lst.Count > 0)
+        {
+            foreach (var item in lst)
+            {
+                data += buildArticleForInformatics(item);
 
+            }
+            data += "<br/>\n<div class='referlink'>\n"
+                    + "<a href='Informatics.aspx'>Xem thêm</a></div>\n";
+
+        }
+        else
+        {
+            data = CommonConstants.ARTICLE_EMPTY_RECORD;
+        }
+        return data;
+    }
     private string buildArticleForEnglish(tblEnglish item)
     {
         string data = "";
@@ -106,6 +203,22 @@ public partial class _Default : System.Web.UI.Page
         data += "              <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
                 + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt=\""+ item.Title+"\" />\n"
+                + "                </div>\n"
+                + "                <div class='block_details_title'>\n"
+                + "                    <a href=\"ArticleDetails.aspx?sec=el&id=" + item.ID + "\">" + item.Title + "</a>\n"
+                + "                </div>\n"
+                + "            </div>\n";
+        return data;
+    }
+
+
+    private string buildArticleForInformatics(tblInformatic item)
+    {
+        string data = "";
+        BaseServices bs = new BaseServices();
+        data += "              <div class='block_details'>\n"
+                + "                <div class='block_details_img'>\n"
+                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt=\"" + item.Title + "\" />\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
                 + "                    <a href=\"ArticleDetails.aspx?sec=el&id=" + item.ID + "\">" + item.Title + "</a>\n"

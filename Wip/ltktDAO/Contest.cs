@@ -674,6 +674,14 @@ namespace ltktDAO
                                                        select p;
             return lst;
         }
+        public static IEnumerable<tblContestForUniversity> getTopPointArticle()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
+                                                        select p);
+            return lst;
+
+        }
         /// <summary>
         /// get latest record
         /// </summary>

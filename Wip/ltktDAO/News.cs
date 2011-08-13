@@ -243,6 +243,19 @@ namespace ltktDAO
 
         #region Method
         /// <summary>
+        /// Get Latest News by posted day
+        /// </summary>
+        /// <param name="_numNews"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblNew> getLatestNewsByDate(int _numNews)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblNew> lst = (from p in DB.tblNews
+                                      orderby p.Posted descending
+                                       select p).Take(_numNews);
+            return lst;
+        }
+        /// <summary>
         /// Kiểm tra sự tồn tại của 1 tin tức
         /// </summary>
         /// <param name="newsID"></param>

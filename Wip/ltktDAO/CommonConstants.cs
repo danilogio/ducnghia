@@ -22,7 +22,7 @@ namespace ltktDAO
         /// <summary>
         /// Number record on one tab
         /// </summary>
-        public const int NUMBER_RECORD_ON_TAB = 6;
+        public const int NUMBER_RECORD_ON_TAB = 8;
         /// <summary>
         /// do not find out article record on DB
         /// </summary>
