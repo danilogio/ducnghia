@@ -23,14 +23,15 @@ namespace ltkt.Admin
     {
         public const string Host = "pop.gmail.com";
         public const int Port = 995;
-        public const string Email = "khanhtung010689@gmail.com";
-        public const string Password = "tKtUngGoogleAccount";
+        public const string Email = "";
+        public const string Password = "";
+        public const string SmtpServer = "";
+        public const string SmtpPort = "";
 
         public const int NoOfEmailsPerPage = 6;
         public const string SelfLink = "<a href=\"Mailbox.aspx?page={0}\">{1}</a>";
         public const string DisplayEmailLink = "<a href=\"Mailbox.aspx?emailID={0}\">{1}</a>";
         
-
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster pageMaster = (AdminMaster)Master;
@@ -207,5 +208,20 @@ namespace ltkt.Admin
             EmailsTable.Visible = true;
             Response.Redirect("Mailbox.aspx?page=1");
         }
+
+        protected void btnConfig_Click(object sender, EventArgs e)
+        {
+            viewPanel.Visible = false;
+            composePanel.Visible = false;
+            configPanel.Visible = true;
+        }
+
+        protected void btnSubmitConfig_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void getEmailConfig()
+        { }
 }
 }

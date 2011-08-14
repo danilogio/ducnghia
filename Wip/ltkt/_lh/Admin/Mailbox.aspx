@@ -89,7 +89,9 @@
                     OnClick="btnCheck_Click" />&nbsp;
                 <asp:Button ID="btnReply" runat="server" Text="Trả lời" CssClass="formbutton" />&nbsp;
                 <asp:Button ID="btnForward" runat="server" Text="Chuyển tiếp" CssClass="formbutton" />&nbsp;
-                <asp:Button ID="btnDelete" runat="server" Text="Xóa" CssClass="formbutton" />
+                <asp:Button ID="btnDelete" runat="server" Text="Xóa" CssClass="formbutton" />&nbsp;
+                <asp:Button ID="btnConfig" runat="server" Text="Cấu hình" CssClass="formbutton" 
+                    onclick="btnConfig_Click" />
                 <br />
                 <br />
                 <hr />
@@ -201,6 +203,20 @@
                     <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="13"></asp:TextBox>
                 </p>
             </div>
+        </asp:Panel>
+        
+        <asp:Panel ID="configPanel" runat="server" Visible="false">
+            <p>
+                <span>Tài khoản GMail</span>
+                <asp:TextBox ID="account" runat="server"></asp:TextBox>
+            </p>
+            <p>
+                <span>Mật khẩu</span>
+                <asp:TextBox ID="password" runat="server"></asp:TextBox>
+            </p>
+            <p>
+                <asp:Button ID="btnSubmitConfig" runat="server" CssClass="submit" Text="Cấu hình" OnClick="btnSubmitConfig_Click" />
+            </p>
         </asp:Panel>
     </div>
     <%--    </div>--%>

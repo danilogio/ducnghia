@@ -29,7 +29,7 @@ namespace ltktDAO
             {
                 return lst.ElementAt(0).Title;
             }
-            return "Not Exists";
+            return null;
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace ltktDAO
                 return lst.ElementAt(0).Chapaeu;
             }
 
-            return "Not Exists";
+            return null;
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace ltktDAO
                 return lst.ElementAt(0).Contents;
             }
 
-            return "Not Exists";
+            return null;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static string getPosted(int newsID)
+        public static DateTime getPosted(int newsID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
@@ -86,10 +86,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Posted.ToString();
+                return (DateTime)lst.ElementAt(0).Posted;
             }
 
-            return "Not Exists";
+            return new DateTime(1970, 1, 1);
         }
 
         /// <summary>
@@ -100,12 +100,16 @@ namespace ltktDAO
         public static string getAuthor(int newsID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var lst = from author in DB.tblUsers
+            IEnumerable<tblUser> lst = from author in DB.tblUsers
                       join news in DB.tblNews on author.Username equals news.Author
                       where news.ID == newsID
                       select author;
 
-            return lst.ElementAt(0).DisplayName;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).DisplayName;
+            }
+            return null;
         }
 
         /// <summary>
@@ -116,11 +120,15 @@ namespace ltktDAO
         public static tblNew getNews(int newsID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
+            
             IEnumerable<tblNew> news = from record in DB.tblNews
                                        where record.ID == newsID
                                        select record;
-            return news.ElementAt(0);
+            if (news.Count() > 0)
+            {
+                return news.ElementAt(0);
+            }
+            return null;
         }
 
 

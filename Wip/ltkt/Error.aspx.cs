@@ -12,7 +12,10 @@ public partial class Error : System.Web.UI.Page
         string errorText = (string) Session["Error"];
         if (errorText != null)
         {
-            lblError.Text = errorText;
+            lblError.Text = "<br />";
+            lblError.Text += errorText;
+            lblError.Text += "<br /><br />";
+
             if (Request.UrlReferrer != null)
             {
                 HpkPreviousPage.NavigateUrl = Request.UrlReferrer.ToString();
