@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 using ltktDAO;
 
@@ -18,162 +19,36 @@ namespace ltkt
                 string sec = Request.QueryString["sec"];
                 int id = Convert.ToInt32(Request.QueryString["id"]);
 
-                switch (sec)
+                try
                 {
-                    case "uni":
-                        {
-                            // do something
-                            tblContestForUniversity contest = ltktDAO.Contest.getContest(id);
-                            if (contest != null)
+                    switch (sec)
+                    {
+                        case "uni":
                             {
-                                lblTitle.Text = contest.Title;
-                                lblLiker.Text = contest.Point.ToString();
-
-                                lblAuthor.Text = ltktDAO.Contest.getAuthor(id);
-                                lblPostedDate.Text = convertDateToString(contest.Posted);
-                                lblChecker.Text = contest.Checker;
-                                lblType.Text = "<a href=\"./ContestUniversity.aspx\">Luyện Thi Đại Học</a>";
-
-                                lblSubject.Text = contest.Subject;
-                                lblBranch.Text = ltktDAO.Contest.getBranch(id);
-                                lblYear.Text = Convert.ToString(contest.Year);
-
-                                lblOverview.Text = contest.Contents.Replace("\n", "<br />");
-
-                                hpkDownloadlink.Text = contest.Title;
-                                hpkDownloadlink.NavigateUrl = contest.Location.Replace("\\", "/");
-
-                                if (contest.Solving != null)
-                                {
-                                    lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
-                                }
-
-                                txtPostedComment.Text = contest.Comment;
-
-                                IList <tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year);
-                                lblRelative.Text = "<ul>";
-                                for (int i = 0; i < items.Count; i++)
-                                {
-                                    lblRelative.Text += "<li>";
-                                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
-                                    lblRelative.Text += "(" + items[i].Posted + ")";
-                                    lblRelative.Text += "</li>";
-                                }
-                                lblRelative.Text += "</ul>";
-
-                                infoContest.Visible = true;
-                                infoEnglish.Visible = false;
-                                infoInformatic.Visible = false;
+                                // do something
+                                showContest(id);
+                                break;
                             }
-                            else
+                        case "el":
                             {
-                                viewArticle.Visible = false;
-                                commentPanel.Visible = false;
-                                relativePanel.Visible = false;
-                                invalidArticle.Visible = true;
-                                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                                // do something else
+                                showEnglish(id);
+                                break;
                             }
+                        case "it":
+                            {
+                                //do something
+                                showInformatic(id);
+                                break;
+                            }
+                        default:
                             break;
-                        }
-                    case "el":
-                        {
-                            // do something else
-                            tblEnglish english = ltktDAO.English.getEnglish(id);
-                            if (english != null)
-                            {
-                                lblTitle.Text = english.Title;
-                                lblLiker.Text = english.Point.ToString();
-
-                                lblAuthor.Text = ltktDAO.English.getAuthor(id);
-                                lblPostedDate.Text = convertDateToString(english.Posted);
-                                lblChecker.Text = english.Checker;
-                                lblType.Text = "<a href=\"./English.aspx\">Anh văn</a>";
-
-
-                                lblOverview.Text = english.Contents.Replace("\n", "<br />");
-
-                                hpkDownloadlink.Text = english.Title;
-                                hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
-
-                                IList<tblEnglish> items = ltktDAO.English.getRelativeByType(english.Type);
-                                lblRelative.Text = "<ul>";
-                                for (int i = 0; i < items.Count; i++)
-                                {
-                                    lblRelative.Text += "<li>";
-                                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
-                                    lblRelative.Text += "(" + items[i].Posted + ")";
-                                    lblRelative.Text += "</li>";
-                                }
-                                lblRelative.Text += "</ul>";
-
-                                txtPostedComment.Text = english.Comment;
-
-                                infoContest.Visible = false;
-                                infoEnglish.Visible = true;
-                                infoInformatic.Visible = false;
-                            }
-                            else
-                            {
-                                viewArticle.Visible = false;
-                                commentPanel.Visible = false;
-                                relativePanel.Visible = false;
-                                invalidArticle.Visible = true;
-                                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                            }
-                            break;
-                        }
-                    case "it":
-                        {
-                            //do something
-                            tblInformatic informatic = ltktDAO.Informatics.getInformatic(id);
-                            if (informatic != null)
-                            {
-                                lblTitle.Text = informatic.Title;
-                                lblLiker.Text = informatic.Point.ToString();
-
-                                lblAuthor.Text = ltktDAO.Informatics.getAuthor(id);
-                                lblPostedDate.Text = convertDateToString(informatic.Posted);
-                                lblChecker.Text = informatic.Checker;
-                                lblType.Text = "<a href=\"./Informatics.aspx\">Tin học</a>";
-
-                                lblOverview.Text = informatic.Contents.Replace("\n", "<br />");
-
-                                hpkDownloadlink.Text = informatic.Title;
-                                hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
-
-                                IList<tblInformatic> items = ltktDAO.Informatics.getRelativeByType(informatic.Type);
-                                lblRelative.Text = "<ul>";
-                                for (int i = 0; i < items.Count; i++)
-                                {
-                                    lblRelative.Text += "<li>";
-                                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
-                                    lblRelative.Text += "(" + items[i].Posted + ")";
-                                    lblRelative.Text += "</li>";
-                                }
-                                lblRelative.Text += "</ul>";
-
-
-                                txtPostedComment.Text = informatic.Comment;
-
-                                infoContest.Visible = false;
-                                infoEnglish.Visible = false;
-                                infoInformatic.Visible = true;
-                            }
-                            else
-                            {
-                                viewArticle.Visible = false;
-                                commentPanel.Visible = false;
-                                relativePanel.Visible = false;
-                                invalidArticle.Visible = true;
-                                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                            }
-                            break;
-                        }
-                    default:
-                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session["Error"] = "Tài nguyên không tồn tại hoặc đã bị xóa!";
+                    Response.Redirect("Error.aspx");
                 }
 
                 if (txtPostedComment.Text == String.Empty)
@@ -206,17 +81,160 @@ namespace ltkt
 
         }
 
+        private void showContest(int id)
+        {
+            tblContestForUniversity contest = ltktDAO.Contest.getContest(id);
+            if (contest != null)
+            {
+                lblTitle.Text = contest.Title;
+                lblLiker.Text = contest.Point.ToString();
 
+                lblAuthor.Text = ltktDAO.Contest.getAuthor(id);
+                lblPostedDate.Text = convertDateToString(contest.Posted);
+                lblChecker.Text = contest.Checker;
+                lblType.Text = "<a href=\"./ContestUniversity.aspx\">Luyện Thi Đại Học</a>";
+
+                lblSubject.Text = contest.Subject;
+                lblBranch.Text = ltktDAO.Contest.getBranch(id);
+                lblYear.Text = Convert.ToString(contest.Year);
+
+                lblOverview.Text = contest.Contents.Replace("\n", "<br />");
+
+                hpkDownloadlink.Text = contest.Title;
+                hpkDownloadlink.NavigateUrl = contest.Location.Replace("\\", "/");
+
+                if (contest.Solving != null)
+                {
+                    lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
+                }
+
+                txtPostedComment.Text = contest.Comment;
+
+                IList<tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year);
+                lblRelative.Text = "<ul>";
+                for (int i = 0; i < items.Count; i++)
+                {
+                    lblRelative.Text += "<li>";
+                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                    lblRelative.Text += "(" + items[i].Posted + ")";
+                    lblRelative.Text += "</li>";
+                }
+                lblRelative.Text += "</ul>";
+
+                infoContest.Visible = true;
+                infoEnglish.Visible = false;
+                infoInformatic.Visible = false;
+            }
+            else
+            {
+                viewArticle.Visible = false;
+                commentPanel.Visible = false;
+                relativePanel.Visible = false;
+                invalidArticle.Visible = true;
+                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
+                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+            }
+        }
+
+        private void showEnglish(int id)
+        {
+            tblEnglish english = ltktDAO.English.getEnglish(id);
+            if (english != null)
+            {
+                lblTitle.Text = english.Title;
+                lblLiker.Text = english.Point.ToString();
+
+                lblAuthor.Text = ltktDAO.English.getAuthor(id);
+                lblPostedDate.Text = convertDateToString(english.Posted);
+                lblChecker.Text = english.Checker;
+                lblType.Text = "<a href=\"./English.aspx\">Anh văn</a>";
+
+
+                lblOverview.Text = english.Contents.Replace("\n", "<br />");
+
+                hpkDownloadlink.Text = english.Title;
+                hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
+
+                IList<tblEnglish> items = ltktDAO.English.getRelativeByType(english.Type);
+                lblRelative.Text = "<ul>";
+                for (int i = 0; i < items.Count; i++)
+                {
+                    lblRelative.Text += "<li>";
+                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                    lblRelative.Text += "(" + items[i].Posted + ")";
+                    lblRelative.Text += "</li>";
+                }
+                lblRelative.Text += "</ul>";
+
+                txtPostedComment.Text = english.Comment;
+
+                infoContest.Visible = false;
+                infoEnglish.Visible = true;
+                infoInformatic.Visible = false;
+            }
+            else
+            {
+                viewArticle.Visible = false;
+                commentPanel.Visible = false;
+                relativePanel.Visible = false;
+                invalidArticle.Visible = true;
+                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
+                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+            }
+        }
+
+        private void showInformatic(int id)
+        {
+            tblInformatic informatic = ltktDAO.Informatics.getInformatic(id);
+            if (informatic != null)
+            {
+                lblTitle.Text = informatic.Title;
+                lblLiker.Text = informatic.Point.ToString();
+
+                lblAuthor.Text = ltktDAO.Informatics.getAuthor(id);
+                lblPostedDate.Text = convertDateToString(informatic.Posted);
+                lblChecker.Text = informatic.Checker;
+                lblType.Text = "<a href=\"./Informatics.aspx\">Tin học</a>";
+
+                lblOverview.Text = informatic.Contents.Replace("\n", "<br />");
+
+                hpkDownloadlink.Text = informatic.Title;
+                hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
+
+                IList<tblInformatic> items = ltktDAO.Informatics.getRelativeByType(informatic.Type);
+                lblRelative.Text = "<ul>";
+                for (int i = 0; i < items.Count; i++)
+                {
+                    lblRelative.Text += "<li>";
+                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                    lblRelative.Text += "(" + items[i].Posted + ")";
+                    lblRelative.Text += "</li>";
+                }
+                lblRelative.Text += "</ul>";
+
+
+                txtPostedComment.Text = informatic.Comment;
+
+                infoContest.Visible = false;
+                infoEnglish.Visible = false;
+                infoInformatic.Visible = true;
+            }
+            else
+            {
+                viewArticle.Visible = false;
+                commentPanel.Visible = false;
+                relativePanel.Visible = false;
+                invalidArticle.Visible = true;
+                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
+                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+            }
+        }
 
         protected void hpkDownloadLink_PreRender(object sender, EventArgs e)
         {
-            string location = (string)Session["download"];
-            if (location != null)
-            {
-
-                //Response.WriteFile(location);
-            }
+            
         }
+
         protected void btnSubmitComment_Click(object sender, EventArgs e)
         {
             string author = "";
