@@ -25,6 +25,7 @@
 	    });
 
 	    function init() {
+	        $('#<%= ddlSubject.ClientID%>').val(0);
 	        $('#divLessonType').hide();
 	    }
     </script>
@@ -37,7 +38,7 @@
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="upload" runat="server">
-            <form method="post" action="Upload.aspx">
+            <%--<form method="post" action="Upload.aspx">--%>
             <div class="form_settings">
                 <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
                 <p>
@@ -69,7 +70,7 @@
                     <span>Tóm tắt:</span><asp:TextBox ID="txtboxSummary" TextMode="MultiLine" Rows="5"
                         runat="server" CssClass="contact"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqSummary" runat="server" ErrorMessage="Xin vui lòng tóm tắt ngắn ngọn nội dung"
-                    ControlToValidate="txtboxSummary" Display="None"></asp:RequiredFieldValidator>
+                        ControlToValidate="txtboxSummary" Display="None"></asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Tập tin nội dung:</span>
@@ -126,7 +127,7 @@
                         OnClick="btnSubmitUpload_Click" />
                 </p>
             </div>
-            </form>
+            <%--</form>--%>
         </asp:Panel>
     </div>
 </asp:Content>

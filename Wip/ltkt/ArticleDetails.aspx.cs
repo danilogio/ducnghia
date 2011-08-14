@@ -38,6 +38,16 @@ namespace ltkt
                                 lblBranch.Text = ltktDAO.Contest.getBranch(id);
                                 lblYear.Text = Convert.ToString(contest.Year);
 
+                                lblOverview.Text = contest.Contents.Replace("\n", "<br />");
+
+                                hpkDownloadlink.Text = contest.Title;
+                                hpkDownloadlink.NavigateUrl = contest.Location.Replace("\\","/");
+
+                                if (contest.Solving != null)
+                                {
+                                    lblResolve.Text = "<a href=\"" + contest.Location.Replace("\\","/") + "\">Hướng dẫn giải</a>";
+                                }
+                                
                                 txtPostedComment.Text = contest.Comment;
 
                                 infoContest.Visible = true;
@@ -69,6 +79,12 @@ namespace ltkt
                                 lblChecker.Text = english.Checker;
                                 lblType.Text = "<a href=\"./English.aspx\">Anh văn</a>";
 
+
+                                lblOverview.Text = english.Contents.Replace("\n", "<br />");
+
+                                hpkDownloadlink.Text = english.Title;
+                                hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/") ;
+
                                 infoContest.Visible = false;
                                 infoEnglish.Visible = true;
                                 infoInformatic.Visible = false;
@@ -98,7 +114,10 @@ namespace ltkt
                                 lblChecker.Text = informatic.Checker;
                                 lblType.Text = "<a href=\"./Informatics.aspx\">Tin học</a>";
 
-                                
+                                lblOverview.Text = informatic.Contents.Replace("\n", "<br />");
+
+                                hpkDownloadlink.Text = informatic.Title;
+                                hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
 
                                 infoContest.Visible = false;
                                 infoEnglish.Visible = false;
@@ -149,6 +168,17 @@ namespace ltkt
 
         }
 
+
+
+        protected void hpkDownloadLink_PreRender(object sender, EventArgs e)
+        {
+            string location = (string)Session["download"];
+            if (location != null)
+            {
+                
+                //Response.WriteFile(location);
+            }
+        }
         protected void btnSubmitComment_Click(object sender, EventArgs e)
         {
             string author = "";

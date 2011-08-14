@@ -82,7 +82,16 @@ namespace ltkt
                             }
                     }
 
-                    string filename = Server.MapPath("~") + "\\" + folder + "\\" + fileContent.FileName;
+                    string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
+                    string filename = rootFolder + fileContent.FileName;
+                    string fileSave = folder + "\\" + fileContent.FileName;
+                    string fileSolvingSave = "";
+                    // save file
+                    if (!Directory.Exists(rootFolder))
+                    {
+                        Directory.CreateDirectory(rootFolder);
+                    }
+
                     fileContent.SaveAs(filename);
 
                     if (fileSolving.HasFile)
@@ -90,6 +99,10 @@ namespace ltkt
                         fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
                             Path.GetFileNameWithoutExtension(fileContent.FileName) +
                             "_solved" + Path.GetExtension(fileSolving.FileName));
+
+                        fileSolvingSave = folder + "\\" +
+                            Path.GetFileNameWithoutExtension(fileContent.FileName) +
+                            "_solved" + Path.GetExtension(fileSolving.FileName);
                     }
                     // ghi xuống db
 
@@ -97,15 +110,36 @@ namespace ltkt
                     {
                         case 0:
                             {
-                                ltktDAO.Contest.insertContest(txtboxTitle.Text,
+
+
+                                if (fileSolvingSave != "")
+                                {
+                                    ltktDAO.Contest.insertContest(txtboxTitle.Text,
                                     txtboxSummary.Text,
                                     user.Username,
                                     DateTime.Now,
                                     Boolean.Parse(ddlTypeContest.SelectedValue),
                                     Convert.ToInt32(ddlBranch.SelectedValue),
                                     Convert.ToInt32(ddlYear.SelectedValue),
-                                    filename,
-                                    txtboxTag.Text);
+                                    fileSave,
+                                    txtboxTag.Text,
+                                    true,
+                                    fileSolvingSave);
+                                }
+                                else
+                                {
+                                    ltktDAO.Contest.insertContest(txtboxTitle.Text,
+                                                                       txtboxSummary.Text,
+                                                                       user.Username,
+                                                                       DateTime.Now,
+                                                                       Boolean.Parse(ddlTypeContest.SelectedValue),
+                                                                       Convert.ToInt32(ddlBranch.SelectedValue),
+                                                                       Convert.ToInt32(ddlYear.SelectedValue),
+                                                                       fileSave,
+                                                                       txtboxTag.Text,
+                                                                       false,
+                                                                       null);
+                                }
                                 break;
                             }
                         case 1:
@@ -115,7 +149,7 @@ namespace ltkt
                                     txtboxSummary.Text,
                                     user.Username,
                                     DateTime.Now,
-                                    filename,
+                                    fileSave,
                                     txtboxTag.Text);
                                 break;
                             }
@@ -126,7 +160,7 @@ namespace ltkt
                                     txtboxSummary.Text,
                                     user.Username,
                                     DateTime.Now,
-                                    filename,
+                                    fileSave,
                                     txtboxTag.Text);
                                 break;
                             }
@@ -136,6 +170,7 @@ namespace ltkt
                     message.Visible = true;
                     liMessage.Text = "Upload thành công.";
                     liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
+                    liMessage.Text += "<br />Bài viết của bạn sẽ được kiểm duyệt trong vòng 24h";
                     liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a><br />";
                 }
             }

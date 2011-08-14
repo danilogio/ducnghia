@@ -759,7 +759,7 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <returns></returns>
         public static Boolean insertContest(string _title, string _content, string _author,
-            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location, string _tag)
+            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location, string _tag, Boolean isSolved, string fileSolved)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -779,6 +779,11 @@ namespace ltktDAO
                     record.Point = 0;//điểm
                     record.Location = _location;
                     record.Tag = _tag;
+
+                    if (isSolved)
+                    {
+                        record.Solving = fileSolved;
+                    }
 
                     DB.tblContestForUniversities.InsertOnSubmit(record);
 

@@ -72,15 +72,13 @@
                             <li>Người kiểm duyệt:<b>
                                 <asp:Label ID="lblChecker" runat="server" Text=""></asp:Label></b></li>
                             <li>Mục:<asp:Label ID="lblType" runat="server" Text=""></asp:Label></li>
-                            
                             <asp:Panel ID="infoContest" runat="server">
                                 <li>Môn:<asp:Label ID="lblSubject" runat="server" Text=""></asp:Label>
-                                <li>Khối:<asp:Label ID="lblBranch" runat="server" Text=""></asp:Label></li>
-                                <li>Năm:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
+                                    <li>Khối:<asp:Label ID="lblBranch" runat="server" Text=""></asp:Label></li>
+                                    <li>Năm:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
                             </asp:Panel>
                             <asp:Panel ID="infoEnglish" runat="server" Visible="false">
                                 <li>Loại tài liệu:<asp:Label ID="lblLessonType" runat="server"></asp:Label></li>
-                                
                             </asp:Panel>
                             <asp:Panel ID="infoInformatic" runat="server" Visible="false">
                             </asp:Panel>
@@ -94,7 +92,7 @@
                     <li>
                         <h4>
                             Download Link:</h4>
-                        <asp:HyperLink ID="hpkDownloadlink" runat="server"></asp:HyperLink>
+                        <asp:HyperLink ID="hpkDownloadlink" runat="server" OnPreRender="hpkDownloadLink_PreRender"></asp:HyperLink>
                     </li>
                     <li>
                         <h4>
@@ -117,7 +115,7 @@
             </div>
             <p>
                 &nbsp;<asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
-                <form action="ArticleDetails.aspx" method="post">
+                <%--<form action="ArticleDetails.aspx" method="post">--%>
                 <div id="postingComment" class="form_settings" style="padding-left: 45px;">
                     <asp:Panel ID="nonUserPanel" runat="server">
                         <p>
@@ -151,7 +149,7 @@
                             Text="Gửi bình luận" />
                     </p>
                 </div>
-                </form>
+                <%--</form>--%>
             </p>
         </asp:Panel>
         <asp:Panel ID="relativePanel" runat="server">

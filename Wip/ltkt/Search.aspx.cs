@@ -11,7 +11,7 @@ namespace ltkt
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+                        
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -20,6 +20,24 @@ namespace ltkt
             {
                 return;
             }
+
+            string keyWords = txtboxSearch.Text;
+            int topic = Convert.ToInt32(ddlSubject.SelectedValue);
+
+            // Luyện thi đại học
+            if (topic == 0 || topic == 3)
+            { }
+            
+            // Tin học
+            if (topic == 1 || topic == 3)
+            { }
+            
+            // Anh văn
+            if (topic == 2 || topic == 3)
+            { }
+
+
+            
         }
     }
 }

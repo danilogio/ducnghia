@@ -26,19 +26,21 @@
             });
         });
         function init() {
+            $('#<%= ddlSubject.ClientID%>').val(0);
             $('#divLessonType').hide();
         }
     </script>
 
     <div id="search" class="block_text">
         <h2>
-            Tìm kiếm</h2>
+            <asp:Literal ID="liTitle" runat="server" Text="Tìm kiếm"></asp:Literal>
+        </h2>
         <hr />
         <%-- <form method="post">--%>
         <asp:Panel ID="searchPanel" runat="server">
             <div class="form_settings">
                 <p>
-                    <span>Chuỗi tìm kiếm:</span><asp:TextBox ID="txtboxSearchString" runat="server" CssClass="contact"></asp:TextBox></p>
+                    <span>Chuỗi tìm kiếm:</span><asp:TextBox ID="txtboxSearch" runat="server" CssClass="contact"></asp:TextBox></p>
                 <p>
                     <span>Chủ đề:</span><asp:DropDownList ID="ddlSubject" runat="server">
                         <asp:ListItem Text="Luyện thi đại học" Value="0"></asp:ListItem>
@@ -119,7 +121,7 @@
                     </div>
                 </p>
                 <p style="padding-top: 15px">
-                    <span>&nbsp;</span><asp:Button ID="btnSubmitSearch" runat="server" Text="Tìm" CssClass="submit"
+                    <span>&nbsp;</span><asp:Button ID="btnSearch" runat="server" Text="Tìm" CssClass="submit"
                         OnClick="btnSearch_Click" /></p>
             </div>
         </asp:Panel>
