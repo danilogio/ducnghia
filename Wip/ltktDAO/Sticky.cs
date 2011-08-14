@@ -9,14 +9,14 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-        EventLog log = new EventLog();
+        static EventLog log = new EventLog();
         /// <summary>
         /// Check existed record in DB
         /// </summary>
         /// <param name="_type"></param>
         /// <param name="_article"></param>
         /// <returns></returns>
-        public bool checkExisted(int _type, int _article)
+        public static bool checkExisted(int _type, int _article)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblSticky> lst = DB.tblStickies.Where(r =>r.Type == _type && r.Article == _article);
@@ -31,7 +31,7 @@ namespace ltktDAO
             }
         }
 
-        public bool insertSticky(tblSticky record)
+        public static bool insertSticky(tblSticky record)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 

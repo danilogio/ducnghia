@@ -35,5 +35,17 @@ namespace ltktDAO
         /// number of character string
         /// </summary>
         public const int NUMBER_OF_CHARACTER_ON_STRING = 15;
+        /// <summary>
+        /// error text
+        /// </summary>
+        public const string COMMON_ERROR_TEXT = "Đã có lỗi xảy ra, xin vui lòng thử lại sau.";
+        /// <summary>
+        /// constant of session error text
+        /// </summary>
+        public const string CONST_SES_ERROR = "Error";
+        /// <summary>
+        /// error Page
+        /// </summary>
+        public const string PAGE_ERROR = "Error.aspx";
     }
 }
