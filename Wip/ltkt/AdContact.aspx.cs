@@ -20,7 +20,6 @@ public partial class AdContact : System.Web.UI.Page
         }
 
         string sDescription = getLocation(sender, e);
-       
     }
 
     private string getLocation(object sender, EventArgs e)

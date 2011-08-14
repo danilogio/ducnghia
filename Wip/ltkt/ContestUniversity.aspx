@@ -25,7 +25,8 @@
                     <li><a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
                         <img src="<%#Eval("Thumbnail")%>" alt="" />
                         <br />
-                        <center><%#Eval("Title")%></center></a></li>
+                        <center><%#Eval("Title")%></center>
+                    </a></li>
                 </ItemTemplate>
                 <EmptyDataTemplate>
                     <div>
@@ -35,9 +36,12 @@
             </asp:ListView>
         </div>
         <div class="datapager">
-            <asp:DataPager ID="DataPager1" PageSize="6" PagedControlID="productList" runat="server">
+            <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
+                PagedControlID="productList" runat="server">
                 <Fields>
+                    <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" />
                     <asp:NumericPagerField />
+                    <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" />
                 </Fields>
             </asp:DataPager>
         </div>
