@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{360AD783-82B9-4A2B-9573-CEC3ABC7F023}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
+    <Compile Include="AdminConstants.cs" />
+    <Compile Include="Ads.cs" />
     <Compile Include="BaseServices.cs" />
     <Compile Include="Comments.cs" />
     <Compile Include="CommonConstants.cs" />
@@ -77,6 +79,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Statistics.cs" />
     <Compile Include="Sticky.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

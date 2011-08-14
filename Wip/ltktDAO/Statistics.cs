@@ -26,5 +26,13 @@ namespace ltktDAO
 
             return (sumContest + sumEnglish + sumInformatics);
         }
+
+        //public static tblStatistic getRecordByID(int _id)
+        //{
+        //    string data = "";
+        //    LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+        //    return data;
+        //}
     }
 }
