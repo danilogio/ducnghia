@@ -177,6 +177,7 @@ public partial class _Default : System.Web.UI.Page
         }
         return data;
     }
+   
     private string loadDetailsForITArticles(IList<tblInformatic> lst)
     {
         string data = "";
@@ -197,6 +198,7 @@ public partial class _Default : System.Web.UI.Page
         }
         return data;
     }
+    
     private string buildArticleForEnglish(tblEnglish item)
     {
         string data = "";
@@ -211,7 +213,6 @@ public partial class _Default : System.Web.UI.Page
                 + "            </div>\n";
         return data;
     }
-
 
     private string buildArticleForInformatics(tblInformatic item)
     {

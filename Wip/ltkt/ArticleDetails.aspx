@@ -103,6 +103,14 @@
             </div>
             <br />
         </asp:Panel>
+        <asp:Panel ID="relativePanel" runat="server">
+            <h4>
+                Bài viết liên quan</h4>
+            <hr />
+            <div>
+                <asp:Label ID="lblRelative" runat="server"></asp:Label>
+            </div>
+        </asp:Panel>
         <asp:Panel ID="commentPanel" runat="server">
             <h4>
                 Gửi ý kiến thảo luận</h4>
@@ -110,12 +118,11 @@
             <br />
             <div id="postedComment">
                 <asp:Label ID="txtPostedComment" runat="server" TextMode="MultiLine" ReadOnly="true"
-                    Height="300px" Width="590px" BackColor="White">
+                    BackColor="White">
                 </asp:Label>
             </div>
-            <p>
-                &nbsp;<asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
-                <%--<form action="ArticleDetails.aspx" method="post">--%>
+            <div>
+                <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
                 <div id="postingComment" class="form_settings" style="padding-left: 45px;">
                     <asp:Panel ID="nonUserPanel" runat="server">
                         <p>
@@ -130,18 +137,8 @@
                         <p>
                             <span>Email:</span><asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
                         </p>
-                        <%--<center>
-                        <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
-                            CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
-                            CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"
-                            CaptchaFontWarping="Low" />
-                    </center>
-                    <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
-                        ControlToValidate="txtboxCaptcha" Display="none">
-                    </asp:RequiredFieldValidator>--%></asp:Panel>
+                    </asp:Panel>
                     <p>
-                        <br />
                         <asp:TextBox ID="txtContent" runat="server" Rows="5" TextMode="MultiLine" Width="500px"></asp:TextBox>
                     </p>
                     <p style="padding-left: 200px;">
@@ -149,13 +146,8 @@
                             Text="Gửi bình luận" />
                     </p>
                 </div>
-                <%--</form>--%>
-            </p>
+            </div>
         </asp:Panel>
-        <asp:Panel ID="relativePanel" runat="server">
-            <h4>
-                Bài viết liên quan</h4>
-            <hr />
-        </asp:Panel>
+        
     </div>
 </asp:Content>

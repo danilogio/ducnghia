@@ -110,21 +110,19 @@ namespace ltkt
                     {
                         case 0:
                             {
-
-
                                 if (fileSolvingSave != "")
                                 {
                                     ltktDAO.Contest.insertContest(txtboxTitle.Text,
-                                    txtboxSummary.Text,
-                                    user.Username,
-                                    DateTime.Now,
-                                    Boolean.Parse(ddlTypeContest.SelectedValue),
-                                    Convert.ToInt32(ddlBranch.SelectedValue),
-                                    Convert.ToInt32(ddlYear.SelectedValue),
-                                    fileSave,
-                                    txtboxTag.Text,
-                                    true,
-                                    fileSolvingSave);
+                                                                    txtboxSummary.Text,
+                                                                    user.Username,
+                                                                    DateTime.Now,
+                                                                    Boolean.Parse(ddlTypeContest.SelectedValue),
+                                                                    Convert.ToInt32(ddlBranch.SelectedValue),
+                                                                    Convert.ToInt32(ddlYear.SelectedValue),
+                                                                    fileSave,
+                                                                    txtboxTag.Text,
+                                                                    true,
+                                                                    fileSolvingSave);
                                 }
                                 else
                                 {

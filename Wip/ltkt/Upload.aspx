@@ -2,6 +2,10 @@
     CodeFile="Upload.aspx.cs" Inherits="ltkt.Upload" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
+
+<asp:Content ID="UploadHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Gửi bài viết | Website luyện thi kinh tế</title>
+</asp:Content>
 <asp:Content ID="Upload" ContentPlaceHolderID="cphContent" runat="Server">
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
@@ -38,7 +42,6 @@
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="upload" runat="server">
-            <%--<form method="post" action="Upload.aspx">--%>
             <div class="form_settings">
                 <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
                 <p>
@@ -127,7 +130,6 @@
                         OnClick="btnSubmitUpload_Click" />
                 </p>
             </div>
-            <%--</form>--%>
         </asp:Panel>
     </div>
 </asp:Content>

@@ -10,6 +10,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
+        static EventLog log = new EventLog();
 
         #region Property
         #region Get Property
@@ -719,6 +720,7 @@ namespace ltktDAO
                                                         select p).Take(number);
             return lst;
         }
+        
         /// <summary>
         /// Thêm một đề thi
         /// </summary>
@@ -759,7 +761,8 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <returns></returns>
         public static Boolean insertContest(string _title, string _content, string _author,
-            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location, string _tag, Boolean isSolved, string fileSolved)
+            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location, 
+            string _tag, Boolean isSolved, string fileSolved)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -790,10 +793,13 @@ namespace ltktDAO
                     DB.SubmitChanges();
 
                     ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, "insert contest id=" + record.ID + " successfully");
                 }
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, e.Message);
                 return false;
             }
             return true;
@@ -909,16 +915,23 @@ namespace ltktDAO
                     contest.Comment += "<br /><br />";
                     DB.SubmitChanges();
                     ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile, "insert comment for contest id=" + _id + " successfully");
                 }
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, e.Message);
                 return false;
             }
 
             return true;
         }
 
+        /// <summary>
+        /// Thích
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
         public static Boolean Like(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -940,6 +953,11 @@ namespace ltktDAO
             return true;
         }
 
+        /// <summary>
+        /// Báo xấu
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
         public static Boolean Dislike(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -962,7 +980,20 @@ namespace ltktDAO
             return true;
         }
 
+        /// <summary>
+        /// Lấy các đề thi cùng năm
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <returns></returns>
+        public static IList<tblContestForUniversity> getRelativeByYear(int _year)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
+                                                       where record.Year == _year
+                                                        select record).Take(5);
 
+            return lst.ToList();
+        }
 
         #endregion
     }

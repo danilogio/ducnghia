@@ -658,6 +658,21 @@ namespace ltktDAO
             return true;
         }
 
+        /// <summary>
+        /// Lấy bài viết liên quan theo loại
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <returns></returns>
+        public static IList<tblEnglish> getRelativeByType(int _type)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblEnglish> lst = (from record in DB.tblEnglishes
+                                           where record.Type == _type
+                                           select record).Take(5);
+
+            return lst.ToList();
+        }
+
         #endregion
     }
 }

@@ -41,14 +41,27 @@ namespace ltkt
                                 lblOverview.Text = contest.Contents.Replace("\n", "<br />");
 
                                 hpkDownloadlink.Text = contest.Title;
-                                hpkDownloadlink.NavigateUrl = contest.Location.Replace("\\","/");
+                                hpkDownloadlink.NavigateUrl = contest.Location.Replace("\\", "/");
 
                                 if (contest.Solving != null)
                                 {
-                                    lblResolve.Text = "<a href=\"" + contest.Location.Replace("\\","/") + "\">Hướng dẫn giải</a>";
+                                    lblResolve.Text = "<a href=\"" + contest.Location.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
                                 }
-                                
+
                                 txtPostedComment.Text = contest.Comment;
+
+                                IList <tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year);
+                                lblRelative.Text += "<ul>";
+                                for (int i = 0; i < items.Count; i++)
+                                {
+                                    lblRelative.Text += "<li>";
+                                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                                    lblRelative.Text += "(" + items[i].Posted + ")";
+                                    lblRelative.Text += "</li>";
+                                }
+                                lblRelative.Text += "</ul>";
+
+
 
                                 infoContest.Visible = true;
                                 infoEnglish.Visible = false;
@@ -83,7 +96,10 @@ namespace ltkt
                                 lblOverview.Text = english.Contents.Replace("\n", "<br />");
 
                                 hpkDownloadlink.Text = english.Title;
-                                hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/") ;
+                                hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
+
+
+                                txtPostedComment.Text = english.Comment;
 
                                 infoContest.Visible = false;
                                 infoEnglish.Visible = true;
@@ -118,6 +134,8 @@ namespace ltkt
 
                                 hpkDownloadlink.Text = informatic.Title;
                                 hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
+
+                                txtPostedComment.Text = informatic.Comment;
 
                                 infoContest.Visible = false;
                                 infoEnglish.Visible = false;
@@ -175,7 +193,7 @@ namespace ltkt
             string location = (string)Session["download"];
             if (location != null)
             {
-                
+
                 //Response.WriteFile(location);
             }
         }
