@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
-
+using ltktDAO;
 public partial class AdContact : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -20,6 +20,7 @@ public partial class AdContact : System.Web.UI.Page
         }
 
         string sDescription = getLocation(sender, e);
+        
     }
 
     private string getLocation(object sender, EventArgs e)

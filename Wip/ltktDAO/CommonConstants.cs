@@ -27,5 +27,13 @@ namespace ltktDAO
         /// do not find out article record on DB
         /// </summary>
         public const string ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
+        /// <summary>
+        /// path of event log
+        /// </summary>
+        public const string LOG_FILE_PATH = "Log\\EventLog.txt";
+        /// <summary>
+        /// number of character string
+        /// </summary>
+        public const int NUMBER_OF_CHARACTER_ON_STRING = 15;
     }
 }

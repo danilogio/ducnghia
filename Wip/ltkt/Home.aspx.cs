@@ -128,8 +128,9 @@ public partial class _Default : System.Web.UI.Page
     private string buildTopNews(tblNew item)
     {
         string data = "";
+        
         data+= "<h3>\n";
-        data += "                " + item.Title.Trim() + "</h3>\n";
+        data += "                " + item.Title + "</h3>\n";
         data += "            <h5>\n";
         data += "                Post ngày " + item.Posted + " bởi <b>"+item.Author.Trim()+"</b></h5>\n";
         data += "            <p>\n";
@@ -202,10 +203,10 @@ public partial class _Default : System.Web.UI.Page
         BaseServices bs = new BaseServices();
         data += "              <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
-                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt=\""+ item.Title.Trim()+"\" />\n"
+                + "                    <span title='" + item.Title + "'><img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='" + item.Title.Trim() + "'/></span>\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
-                + "                    <a href=\"ArticleDetails.aspx?sec=el&id=" + item.ID + "\">" + item.Title.Trim() + "</a>\n"
+                + "                    <span title='" + item.Title + "'><a href=\"ArticleDetails.aspx?sec=el&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
                 + "                </div>\n"
                 + "            </div>\n";
         return data;
@@ -218,10 +219,10 @@ public partial class _Default : System.Web.UI.Page
         BaseServices bs = new BaseServices();
         data += "              <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
-                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt=\"" + item.Title + "\" />\n"
+                + "                    <span title='"+item.Title+"'><img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='" + item.Title + "' /></span>\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
-                + "                    <a href=\"ArticleDetails.aspx?sec=it&id=" + item.ID + "\">" + item.Title.Trim() + "</a>\n"
+                + "                    <span title='"+item.Title+"'><a href=\"ArticleDetails.aspx?sec=it&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
                 + "                </div>\n"
                 + "            </div>\n";
         return data;
@@ -232,10 +233,10 @@ public partial class _Default : System.Web.UI.Page
         BaseServices bs = new BaseServices();
         res += "                <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
-                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='"+item.Title+"' />\n"
+                + "                    <span title='" + item.Title + "'><img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='" + item.Title + "' /></span>\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
-                + "                    <a href=\"ArticleDetails.aspx?sec=uni&id=" + item.ID + "\">" + item.Title.Trim() + "</a>\n"
+                + "                    <span title='" + item.Title + "'><a href=\"ArticleDetails.aspx?sec=uni&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
                 + "                </div>\n"
                 + "                <div class='block_details_text'>\n"
                 + "                    " + item.Subject.Trim() + "<br />\n"

@@ -60,7 +60,7 @@
                 <li><a href="#EnglishLesson03">Đề thi</a></li>
             </ul>
             <!-- start EglishLesson-1-->
-            <div id="EnglishLesson01">
+            <div id="EnglishLesson01"></a>
                 <%=loadDataForELLectures() %>
             </div>
             <!-- start EglishLesson-2-->
@@ -78,38 +78,8 @@
             Tin tức thư viện</h2>
         <hr />
         <div>
-            <%--<h3>
-                Cơ chế gửi bài tại thư viện trực tuyến Đức Nghĩa</h3>
-            <h5>
-                Post ngày 9/7/1011 bởi <b>Thầy Đức Nghĩa</b></h5>
-            <p>
-                Để đảm bảo sự trong sạch và nâng cao chất lượng nội dung Thư viện trực tuyến Violet,
-                BQT xin thông báo rõ một số quy chế mới sau: *Không được đăng các tài liệu phản
-                động hoặc mang nội dung chính trị nhạy cảm, các tác phẩm văn học bị cấm phát hành,
-                phim ảnh khiêu dâm. *Không được đăng các tài liệu hoặc gửi ý kiến mang thông tin
-                lừa đảo, ví dụ như lừa người dùng chuyển tiền vào tài khoản điện thoại. *Không được
-                gửi các tài liệu mang thông tin nói xấu, bôi... <a href="News.aspx">Xem tiếp >></a>
-            </p>
-            <ul>
-                <li>
-                    <asp:HyperLink ID="HpkNews1" runat="server" NavigateUrl="~/News.aspx">Trung Tâm Đức Nghĩa chào mừng ngày Nhà giáo Việt Nam</asp:HyperLink><div
-                        class="date">
-                        (20-11-2011)</div>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HpkNews2" runat="server" NavigateUrl="~/News.aspx">Trung tâm Đức Nghĩa chào mừng năm học mới</asp:HyperLink><div
-                        class="date">
-                        (20-11-2011)</div>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HpkNews3" runat="server" NavigateUrl="~/News.aspx">Thông báo địa điểm họp mặt thành viên</asp:HyperLink><div
-                        class="date">
-                        (19-11-2011)</div>
-                </li>
-            </ul>--%>
             <%=loadLatestNews()%>
         </div>
-        
         <div class="referlink">
             <asp:HyperLink ID="HpkViewAllNsew" runat="server" NavigateUrl="~/News.aspx">Xem tất cả >></asp:HyperLink>
         </div>

@@ -9,6 +9,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
+        EventLog log = new EventLog();
         /// <summary>
         /// Check existed record in DB
         /// </summary>
@@ -47,8 +48,10 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, e.Message);
                 return false;
             }
+            log.writeLog(DBHelper.strPathLogFile, "insert sticky " + record.Type+ ":" +record.Article + " successfully");
             return true;
         }
 
