@@ -31,12 +31,13 @@ namespace ltktDAO
             }
         }
 
-        public static bool insertSticky(tblSticky record)
+        public static bool insertSticky(tblSticky record, string _username)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             try
             {
+                log.writeLog("[" + _username + "]:INSERT Sticky where _type=" + record.Type + " and article=" + record.Article);
                 using (TransactionScope ts = new TransactionScope())
                 {
                     DB.tblStickies.InsertOnSubmit(record);
@@ -51,10 +52,30 @@ namespace ltktDAO
                 log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, e.Message);
                 return false;
             }
-            log.writeLog(DBHelper.strPathLogFile, "insert sticky " + record.Type+ ":" +record.Article + " successfully");
+            log.writeLog("[" + _username + "]:INSERT Sticky successful");
             return true;
         }
 
-        //public bool deleteSticky(
+        public bool deleteSticky(int _type, int _article, string _username)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                log.writeLog("[" + _username + "]:DELETE Sticky where _type=" + _type + " and article=" + _article);
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblSticky s = DB.tblStickies.Single(p => p.Type == _type && p.Article == _article);
+                    DB.tblStickies.DeleteOnSubmit(s);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, ex.Message);
+                return false;
+            }
+            log.writeLog("[" + _username + "]:DELETE Sticky successful");
+            return true;
+        }
     }
 }

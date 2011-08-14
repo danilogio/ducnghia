@@ -29,12 +29,26 @@ namespace ltktDAO
             sErrorTime = sYear+sMonth+sDay;
         }
 
+        /// <summary>
+        /// use to write from Website
+        /// </summary>
+        /// <param name="sPathName"></param>
+        /// <param name="sErrMsg"></param>
         public void writeLog(string sPathName, string sErrMsg)
         {
             StreamWriter sw = new StreamWriter(sPathName + sErrorTime, true);
             sw.WriteLine(sLogFormat + sErrMsg);
             sw.Flush();
             sw.Close();
+        }
+
+        /// <summary>
+        /// use to write from DAO
+        /// </summary>
+        /// <param name="sErrMsg"></param>
+        public void writeLog(string sErrMsg)
+        {
+            writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, sErrMsg);
         }
     }
 }

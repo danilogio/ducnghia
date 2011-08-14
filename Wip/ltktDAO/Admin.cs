@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 
 namespace ltktDAO
 {
@@ -9,32 +10,62 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
+        static EventLog log = new EventLog();
+        
 
         /// <summary>
-        /// Tống tất cả các bài viết (ltđh, anh văn, tin học)
+        /// Get record of TblAdmin
         /// </summary>
+        /// <param name="_id"></param>
         /// <returns></returns>
-        public static int sumArticle()
+        public static IQueryable<tblAdmin> getRecord(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
-            int sumContest = (from contest in DB.tblContestForUniversities
-                              select contest).Count();
-            int sumEnglish = (from english in DB.tblEnglishes
-                              select english).Count();
-            int sumInformatics = (from informatics in DB.tblInformatics
-                                  select informatics).Count();
-
-            return (sumContest + sumEnglish + sumInformatics);
+            var item = DB.tblAdmins.Where(p => p.ID == _id);
+            return item;
+        }
+        public static bool changeStateON(int _id, string _username)
+        {
+            try
+            {
+                log.writeLog("[" + _username + "]:Change state id=" + _id+ " is ON");
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+                    var record = DB.tblAdmins.Single(p => p.ID == _id);
+                    record.State = true;
+                    DB.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, ex.Message);
+                return false;
+            }
+            log.writeLog("[" + _username + "]:Change state ON successful");
+            return true;
         }
 
-        /// <summary>
-        /// Năm (5) thành viên login gần nhất
-        /// </summary>
-        /// <returns></returns>
-        public static string latestLogin()
+        public static bool changeStateOFF(int _id, string _username)
         {
-            return "test";
+            try
+            {
+                log.writeLog("[" + _username + "]:Change state id=" + _id + " is OFF");
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+                    var record = DB.tblAdmins.Single(p => p.ID == _id);
+                    record.State = false;
+                    DB.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, ex.Message);
+                return false;
+            }
+            log.writeLog("[" + _username + "]:Change state OFF successful");
+            return true;
         }
     }
 

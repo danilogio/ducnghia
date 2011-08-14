@@ -216,7 +216,7 @@ public partial class _Default : System.Web.UI.Page
             data += "                Post ngày " + item.Posted + " bởi <b>" + item.Author.Trim() + "</b></h5>\n";
             data += "            <p>\n";
             data += item.Chapaeu.Trim() + "...";
-            data += "              <a href='News.aspx?id='" + item.ID + ">Xem tiếp >></a>\n";
+            data += "              <a href='News.aspx?id=" + item.ID + "'>Xem tiếp >></a>\n";
             data += "            </p>\n";
         }
         catch (Exception ex)
