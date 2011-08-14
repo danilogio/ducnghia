@@ -10,6 +10,18 @@ namespace ltktDAO
     {
         public string getThumbnail(string thumbnail, string location)
         {
+            if (thumbnail != null)
+            {
+                thumbnail = thumbnail.Trim();
+            }
+            else
+            {
+                thumbnail = "";
+            }
+            if (location != null)
+            {
+                location = location.Trim();
+            }
             DirectoryInfo d = new DirectoryInfo(".");
             string sPath = d.FullName + "\\ltkt\\";
             FileInfo f = new FileInfo(sPath + thumbnail);

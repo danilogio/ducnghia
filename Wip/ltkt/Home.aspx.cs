@@ -202,7 +202,7 @@ public partial class _Default : System.Web.UI.Page
         BaseServices bs = new BaseServices();
         data += "              <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
-                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail.Trim(), item.Location.Trim()) + "' alt=\""+ item.Title.Trim()+"\" />\n"
+                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt=\""+ item.Title.Trim()+"\" />\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
                 + "                    <a href=\"ArticleDetails.aspx?sec=el&id=" + item.ID + "\">" + item.Title.Trim() + "</a>\n"
@@ -218,7 +218,7 @@ public partial class _Default : System.Web.UI.Page
         BaseServices bs = new BaseServices();
         data += "              <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
-                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail.Trim(), item.Location.Trim()) + "' alt=\"" + item.Title + "\" />\n"
+                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt=\"" + item.Title + "\" />\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
                 + "                    <a href=\"ArticleDetails.aspx?sec=it&id=" + item.ID + "\">" + item.Title.Trim() + "</a>\n"
@@ -232,7 +232,7 @@ public partial class _Default : System.Web.UI.Page
         BaseServices bs = new BaseServices();
         res += "                <div class='block_details'>\n"
                 + "                <div class='block_details_img'>\n"
-                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail.Trim(), item.Location.Trim()) + "' alt='"+item.Title+"' />\n"
+                + "                    <img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='"+item.Title+"' />\n"
                 + "                </div>\n"
                 + "                <div class='block_details_title'>\n"
                 + "                    <a href=\"ArticleDetails.aspx?sec=uni&id=" + item.ID + "\">" + item.Title.Trim() + "</a>\n"
