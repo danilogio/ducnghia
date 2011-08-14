@@ -45,13 +45,13 @@ namespace ltkt
 
                                 if (contest.Solving != null)
                                 {
-                                    lblResolve.Text = "<a href=\"" + contest.Location.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
+                                    lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
                                 }
 
                                 txtPostedComment.Text = contest.Comment;
 
                                 IList <tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year);
-                                lblRelative.Text += "<ul>";
+                                lblRelative.Text = "<ul>";
                                 for (int i = 0; i < items.Count; i++)
                                 {
                                     lblRelative.Text += "<li>";
@@ -60,8 +60,6 @@ namespace ltkt
                                     lblRelative.Text += "</li>";
                                 }
                                 lblRelative.Text += "</ul>";
-
-
 
                                 infoContest.Visible = true;
                                 infoEnglish.Visible = false;
@@ -98,6 +96,16 @@ namespace ltkt
                                 hpkDownloadlink.Text = english.Title;
                                 hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
 
+                                IList<tblEnglish> items = ltktDAO.English.getRelativeByType(english.Type);
+                                lblRelative.Text = "<ul>";
+                                for (int i = 0; i < items.Count; i++)
+                                {
+                                    lblRelative.Text += "<li>";
+                                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                                    lblRelative.Text += "(" + items[i].Posted + ")";
+                                    lblRelative.Text += "</li>";
+                                }
+                                lblRelative.Text += "</ul>";
 
                                 txtPostedComment.Text = english.Comment;
 
@@ -134,6 +142,18 @@ namespace ltkt
 
                                 hpkDownloadlink.Text = informatic.Title;
                                 hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
+
+                                IList<tblInformatic> items = ltktDAO.Informatics.getRelativeByType(informatic.Type);
+                                lblRelative.Text = "<ul>";
+                                for (int i = 0; i < items.Count; i++)
+                                {
+                                    lblRelative.Text += "<li>";
+                                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                                    lblRelative.Text += "(" + items[i].Posted + ")";
+                                    lblRelative.Text += "</li>";
+                                }
+                                lblRelative.Text += "</ul>";
+
 
                                 txtPostedComment.Text = informatic.Comment;
 

@@ -73,9 +73,9 @@
                                 <asp:Label ID="lblChecker" runat="server" Text=""></asp:Label></b></li>
                             <li>Mục:<asp:Label ID="lblType" runat="server" Text=""></asp:Label></li>
                             <asp:Panel ID="infoContest" runat="server">
-                                <li>Môn:<asp:Label ID="lblSubject" runat="server" Text=""></asp:Label>
-                                    <li>Khối:<asp:Label ID="lblBranch" runat="server" Text=""></asp:Label></li>
-                                    <li>Năm:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
+                                <li>Môn:<asp:Label ID="lblSubject" runat="server" Text=""></asp:Label></li>
+                                <li>Khối:<asp:Label ID="lblBranch" runat="server" Text=""></asp:Label></li>
+                                <li>Năm:<asp:Label ID="lblYear" runat="server" Text=""></asp:Label></li>
                             </asp:Panel>
                             <asp:Panel ID="infoEnglish" runat="server" Visible="false">
                                 <li>Loại tài liệu:<asp:Label ID="lblLessonType" runat="server"></asp:Label></li>
@@ -148,6 +148,5 @@
                 </div>
             </div>
         </asp:Panel>
-        
     </div>
 </asp:Content>
