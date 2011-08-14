@@ -240,7 +240,7 @@ public partial class _Default : System.Web.UI.Page
                 + "                <div class='block_details_text'>\n"
                 + "                    " + item.Subject.Trim() + "<br />\n"
                 + Contest.getBranch(item.ID) + "<br/>\n"
-                + item.Year.
+                + item.Year
                 + "                </div>\n"
                 + "            </div>\n";
                 

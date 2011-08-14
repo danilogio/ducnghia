@@ -61,6 +61,7 @@
     <Compile Include="Contest.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="English.cs" />
+    <Compile Include="EventLog.cs" />
     <Compile Include="Informatics.cs" />
     <Compile Include="LTDH.cs">
       <DependentUpon>LTDH.dbml</DependentUpon>
@@ -99,6 +100,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Log\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
