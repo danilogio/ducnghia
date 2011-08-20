@@ -758,16 +758,27 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public static IList<tblInformatic> getRelativeByType(int _type)
+        public static IList<tblInformatic> getRelativeByType(int _type, int _numberRecords)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = (from record in DB.tblInformatics
                                               where record.Type == _type
-                                              select record).Take(5);
+                                              select record).Take(_numberRecords);
 
             return lst.ToList();
         }
 
+        public static IList<tblInformatic> listInformatics(string _keyword)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                             where record.Title.Contains(_keyword) ||
+                                                         record.Tag.Contains(_keyword) ||
+                                                         record.Contents.Contains(_keyword)
+                                             select record;
+
+            return lst.ToList();
+        }
 
         #endregion
     }

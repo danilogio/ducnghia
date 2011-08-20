@@ -61,6 +61,7 @@ namespace ltktDAO
             NUMBER_RECORD_ON_TAB,
         };
 
+        /*
         public static int getIDFunction(FUNCTION func)
         {
             switch (func)
@@ -148,5 +149,6 @@ namespace ltktDAO
             }
             return -1;
         }
+         */
     }
 }

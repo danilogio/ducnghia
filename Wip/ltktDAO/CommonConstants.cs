@@ -23,6 +23,12 @@ namespace ltktDAO
         /// Number record on one tab
         /// </summary>
         public const int NUMBER_RECORD_ON_TAB = 8;
+        
+        /// <summary>
+        /// Number record of relative a article
+        /// </summary>
+        public const int NUMBER_RECORD_RELATIVE = 5;
+        
         /// <summary>
         /// do not find out article record on DB
         /// </summary>

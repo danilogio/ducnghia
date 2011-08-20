@@ -110,7 +110,7 @@ namespace ltkt
 
                 txtPostedComment.Text = contest.Comment;
 
-                IList<tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year);
+                IList<tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year, CommonConstants.NUMBER_RECORD_RELATIVE);
                 lblRelative.Text = "<ul>";
                 for (int i = 0; i < items.Count; i++)
                 {
@@ -155,12 +155,12 @@ namespace ltkt
                 hpkDownloadlink.Text = english.Title;
                 hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
 
-                IList<tblEnglish> items = ltktDAO.English.getRelativeByType(english.Type);
+                IList<tblEnglish> items = ltktDAO.English.getRelativeByType(english.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
                 lblRelative.Text = "<ul>";
                 for (int i = 0; i < items.Count; i++)
                 {
                     lblRelative.Text += "<li>";
-                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
                     lblRelative.Text += "(" + items[i].Posted + ")";
                     lblRelative.Text += "</li>";
                 }
@@ -201,12 +201,12 @@ namespace ltkt
                 hpkDownloadlink.Text = informatic.Title;
                 hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
 
-                IList<tblInformatic> items = ltktDAO.Informatics.getRelativeByType(informatic.Type);
+                IList<tblInformatic> items = ltktDAO.Informatics.getRelativeByType(informatic.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
                 lblRelative.Text = "<ul>";
                 for (int i = 0; i < items.Count; i++)
                 {
                     lblRelative.Text += "<li>";
-                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                    lblRelative.Text += "<a href='ArticleDetails.aspx?sec=it&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
                     lblRelative.Text += "(" + items[i].Posted + ")";
                     lblRelative.Text += "</li>";
                 }

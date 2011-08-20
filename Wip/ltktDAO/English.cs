@@ -100,9 +100,9 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
-                                          join record in DB.tblEnglishes on author.Username equals record.Author
-                                          where record.ID == ID
-                                          select author;
+                                       join record in DB.tblEnglishes on author.Username equals record.Author
+                                       where record.ID == ID
+                                       select author;
 
             return lst.ElementAt(0).DisplayName;
         }
@@ -124,7 +124,7 @@ namespace ltktDAO
                 return lst.ElementAt(0).Posted;
             }
 
-            return new DateTime(1970,1,1);
+            return new DateTime(1970, 1, 1);
         }
 
         /// <summary>
@@ -449,8 +449,8 @@ namespace ltktDAO
                 }
             }
             catch (Exception e)
-            { 
-                return false; 
+            {
+                return false;
             }
 
             return true;
@@ -461,7 +461,7 @@ namespace ltktDAO
 
         #region Method
 
-        
+
         /// <summary>
         /// Thêm một bài viết mới
         /// </summary>
@@ -583,7 +583,8 @@ namespace ltktDAO
         public static Boolean insertComment(int _id, string _newComment)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            try {
+            try
+            {
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var english = DB.tblEnglishes.Single(e => e.ID == _id);
@@ -626,9 +627,9 @@ namespace ltktDAO
             if (numberRecord <= 0)
                 numberRecord = 1;
             IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
-                                          where p.Type == _type
-                                          orderby p.Posted descending
-                                          select p).Take(numberRecord);
+                                           where p.Type == _type
+                                           orderby p.Posted descending
+                                           select p).Take(numberRecord);
             return lst;
         }
         /// <summary>
@@ -663,12 +664,24 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public static IList<tblEnglish> getRelativeByType(int _type)
+        public static IList<tblEnglish> getRelativeByType(int _type, int _numberRecords)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = (from record in DB.tblEnglishes
                                            where record.Type == _type
-                                           select record).Take(5);
+                                           select record).Take(_numberRecords);
+
+            return lst.ToList();
+        }
+
+        public static IList<tblEnglish> listEnglish(string _keyword)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
+                                          where record.Title.Contains(_keyword) ||
+                                                      record.Tag.Contains(_keyword) ||
+                                                      record.Contents.Contains(_keyword)
+                                          select record;
 
             return lst.ToList();
         }

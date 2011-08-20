@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Error.aspx.cs" Inherits="Error" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+<asp:Content ID="ErrorHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>Error</title>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="Server">
+<asp:Content ID="ErrorContent" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="block_text">
     <h2>Lỗi</h2>
     <hr />

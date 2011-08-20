@@ -720,7 +720,7 @@ namespace ltktDAO
                                                         select p).Take(number);
             return lst;
         }
-        
+
         /// <summary>
         /// Thêm một đề thi
         /// </summary>
@@ -761,7 +761,7 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <returns></returns>
         public static Boolean insertContest(string _title, string _content, string _author,
-            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location, 
+            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location,
             string _tag, Boolean isSolved, string fileSolved)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -985,12 +985,41 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public static IList<tblContestForUniversity> getRelativeByYear(int _year)
+        public static IList<tblContestForUniversity> getRelativeByYear(int _year, int _numberRecords)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
-                                                       where record.Year == _year
-                                                        select record).Take(5);
+                                                        where record.Year == _year
+                                                        select record).Take(_numberRecords);
+
+            return lst.ToList();
+        }
+
+        /// <summary>
+        /// Lấy danh sách đề thi 
+        /// </summary>
+        /// <param name="_isUniversity"></param>
+        /// <param name="_year"></param>
+        /// <returns></returns>
+        public static IList<tblContestForUniversity> listContest(bool _isUniversity, int _year)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.isUniversity == _isUniversity
+                                                       && record.Year == _year
+                                                       select record;
+
+            return lst.ToList();
+        }
+
+        public static IList<tblContestForUniversity> listContest(String _keyword)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.Title.Contains(_keyword) ||
+                                                       record.Tag.Contains(_keyword) ||
+                                                       record.Contents.Contains(_keyword)
+                                                       select record;
 
             return lst.ToList();
         }

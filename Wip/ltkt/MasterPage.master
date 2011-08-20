@@ -5,10 +5,14 @@
 <head>
     <asp:ContentPlaceHolder ID="cphMasterHearder" runat="server">
         <title>Website Luyện thi Kinh tế</title>
+
+        <script type="text/javascript">
+        function init() {
+        }
+        </script>
+
     </asp:ContentPlaceHolder>
-    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <link type="text/css" href="css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
 
@@ -79,11 +83,6 @@
 
     <script type="text/javascript">
         document.write("<script type='text/javascript' language='javascript'>MainContentW = 1000;LeftBannerW = 125;RightBannerW = 125;LeftAdjust = 5;RightAdjust = 5;TopAdjust = 10;ShowAdDiv();window.onresize=ShowAdDiv;;<\/script>"); 
-    </script>
-
-    <script type="text/javascript">
-        function init() {
-        }
     </script>
 
     <style type="text/css">
@@ -363,6 +362,7 @@
         </div>
     </div>
     <div style="text-align: center; font-size: 0.75em; color: gray">
-        Design by <a href="mailto:doviettrung1802@gmail.com">Trung Do Viet</a> & <a href="mailto:khanhtung010689@gmail.com">Tung Khanh Tong</a> 2011.</div>
+        Design by <a href="mailto:doviettrung1802@gmail.com">Trung Do Viet</a> & <a href="mailto:khanhtung010689@gmail.com">
+            Tung Khanh Tong</a> 2011.</div>
 </body>
 </html>

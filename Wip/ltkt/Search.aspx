@@ -2,7 +2,8 @@
     CodeFile="Search.aspx.cs" Inherits="ltkt.Search" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
-<asp:Content ID="Search" ContentPlaceHolderID="cphContent" runat="Server">
+<asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Tìm kiếm | Website luyện thi kinh tế</title>
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
@@ -15,22 +16,35 @@
 
                 if (selectedIndex == 0) {
                     $('#divLessonType').hide();
-
                     $('#divContest').show();
                 }
                 else {
                     $('#divLessonType').show();
-
                     $('#divContest').hide();
+                }
+            });
+            
+            $('#<%= ddlSearchingType.ClientID %>').change(function(e) {
+                var selectedIndex = $('#<%= ddlSearchingType.ClientID%>').get(0).selectedIndex;
+                if (selectedIndex == 0) { 
+                    $('#Contest').hide();
+                }
+                else {
+                    $('#Contest').show();
                 }
             });
         });
         function init() {
             $('#<%= ddlSubject.ClientID%>').val(0);
+            $('#<%= ddlSearchingType.ClientID%>').val(0);
+            $('#Contest').hide();
             $('#divLessonType').hide();
+            $('#divContest').show();
         }
     </script>
 
+</asp:Content>
+<asp:Content ID="Search" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="search" class="block_text">
         <h2>
             <asp:Literal ID="liTitle" runat="server" Text="Tìm kiếm"></asp:Literal>
@@ -39,7 +53,7 @@
         <%-- <form method="post">--%>
         <asp:Panel ID="searchPanel" runat="server">
             <div class="form_settings">
-                <p>
+                <p id="Keyword">
                     <span>Chuỗi tìm kiếm:</span><asp:TextBox ID="txtboxSearch" runat="server" CssClass="contact"></asp:TextBox></p>
                 <p>
                     <span>Chủ đề:</span><asp:DropDownList ID="ddlSubject" runat="server">
@@ -49,15 +63,16 @@
                         <asp:ListItem Text="--Tất cả chủ đề--" Value="3"></asp:ListItem>
                     </asp:DropDownList>
                 </p>
-                <p>
+                <%--<p>
                     <span>Tìm kiếm theo:</span><asp:DropDownList ID="ddlSearchingType" runat="server">
                         <asp:ListItem Text="--Tất cả--" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Tiêu đề" Value="1"></asp:ListItem>
                         <asp:ListItem Text="Tag" Value="2"></asp:ListItem>
                     </asp:DropDownList>
-                </p>
+                </p>--%>
                 <%--Đối với Anh văn, Tin học--%>
                 <div id="divLessonType">
+                    <%--
                     <p id="lessonType">
                         <span>Loại bài viết: </span>
                         <asp:DropDownList ID="ddlType" runat="server">
@@ -81,24 +96,30 @@
                             <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
                             <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
                         </asp:DropDownList>
-                    </p>
+                    </p>--%>
                 </div>
                 <%--Đối với loại 1: Luyện thi đại học--%>
                 <div id="divContest">
+                    <p>
+                        <span>Tìm kiếm theo:</span><asp:DropDownList ID="ddlSearchingType" runat="server">
+                            <asp:ListItem Text="Tất cả" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Đề thi" Value="1"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
                     <p id="Contest">
                         <span>Đề thi : </span>
-                        <asp:DropDownList ID="ddlTypeContest" runat="server" Width="15%" ToolTip="Loại trường">
-                            <asp:ListItem Text="Đại học" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="Cao đẳng" Value="1"></asp:ListItem>
+                        <asp:DropDownList ID="ddlTypeContest" runat="server" Width="20%" ToolTip="Loại trường">
+                            <asp:ListItem Text="Đại học" Value="true"></asp:ListItem>
+                            <asp:ListItem Text="Cao đẳng" Value="false"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:DropDownList ID="ddlBranch" runat="server" Width="15%" ToolTip="Khối của ngành học">
+                        <%--<asp:DropDownList ID="ddlBranch" runat="server" Width="15%" ToolTip="Khối của ngành học">
                             <asp:ListItem Text="khối A" Value="0"></asp:ListItem>
                             <asp:ListItem Text="khối B" Value="1"></asp:ListItem>
                             <asp:ListItem Text="khối C" Value="2"></asp:ListItem>
                             <asp:ListItem Text="khối D" Value="3"></asp:ListItem>
                             <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>
-                        </asp:DropDownList>
-                        năm
+                        </asp:DropDownList>--%>
+                        &nbsp;&nbsp;&nbsp;năm&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList ID="ddlYear" runat="server" Width="15%" ToolTip="Tìm kiếm trong khoảng từ +3 năm tới -3 năm">
                             <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
                             <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
@@ -114,20 +135,21 @@
                         </asp:DropDownList>
                     </p>
                 </div>
-                <p>
-                    <div align="center" style="margin-top: 10px; margin-left: 100px">
-                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
-                            PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
-                    </div>
-                </p>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSearch" runat="server" Text="Tìm" CssClass="submit"
-                        OnClick="btnSearch_Click" /></p>
+                        OnClick="btnSearch_Click" />
+                </p>
             </div>
         </asp:Panel>
         <%--</form>--%>
-        
         <asp:Panel ID="resultPanel" runat="server">
+            <h2>
+                Kết quả tìm kiếm
+            </h2>
+            <hr />
+            <div>
+                <asp:Label ID="lblResult" runat="server" Text="adsfasd"></asp:Label>
+            </div>
         </asp:Panel>
     </div>
 </asp:Content>

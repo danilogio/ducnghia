@@ -139,7 +139,7 @@
                         </p>
                     </asp:Panel>
                     <p>
-                        <asp:TextBox ID="txtContent" runat="server" Rows="5" TextMode="MultiLine" Width="500px"></asp:TextBox>
+                        <asp:TextBox ID="txtContent" runat="server" Rows="2" TextMode="MultiLine" Width="500px"></asp:TextBox>
                     </p>
                     <p style="padding-left: 200px;">
                         <asp:Button ID="btnSubmitComment" runat="server" CssClass="submit" OnClick="btnSubmitComment_Click"
