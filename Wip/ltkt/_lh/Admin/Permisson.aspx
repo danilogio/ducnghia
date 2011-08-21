@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Permisson.aspx.cs" Inherits="ltkt.Admin.Permission" %>
 
-<asp:Content ID="PermissonAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="PermissionAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý phân quyền | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -18,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+
+<asp:Content ID="PermissonAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
         <h4>
             Phân quyền</h4>

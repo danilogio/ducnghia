@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Mailbox.aspx.cs" Inherits="ltkt.Admin.Mailbox" Title="Hộp thư" ValidateRequest="false" %>
 
-<asp:Content ID="MailboxHeader" ContentPlaceHolderID="head" runat="Server">
-    <title>Hộp thư</title>
+<asp:Content ID="MailboxHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
+    <title>Hộp thư | Website luyện thi kinh tế</title>
 
     <script type="text/javascript" src="../../js/tinyMCE/tiny_mce.js"></script>
 

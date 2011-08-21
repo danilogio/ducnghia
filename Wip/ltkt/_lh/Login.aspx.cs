@@ -7,9 +7,9 @@ using System.Web.UI.WebControls;
 using ltktDAO;
 
 
-namespace DucNghia.Admin
+namespace ltkt.Admin
 {
-    public partial class _lh_Login : System.Web.UI.Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

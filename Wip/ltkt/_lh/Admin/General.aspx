@@ -1,10 +1,9 @@
 ﻿<%@ Page Title="Quản lý chung" Language="C#" MasterPageFile="~/AdminMaster.master"
     AutoEventWireup="true" CodeFile="General.aspx.cs" Inherits="ltkt.Admin.General" %>
 
-<asp:Content ID="GeneralAdminHead" ContentPlaceHolderID="head" runat="server">
-    <title>Quản lý chung</title>
-</asp:Content>
-<asp:Content ID="GeneralAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="GeneralAdminHead" ContentPlaceHolderID="cphAdminHeader" runat="server">
+    <title>Quản lý chung | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -21,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+<asp:Content ID="GeneralAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+    
     <div id="div_content">
         <div id="Summary" class="block_text form_settings" style="margin: 5px;">
             <p>

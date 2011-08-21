@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Comment.aspx.cs" Inherits="ltkt.Admin.Comment" %>
 
-<asp:Content ID="CommentAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="CommentAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý bình luận, comment | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -18,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+
+<asp:Content ID="CommentAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
         <h4>
             Comment</h4>

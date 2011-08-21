@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Informatics.aspx.cs" Inherits="ltkt.Admin.Informatics" %>
 
-<asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="InformacticAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý chủ đề tin học | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -18,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+
+<asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
         <h4>
             Tin học</h4>

@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="News.aspx.cs" Inherits="ltkt.Admin.News" %>
 
-<asp:Content ID="NewsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="NewsAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý tin tức | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -18,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+<asp:Content ID="NewsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+    
     <div id="div_content">
         <asp:Panel ID="viewPanel" runat="server">
             <div id="addButton">

@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="ContestUniversity.aspx.cs" Inherits="ltkt.Admin.ContestUniversity" %>
 
-<asp:Content ID="ContestForUniversityAdmin" ContentPlaceHolderID="cphAdminContent"
+<asp:Content ID="ContestForUniversityAdminHeader" ContentPlaceHolderID="cphAdminHeader"
     runat="Server">
+    <title>Quản lý đề thi đại học | Website luyện thi kinh tế</title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -19,7 +20,10 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+<asp:Content ID="ContestForUniversityAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
-        <h4>Luyện thi đại học</h4>
+        <h4>
+            Luyện thi đại học</h4>
     </div>
 </asp:Content>

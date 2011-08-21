@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Advertisement.aspx.cs" Inherits="ltkt.Admin.Advertisement" %>
 
-<asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="AdvertisementAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý quảng cáo | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -18,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+
+<asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="content">
         <h4>
             Quảng cáo</h4>

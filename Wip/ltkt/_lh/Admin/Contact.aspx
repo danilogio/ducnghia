@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Contact.aspx.cs" Inherits="ltkt.Admin.Contact" %>
 
-<asp:Content ID="ContactAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="ContactAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý liên hệ | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -18,6 +20,9 @@
             padding: 20px 5px;
         }
     </style>
+</asp:Content>
+
+<asp:Content ID="ContactAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
         <h4>
             Liên hệ</h4>

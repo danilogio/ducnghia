@@ -20,8 +20,7 @@
             padding: 20px 5px;
         }
     </style>
-    
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <asp:ContentPlaceHolder ID="cphAdminHeader" runat="server">
         <title></title>
     </asp:ContentPlaceHolder>
 </head>
