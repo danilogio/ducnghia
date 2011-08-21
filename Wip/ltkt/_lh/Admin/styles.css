@@ -441,6 +441,12 @@ div.block_details_text
 	margin: 15px 0 0 0;
 }
 
+#addNews
+{
+	margin: 15px 0 0 0;
+	height: 450px;
+}
+
 .form_settings p
 {
 	padding: 0 0 4px 0;
@@ -453,9 +459,9 @@ div.block_details_text
 	text-align: left;
 }
 
-.form_settings #to span
+.form_settings #to, #titleHeader span
 {
-		width: 100px;
+	width: 100px;
 }
 
 .form_settings input, .form_settings textarea
@@ -468,6 +474,11 @@ div.block_details_text
 	color: #47433F;
 }
 
+.form_settings #titleHeader input, .form_settings #titleHeader input
+{
+	width: 600px;
+}
+
 .form_settings #to input, .form_settings #to input
 {
 	width: 600px;
@@ -477,6 +488,12 @@ div.block_details_text
 {
 	font: 100% arial;
 	width: 700px;
+}
+
+.form_settings #titleHeader textarea
+{
+	font: 100% arial;
+	width: 600px;
 }
 
 .form_settings .submit

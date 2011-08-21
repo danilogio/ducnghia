@@ -12,7 +12,6 @@ namespace ltkt
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Request.QueryString["id"] != null)
             {
                 int newsID = 1;

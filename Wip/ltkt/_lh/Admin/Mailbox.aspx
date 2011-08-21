@@ -90,8 +90,7 @@
                 <asp:Button ID="btnReply" runat="server" Text="Trả lời" CssClass="formbutton" />&nbsp;
                 <asp:Button ID="btnForward" runat="server" Text="Chuyển tiếp" CssClass="formbutton" />&nbsp;
                 <asp:Button ID="btnDelete" runat="server" Text="Xóa" CssClass="formbutton" />&nbsp;
-                <asp:Button ID="btnConfig" runat="server" Text="Cấu hình" CssClass="formbutton" 
-                    onclick="btnConfig_Click" />
+                <asp:Button ID="btnConfig" runat="server" Text="Cấu hình" CssClass="formbutton" OnClick="btnConfig_Click" />
                 <br />
                 <br />
                 <hr />
@@ -106,8 +105,6 @@
                     CssClass="formbutton" />
             </div>
             <div id="right" style="float: left; width: 83%;">
-                <%--<asp:GridView ID="grdMailbox" runat="server">
-                    </asp:GridView>--%>
                 <asp:Table ID="EmailsTable" CssClass="emails-table" runat="server" Visible="false">
                     <asp:TableHeaderRow>
                         <asp:TableHeaderCell CssClass="emails-table-header" ColumnSpan="4">
@@ -204,7 +201,6 @@
                 </p>
             </div>
         </asp:Panel>
-        
         <asp:Panel ID="configPanel" runat="server" Visible="false">
             <p>
                 <span>Tài khoản GMail</span>
@@ -215,7 +211,8 @@
                 <asp:TextBox ID="password" runat="server"></asp:TextBox>
             </p>
             <p>
-                <asp:Button ID="btnSubmitConfig" runat="server" CssClass="submit" Text="Cấu hình" OnClick="btnSubmitConfig_Click" />
+                <asp:Button ID="btnSubmitConfig" runat="server" CssClass="submit" Text="Cấu hình"
+                    OnClick="btnSubmitConfig_Click" />
             </p>
         </asp:Panel>
     </div>

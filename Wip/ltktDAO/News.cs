@@ -321,6 +321,42 @@ namespace ltktDAO
         }
 
         /// <summary>
+        /// Thêm tin tức
+        /// </summary>
+        /// <param name="_title"></param>
+        /// <param name="_chapeau"></param>
+        /// <param name="_content"></param>
+        /// <returns></returns>
+        public static Boolean insertNews(string _author, string _title, string _chapeau, string _content)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblNew record = new tblNew();
+                    record.Title = _title;
+                    record.Chapaeu = _chapeau;
+                    record.Contents = _content;
+                    record.Author = _author;
+                    record.Posted = DateTime.Now;
+
+                    DB.tblNews.InsertOnSubmit(record);
+
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Cập nhật tin tức
         /// </summary>
         /// <param name="recordUpdate"></param>
@@ -363,6 +399,64 @@ namespace ltktDAO
 
             return lst.Count();
         }
+
+        /// <summary>
+        /// Lấy toàn bộ tin tức
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<tblNew> getAll()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblNew> lst = from record in DB.tblNews
+                                      select record;
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Lấy count email từ id start
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblNew> fetchEmailList(int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblNew> lst = (from record in DB.tblNews
+                                       select record).Skip(start).Take(count);
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Xóa một tin tức
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static Boolean deleteNews(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var news = DB.tblNews.Single(n => n.ID == _id);
+                    
+                    DB.tblNews.DeleteOnSubmit(news);
+                    
+                    DB.SubmitChanges();
+                    
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
         #endregion
     }
 }

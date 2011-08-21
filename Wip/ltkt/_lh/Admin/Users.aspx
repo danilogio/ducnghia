@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Users.aspx.cs" Inherits="ltkt.Admin.Users" %>
 
-<asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+<asp:Content ID="UsersAdminHead" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+    <title>Quản lý thành viên | Website luyện thi kinh tế</title>
+    
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -23,6 +25,9 @@
             background-color: white;
         }
     </style>
+</asp:Content>
+
+<asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
         <form id="form1">
         <h4>
