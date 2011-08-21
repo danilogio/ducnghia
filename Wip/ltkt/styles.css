@@ -121,7 +121,7 @@ form input, form select, form textarea
 	border: 1px solid #999;
 	border-right: 1px solid #eee;
 	border-bottom: 1px solid #eee;
-	background-color: #ccc;
+	background-color: white;
 	color: #333;
 }
 
@@ -383,7 +383,7 @@ li ol, li ul
 
 .sidebar li ul li a:hover
 {
-	color: #0B519A;
+	color: #FA297D;
 }
 
 .sidebar h4
@@ -631,6 +631,7 @@ form_settings .captcha
 {
 	color:#FA297D;
 }
+
 ul#icons {margin: 0; padding: 0;}
 ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
 ul#icons span.ui-icon {float: left; margin: 0 4px;}

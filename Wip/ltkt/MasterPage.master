@@ -147,7 +147,6 @@
                             <ul>
                                 <li id="idlogin" style="background:white;border: 1px solid #a6c9e2;">
                                     <asp:Panel ID="loginPanel" runat="server" Visible="true">
-                                        <form method="post" action="Home.aspx">
                                         <div id="divUsername" style="display: table-row">
                                             <div id="divUsernameLabel" style="float: left; width: 40%">
                                                 <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:"></asp:Label>
@@ -174,7 +173,6 @@
                                                     CssClass="searchsubmit formbutton" />
                                             </div>
                                         </div>
-                                        </form>
                                         <div id="divUlitiesLogin">
                                             <div style="float: left; padding-left: 5px; width: 49%">
                                                 <asp:HyperLink ID="hpkForgotPassword" NavigateUrl="~/ResetPassword.aspx" runat="server"
@@ -198,16 +196,6 @@
                                                             <span class="activeText">
                                                                 <asp:Literal ID="loginUser" runat="server"></asp:Literal></span></asp:HyperLink>
                                                     </div>
-                                                    <%-- <div style="width: 100%;">
-                                                        <div style="float: left; width: 60%;">
-                                                            <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
-                                                                Font-Italic="True">Hồ sơ cá nhân</asp:HyperLink>
-                                                        </div>
-                                                        <div>
-                                                            <asp:HyperLink ID="hplUpload" NavigateUrl="~/Upload.aspx" runat="server" Font-Underline="False"
-                                                                Font-Italic="True">Gửi bài</asp:HyperLink>
-                                                        </div>
-                                                    </div>--%>
                                                 </div>
                                                 <div>
                                                     <asp:Button ID="btnLogout" runat="server" Text="Thoát" OnClick="btnLogout_Click"

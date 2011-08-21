@@ -316,32 +316,136 @@ namespace ltkt
 
         protected void btnLike_Click(object sender, EventArgs e)
         {
-            // Write comment to db
-            string sec = Request.QueryString["sec"];
-            int id = Convert.ToInt32(Request.QueryString["id"]);
+            
+            //// Write comment to db
+            //string sec = Request.QueryString["sec"];
+            //int id = Convert.ToInt32(Request.QueryString["id"]);
+            ////Check article haven't liked before
+            //if (!checkLikeOneTime(sec, id))
+            //{
+            //    switch (sec)
+            //    {
+            //        case "uni":
+            //            {
+            //                ltktDAO.Contest.Like(id);
+            //                updateCookie(sec, id);
+            //                break;
+            //            }
+            //        case "el":
+            //            {
+            //                ltktDAO.English.Like(id);
+            //                updateCookie(sec, id);
+            //                break;
+            //            }
+            //        case "it":
+            //            {
+            //                ltktDAO.Informatics.Like(id);
+            //                updateCookie(sec, id);
+            //                break;
+            //            }
+            //        default:
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    btnLike.Enabled = false;
+            //}
+            Page_Load(sender, e);
+        }
 
-            switch (sec)
+        private bool checkLikeOneTime(string sec, int id)
+        {
+            //uni:1,2,3,4
+            //it:1,2,3,4
+            //el:1,2,3,4
+            string str = readCookie("Like_" + sec);
+            switch(sec)
             {
                 case "uni":
                     {
-                        ltktDAO.Contest.Like(id);
+                        if (Response.Cookies["Like_" + sec] != null)
+                        {
+                            if(str.Contains(id.ToString()))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+
+                        }
                         break;
                     }
                 case "el":
                     {
-                        ltktDAO.English.Like(id);
+                        if (Response.Cookies["Like_" + sec] != null)
+                        {
+                            if (str.Contains(id.ToString()))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+
+                        }
                         break;
                     }
                 case "it":
                     {
-                        ltktDAO.Informatics.Like(id);
+                        if (Response.Cookies["Like_" + sec] != null)
+                        {
+                            if (str.Contains(id.ToString()))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+
+                        }
                         break;
                     }
-                default:
-                    break;
             }
+            return false;
+        }
+        private void updateCookie(string sec, int id)
+        {
+            //update
+            if (Response.Cookies["Like_" + sec] != null)
+            {
+                string str = readCookie("Like_" + sec);
+                str += id.ToString()  + ",";
+                writeCookie("Like_" + sec, str);
+            }
+            else //write new
+            {
+                writeCookie("Like_" + sec, id.ToString());
+            }
+        }
 
-            Page_Load(sender, e);
+        //Do not use this method directly
+        private string readCookie(string name)
+        {
+            if (Response.Cookies[name] != null)
+            {
+                return Response.Cookies[name].Value;
+            }
+            return "";
+        }
+        //Do not use this method directly
+        private void writeCookie(string name, string value)
+        {
+            HttpCookie cookie = new HttpCookie(name);
+            cookie.Domain = "www.luyenthikinhte.com";
+            cookie.Value = value;
+            cookie.Expires = DateTime.Today.AddDays(14);
+            
+            Response.Cookies.Add(cookie);
         }
 
         protected void btnDislike_Click(object sender, EventArgs e)
