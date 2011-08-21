@@ -388,6 +388,39 @@ namespace ltktDAO
         }
 
         /// <summary>
+        /// Cập nhật tin tức
+        /// </summary>
+        /// <param name="newsID"></param>
+        /// <param name="_author"></param>
+        /// <param name="_title"></param>
+        /// <param name="_chapeau"></param>
+        /// <param name="_content"></param>
+        /// <returns></returns>
+        public static Boolean updateNews(int newsID, string _author, string _title, string _chapeau, string _content)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var news = DB.tblNews.Single(n => n.ID == newsID);
+                    news.Title = _title;
+                    news.Chapaeu = _chapeau;
+                    news.Contents = _content;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Tổng số tin
         /// </summary>
         /// <returns></returns>

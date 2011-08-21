@@ -42,7 +42,7 @@ namespace ltkt.Admin
                     btnSave.Text = "Sửa";
                     btnSticky.Visible = true;
                     addPanel.Visible = true;
-
+                                        
                     txtTitle.Text = editNews.Title;
                     txtChapeau.Text = editNews.Chapaeu;
                     txtContent.Text = editNews.Contents;
@@ -57,7 +57,6 @@ namespace ltkt.Admin
             {
                 Response.Redirect("News.aspx?page=1");
             }
-
         }
 
         private void showNews(int page)
@@ -135,32 +134,32 @@ namespace ltkt.Admin
             string strChapeau = txtChapeau.Text;
             string strContent = Server.HtmlDecode(txtContent.Text);
 
-            try
+            if (Session["User"] != null)
             {
-                tblNew editNews = (tblNew)Session["editNews"];
-                if (editNews == null)//thêm mới
+                tblUser author = (tblUser)Session["User"];
+                try
                 {
-                    if (Session["User"] != null)
+                    tblNew editNews = (tblNew)Session["editNews"];
+                    if (editNews == null)//thêm mới
                     {
-                        tblUser author = (tblUser)Session["User"];
                         ltktDAO.News.insertNews(author.Username, strTitlte, strChapeau, strContent);
-
                         Page_Load(sender, e);
                     }
-                    else
+                    else//edit
                     {
-                        Response.Redirect("../Login.aspx");
+                        ltktDAO.News.updateNews(editNews.ID, author.Username, strTitlte, strChapeau, strContent);
+                        Response.Redirect("News.aspx?page=1");
                     }
                 }
-                else//edit
+                catch (Exception ex)
                 {
- 
+                    liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
+                    liMessage.Visible = true;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
-                liMessage.Visible = true;
+                Response.Redirect("../Login.aspx");
             }
         }
 
@@ -179,11 +178,6 @@ namespace ltkt.Admin
 
             addPanel.Visible = false;
             Response.Redirect("News.aspx?page=1");
-        }
-
-        protected void btnSticky_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

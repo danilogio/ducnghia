@@ -146,7 +146,7 @@
                     <asp:Button ID="btnSave" runat="server" Text="Thêm tin tức" CssClass="formbutton" 
                         onclick="btnSave_Click" />&nbsp;
                     <asp:Button ID="btnSticky" runat="server" Text="Sticky" CssClass="formbutton" 
-                        onclick="btnSticky_Click" Visible="false" />&nbsp;
+                        Visible="false" />&nbsp;
                     <asp:Button ID="btnCancel" runat="server" Text="Hủy" CssClass="formbutton" 
                         onclick="btnCancel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
