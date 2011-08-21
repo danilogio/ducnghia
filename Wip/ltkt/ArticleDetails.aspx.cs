@@ -18,7 +18,10 @@ namespace ltkt
             {
                 string sec = Request.QueryString["sec"];
                 int id = Convert.ToInt32(Request.QueryString["id"]);
-
+                if(checkLikeOneTime(sec, id))
+                {
+                    btnLike.Visible = false;
+                }
                 try
                 {
                     switch (sec)
@@ -318,39 +321,42 @@ namespace ltkt
         {
             
             //// Write comment to db
-            //string sec = Request.QueryString["sec"];
-            //int id = Convert.ToInt32(Request.QueryString["id"]);
-            ////Check article haven't liked before
-            //if (!checkLikeOneTime(sec, id))
-            //{
-            //    switch (sec)
-            //    {
-            //        case "uni":
-            //            {
-            //                ltktDAO.Contest.Like(id);
-            //                updateCookie(sec, id);
-            //                break;
-            //            }
-            //        case "el":
-            //            {
-            //                ltktDAO.English.Like(id);
-            //                updateCookie(sec, id);
-            //                break;
-            //            }
-            //        case "it":
-            //            {
-            //                ltktDAO.Informatics.Like(id);
-            //                updateCookie(sec, id);
-            //                break;
-            //            }
-            //        default:
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    btnLike.Enabled = false;
-            //}
+            string sec = Request.QueryString["sec"];
+            int id = Convert.ToInt32(Request.QueryString["id"]);
+            //Check article haven't liked before
+            if (!checkLikeOneTime(sec, id))
+            {
+                switch (sec)
+                {
+                    case "uni":
+                        {
+                            ltktDAO.Contest.Like(id);
+                            updateCookie(sec, id);
+                            btnLike.Visible = false;
+                            break;
+                        }
+                    case "el":
+                        {
+                            ltktDAO.English.Like(id);
+                            updateCookie(sec, id);
+                            btnLike.Visible = false;
+                            break;
+                        }
+                    case "it":
+                        {
+                            ltktDAO.Informatics.Like(id);
+                            updateCookie(sec, id);
+                            btnLike.Visible = false;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                btnLike.Visible = false;
+            }
             Page_Load(sender, e);
         }
 
@@ -359,12 +365,12 @@ namespace ltkt
             //uni:1,2,3,4
             //it:1,2,3,4
             //el:1,2,3,4
-            string str = readCookie("Like_" + sec);
+            string str = readCookie("Like" + sec);
             switch(sec)
             {
                 case "uni":
                     {
-                        if (Response.Cookies["Like_" + sec] != null)
+                        if (Request.Cookies["Like" + sec] != null && str != null)
                         {
                             if(str.Contains(id.ToString()))
                             {
@@ -380,7 +386,7 @@ namespace ltkt
                     }
                 case "el":
                     {
-                        if (Response.Cookies["Like_" + sec] != null)
+                        if (Request.Cookies["Like" + sec] != null && str != null)
                         {
                             if (str.Contains(id.ToString()))
                             {
@@ -396,7 +402,7 @@ namespace ltkt
                     }
                 case "it":
                     {
-                        if (Response.Cookies["Like_" + sec] != null)
+                        if (Request.Cookies["Like" + sec] != null && str != null)
                         {
                             if (str.Contains(id.ToString()))
                             {
@@ -416,36 +422,33 @@ namespace ltkt
         private void updateCookie(string sec, int id)
         {
             //update
-            if (Response.Cookies["Like_" + sec] != null)
+            if (Request.Cookies["Like" + sec] != null)
             {
-                string str = readCookie("Like_" + sec);
+                string str = readCookie("Like" + sec);
                 str += id.ToString()  + ",";
-                writeCookie("Like_" + sec, str);
+                writeCookie("Like" + sec, str);
             }
             else //write new
             {
-                writeCookie("Like_" + sec, id.ToString());
+                writeCookie("Like" + sec, id.ToString());
             }
         }
 
         //Do not use this method directly
         private string readCookie(string name)
         {
-            if (Response.Cookies[name] != null)
+            if (Request.Cookies[name] != null)
             {
-                return Response.Cookies[name].Value;
+                return Server.HtmlEncode(Request.Cookies[name].Value);
             }
             return "";
         }
         //Do not use this method directly
         private void writeCookie(string name, string value)
         {
-            HttpCookie cookie = new HttpCookie(name);
-            cookie.Domain = "www.luyenthikinhte.com";
-            cookie.Value = value;
-            cookie.Expires = DateTime.Today.AddDays(14);
-            
-            Response.Cookies.Add(cookie);
+            Response.Cookies[name].Value = value;
+            //Response.Cookies[name].Domain = "www.luyenthikinhte.com";
+            Response.Cookies[name].Expires = DateTime.Now.AddDays(14);
         }
 
         protected void btnDislike_Click(object sender, EventArgs e)

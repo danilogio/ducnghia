@@ -64,11 +64,11 @@ namespace ltkt
         private string[] readInformation()
         {
             string[] inform = new string[2] { "", "" };
-            if (Response.Cookies["Username"] != null
-                && Response.Cookies["Password"] != null)
+            if (Request.Cookies["Username"] != null
+                && Request.Cookies["Password"] != null)
             {
-                string sUsername = Response.Cookies["Username"].ToString();
-                string sPassword = Response.Cookies["Password"].ToString();
+                string sUsername = Server.HtmlEncode( Request.Cookies["Username"].Value);
+                string sPassword = Server.HtmlEncode(Request.Cookies["Password"].Value);
                 inform[0] = sUsername;
                 inform[1] = sPassword;
                 return inform;
@@ -87,11 +87,8 @@ namespace ltkt
                 cookUsername.Value = sUsername;
                 cookPassword.Value = Users.encryptPassword(sPassword);
 
-                cookUsername.Domain = "www.luyenthikinhte.com";
-                cookPassword.Domain = "www.luyenthikinhte.com";
-
-                cookUsername.Expires = DateTime.Today.AddDays(14);
-                cookPassword.Expires = DateTime.Today.AddDays(14);
+                cookUsername.Expires = DateTime.Now.AddDays(14);
+                cookPassword.Expires = DateTime.Now.AddDays(14);
 
                 Response.Cookies.Add(cookUsername);
                 Response.Cookies.Add(cookPassword);
@@ -103,8 +100,8 @@ namespace ltkt
         {
             if (Response.Cookies["Username"] != null && Response.Cookies["Password"] != null)
             {
-                Response.Cookies["Username"].Expires.AddDays(-1);
-                Response.Cookies["Password"].Expires.AddDays(-1);
+                Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
             }
         }
 
