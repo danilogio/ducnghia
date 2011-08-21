@@ -2,6 +2,10 @@
     CodeFile="ResetPassword.aspx.cs" Inherits="ltkt.ResetPassword" %>
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
+<asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Lấy lại mật khẩu | Website luyện thi kinh tế</title>
+</asp:Content>
+
 <asp:Content ID="ResetPassword" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="contact" class="block_text">
         <h2>

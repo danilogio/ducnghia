@@ -2,6 +2,11 @@
     CodeFile="Profile.aspx.cs" Inherits="ltkt.Profiles" Title="Hồ sơ cá nhân" %>
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
+
+<asp:Content ID="ProfileHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Hồ sơ cá nhân | Website luyện thi kinh tế</title>
+</asp:Content>
+
 <asp:Content ID="Profile" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="loginForm" class="block_text">
         <h2>

@@ -2,12 +2,12 @@
     CodeFile="AdContact.aspx.cs" Inherits="AdContact" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
-<asp:Content ID="AdContact" ContentPlaceHolderID="cphContent" runat="Server">
 
+<asp:Content ID="AdContactHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Liên hệ quảng cáo | Website luyện thi kinh tế</title>
+    
     <script type="text/javascript" src="js/jquery.dynDateTime.js"></script>
-
     <script type="text/javascript" src="js/lang/calendar-en.js"></script>
-
     <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue.css" />
 
     <script type="text/javascript">
@@ -28,7 +28,9 @@
 
         }); 
     </script>
+</asp:Content>
 
+<asp:Content ID="AdContact" ContentPlaceHolderID="cphContent" runat="Server">
     <%-- <form action="AdContact.aspx" method="post">--%>
     <div id="Advertisement" class="block_text">
         <h2>
@@ -109,8 +111,8 @@
                 </p>
                 <p>
                     <div align="center" style="margin-top: 10px; margin-left: 100px">
-                        <recaptcha:recaptchacontrol id="recaptcha" runat="server" publickey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
-                            privatekey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
+                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
+                            PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
                     </div>
                 </p>
                 <p style="padding-top: 15px">

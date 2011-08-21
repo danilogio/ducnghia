@@ -2,6 +2,10 @@
     CodeFile="Contact.aspx.cs" Inherits="Contact" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
+
+<asp:Content ID="ContactHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Liên hệ/Góp ý | Website luyện thi kinh tế</title>
+</asp:Content>
 <asp:Content ID="Contact" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="contact" class="block_text">
         <h2>

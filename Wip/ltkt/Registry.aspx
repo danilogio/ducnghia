@@ -2,10 +2,14 @@
     CodeFile="Registry.aspx.cs" Inherits="ltkt.Registry" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
+<asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Đăng ký thành viên | Website luyện thi kinh tế</title>
+</asp:Content>
+
 <asp:Content ID="Register" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="signupForm" class="block_text">
         <h2>
-            Đăng ký tài khoản</h2>
+            Đăng ký thành viên</h2>
         <hr />
         <div id="divMessage" class="form_settings">
             <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>

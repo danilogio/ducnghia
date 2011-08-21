@@ -28,9 +28,11 @@
                 var selectedIndex = $('#<%= ddlSearchingType.ClientID%>').get(0).selectedIndex;
                 if (selectedIndex == 0) { 
                     $('#Contest').hide();
+                    $('#Keyword').show();
                 }
                 else {
                     $('#Contest').show();
+                    $('#Keyword').hide();
                 }
             });
         });
@@ -52,9 +54,14 @@
         <hr />
         <%-- <form method="post">--%>
         <asp:Panel ID="searchPanel" runat="server">
+            <p>
+                <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
+            </p>
             <div class="form_settings">
                 <p id="Keyword">
                     <span>Chuỗi tìm kiếm:</span><asp:TextBox ID="txtboxSearch" runat="server" CssClass="contact"></asp:TextBox></p>
+                <asp:RequiredFieldValidator ID="reqSearch" runat="server" ErrorMessage="Vui lòng nhập từ khóa tìm kiếm"
+                    ControlToValidate="txtboxSearch" Display="None"></asp:RequiredFieldValidator>
                 <p>
                     <span>Chủ đề:</span><asp:DropDownList ID="ddlSubject" runat="server">
                         <asp:ListItem Text="Luyện thi đại học" Value="0"></asp:ListItem>

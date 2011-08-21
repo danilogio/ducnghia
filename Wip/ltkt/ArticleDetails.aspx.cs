@@ -86,6 +86,8 @@ namespace ltkt
             tblContestForUniversity contest = ltktDAO.Contest.getContest(id);
             if (contest != null)
             {
+                liTitle.Text = contest.Title;
+
                 lblTitle.Text = contest.Title;
                 lblLiker.Text = contest.Point.ToString();
 
@@ -141,6 +143,8 @@ namespace ltkt
             tblEnglish english = ltktDAO.English.getEnglish(id);
             if (english != null)
             {
+                liTitle.Text = english.Title;
+
                 lblTitle.Text = english.Title;
                 lblLiker.Text = english.Point.ToString();
 
@@ -188,6 +192,8 @@ namespace ltkt
             tblInformatic informatic = ltktDAO.Informatics.getInformatic(id);
             if (informatic != null)
             {
+                liTitle.Text = informatic.Title;
+
                 lblTitle.Text = informatic.Title;
                 lblLiker.Text = informatic.Point.ToString();
 

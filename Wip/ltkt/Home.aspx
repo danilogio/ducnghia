@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Home.aspx.cs" Inherits="_Default" %>
 
-<asp:Content ID="Home" ContentPlaceHolderID="cphContent" runat="Server">
-
+<asp:Content ID="HomeHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Trang chủ | Website luyện thi kinh tế</title>
+    
     <script type="text/javascript">
         $(function() {
             // Tabs
@@ -11,7 +12,8 @@
             $('#EnglishLesson').tabs();
         });
     </script>
-
+</asp:Content>
+<asp:Content ID="Home" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="block_text" class="block_text">
         <h2>
             <asp:Label ID="lblWelcomeTitle" runat="server"></asp:Label></h2>

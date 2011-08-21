@@ -2,6 +2,10 @@
     CodeFile="Login.aspx.cs" Inherits="ltkt.Login" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
+
+<asp:Content ID="LoginHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title>Đăng nhập | Website luyện thi kinh tế</title>
+</asp:Content>
 <asp:Content ID="Login" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="loginForm" class="block_text">
         <h2>
