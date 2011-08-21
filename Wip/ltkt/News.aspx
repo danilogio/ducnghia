@@ -3,6 +3,7 @@
 
 <asp:Content ID="newsHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>Tin tức | Website luyện thi kinh tế</title>
+  
 </asp:Content>
 <asp:Content ID="newsContent" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="block_text">
@@ -10,6 +11,7 @@
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="newsPanel" runat="server">
+            
             <h2>
                 <asp:Literal ID="liTitle" runat="server" Text=""></asp:Literal>
             </h2>

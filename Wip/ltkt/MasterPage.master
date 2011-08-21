@@ -7,8 +7,8 @@
         <title>Website Luyện thi Kinh tế</title>
 
         <script type="text/javascript">
-        function init() {
-        }
+            function init() {
+            }
         </script>
 
     </asp:ContentPlaceHolder>
@@ -19,15 +19,15 @@
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#datepicker').datepicker({
-                inline: true
-            });
 
-            $("#accordion").accordion();
             ShowAdDiv();
+
+            // Accordion
+            $("#UniSection").accordion({ header: "h3" });
+            $("#EnglishSection").accordion({ header: "h3" });
+            $("#ItSection").accordion({ header: "h3" });
         });
 
         function FloatTopDiv() {
@@ -145,7 +145,7 @@
                                 <asp:Literal ID="userStateTitle" runat="server" Text="Đăng nhập"></asp:Literal>
                             </h4>
                             <ul>
-                                <li id="idlogin">
+                                <li id="idlogin" style="background:white;border: 1px solid #a6c9e2;">
                                     <asp:Panel ID="loginPanel" runat="server" Visible="true">
                                         <form method="post" action="Home.aspx">
                                         <div id="divUsername" style="display: table-row">
@@ -224,7 +224,7 @@
                                 Tìm kiếm
                             </h4>
                             <form method="get" class="searchform" action="Home.aspx">
-                            <ul>
+                            <ul  style="background:white;border: 1px solid #a6c9e2;">
                                 <li>
                                     <asp:DropDownList ID="ltsItem" runat="server">
                                         <asp:ListItem Text="--Tất cả danh mục--" Value="all" Selected="True"></asp:ListItem>
@@ -245,44 +245,113 @@
                         </li>
                         <li>
                             <h4>
-                                <span>Luyện thi đại học</span></h4>
-                            <ul class="blocklist">
-                                <%--<li>
-                                    <asp:HyperLink ID="HpkUniLibLecture" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
-                                <li>
-                                    <asp:HyperLink ID="HpkUniLibExercise" runat="server" NavigateUrl="~/ContestForUniversity.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                --%><li>
-                                    <asp:HyperLink ID="HpkUniLibSubject" runat="server" NavigateUrl="~/ContestUniversity.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
-                            </ul>
+                                Luyện Thi Đại Học</h4>
+                            <div id="UniSection">
+                                <div>
+                                    <h3>
+                                        <a href="#">Khối A</a></h3>
+                                    <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                    </div>
+                                    
+                                </div>
+                                <div>
+                                    <h3>
+                                        <a href="#">Khối B</a></h3>
+                                   <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sinh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                    </div>
+                                </div>
+                                <div>
+                                   <h3>
+                                        <a href="#">Khối C</a></h3>
+                                    <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sử&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Địa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                    </div>
+                                </div>
+                                 <div>
+                                   <h3>
+                                        <a href="#">Khối D</a></h3>
+                                    <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Anh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <h4>
-                                <span>Tin học</span></h4>
-                            <ul class="blocklist">
-                                <li>
-                                    <asp:HyperLink ID="HpkITLibLecture" runat="server" NavigateUrl="~/Informatics.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
-                                <li>
-                                    <asp:HyperLink ID="HpkITLibExercise" runat="server" NavigateUrl="~/Informatics.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                <li>
-                                    <asp:HyperLink ID="HpkITLibSubject" runat="server" NavigateUrl="~/Informatics.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
-                            </ul>
+                                Anh Văn</h4>
+                            <div id="EnglishSection">
+                                <div>
+                                    <h3>
+                                        <a href="#">Thư viện Bài Giảng</a></h3>
+                                    <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                    </div>
+                                    
+                                </div>
+                                <div>
+                                    <h3>
+                                        <a href="#">Thư viện Bài Tập</a></h3>
+                                    <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                    </div>
+                                </div>
+                                <div>
+                                   <h3>
+                                        <a href="#">Thư viện Đề Thi</a></h3>
+                                     <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <h4>
-                                <span>Anh văn</span></h4>
-                            <ul class="blocklist">
-                                <li>
-                                    <asp:HyperLink ID="HpkELLibLecture" runat="server" NavigateUrl="~/English.aspx?section=lecture">Thư viện bài giảng</asp:HyperLink></li>
-                                <li>
-                                    <asp:HyperLink ID="HpkELLibExercise" runat="server" NavigateUrl="~/English.aspx?section=exercise">Thư viện bài tập</asp:HyperLink></li>
-                                <li>
-                                    <asp:HyperLink ID="HpkELLibSubject" runat="server" NavigateUrl="~/English.aspx?section=subject">Thư viện đề thi</asp:HyperLink></li>
-                            </ul>
+                                Tin Học</h4>
+                            <div id="ItSection">
+                                <div>
+                                    <h3>
+                                        <a href="#">Tin học Văn Phòng</a></h3>
+                                    <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Word&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Excel&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>PowerPoint&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Access&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                    </div>
+                                    
+                                </div>
+                                <div>
+                                    <h3>
+                                        <a href="#">Thủ thuật vi tính</a></h3>
+                                   <div class="dialog_link">
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Thủ thuật căn bản&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Thủ thuật nâng cao&nbsp&nbsp</a><br /><br />
+                                    </div>
+                                </div>
+                            </div>
                         </li>
-                        <li>
+                        <li >
                             <h4>
                                 Tài liệu mới</h4>
-                            <ul>
+                            <ul style="background:white;border: 1px solid #a6c9e2;">
                                 <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
                                     ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
                                 <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
@@ -291,10 +360,10 @@
                                     - brilliant premium templates</li>
                             </ul>
                         </li>
-                        <li>
+                        <li style="background:white;border: 1px solid #a6c9e2;">
                             <h4>
                                 Tài liệu được quan tâm</h4>
-                            <ul>
+                            <ul style="background:white;border: 1px solid #a6c9e2;">
                                 <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
                                     ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
                                 <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
