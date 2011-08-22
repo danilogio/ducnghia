@@ -65,5 +65,6 @@ namespace ltktDAO
         /// guest user
         /// </summary>
         public const string USER_GUEST = "Guest";
+        
     }
 }
