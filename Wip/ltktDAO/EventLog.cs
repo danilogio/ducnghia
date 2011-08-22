@@ -48,7 +48,16 @@ namespace ltktDAO
         /// <param name="sErrMsg"></param>
         public void writeLog(string sErrMsg)
         {
-            writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, sErrMsg);
+            writeLog(DBHelper.strPathLogFile, sErrMsg);
+        }
+        /// <summary>
+        /// use to write from Website
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="sErrMsg"></param>
+        public void writeLog(string pathLog, string username, string sErrMsg)
+        {
+            writeLog(pathLog, "[" + username + "]:" + sErrMsg);
         }
     }
 }

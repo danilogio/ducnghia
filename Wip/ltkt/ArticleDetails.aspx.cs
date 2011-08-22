@@ -12,15 +12,21 @@ namespace ltkt
 {
     public partial class ArticleDetails : System.Web.UI.Page
     {
+        EventLog log = new EventLog();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["sec"] != null)
             {
                 string sec = Request.QueryString["sec"];
                 int id = Convert.ToInt32(Request.QueryString["id"]);
-                if(checkLikeOneTime(sec, id))
+                if (checkDoOneTime(CommonConstants.LIKE, sec, id))
                 {
                     btnLike.Visible = false;
+                }
+                if( checkDoOneTime(CommonConstants.DISLIKE, sec, id))
+                {
+                    btnDislike.Visible = false;
                 }
                 try
                 {
@@ -50,8 +56,17 @@ namespace ltkt
                 }
                 catch (Exception ex)
                 {
+                    tblUser user = (tblUser)Session["User"];
+                    string username = CommonConstants.USER_GUEST;
+                    if (user != null)
+                    {
+                        username = user.Username;
+                    }
+
+                    log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
                     Session["Error"] = "Tài nguyên không tồn tại hoặc đã bị xóa!";
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
 
                 if (txtPostedComment.Text == String.Empty)
@@ -305,72 +320,90 @@ namespace ltkt
         private string convertDateToString(DateTime date)
         {
             string strDate = "";
-
-            strDate += date.ToShortTimeString();
-            strDate += " ngày ";
-            strDate += Convert.ToString(date.Day);
-            strDate += "/";
-            strDate += Convert.ToString(date.Month);
-            strDate += "/";
-            strDate += Convert.ToString(date.Year);
-
+            if (date != null)
+            {
+                strDate += date.ToShortTimeString();
+                strDate += " ngày ";
+                strDate += Convert.ToString(date.Day);
+                strDate += "/";
+                strDate += Convert.ToString(date.Month);
+                strDate += "/";
+                strDate += Convert.ToString(date.Year);
+            }
             return strDate;
         }
 
         protected void btnLike_Click(object sender, EventArgs e)
         {
-            
-            //// Write comment to db
-            string sec = Request.QueryString["sec"];
-            int id = Convert.ToInt32(Request.QueryString["id"]);
-            //Check article haven't liked before
-            if (!checkLikeOneTime(sec, id))
+            try
             {
-                switch (sec)
+                //// Write comment to db
+                string sec = Request.QueryString["sec"];
+                int id = Convert.ToInt32(Request.QueryString["id"]);
+
+                //Check article haven't liked before
+                if (!checkDoOneTime(CommonConstants.LIKE, sec, id))
                 {
-                    case "uni":
-                        {
-                            ltktDAO.Contest.Like(id);
-                            updateCookie(sec, id);
-                            btnLike.Visible = false;
+                    switch (sec)
+                    {
+                        case "uni":
+                            {
+                                ltktDAO.Contest.Like(id);
+                                updateCookie(CommonConstants.LIKE, sec, id);
+                                btnLike.Visible = false;
+                                break;
+                            }
+                        case "el":
+                            {
+                                ltktDAO.English.Like(id);
+                                updateCookie(CommonConstants.LIKE, sec, id);
+                                btnLike.Visible = false;
+                                break;
+                            }
+                        case "it":
+                            {
+                                ltktDAO.Informatics.Like(id);
+                                updateCookie(CommonConstants.LIKE, sec, id);
+                                btnLike.Visible = false;
+                                break;
+                            }
+                        default:
                             break;
-                        }
-                    case "el":
-                        {
-                            ltktDAO.English.Like(id);
-                            updateCookie(sec, id);
-                            btnLike.Visible = false;
-                            break;
-                        }
-                    case "it":
-                        {
-                            ltktDAO.Informatics.Like(id);
-                            updateCookie(sec, id);
-                            btnLike.Visible = false;
-                            break;
-                        }
-                    default:
-                        break;
+                    }
+                }
+                else
+                {
+                    btnLike.Visible = false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                btnLike.Visible = false;
+                tblUser user = (tblUser)Session["User"];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
+
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
+                Session["Error"] = "Tài nguyên không tồn tại hoặc đã bị xóa!";
+                Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             Page_Load(sender, e);
         }
 
-        private bool checkLikeOneTime(string sec, int id)
+        private bool checkDoOneTime(string type, string sec, int id)
         {
             //uni:1,2,3,4
             //it:1,2,3,4
             //el:1,2,3,4
-            string str = readCookie("Like" + sec);
+            string str = readCookie(type + sec);
             switch(sec)
             {
                 case "uni":
                     {
-                        if (Request.Cookies["Like" + sec] != null && str != null)
+                        if (Request.Cookies[type + sec] != null && str != null)
                         {
                             if(str.Contains(id.ToString()))
                             {
@@ -386,7 +419,7 @@ namespace ltkt
                     }
                 case "el":
                     {
-                        if (Request.Cookies["Like" + sec] != null && str != null)
+                        if (Request.Cookies[type + sec] != null && str != null)
                         {
                             if (str.Contains(id.ToString()))
                             {
@@ -402,7 +435,7 @@ namespace ltkt
                     }
                 case "it":
                     {
-                        if (Request.Cookies["Like" + sec] != null && str != null)
+                        if (Request.Cookies[type + sec] != null && str != null)
                         {
                             if (str.Contains(id.ToString()))
                             {
@@ -419,18 +452,18 @@ namespace ltkt
             }
             return false;
         }
-        private void updateCookie(string sec, int id)
+        private void updateCookie(string type, string sec, int id)
         {
             //update
-            if (Request.Cookies["Like" + sec] != null)
+            if (Request.Cookies[ type + sec] != null)
             {
-                string str = readCookie("Like" + sec);
+                string str = readCookie(type + sec);
                 str += id.ToString()  + ",";
-                writeCookie("Like" + sec, str);
+                writeCookie(type + sec, str);
             }
             else //write new
             {
-                writeCookie("Like" + sec, id.ToString());
+                writeCookie(type + sec, id.ToString());
             }
         }
 
@@ -454,30 +487,60 @@ namespace ltkt
         protected void btnDislike_Click(object sender, EventArgs e)
         {
             // Write comment to db
-            string sec = Request.QueryString["sec"];
-            int id = Convert.ToInt32(Request.QueryString["id"]);
-
-            switch (sec)
+            try
             {
-                case "uni":
-                    {
-                        ltktDAO.Contest.Dislike(id);
-                        break;
-                    }
-                case "el":
-                    {
-                        ltktDAO.English.Dislike(id);
-                        break;
-                    }
-                case "it":
-                    {
-                        ltktDAO.Informatics.Dislike(id);
-                        break;
-                    }
-                default:
-                    break;
-            }
+                string sec = Request.QueryString["sec"];
+                int id = Convert.ToInt32(Request.QueryString["id"]);
 
+                //Check article haven't disliked before
+                if (!checkDoOneTime(CommonConstants.DISLIKE, sec, id))
+                {
+                    switch (sec)
+                    {
+                        case "uni":
+                            {
+                                ltktDAO.Contest.Dislike(id);
+                                updateCookie(CommonConstants.DISLIKE, sec, id);
+                                btnDislike.Visible = false;
+                                break;
+                            }
+                        case "el":
+                            {
+                                ltktDAO.English.Dislike(id);
+                                updateCookie(CommonConstants.DISLIKE, sec, id);
+                                btnDislike.Visible = false;
+                                break;
+                            }
+                        case "it":
+                            {
+                                ltktDAO.Informatics.Dislike(id);
+                                updateCookie(CommonConstants.DISLIKE, sec, id);
+                                btnDislike.Visible = false;
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    btnDislike.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session["User"];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
+
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
+                Session["Error"] = "Tài nguyên không tồn tại hoặc đã bị xóa!";
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
             Page_Load(sender, e);
         }
     }

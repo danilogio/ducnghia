@@ -36,7 +36,7 @@ namespace ltktDAO
         /// <summary>
         /// path of event log
         /// </summary>
-        public const string LOG_FILE_PATH = "Log\\EventLog.txt";
+        public const string LOG_FILE_PATH = "Log\\EventLog";
         /// <summary>
         /// number of character string
         /// </summary>
@@ -53,5 +53,17 @@ namespace ltktDAO
         /// error Page
         /// </summary>
         public const string PAGE_ERROR = "Error.aspx";
+        /// <summary>
+        /// Like page
+        /// </summary>
+        public const string LIKE = "Like";
+        /// <summary>
+        /// Dislike page
+        /// </summary>
+        public const string DISLIKE = "Dislike";
+        /// <summary>
+        /// guest user
+        /// </summary>
+        public const string USER_GUEST = "Guest";
     }
 }

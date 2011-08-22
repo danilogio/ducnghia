@@ -237,39 +237,16 @@
                             <div id="UniSection">
                                 <div>
                                     <h3>
-                                        <a href="#">Khối A</a></h3>
+                                        <a href="#">Danh sách môn</a></h3>
                                     <div class="dialog_link">
                                         <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                                    </div>
-                                    
-                                </div>
-                                <div>
-                                    <h3>
-                                        <a href="#">Khối B</a></h3>
-                                   <div class="dialog_link">
                                         <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
                                         <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sinh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                                    </div>
-                                </div>
-                                <div>
-                                   <h3>
-                                        <a href="#">Khối C</a></h3>
-                                    <div class="dialog_link">
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sử&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Địa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                                    </div>
-                                </div>
-                                 <div>
-                                   <h3>
-                                        <a href="#">Khối D</a></h3>
-                                    <div class="dialog_link">
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Anh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sinh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sử&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Địa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="#" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Anh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
                                     </div>
                                 </div>
                             </div>
