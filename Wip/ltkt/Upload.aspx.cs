@@ -14,37 +14,55 @@ namespace ltkt
 {
     public partial class Upload : System.Web.UI.Page
     {
+        EventLog log = new EventLog();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] == null)
+            try
             {
-                Response.Redirect("Login.aspx");
-            }
-            else
-            {
-                string selIndex = Request["selIndex"];
-                int selectedIndex;
-
-                if (selIndex == null)
+                if (Session["User"] == null)
                 {
-                    selectedIndex = 0;
+                    Response.Redirect("Login.aspx");
                 }
                 else
                 {
-                    selectedIndex = Int32.Parse(selIndex);
+                    string selIndex = Request["selIndex"];
+                    int selectedIndex;
 
-                    if (selectedIndex == 0)
+                    if (selIndex == null)
                     {
-                        //ddlType.Visible = false;
-                        //lessonType.Visible = false;
+                        selectedIndex = 0;
                     }
                     else
                     {
-                        //ddlType.Visible = true;
-                        //lessonType.Visible = true;
+                        selectedIndex = Int32.Parse(selIndex);
+
+                        if (selectedIndex == 0)
+                        {
+                            //ddlType.Visible = false;
+                            //lessonType.Visible = false;
+                        }
+                        else
+                        {
+                            //ddlType.Visible = true;
+                            //lessonType.Visible = true;
+                        }
+                        Response.End();
                     }
-                    Response.End();
                 }
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session["User"];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
+
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
+                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
 
@@ -105,68 +123,77 @@ namespace ltkt
                             "_solved" + Path.GetExtension(fileSolving.FileName);
                     }
                     // ghi xuống db
-
-                    switch (type)
+                    try
                     {
-                        case 0:
-                            {
-                                if (fileSolvingSave != "")
+                        switch (type)
+                        {
+                            case 0:
                                 {
-                                    ltktDAO.Contest.insertContest(txtboxTitle.Text,
-                                                                    txtboxSummary.Text,
-                                                                    user.Username,
-                                                                    DateTime.Now,
-                                                                    Boolean.Parse(ddlTypeContest.SelectedValue),
-                                                                    Convert.ToInt32(ddlBranch.SelectedValue),
-                                                                    Convert.ToInt32(ddlYear.SelectedValue),
-                                                                    fileSave,
-                                                                    txtboxTag.Text,
-                                                                    true,
-                                                                    fileSolvingSave);
+                                    if (fileSolvingSave != "")
+                                    {
+                                        ltktDAO.Contest.insertContest(txtboxTitle.Text,
+                                                                        txtboxSummary.Text,
+                                                                        user.Username,
+                                                                        DateTime.Now,
+                                                                        Boolean.Parse(ddlTypeContest.SelectedValue),
+                                                                        Convert.ToInt32(ddlBranch.SelectedValue),
+                                                                        Convert.ToInt32(ddlYear.SelectedValue),
+                                                                        fileSave,
+                                                                        txtboxTag.Text,
+                                                                        true,
+                                                                        fileSolvingSave);
+                                    }
+                                    else
+                                    {
+                                        ltktDAO.Contest.insertContest(txtboxTitle.Text,
+                                                                           txtboxSummary.Text,
+                                                                           user.Username,
+                                                                           DateTime.Now,
+                                                                           Boolean.Parse(ddlTypeContest.SelectedValue),
+                                                                           Convert.ToInt32(ddlBranch.SelectedValue),
+                                                                           Convert.ToInt32(ddlYear.SelectedValue),
+                                                                           fileSave,
+                                                                           txtboxTag.Text,
+                                                                           false,
+                                                                           null);
+                                    }
+                                    break;
                                 }
-                                else
+                            case 1:
                                 {
-                                    ltktDAO.Contest.insertContest(txtboxTitle.Text,
-                                                                       txtboxSummary.Text,
-                                                                       user.Username,
-                                                                       DateTime.Now,
-                                                                       Boolean.Parse(ddlTypeContest.SelectedValue),
-                                                                       Convert.ToInt32(ddlBranch.SelectedValue),
-                                                                       Convert.ToInt32(ddlYear.SelectedValue),
-                                                                       fileSave,
-                                                                       txtboxTag.Text,
-                                                                       false,
-                                                                       null);
+                                    ltktDAO.Informatics.insertInformatic(txtboxTitle.Text,
+                                        Convert.ToInt32(ddlType.SelectedValue),
+                                        txtboxSummary.Text,
+                                        user.Username,
+                                        DateTime.Now,
+                                        fileSave,
+                                        txtboxTag.Text);
+                                    break;
                                 }
-                                break;
-                            }
-                        case 1:
-                            {
-                                ltktDAO.Informatics.insertInformatic(txtboxTitle.Text,
-                                    Convert.ToInt32(ddlType.SelectedValue),
-                                    txtboxSummary.Text,
-                                    user.Username,
-                                    DateTime.Now,
-                                    fileSave,
-                                    txtboxTag.Text);
-                                break;
-                            }
-                        case 2:
-                            {
-                                ltktDAO.English.insertEnglish(txtboxTitle.Text,
-                                    Convert.ToInt32(ddlType.SelectedValue),
-                                    txtboxSummary.Text,
-                                    user.Username,
-                                    DateTime.Now,
-                                    fileSave,
-                                    txtboxTag.Text);
-                                break;
-                            }
+                            case 2:
+                                {
+                                    ltktDAO.English.insertEnglish(txtboxTitle.Text,
+                                        Convert.ToInt32(ddlType.SelectedValue),
+                                        txtboxSummary.Text,
+                                        user.Username,
+                                        DateTime.Now,
+                                        fileSave,
+                                        txtboxTag.Text);
+                                    break;
+                                }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), user.Username, ex.Message);
+
+                        Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                        Response.Redirect(CommonConstants.PAGE_ERROR);
                     }
 
                     upload.Visible = false;
                     message.Visible = true;
-                    liMessage.Text = "Upload thành công.";
+                    liMessage.Text = CommonConstants.UPLOAD_SUCCESSFUL;
                     liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
                     liMessage.Text += "<br />Bài viết của bạn sẽ được kiểm duyệt trong vòng 24h";
                     liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a><br />";
@@ -174,7 +201,7 @@ namespace ltkt
             }
             else
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
         }
 

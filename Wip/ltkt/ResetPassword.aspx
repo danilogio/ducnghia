@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="ResetPassword.aspx.cs" Inherits="ltkt.ResetPassword" %>
 
-<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
+
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>Lấy lại mật khẩu | Website luyện thi kinh tế</title>
 </asp:Content>
@@ -30,17 +31,12 @@
                         ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Email không đúng định dạng"
                         Display="None" />
                 </p>
-                <center>
-                    <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
-                        CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
-                        CaptchaMaxTimeout="240" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#" />
-                </center>
-                <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server">
-            
-                </asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
-                    ControlToValidate="txtboxCaptcha" Display="none">
-                </asp:RequiredFieldValidator>
+                 <p>
+                    <div align="center" style="margin-top: 10px; margin-left: 100px">
+                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
+                            PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
+                    </div>
+                </p>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnResetPassword" OnClick='btnResetPassword_Click'
                         runat="server" Text="Gửi" CssClass="submit" /></p>

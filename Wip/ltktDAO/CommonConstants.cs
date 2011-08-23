@@ -54,6 +54,10 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_ERROR = "Error.aspx";
         /// <summary>
+        /// Login page
+        /// </summary>
+        public const string PAGE_LOGIN = "Login.aspx";
+        /// <summary>
         /// Like page
         /// </summary>
         public const string LIKE = "Like";
@@ -65,6 +69,9 @@ namespace ltktDAO
         /// guest user
         /// </summary>
         public const string USER_GUEST = "Guest";
-        
+        /// <summary>
+        /// Upload successful
+        /// </summary>
+        public const string UPLOAD_SUCCESSFUL = "Upload thành công";
     }
 }
