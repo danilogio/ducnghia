@@ -16,6 +16,7 @@ namespace ltkt
 {
     public partial class Profiles : System.Web.UI.Page
     {
+        EventLog log = new EventLog();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["User"] != null)
@@ -40,36 +41,53 @@ namespace ltkt
 
         protected void btnSubmitChangePassword_Click(object sender, EventArgs e)
         {
-            string oldPassword = txtboxPassword.Text;
-
-            // Kiểm tra xem có đúng password hay không?
-            tblUser user = (tblUser)Session["User"];
-
-            Boolean isExist = ltktDAO.Users.isUser(user.Username, oldPassword);
-
-            if (isExist)
+            try
             {
-                string newPassword = txtboxNewPassword.Text;
+                string oldPassword = txtboxPassword.Text;
 
-                Boolean isOK = ltktDAO.Users.updateUserPassword(user.Username, newPassword);
+                // Kiểm tra xem có đúng password hay không?
+                tblUser user = (tblUser)Session["User"];
 
-                // Thành công
-                if (isOK)
+                Boolean isExist = ltktDAO.Users.isUser(user.Username, oldPassword);
+
+                if (isExist)
                 {
-                    lMessage.Text = "Bạn đã đổi mật khẩu thành công!";
-                    lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    string newPassword = txtboxNewPassword.Text;
+
+                    Boolean isOK = ltktDAO.Users.updateUserPassword(user.Username, newPassword);
+
+                    // Thành công
+                    if (isOK)
+                    {
+                        lMessage.Text = "Bạn đã đổi mật khẩu thành công!";
+                        lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                        lMessage.Visible = true;
+
+                        messagePanel.Visible = true;
+                        changePasswordPanel.Visible = false;
+                    }
+                }
+                else
+                {
+                    lMessage.Text = "Mật khẩu hiện tại không đúng. Xin vui lòng kiểm tra lại!";
                     lMessage.Visible = true;
 
                     messagePanel.Visible = true;
-                    changePasswordPanel.Visible = false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                lMessage.Text = "Mật khẩu hiện tại không đúng. Xin vui lòng kiểm tra lại!";
-                lMessage.Visible = true;
+                tblUser user = (tblUser)Session["User"];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
 
-                messagePanel.Visible = true;
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
+                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
 
@@ -100,16 +118,26 @@ namespace ltkt
 
             user.Email = strEmail;
             user.DisplayName = strDisplayName;
-
-            Boolean isOK = ltktDAO.Users.updateUser(user.Username, user);
-            if (isOK)
+            try
             {
-                lMessage.Text = "Bạn đã cập nhật hồ sơ thành công!";
-                lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                lMessage.Visible = true;
 
-                messagePanel.Visible = true;
-                editPanel.Visible = false;
+                bool isOK = ltktDAO.Users.updateUser(user.Username, user);
+                if (isOK)
+                {
+                    lMessage.Text = "Bạn đã cập nhật hồ sơ thành công!";
+                    lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    lMessage.Visible = true;
+
+                    messagePanel.Visible = true;
+                    editPanel.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), user.Username, ex.Message);
+
+                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
     }

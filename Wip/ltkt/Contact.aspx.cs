@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using ltktDAO;
 using System.Web.Mail;
 using ltktDAO;
 using System.Text;
 
 public partial class Contact : System.Web.UI.Page
 {
+    EventLog log = new EventLog();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["User"] != null)
@@ -65,6 +66,19 @@ public partial class Contact : System.Web.UI.Page
             liMessage.Text = String.Format("Phản hồi của bạn gửi không thành công. Xin vui lòng kiểm tra lại địa chỉ email của bạn ({0})", ex.Message);
             liMessage.Text += "\r\n <a href=\"Contact.aspx\">Thử lại</a>";
             contactPanel.Visible = false;
+
+            //Write to log
+            tblUser user = (tblUser)Session["User"];
+            string username = CommonConstants.USER_GUEST;
+            if (user != null)
+            {
+                username = user.Username;
+            }
+
+            log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
+            Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+            Response.Redirect(CommonConstants.PAGE_ERROR);
         }
 
     }
