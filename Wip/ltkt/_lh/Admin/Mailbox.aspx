@@ -66,12 +66,6 @@
             float: right;
             color: #666666;
         }
-        a
-        {
-            font-family: "Lucida Sans Unicode" , "Trebuchet MS";
-            font-size: 9pt;
-            color: #005B7F;
-        }
         a:hover
         {
             color: red;
@@ -184,7 +178,7 @@
                 <br />
                 <hr />
             </div>
-            <div id="to">
+            <div id="titleHeader">
                 <br />
                 <p>
                     <span>Đến:</span>
@@ -202,18 +196,20 @@
             </div>
         </asp:Panel>
         <asp:Panel ID="configPanel" runat="server" Visible="false">
-            <p>
-                <span>Tài khoản GMail</span>
-                <asp:TextBox ID="account" runat="server"></asp:TextBox>
-            </p>
-            <p>
-                <span>Mật khẩu</span>
-                <asp:TextBox ID="password" runat="server"></asp:TextBox>
-            </p>
-            <p>
-                <asp:Button ID="btnSubmitConfig" runat="server" CssClass="submit" Text="Cấu hình"
-                    OnClick="btnSubmitConfig_Click" />
-            </p>
+            <div class="form_settings">
+                <p>
+                    <span>Tài khoản:</span>
+                    <asp:TextBox ID="account" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Mật khẩu:</span>
+                    <asp:TextBox ID="password" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <asp:Button ID="btnSubmitConfig" runat="server" CssClass="formbutton" Text="Cấu hình"
+                        OnClick="btnSubmitConfig_Click" />
+                </p>
+            </div>
         </asp:Panel>
     </div>
     <%--    </div>--%>

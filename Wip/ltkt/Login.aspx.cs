@@ -33,7 +33,7 @@ namespace ltkt
             {
                 return;
             }
-            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
+            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword, false);
 
             if (user != null)
             {

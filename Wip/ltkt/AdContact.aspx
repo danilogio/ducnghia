@@ -111,8 +111,8 @@
                 </p>
                 <p>
                     <div align="center" style="margin-top: 10px; margin-left: 100px">
-                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
-                            PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH" />
+                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
+                            PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
                     </div>
                 </p>
                 <p style="padding-top: 15px">

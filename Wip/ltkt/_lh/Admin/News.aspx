@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
-    CodeFile="News.aspx.cs" Inherits="ltkt.Admin.News" ValidateRequest="false"  %>
+    CodeFile="News.aspx.cs" Inherits="ltkt.Admin.News" ValidateRequest="false" %>
 
 <asp:Content ID="NewsAdminHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
     <title>Quản lý tin tức | Website luyện thi kinh tế</title>
@@ -19,20 +19,6 @@
             padding: 20px 5px;
         }
     </style>
-    <%--JQuery easy confirm dialog
-    <script type="text/javascript" src="../../js/plugins/easy-confirm-dialog/jquery.easy-confirm-dialog.js"></script>
-    
-    <script type="text/javascript">
-        $("#french").easyconfirm({locale: {
-		    title: 'Xác nhận',
-		    text: 'Bạn có muốn xóa tin tức này?',
-		    button: ['Xóa',' Hủy'],
-		    closeText: 'fermer'
-	    }});
-	    $("#french").click(function() {
-		    alert("Je vous remercie de votre soumission!");
-	    });
-	</script>--%>
     <%--tinyMCE--%>
 
     <script type="text/javascript" src="../../js/tinyMCE/tiny_mce.js"></script>
@@ -138,17 +124,14 @@
                 </asp:Table>
             </div>
         </asp:Panel>
-        
         <asp:Panel ID="addPanel" runat="server">
             <div id="addNews" class="form_settings">
                 <%--<asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />--%>
                 <div id="composeFunction">
-                    <asp:Button ID="btnSave" runat="server" Text="Thêm tin tức" CssClass="formbutton" 
-                        onclick="btnSave_Click" />&nbsp;
-                    <asp:Button ID="btnSticky" runat="server" Text="Sticky" CssClass="formbutton" 
-                        Visible="false" />&nbsp;
-                    <asp:Button ID="btnCancel" runat="server" Text="Hủy" CssClass="formbutton" 
-                        onclick="btnCancel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btnSave" runat="server" Text="Thêm tin tức" CssClass="formbutton"
+                        OnClick="btnSave_Click" />&nbsp;
+                    <asp:Button ID="btnSticky" runat="server" Text="Sticky" CssClass="formbutton" Visible="false" />&nbsp;
+                    <asp:Button ID="btnCancel" runat="server" Text="Hủy" CssClass="formbutton" OnClick="btnCancel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
                     <br />
                     <br />
@@ -162,13 +145,13 @@
                     </p>
                     <p>
                         <span>Tóm tắt:</span>
-                        <asp:TextBox ID="txtChapeau" runat="server" TextMode="MultiLine" Rows="3" CssClass="NoEditor" ></asp:TextBox>
+                        <asp:TextBox ID="txtChapeau" runat="server" TextMode="MultiLine" Rows="3" CssClass="NoEditor"></asp:TextBox>
                     </p>
                 </div>
                 <div id="composeContent">
-                <p>
-                    <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="12"></asp:TextBox>
-                </p>
+                    <p>
+                        <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="12"></asp:TextBox>
+                    </p>
                 </div>
             </div>
         </asp:Panel>

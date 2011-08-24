@@ -29,7 +29,7 @@ namespace ltkt
                 {
 
                     liTitle.Text = news.Title;
-                    liPosted.Text = convertDateToString((DateTime)news.Posted);
+                    liPosted.Text = ltktDAO.BaseServices.convertDateToString((DateTime)news.Posted);
                     liAuthor.Text = ltktDAO.News.getAuthor(newsID);
 
                     lblContent.Text = news.Contents;
@@ -63,21 +63,5 @@ namespace ltkt
             }
 
         }
-
-        private string convertDateToString(DateTime date)
-        {
-            string strDate = "";
-
-            strDate += date.ToShortTimeString();
-            strDate += " ngày ";
-            strDate += Convert.ToString(date.Day);
-            strDate += "/";
-            strDate += Convert.ToString(date.Month);
-            strDate += "/";
-            strDate += Convert.ToString(date.Year);
-
-            return strDate;
-        }
-
     }
 }

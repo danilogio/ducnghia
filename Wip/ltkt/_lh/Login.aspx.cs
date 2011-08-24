@@ -23,7 +23,7 @@ namespace ltkt.Admin
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
 
-            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
+            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword, false);
 
             if (user != null)
             {

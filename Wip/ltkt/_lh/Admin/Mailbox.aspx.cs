@@ -25,42 +25,51 @@ namespace ltkt.Admin
         public const int Port = 995;
         public const string Email = "";
         public const string Password = "";
-        public const string SmtpServer = "";
-        public const string SmtpPort = "";
+        public const string SmtpServer = "smtp.gmail.com";
+        public const string SmtpPort = "465";
 
         public const int NoOfEmailsPerPage = 6;
         public const string SelfLink = "<a href=\"Mailbox.aspx?page={0}\">{1}</a>";
         public const string DisplayEmailLink = "<a href=\"Mailbox.aspx?emailID={0}\">{1}</a>";
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster pageMaster = (AdminMaster)Master;
             pageMaster.updateHeader("Hộp thư");
 
-
-            int page = 1;
-            int emailID = -1;
-
-            if (Request.QueryString["page"] != null)
+            if (getEmailConfig())
             {
-                EmailsTable.Visible = true;
-                EmailDetailTable.Visible = false;
 
-                page = Convert.ToInt32(Request.QueryString["page"]);
-                showEmail(page);
+                int page = 1;
+                int emailID = -1;
+
+                if (Request.QueryString["page"] != null)
+                {
+                    EmailsTable.Visible = true;
+                    EmailDetailTable.Visible = false;
+
+                    page = Convert.ToInt32(Request.QueryString["page"]);
+                    showEmail(page);
+                }
+                else if (Request.QueryString["emailID"] != null)
+                {
+                    EmailsTable.Visible = false;
+                    EmailDetailTable.Visible = true;
+
+                    emailID = Convert.ToInt32(Request.QueryString["emailID"]);
+                    ltktDAO.Contact.setRead(emailID, true);
+                    showDetails(emailID);
+                }
+                else if (Request.QueryString["page"] == null)
+                {
+                    Response.Redirect("Mailbox.aspx?page=1");
+                }
             }
-            else if (Request.QueryString["emailID"] != null)
+            else
             {
-                EmailsTable.Visible = false;
-                EmailDetailTable.Visible = true;
-                
-                emailID = Convert.ToInt32(Request.QueryString["emailID"]);
-                ltktDAO.Contact.setRead(emailID, true);
-                showDetails(emailID);
-            }
-            else if (Request.QueryString["page"] == null)
-            {
-                Response.Redirect("Mailbox.aspx?page=1");
+                viewPanel.Visible = false;
+                composePanel.Visible = false;
+                configPanel.Visible = true;
             }
         }
 
@@ -152,6 +161,7 @@ namespace ltkt.Admin
             composePanel.Visible = false;
             viewPanel.Visible = true;
         }
+
         protected void btnSend_Click(object sender, EventArgs e)
         {
             string strTo = txtTo.Text;
@@ -162,8 +172,8 @@ namespace ltkt.Admin
             try
             {
                 MailMessage message = new MailMessage();
-                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", "smtp.gmail.com");
-                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", "465");
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", SmtpServer);
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", SmtpPort);
                 message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusing", "2");
                 message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
                 //Use 0 for anonymous
@@ -176,7 +186,7 @@ namespace ltkt.Admin
                 message.BodyFormat = MailFormat.Html;
                 message.Body = strContent;
                 message.BodyEncoding = Encoding.UTF8;
-                SmtpMail.SmtpServer = "smtp.gmail.com:465";
+                SmtpMail.SmtpServer = SmtpServer + ":" + SmtpPort;
 
                 SmtpMail.Send(message);
 
@@ -201,7 +211,7 @@ namespace ltkt.Admin
             txtContent.Text = "";
             composePanel.Visible = true;
         }
-        
+
         protected void btnCheck_Click(object sender, EventArgs e)
         {
             EmailDetailTable.Visible = false;
@@ -221,7 +231,9 @@ namespace ltkt.Admin
 
         }
 
-        private void getEmailConfig()
-        { }
-}
+        private bool getEmailConfig()
+        {
+            return true;
+        }
+    }
 }

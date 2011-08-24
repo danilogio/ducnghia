@@ -452,7 +452,7 @@ namespace ltktDAO
         /// <param name="start"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static IEnumerable<tblNew> fetchEmailList(int start, int count)
+        public static IEnumerable<tblNew> fetchNewsList(int start, int count)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = (from record in DB.tblNews

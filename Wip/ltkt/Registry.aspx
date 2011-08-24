@@ -5,7 +5,6 @@
 <asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>Đăng ký thành viên | Website luyện thi kinh tế</title>
 </asp:Content>
-
 <asp:Content ID="Register" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="signupForm" class="block_text">
         <h2>
@@ -14,7 +13,6 @@
         <div id="divMessage" class="form_settings">
             <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
         </div>
-       
         <asp:Panel ID="registerPanel" runat="server">
             <div class="form_settings">
                 <p>
@@ -69,17 +67,14 @@
                         ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Email không đúng định dạng"
                         Display="None" />
                 </p>
-                 <p>
-                    <div align="center" style="margin-top:10px; margin-left:100px">
-                   <recaptcha:RecaptchaControl ID="recaptcha" runat="server"  PublicKey="6LfZ4MYSAAAAACHZzxmZmcaLeBN7ywBD5e5TxEDA"
-                        PrivateKey="6LfZ4MYSAAAAAE9Oe291w86KwMIT83fSvvEvBOPH"/>
-                    </div>
-                </p>
+                <div align="center" style="margin-top: 10px; margin-left: 100px">
+                    <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
+                        PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
+                </div>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSubmitSignup" runat="server" Text="Đăng ký"
                         CssClass="submit" OnClick="btnRegistry_Click" /></p>
             </div>
         </asp:Panel>
-     
     </div>
 </asp:Content>

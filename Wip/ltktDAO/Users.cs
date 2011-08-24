@@ -496,11 +496,21 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_username"></param>
         /// <param name="_password"></param>
+        /// <param name="_pwdEncrypted"></param>
         /// <returns></returns>
-        public static tblUser getUser(string _username, string _password)
+        public static tblUser getUser(string _username, string _password, bool _pwdEncrypted)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            string pwd = encryptPassword(_password);
+            string pwd = "";
+            if (_pwdEncrypted)
+            {
+                pwd = _password;
+            }
+            else
+            {
+                pwd = encryptPassword(_password);
+            }
+
 
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == _username && record.Password == pwd

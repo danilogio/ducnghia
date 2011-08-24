@@ -13,7 +13,7 @@ namespace ltkt.Admin
     {
         public const int NoOfNeswPerPage = 10;
         public const string SelfLink = "<a href=\"News.aspx?page={0}\">{1}</a>";
-        public const string DisplayNewsLink = "<a href=\"../../News.aspx?id={0}\">{1}</a>";
+        public const string DisplayNewsLink = "<a href=\"../../News.aspx?id={0}\" target=\"_blank\">{1}</a>";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,23 +34,24 @@ namespace ltkt.Admin
             {
                 string action = Request.QueryString["action"];
                 int newsID = Convert.ToInt32(Request.QueryString["id"]);
+                
                 if (action == "edit")
                 {
                     viewPanel.Visible = false;
-                    tblNew editNews = ltktDAO.News.getNews(newsID);
-                    Session["editNews"] = editNews;
-                    btnSave.Text = "Sửa";
-                    btnSticky.Visible = true;
-                    addPanel.Visible = true;
-                                        
-                    txtTitle.Text = editNews.Title;
-                    txtChapeau.Text = editNews.Chapaeu;
-                    txtContent.Text = editNews.Contents;
+                    editNews(newsID);
                 }
                 else if (action == "delete")
                 {
                     Boolean completeDelete = ltktDAO.News.deleteNews(newsID);
-                    Response.Redirect("News.aspx?page=1");
+
+                    if (completeDelete)
+                    {
+                        Response.Redirect("News.aspx?page=1");
+                    }
+                    else
+                    {
+                        Response.Write("alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")");
+                    }
                 }
             }
             else
@@ -58,6 +59,8 @@ namespace ltkt.Admin
                 Response.Redirect("News.aspx?page=1");
             }
         }
+
+        
 
         private void showNews(int page)
         {
@@ -68,7 +71,7 @@ namespace ltkt.Admin
             String actionLink = "<span title=\"Sửa tin tức\"><a href = \"News.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
             actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"News.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
 
-            IEnumerable<tblNew> lst = ltktDAO.News.fetchEmailList(((page - 1) *
+            IEnumerable<tblNew> lst = ltktDAO.News.fetchNewsList(((page - 1) *
                 NoOfNeswPerPage), NoOfNeswPerPage);
 
             if (mod == 0)
@@ -104,7 +107,6 @@ namespace ltkt.Admin
                 newsRow.Cells.Add(titleCell);
                 newsRow.Cells.Add(actionCell);
 
-
                 NewsTable.Rows.AddAt(2 + idx, newsRow);
             }
 
@@ -127,6 +129,22 @@ namespace ltkt.Admin
             btnSticky.Visible = false;
             Session["editNews"] = null;
         }
+
+        private void editNews(int newsID)
+        {
+            tblNew editNews = ltktDAO.News.getNews(newsID);
+            Session["editNews"] = editNews;
+
+            btnSave.Text = "Sửa";
+            btnSticky.Visible = true;
+            addPanel.Visible = true;
+
+            txtTitle.EnableViewState = true;
+            txtTitle.Text = editNews.Title;
+            txtChapeau.Text = editNews.Chapaeu;
+            txtContent.Text = editNews.Contents;
+        }
+
 
         protected void btnSave_Click(object sender, EventArgs e)
         {

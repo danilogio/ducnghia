@@ -20,7 +20,7 @@ namespace ltkt
             //get cookie successful
             if (sInformation != null)
             {
-                tblUser user = ltktDAO.Users.getUser(sInformation[0], sInformation[1]);
+                tblUser user = ltktDAO.Users.getUser(sInformation[0], sInformation[1], true);
                 chxRemember.Checked = true;
                 if (user != null)
                 {
@@ -110,7 +110,7 @@ namespace ltkt
             string strUsername = txtUsername.Text;
             string strPassword = txtPassword.Text;
 
-            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword);
+            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword, false);
 
             if (user != null)
             {

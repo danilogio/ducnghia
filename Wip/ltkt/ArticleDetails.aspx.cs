@@ -112,13 +112,8 @@ namespace ltkt
                     lblLiker.Text = contest.Point.ToString();
 
                     lblAuthor.Text = ltktDAO.Contest.getAuthor(id);
-                    lblPostedDate.Text = convertDateToString(contest.Posted);
+                    lblPostedDate.Text = ltktDAO.BaseServices.convertDateToString(contest.Posted);
                     lblChecker.Text = contest.Checker;
-                    lblType.Text = "<a href=\"./ContestUniversity.aspx\">Luyện Thi Đại Học</a>";
-
-                    lblSubject.Text = contest.Subject;
-                    lblBranch.Text = ltktDAO.Contest.getBranch(id);
-                    lblYear.Text = Convert.ToString(contest.Year);
 
                     lblOverview.Text = contest.Contents.Replace("\n", "<br />");
 
@@ -143,9 +138,6 @@ namespace ltkt
                     }
                     lblRelative.Text += "</ul>";
 
-                    infoContest.Visible = true;
-                    infoEnglish.Visible = false;
-                    infoInformatic.Visible = false;
                 }
                 else
                 {
@@ -186,10 +178,8 @@ namespace ltkt
                     lblLiker.Text = english.Point.ToString();
 
                     lblAuthor.Text = ltktDAO.English.getAuthor(id);
-                    lblPostedDate.Text = convertDateToString(english.Posted);
+                    lblPostedDate.Text = ltktDAO.BaseServices.convertDateToString(english.Posted);
                     lblChecker.Text = english.Checker;
-                    lblType.Text = "<a href=\"./English.aspx\">Anh văn</a>";
-
 
                     lblOverview.Text = english.Contents.Replace("\n", "<br />");
 
@@ -209,9 +199,6 @@ namespace ltkt
 
                     txtPostedComment.Text = english.Comment;
 
-                    infoContest.Visible = false;
-                    infoEnglish.Visible = true;
-                    infoInformatic.Visible = false;
                 }
                 else
                 {
@@ -252,9 +239,8 @@ namespace ltkt
                     lblLiker.Text = informatic.Point.ToString();
 
                     lblAuthor.Text = ltktDAO.Informatics.getAuthor(id);
-                    lblPostedDate.Text = convertDateToString(informatic.Posted);
+                    lblPostedDate.Text = ltktDAO.BaseServices.convertDateToString(informatic.Posted);
                     lblChecker.Text = informatic.Checker;
-                    lblType.Text = "<a href=\"./Informatics.aspx\">Tin học</a>";
 
                     lblOverview.Text = informatic.Contents.Replace("\n", "<br />");
 
@@ -275,9 +261,6 @@ namespace ltkt
 
                     txtPostedComment.Text = informatic.Comment;
 
-                    infoContest.Visible = false;
-                    infoEnglish.Visible = false;
-                    infoInformatic.Visible = true;
                 }
                 else
                 {
@@ -328,7 +311,7 @@ namespace ltkt
                     author = txtName.Text;
                 }
 
-                date = convertDateToString(DateTime.Now);
+                date = ltktDAO.BaseServices.convertDateToString(DateTime.Now);
                 comment = txtContent.Text.Replace("\n", "<br />");
 
                 newComment += "<span>";
@@ -383,22 +366,7 @@ namespace ltkt
             Page_Load(sender, e);
         }
 
-        private string convertDateToString(DateTime date)
-        {
-            string strDate = "";
-            if (date != null)
-            {
-                strDate += date.ToShortTimeString();
-                strDate += " ngày ";
-                strDate += Convert.ToString(date.Day);
-                strDate += "/";
-                strDate += Convert.ToString(date.Month);
-                strDate += "/";
-                strDate += Convert.ToString(date.Year);
-            }
-            return strDate;
-        }
-
+        
         protected void btnLike_Click(object sender, EventArgs e)
         {
             try
@@ -518,6 +486,7 @@ namespace ltkt
             }
             return false;
         }
+        
         private void updateCookie(string type, string sec, int id)
         {
             //update
@@ -542,6 +511,7 @@ namespace ltkt
             }
             return "";
         }
+        
         //Do not use this method directly
         private void writeCookie(string name, string value)
         {

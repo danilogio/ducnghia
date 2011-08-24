@@ -76,5 +76,28 @@ namespace ltktDAO
             }
             return "unknown.png";
         }
+
+        /// <summary>
+        /// Chuyển từ DateTime sang chuỗi
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string convertDateToString(DateTime date)
+        {
+            string strDate = "";
+            if (date != null)
+            {
+                strDate += date.ToShortTimeString();
+                strDate += " ngày ";
+                strDate += Convert.ToString(date.Day);
+                strDate += "/";
+                strDate += Convert.ToString(date.Month);
+                strDate += "/";
+                strDate += Convert.ToString(date.Year);
+            }
+            return strDate;
+        }
+
+
     }
 }
