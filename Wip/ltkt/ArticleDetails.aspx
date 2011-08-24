@@ -4,7 +4,7 @@
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="ArticleDetailsHead" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>
-        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+        <asp:Literal ID="liTitle" runat="server" ></asp:Literal>
         | Website Luyện thi Kinh tế</title>
     <style type="text/css">
         .comment
@@ -51,7 +51,7 @@
             </h2>
             <div id="feedback" style="float: right;">
                 <asp:Button ID="btnLike" runat="server" Text="Thích" CssClass="formbutton" OnClick="btnLike_Click" />
-                <asp:Button ID="btnDislike" runat="server" Text="Báo xấu" CssClass="formbutton" OnClick="btnDislike_Click" />
+                &nbsp;<asp:Button ID="btnDislike" runat="server" Text="Báo xấu" CssClass="formbutton" OnClick="btnDislike_Click" />
             </div>
             <div id="overview">
                 <h5>
@@ -93,6 +93,21 @@
                 </ul>
             </div>
             <br />
+            <div id="divPreviewButton" style="float: left;">
+                <asp:Button ID="btnPreview" runat="server" 
+                    Text="Xem trước >>>" CssClass="formbutton" 
+                    onclick="btnPreview_Click" />
+            </div>
+            <div id="divPreviewText">
+                <h4>
+                    &nbsp;
+                </h4>
+                <hr />
+            </div>
+        </asp:Panel>
+        <asp:Panel ID="previewPanel" runat="server" Visible="false">
+            <div id="previewContent">Nội dung preview<br /><br /><br />
+            </div>
         </asp:Panel>
         <asp:Panel ID="relativePanel" runat="server">
             <h4>
@@ -117,7 +132,7 @@
                 <div id="postingComment" class="form_settings" style="padding-left: 45px;">
                     <asp:Panel ID="nonUserPanel" runat="server">
                         <p>
-                            Hãy <a href="Registry.aspx" title="Đăng ký thành viên">đăng ký thành viên</a> để
+                            Hãy <a href="Registry.aspx" title="Đăng ký thành viên">đăng ký thành viên</a> để 
                             gửi ý kiến thảo luận đơn giản hơn.
                             <br />
                             Nếu bạn đã đăng ký, hãy <a href="Login.aspx" title="Đăng nhập">đăng nhập tại đây</a>.

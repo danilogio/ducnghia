@@ -20,6 +20,7 @@ namespace ltkt
             {
                 string sec = Request.QueryString["sec"];
                 int id = Convert.ToInt32(Request.QueryString["id"]);
+                
                 if (checkDoOneTime(CommonConstants.LIKE, sec, id))
                 {
                     btnLike.Visible = false;
@@ -28,6 +29,7 @@ namespace ltkt
                 {
                     btnDislike.Visible = false;
                 }
+                
                 try
                 {
                     switch (sec)
@@ -579,5 +581,17 @@ namespace ltkt
             }
             Page_Load(sender, e);
         }
-    }
+        
+        protected void btnPreview_Click(object sender, EventArgs e)
+        {
+            if (previewPanel.Visible == true)
+            {
+                previewPanel.Visible = false;
+            }
+            else
+            {
+                previewPanel.Visible = true;
+            }
+        }
+}
 }
