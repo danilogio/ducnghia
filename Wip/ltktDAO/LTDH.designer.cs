@@ -33,9 +33,9 @@ namespace ltktDAO
     partial void InserttblAdmin(tblAdmin instance);
     partial void UpdatetblAdmin(tblAdmin instance);
     partial void DeletetblAdmin(tblAdmin instance);
-    partial void InserttblUser(tblUser instance);
-    partial void UpdatetblUser(tblUser instance);
-    partial void DeletetblUser(tblUser instance);
+    partial void InserttblSticky(tblSticky instance);
+    partial void UpdatetblSticky(tblSticky instance);
+    partial void DeletetblSticky(tblSticky instance);
     partial void InserttblContact(tblContact instance);
     partial void UpdatetblContact(tblContact instance);
     partial void DeletetblContact(tblContact instance);
@@ -57,9 +57,9 @@ namespace ltktDAO
     partial void InserttblStatistic(tblStatistic instance);
     partial void UpdatetblStatistic(tblStatistic instance);
     partial void DeletetblStatistic(tblStatistic instance);
-    partial void InserttblSticky(tblSticky instance);
-    partial void UpdatetblSticky(tblSticky instance);
-    partial void DeletetblSticky(tblSticky instance);
+    partial void InserttblUser(tblUser instance);
+    partial void UpdatetblUser(tblUser instance);
+    partial void DeletetblUser(tblUser instance);
     #endregion
 		
 		public LTDHDataContext() : 
@@ -100,11 +100,11 @@ namespace ltktDAO
 			}
 		}
 		
-		public System.Data.Linq.Table<tblUser> tblUsers
+		public System.Data.Linq.Table<tblSticky> tblStickies
 		{
 			get
 			{
-				return this.GetTable<tblUser>();
+				return this.GetTable<tblSticky>();
 			}
 		}
 		
@@ -172,11 +172,11 @@ namespace ltktDAO
 			}
 		}
 		
-		public System.Data.Linq.Table<tblSticky> tblStickies
+		public System.Data.Linq.Table<tblUser> tblUsers
 		{
 			get
 			{
-				return this.GetTable<tblSticky>();
+				return this.GetTable<tblUser>();
 			}
 		}
 	}
@@ -315,213 +315,33 @@ namespace ltktDAO
 		}
 	}
 	
-	[Table(Name="dbo.tblUsers")]
-	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.tblSticky")]
+	public partial class tblSticky : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private int _Type;
 		
-		private string _Username;
-		
-		private string _Password;
-		
-		private string _DisplayName;
-		
-		private string _Email;
-		
-		private bool _Sex;
-		
-		private bool _Type;
-		
-		private string _Role;
-		
-		private string _Permission;
-		
-		private int _State;
-		
-		private System.DateTime _RegisterDate;
-		
-		private System.Nullable<System.DateTime> _KIADate;
-		
-		private int _NumberOfArticles;
-		
-		private string _Note;
-		
-		private EntitySet<tblContestForUniversity> _tblContestForUniversities;
-		
-		private EntitySet<tblEnglish> _tblEnglishes;
-		
-		private EntitySet<tblInformatic> _tblInformatics;
-		
-		private EntitySet<tblNew> _tblNews;
+		private int _Article;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnDisplayNameChanging(string value);
-    partial void OnDisplayNameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnSexChanging(bool value);
-    partial void OnSexChanged();
-    partial void OnTypeChanging(bool value);
+    partial void OnTypeChanging(int value);
     partial void OnTypeChanged();
-    partial void OnRoleChanging(string value);
-    partial void OnRoleChanged();
-    partial void OnPermissionChanging(string value);
-    partial void OnPermissionChanged();
-    partial void OnStateChanging(int value);
-    partial void OnStateChanged();
-    partial void OnRegisterDateChanging(System.DateTime value);
-    partial void OnRegisterDateChanged();
-    partial void OnKIADateChanging(System.Nullable<System.DateTime> value);
-    partial void OnKIADateChanged();
-    partial void OnNumberOfArticlesChanging(int value);
-    partial void OnNumberOfArticlesChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
+    partial void OnArticleChanging(int value);
+    partial void OnArticleChanged();
     #endregion
 		
-		public tblUser()
+		public tblSticky()
 		{
-			this._tblContestForUniversities = new EntitySet<tblContestForUniversity>(new Action<tblContestForUniversity>(this.attach_tblContestForUniversities), new Action<tblContestForUniversity>(this.detach_tblContestForUniversities));
-			this._tblEnglishes = new EntitySet<tblEnglish>(new Action<tblEnglish>(this.attach_tblEnglishes), new Action<tblEnglish>(this.detach_tblEnglishes));
-			this._tblInformatics = new EntitySet<tblInformatic>(new Action<tblInformatic>(this.attach_tblInformatics), new Action<tblInformatic>(this.detach_tblInformatics));
-			this._tblNews = new EntitySet<tblNew>(new Action<tblNew>(this.attach_tblNews), new Action<tblNew>(this.detach_tblNews));
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Password", DbType="NChar(254) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisplayName", DbType="NVarChar(50)")]
-		public string DisplayName
-		{
-			get
-			{
-				return this._DisplayName;
-			}
-			set
-			{
-				if ((this._DisplayName != value))
-				{
-					this.OnDisplayNameChanging(value);
-					this.SendPropertyChanging();
-					this._DisplayName = value;
-					this.SendPropertyChanged("DisplayName");
-					this.OnDisplayNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="NChar(50) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Sex", DbType="Bit NOT NULL")]
-		public bool Sex
-		{
-			get
-			{
-				return this._Sex;
-			}
-			set
-			{
-				if ((this._Sex != value))
-				{
-					this.OnSexChanging(value);
-					this.SendPropertyChanging();
-					this._Sex = value;
-					this.SendPropertyChanged("Sex");
-					this.OnSexChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Type", DbType="Bit NOT NULL")]
-		public bool Type
+		[Column(Storage="_Type", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Type
 		{
 			get
 			{
@@ -540,195 +360,23 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Role", DbType="NVarChar(50)")]
-		public string Role
+		[Column(Storage="_Article", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Article
 		{
 			get
 			{
-				return this._Role;
+				return this._Article;
 			}
 			set
 			{
-				if ((this._Role != value))
+				if ((this._Article != value))
 				{
-					this.OnRoleChanging(value);
+					this.OnArticleChanging(value);
 					this.SendPropertyChanging();
-					this._Role = value;
-					this.SendPropertyChanged("Role");
-					this.OnRoleChanged();
+					this._Article = value;
+					this.SendPropertyChanged("Article");
+					this.OnArticleChanged();
 				}
-			}
-		}
-		
-		[Column(Storage="_Permission", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string Permission
-		{
-			get
-			{
-				return this._Permission;
-			}
-			set
-			{
-				if ((this._Permission != value))
-				{
-					this.OnPermissionChanging(value);
-					this.SendPropertyChanging();
-					this._Permission = value;
-					this.SendPropertyChanged("Permission");
-					this.OnPermissionChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_State", DbType="Int NOT NULL")]
-		public int State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RegisterDate", DbType="DateTime NOT NULL")]
-		public System.DateTime RegisterDate
-		{
-			get
-			{
-				return this._RegisterDate;
-			}
-			set
-			{
-				if ((this._RegisterDate != value))
-				{
-					this.OnRegisterDateChanging(value);
-					this.SendPropertyChanging();
-					this._RegisterDate = value;
-					this.SendPropertyChanged("RegisterDate");
-					this.OnRegisterDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_KIADate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> KIADate
-		{
-			get
-			{
-				return this._KIADate;
-			}
-			set
-			{
-				if ((this._KIADate != value))
-				{
-					this.OnKIADateChanging(value);
-					this.SendPropertyChanging();
-					this._KIADate = value;
-					this.SendPropertyChanged("KIADate");
-					this.OnKIADateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_NumberOfArticles", DbType="Int NOT NULL")]
-		public int NumberOfArticles
-		{
-			get
-			{
-				return this._NumberOfArticles;
-			}
-			set
-			{
-				if ((this._NumberOfArticles != value))
-				{
-					this.OnNumberOfArticlesChanging(value);
-					this.SendPropertyChanging();
-					this._NumberOfArticles = value;
-					this.SendPropertyChanged("NumberOfArticles");
-					this.OnNumberOfArticlesChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Note", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
-		public EntitySet<tblContestForUniversity> tblContestForUniversities
-		{
-			get
-			{
-				return this._tblContestForUniversities;
-			}
-			set
-			{
-				this._tblContestForUniversities.Assign(value);
-			}
-		}
-		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
-		public EntitySet<tblEnglish> tblEnglishes
-		{
-			get
-			{
-				return this._tblEnglishes;
-			}
-			set
-			{
-				this._tblEnglishes.Assign(value);
-			}
-		}
-		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
-		public EntitySet<tblInformatic> tblInformatics
-		{
-			get
-			{
-				return this._tblInformatics;
-			}
-			set
-			{
-				this._tblInformatics.Assign(value);
-			}
-		}
-		
-		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
-		public EntitySet<tblNew> tblNews
-		{
-			get
-			{
-				return this._tblNews;
-			}
-			set
-			{
-				this._tblNews.Assign(value);
 			}
 		}
 		
@@ -750,54 +398,6 @@ namespace ltktDAO
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_tblContestForUniversities(tblContestForUniversity entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = this;
-		}
-		
-		private void detach_tblContestForUniversities(tblContestForUniversity entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = null;
-		}
-		
-		private void attach_tblEnglishes(tblEnglish entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = this;
-		}
-		
-		private void detach_tblEnglishes(tblEnglish entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = null;
-		}
-		
-		private void attach_tblInformatics(tblInformatic entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = this;
-		}
-		
-		private void detach_tblInformatics(tblInformatic entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = null;
-		}
-		
-		private void attach_tblNews(tblNew entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = this;
-		}
-		
-		private void detach_tblNews(tblNew entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblUser = null;
 		}
 	}
 	
@@ -1793,6 +1393,8 @@ namespace ltktDAO
 		
 		private string _HtmlEmbedLink;
 		
+		private string _Class;
+		
 		private EntityRef<tblUser> _tblUser;
 		
     #region Extensibility Method Definitions
@@ -1831,6 +1433,8 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
+    partial void OnClassChanging(string value);
+    partial void OnClassChanged();
     #endregion
 		
 		public tblEnglish()
@@ -2163,6 +1767,26 @@ namespace ltktDAO
 			}
 		}
 		
+		[Column(Storage="_Class", DbType="NVarChar(50)")]
+		public string Class
+		{
+			get
+			{
+				return this._Class;
+			}
+			set
+			{
+				if ((this._Class != value))
+				{
+					this.OnClassChanging(value);
+					this.SendPropertyChanging();
+					this._Class = value;
+					this.SendPropertyChanged("Class");
+					this.OnClassChanged();
+				}
+			}
+		}
+		
 		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
@@ -2258,6 +1882,8 @@ namespace ltktDAO
 		
 		private string _HtmlEmbedLink;
 		
+		private string _Leitmotif;
+		
 		private EntityRef<tblUser> _tblUser;
 		
     #region Extensibility Method Definitions
@@ -2298,6 +1924,8 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
+    partial void OnLeitmotifChanging(string value);
+    partial void OnLeitmotifChanged();
     #endregion
 		
 		public tblInformatic()
@@ -2646,6 +2274,26 @@ namespace ltktDAO
 					this._HtmlEmbedLink = value;
 					this.SendPropertyChanged("HtmlEmbedLink");
 					this.OnHtmlEmbedLinkChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Leitmotif", DbType="NVarChar(50)")]
+		public string Leitmotif
+		{
+			get
+			{
+				return this._Leitmotif;
+			}
+			set
+			{
+				if ((this._Leitmotif != value))
+				{
+					this.OnLeitmotifChanging(value);
+					this.SendPropertyChanging();
+					this._Leitmotif = value;
+					this.SendPropertyChanged("Leitmotif");
+					this.OnLeitmotifChanged();
 				}
 			}
 		}
@@ -3124,33 +2772,213 @@ namespace ltktDAO
 		}
 	}
 	
-	[Table(Name="dbo.tblSticky")]
-	public partial class tblSticky : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.tblUsers")]
+	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Type;
+		private int _ID;
 		
-		private int _Article;
+		private string _Username;
+		
+		private string _Password;
+		
+		private string _DisplayName;
+		
+		private string _Email;
+		
+		private bool _Sex;
+		
+		private bool _Type;
+		
+		private string _Role;
+		
+		private string _Permission;
+		
+		private int _State;
+		
+		private System.DateTime _RegisterDate;
+		
+		private System.Nullable<System.DateTime> _KIADate;
+		
+		private int _NumberOfArticles;
+		
+		private string _Note;
+		
+		private EntitySet<tblContestForUniversity> _tblContestForUniversities;
+		
+		private EntitySet<tblEnglish> _tblEnglishes;
+		
+		private EntitySet<tblInformatic> _tblInformatics;
+		
+		private EntitySet<tblNew> _tblNews;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnTypeChanging(int value);
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnDisplayNameChanging(string value);
+    partial void OnDisplayNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnSexChanging(bool value);
+    partial void OnSexChanged();
+    partial void OnTypeChanging(bool value);
     partial void OnTypeChanged();
-    partial void OnArticleChanging(int value);
-    partial void OnArticleChanged();
+    partial void OnRoleChanging(string value);
+    partial void OnRoleChanged();
+    partial void OnPermissionChanging(string value);
+    partial void OnPermissionChanged();
+    partial void OnStateChanging(int value);
+    partial void OnStateChanged();
+    partial void OnRegisterDateChanging(System.DateTime value);
+    partial void OnRegisterDateChanged();
+    partial void OnKIADateChanging(System.Nullable<System.DateTime> value);
+    partial void OnKIADateChanged();
+    partial void OnNumberOfArticlesChanging(int value);
+    partial void OnNumberOfArticlesChanged();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
     #endregion
 		
-		public tblSticky()
+		public tblUser()
 		{
+			this._tblContestForUniversities = new EntitySet<tblContestForUniversity>(new Action<tblContestForUniversity>(this.attach_tblContestForUniversities), new Action<tblContestForUniversity>(this.detach_tblContestForUniversities));
+			this._tblEnglishes = new EntitySet<tblEnglish>(new Action<tblEnglish>(this.attach_tblEnglishes), new Action<tblEnglish>(this.detach_tblEnglishes));
+			this._tblInformatics = new EntitySet<tblInformatic>(new Action<tblInformatic>(this.attach_tblInformatics), new Action<tblInformatic>(this.detach_tblInformatics));
+			this._tblNews = new EntitySet<tblNew>(new Action<tblNew>(this.attach_tblNews), new Action<tblNew>(this.detach_tblNews));
 			OnCreated();
 		}
 		
-		[Column(Storage="_Type", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Type
+		[Column(Storage="_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Password", DbType="NChar(254) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisplayName", DbType="NVarChar(50)")]
+		public string DisplayName
+		{
+			get
+			{
+				return this._DisplayName;
+			}
+			set
+			{
+				if ((this._DisplayName != value))
+				{
+					this.OnDisplayNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisplayName = value;
+					this.SendPropertyChanged("DisplayName");
+					this.OnDisplayNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Sex", DbType="Bit NOT NULL")]
+		public bool Sex
+		{
+			get
+			{
+				return this._Sex;
+			}
+			set
+			{
+				if ((this._Sex != value))
+				{
+					this.OnSexChanging(value);
+					this.SendPropertyChanging();
+					this._Sex = value;
+					this.SendPropertyChanged("Sex");
+					this.OnSexChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Type", DbType="Bit NOT NULL")]
+		public bool Type
 		{
 			get
 			{
@@ -3169,23 +2997,195 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Article", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Article
+		[Column(Storage="_Role", DbType="NVarChar(50)")]
+		public string Role
 		{
 			get
 			{
-				return this._Article;
+				return this._Role;
 			}
 			set
 			{
-				if ((this._Article != value))
+				if ((this._Role != value))
 				{
-					this.OnArticleChanging(value);
+					this.OnRoleChanging(value);
 					this.SendPropertyChanging();
-					this._Article = value;
-					this.SendPropertyChanged("Article");
-					this.OnArticleChanged();
+					this._Role = value;
+					this.SendPropertyChanged("Role");
+					this.OnRoleChanged();
 				}
+			}
+		}
+		
+		[Column(Storage="_Permission", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string Permission
+		{
+			get
+			{
+				return this._Permission;
+			}
+			set
+			{
+				if ((this._Permission != value))
+				{
+					this.OnPermissionChanging(value);
+					this.SendPropertyChanging();
+					this._Permission = value;
+					this.SendPropertyChanged("Permission");
+					this.OnPermissionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_State", DbType="Int NOT NULL")]
+		public int State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RegisterDate", DbType="DateTime NOT NULL")]
+		public System.DateTime RegisterDate
+		{
+			get
+			{
+				return this._RegisterDate;
+			}
+			set
+			{
+				if ((this._RegisterDate != value))
+				{
+					this.OnRegisterDateChanging(value);
+					this.SendPropertyChanging();
+					this._RegisterDate = value;
+					this.SendPropertyChanged("RegisterDate");
+					this.OnRegisterDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_KIADate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> KIADate
+		{
+			get
+			{
+				return this._KIADate;
+			}
+			set
+			{
+				if ((this._KIADate != value))
+				{
+					this.OnKIADateChanging(value);
+					this.SendPropertyChanging();
+					this._KIADate = value;
+					this.SendPropertyChanged("KIADate");
+					this.OnKIADateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NumberOfArticles", DbType="Int NOT NULL")]
+		public int NumberOfArticles
+		{
+			get
+			{
+				return this._NumberOfArticles;
+			}
+			set
+			{
+				if ((this._NumberOfArticles != value))
+				{
+					this.OnNumberOfArticlesChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfArticles = value;
+					this.SendPropertyChanged("NumberOfArticles");
+					this.OnNumberOfArticlesChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Note", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Note
+		{
+			get
+			{
+				return this._Note;
+			}
+			set
+			{
+				if ((this._Note != value))
+				{
+					this.OnNoteChanging(value);
+					this.SendPropertyChanging();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
+				}
+			}
+		}
+		
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
+		public EntitySet<tblContestForUniversity> tblContestForUniversities
+		{
+			get
+			{
+				return this._tblContestForUniversities;
+			}
+			set
+			{
+				this._tblContestForUniversities.Assign(value);
+			}
+		}
+		
+		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
+		public EntitySet<tblEnglish> tblEnglishes
+		{
+			get
+			{
+				return this._tblEnglishes;
+			}
+			set
+			{
+				this._tblEnglishes.Assign(value);
+			}
+		}
+		
+		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
+		public EntitySet<tblInformatic> tblInformatics
+		{
+			get
+			{
+				return this._tblInformatics;
+			}
+			set
+			{
+				this._tblInformatics.Assign(value);
+			}
+		}
+		
+		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
+		public EntitySet<tblNew> tblNews
+		{
+			get
+			{
+				return this._tblNews;
+			}
+			set
+			{
+				this._tblNews.Assign(value);
 			}
 		}
 		
@@ -3207,6 +3207,54 @@ namespace ltktDAO
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_tblContestForUniversities(tblContestForUniversity entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = this;
+		}
+		
+		private void detach_tblContestForUniversities(tblContestForUniversity entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = null;
+		}
+		
+		private void attach_tblEnglishes(tblEnglish entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = this;
+		}
+		
+		private void detach_tblEnglishes(tblEnglish entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = null;
+		}
+		
+		private void attach_tblInformatics(tblInformatic entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = this;
+		}
+		
+		private void detach_tblInformatics(tblInformatic entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = null;
+		}
+		
+		private void attach_tblNews(tblNew entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = this;
+		}
+		
+		private void detach_tblNews(tblNew entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser = null;
 		}
 	}
 }
