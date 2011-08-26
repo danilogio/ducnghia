@@ -8,10 +8,13 @@ using System.Windows.Forms;
 using ltktDAO;
 public partial class AdContact : System.Web.UI.Page
 {
+    EventLog log = new EventLog();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         
     }
+    
     protected void btnSubmitContact_Click(object sender, EventArgs e)
     {
         if (!recaptcha.IsValid)
@@ -19,7 +22,14 @@ public partial class AdContact : System.Web.UI.Page
             return;
         }
 
-        string sDescription = getLocation(sender, e);
+        string _companyName = txtboxCompanyName.Text;
+        string _address = txtAddress.Text;
+        string _email = txtboxContactEmail.Text;
+        string _phone = txtboxFone.Text;
+        DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
+        DateTime _endDate = DateTime.Parse(txtToDate.Text);
+        string _description = getLocation(sender, e);
+
         
     }
 

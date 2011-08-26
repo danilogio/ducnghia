@@ -766,6 +766,22 @@ namespace ltktDAO
             return null;
         }
 
+        /// <summary>
+        /// Lấy count user từ id start
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblUser> fetchUserList(int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblUser> lst = (from record in DB.tblUsers
+                                        
+                                       select record).Skip(start).Take(count);
+
+            return lst;
+        }
+
         #endregion
     }
 }

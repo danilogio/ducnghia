@@ -19,10 +19,11 @@ namespace ltkt.Admin
 
             if (!IsPostBack)
             {
-                gvUsers.DataSource = ltktDAO.Users.getAll();
-                gvUsers.DataBind();
+                //gvUsers.DataSource = ltktDAO.Users.getAll();
+                //gvUsers.DataBind();
             }
         }
+        /*
         protected void gvUsers_RowUpdating(object sender, EventArgs e)
         {
         }
@@ -73,6 +74,8 @@ namespace ltkt.Admin
             this.gvUsers.DataSource = ltktDAO.Users.getAll();
             this.gvUsers.DataBind();
         }
+        */
+
 
     }
 }

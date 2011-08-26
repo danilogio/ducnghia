@@ -456,6 +456,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = (from record in DB.tblNews
+                                       orderby record.ID descending
                                        select record).Skip(start).Take(count);
 
             return lst;

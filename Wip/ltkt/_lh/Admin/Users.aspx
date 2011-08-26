@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Users.aspx.cs" Inherits="ltkt.Admin.Users" %>
 
-<asp:Content ID="UsersAdminHead" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+<asp:Content ID="UsersAdminHead" ContentPlaceHolderID="cphAdminHeader" runat="Server">
     <title>Quản lý thành viên | Website luyện thi kinh tế</title>
     
     <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -25,18 +25,61 @@
             background-color: white;
         }
     </style>
+    
+    <style type="text/css">
+        .users-table
+        {
+            border: solid 1px #444444;
+        }
+        .users-table-header
+        {
+            font-family: "Trebuchet MS";
+            font-size: 9pt;
+            background-color: #0099B9;
+            color: white;
+            border: solid 1px #444444;
+        }
+        .users-table-header-cell
+        {
+            font-family: "Georgia";
+            font-size: 9pt;
+            font-weight: bold;
+            border: solid 1px #666666;
+            padding: 6px;
+        }
+        .users-table-cell
+        {
+            font-family: "Georgia";
+            font-size: 9pt;
+            width: 300px;
+            border: solid 1px #666666;
+            padding: 6px;
+        }
+        .users-table-footer
+        {
+            border: solid 1px #666666;
+            padding: 3px;
+            width: 50%;
+        }
+        .users-datetime
+        {
+            float: right;
+            color: #666666;
+        }
+        a:hover
+        {
+            color: red;
+        }
+    </style>
 </asp:Content>
-
 <asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
-        <form id="form1">
-        <h4>
-            Người dùng</h4>
+        <%--<form id="form1">--%>
         <div class="block_text">
             <h5>
                 Danh sách thành viên</h5>
             <div class="form_settings">
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                <%--<asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
                 <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" BackColor="Black"
                     BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
@@ -87,7 +130,8 @@
                     <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
                     <EditRowStyle Wrap="True"></EditRowStyle>
                     <AlternatingRowStyle BackColor="White" />
-                </asp:GridView>
+                </asp:GridView>--%>
+                
             </div>
         </div>
         <div class="block_text">
@@ -98,6 +142,6 @@
             <h5>
                 Thành viên quản trị</h5>
         </div>
-        </form>
+        <%--</form>--%>
     </div>
 </asp:Content>

@@ -11,6 +11,8 @@ namespace ltkt.Admin
 {
     public partial class News : System.Web.UI.Page
     {
+        EventLog log = new EventLog();
+
         public const int NoOfNeswPerPage = 10;
         public const string SelfLink = "<a href=\"News.aspx?page={0}\">{1}</a>";
         public const string DisplayNewsLink = "<a href=\"../../News.aspx?id={0}\" target=\"_blank\">{1}</a>";
@@ -28,6 +30,7 @@ namespace ltkt.Admin
                 addPanel.Visible = false;
 
                 page = Convert.ToInt32(Request.QueryString["page"]);
+                btnSave.Text = "Thêm tin tức";
                 showNews(page);
             }
             else if (Request.QueryString["action"] != null)
@@ -59,9 +62,7 @@ namespace ltkt.Admin
                 Response.Redirect("News.aspx?page=1");
             }
         }
-
-        
-
+                
         private void showNews(int page)
         {
             int totalNews = ltktDAO.News.countNews();
@@ -71,8 +72,7 @@ namespace ltkt.Admin
             String actionLink = "<span title=\"Sửa tin tức\"><a href = \"News.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
             actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"News.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
 
-            IEnumerable<tblNew> lst = ltktDAO.News.fetchNewsList(((page - 1) *
-                NoOfNeswPerPage), NoOfNeswPerPage);
+            IEnumerable<tblNew> lst = ltktDAO.News.fetchNewsList(((page - 1) * NoOfNeswPerPage), NoOfNeswPerPage);
 
             if (mod == 0)
             {
@@ -130,19 +130,21 @@ namespace ltkt.Admin
             Session["editNews"] = null;
         }
 
-        private void editNews(int newsID)
+        private void editNews (int newsID)
         {
-            tblNew editNews = ltktDAO.News.getNews(newsID);
-            Session["editNews"] = editNews;
+            if (Session["editNews"] == null)
+            {
+                tblNew editNews = ltktDAO.News.getNews(newsID);
+                Session["editNews"] = editNews;
 
-            btnSave.Text = "Sửa";
-            btnSticky.Visible = true;
-            addPanel.Visible = true;
+                btnSave.Text = "Sửa";
+                btnSticky.Visible = true;
+                addPanel.Visible = true;
 
-            txtTitle.EnableViewState = true;
-            txtTitle.Text = editNews.Title;
-            txtChapeau.Text = editNews.Chapaeu;
-            txtContent.Text = editNews.Contents;
+                txtTitle.Text = editNews.Title;
+                txtChapeau.Text = editNews.Chapaeu;
+                txtContent.Text = editNews.Contents;
+            }
         }
 
 
@@ -166,6 +168,7 @@ namespace ltkt.Admin
                     else//edit
                     {
                         ltktDAO.News.updateNews(editNews.ID, author.Username, strTitlte, strChapeau, strContent);
+                        Session["editNews"] = null;
                         Response.Redirect("News.aspx?page=1");
                     }
                 }
@@ -173,6 +176,18 @@ namespace ltkt.Admin
                 {
                     liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
                     liMessage.Visible = true;
+
+                    tblUser user = (tblUser)Session["User"];
+                    string username = CommonConstants.USER_GUEST;
+                    if (user != null)
+                    {
+                        username = user.Username;
+                    }
+
+                    log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+
+                    Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
             }
             else
@@ -191,7 +206,9 @@ namespace ltkt.Admin
                 txtContent.Text = Server.HtmlEncode("");
             }
             else//edit
-            { }
+            {
+                Session["editNews"] = null;
+            }
             
 
             addPanel.Visible = false;

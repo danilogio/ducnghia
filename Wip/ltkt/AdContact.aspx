@@ -2,12 +2,13 @@
     CodeFile="AdContact.aspx.cs" Inherits="AdContact" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
-
 <asp:Content ID="AdContactHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>Liên hệ quảng cáo | Website luyện thi kinh tế</title>
-    
+
     <script type="text/javascript" src="js/jquery.dynDateTime.js"></script>
+
     <script type="text/javascript" src="js/lang/calendar-en.js"></script>
+
     <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue.css" />
 
     <script type="text/javascript">
@@ -28,8 +29,8 @@
 
         }); 
     </script>
-</asp:Content>
 
+</asp:Content>
 <asp:Content ID="AdContact" ContentPlaceHolderID="cphContent" runat="Server">
     <%-- <form action="AdContact.aspx" method="post">--%>
     <div id="Advertisement" class="block_text">
@@ -43,7 +44,6 @@
         </asp:Panel>
         <asp:Panel ID="contactPanel" runat="server">
             <div class="form_settings">
-                <%--<form action="AdContact.aspx" method="post">--%>
                 <p>
                     <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
                 </p>
@@ -92,13 +92,7 @@
                     ControlToValidate="txtToDate" Display="None">
                 </asp:RequiredFieldValidator>
                 <p>
-                    <span>Vị trí:</span>
-                    <%--<asp:CheckBoxList ID="CheckBoxList1" runat="server" CssClass="checkbox">
-                            <asp:ListItem Value="1" Text="Top Banner"></asp:ListItem>
-                            <asp:ListItem Value="2" Text="Top Banner"></asp:ListItem>
-                            <asp:ListItem Value="3" Text="Top Banner"></asp:ListItem>
-                        </asp:CheckBoxList>--%>
-                    <span id="location" class="checkboxlist">
+                    <span>Vị trí:</span> <span id="location" class="checkboxlist">
                         <input runat="server" type="checkbox" id="chkTop" value="0" class="checkbox" checked="checked" />
                         Top Banner<br />
                         <input runat="server" type="checkbox" id="chkRight" value="1" class="checkbox" />
@@ -109,16 +103,13 @@
                         Bottom Banner<br />
                     </span>
                 </p>
-                <p>
-                    <div align="center" style="margin-top: 10px; margin-left: 100px">
-                        <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
-                            PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
-                    </div>
-                </p>
+                <div align="center" style="margin-top: 10px; margin-left: 100px">
+                    <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
+                        PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
+                </div>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit"
                         OnClick="btnSubmitContact_Click" /></p>
-                <%--</form>--%>
             </div>
         </asp:Panel>
     </div>
