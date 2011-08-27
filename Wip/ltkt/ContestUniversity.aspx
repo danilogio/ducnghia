@@ -26,6 +26,10 @@
                         <img src="<%#Eval("Thumbnail")%>" alt="" />
                         <br />
                         <center><%#Eval("Title")%></center>
+                        
+                        <div class="block_details_text">
+                            <center><%#Eval("Year")%></center>
+                        </div>
                     </a></li>
                 </ItemTemplate>
                 <EmptyDataTemplate>
@@ -35,7 +39,12 @@
                 </EmptyDataTemplate>
             </asp:ListView>
         </div>
+        
+        
         <div class="datapager">
+        <br />
+        <br />
+        <hr />
             <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
                 <Fields>

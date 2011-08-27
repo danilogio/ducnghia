@@ -13,5 +13,9 @@ namespace ltkt
         {
 
         }
+        protected void DataPagerArticles_PreRender(object sender, EventArgs e)
+        {
+
+        }
     }
 }
