@@ -11,7 +11,7 @@
     </style>
     <div id="content" class="block_text">
         <h2>
-            Luyện thi đại học</h2>
+            <asp:Label ID="lblTitle" runat="server" Text="Luyện Thi Đại Học"></asp:Label></h2>
         <hr />
         <br />
         <div>

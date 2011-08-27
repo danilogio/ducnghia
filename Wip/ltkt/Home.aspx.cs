@@ -377,7 +377,7 @@ public partial class _Default : System.Web.UI.Page
                     + "                    <span title='" + item.Title + "'><a href=\"ArticleDetails.aspx?sec=uni&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
                     + "                </div>\n"
                     + "                <div class='block_details_text'>\n"
-                    + "                    " + item.Subject.Trim() + "<br />\n"
+                    + "                    " + BaseServices.getNameByCode(item.Subject.Trim()) + "<br />\n"
                     + Contest.getBranch(item.ID) + "<br/>\n"
                     + item.Year
                     + "                </div>\n"

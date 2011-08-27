@@ -667,7 +667,25 @@ namespace ltktDAO
         #endregion
 
         #region Method
-
+        /// <summary>
+        /// get Article by Subject and by time
+        /// </summary>
+        /// <param name="articleSCO"></param>
+        /// <returns></returns>
+        public IEnumerable<tblContestForUniversity> getArticleBySubjectAndTime(ArticleSCO articleSCO)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                                            where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getTimeFromString(articleSCO.Time)
+                                                            && p.State != 0
+                                                            orderby p.Year
+                                                           select p;
+            return lst;
+        }
+        /// <summary>
+        /// get all records of Contest
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<tblContestForUniversity> getAll()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -680,6 +698,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
                                                         select p);
+            
             return lst;
 
         }

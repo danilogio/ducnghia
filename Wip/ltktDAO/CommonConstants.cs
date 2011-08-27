@@ -28,6 +28,11 @@ namespace ltktDAO
         /// Number record of relative a article
         /// </summary>
         public const int NUMBER_RECORD_RELATIVE = 5;
+
+        /// <summary>
+        /// Blank value
+        /// </summary>
+        public const string BLANK = "";
         
         /// <summary>
         /// do not find out article record on DB
@@ -70,8 +75,140 @@ namespace ltktDAO
         /// </summary>
         public const string USER_GUEST = "Guest";
         /// <summary>
+        /// User on session
+        /// </summary>
+        public const string SES_USER = "User";
+        /// <summary>
         /// Upload successful
         /// </summary>
         public const string UPLOAD_SUCCESSFUL = "Upload thành công";
+        /// <summary>
+        /// Article SCO on session
+        /// </summary>
+        public const string SES_ARTICLE_SCO = "ArticleSCO";
+        /// <summary>
+        /// section on request
+        /// </summary>
+        public const string REQ_SECTION = "sec";
+        /// <summary>
+        /// Id of item on request
+        /// </summary>
+        public const string REQ_ID = "id";
+        /// <summary>
+        /// subject on request
+        /// </summary>
+        public const string REQ_SUBJECT = "sub";
+        /// <summary>
+        /// time on request
+        /// </summary>
+        public const string REQ_TIME = "time";
+        /// <summary>
+        /// library on session
+        /// </summary>
+        public const string REQ_LIBRARY = "lib";
+        /// <summary>
+        /// now
+        /// </summary>
+        public const string NOW = "now";
+        /// <summary>
+        /// comma character(,)
+        /// </summary>
+        public const string COMMA = ",";
+        /// <summary>
+        /// one space character(" ")
+        /// </summary>
+        public const string SPACE = " ";
+        /// <summary>
+        /// bar character
+        /// </summary>
+        public const string BAR = "-";
+        /// <summary>
+        /// Section university code
+        /// </summary>
+        public const string SEC_UNIVERSITY_CODE = "uni";
+        /// <summary>
+        /// Section informatics code
+        /// </summary>
+        public const string SEC_INFORMATICS_CODE = "it";
+        /// <summary>
+        /// Section english code
+        /// </summary>
+        public const string SEC_ENGLISH_CODE = "el";
+        /// <summary>
+        /// Section university code
+        /// </summary>
+        public const string SEC_UNIVESITY = "Luyện thi Đại học";
+        /// <summary>
+        /// Section informatics code
+        /// </summary>
+        public const string SEC_INFORMATICS = "Tin học";
+        /// <summary>
+        /// Section english code
+        /// </summary>
+        public const string SEC_ENGLISH = "Anh văn";
+        /// <summary>
+        /// Môn Toán
+        /// </summary>
+        public const string SUB_MATHEMATICS = "Môn Toán";
+        /// <summary>
+        /// Môn Lý
+        /// </summary>
+        public const string SUB_PHYSICAL = "Môn Lý";
+        /// <summary>
+        /// Môn Hóa
+        /// </summary>
+        public const string SUB_CHEMICAL = "Môn Hóa";
+        /// <summary>
+        /// Môn Sinh
+        /// </summary>
+        public const string SUB_BIOGRAPHY = "Môn Sinh";
+        /// <summary>
+        /// Môn Văn
+        /// </summary>
+        public const string SUB_LITERATURE = "Môn Văn";
+        /// <summary>
+        /// Môn Sử
+        /// </summary>
+        public const string SUB_HISTORY = "Môn Sử";
+        /// <summary>
+        /// Môn Địa
+        /// </summary>
+        public const string SUB_GEOGRAPHY = "Môn Địa";
+        /// <summary>
+        /// Môn Anh
+        /// </summary>
+        public const string SUB_ENGLISH = "Môn Anh";
+        /// <summary>
+        /// Mã Môn Toán
+        /// </summary>
+        public const string SUB_MATHEMATICS_CODE = "math";
+        /// <summary>
+        /// Mã môn Lý
+        /// </summary>
+        public const string SUB_PHYSICAL_CODE = "phy";
+        /// <summary>
+        /// Mã môn Hóa
+        /// </summary>
+        public const string SUB_CHEMICAL_CODE = "chem";
+        /// <summary>
+        /// Mã Môn sinh
+        /// </summary>
+        public const string SUB_BIOGRAPHY_CODE = "bio";
+        /// <summary>
+        /// Mã Môn Văn
+        /// </summary>
+        public const string SUB_LITERATURE_CODE = "lit";
+        /// <summary>
+        /// Mã môn Sử
+        /// </summary>
+        public const string SUB_HISTORY_CODE = "his";
+        /// <summary>
+        /// Mã Môn địa
+        /// </summary>
+        public const string SUB_GEOGRAPHY_CODE = "geo";
+        /// <summary>
+        /// Mã Môn Anh
+        /// </summary>
+        public const string SUB_ENGLISH_CODE = "el";
     }
 }

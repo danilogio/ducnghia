@@ -16,10 +16,10 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["sec"] != null)
+            if (Request.QueryString[CommonConstants.REQ_SECTION] != null)
             {
-                string sec = Request.QueryString["sec"];
-                int id = Convert.ToInt32(Request.QueryString["id"]);
+                string sec = Request.QueryString[CommonConstants.REQ_SECTION];
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
                 
                 if (checkDoOneTime(CommonConstants.LIKE, sec, id))
                 {
@@ -34,19 +34,19 @@ namespace ltkt
                 {
                     switch (sec)
                     {
-                        case "uni":
+                        case CommonConstants.SEC_UNIVERSITY_CODE:
                             {
                                 // do something
                                 showContest(id);
                                 break;
                             }
-                        case "el":
+                        case CommonConstants.SEC_ENGLISH_CODE:
                             {
                                 // do something else
                                 showEnglish(id);
                                 break;
                             }
-                        case "it":
+                        case CommonConstants.SEC_INFORMATICS_CODE:
                             {
                                 //do something
                                 showInformatic(id);
@@ -58,7 +58,7 @@ namespace ltkt
                 }
                 catch (Exception ex)
                 {
-                    tblUser user = (tblUser)Session["User"];
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                     string username = CommonConstants.USER_GUEST;
                     if (user != null)
                     {
@@ -80,7 +80,7 @@ namespace ltkt
                     txtPostedComment.Visible = true;
                 }
 
-                if (Session["User"] != null)
+                if (Session[CommonConstants.SES_USER] != null)
                 {
                     nonUserPanel.Visible = false;
                 }
@@ -153,7 +153,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -214,7 +214,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -276,7 +276,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -297,15 +297,15 @@ namespace ltkt
 
         protected void btnSubmitComment_Click(object sender, EventArgs e)
         {
-            string author = "";
-            string date = "";
-            string comment = "";
-            string newComment = "";
+            string author = CommonConstants.BLANK;
+            string date = CommonConstants.BLANK;
+            string comment = CommonConstants.BLANK;
+            string newComment = CommonConstants.BLANK;
             try
             {
-                if (Session["User"] != null)
+                if (Session[CommonConstants.SES_USER] != null)
                 {
-                    tblUser user = (tblUser)Session["User"];
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                     author = user.DisplayName;
                 }
                 else
@@ -323,22 +323,22 @@ namespace ltkt
                 newComment += "</span>";
 
                 // Write comment to db
-                string sec = Request.QueryString["sec"];
-                int id = Convert.ToInt32(Request.QueryString["id"]);
+                string sec = Request.QueryString[CommonConstants.REQ_SECTION];
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
                 switch (sec)
                 {
-                    case "uni":
+                    case CommonConstants.SEC_UNIVERSITY_CODE:
                         {
                             ltktDAO.Contest.insertComment(id, newComment);
                             break;
                         }
-                    case "el":
+                    case CommonConstants.SEC_ENGLISH_CODE:
                         {
                             ltktDAO.English.insertComment(id, newComment);
                             break;
                         }
-                    case "it":
+                    case CommonConstants.SEC_INFORMATICS_CODE:
                         {
                             ltktDAO.Informatics.insertComment(id, newComment);
                             break;
@@ -349,7 +349,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -361,9 +361,9 @@ namespace ltkt
                 Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT ;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            txtName.Text = "";
-            txtEmail.Text = "";
-            txtContent.Text = "";
+            txtName.Text = CommonConstants.BLANK;
+            txtEmail.Text = CommonConstants.BLANK; ;
+            txtContent.Text = CommonConstants.BLANK; ;
 
             Page_Load(sender, e);
         }
@@ -374,29 +374,29 @@ namespace ltkt
             try
             {
                 //// Write comment to db
-                string sec = Request.QueryString["sec"];
-                int id = Convert.ToInt32(Request.QueryString["id"]);
+                string sec = Request.QueryString[CommonConstants.REQ_SECTION];
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
                 //Check article haven't liked before
                 if (!checkDoOneTime(CommonConstants.LIKE, sec, id))
                 {
                     switch (sec)
                     {
-                        case "uni":
+                        case CommonConstants.SEC_UNIVERSITY_CODE:
                             {
                                 ltktDAO.Contest.Like(id);
                                 updateCookie(CommonConstants.LIKE, sec, id);
                                 btnLike.Visible = false;
                                 break;
                             }
-                        case "el":
+                        case CommonConstants.SEC_ENGLISH_CODE:
                             {
                                 ltktDAO.English.Like(id);
                                 updateCookie(CommonConstants.LIKE, sec, id);
                                 btnLike.Visible = false;
                                 break;
                             }
-                        case "it":
+                        case CommonConstants.SEC_INFORMATICS_CODE:
                             {
                                 ltktDAO.Informatics.Like(id);
                                 updateCookie(CommonConstants.LIKE, sec, id);
@@ -414,7 +414,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -437,7 +437,7 @@ namespace ltkt
             string str = readCookie(type + sec);
             switch(sec)
             {
-                case "uni":
+                case CommonConstants.SEC_UNIVERSITY_CODE:
                     {
                         if (Request.Cookies[type + sec] != null && str != null)
                         {
@@ -453,7 +453,7 @@ namespace ltkt
                         }
                         break;
                     }
-                case "el":
+                case CommonConstants.SEC_ENGLISH_CODE:
                     {
                         if (Request.Cookies[type + sec] != null && str != null)
                         {
@@ -469,7 +469,7 @@ namespace ltkt
                         }
                         break;
                     }
-                case "it":
+                case CommonConstants.SEC_INFORMATICS_CODE:
                     {
                         if (Request.Cookies[type + sec] != null && str != null)
                         {
@@ -495,7 +495,7 @@ namespace ltkt
             if (Request.Cookies[ type + sec] != null)
             {
                 string str = readCookie(type + sec);
-                str += id.ToString()  + ",";
+                str += id.ToString()  + CommonConstants.COMMA;
                 writeCookie(type + sec, str);
             }
             else //write new
@@ -511,7 +511,7 @@ namespace ltkt
             {
                 return Server.HtmlEncode(Request.Cookies[name].Value);
             }
-            return "";
+            return CommonConstants.BLANK;
         }
         
         //Do not use this method directly
@@ -527,29 +527,29 @@ namespace ltkt
             // Write comment to db
             try
             {
-                string sec = Request.QueryString["sec"];
-                int id = Convert.ToInt32(Request.QueryString["id"]);
+                string sec = Request.QueryString[CommonConstants.REQ_SECTION];
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
                 //Check article haven't disliked before
                 if (!checkDoOneTime(CommonConstants.DISLIKE, sec, id))
                 {
                     switch (sec)
                     {
-                        case "uni":
+                        case CommonConstants.SEC_UNIVERSITY_CODE:
                             {
                                 ltktDAO.Contest.Dislike(id);
                                 updateCookie(CommonConstants.DISLIKE, sec, id);
                                 btnDislike.Visible = false;
                                 break;
                             }
-                        case "el":
+                        case CommonConstants.SEC_ENGLISH_CODE:
                             {
                                 ltktDAO.English.Dislike(id);
                                 updateCookie(CommonConstants.DISLIKE, sec, id);
                                 btnDislike.Visible = false;
                                 break;
                             }
-                        case "it":
+                        case CommonConstants.SEC_INFORMATICS_CODE:
                             {
                                 ltktDAO.Informatics.Dislike(id);
                                 updateCookie(CommonConstants.DISLIKE, sec, id);
@@ -567,7 +567,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {

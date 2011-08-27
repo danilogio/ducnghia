@@ -56,6 +56,7 @@
     <Compile Include="Admin.cs" />
     <Compile Include="AdminConstants.cs" />
     <Compile Include="Ads.cs" />
+    <Compile Include="ArticleSCO.cs" />
     <Compile Include="BaseServices.cs" />
     <Compile Include="Comments.cs" />
     <Compile Include="CommonConstants.cs" />

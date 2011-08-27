@@ -98,6 +98,78 @@ namespace ltktDAO
             return strDate;
         }
 
+        public static string nullToBlank(string target)
+        {
+            if (target == null)
+            {
+                return CommonConstants.BLANK;
+            }
+            return target;
+        }
 
+        public static bool isNullOrBlank(string target)
+        {
+            if (target != null && target != CommonConstants.BLANK)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static int getTimeFromString(string target)
+        {
+            if (isNullOrBlank(target) || target == CommonConstants.NOW)
+            {
+                return DateTime.Now.Year;
+            }
+            return Int32.Parse(target);
+        }
+        public static string getNameByCode(string code)
+        {
+            if(isNullOrBlank(code))
+            {
+                return CommonConstants.BLANK;
+            }
+            switch (code)
+            {
+                case CommonConstants.SUB_MATHEMATICS_CODE:
+                    {
+                        return CommonConstants.SUB_MATHEMATICS;
+                    }
+                case CommonConstants.SUB_PHYSICAL_CODE:
+                    {
+                        return CommonConstants.SUB_PHYSICAL;
+                    }
+                case CommonConstants.SUB_CHEMICAL_CODE:
+                    {
+                        return CommonConstants.SUB_CHEMICAL;
+                    }
+                case CommonConstants.SUB_BIOGRAPHY_CODE:
+                    {
+                        return CommonConstants.SUB_BIOGRAPHY;
+                    }
+                case CommonConstants.SUB_GEOGRAPHY_CODE:
+                    {
+                        return CommonConstants.SUB_GEOGRAPHY;
+                    }
+                case CommonConstants.SUB_LITERATURE_CODE:
+                    {
+                        return CommonConstants.SUB_LITERATURE;
+                    }
+                case CommonConstants.SUB_HISTORY_CODE:
+                    {
+                        return CommonConstants.SUB_HISTORY;
+                    }
+                case CommonConstants.SUB_ENGLISH_CODE:
+                    {
+                        return CommonConstants.SUB_ENGLISH;
+                    }
+                default:
+                    {
+                        return CommonConstants.BLANK;
+                    }
+
+            }
+        }
     }
 }
