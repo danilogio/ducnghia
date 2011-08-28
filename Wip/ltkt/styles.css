@@ -83,6 +83,11 @@ a:hover
 	color: #FA297D;
 }
 
+a:visited
+{
+	color: Gray;	
+}
+
 a:focus
 {
 	outline: none;
@@ -558,10 +563,8 @@ div.block_details_text
 }
 
 .form_settings .checkboxlist
-{
-	margin-left: 0px;
-	display: block;
-	width: 300px;
+{		
+	padding-left: 55px;
 }
 form_settings .captcha
 {
