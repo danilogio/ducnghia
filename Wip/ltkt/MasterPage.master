@@ -19,6 +19,7 @@
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -109,10 +110,25 @@
 </div>--%>
     <div id="outer-container">
         <div id="container">
-            <div id="header">
-                <h1>
+            <div id="header" style="text-align: left">
+                <%--<h1>
                     <a href="Home.aspx" style="text-align: left">
-                        <img src="images/logo-4.png" alt="luyenthikinhte.com" /></a></h1>
+                        <img src="images/logp.png" alt="luyenthikinhte.com" /></a></h1>--%>
+                <table>
+                    <tr>
+                        <td style="width: 30%; float: left; margin-top: 40px;">
+                            <a href="Home.aspx">
+                                <asp:Image ID="imgLogo" Height="88px" runat="server" ImageUrl="~/images/logp.png"
+                                    Width="100px" AlternateText="www.luyenthikinhte.com" /></a>
+                        </td>
+                        <td style="width: 60%; float: left; margin-top: 40px;">
+                            <%--<a href="AdContact.aspx">
+                                <img src="imagesAd/default/top-up.gif" alt="luyenthikinhte.com" /></a>--%>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=top">
+                                <asp:Image ID="imgTop" runat="server" ImageUrl="~/imagesAd/default/top-up.gif" /></asp:HyperLink>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div id="nav">
                 <div id="center-ul">
@@ -133,6 +149,11 @@
                 </div>
             </div>
             <div id="body">
+                <div style="width: 100%; margin-left: 6px;">
+                    <asp:HyperLink ID="hpkTopLeader" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=topleader">
+                        <asp:Image ID="imgTopLeader" runat="server" ImageUrl="~/imagesAd/top.gif" /></asp:HyperLink>
+                </div>
+                <br />
                 <form id="frmMain" runat="server">
                 <div id="content">
                     <asp:ContentPlaceHolder ID="cphContent" runat="server">
@@ -145,7 +166,7 @@
                                 <asp:Literal ID="userStateTitle" runat="server" Text="Đăng nhập"></asp:Literal>
                             </h4>
                             <ul>
-                                <li id="idlogin" style="background:white;border: 1px solid #a6c9e2;">
+                                <li id="idlogin" style="background: white; border: 1px solid #a6c9e2;">
                                     <asp:Panel ID="loginPanel" runat="server" Visible="true">
                                         <div id="divUsername" style="display: table-row">
                                             <div id="divUsernameLabel" style="float: left; width: 40%">
@@ -212,7 +233,7 @@
                                 Tìm kiếm
                             </h4>
                             <form method="get" class="searchform" action="Home.aspx">
-                            <ul  style="background:white;border: 1px solid #a6c9e2;">
+                            <ul style="background: white; border: 1px solid #a6c9e2;">
                                 <li>
                                     <asp:DropDownList ID="ltsItem" runat="server">
                                         <asp:ListItem Text="--Tất cả danh mục--" Value="all" Selected="True"></asp:ListItem>
@@ -239,14 +260,30 @@
                                     <h3>
                                         <a href="#">Danh sách môn</a></h3>
                                     <div class="dialog_link">
-                                        <a href="ContestUniversity.aspx?sub=math&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=phy&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=chem&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=bio&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sinh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=lit&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=his&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Sử&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=geo&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Địa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="ContestUniversity.aspx?sub=el&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Môn Anh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="ContestUniversity.aspx?sub=math&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=phy&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=chem&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=bio&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Sinh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=lit&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=his&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Sử&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=geo&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Địa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="ContestUniversity.aspx?sub=el&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Môn Anh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
                                     </div>
                                 </div>
                             </div>
@@ -259,31 +296,54 @@
                                     <h3>
                                         <a href="#">Thư viện Bài Giảng</a></h3>
                                     <div class="dialog_link">
-                                        <a href="English.aspx?lib=lec&class=11&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=lec&class=11&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=lec&class=10&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=lec&class=19&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="English.aspx?lib=lec&class=11&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=lec&class=11&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=lec&class=10&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=lec&class=19&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
                                     </div>
-                                    
                                 </div>
                                 <div>
                                     <h3>
                                         <a href="#">Thư viện Bài Tập</a></h3>
                                     <div class="dialog_link">
-                                        <a href="English.aspx?lib=prac&class=12&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=prac&class=11&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=prac&class=10&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=prac&class=19&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                        <a href="English.aspx?lib=prac&class=12&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=prac&class=11&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=prac&class=10&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=prac&class=19&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
                                     </div>
                                 </div>
                                 <div>
-                                   <h3>
+                                    <h3>
                                         <a href="#">Thư viện Đề Thi</a></h3>
-                                     <div class="dialog_link">
-                                        <a href="English.aspx?lib=exam&class=12&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=exam&class=11&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=exam&class=10&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="English.aspx?lib=exam&class=19&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
+                                    <div class="dialog_link">
+                                        <a href="English.aspx?lib=exam&class=12&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=exam&class=11&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=exam&class=10&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="English.aspx?lib=exam&class=19&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
                                     </div>
                                 </div>
                             </div>
@@ -296,27 +356,37 @@
                                     <h3>
                                         <a href="#">Tin học Văn Phòng</a></h3>
                                     <div class="dialog_link">
-                                        <a href="Informatics.aspx?Leit=word&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Word&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="Informatics.aspx?Leit=excel&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Excel&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="Informatics.aspx?Leit=pp&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>PowerPoint&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="Informatics.aspx?Leit=acc&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Access&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                                        <a href="Informatics.aspx?Leit=word&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Word&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="Informatics.aspx?Leit=excel&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Excel&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="Informatics.aspx?Leit=pp&time=now" class="ui-state-default ui-corner-all"><span
+                                            class="ui-icon ui-icon-newwin"></span>PowerPoint&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="Informatics.aspx?Leit=acc&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Access&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                                     </div>
-                                    
                                 </div>
                                 <div>
                                     <h3>
                                         <a href="#">Thủ thuật vi tính</a></h3>
-                                   <div class="dialog_link">
-                                        <a href="Informatics.aspx?Leit=simtip&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Thủ thuật căn bản&nbsp&nbsp&nbsp&nbsp&nbsp</a><br /><br />
-                                        <a href="Informatics.aspx?Leit=advtip&time=now" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Thủ thuật nâng cao&nbsp&nbsp</a><br /><br />
+                                    <div class="dialog_link">
+                                        <a href="Informatics.aspx?Leit=simtip&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Thủ thuật căn bản&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <br />
+                                        <a href="Informatics.aspx?Leit=advtip&time=now" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>Thủ thuật nâng cao&nbsp&nbsp</a><br />
+                                        <br />
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li >
+                        <li>
                             <h4>
                                 Tài liệu mới</h4>
-                            <ul style="background:white;border: 1px solid #a6c9e2;">
+                            <ul style="background: white; border: 1px solid #a6c9e2;">
                                 <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
                                     ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
                                 <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
@@ -325,10 +395,10 @@
                                     - brilliant premium templates</li>
                             </ul>
                         </li>
-                        <li style="background:white;border: 1px solid #a6c9e2;">
+                        <li style="background: white; border: 1px solid #a6c9e2;">
                             <h4>
                                 Tài liệu được quan tâm</h4>
-                            <ul style="background:white;border: 1px solid #a6c9e2;">
+                            <ul style="background: white; border: 1px solid #a6c9e2;">
                                 <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
                                     ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
                                 <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
@@ -339,18 +409,52 @@
                         </li>
                         <li>
                             <center>
-                                <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/AdContact.aspx" runat="server">
-                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/bottom.gif" /></asp:HyperLink>
+                                <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/Ads.aspx?action=click&id=bot1" runat="server">
+                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" /></asp:HyperLink>
                             </center>
                         </li>
                         <li>
                             <center>
-                                <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="#" runat="server">
-                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/bottom.gif" /></asp:HyperLink>
+                                <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="~/Ads.aspx?action=click&id=bot2" runat="server">
+                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" /></asp:HyperLink>
                             </center>
                         </li>
                     </ul>
                 </div>
+                <%-- <div id="divAdRight" style="display: none; position: absolute; top: 0px">
+                    <p>
+                        <asp:LinkButton ID="lkbTopRight" runat="server" OnClick="AdTopRight_Click">
+                            <asp:Image ID="imgTopRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                                Width="125px" AlternateText="" /></asp:LinkButton>
+                    </p>
+                    <p>
+                        <asp:LinkButton ID="lkbAdMiddleRight" runat="server" OnClick="AdMiddleRight_Click">
+                            <asp:Image ID="imgMiddleRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                                Width="125px" AlternateText="" /></asp:LinkButton>
+                    </p>
+                    <p>
+                        <asp:LinkButton ID="lkbBottomRight" runat="server" OnClick="AdBottomRight_Click">
+                            <asp:Image ID="imgBottomRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                                Width="125px" AlternateText="" /></asp:LinkButton>
+                    </p>
+                </div>
+                <div id="divAdLeft" style="display: none; position: absolute; top: 0px">
+                    <p>
+                        <asp:LinkButton ID="lkbTopLeft" runat="server" OnClick="AdTopLeft_Click">
+                            <asp:Image ID="imgTopLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                                Width="125px" AlternateText="" /></asp:LinkButton>
+                    </p>
+                    <p>
+                        <asp:LinkButton ID="lkbMiddleLeft" runat="server" OnClick="AdMiddleLeft_Click">
+                            <asp:Image ID="imgMiddleLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                                Width="125px" AlternateText="" /></asp:LinkButton>
+                    </p>
+                    <p>
+                        <asp:LinkButton ID="lkbBottomLeft" runat="server" OnClick="AdBottomLeft_Click">
+                            <asp:Image ID="imgBottomLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                                Width="125px" AlternateText="" /></asp:LinkButton>
+                    </p>
+                </div>--%>
                 </form>
                 <div class="clear">
                 </div>
@@ -373,27 +477,46 @@
                 </div></p>--%>
             <div id="divAdRight" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/Ads.aspx?action=click&id=topright"
+                        runat="server">
+                        <asp:Image ID="imgTopRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdRightMiddle" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="hpkMiddleRight" NavigateUrl="~/Ads.aspx?action=click&id=middleright"
+                        runat="server">
+                        <asp:Image ID="imgMiddleRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomright"
+                        runat="server">
+                        <asp:Image ID="imgBottomRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" AlternateText="" /></asp:HyperLink>
                 </p>
             </div>
             <div id="divAdLeft" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/Ads.aspx?action=click&id=topleft"
+                        runat="server">
+                        <asp:Image ID="imgTopLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleleft"
+                        runat="server">
+                        <asp:Image ID="imgMiddleLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/AdContact.aspx" runat="server"><img src="imagesAd/adbanner.gif" width="125" alt=""/></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomleft"
+                        runat="server">
+                        <asp:Image ID="imgBottomLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" AlternateText="" /></asp:HyperLink>
                 </p>
             </div>
         </div>
+        <%--</form>--%>
     </div>
     <div style="text-align: center; font-size: 0.75em; color: gray">
         Design by <a href="mailto:doviettrung1802@gmail.com">Trung Do Viet</a> & <a href="mailto:khanhtung010689@gmail.com">

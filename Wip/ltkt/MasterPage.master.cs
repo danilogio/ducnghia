@@ -28,7 +28,7 @@ namespace ltkt
                 }
             }
 
-            if (Session["User"] == null)
+            if (Session[CommonConstants.SES_USER] == null)
             {
                 userStateTitle.Text = "Đăng nhập";
                 loginPanel.Visible = true;
@@ -36,7 +36,7 @@ namespace ltkt
             }
             else
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 userStateTitle.Text = "Thông tin tài khoản";
                 loginUser.Text = user.DisplayName;
                 loginPanel.Visible = false;
@@ -53,7 +53,7 @@ namespace ltkt
 
         public void updateAccount(tblUser _user)
         {
-            Session["User"] = _user;
+            Session[CommonConstants.SES_USER] = _user;
             loginUser.Text = _user.DisplayName;
             userStateTitle.Text = "Thông tin tài khoản";
             loginPanel.Visible = false;
@@ -175,7 +175,7 @@ namespace ltkt
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Session["User"] = null;
+            Session[CommonConstants.SES_USER] = null;
 
             userStateTitle.Text = "Đăng nhập";
             loginPanel.Visible = true;
@@ -188,5 +188,6 @@ namespace ltkt
 
             Response.Redirect("~/Home.aspx");
         }
+        
     }
 }

@@ -214,5 +214,29 @@ namespace ltktDAO
         public const string UNI_LINK_TEMPLATE = "<a href=\"ContestUniversity.aspx?sub={0}&time={1}\">{2}</a>";
 
         public const string UNI_LABEL_TEMPLATE = "<label>{0}</label>";
+
+        public const string REQ_ACTION = "action";
+
+        public const string ACT_CLICK = "click";
+
+        public const string ADS_TOP_BANNER = "top";
+
+        public const string ADS_TOP_LEADER_BANNER = "topleader";
+
+        public const string ADS_TOP_RIGHT_BANNER = "topright";
+
+        public const string ADS_MIDDLE_RIGHT_BANNER = "middleright";
+
+        public const string ADS_BOTTOM_RIGHT_BANNER = "bottomright";
+
+        public const string ADS_TOP_LEFT_BANNER = "topleft";
+
+        public const string ADS_MIDDLE_LEFT_BANNER = "middleleft";
+
+        public const string ADS_BOTTOM_LEFT_BANNER = "bottomleft";
+
+        public const string ADS_BOTTOM_1_BANNER = "bot1";
+
+        public const string ADS_BOTTOM_2_BANNER = "bot2";
     }
 }
