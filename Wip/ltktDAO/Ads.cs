@@ -27,7 +27,6 @@ namespace ltktDAO
                                         string _phone,
                                         DateTime _from,
                                         DateTime _end,
-                                        string _location,
                                         string _description)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -44,7 +43,7 @@ namespace ltktDAO
                     record.fromDate = _from;
                     record.toDate = _end;
                     record.Price = 0;
-                    record.Location = _location;
+                    record.Location = "";
                     record.Description = _description;
 
                     DB.tblAdvertisements.InsertOnSubmit(record);

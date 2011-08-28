@@ -776,8 +776,8 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = (from record in DB.tblUsers
-                                        
-                                       select record).Skip(start).Take(count);
+
+                                        select record).Skip(start).Take(count);
 
             return lst;
         }
