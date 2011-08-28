@@ -166,12 +166,12 @@ li ol, li ul
 
 #container
 {
-	background: transparent url( 'images/corebg.png' ) no-repeat scroll 0 139px;
+	background: transparent url(  'images/corebg.png' ) no-repeat scroll 0 139px;
 }
 
 #outer-container
 {
-	background: transparent url( 'images/mainbg.png' ) repeat-y scroll 0 0;
+	background: transparent url(  'images/mainbg.png' ) repeat-y scroll 0 0;
 	width: 980px;
 	margin: 0 auto;
 	padding: 0;
@@ -181,7 +181,7 @@ li ol, li ul
 	padding: 0 15px;
 	margin: 0 auto;
 	height: 145px;
-	background: transparent url( 'images/headerbg.png' ) repeat-x scroll 0 0;
+	background: transparent url(  'images/headerbg.png' ) repeat-x scroll 0 0;
 }
 
 #header h1
@@ -245,7 +245,7 @@ li ol, li ul
 
 #nav ul li a:hover
 {
-	background: #609BC8 url( 'images/navbg.png' ) repeat-x;
+	background: #609BC8 url(  'images/navbg.png' ) repeat-x;
 }
 
 #body
@@ -335,7 +335,7 @@ li ol, li ul
 {
 	color: #eee;
 	font-family: Arial, Helvetica, sans-serif;
-	background: #333333 url( '../../images/h4-bg2.png' ) repeat-x scroll left bottom;
+	background: #333333 url(  '../../images/h4-bg2.png' ) repeat-x scroll left bottom;
 	font-size: 12px;
 	letter-spacing: 0;
 	text-transform: uppercase;
@@ -544,4 +544,44 @@ div.block_details_text
 .block_text a:hover
 {
 	color: #FA297D;
+}
+
+.table
+{
+	border: solid 1px #444444;
+}
+.table-header
+{
+	font-family: "Trebuchet MS";
+	font-size: 9pt;
+	background-color: #0099B9;
+	color: white;
+	border: solid 1px #444444;
+}
+.table-header-cell
+{
+	font-family: "Georgia";
+	font-size: 9pt;
+	font-weight: bold;
+	border: solid 1px #666666;
+	padding: 6px;
+}
+.table-cell
+{
+	font-family: "Georgia";
+	font-size: 9pt;
+	width: 300px;
+	border: solid 1px #666666;
+	padding: 6px;
+}
+.table-footer
+{
+	border: solid 1px #666666;
+	padding: 3px;
+	width: 50%;
+}
+.datetime
+{
+	float: right;
+	color: #666666;
 }

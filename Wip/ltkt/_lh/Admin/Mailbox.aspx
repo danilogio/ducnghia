@@ -3,6 +3,8 @@
 
 <asp:Content ID="MailboxHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
     <title>Hộp thư | Website luyện thi kinh tế</title>
+    
+    <link rel="stylesheet" href="styles.css" type="text/css" />
 
     <script type="text/javascript" src="../../js/tinyMCE/tiny_mce.js"></script>
 
@@ -25,52 +27,7 @@
 
     </script>
 
-    <style type="text/css">
-        .emails-table
-        {
-            width: 600px;
-            border: solid 1px #444444;
-        }
-        .emails-table-header
-        {
-            font-family: "Trebuchet MS";
-            font-size: 9pt;
-            background-color: #0099B9;
-            color: white;
-            border: solid 1px #444444;
-        }
-        .emails-table-header-cell
-        {
-            font-family: "Georgia";
-            font-size: 9pt;
-            font-weight: bold;
-            border: solid 1px #666666;
-            padding: 6px;
-        }
-        .emails-table-cell
-        {
-            font-family: "Georgia";
-            font-size: 9pt;
-            width: 500px;
-            border: solid 1px #666666;
-            padding: 6px;
-        }
-        .emails-table-footer
-        {
-            border: solid 1px #666666;
-            padding: 3px;
-            width: 50%;
-        }
-        .email-datetime
-        {
-            float: right;
-            color: #666666;
-        }
-        a:hover
-        {
-            color: red;
-        }
-    </style>
+    
 </asp:Content>
 <asp:Content ID="Mailbox" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <%--<div id="mailbox" class="block_text">--%>
@@ -99,20 +56,20 @@
                     CssClass="formbutton" />
             </div>
             <div id="right" style="float: left; width: 83%;">
-                <asp:Table ID="EmailsTable" CssClass="emails-table" runat="server" Visible="false">
+                <asp:Table ID="EmailsTable" CssClass="table" runat="server" Visible="false">
                     <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="emails-table-header" ColumnSpan="4">
+                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="4">
                                 Hộp thư đến
                         </asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
-                        <asp:TableCell CssClass="emails-table-header-cell">#</asp:TableCell>
-                        <asp:TableCell CssClass="emails-table-header-cell">Người gửi</asp:TableCell>
-                        <asp:TableCell CssClass="emails-table-header-cell">Chủ đề</asp:TableCell>
-                        <asp:TableCell CssClass="emails-table-header-cell">Ngày gửi</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">#</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Chủ đề</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Ngày gửi</asp:TableCell>
                     </asp:TableRow>
                     <asp:TableFooterRow>
-                        <asp:TableCell CssClass="emails-table-footer" ColumnSpan="4">
+                        <asp:TableCell CssClass="table-footer" ColumnSpan="4">
                             <asp:Table ID="FooterTable" Width="100%" BorderWidth="0" runat="server">
                                 <asp:TableRow>
                                     <asp:TableCell>
@@ -128,25 +85,25 @@
                 </asp:Table>
                 <asp:Table ID="EmailDetailTable" runat="server" CssClass="emails-table" Visible="true">
                     <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="emails-table-header" ColumnSpan="2">
+                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="2">
                             Email #<asp:Literal ID="EmailIdLiteral" runat="server" />
                         </asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
-                        <asp:TableCell CssClass="emails-table-header-cell">Ngày gửi</asp:TableCell>
-                        <asp:TableCell CssClass="emails-table-cell">
+                        <asp:TableCell CssClass="table-header-cell">Ngày gửi</asp:TableCell>
+                        <asp:TableCell CssClass="table-cell">
                             <asp:Literal ID="DateLiteral" runat="server" />
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
-                        <asp:TableCell CssClass="emails-table-header-cell">Người gửi</asp:TableCell>
-                        <asp:TableCell CssClass="emails-table-cell">
+                        <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
+                        <asp:TableCell CssClass="table-cell">
                             <asp:Literal ID="FromLiteral" runat="server" />
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
-                        <asp:TableCell CssClass="emails-table-header-cell">Chủ đề</asp:TableCell>
-                        <asp:TableCell CssClass="emails-table-cell">
+                        <asp:TableCell CssClass="table-header-cell">Chủ đề</asp:TableCell>
+                        <asp:TableCell CssClass="table-cell">
                             <asp:Literal ID="SubjectLiteral" runat="server" />
                         </asp:TableCell>
                     </asp:TableRow>
@@ -156,13 +113,13 @@
                                 <asp:Literal ID="AttachmentsLiteral" runat="server" />
                             </asp:TableCell>
                         </asp:TableRow>--%>
-                    <asp:TableRow CssClass="emails-table-cell">
-                        <asp:TableCell CssClass="emails-table-cell" ColumnSpan="2">
+                    <asp:TableRow CssClass="table-cell">
+                        <asp:TableCell CssClass="table-cell" ColumnSpan="2">
                             <asp:Literal ID="HeadersLiteral" runat="server" />
                         </asp:TableCell>
                     </asp:TableRow>
-                    <asp:TableRow CssClass="emails-table-cell">
-                        <asp:TableCell CssClass="emails-table-cell" ColumnSpan="2">
+                    <asp:TableRow CssClass="table-cell">
+                        <asp:TableCell CssClass="table-cell" ColumnSpan="2">
                             <asp:Literal ID="BodyLiteral" runat="server" />
                         </asp:TableCell>
                     </asp:TableRow>

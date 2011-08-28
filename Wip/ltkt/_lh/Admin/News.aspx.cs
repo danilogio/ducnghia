@@ -13,7 +13,7 @@ namespace ltkt.Admin
     {
         EventLog log = new EventLog();
 
-        public const int NoOfNeswPerPage = 10;
+        public const int NoOfNewsPerPage = 10;
         public const string SelfLink = "<a href=\"News.aspx?page={0}\">{1}</a>";
         public const string DisplayNewsLink = "<a href=\"../../News.aspx?id={0}\" target=\"_blank\">{1}</a>";
 
@@ -68,19 +68,19 @@ namespace ltkt.Admin
             int totalNews = ltktDAO.News.countNews();
             // Computing total pages
             int totalPages;
-            int mod = totalNews % NoOfNeswPerPage;
+            int mod = totalNews % NoOfNewsPerPage;
             String actionLink = "<span title=\"Sửa tin tức\"><a href = \"News.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
             actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"News.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
 
-            IEnumerable<tblNew> lst = ltktDAO.News.fetchNewsList(((page - 1) * NoOfNeswPerPage), NoOfNeswPerPage);
+            IEnumerable<tblNew> lst = ltktDAO.News.fetchNewsList(((page - 1) * NoOfNewsPerPage), NoOfNewsPerPage);
 
             if (mod == 0)
             {
-                totalPages = totalNews / NoOfNeswPerPage;
+                totalPages = totalNews / NoOfNewsPerPage;
             }
             else
             {
-                totalPages = ((totalNews - mod) / NoOfNeswPerPage) + 1;
+                totalPages = ((totalNews - mod) / NoOfNewsPerPage) + 1;
             }
 
             for (int idx = 0; idx < lst.Count(); ++idx)
@@ -88,17 +88,17 @@ namespace ltkt.Admin
                 tblNew news = lst.ElementAt(idx);
 
                 TableCell noCell = new TableCell();
-                noCell.CssClass = "news-table-cell";
+                noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "20px";
                 noCell.Text = Convert.ToString(news.ID);
 
                 TableCell titleCell = new TableCell();
-                titleCell.CssClass = "news-table-cell";
+                titleCell.CssClass = "table-cell";
                 titleCell.Style["width"] = "300px";
                 titleCell.Text = String.Format(DisplayNewsLink, news.ID, news.Title);
 
                 TableCell actionCell = new TableCell();
-                actionCell.CssClass = "news-table-cell";
+                actionCell.CssClass = "table-cell";
                 actionCell.Style["width"] = "40px";
                 actionCell.Text = String.Format(actionLink, news.ID);
 

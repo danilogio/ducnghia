@@ -63,6 +63,37 @@ namespace ltktDAO
             
             return true;
         }
+
+        /// <summary>
+        /// Tổng số quảng cáo
+        /// </summary>
+        /// <returns></returns>
+        public static int countAds()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            
+            return (from record in DB.tblAdvertisements select record).Count();
+        }
+
+        /// <summary>
+        /// Lấy ra ds count quảng cáo, từ id = start
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblAdvertisement> fetchAdsList(int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblAdvertisement> lst = (from record in DB.tblAdvertisements
+                                                 orderby record.toDate, record.State descending
+                                                 select record).Skip(start).Take(count);
+
+            return lst;
+        }
+
         #endregion
+
+        
     }
 }

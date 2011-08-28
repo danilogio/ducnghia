@@ -35,8 +35,8 @@ namespace ltkt
 
             try
             {
-                bool isOK = ltktDAO.Ads.insertAds(_companyName,_address, _email, _phone, _fromDate, _endDate, _description);
-                
+                bool isOK = ltktDAO.Ads.insertAds(_companyName, _address, _email, _phone, _fromDate, _endDate, _description);
+
                 if (isOK)
                 {
                     contactPanel.Visible = false;
@@ -76,8 +76,9 @@ namespace ltkt
                 }
             }
             sLocation += "[Loc]";
-            
+
             return sLocation;
         }
+        
     }
 }

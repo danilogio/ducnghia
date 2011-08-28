@@ -97,21 +97,21 @@ namespace ltkt.Admin
                 tblContact email = lst.ElementAt(idx);
 
                 TableCell noCell = new TableCell();
-                noCell.CssClass = "emails-table-cell";
+                noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "20px";
                 noCell.Text = Convert.ToString(email.ID);
 
                 TableCell fromCell = new TableCell();
-                fromCell.CssClass = "emails-table-cell";
+                fromCell.CssClass = "table-cell";
                 fromCell.Text = email.EmailFrom;
 
                 TableCell subjectCell = new TableCell();
-                subjectCell.CssClass = "emails-table-cell";
+                subjectCell.CssClass = "table-cell";
                 subjectCell.Style["width"] = "300px";
                 subjectCell.Text = String.Format(DisplayEmailLink, email.ID, email.Subject);
 
                 TableCell dateCell = new TableCell();
-                dateCell.CssClass = "emails-table-cell";
+                dateCell.CssClass = "table-cell";
                 dateCell.Text = email.Posted.ToString();
 
                 TableRow emailRow = new TableRow();

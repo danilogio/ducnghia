@@ -1,6 +1,6 @@
 body
 {
-	background: #333333 url( 'images/bodybg.png' ) repeat-x scroll top left;
+	background: #333333 url(  'images/bodybg.png' ) repeat-x scroll top left;
 	margin: 0;
 	padding: 0;
 	font-family: Arial, Helvetica, sans-serif;
@@ -85,7 +85,7 @@ a:hover
 
 a:visited
 {
-	color: Gray;	
+	color: Gray;
 }
 
 a:focus
@@ -224,12 +224,12 @@ li ol, li ul
 
 #container
 {
-	background: transparent url( 'images/corebg.png' ) no-repeat scroll 0 139px;
+	background: transparent url(  'images/corebg.png' ) no-repeat scroll 0 139px;
 }
 
 #outer-container
 {
-	background: transparent url( 'images/mainbg.png' ) repeat-y scroll 0 0;
+	background: transparent url(  'images/mainbg.png' ) repeat-y scroll 0 0;
 	width: 980px;
 	margin: 0 auto;
 	padding: 0;
@@ -239,7 +239,7 @@ li ol, li ul
 	padding: 0 15px;
 	margin: 0 auto;
 	height: 145px;
-	background: transparent url( 'images/headerbg.png' ) repeat-x scroll 0 0;
+	background: transparent url(  'images/headerbg.png' ) repeat-x scroll 0 0;
 }
 
 #header h1
@@ -303,7 +303,7 @@ li ol, li ul
 
 #nav ul li a:hover
 {
-	background: #609BC8 url( 'images/navbg.png' ) repeat-x;
+	background: #609BC8 url(  'images/navbg.png' ) repeat-x;
 }
 
 #body
@@ -395,7 +395,7 @@ li ol, li ul
 {
 	color: #eee;
 	font-family: Arial, Helvetica, sans-serif;
-	background: #333333 url( 'images/h4-bg2.png' ) repeat-x scroll left bottom;
+	background: #333333 url(  'images/h4-bg2.png' ) repeat-x scroll left bottom;
 	font-size: 12px;
 	letter-spacing: 0;
 	text-transform: uppercase;
@@ -527,6 +527,13 @@ div.block_details_text
 	text-align: left;
 }
 
+.form_settings #checkbox input, .form_settings #checkbox textarea
+{
+	width: 30px;
+	border: white;
+	margin-left: 135px;
+}
+
 .form_settings input, .form_settings textarea
 {
 	padding: 5px;
@@ -573,14 +580,14 @@ div.block_details_text
 }
 
 .form_settings .checkboxlist
-{		
+{
 	padding-left: 55px;
 }
 form_settings .captcha
 {
 	margin-left: 100px;
-	text-align:left;
-    clear: both;
+	text-align: left;
+	clear: both;
 	display: block;
 	width: 300px;
 }
@@ -611,11 +618,11 @@ form_settings .captcha
 
 .referlink
 {
-	display:block;
-    text-align:right;
-    margin-bottom:0px;
-    clear: both;
-    font-size:small;
+	display: block;
+	text-align: right;
+	margin-bottom: 0px;
+	clear: both;
+	font-size: small;
 }
 
 .articleList li
@@ -633,18 +640,41 @@ form_settings .captcha
 	color: #3f84b4;
 }
 
-.dialog_link a 
+.dialog_link a
 {
 	padding: .4em 1em .4em 20px;
 	text-decoration: none;
 	position: relative;
 }
-.dialog_link a span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+.dialog_link a span.ui-icon
+{
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
+}
 .dialog_link a:hover
 {
-	color:#FA297D;
+	color: #FA297D;
 }
 
-ul#icons {margin: 0; padding: 0;}
-ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
-ul#icons span.ui-icon {float: left; margin: 0 4px;}
+ul#icons
+{
+	margin: 0;
+	padding: 0;
+}
+ul#icons li
+{
+	margin: 2px;
+	position: relative;
+	padding: 4px 0;
+	cursor: pointer;
+	float: left;
+	list-style: none;
+}
+ul#icons span.ui-icon
+{
+	float: left;
+	margin: 0 4px;
+}

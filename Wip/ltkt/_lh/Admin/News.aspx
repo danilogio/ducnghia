@@ -40,52 +40,7 @@
 
         });
     </script>
-
-    <style type="text/css">
-        .news-table
-        {
-            border: solid 1px #444444;
-        }
-        .news-table-header
-        {
-            font-family: "Trebuchet MS";
-            font-size: 9pt;
-            background-color: #0099B9;
-            color: white;
-            border: solid 1px #444444;
-        }
-        .news-table-header-cell
-        {
-            font-family: "Georgia";
-            font-size: 9pt;
-            font-weight: bold;
-            border: solid 1px #666666;
-            padding: 6px;
-        }
-        .news-table-cell
-        {
-            font-family: "Georgia";
-            font-size: 9pt;
-            width: 300px;
-            border: solid 1px #666666;
-            padding: 6px;
-        }
-        .news-table-footer
-        {
-            border: solid 1px #666666;
-            padding: 3px;
-            width: 50%;
-        }
-        .news-datetime
-        {
-            float: right;
-            color: #666666;
-        }
-        a:hover
-        {
-            color: red;
-        }
-    </style>
+    
 </asp:Content>
 <asp:Content ID="NewsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content" class="block_text">
@@ -96,19 +51,19 @@
             </div>
             <br />
             <div id="viewNews">
-                <asp:Table ID="NewsTable" CssClass="news-table" runat="server">
+                <asp:Table ID="NewsTable" CssClass="table" runat="server">
                     <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="news-table-header" ColumnSpan="3">
+                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="3">
                                 Quản lý tin tức
                         </asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
-                        <asp:TableCell CssClass="news-table-header-cell">ID</asp:TableCell>
-                        <asp:TableCell CssClass="news-table-header-cell">Title</asp:TableCell>
-                        <asp:TableCell CssClass="news-table-header-cell">Thao tác</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Title</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
                     </asp:TableRow>
                     <asp:TableFooterRow>
-                        <asp:TableCell CssClass="news-table-footer" ColumnSpan="4">
+                        <asp:TableCell CssClass="table-footer" ColumnSpan="4">
                             <asp:Table ID="FooterTable" Width="100%" BorderWidth="0" runat="server">
                                 <asp:TableRow>
                                     <asp:TableCell>

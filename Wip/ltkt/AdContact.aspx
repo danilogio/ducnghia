@@ -6,6 +6,7 @@
     <title>Liên hệ quảng cáo | Website luyện thi kinh tế</title>
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
 
     <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue.css" />
@@ -16,6 +17,22 @@
                 dateFormat : 'dd-mm-yy'
             });
         }); 
+    </script>
+
+    <script type="text/javascript">
+    function DisplayFullImage() 
+    { 
+        txtCode = "<HTML><HEAD>" 
+        +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
+        + "<IMG src='" + "images/a.jpg" + "' BORDER=0 NAME=FullImage " 
+        + "onload='window.resizeTo(document.FullImage.width,700)'>"  
+        + "</CENTER>"   
+        + "</BODY></HTML>"; 
+        mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 
+        mywindow.document.open(); 
+        mywindow.document.write(txtCode); 
+        mywindow.document.close();
+    }
     </script>
 
 </asp:Content>
@@ -37,61 +54,74 @@
                 <p>
                     <span>Tên Công ty(*):</span>
                     <asp:TextBox ID="txtboxCompanyName" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqComName" runat="server" ErrorMessage="Vui lòng nhập tên công ty"
-                        ControlToValidate="txtboxCompanyName" Display="None">
+                    <asp:RequiredFieldValidator ID="reqComName" runat="server" ControlToValidate="txtboxCompanyName"
+                        Display="None" ErrorMessage="Vui lòng nhập tên công ty">
                     </asp:RequiredFieldValidator>
                 </p>
                 <%-- Address--%>
                 <p>
                     <span>Địa chỉ(*):</span>
-                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqAddress" runat="server" ErrorMessage="Vui lòng nhập địa chỉ công ty"
-                        ControlToValidate="txtAddress" Display="None">
+                    <asp:TextBox ID="txtAddress" runat="server" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqAddress" runat="server" ControlToValidate="txtAddress"
+                        Display="None" ErrorMessage="Vui lòng nhập địa chỉ công ty">
                     </asp:RequiredFieldValidator>
                 </p>
                 <%--Email--%>
                 <p>
                     <span>Email(*):</span>
                     <asp:TextBox ID="txtboxContactEmail" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqContactEmail" runat="server" ErrorMessage="Vui lòng nhập email liên lạc"
-                        ControlToValidate="txtboxContactEmail" Display="none">
+                    <asp:RequiredFieldValidator ID="reqContactEmail" runat="server" ControlToValidate="txtboxContactEmail"
+                        Display="none" ErrorMessage="Vui lòng nhập email liên lạc">
                     </asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="valEmail" runat="server" ControlToValidate="txtboxContactEmail"
-                        ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Email không đúng định dạng"
-                        Display="None" />
+                        Display="None" ErrorMessage="Email không đúng định dạng" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
                 </p>
                 <%--Phone--%>
                 <p>
                     <span>Số điện thoại(*):</span>
                     <asp:TextBox ID="txtboxFone" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqPhone" runat="server" ErrorMessage="Vui lòng nhập số điện thoại"
-                        ControlToValidate="txtboxFone" Display="None">
+                    <asp:RequiredFieldValidator ID="reqPhone" runat="server" ControlToValidate="txtboxFone"
+                        Display="None" ErrorMessage="Vui lòng nhập số điện thoại">
                     </asp:RequiredFieldValidator>
                 </p>
                 <%--From date - To Date--%>
                 <p>
                     <span>Từ ngày(*):</span>
                     <asp:TextBox ID="txtFromDate" runat="server" CssClass="calendar"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqFromDate" runat="server" ErrorMessage="Vui lòng nhập ngày bắt đầu"
-                        ControlToValidate="txtFromDate" Display="None">
+                    <asp:RequiredFieldValidator ID="reqFromDate" runat="server" ControlToValidate="txtFromDate"
+                        Display="None" ErrorMessage="Vui lòng nhập ngày bắt đầu">
                     </asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Đến ngày(*):</span>
                     <asp:TextBox ID="txtToDate" runat="server" CssClass="calendar"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqToDate" runat="server" ErrorMessage="Vui lòng nhập ngày kêt thúc"
-                        ControlToValidate="txtToDate" Display="None">
+                    <asp:RequiredFieldValidator ID="reqToDate" runat="server" ControlToValidate="txtToDate"
+                        Display="None" ErrorMessage="Vui lòng nhập ngày kêt thúc">
                     </asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Vị trí:</span>
-                    <asp:CheckBoxList ID="chxLocation" runat="server" CssClass="checkboxlist">
-                        <asp:ListItem Text="Top Banner" Selected="True" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Right Banner" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Left Banner" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Bottom Banner" Value="3"></asp:ListItem>
-                    </asp:CheckBoxList>
+                    <%--<asp:Button ID="btnShowAdsLocation" runat="server" CssClass="formbutton"
+                        OnClick="btnShowAdsLocation_Click" Text="Nhấp vào đây để xem vị trí quảng cáo"
+                        Width="310px" />--%>
+                    <input type="button" onclick="DisplayFullImage();" class="formbutton" style="width: 310px;" value="Nhấp vào đây để xem vị trí quảng cáo" />
+                    <%--<asp:Image ID="imgLocationImage" runat="server" Visible="false" ImageUrl="~/images/a.jpg" onclick="DisplayFullImage(this);"
+                        Height="25px" Width="25px" />--%>
                 </p>
+                <div id="checkbox">
+                    <asp:CheckBoxList ID="chxLocation" runat="server" CssClass="checkboxlist">
+                        <asp:ListItem Selected="True" Text="Top Banner" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Leader Banner" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Top-Left Banner" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Middle-Left Banner" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Bottom-Left Banner" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="Top-Right Banner" Value="5"></asp:ListItem>
+                        <asp:ListItem Text="Middle-Right Banner" Value="6"></asp:ListItem>
+                        <asp:ListItem Text="Bottom-Right Banner" Value="7"></asp:ListItem>
+                        <asp:ListItem Text="Bottom 1 Banner" Value="8"></asp:ListItem>
+                        <asp:ListItem Text="Bottom 2 Banner" Value="9"></asp:ListItem>
+                    </asp:CheckBoxList>
+                </div>
                 <%--<p>
                     <span>Vị trí:</span> <span id="location" class="checkboxlist">
                         <input runat="server" type="checkbox" id="chkTop" value="0" class="checkbox" checked="checked" />
@@ -105,13 +135,15 @@
                     </span>
                 </p>--%>
                 <div align="center" style="margin-top: 10px; margin-left: 100px">
-                    <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
-                        PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
+                    <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan"
+                        PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ " />
                 </div>
                 <p style="padding-top: 15px">
-                    <span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" Text="Gửi" CssClass="submit"
-                        OnClick="btnSubmitContact_Click" /></p>
+                    <span>&nbsp;</span><asp:Button ID="btnSubmitContact" runat="server" CssClass="submit"
+                        OnClick="btnSubmitContact_Click" Text="Gửi" />
+                </p>
             </div>
         </asp:Panel>
+        
     </div>
 </asp:Content>

@@ -830,6 +830,12 @@ namespace ltktDAO
 		
 		private string _Description;
 		
+		private string _DestinationURL;
+		
+		private int _State;
+		
+		private System.Nullable<int> _Click;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -854,6 +860,12 @@ namespace ltktDAO
     partial void OnLocationChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
+    partial void OnDestinationURLChanging(string value);
+    partial void OnDestinationURLChanged();
+    partial void OnStateChanging(int value);
+    partial void OnStateChanged();
+    partial void OnClickChanging(System.Nullable<int> value);
+    partial void OnClickChanged();
     #endregion
 		
 		public tblAdvertisement()
@@ -1057,6 +1069,66 @@ namespace ltktDAO
 					this._Description = value;
 					this.SendPropertyChanged("Description");
 					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DestinationURL", DbType="NVarChar(50)")]
+		public string DestinationURL
+		{
+			get
+			{
+				return this._DestinationURL;
+			}
+			set
+			{
+				if ((this._DestinationURL != value))
+				{
+					this.OnDestinationURLChanging(value);
+					this.SendPropertyChanging();
+					this._DestinationURL = value;
+					this.SendPropertyChanged("DestinationURL");
+					this.OnDestinationURLChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_State", DbType="Int NOT NULL")]
+		public int State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Click", DbType="Int")]
+		public System.Nullable<int> Click
+		{
+			get
+			{
+				return this._Click;
+			}
+			set
+			{
+				if ((this._Click != value))
+				{
+					this.OnClickChanging(value);
+					this.SendPropertyChanging();
+					this._Click = value;
+					this.SendPropertyChanged("Click");
+					this.OnClickChanged();
 				}
 			}
 		}
