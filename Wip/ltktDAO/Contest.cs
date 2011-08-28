@@ -676,7 +676,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
-                                                            where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getTimeFromString(articleSCO.Time)
+                                                            where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                                                             && p.State != 0
                                                             orderby p.Year
                                                            select p;

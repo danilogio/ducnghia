@@ -137,7 +137,7 @@ namespace ltktDAO
         /// <summary>
         /// Section university code
         /// </summary>
-        public const string SEC_UNIVESITY = "Luyện thi Đại học";
+        public const string SEC_UNIVERSITY = "Luyện thi Đại học";
         /// <summary>
         /// Section informatics code
         /// </summary>
@@ -210,5 +210,9 @@ namespace ltktDAO
         /// Mã Môn Anh
         /// </summary>
         public const string SUB_ENGLISH_CODE = "el";
+
+        public const string UNI_LINK_TEMPLATE = "<a href=\"ContestUniversity.aspx?sub={0}&time={1}\">{2}</a>";
+
+        public const string UNI_LABEL_TEMPLATE = "<label>{0}</label>";
     }
 }

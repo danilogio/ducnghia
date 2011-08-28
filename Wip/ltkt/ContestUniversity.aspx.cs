@@ -11,6 +11,8 @@ namespace ltkt
     {
         Contest contestDAO = new Contest();
         EventLog log = new EventLog();
+        BaseServices service = new BaseServices();
+
         public void Page_Load(object sender, EventArgs e)
         {
             ArticleSCO articleSCO = new ArticleSCO();
@@ -20,7 +22,7 @@ namespace ltkt
                 articleSCO.Time = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_TIME]);
 
                 Session[CommonConstants.SES_ARTICLE_SCO] = articleSCO;
-                lblTitle.Text = CommonConstants.SEC_UNIVESITY;
+                lblTitle.Text = CommonConstants.SEC_UNIVERSITY;
 
                 if (!IsPostBack)
                 {
@@ -33,6 +35,8 @@ namespace ltkt
                         IEnumerable<tblContestForUniversity> lst = contestDAO.getArticleBySubjectAndTime(articleSCO);
                         productList.DataSource = lst;
                         productList.DataBind();
+
+                        lblOlderLinks.Text = getOlderLinks(articleSCO);
                     }
                 }
             }
@@ -56,7 +60,7 @@ namespace ltkt
         {
             ArticleSCO articleSCO = new ArticleSCO();
             articleSCO = (ArticleSCO)Session[CommonConstants.SES_ARTICLE_SCO];
-            lblTitle.Text = CommonConstants.SEC_UNIVESITY;
+            lblTitle.Text = CommonConstants.SEC_UNIVERSITY;
             if (articleSCO != null)
             {
                 try
@@ -70,6 +74,8 @@ namespace ltkt
                         IEnumerable<tblContestForUniversity> lst = contestDAO.getArticleBySubjectAndTime(articleSCO);
                         productList.DataSource = lst;
                         productList.DataBind();
+
+                        lblOlderLinks.Text = getOlderLinks(articleSCO);
                     }
                 }
                 catch (Exception ex)
@@ -88,5 +94,15 @@ namespace ltkt
                 }
             }
         }
+
+        private string getOlderLinks(ArticleSCO articleSCO)
+        {
+            articleSCO.Section = CommonConstants.SEC_UNIVERSITY_CODE;
+
+            string links = service.createOlderLink(CommonConstants.UNI_LINK_TEMPLATE, articleSCO, 10);
+
+            return links;
+        }
+       
     }
 }

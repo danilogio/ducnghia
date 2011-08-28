@@ -26,7 +26,6 @@
                         <img src="<%#Eval("Thumbnail")%>" alt="" />
                         <br />
                         <center><%#Eval("Title")%></center>
-                        
                         <div class="block_details_text">
                             <center><%#Eval("Year")%></center>
                         </div>
@@ -39,20 +38,26 @@
                 </EmptyDataTemplate>
             </asp:ListView>
         </div>
-        
-        
         <div class="datapager">
-        <br />
-        <br />
-        <hr />
+            <br />
+            <br />
+            <hr />
             <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
                 <Fields>
-                    <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" />
+                    <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" PreviousPageText="<" FirstPageText="<<"/>
                     <asp:NumericPagerField />
-                    <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" />
+                    <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" LastPageText=">>"  NextPageText=">"  />
                 </Fields>
             </asp:DataPager>
         </div>
+        
+        <hr />
+        <br />
+        <h4>
+            Các đề liên quan</h4>
+            <asp:Label ID="lblOlderLinks" runat="server"></asp:Label>
     </div>
+    
+    
 </asp:Content>

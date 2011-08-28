@@ -116,7 +116,7 @@ namespace ltktDAO
             return true;
         }
 
-        public static int getTimeFromString(string target)
+        public static int getYearFromString(string target)
         {
             if (isNullOrBlank(target) || target == CommonConstants.NOW)
             {
@@ -170,6 +170,30 @@ namespace ltktDAO
                     }
 
             }
+        }
+
+        public string createOlderLink(string linkTemplate, ArticleSCO articleSCO, int numberOlder)
+        {
+            string links = CommonConstants.BLANK;
+            int startYear = getYearFromString(CommonConstants.NOW);
+            int selectedYear = getYearFromString(articleSCO.Time);
+
+            if (articleSCO.Section == CommonConstants.SEC_UNIVERSITY_CODE)
+            {
+                for (int i = startYear; i >= 2000; i--)
+                {
+                    if (i == selectedYear)
+                    {
+                        links += String.Format(CommonConstants.UNI_LABEL_TEMPLATE, i.ToString());
+                    }
+                    else
+                    {
+                        links += String.Format(linkTemplate, articleSCO.Subject, i.ToString(), i.ToString());
+                    }
+                    links += CommonConstants.SPACE;
+                }
+            }
+            return links;
         }
     }
 }
