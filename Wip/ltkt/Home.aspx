@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Home.aspx.cs" Inherits="_Default" %>
+    CodeFile="Home.aspx.cs" Inherits="ltkt.Home" %>
 
 <asp:Content ID="HomeHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>Trang chủ | Website luyện thi kinh tế</title>
