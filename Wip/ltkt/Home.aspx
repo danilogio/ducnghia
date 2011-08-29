@@ -39,9 +39,9 @@
         <h2>
             Thư viện Tin học</h2>
         <ul>
-            <li><a href="#ItLesson01">Bài giảng</a></li>
-            <li><a href="#ItLesson02">Bài tập</a></li>
-            <li><a href="#ItLesson03">Đề thi</a></li>
+            <li><a href="#ItLesson01">Tin học Văn phòng</a></li>
+            <li><a href="#ItLesson02">Thủ thuật căn bản</a></li>
+            <li><a href="#ItLesson03">Thủ thuật nâng cao</a></li>
         </ul>
         <!-- start ItLesson-1-->
         <div id="ItLesson01">
@@ -61,9 +61,9 @@
             Thư viện Anh Văn</h2>
         <div>
             <ul>
-                <li><a href="#EnglishLesson01">Bài giảng</a></li>
-                <li><a href="#EnglishLesson02">Bài tập</a></li>
-                <li><a href="#EnglishLesson03">Đề thi</a></li>
+                <li><a href="#EnglishLesson01">Phổ Thông</a></li>
+                <li><a href="#EnglishLesson02">Chuyên Ngành</a></li>
+                <li><a href="#EnglishLesson03">Chứng Chỉ</a></li>
             </ul>
             <!-- start EglishLesson-1-->
             <div id="EnglishLesson01"></a>
