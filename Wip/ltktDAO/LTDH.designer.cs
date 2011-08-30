@@ -66,7 +66,7 @@ namespace ltktDAO
     #endregion
 		
 		public LTDHDataContext() : 
-				base(global::ltktDAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
+				base(global::ltktDAO.Properties.Settings.Default.LTDHConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -354,9 +354,15 @@ namespace ltktDAO
 		
 		private EntitySet<tblContestForUniversity> _tblContestForUniversities;
 		
+		private EntitySet<tblContestForUniversity> _tblContestForUniversities1;
+		
 		private EntitySet<tblEnglish> _tblEnglishes;
 		
+		private EntitySet<tblEnglish> _tblEnglishes1;
+		
 		private EntitySet<tblInformatic> _tblInformatics;
+		
+		private EntitySet<tblInformatic> _tblInformatics1;
 		
 		private EntitySet<tblNew> _tblNews;
 		
@@ -397,8 +403,11 @@ namespace ltktDAO
 		public tblUser()
 		{
 			this._tblContestForUniversities = new EntitySet<tblContestForUniversity>(new Action<tblContestForUniversity>(this.attach_tblContestForUniversities), new Action<tblContestForUniversity>(this.detach_tblContestForUniversities));
+			this._tblContestForUniversities1 = new EntitySet<tblContestForUniversity>(new Action<tblContestForUniversity>(this.attach_tblContestForUniversities1), new Action<tblContestForUniversity>(this.detach_tblContestForUniversities1));
 			this._tblEnglishes = new EntitySet<tblEnglish>(new Action<tblEnglish>(this.attach_tblEnglishes), new Action<tblEnglish>(this.detach_tblEnglishes));
+			this._tblEnglishes1 = new EntitySet<tblEnglish>(new Action<tblEnglish>(this.attach_tblEnglishes1), new Action<tblEnglish>(this.detach_tblEnglishes1));
 			this._tblInformatics = new EntitySet<tblInformatic>(new Action<tblInformatic>(this.attach_tblInformatics), new Action<tblInformatic>(this.detach_tblInformatics));
+			this._tblInformatics1 = new EntitySet<tblInformatic>(new Action<tblInformatic>(this.attach_tblInformatics1), new Action<tblInformatic>(this.detach_tblInformatics1));
 			this._tblNews = new EntitySet<tblNew>(new Action<tblNew>(this.attach_tblNews), new Action<tblNew>(this.detach_tblNews));
 			OnCreated();
 		}
@@ -683,7 +692,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", OtherKey="Author")]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities
 		{
 			get
@@ -696,7 +705,20 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", OtherKey="Author")]
+		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblContestForUniversities1", ThisKey="Username", OtherKey="Checker")]
+		public EntitySet<tblContestForUniversity> tblContestForUniversities1
+		{
+			get
+			{
+				return this._tblContestForUniversities1;
+			}
+			set
+			{
+				this._tblContestForUniversities1.Assign(value);
+			}
+		}
+		
+		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblEnglish> tblEnglishes
 		{
 			get
@@ -709,7 +731,20 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", OtherKey="Author")]
+		[Association(Name="tblUser_tblEnglish1", Storage="_tblEnglishes1", ThisKey="Username", OtherKey="Checker")]
+		public EntitySet<tblEnglish> tblEnglishes1
+		{
+			get
+			{
+				return this._tblEnglishes1;
+			}
+			set
+			{
+				this._tblEnglishes1.Assign(value);
+			}
+		}
+		
+		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblInformatic> tblInformatics
 		{
 			get
@@ -722,7 +757,20 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblNews", OtherKey="Author")]
+		[Association(Name="tblUser_tblInformatic1", Storage="_tblInformatics1", ThisKey="Username", OtherKey="Checker")]
+		public EntitySet<tblInformatic> tblInformatics1
+		{
+			get
+			{
+				return this._tblInformatics1;
+			}
+			set
+			{
+				this._tblInformatics1.Assign(value);
+			}
+		}
+		
+		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblNew> tblNews
 		{
 			get
@@ -767,6 +815,18 @@ namespace ltktDAO
 			entity.tblUser = null;
 		}
 		
+		private void attach_tblContestForUniversities1(tblContestForUniversity entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser1 = this;
+		}
+		
+		private void detach_tblContestForUniversities1(tblContestForUniversity entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser1 = null;
+		}
+		
 		private void attach_tblEnglishes(tblEnglish entity)
 		{
 			this.SendPropertyChanging();
@@ -779,6 +839,18 @@ namespace ltktDAO
 			entity.tblUser = null;
 		}
 		
+		private void attach_tblEnglishes1(tblEnglish entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser1 = this;
+		}
+		
+		private void detach_tblEnglishes1(tblEnglish entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser1 = null;
+		}
+		
 		private void attach_tblInformatics(tblInformatic entity)
 		{
 			this.SendPropertyChanging();
@@ -789,6 +861,18 @@ namespace ltktDAO
 		{
 			this.SendPropertyChanging();
 			entity.tblUser = null;
+		}
+		
+		private void attach_tblInformatics1(tblInformatic entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser1 = this;
+		}
+		
+		private void detach_tblInformatics1(tblInformatic entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblUser1 = null;
 		}
 		
 		private void attach_tblNews(tblNew entity)
@@ -830,11 +914,7 @@ namespace ltktDAO
 		
 		private string _Description;
 		
-		private string _DestinationURL;
-		
-		private int _State;
-		
-		private System.Nullable<int> _Click;
+		private System.Nullable<int> _State;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -860,12 +940,8 @@ namespace ltktDAO
     partial void OnLocationChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnDestinationURLChanging(string value);
-    partial void OnDestinationURLChanged();
-    partial void OnStateChanging(int value);
+    partial void OnStateChanging(System.Nullable<int> value);
     partial void OnStateChanged();
-    partial void OnClickChanging(System.Nullable<int> value);
-    partial void OnClickChanged();
     #endregion
 		
 		public tblAdvertisement()
@@ -1073,28 +1149,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_DestinationURL", DbType="NVarChar(50)")]
-		public string DestinationURL
-		{
-			get
-			{
-				return this._DestinationURL;
-			}
-			set
-			{
-				if ((this._DestinationURL != value))
-				{
-					this.OnDestinationURLChanging(value);
-					this.SendPropertyChanging();
-					this._DestinationURL = value;
-					this.SendPropertyChanged("DestinationURL");
-					this.OnDestinationURLChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_State", DbType="Int NOT NULL")]
-		public int State
+		[Column(Storage="_State", DbType="Int")]
+		public System.Nullable<int> State
 		{
 			get
 			{
@@ -1109,26 +1165,6 @@ namespace ltktDAO
 					this._State = value;
 					this.SendPropertyChanged("State");
 					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Click", DbType="Int")]
-		public System.Nullable<int> Click
-		{
-			get
-			{
-				return this._Click;
-			}
-			set
-			{
-				if ((this._Click != value))
-				{
-					this.OnClickChanging(value);
-					this.SendPropertyChanging();
-					this._Click = value;
-					this.SendPropertyChanged("Click");
-					this.OnClickChanged();
 				}
 			}
 		}
@@ -1408,6 +1444,8 @@ namespace ltktDAO
 		
 		private EntityRef<tblUser> _tblUser;
 		
+		private EntityRef<tblUser> _tblUser1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1457,6 +1495,7 @@ namespace ltktDAO
 		public tblContestForUniversity()
 		{
 			this._tblUser = default(EntityRef<tblUser>);
+			this._tblUser1 = default(EntityRef<tblUser>);
 			OnCreated();
 		}
 		
@@ -1815,6 +1854,10 @@ namespace ltktDAO
 			{
 				if ((this._Checker != value))
 				{
+					if (this._tblUser1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnCheckerChanging(value);
 					this.SendPropertyChanging();
 					this._Checker = value;
@@ -1864,7 +1907,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1894,6 +1937,40 @@ namespace ltktDAO
 						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
+				}
+			}
+		}
+		
+		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
+		public tblUser tblUser1
+		{
+			get
+			{
+				return this._tblUser1.Entity;
+			}
+			set
+			{
+				tblUser previousValue = this._tblUser1.Entity;
+				if (((previousValue != value) 
+							|| (this._tblUser1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblUser1.Entity = null;
+						previousValue.tblContestForUniversities1.Remove(this);
+					}
+					this._tblUser1.Entity = value;
+					if ((value != null))
+					{
+						value.tblContestForUniversities1.Add(this);
+						this._Checker = value.Username;
+					}
+					else
+					{
+						this._Checker = default(string);
+					}
+					this.SendPropertyChanged("tblUser1");
 				}
 			}
 		}
@@ -1957,9 +2034,11 @@ namespace ltktDAO
 		
 		private string _HtmlEmbedLink;
 		
-		private string _Class;
+		private System.Nullable<int> _Class;
 		
 		private EntityRef<tblUser> _tblUser;
+		
+		private EntityRef<tblUser> _tblUser1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1997,13 +2076,14 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
-    partial void OnClassChanging(string value);
+    partial void OnClassChanging(System.Nullable<int> value);
     partial void OnClassChanged();
     #endregion
 		
 		public tblEnglish()
 		{
 			this._tblUser = default(EntityRef<tblUser>);
+			this._tblUser1 = default(EntityRef<tblUser>);
 			OnCreated();
 		}
 		
@@ -2282,6 +2362,10 @@ namespace ltktDAO
 			{
 				if ((this._Checker != value))
 				{
+					if (this._tblUser1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnCheckerChanging(value);
 					this.SendPropertyChanging();
 					this._Checker = value;
@@ -2331,8 +2415,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Class", DbType="NVarChar(50)")]
-		public string Class
+		[Column(Storage="_Class", DbType="Int")]
+		public System.Nullable<int> Class
 		{
 			get
 			{
@@ -2351,7 +2435,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -2381,6 +2465,40 @@ namespace ltktDAO
 						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
+				}
+			}
+		}
+		
+		[Association(Name="tblUser_tblEnglish1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
+		public tblUser tblUser1
+		{
+			get
+			{
+				return this._tblUser1.Entity;
+			}
+			set
+			{
+				tblUser previousValue = this._tblUser1.Entity;
+				if (((previousValue != value) 
+							|| (this._tblUser1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblUser1.Entity = null;
+						previousValue.tblEnglishes1.Remove(this);
+					}
+					this._tblUser1.Entity = value;
+					if ((value != null))
+					{
+						value.tblEnglishes1.Add(this);
+						this._Checker = value.Username;
+					}
+					else
+					{
+						this._Checker = default(string);
+					}
+					this.SendPropertyChanged("tblUser1");
 				}
 			}
 		}
@@ -2424,19 +2542,21 @@ namespace ltktDAO
 		
 		private string _Thumbnail;
 		
+		private string _Location;
+		
 		private string _Author;
 		
 		private System.DateTime _Posted;
 		
 		private int _State;
 		
+		private System.Nullable<int> _Leitmotif;
+		
+		private System.Nullable<int> _Score;
+		
 		private System.Nullable<int> _Point;
 		
 		private string _Tag;
-		
-		private string _Location;
-		
-		private System.Nullable<int> _Score;
 		
 		private string _Comment;
 		
@@ -2446,9 +2566,9 @@ namespace ltktDAO
 		
 		private string _HtmlEmbedLink;
 		
-		private string _Leitmotif;
-		
 		private EntityRef<tblUser> _tblUser;
+		
+		private EntityRef<tblUser> _tblUser1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2466,20 +2586,22 @@ namespace ltktDAO
     partial void OnContentsChanged();
     partial void OnThumbnailChanging(string value);
     partial void OnThumbnailChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
     partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
     partial void OnPostedChanging(System.DateTime value);
     partial void OnPostedChanged();
     partial void OnStateChanging(int value);
     partial void OnStateChanged();
+    partial void OnLeitmotifChanging(System.Nullable<int> value);
+    partial void OnLeitmotifChanged();
+    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanged();
     partial void OnPointChanging(System.Nullable<int> value);
     partial void OnPointChanged();
     partial void OnTagChanging(string value);
     partial void OnTagChanged();
-    partial void OnLocationChanging(string value);
-    partial void OnLocationChanged();
-    partial void OnScoreChanging(System.Nullable<int> value);
-    partial void OnScoreChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     partial void OnCheckerChanging(string value);
@@ -2488,13 +2610,12 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
-    partial void OnLeitmotifChanging(string value);
-    partial void OnLeitmotifChanged();
     #endregion
 		
 		public tblInformatic()
 		{
 			this._tblUser = default(EntityRef<tblUser>);
+			this._tblUser1 = default(EntityRef<tblUser>);
 			OnCreated();
 		}
 		
@@ -2618,6 +2739,26 @@ namespace ltktDAO
 			}
 		}
 		
+		[Column(Storage="_Location", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_Author", DbType="NChar(20) NOT NULL", CanBeNull=false)]
 		public string Author
 		{
@@ -2682,6 +2823,46 @@ namespace ltktDAO
 			}
 		}
 		
+		[Column(Storage="_Leitmotif", DbType="Int")]
+		public System.Nullable<int> Leitmotif
+		{
+			get
+			{
+				return this._Leitmotif;
+			}
+			set
+			{
+				if ((this._Leitmotif != value))
+				{
+					this.OnLeitmotifChanging(value);
+					this.SendPropertyChanging();
+					this._Leitmotif = value;
+					this.SendPropertyChanged("Leitmotif");
+					this.OnLeitmotifChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Score", DbType="Int")]
+		public System.Nullable<int> Score
+		{
+			get
+			{
+				return this._Score;
+			}
+			set
+			{
+				if ((this._Score != value))
+				{
+					this.OnScoreChanging(value);
+					this.SendPropertyChanging();
+					this._Score = value;
+					this.SendPropertyChanged("Score");
+					this.OnScoreChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_Point", DbType="Int")]
 		public System.Nullable<int> Point
 		{
@@ -2722,46 +2903,6 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Location", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
-		public string Location
-		{
-			get
-			{
-				return this._Location;
-			}
-			set
-			{
-				if ((this._Location != value))
-				{
-					this.OnLocationChanging(value);
-					this.SendPropertyChanging();
-					this._Location = value;
-					this.SendPropertyChanged("Location");
-					this.OnLocationChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Score", DbType="Int")]
-		public System.Nullable<int> Score
-		{
-			get
-			{
-				return this._Score;
-			}
-			set
-			{
-				if ((this._Score != value))
-				{
-					this.OnScoreChanging(value);
-					this.SendPropertyChanging();
-					this._Score = value;
-					this.SendPropertyChanged("Score");
-					this.OnScoreChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_Comment", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string Comment
 		{
@@ -2782,7 +2923,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Checker", DbType="NChar(10)")]
+		[Column(Storage="_Checker", DbType="NChar(20)")]
 		public string Checker
 		{
 			get
@@ -2793,6 +2934,10 @@ namespace ltktDAO
 			{
 				if ((this._Checker != value))
 				{
+					if (this._tblUser1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnCheckerChanging(value);
 					this.SendPropertyChanging();
 					this._Checker = value;
@@ -2842,27 +2987,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Leitmotif", DbType="NVarChar(50)")]
-		public string Leitmotif
-		{
-			get
-			{
-				return this._Leitmotif;
-			}
-			set
-			{
-				if ((this._Leitmotif != value))
-				{
-					this.OnLeitmotifChanging(value);
-					this.SendPropertyChanging();
-					this._Leitmotif = value;
-					this.SendPropertyChanged("Leitmotif");
-					this.OnLeitmotifChanged();
-				}
-			}
-		}
-		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -2892,6 +3017,40 @@ namespace ltktDAO
 						this._Author = default(string);
 					}
 					this.SendPropertyChanged("tblUser");
+				}
+			}
+		}
+		
+		[Association(Name="tblUser_tblInformatic1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
+		public tblUser tblUser1
+		{
+			get
+			{
+				return this._tblUser1.Entity;
+			}
+			set
+			{
+				tblUser previousValue = this._tblUser1.Entity;
+				if (((previousValue != value) 
+							|| (this._tblUser1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblUser1.Entity = null;
+						previousValue.tblInformatics1.Remove(this);
+					}
+					this._tblUser1.Entity = value;
+					if ((value != null))
+					{
+						value.tblInformatics1.Add(this);
+						this._Checker = value.Username;
+					}
+					else
+					{
+						this._Checker = default(string);
+					}
+					this.SendPropertyChanged("tblUser1");
 				}
 			}
 		}
@@ -3085,7 +3244,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get

@@ -58,11 +58,11 @@ namespace ltkt
         /// load data for Lecture Tab
         /// </summary>
         /// <returns></returns>
-        public string loadDataForITLectures()
+        public string loadDataForITOffice()
         {
             try
             {
-                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.ARTICLE_TYPE_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_WORD, CommonConstants.IT_TYPE_OFFICE_ACCESS, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
@@ -78,11 +78,11 @@ namespace ltkt
         /// load data for Practise Tab
         /// </summary>
         /// <returns></returns>
-        public string loadDataForITPractise()
+        public string loadDataForITTipSimple()
         {
             try
             {
-                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.ARTICLE_TYPE_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_SIMPLE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
@@ -98,11 +98,11 @@ namespace ltkt
         /// Load data for Examination Tab
         /// </summary>
         /// <returns></returns>
-        public string loadDataForITExamination()
+        public string loadDataForITTipAdvance()
         {
             try
             {
-                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.ARTICLE_TYPE_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_ADVANCE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }

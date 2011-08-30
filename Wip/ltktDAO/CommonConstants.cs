@@ -8,6 +8,18 @@ namespace ltktDAO
     public static class CommonConstants
     {
         /// <summary>
+        /// state is unchec
+        /// </summary>
+        public const int STATE_UNCHECK = 0;
+        /// <summary>
+        /// state is checked
+        /// </summary>
+        public const int STATE_CHECKED = 1;
+        /// <summary>
+        /// state is bad
+        /// </summary>
+        public const int STATE_BAD = 2;
+        /// <summary>
         /// Article has type lecture
         /// </summary>
         public const int ARTICLE_TYPE_LECTURE = 0;
@@ -19,6 +31,30 @@ namespace ltktDAO
         /// Article has type Examination
         /// </summary>
         public const int ARTICLE_TYPE_EXAM = 2;
+        /// <summary>
+        /// Article IT with type word
+        /// </summary>
+        public const int IT_TYPE_OFFICE_WORD = 0;
+        /// <summary>
+        /// Article IT with type Excel
+        /// </summary>
+        public const int IT_TYPE_OFFICE_EXCEL = 1;
+        /// <summary>
+        /// Article IT with type Power point
+        /// </summary>
+        public const int IT_TYPE_OFFICE_POWERPOINT = 2;
+        /// <summary>
+        /// Article IT with type power point
+        /// </summary>
+        public const int IT_TYPE_OFFICE_ACCESS = 3;
+        /// <summary>
+        /// Article IT with type simple tip
+        /// </summary>
+        public const int IT_TYPE_OFFICE_SIMPLE_TIP = 4;
+        /// <summary>
+        /// Article IT type with type advance tip
+        /// </summary>
+        public const int IT_TYPE_OFFICE_ADVANCE_TIP = 5;
         /// <summary>
         /// Number record on one tab
         /// </summary>

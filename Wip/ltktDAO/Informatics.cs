@@ -550,17 +550,36 @@ namespace ltktDAO
         #region Method
 
         /// <summary>
-        /// Get amount of latest article by posted date
+        /// Get amount of latest article by posted date with range type
         /// </summary>
         /// <param name="numRecord"></param>
+        /// <returns></returns>
+        public static IEnumerable<tblInformatic> getLatestArticleByPostedDate(int _mintype, int _maxtype, int _numRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (_numRecord <= 0)
+                _numRecord = 1;
+
+            IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
+                                              where p.Leitmotif >= _mintype && p.Leitmotif <= _maxtype && p.State != CommonConstants.STATE_UNCHECK
+                                              orderby p.Posted descending
+                                              select p).Take(_numRecord);
+            return lst;
+        }
+        /// <summary>
+        /// Get amount of latest article by posted date with match type
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="_numRecord"></param>
         /// <returns></returns>
         public static IEnumerable<tblInformatic> getLatestArticleByPostedDate(int _type, int _numRecord)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (_numRecord <= 0)
                 _numRecord = 1;
+
             IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
-                                              where p.Type == _type
+                                              where p.Leitmotif == _type && p.State != CommonConstants.STATE_UNCHECK
                                               orderby p.Posted descending
                                               select p).Take(_numRecord);
             return lst;

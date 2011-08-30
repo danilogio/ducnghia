@@ -45,15 +45,15 @@
         </ul>
         <!-- start ItLesson-1-->
         <div id="ItLesson01">
-            <%=loadDataForITLectures() %>
+            <%=loadDataForITOffice() %>
         </div>
         <!-- start ItLesson-2-->
         <div id="ItLesson02">
-            <%=loadDataForITPractise() %>
+            <%=loadDataForITTipSimple() %>
         </div>
         <!-- start ItLesson-3-->
         <div id="ItLesson03">
-            <%=loadDataForITExamination() %>
+            <%=loadDataForITTipAdvance() %>
         </div>
     </div>
     <div id="EnglishLesson" class="block_text">

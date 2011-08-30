@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="LTDH" Class="LTDHDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Career\LTKT\Wip\ltkt\App_Data\LTDH.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="ltktDAO.Properties.Settings" SettingsPropertyName="LTDHConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=E:\Data\Projects\ducnghia\Wip\ltkt\App_Data\LTDH.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="ltktDAO.Properties.Settings" SettingsPropertyName="LTDHConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblAdmin" Member="tblAdmins">
     <Type Name="tblAdmin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -25,10 +25,13 @@
       <Column Name="KIADate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="NumberOfArticles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="tblUser_tblContestForUniversity" Member="tblContestForUniversities" OtherKey="Author" Type="tblContestForUniversity" />
-      <Association Name="tblUser_tblEnglish" Member="tblEnglishes" OtherKey="Author" Type="tblEnglish" />
-      <Association Name="tblUser_tblInformatic" Member="tblInformatics" OtherKey="Author" Type="tblInformatic" />
-      <Association Name="tblUser_tblNew" Member="tblNews" OtherKey="Author" Type="tblNew" />
+      <Association Name="tblUser_tblContestForUniversity" Member="tblContestForUniversities" ThisKey="Username" OtherKey="Author" Type="tblContestForUniversity" />
+      <Association Name="tblUser_tblContestForUniversity1" Member="tblContestForUniversities1" ThisKey="Username" OtherKey="Checker" Type="tblContestForUniversity" />
+      <Association Name="tblUser_tblEnglish" Member="tblEnglishes" ThisKey="Username" OtherKey="Author" Type="tblEnglish" />
+      <Association Name="tblUser_tblEnglish1" Member="tblEnglishes1" ThisKey="Username" OtherKey="Checker" Type="tblEnglish" />
+      <Association Name="tblUser_tblInformatic" Member="tblInformatics" ThisKey="Username" OtherKey="Author" Type="tblInformatic" />
+      <Association Name="tblUser_tblInformatic1" Member="tblInformatics1" ThisKey="Username" OtherKey="Checker" Type="tblInformatic" />
+      <Association Name="tblUser_tblNew" Member="tblNews" ThisKey="Username" OtherKey="Author" Type="tblNew" />
     </Type>
   </Table>
   <Table Name="dbo.tblAdvertisement" Member="tblAdvertisements">
@@ -43,9 +46,7 @@
       <Column Name="Price" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Location" Type="System.String" DbType="NChar(254) NOT NULL" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="DestinationURL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Click" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="State" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblContact" Member="tblContacts">
@@ -81,7 +82,8 @@
       <Column Name="Checker" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
       <Column Name="HtmlPreview" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="HtmlEmbedLink" Type="System.String" DbType="NChar(254)" CanBeNull="true" />
-      <Association Name="tblUser_tblContestForUniversity" Member="tblUser" ThisKey="Author" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblUser_tblContestForUniversity" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblUser_tblContestForUniversity1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblEnglish" Member="tblEnglishes">
@@ -102,8 +104,9 @@
       <Column Name="Checker" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
       <Column Name="HtmlPreview" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="HtmlEmbedLink" Type="System.String" DbType="NChar(254)" CanBeNull="true" />
-      <Column Name="Class" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="tblUser_tblEnglish" Member="tblUser" ThisKey="Author" Type="tblUser" IsForeignKey="true" />
+      <Column Name="Class" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblUser_tblEnglish" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblUser_tblEnglish1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblInformatics" Member="tblInformatics">
@@ -114,19 +117,20 @@
       <Column Name="Chapeau" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Contents" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Thumbnail" Type="System.String" DbType="NChar(254)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="Author" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="Posted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Leitmotif" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Point" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Tag" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Checker" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Checker" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
       <Column Name="HtmlPreview" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="HtmlEmbedLink" Type="System.String" DbType="NChar(254)" CanBeNull="true" />
-      <Column Name="Leitmotif" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="tblUser_tblInformatic" Member="tblUser" ThisKey="Author" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblUser_tblInformatic" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblUser_tblInformatic1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblNews" Member="tblNews">
@@ -137,7 +141,7 @@
       <Column Name="Contents" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Posted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Author" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="tblUser_tblNew" Member="tblUser" ThisKey="Author" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblUser_tblNew" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblPermission" Member="tblPermissions">
