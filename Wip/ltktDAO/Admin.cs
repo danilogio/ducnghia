@@ -18,21 +18,21 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static IQueryable<tblAdmin> getRecord(int _id)
+        public static IQueryable<tblAdmin> getRecord(string _code)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var item = DB.tblAdmins.Where(p => p.ID == _id);
+            var item = DB.tblAdmins.Where(p => p.Code == _code);
             return item;
         }
-        public static bool changeStateON(int _id, string _username)
+        public static bool changeStateON(string _code, string _username)
         {
             try
             {
-                log.writeLog("[" + _username + "]:Change state id=" + _id+ " is ON");
+                log.writeLog("[" + _username + "]:Change state id=" + _code + " is ON");
                 using (TransactionScope ts = new TransactionScope())
                 {
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-                    var record = DB.tblAdmins.Single(p => p.ID == _id);
+                    var record = DB.tblAdmins.Single(p => p.Code == _code);
                     record.State = true;
                     DB.SubmitChanges();
                 }
@@ -46,15 +46,15 @@ namespace ltktDAO
             return true;
         }
 
-        public static bool changeStateOFF(int _id, string _username)
+        public static bool changeStateOFF(string _code, string _username)
         {
             try
             {
-                log.writeLog("[" + _username + "]:Change state id=" + _id + " is OFF");
+                log.writeLog("[" + _username + "]:Change state id=" + _code + " is OFF");
                 using (TransactionScope ts = new TransactionScope())
                 {
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-                    var record = DB.tblAdmins.Single(p => p.ID == _id);
+                    var record = DB.tblAdmins.Single(p => p.Code == _code);
                     record.State = false;
                     DB.SubmitChanges();
                 }

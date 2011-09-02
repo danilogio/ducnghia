@@ -62,7 +62,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -188,13 +188,13 @@ namespace ltkt
                     {
                         log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), user.Username, ex.Message);
 
-                        Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                        Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                         Response.Redirect(CommonConstants.PAGE_ERROR);
                     }
 
                     upload.Visible = false;
                     message.Visible = true;
-                    liMessage.Text = CommonConstants.UPLOAD_SUCCESSFUL;
+                    liMessage.Text = CommonConstants.MSG_UPLOAD_SUCCESSFUL;
                     liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
                     liMessage.Text += "<br />Bài viết của bạn sẽ được kiểm duyệt trong vòng 24h";
                     liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a><br />";

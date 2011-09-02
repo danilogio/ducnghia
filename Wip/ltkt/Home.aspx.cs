@@ -44,13 +44,13 @@ namespace ltkt
                 }
                 else
                 {
-                    data = CommonConstants.ARTICLE_EMPTY_RECORD;
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
                 }
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -63,14 +63,14 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_WORD, CommonConstants.IT_TYPE_OFFICE_ACCESS, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_WORD, CommonConstants.AT_IT_OFFICE_ACCESS, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return null;
@@ -83,14 +83,14 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_SIMPLE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_SIMPLE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return null;
@@ -103,14 +103,14 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_ADVANCE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_ADVANCE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return null;
@@ -124,14 +124,14 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.ARTICLE_TYPE_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.AT_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblEnglish> lst = items.ToList();
                 return loadDetailsForELArticles(lst);
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return null;
@@ -145,14 +145,14 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.ARTICLE_TYPE_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.AT_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblEnglish> lst = items.ToList();
                 return loadDetailsForELArticles(lst);
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return null;
@@ -166,14 +166,14 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.ARTICLE_TYPE_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.AT_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblEnglish> lst = items.ToList();
                 return loadDetailsForELArticles(lst);
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return null;
@@ -197,13 +197,13 @@ namespace ltkt
                 }
                 else
                 {
-                    data = CommonConstants.ARTICLE_EMPTY_RECORD;
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
                 }
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -225,7 +225,7 @@ namespace ltkt
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -251,7 +251,7 @@ namespace ltkt
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -275,13 +275,13 @@ namespace ltkt
                 }
                 else
                 {
-                    data = CommonConstants.ARTICLE_EMPTY_RECORD;
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
                 }
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -305,13 +305,13 @@ namespace ltkt
                 }
                 else
                 {
-                    data = CommonConstants.ARTICLE_EMPTY_RECORD;
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
                 }
             }
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -336,7 +336,7 @@ namespace ltkt
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -360,7 +360,7 @@ namespace ltkt
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             return data;
@@ -389,7 +389,7 @@ namespace ltkt
             catch (Exception ex)
             {
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
 

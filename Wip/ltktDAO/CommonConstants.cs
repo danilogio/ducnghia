@@ -69,7 +69,7 @@ namespace ltktDAO
             public const string BAR = "-";
         #endregion
 
-        #region State
+        #region State (STATE)
             /// <summary>
             /// state is unchec
             /// </summary>
@@ -131,58 +131,228 @@ namespace ltktDAO
             
         #endregion 
         
-        #region Article type
+        #region Article type (AT)
             /// <summary>
             /// Article has type lecture
             /// </summary>
-            public const int ARTICLE_TYPE_LECTURE = 0;
+            public const int AT_LECTURE = 0;
             /// <summary>
             /// Article has type a practise
             /// </summary>
-            public const int ARTICLE_TYPE_PRACTISE = 1;
+            public const int AT_PRACTISE = 1;
             /// <summary>
             /// Article has type Examination
             /// </summary>
-            public const int ARTICLE_TYPE_EXAM = 2;
+            public const int AT_EXAM = 2;
+
+            #region University (AT_UNI)
+                /// <summary>
+                /// Khối A
+                /// </summary>
+                public const int AT_UNI_BRANCH_A = 0;
+                /// <summary>
+                /// Khối B
+                /// </summary>
+                public const int AT_UNI_BRANCH_B = 1;
+                /// <summary>
+                /// Khối C
+                /// </summary>
+                public const int AT_UNI_BRANCH_C = 2;
+                /// <summary>
+                /// Khối D
+                /// </summary>
+                public const int AT_UNI_BRANCH_D = 3;
+            #endregion
+
+            #region Informatics (AT_IT)
             /// <summary>
-            /// Article IT with type word
-            /// </summary>
-            public const int IT_TYPE_OFFICE_WORD = 0;
+                /// Article IT with type word
+                /// </summary>
+                public const int AT_IT_OFFICE_WORD = 0;
+                /// <summary>
+                /// Article IT with type Excel
+                /// </summary>
+                public const int AT_IT_OFFICE_EXCEL = 1;
+                /// <summary>
+                /// Article IT with type Power point
+                /// </summary>
+                public const int AT_IT_OFFICE_POWERPOINT = 2;
+                /// <summary>
+                /// Article IT with type power point
+                /// </summary>
+                public const int AT_IT_OFFICE_ACCESS = 3;
+                /// <summary>
+                /// Article IT with type simple tip
+                /// </summary>
+                public const int AT_IT_OFFICE_SIMPLE_TIP = 4;
+                /// <summary>
+                /// Article IT type with type advance tip
+                /// </summary>
+                public const int AT_IT_OFFICE_ADVANCE_TIP = 5;
+            #endregion
+
+            #region English Type (AT_EL)
             /// <summary>
-            /// Article IT with type Excel
-            /// </summary>
-            public const int IT_TYPE_OFFICE_EXCEL = 1;
-            /// <summary>
-            /// Article IT with type Power point
-            /// </summary>
-            public const int IT_TYPE_OFFICE_POWERPOINT = 2;
-            /// <summary>
-            /// Article IT with type power point
-            /// </summary>
-            public const int IT_TYPE_OFFICE_ACCESS = 3;
-            /// <summary>
-            /// Article IT with type simple tip
-            /// </summary>
-            public const int IT_TYPE_OFFICE_SIMPLE_TIP = 4;
-            /// <summary>
-            /// Article IT type with type advance tip
-            /// </summary>
-            public const int IT_TYPE_OFFICE_ADVANCE_TIP = 5;
+                /// Anh văn lớp 1
+                /// </summary>
+                public const int AT_EL_CLASS_1 = 1;
+                /// <summary>
+                /// Anh văn lớp 2
+                /// </summary>
+                public const int AT_EL_CLASS_2 = 2;
+                /// <summary>
+                /// Anh văn lớp 3
+                /// </summary>
+                public const int AT_EL_CLASS_3 = 3;
+                /// <summary>
+                /// Anh văn lớp 4
+                /// </summary>
+                public const int AT_EL_CLASS_4 = 4;
+                /// <summary>
+                /// Anh văn lớp 5
+                /// </summary>
+                public const int AT_EL_CLASS_5 = 5;
+                /// <summary>
+                /// Anh văn lớp 6
+                /// </summary>
+                public const int AT_EL_CLASS_6 = 6;
+                /// <summary>
+                /// Anh văn lớp 7
+                /// </summary>
+                public const int AT_EL_CLASS_7 = 7;
+                /// <summary>
+                /// Anh văn lớp 8
+                /// </summary>
+                public const int AT_EL_CLASS_8 = 8;
+                /// <summary>
+                /// Anh văn lớp 9
+                /// </summary>
+                public const int AT_EL_CLASS_9 = 9;
+                /// <summary>
+                /// Anh văn lớp 10
+                /// </summary>
+                public const int AT_EL_CLASS_10 = 10;
+                /// <summary>
+                /// Anh văn lớp 11
+                /// </summary>
+                public const int AT_EL_CLASS_11 = 11;
+                /// <summary>
+                /// Anh văn lớp 12
+                /// </summary>
+                public const int AT_EL_CLASS_12 = 12;
+                /// <summary>
+                /// CN Toán
+                /// </summary>
+                public const int AT_EL_MJ_MATH = 20;
+                /// <summary>
+                /// CN Kinh tế
+                /// </summary>
+                public const int AT_EL_MJ_ECO = 21;
+                /// <summary>
+                /// CN Hóa
+                /// </summary>
+                public const int AT_EL_MJ_CHEM = 22;
+                /// <summary>
+                /// CN Sinh
+                /// </summary>
+                public const int AT_EL_MJ_BIO = 23;
+                /// <summary>
+                /// CN Khoa học vật liệu
+                /// </summary>
+                public const int AT_EL_MJ_MATERIAL = 24;
+                /// <summary>
+                /// CN Lý
+                /// </summary>
+                public const int AT_EL_MJ_PHY = 25;
+                /// <summary>
+                /// CN viễn thông
+                /// </summary>
+                public const int AT_EL_MJ_TELE = 26;
+                /// <summary>
+                /// CN CNTT
+                /// </summary>
+                public const int AT_EL_MJ_IT = 27;
+                /// <summary>
+                /// TOEIC 300
+                /// </summary>
+                public const int AT_EL_TOEIC_300 = 40;
+                /// <summary>
+                /// TOEIC 400
+                /// </summary>
+                public const int AT_EL_TOEIC_400 = 41;
+                /// <summary>
+                /// TOEIC 500
+                /// </summary>
+                public const int AT_EL_TOEIC_500 = 42;
+                /// <summary>
+                /// TOEIC 600
+                /// </summary>
+                public const int AT_EL_TOEIC_600 = 43;
+                /// <summary>
+                /// TOEIC 700
+                /// </summary>
+                public const int AT_EL_TOEIC_700 = 44;
+                /// <summary>
+                /// TOEIC 800
+                /// </summary>
+                public const int AT_EL_TOEIC_800 = 45;
+                /// <summary>
+                /// TOEIC 900
+                /// </summary>
+                public const int AT_EL_TOEIC_900 = 46;
+                /// <summary>
+                /// Chứng chỉ A
+                /// </summary>
+                public const int AT_EL_CERT_A = 60;
+                /// <summary>
+                /// Chứng chỉ B
+                /// </summary>
+                public const int AT_EL_CERT_B = 61;
+                /// <summary>
+                /// Chứng chỉ C
+                /// </summary>
+                public const int AT_EL_CERT_C = 62;
+                /// <summary>
+                /// TOEFL
+                /// </summary>
+                public const int AT_EL_TOEFL = 40;
+                /// <summary>
+                /// IELTS
+                /// </summary>
+                public const int AT_EL_IELTS = 50;
+            #endregion
+        
         #endregion
 
-        #region Messages
+        #region Sticky Type (ST)
             /// <summary>
+            /// Sticky University
+            /// </summary>
+            public const int ST_UNI = 0;
+            /// <summary>
+            /// Sticky English
+            /// </summary>
+            public const int ST_EL = 1;
+            /// <summary>
+            /// Sticky Informatics
+            /// </summary>
+            public const int ST_IT = 2;
+        #endregion
+
+        #region Messages(MSG)
+                /// <summary>
             /// do not find out article record on DB
             /// </summary>
-            public const string ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
+            public const string MSG_ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
             /// <summary>
             /// error text
             /// </summary>
-            public const string COMMON_ERROR_TEXT = "Đã có lỗi xảy ra, xin vui lòng thử lại sau.";
+            public const string MSG_COMMON_ERROR_TEXT = "Đã có lỗi xảy ra, xin vui lòng thử lại sau.";
             /// <summary>
             /// Upload successful
             /// </summary>
-            public const string UPLOAD_SUCCESSFUL = "Upload thành công";
+            public const string MSG_UPLOAD_SUCCESSFUL = "Upload thành công";
+
         #endregion
 
         #region Administrator Function (AF)
