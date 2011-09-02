@@ -100,7 +100,7 @@ namespace ltkt
 
             if (lblResult.Text == "<p><ul></ul></p>")
             {
-                lblResult.Text = "<p><br />Rất tiếc, không có kết quả nào phù hợp với yêu cầu tìm kiếm của bạn.</p>";
+                lblResult.Text = CommonConstants.MSG_SEARCH_NOT_FOUND;
             }
 
         }

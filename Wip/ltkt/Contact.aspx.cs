@@ -14,9 +14,9 @@ public partial class Contact : System.Web.UI.Page
     EventLog log = new EventLog();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["User"] != null)
+        if (Session[CommonConstants.SES_USER] != null)
         {
-            tblUser user = (tblUser)Session["User"];
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
             txtboxContactName.Text = user.DisplayName;
             txtboxContactEmail.Text = user.Email.Trim();
         }
@@ -55,7 +55,7 @@ public partial class Contact : System.Web.UI.Page
             
             liMessage.Visible = true;
             contactPanel.Visible = false;
-            liMessage.Text = "Phản hồi của bạn đã được gửi thành công đến cho chúng tôi. Chân thành cảm ơn đóng góp của bạn!";
+            liMessage.Text = CommonConstants.MSG_REPLY_SUCCESSFUL;
 
             Boolean isOK = ltktDAO.Contact.insertEmail(strContactEmail, "trungtamducnghia@gmail.com",
                 strContactTitle, message.Body, DateTime.Now);
@@ -63,12 +63,11 @@ public partial class Contact : System.Web.UI.Page
         catch (Exception ex)
         {
             liMessage.Visible = true;
-            liMessage.Text = String.Format("Phản hồi của bạn gửi không thành công. Xin vui lòng kiểm tra lại địa chỉ email của bạn ({0})", ex.Message);
-            liMessage.Text += "\r\n <a href=\"Contact.aspx\">Thử lại</a>";
+            liMessage.Text = CommonConstants.MSG_REPLY_FAILED;
             contactPanel.Visible = false;
 
             //Write to log
-            tblUser user = (tblUser)Session["User"];
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
             string username = CommonConstants.USER_GUEST;
             if (user != null)
             {

@@ -380,6 +380,18 @@ namespace ltktDAO
             /// Message reset password is failed
             /// </summary>
             public const string MSG_RESET_PASSWORD_FAILED = "Lỗi: Không tìm thấy email của bạn!";
+            /// <summary>
+            /// Message search not found
+            /// </summary>
+            public const string MSG_SEARCH_NOT_FOUND = "<p><br />Rất tiếc, không có kết quả nào phù hợp với yêu cầu tìm kiếm của bạn.</p>";
+            /// <summary>
+            /// Message reply is sent successful
+            /// </summary>
+            public const string MSG_REPLY_SUCCESSFUL = "Phản hồi của bạn đã được gửi thành công đến cho chúng tôi. Chân thành cảm ơn đóng góp của bạn! ";
+            /// <summary>
+            /// Message reply is sent failed
+            /// </summary>
+            public const string MSG_REPLY_FAILED = "Phản hồi của bạn gửi không thành công. Xin vui lòng kiểm tra lại địa chỉ email của bạn. \n <br/> <a href=\"Contact.aspx\">Thử lại</a>";
         #endregion
 
         #region Administrator Function (AF)
@@ -705,11 +717,12 @@ namespace ltktDAO
             /// <summary>
             /// University link template
             /// </summary>
-            public const string TEMP_UNI_LINK = "<a href=\"ContestUniversity.aspx?sub={0}&time={1}\">{2}</a>";
+            public const string TEMP_UNI_LINK = "<a href=\"" + PAGE_UNIVERSITY + "?" + REQ_SUBJECT + "={0}&" +REQ_TIME+"={1}\">{2}</a>";
             /// <summary>
-            /// 
+            /// Label template
             /// </summary>
             public const string TEMP_UNI_LABEL = "<label>{0}</label>";
+            
         #endregion
 
         #region Action request (ACT)

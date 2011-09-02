@@ -11,6 +11,8 @@ namespace ltkt
     public partial class ResetPassword : System.Web.UI.Page
     {
         ltktDAO.Users userDAO = new ltktDAO.Users();
+        EventLog log = new EventLog();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -18,31 +20,42 @@ namespace ltkt
 
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {
-            string strEmail = txtboxRegistryEmail.Text;
-
-            // Kiểm tra sự tồn tại của email
-            string strUsername = userDAO.existedEmail(strEmail);
-
-
-            if (strUsername != null)
+            try
             {
-                // Phát sinh mật khẩu bất kỳ
-                string strNewPassword = userDAO.generatePassword();
+                string strEmail = txtboxRegistryEmail.Text;
 
-                // Gửi mật khẩu đến email
-                userDAO.sendNewPassword(strUsername, strNewPassword, strEmail);
+                // Kiểm tra sự tồn tại của email
+                string strUsername = userDAO.existedEmail(strEmail);
 
-                liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_SUCCESSFUL;
-                liMessage.Visible = true;
-                requestPassword.Visible = false;
+
+                if (strUsername != null)
+                {
+                    // Phát sinh mật khẩu bất kỳ
+                    string strNewPassword = userDAO.generatePassword();
+
+                    // Gửi mật khẩu đến email
+                    userDAO.sendNewPassword(strUsername, strNewPassword, strEmail);
+
+                    liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_SUCCESSFUL;
+                    liMessage.Visible = true;
+                    requestPassword.Visible = false;
+                }
+                else
+                {
+                    liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_FAILED;
+                    liMessage.Visible = true;
+                }
+
+                // Thông báo cho người dùng
             }
-            else
+            catch (Exception ex)
             {
-                liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_FAILED;
-                liMessage.Visible = true;
-            }
+                string username = CommonConstants.USER_GUEST;
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-            // Thông báo cho người dùng
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
         }
     }
 }
