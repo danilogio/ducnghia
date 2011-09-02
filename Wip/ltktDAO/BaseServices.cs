@@ -211,7 +211,7 @@ namespace ltktDAO
                 {
                     if (i == selectedYear)
                     {
-                        links += String.Format(CommonConstants.UNI_LABEL_TEMPLATE, i.ToString());
+                        links += String.Format(CommonConstants.TEMP_UNI_LABEL, i.ToString());
                     }
                     else
                     {

@@ -45,6 +45,9 @@ namespace ltktDAO
     partial void InserttblContestForUniversity(tblContestForUniversity instance);
     partial void UpdatetblContestForUniversity(tblContestForUniversity instance);
     partial void DeletetblContestForUniversity(tblContestForUniversity instance);
+    partial void InserttblControl(tblControl instance);
+    partial void UpdatetblControl(tblControl instance);
+    partial void DeletetblControl(tblControl instance);
     partial void InserttblEnglish(tblEnglish instance);
     partial void UpdatetblEnglish(tblEnglish instance);
     partial void DeletetblEnglish(tblEnglish instance);
@@ -135,6 +138,14 @@ namespace ltktDAO
 			}
 		}
 		
+		public System.Data.Linq.Table<tblControl> tblControls
+		{
+			get
+			{
+				return this.GetTable<tblControl>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tblEnglish> tblEnglishes
 		{
 			get
@@ -190,9 +201,7 @@ namespace ltktDAO
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
-		
-		private string _Name;
+		private string _Code;
 		
 		private string _Message;
 		
@@ -202,10 +211,8 @@ namespace ltktDAO
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
     partial void OnMessageChanging(string value);
     partial void OnMessageChanged();
     partial void OnStateChanging(bool value);
@@ -217,42 +224,22 @@ namespace ltktDAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[Column(Storage="_Code", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Code
 		{
 			get
 			{
-				return this._ID;
+				return this._Code;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._Code != value))
 				{
-					this.OnIDChanging(value);
+					this.OnCodeChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
 				}
 			}
 		}
@@ -1996,6 +1983,116 @@ namespace ltktDAO
 		}
 	}
 	
+	[Table(Name="dbo.tblControl")]
+	public partial class tblControl : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Code;
+		
+		private string _Name;
+		
+		private string _Value;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnValueChanging(string value);
+    partial void OnValueChanged();
+    #endregion
+		
+		public tblControl()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_Code", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this.OnCodeChanging(value);
+					this.SendPropertyChanging();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Value", DbType="NVarChar(500)")]
+		public string Value
+		{
+			get
+			{
+				return this._Value;
+			}
+			set
+			{
+				if ((this._Value != value))
+				{
+					this.OnValueChanging(value);
+					this.SendPropertyChanging();
+					this._Value = value;
+					this.SendPropertyChanged("Value");
+					this.OnValueChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[Table(Name="dbo.tblEnglish")]
 	public partial class tblEnglish : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3391,7 +3488,7 @@ namespace ltktDAO
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private string _Code;
 		
 		private string _Name;
 		
@@ -3401,8 +3498,8 @@ namespace ltktDAO
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
     partial void OnValueChanging(string value);
@@ -3414,27 +3511,27 @@ namespace ltktDAO
 			OnCreated();
 		}
 		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[Column(Storage="_Code", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Code
 		{
 			get
 			{
-				return this._ID;
+				return this._Code;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._Code != value))
 				{
-					this.OnIDChanging(value);
+					this.OnCodeChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -3454,7 +3551,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Value", DbType="NVarChar(254) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Value", DbType="NChar(254) NOT NULL", CanBeNull=false)]
 		public string Value
 		{
 			get

@@ -3,8 +3,7 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=E:\Data\Projects\ducnghia\Wip\ltkt\App_Data\LTDH.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="ltktDAO.Properties.Settings" SettingsPropertyName="LTDHConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblAdmin" Member="tblAdmins">
     <Type Name="tblAdmin">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Message" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="State" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
@@ -86,6 +85,13 @@
       <Association Name="tblUser_tblContestForUniversity1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tblControl" Member="tblControls">
+    <Type Name="tblControl">
+      <Column Name="Code" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tblEnglish" Member="tblEnglishes">
     <Type Name="tblEnglish">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -152,9 +158,9 @@
   </Table>
   <Table Name="dbo.tblStatistic" Member="tblStatistics">
     <Type Name="tblStatistic">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Value" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NChar(254) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.tblSticky" Member="tblStickies">

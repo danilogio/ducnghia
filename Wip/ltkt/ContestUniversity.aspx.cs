@@ -99,7 +99,7 @@ namespace ltkt
         {
             articleSCO.Section = CommonConstants.SEC_UNIVERSITY_CODE;
 
-            string links = service.createOlderLink(CommonConstants.UNI_LINK_TEMPLATE, articleSCO, 10);
+            string links = service.createOlderLink(CommonConstants.TEMP_UNI_LINK, articleSCO, 10);
 
             return links;
         }

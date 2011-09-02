@@ -82,6 +82,53 @@ namespace ltktDAO
             /// state is bad
             /// </summary>
             public const int STATE_BAD = 2;
+
+            /// <summary>
+            /// state is non active
+            /// </summary>
+            public const int STATE_NON_ACTIVE = 0;
+
+            /// <summary>
+            /// state is active
+            /// </summary>
+            public const int STATE_ACTIVE = 1;
+            /// <summary>
+            /// state is warning
+            /// </summary>
+            public const int STATE_WARNING = 2;
+            /// <summary>
+            /// state is kia 3 day
+            /// </summary>
+            public const int STATE_KIA_3D = 31;
+            /// <summary>
+            /// state is kia 1 week
+            /// </summary>
+            public const int STATE_KIA_1W = 32;
+            /// <summary>
+            /// state is kia 2 week
+            /// </summary>
+            public const int STATE_KIA_2W = 33;
+            /// <summary>
+            /// state is kia 3 week
+            /// </summary>
+            public const int STATE_KIA_3W = 34;
+            /// <summary>
+            /// state is kia 1 Month
+            /// </summary>
+            public const int STATE_KIA_1M = 35;
+            /// <summary>
+            /// state is deleted
+            /// </summary>
+            public const int STATE_DELETED = 4;
+            /// <summary>
+            /// state is pending
+            /// </summary>
+            public const int STATE_PENDING = 10;
+            /// <summary>
+            /// state is sticky
+            /// </summary>
+            public const int STATE_STICKY = 13;
+            
         #endregion 
         
         #region Article type
@@ -138,34 +185,160 @@ namespace ltktDAO
             public const string UPLOAD_SUCCESSFUL = "Upload thành công";
         #endregion
 
-        #region Administrator Function
-            public const string AF_TITLE = "TITLE";
+        #region Administrator Function (AF)
+            /// <summary>
+            /// Bật/Tắt thông báo
+            /// </summary>
+            public const string AF_ANNOUCEMENT = "ANNOUCEMENT";
+            /// <summary>
+            /// Bật/Tắt chức năng upload
+            /// </summary>
             public const string AF_UPLOAD = "UPLOAD";
+            /// <summary>
+            /// Bật/Tắt chức năng đăng ký
+            /// </summary>
             public const string AF_REGISTRY = "REGISTRY";
+            /// <summary>
+            /// Bật/tắt chức năng login
+            /// </summary>
             public const string AF_LOGIN = "LOGIN";
+            /// <summary>
+            /// Bật/Tắt chức năng download
+            /// </summary>
             public const string AF_DOWNLOAD = "DOWNLOAD";
+            /// <summary>
+            /// Bật/Tắt chức năng Comment
+            /// </summary>
             public const string AF_COMMENT = "COMMENT";
+            /// <summary>
+            /// Bật/Tắt chức năng Comment không cần đăng nhập
+            /// </summary>
+            public const string AF_COMMENT_EASY = "COMMENT_EASY";
+            /// <summary>
+            /// Bật/Tắt chức năng đăng ký quảng cáo
+            /// </summary>
             public const string AF_ADS = "ADS";
+            /// <summary>
+            /// Bật/Tắt chức năng upload tại trang LTDH
+            /// </summary>
             public const string AF_UPLOAD_UNI = "UPLOAD_UNI";
+            /// <summary>
+            /// Bật/Tắt chức năng Download tại trang LTDH
+            /// </summary>
             public const string AF_DOWNLOAD_UNI = "DOWNLOAD_UNI";
+            /// <summary>
+            /// Bật/Tắt chức năng Upload tiếng anh
+            /// </summary>
             public const string AF_UPLOAD_EL = "UPLOAD_EL";
-            public const string AF_DOWNLOAD_EL = "DOWNLOAD_UNI";
+            /// <summary>
+            /// Bật/Tắt chức năng Download Tiếng anh
+            /// </summary>
+            public const string AF_DOWNLOAD_EL = "DOWNLOAD_EL";
+            /// <summary>
+            /// Bật/Tắt chức năng Upload IT
+            /// </summary>
             public const string AF_UPLOAD_IT = "UPLOAD_IT";
+            /// <summary>
+            /// Bật/Tắt chức năng Download IT
+            /// </summary>
             public const string AF_DOWNLOAD_IT = "DOWNLOAD_IT";
+            /// <summary>
+            /// Bật/Tắt chức năng Xem tin tức
+            /// </summary>
             public const string AF_NEWS_VIEW = "NEWS_VIEW";
+            /// <summary>
+            /// Bật/Tắt chức năng Post tin tức
+            /// </summary>
             public const string AF_NEWS_POST = "NEWS_POST";
+            /// <summary>
+            /// Bật/Tắt chức năng Search
+            /// </summary>
             public const string AF_SEARCH = "SEARCH";
+            /// <summary>
+            /// Bật/Tắt chức năng Liên hệ
+            /// </summary>
             public const string AF_CONTACT = "CONTACT";
+            /// <summary>
+            /// Bật/Tắt chế độ Underconstruction
+            /// </summary>
             public const string AF_UNDERCONTRUCTION = "UNDERCONS";
-            public const string AF_EMAIL_CONFIG = "EMAIL_CONFIG";
+            /// <summary>
+            /// Bật/Tắt chức năng gửi email
+            /// </summary>
             public const string AF_EMAIL_SEND = "EMAIL_SEND";
         #endregion
-        
-        #region Statistic Function
-            //public const int SF_
-        #endregion
 
-            #region Pages Name
+        #region Statistic Function (SF)
+            /// <summary>
+            /// Thành viên login gần nhất
+            /// </summary>
+            public const string SF_LATEST_LOGIN = "LATEST_LOGIN";
+            /// <summary>
+            /// Tổng số bài viết
+            /// </summary>
+            public const string SF_NUM_ARTICLE = "NUM_ARTICLE";
+            /// <summary>
+            /// TỔng số bài trong trang English
+            /// </summary>
+            public const string SF_NUM_ARTICLE_ON_EL = "NUM_ARTICLE_ON_EL";
+            /// <summary>
+            /// Tổng số bài trong trang IT
+            /// </summary>
+            public const string SF_NUM_ARTICLE_ON_IT = "NUM_ARTICLE_ON_IT";
+            /// <summary>
+            /// Tổng số bài trong trang LTDH
+            /// </summary>
+            public const string SF_NUM_ARTICLE_ON_UNI = "NUM_ARTICLE_ON_UNI";
+            /// <summary>
+            /// Tổng số bài trong 1 tab tại trang chủ
+            /// </summary>
+            public const string SF_NUM_ARTICLE_ON_TAB = "NUM_ARTICLE_ON_TAB";
+            /// <summary>
+            /// Tổng số comment trong ngày
+            /// </summary>
+            public const string SF_NUM_COMMENT_A_DAY = "NUM_COMMENT_DAY";
+            /// <summary>
+            /// Tổng số upload trong  ngày
+            /// </summary>
+            public const string SF_NUM_UPLOAD_A_DAY = "NUM_UPLOAD_DAY";
+            /// <summary>
+            /// Tổng số download trong 1 ngày
+            /// </summary>
+            public const string SF_NUM_DOWNLOAD_A_DAY = "NUM_DOWNLOAD_DAY";
+            /// <summary>
+            /// Tổng số upload
+            /// </summary>
+            public const string SF_NUM_UPLOAD = "NUM_UPLOAD";
+            /// <summary>
+            /// Tổng số thành viên hiện tại
+            /// </summary>
+            public const string SF_NUM_USER = "NUM_USER";
+            /// <summary>
+            /// Tổng số thành viên đăng ký mới
+            /// </summary>
+            public const string SF_NUM_USER_REGISTRY = "NUM_USER_REGISTRY";
+        #endregion
+            
+        #region Control Function (CF)
+            /// <summary>
+            /// Lấy tiêu đề web
+            /// </summary>
+            public const string CF_TITLE = "TITLE";
+            /// <summary>
+            /// Văn bản chào mừng tại trang chủ
+            /// </summary>
+            public const string CF_WELCOME_TEXT = "WELCOME_TEXT";
+            /// <summary>
+            /// Cấu hình email
+            /// </summary>
+            public const string CF_EMAIL_CONFIG = "EMAIL_CONFIG";
+            /// <summary>
+            /// Nội dung thông báo
+            /// </summary>
+            public const string CF_ANNOUCEMENT = "ANNOUCEMENT";
+        #endregion
+        
+        #region Pages Name (PAGE)
             /// <summary>
         /// error Page
         /// </summary>
@@ -192,7 +365,7 @@ namespace ltktDAO
         public const string PAGE_UNIVERSITY = "ContestUniversity.aspx";
     #endregion
 
-        #region Session Constants
+        #region Session Constants (SES)
             /// <summary>
             /// User on session
             /// </summary>
@@ -207,7 +380,7 @@ namespace ltktDAO
             public const string SES_ERROR = "Error";
         #endregion
 
-        #region Request Constants
+        #region Request Constants (REQ)
             /// <summary>
             /// section on request
             /// </summary>
@@ -234,7 +407,7 @@ namespace ltktDAO
             public const string REQ_ACTION = "action";
         #endregion 
         
-        #region Section Uni,It,EL
+        #region Section Uni,It,EL (SEC)
             /// <summary>
             /// Section university code
             /// </summary>
@@ -261,7 +434,7 @@ namespace ltktDAO
             public const string SEC_ENGLISH = "Anh văn";
         #endregion
 
-        #region Subjects Math,Phy,Chem,Bio,Lit,His,Geo,Eng
+        #region Subjects Math,Phy,Chem,Bio,Lit,His,Geo,Eng (SUB)
             /// <summary>
             /// Môn Toán
             /// </summary>
@@ -328,25 +501,25 @@ namespace ltktDAO
             public const string SUB_ENGLISH_CODE = "el";
         #endregion
 
-        #region Templates
+        #region Templates (TEMP)
             /// <summary>
             /// University link template
             /// </summary>
-            public const string UNI_LINK_TEMPLATE = "<a href=\"ContestUniversity.aspx?sub={0}&time={1}\">{2}</a>";
+            public const string TEMP_UNI_LINK = "<a href=\"ContestUniversity.aspx?sub={0}&time={1}\">{2}</a>";
             /// <summary>
             /// 
             /// </summary>
-            public const string UNI_LABEL_TEMPLATE = "<label>{0}</label>";
+            public const string TEMP_UNI_LABEL = "<label>{0}</label>";
         #endregion
 
-        #region Action request
+        #region Action request (ACT)
             /// <summary>
             /// Action Click
             /// </summary>
             public const string ACT_CLICK = "click";
         #endregion
 
-        #region Advertisement
+        #region Advertisement (ADS)
             /// <summary>
             /// Banner Top
             /// </summary>
@@ -389,7 +562,7 @@ namespace ltktDAO
             public const string ADS_BOTTOM_2_BANNER = "bot2";
         #endregion
 
-        #region SQL query
+        #region SQL query (SQL)
             /// <summary>
             /// insert query template, require 2 argument
             /// </summary>
@@ -416,7 +589,7 @@ namespace ltktDAO
             public const string SQL_UPDATE_FAILED_TEMPLATE = " Delete record {0} to Table {1} failed";
         #endregion
 
-        #region SQL table
+        #region SQL table (SQL_TABLE)
             /// <summary>
             /// Table Informatics 
             /// </summary>
