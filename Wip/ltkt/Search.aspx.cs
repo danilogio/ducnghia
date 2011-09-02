@@ -10,6 +10,9 @@ namespace ltkt
 {
     public partial class Search : System.Web.UI.Page
     {
+        EventLog log = new EventLog();
+        ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             resultPanel.Visible = false;
@@ -49,7 +52,7 @@ namespace ltkt
             // Tin học
             if (topic == 1 || topic == 3)
             {
-                lstInformatics = ltktDAO.Informatics.listInformatics(keyWords);
+                lstInformatics = informaticsDAO.listInformatics(keyWords);
             }
 
             // Anh văn

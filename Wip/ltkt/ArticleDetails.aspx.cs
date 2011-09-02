@@ -13,6 +13,7 @@ namespace ltkt
     public partial class ArticleDetails : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -249,7 +250,7 @@ namespace ltkt
                     hpkDownloadlink.Text = informatic.Title;
                     hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
 
-                    IList<tblInformatic> items = ltktDAO.Informatics.getRelativeByType(informatic.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
+                    IList<tblInformatic> items = informaticsDAO.getRelativeByType(informatic.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
@@ -301,16 +302,19 @@ namespace ltkt
             string date = CommonConstants.BLANK;
             string comment = CommonConstants.BLANK;
             string newComment = CommonConstants.BLANK;
+            string currentUser = CommonConstants.BLANK;
             try
             {
                 if (Session[CommonConstants.SES_USER] != null)
                 {
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                     author = user.DisplayName;
+                    currentUser = user.Username;
                 }
                 else
                 {
                     author = txtName.Text;
+                    currentUser = author;
                 }
 
                 date = ltktDAO.BaseServices.convertDateToString(DateTime.Now);
@@ -340,7 +344,7 @@ namespace ltkt
                         }
                     case CommonConstants.SEC_INFORMATICS_CODE:
                         {
-                            ltktDAO.Informatics.insertComment(id, newComment);
+                            informaticsDAO.insertComment(id, newComment, currentUser);
                             break;
                         }
                     default:
@@ -398,7 +402,7 @@ namespace ltkt
                             }
                         case CommonConstants.SEC_INFORMATICS_CODE:
                             {
-                                ltktDAO.Informatics.Like(id);
+                                informaticsDAO.Like(id);
                                 updateCookie(CommonConstants.LIKE, sec, id);
                                 btnLike.Visible = false;
                                 break;
@@ -551,7 +555,7 @@ namespace ltkt
                             }
                         case CommonConstants.SEC_INFORMATICS_CODE:
                             {
-                                ltktDAO.Informatics.Dislike(id);
+                                informaticsDAO.Dislike(id);
                                 updateCookie(CommonConstants.DISLIKE, sec, id);
                                 btnDislike.Visible = false;
                                 break;

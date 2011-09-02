@@ -9,8 +9,10 @@ using ltktDAO;
 
 namespace ltkt.Admin
 {
+
     public partial class General : System.Web.UI.Page
     {
+        ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster page = (AdminMaster)Master;
@@ -20,7 +22,7 @@ namespace ltkt.Admin
             latestUser.Text = ltktDAO.Users.latestUser();
             sumContest.Text = ltktDAO.Contest.sumContest().ToString();
             sumEnglish.Text = ltktDAO.English.sumEnglish().ToString();
-            sumInformatics.Text = ltktDAO.Informatics.sumInformatics().ToString();
+            sumInformatics.Text = informaticsDAO.sumInformatics().ToString();
 
         }
     }

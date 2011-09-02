@@ -12,6 +12,7 @@ namespace ltkt
     public partial class Home : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         protected void Page_Load(object sender, EventArgs e)
         {
             lblWelcomeTitle.Text = "Chào mừng quý vị đến với Website Luyện thi Kinh tế";
@@ -62,7 +63,7 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_WORD, CommonConstants.IT_TYPE_OFFICE_ACCESS, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_WORD, CommonConstants.IT_TYPE_OFFICE_ACCESS, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
@@ -82,7 +83,7 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_SIMPLE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_SIMPLE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }
@@ -102,7 +103,7 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblInformatic> lst = ltktDAO.Informatics.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_ADVANCE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.IT_TYPE_OFFICE_ADVANCE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblInformatic> items = lst.ToList();
                 return loadDetailsForITArticles(items);
             }

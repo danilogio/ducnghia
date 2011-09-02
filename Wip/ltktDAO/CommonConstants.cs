@@ -138,32 +138,59 @@ namespace ltktDAO
             public const string UPLOAD_SUCCESSFUL = "Upload thành công";
         #endregion
 
-        #region Pages Name
-            /// <summary>
-            /// error Page
-            /// </summary>
-            public const string PAGE_ERROR = "Error.aspx";
-            /// <summary>
-            /// Login page
-            /// </summary>
-            public const string PAGE_LOGIN = "Login.aspx";
-            /// <summary>
-            /// Home page
-            /// </summary>
-            public const string PAGE_HOME = "Home.aspx";
-            /// <summary>
-            /// English page
-            /// </summary>
-            public const string PAGE_ENGLISH = "English.aspx";
-            /// <summary>
-            /// Informatics page
-            /// </summary>
-            public const string PAGE_INFORMATICS = "Informatics.aspx";
-            /// <summary>
-            /// University page
-            /// </summary>
-            public const string PAGE_UNIVERSITY = "ContestUniversity.aspx";
+        #region Administrator Function
+            public const string AF_TITLE = "TITLE";
+            public const string AF_UPLOAD = "UPLOAD";
+            public const string AF_REGISTRY = "REGISTRY";
+            public const string AF_LOGIN = "LOGIN";
+            public const string AF_DOWNLOAD = "DOWNLOAD";
+            public const string AF_COMMENT = "COMMENT";
+            public const string AF_ADS = "ADS";
+            public const string AF_UPLOAD_UNI = "UPLOAD_UNI";
+            public const string AF_DOWNLOAD_UNI = "DOWNLOAD_UNI";
+            public const string AF_UPLOAD_EL = "UPLOAD_EL";
+            public const string AF_DOWNLOAD_EL = "DOWNLOAD_UNI";
+            public const string AF_UPLOAD_IT = "UPLOAD_IT";
+            public const string AF_DOWNLOAD_IT = "DOWNLOAD_IT";
+            public const string AF_NEWS_VIEW = "NEWS_VIEW";
+            public const string AF_NEWS_POST = "NEWS_POST";
+            public const string AF_SEARCH = "SEARCH";
+            public const string AF_CONTACT = "CONTACT";
+            public const string AF_UNDERCONTRUCTION = "UNDERCONS";
+            public const string AF_EMAIL_CONFIG = "EMAIL_CONFIG";
+            public const string AF_EMAIL_SEND = "EMAIL_SEND";
         #endregion
+        
+        #region Statistic Function
+            //public const int SF_
+        #endregion
+
+            #region Pages Name
+            /// <summary>
+        /// error Page
+        /// </summary>
+        public const string PAGE_ERROR = "Error.aspx";
+        /// <summary>
+        /// Login page
+        /// </summary>
+        public const string PAGE_LOGIN = "Login.aspx";
+        /// <summary>
+        /// Home page
+        /// </summary>
+        public const string PAGE_HOME = "Home.aspx";
+        /// <summary>
+        /// English page
+        /// </summary>
+        public const string PAGE_ENGLISH = "English.aspx";
+        /// <summary>
+        /// Informatics page
+        /// </summary>
+        public const string PAGE_INFORMATICS = "Informatics.aspx";
+        /// <summary>
+        /// University page
+        /// </summary>
+        public const string PAGE_UNIVERSITY = "ContestUniversity.aspx";
+    #endregion
 
         #region Session Constants
             /// <summary>
