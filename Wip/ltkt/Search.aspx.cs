@@ -22,47 +22,58 @@ namespace ltkt
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //if (!recaptcha.IsValid)
-            //{
-            //    return;
-            //}
-
             string keyWords = txtboxSearch.Text;
             int topic = Convert.ToInt32(ddlSubject.SelectedValue);
             IList<tblEnglish> lstEnglish = null;
             IList<tblContestForUniversity> lstContest = null;
             IList<tblInformatic> lstInformatics = null;
-
-            // Luyện thi đại học
-            if (topic == 0 || topic == 3)
+            try
             {
-                int isAll = Convert.ToInt32(ddlSearchingType.SelectedValue);
-                if (isAll == 0)
+                // Luyện thi đại học
+                if (topic == 0 || topic == 3)
                 {
-                    lstContest = contestDAO.listContest(keyWords);
+                    int isAll = Convert.ToInt32(ddlSearchingType.SelectedValue);
+                    if (isAll == 0)
+                    {
+                        lstContest = contestDAO.listContest(keyWords);
+                    }
+                    else
+                    {
+                        //int branch = 0;//Convert.ToInt32(ddlBranch.SelectedValue);
+                        bool isUniversity = Boolean.Parse(ddlTypeContest.SelectedValue);
+                        int year = Convert.ToInt32(ddlYear.SelectedValue);
+
+                        lstContest = contestDAO.listContest(isUniversity, year);
+                    }
                 }
-                else
+
+                // Tin học
+                if (topic == 1 || topic == 3)
                 {
-                    //int branch = 0;//Convert.ToInt32(ddlBranch.SelectedValue);
-                    bool isUniversity = Boolean.Parse(ddlTypeContest.SelectedValue);
-                    int year = Convert.ToInt32(ddlYear.SelectedValue);
+                    lstInformatics = informaticsDAO.listInformatics(keyWords);
+                }
 
-                    lstContest = contestDAO.listContest(isUniversity, year);
+                // Anh văn
+                if (topic == 2 || topic == 3)
+                {
+                    lstEnglish = englishDAO.listEnglish(keyWords);
                 }
             }
-
-            // Tin học
-            if (topic == 1 || topic == 3)
+            catch (Exception ex)
             {
-                lstInformatics = informaticsDAO.listInformatics(keyWords);
-            }
+                //Write to log
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
 
-            // Anh văn
-            if (topic == 2 || topic == 3)
-            {
-                lstEnglish = englishDAO.listEnglish(keyWords);
-            }
+                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
             resultPanel.Visible = true;
 
             int idx = 0;
@@ -71,9 +82,12 @@ namespace ltkt
             {
                 for (idx = 0; idx < lstContest.Count(); ++idx)
                 {
-                    lblResult.Text += "<li>";
-                    lblResult.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + lstContest[idx].ID + "'>" + lstContest[idx].Title.Trim() + "</a>";
-                    lblResult.Text += "</li>";
+                    lblResult.Text =  BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, 
+                                                                        CommonConstants.SEC_UNIVERSITY_CODE, 
+                                                                        lstContest[idx].ID.ToString(), 
+                                                                        lstContest[idx].Title);
+                    lblResult.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, 
+                                                                        lblResult.Text);
                 }
             }
 
@@ -81,9 +95,12 @@ namespace ltkt
             {
                 for (idx = 0; idx < lstEnglish.Count(); ++idx)
                 {
-                    lblResult.Text += "<li>";
-                    lblResult.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + lstEnglish[idx].ID + "'>" + lstEnglish[idx].Title.Trim() + "</a>";
-                    lblResult.Text += "</li>";
+                    lblResult.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
+                                                                        CommonConstants.SEC_ENGLISH_CODE,
+                                                                        lstContest[idx].ID.ToString(),
+                                                                        lstContest[idx].Title);
+                    lblResult.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG,
+                                                                        lblResult.Text);
                 }
             }
 
@@ -91,9 +108,12 @@ namespace ltkt
             {
                 for (idx = 0; idx < lstInformatics.Count(); ++idx)
                 {
-                    lblResult.Text += "<li>";
-                    lblResult.Text += "<a href='ArticleDetails.aspx?sec=it&id=" + lstInformatics[idx].ID + "'>" + lstInformatics[idx].Title.Trim() + "</a>";
-                    lblResult.Text += "</li>";
+                    lblResult.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
+                                                                        CommonConstants.SEC_INFORMATICS_CODE,
+                                                                        lstContest[idx].ID.ToString(),
+                                                                        lstContest[idx].Title);
+                    lblResult.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG,
+                                                                        lblResult.Text);
                 }
             }
             lblResult.Text += "</ul></p>";

@@ -129,7 +129,7 @@ namespace ltktDAO
             string msg = CommonConstants.BLANK;
             if (!isNullOrBlank(template))
             {
-                msg = String.Format(template, arg1);
+                msg = String.Format(template, arg1.Trim());
             }
             return msg;
         }
@@ -138,7 +138,7 @@ namespace ltktDAO
             string msg = CommonConstants.BLANK;
             if (!isNullOrBlank(template))
             {
-                msg = String.Format(template, arg1, arg2);
+                msg = String.Format(template, arg1.Trim(), arg2.Trim());
             }
             return msg;
         }
@@ -147,7 +147,7 @@ namespace ltktDAO
             string msg = CommonConstants.BLANK;
             if (!isNullOrBlank(template))
             {
-                msg = String.Format(template, arg1, arg2, arg3);
+                msg = String.Format(template, arg1.Trim(), arg2.Trim(), arg3.Trim());
             }
             return msg;
         }
@@ -211,7 +211,7 @@ namespace ltktDAO
                 {
                     if (i == selectedYear)
                     {
-                        links += String.Format(CommonConstants.TEMP_UNI_LABEL, i.ToString());
+                        links += String.Format(CommonConstants.TEMP_LABEL_TAG, i.ToString());
                     }
                     else
                     {

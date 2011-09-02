@@ -572,6 +572,10 @@ namespace ltktDAO
         /// University page
         /// </summary>
         public const string PAGE_UNIVERSITY = "ContestUniversity.aspx";
+        /// <summary>
+        /// Article page
+        /// </summary>
+        public const string PAGE_ARTICLE_DETAILS = "ArticleDetails.aspx";
     #endregion
 
         #region Application Constants (APP)
@@ -718,11 +722,20 @@ namespace ltktDAO
             /// University link template
             /// </summary>
             public const string TEMP_UNI_LINK = "<a href=\"" + PAGE_UNIVERSITY + "?" + REQ_SUBJECT + "={0}&" +REQ_TIME+"={1}\">{2}</a>";
+
+            public const string TEMP_ARTICLE_DETAILS_LINK = "<a href='" + PAGE_ARTICLE_DETAILS +"?" + REQ_SECTION +"={0}&" + REQ_ID + "={1}'>{2}</a>";
             /// <summary>
-            /// Label template
+            /// Label tag template
             /// </summary>
-            public const string TEMP_UNI_LABEL = "<label>{0}</label>";
-            
+            public const string TEMP_LABEL_TAG = "<label>{0}</label>";
+            /// <summary>
+            /// Template tag
+            /// </summary>
+            public const string TEMP_LI_TAG = "<li>{0}</li>";
+            /// <summary>
+            /// Template A tag
+            /// </summary>
+            public const string TEMP_A_TAG = "<a href=\"{0}\">{1}</a>";
         #endregion
 
         #region Action request (ACT)
