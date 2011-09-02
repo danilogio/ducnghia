@@ -394,7 +394,7 @@ namespace ltktDAO
 
         #region Method
 
-        public static IEnumerable<tblUser> getAll()
+        public IEnumerable<tblUser> getAll()
         {
             LTDHDataContext DB = new LTDHDataContext(strPathDB);
             IEnumerable<tblUser> lst;
@@ -408,7 +408,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        public static Boolean insertUser(tblUser record)
+        public Boolean insertUser(tblUser record)
         {
             LTDHDataContext DB = new LTDHDataContext(strPathDB);
 
@@ -436,7 +436,7 @@ namespace ltktDAO
         /// <param name="_username"></param>
         /// <param name="update"></param>
         /// <returns></returns>
-        public static Boolean updateUser(string _username, tblUser update)
+        public Boolean updateUser(string _username, tblUser update)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -472,7 +472,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static string encryptPassword(string password)
+        public string encryptPassword(string password)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             byte[] originalText = ASCIIEncoding.Default.GetBytes(password);
@@ -485,7 +485,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static string decryptPassword(string password)
+        public string decryptPassword(string password)
         {
             return "";
         }
@@ -498,7 +498,7 @@ namespace ltktDAO
         /// <param name="_password"></param>
         /// <param name="_pwdEncrypted"></param>
         /// <returns></returns>
-        public static tblUser getUser(string _username, string _password, bool _pwdEncrypted)
+        public tblUser getUser(string _username, string _password, bool _pwdEncrypted)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             string pwd = "";
@@ -530,7 +530,7 @@ namespace ltktDAO
         /// <param name="_username"></param>
         /// <param name="_password"></param>
         /// <returns></returns>
-        public static Boolean isUser(string _username, string _password)
+        public Boolean isUser(string _username, string _password)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             string pwd = encryptPassword(_password);
@@ -550,7 +550,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_username"></param>
         /// <returns></returns>
-        public static Boolean existedUser(string _username)
+        public Boolean existedUser(string _username)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -573,7 +573,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_email"></param>
         /// <returns></returns>
-        public static string existedEmail(string _email)
+        public string existedEmail(string _email)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -601,7 +601,7 @@ namespace ltktDAO
         /// <param name="_sex"></param>
         /// <param name="_password"></param>
         /// <returns></returns>
-        public static Boolean register(string _username,
+        public Boolean register(string _username,
             string _displayName,
             string _email,
             Boolean _sex,
@@ -643,7 +643,7 @@ namespace ltktDAO
         /// Phát sinh chuỗi mật khẩu bất kỳ
         /// </summary>
         /// <returns></returns>
-        public static string generatePassword()
+        public string generatePassword()
         {
             //var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             //var stringChars = new char[8];
@@ -664,7 +664,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_username"></param>
         /// <param name="_newPassword"></param>
-        public static Boolean updateUserPassword(string _username, string _newPassword)
+        public Boolean updateUserPassword(string _username, string _newPassword)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -696,7 +696,7 @@ namespace ltktDAO
         /// <param name="_newPassword"></param>
         /// <param name="_email"></param>
         /// <returns></returns>
-        public static Boolean sendNewPassword(string _username, string _newPassword, string _email)
+        public Boolean sendNewPassword(string _username, string _newPassword, string _email)
         {
             try
             {
@@ -738,7 +738,7 @@ namespace ltktDAO
         /// Tổng số user
         /// </summary>
         /// <returns></returns>
-        public static int numberOfUsers()
+        public int numberOfUsers()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             var lst = from record in DB.tblUsers
@@ -751,7 +751,7 @@ namespace ltktDAO
         /// Tên user mới nhất
         /// </summary>
         /// <returns></returns>
-        public static string latestUser()
+        public string latestUser()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IQueryable<tblUser> lst = (from record in DB.tblUsers
@@ -772,7 +772,7 @@ namespace ltktDAO
         /// <param name="start"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static IEnumerable<tblUser> fetchUserList(int start, int count)
+        public IEnumerable<tblUser> fetchUserList(int start, int count)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = (from record in DB.tblUsers

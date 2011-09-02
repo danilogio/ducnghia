@@ -12,6 +12,8 @@ namespace ltkt
     {
         EventLog log = new EventLog();
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+        ltktDAO.English englishDAO = new ltktDAO.English();
+        ltktDAO.Contest contestDAO = new ltktDAO.Contest();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +39,7 @@ namespace ltkt
                 int isAll = Convert.ToInt32(ddlSearchingType.SelectedValue);
                 if (isAll == 0)
                 {
-                    lstContest = ltktDAO.Contest.listContest(keyWords);
+                    lstContest = contestDAO.listContest(keyWords);
                 }
                 else
                 {
@@ -45,7 +47,7 @@ namespace ltkt
                     bool isUniversity = Boolean.Parse(ddlTypeContest.SelectedValue);
                     int year = Convert.ToInt32(ddlYear.SelectedValue);
 
-                    lstContest = ltktDAO.Contest.listContest(isUniversity, year);
+                    lstContest = contestDAO.listContest(isUniversity, year);
                 }
             }
 
@@ -58,7 +60,7 @@ namespace ltkt
             // Anh văn
             if (topic == 2 || topic == 3)
             {
-                lstEnglish = ltktDAO.English.listEnglish(keyWords);
+                lstEnglish = englishDAO.listEnglish(keyWords);
             }
 
             resultPanel.Visible = true;

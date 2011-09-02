@@ -13,15 +13,19 @@ namespace ltkt.Admin
     public partial class General : System.Web.UI.Page
     {
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+        ltktDAO.English englishDAO = new ltktDAO.English();
+        ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        ltktDAO.Users userDAO = new ltktDAO.Users();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster page = (AdminMaster)Master;
             page.updateHeader("Tổng quan");
 
-            sumUsers.Text = ltktDAO.Users.numberOfUsers().ToString();
-            latestUser.Text = ltktDAO.Users.latestUser();
-            sumContest.Text = ltktDAO.Contest.sumContest().ToString();
-            sumEnglish.Text = ltktDAO.English.sumEnglish().ToString();
+            sumUsers.Text = userDAO.numberOfUsers().ToString();
+            latestUser.Text = userDAO.latestUser();
+            sumContest.Text = contestDAO.sumContest().ToString();
+            sumEnglish.Text = englishDAO.sumEnglish().ToString();
             sumInformatics.Text = informaticsDAO.sumInformatics().ToString();
 
         }

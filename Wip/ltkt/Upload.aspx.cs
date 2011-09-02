@@ -16,6 +16,9 @@ namespace ltkt
     {
         EventLog log = new EventLog();
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+        ltktDAO.English englishDAO = new ltktDAO.English();
+        ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -132,7 +135,7 @@ namespace ltkt
                                 {
                                     if (fileSolvingSave != CommonConstants.BLANK)
                                     {
-                                        ltktDAO.Contest.insertContest(txtboxTitle.Text,
+                                        contestDAO.insertContest(txtboxTitle.Text,
                                                                         txtboxSummary.Text,
                                                                         user.Username,
                                                                         DateTime.Now,
@@ -146,7 +149,7 @@ namespace ltkt
                                     }
                                     else
                                     {
-                                        ltktDAO.Contest.insertContest(txtboxTitle.Text,
+                                        contestDAO.insertContest(txtboxTitle.Text,
                                                                            txtboxSummary.Text,
                                                                            user.Username,
                                                                            DateTime.Now,
@@ -173,7 +176,7 @@ namespace ltkt
                                 }
                             case 2:
                                 {
-                                    ltktDAO.English.insertEnglish(txtboxTitle.Text,
+                                    englishDAO.insertEnglish(txtboxTitle.Text,
                                         Convert.ToInt32(ddlType.SelectedValue),
                                         txtboxSummary.Text,
                                         user.Username,

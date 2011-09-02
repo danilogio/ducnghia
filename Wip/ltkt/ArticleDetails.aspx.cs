@@ -14,6 +14,8 @@ namespace ltkt
     {
         EventLog log = new EventLog();
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+        ltktDAO.English englishDAO = new ltktDAO.English();
+        ltktDAO.Contest contestDAO = new ltktDAO.Contest();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -130,7 +132,7 @@ namespace ltkt
 
                     txtPostedComment.Text = contest.Comment;
 
-                    IList<tblContestForUniversity> items = ltktDAO.Contest.getRelativeByYear(contest.Year, CommonConstants.NUMBER_RECORD_RELATIVE);
+                    IList<tblContestForUniversity> items = contestDAO.getRelativeByYear(contest.Year, CommonConstants.NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
@@ -189,7 +191,7 @@ namespace ltkt
                     hpkDownloadlink.Text = english.Title;
                     hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
 
-                    IList<tblEnglish> items = ltktDAO.English.getRelativeByType(english.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
+                    IList<tblEnglish> items = englishDAO.getRelativeByType(english.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
@@ -334,12 +336,12 @@ namespace ltkt
                 {
                     case CommonConstants.SEC_UNIVERSITY_CODE:
                         {
-                            ltktDAO.Contest.insertComment(id, newComment);
+                            contestDAO.insertComment(id, newComment);
                             break;
                         }
                     case CommonConstants.SEC_ENGLISH_CODE:
                         {
-                            ltktDAO.English.insertComment(id, newComment);
+                            englishDAO.insertComment(id, newComment);
                             break;
                         }
                     case CommonConstants.SEC_INFORMATICS_CODE:
@@ -388,14 +390,14 @@ namespace ltkt
                     {
                         case CommonConstants.SEC_UNIVERSITY_CODE:
                             {
-                                ltktDAO.Contest.Like(id);
+                                contestDAO.Like(id);
                                 updateCookie(CommonConstants.LIKE, sec, id);
                                 btnLike.Visible = false;
                                 break;
                             }
                         case CommonConstants.SEC_ENGLISH_CODE:
                             {
-                                ltktDAO.English.Like(id);
+                                englishDAO.Like(id);
                                 updateCookie(CommonConstants.LIKE, sec, id);
                                 btnLike.Visible = false;
                                 break;
@@ -541,14 +543,14 @@ namespace ltkt
                     {
                         case CommonConstants.SEC_UNIVERSITY_CODE:
                             {
-                                ltktDAO.Contest.Dislike(id);
+                                contestDAO.Dislike(id);
                                 updateCookie(CommonConstants.DISLIKE, sec, id);
                                 btnDislike.Visible = false;
                                 break;
                             }
                         case CommonConstants.SEC_ENGLISH_CODE:
                             {
-                                ltktDAO.English.Dislike(id);
+                                englishDAO.Dislike(id);
                                 updateCookie(CommonConstants.DISLIKE, sec, id);
                                 btnDislike.Visible = false;
                                 break;

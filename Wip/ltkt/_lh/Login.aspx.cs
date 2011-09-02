@@ -11,6 +11,7 @@ namespace ltkt.Admin
 {
     public partial class Login : System.Web.UI.Page
     {
+        ltktDAO.Users userDAO = new ltktDAO.Users();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["User"] != null)
@@ -23,7 +24,7 @@ namespace ltkt.Admin
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
 
-            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword, false);
+            tblUser user = userDAO.getUser(strUsername, strPassword, false);
 
             if (user != null)
             {

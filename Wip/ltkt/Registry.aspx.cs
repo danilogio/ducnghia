@@ -12,6 +12,7 @@ namespace ltkt
     public partial class Registry : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Users userDAO = new ltktDAO.Users();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -26,7 +27,7 @@ namespace ltkt
                 {
                     return;
                 }
-                bool isExistedUsername = ltktDAO.Users.existedUser(strUsername);
+                bool isExistedUsername = userDAO.existedUser(strUsername);
 
                 if (isExistedUsername)
                 {
@@ -40,7 +41,7 @@ namespace ltkt
                     string strPassword = txtboxPassword.Text;
                     string strEmail = txtboxEmail.Text;
 
-                    string user = ltktDAO.Users.existedEmail(strEmail);
+                    string user = userDAO.existedEmail(strEmail);
                     if (user != null)
                     {
                         liMessage.Text = "Email của bạn đã được đăng ký. ";
@@ -50,7 +51,7 @@ namespace ltkt
                     }
                     else
                     { // Mọi điều kiện đã hợp lệ, bắt đầu đăng ký
-                        bool success = ltktDAO.Users.register(strUsername, strDisplayName, strEmail, isFemale, strPassword);
+                        bool success = userDAO.register(strUsername, strDisplayName, strEmail, isFemale, strPassword);
 
                         if (success)
                         {

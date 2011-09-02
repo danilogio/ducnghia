@@ -13,6 +13,8 @@ namespace ltkt
     {
         EventLog log = new EventLog();
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+        ltktDAO.English englishDAO = new ltktDAO.English();
+        ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         protected void Page_Load(object sender, EventArgs e)
         {
             lblWelcomeTitle.Text = "Chào mừng quý vị đến với Website Luyện thi Kinh tế";
@@ -26,7 +28,7 @@ namespace ltkt
             string data = "";
             try
             {
-                IEnumerable<tblContestForUniversity> lst = Contest.getLatestArticleByPostedDate(CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblContestForUniversity> lst = contestDAO.getLatestArticleByPostedDate(CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblContestForUniversity> items = lst.ToList();
 
 
@@ -124,7 +126,7 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.AT_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblEnglish> items = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblEnglish> lst = items.ToList();
                 return loadDetailsForELArticles(lst);
             }
@@ -145,7 +147,7 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.AT_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblEnglish> items = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblEnglish> lst = items.ToList();
                 return loadDetailsForELArticles(lst);
             }
@@ -166,7 +168,7 @@ namespace ltkt
         {
             try
             {
-                IEnumerable<tblEnglish> items = ltktDAO.English.getLatestArticlesByPostedDate(CommonConstants.AT_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblEnglish> items = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblEnglish> lst = items.ToList();
                 return loadDetailsForELArticles(lst);
             }

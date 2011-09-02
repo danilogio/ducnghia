@@ -535,8 +535,11 @@ namespace ltktDAO
         public const string PAGE_UNIVERSITY = "ContestUniversity.aspx";
     #endregion
 
+        #region Application Constants (APP)
+        #endregion
+
         #region Session Constants (SES)
-            /// <summary>
+        /// <summary>
             /// User on session
             /// </summary>
             public const string SES_USER = "User";

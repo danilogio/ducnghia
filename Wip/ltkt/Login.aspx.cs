@@ -11,6 +11,8 @@ namespace ltkt
     public partial class Login : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Users userDAO = new ltktDAO.Users();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MasterPage page = (MasterPage)Master;
@@ -36,7 +38,7 @@ namespace ltkt
             }
             try
             {
-                tblUser user = ltktDAO.Users.getUser(strUsername, strPassword, false);
+                tblUser user =userDAO.getUser(strUsername, strPassword, false);
 
                 if (user != null)
                 {

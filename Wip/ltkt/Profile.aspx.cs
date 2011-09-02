@@ -17,11 +17,12 @@ namespace ltkt
     public partial class Profiles : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Users userDAO = new ltktDAO.Users();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] != null)
+            if (Session[CommonConstants.SES_USER] != null)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
                 lLogonUser.Text = user.Username;
                 lDisplayName.Text = user.DisplayName;
@@ -34,7 +35,7 @@ namespace ltkt
             }
             else
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
 
         }
@@ -46,15 +47,15 @@ namespace ltkt
                 string oldPassword = txtboxPassword.Text;
 
                 // Kiểm tra xem có đúng password hay không?
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
-                Boolean isExist = ltktDAO.Users.isUser(user.Username, oldPassword);
+                Boolean isExist = userDAO.isUser(user.Username, oldPassword);
 
                 if (isExist)
                 {
                     string newPassword = txtboxNewPassword.Text;
 
-                    Boolean isOK = ltktDAO.Users.updateUserPassword(user.Username, newPassword);
+                    Boolean isOK = userDAO.updateUserPassword(user.Username, newPassword);
 
                     // Thành công
                     if (isOK)
@@ -77,7 +78,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -111,7 +112,7 @@ namespace ltkt
 
         protected void btnSubmitUpdateProfile_Click(object sender, EventArgs e)
         {
-            tblUser user = (tblUser)Session["User"];
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
             string strDisplayName = txtboxDisplayName.Text;
             string strEmail = txtboxEmail.Text;
@@ -121,7 +122,7 @@ namespace ltkt
             try
             {
 
-                bool isOK = ltktDAO.Users.updateUser(user.Username, user);
+                bool isOK = userDAO.updateUser(user.Username, user);
                 if (isOK)
                 {
                     lMessage.Text = "Bạn đã cập nhật hồ sơ thành công!";

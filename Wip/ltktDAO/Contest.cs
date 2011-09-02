@@ -10,7 +10,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-        static EventLog log = new EventLog();
+         EventLog log = new EventLog();
 
         #region Property
         #region Get Property
@@ -686,14 +686,14 @@ namespace ltktDAO
         /// get all records of Contest
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<tblContestForUniversity> getAll()
+        public IEnumerable<tblContestForUniversity> getAll()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
                                                        select p;
             return lst;
         }
-        public static IEnumerable<tblContestForUniversity> getTopPointArticle()
+        public IEnumerable<tblContestForUniversity> getTopPointArticle()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
@@ -708,7 +708,7 @@ namespace ltktDAO
         /// <param name="Date"></param>
         /// <param name="numberRecord"></param>
         /// <returns></returns>
-        public static IEnumerable<tblContestForUniversity> getArticleByDate(string Date, int numberRecord)
+        public IEnumerable<tblContestForUniversity> getArticleByDate(string Date, int numberRecord)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             DateTime date = new DateTime();
@@ -728,7 +728,7 @@ namespace ltktDAO
 
         }
 
-        public static IEnumerable<tblContestForUniversity> getLatestArticleByPostedDate(int number)
+        public IEnumerable<tblContestForUniversity> getLatestArticleByPostedDate(int number)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (number <= 0)
@@ -745,7 +745,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        public static Boolean insertContest(tblContestForUniversity record)
+        public Boolean insertContest(tblContestForUniversity record)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -779,7 +779,7 @@ namespace ltktDAO
         /// <param name="_year"></param>
         /// <param name="_location"></param>
         /// <returns></returns>
-        public static Boolean insertContest(string _title, string _content, string _author,
+        public Boolean insertContest(string _title, string _content, string _author,
             DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location,
             string _tag, Boolean isSolved, string fileSolved)
         {
@@ -831,7 +831,7 @@ namespace ltktDAO
         /// <param name="ID"></param>
         /// <param name="update"></param>
         /// <returns></returns>
-        public static Boolean updateContest(int _id, tblContestForUniversity update)
+        public Boolean updateContest(int _id, tblContestForUniversity update)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -866,7 +866,7 @@ namespace ltktDAO
         /// Tổng các đề thi
         /// </summary>
         /// <returns></returns>
-        public static int sumContest()
+        public int sumContest()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -922,7 +922,7 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_newComment"></param>
         /// <returns></returns>
-        public static Boolean insertComment(int _id, string _newComment)
+        public Boolean insertComment(int _id, string _newComment)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -951,7 +951,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static Boolean Like(int _id)
+        public Boolean Like(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -977,7 +977,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static Boolean Dislike(int _id)
+        public Boolean Dislike(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -1004,7 +1004,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public static IList<tblContestForUniversity> getRelativeByYear(int _year, int _numberRecords)
+        public IList<tblContestForUniversity> getRelativeByYear(int _year, int _numberRecords)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
@@ -1020,7 +1020,7 @@ namespace ltktDAO
         /// <param name="_isUniversity"></param>
         /// <param name="_year"></param>
         /// <returns></returns>
-        public static IList<tblContestForUniversity> listContest(bool _isUniversity, int _year)
+        public IList<tblContestForUniversity> listContest(bool _isUniversity, int _year)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
@@ -1031,7 +1031,7 @@ namespace ltktDAO
             return lst.ToList();
         }
 
-        public static IList<tblContestForUniversity> listContest(String _keyword)
+        public IList<tblContestForUniversity> listContest(String _keyword)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities

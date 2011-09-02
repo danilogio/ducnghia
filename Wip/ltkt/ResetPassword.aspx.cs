@@ -10,6 +10,7 @@ namespace ltkt
 {
     public partial class ResetPassword : System.Web.UI.Page
     {
+        ltktDAO.Users userDAO = new ltktDAO.Users();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,16 +21,16 @@ namespace ltkt
             string strEmail = txtboxRegistryEmail.Text;
 
             // Kiểm tra sự tồn tại của email
-            string strUsername = ltktDAO.Users.existedEmail(strEmail);
+            string strUsername = userDAO.existedEmail(strEmail);
 
 
             if (strUsername != null)
             {
                 // Phát sinh mật khẩu bất kỳ
-                string strNewPassword = ltktDAO.Users.generatePassword();
+                string strNewPassword = userDAO.generatePassword();
 
                 // Gửi mật khẩu đến email
-                ltktDAO.Users.sendNewPassword(strUsername, strNewPassword, strEmail);
+                userDAO.sendNewPassword(strUsername, strNewPassword, strEmail);
 
                 liMessage.Text = "Mật khẩu mới đã được gửi tới email của bạn. Xin vui lòng kiểm tra email.";
                 liMessage.Visible = true;

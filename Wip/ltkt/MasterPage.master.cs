@@ -12,6 +12,7 @@ namespace ltkt
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        ltktDAO.Users userDAO = new ltktDAO.Users();
         protected void Page_Load(object sender, EventArgs e)
         {
            
@@ -20,7 +21,7 @@ namespace ltkt
             //get cookie successful
             if (sInformation != null)
             {
-                tblUser user = ltktDAO.Users.getUser(sInformation[0], sInformation[1], true);
+                tblUser user = userDAO.getUser(sInformation[0], sInformation[1], true);
                 chxRemember.Checked = true;
                 if (user != null)
                 {
@@ -85,7 +86,7 @@ namespace ltkt
                 HttpCookie cookPassword = new HttpCookie("Password");
 
                 cookUsername.Value = sUsername;
-                cookPassword.Value = Users.encryptPassword(sPassword);
+                cookPassword.Value = userDAO.encryptPassword(sPassword);
 
                 cookUsername.Expires = DateTime.Now.AddDays(14);
                 cookPassword.Expires = DateTime.Now.AddDays(14);
@@ -110,7 +111,7 @@ namespace ltkt
             string strUsername = txtUsername.Text;
             string strPassword = txtPassword.Text;
 
-            tblUser user = ltktDAO.Users.getUser(strUsername, strPassword, false);
+            tblUser user = userDAO.getUser(strUsername, strPassword, false);
 
             if (user != null)
             {

@@ -467,7 +467,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        public static Boolean insertEnglish(tblEnglish record)
+        public Boolean insertEnglish(tblEnglish record)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -500,7 +500,7 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <param name="_tag"></param>
         /// <returns></returns>
-        public static Boolean insertEnglish(string _title, int _type, string _content,
+        public Boolean insertEnglish(string _title, int _type, string _content,
             string _author, DateTime _posted, string _location, string _tag)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -538,7 +538,7 @@ namespace ltktDAO
         /// <param name="ID"></param>
         /// <param name="update"></param>
         /// <returns></returns>
-        public static Boolean updateEnglish(int _id, tblEnglish update)
+        public Boolean updateEnglish(int _id, tblEnglish update)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -572,7 +572,7 @@ namespace ltktDAO
         /// Tổng các bài viết về chủ đề Anh văn (bài giảng, đề thi, bài tập).
         /// </summary>
         /// <returns></returns>
-        public static int sumEnglish()
+        public int sumEnglish()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             return (from english in DB.tblEnglishes
@@ -580,7 +580,7 @@ namespace ltktDAO
 
         }
 
-        public static Boolean insertComment(int _id, string _newComment)
+        public Boolean insertComment(int _id, string _newComment)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -600,7 +600,7 @@ namespace ltktDAO
             return true;
         }
 
-        public static Boolean Like(int _id)
+        public Boolean Like(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -621,7 +621,7 @@ namespace ltktDAO
             return true;
         }
 
-        public static IEnumerable<tblEnglish> getLatestArticlesByPostedDate(int _type, int numberRecord)
+        public IEnumerable<tblEnglish> getLatestArticlesByPostedDate(int _type, int numberRecord)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (numberRecord <= 0)
@@ -637,7 +637,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static Boolean Dislike(int _id)
+        public Boolean Dislike(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -664,7 +664,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public static IList<tblEnglish> getRelativeByType(int _type, int _numberRecords)
+        public IList<tblEnglish> getRelativeByType(int _type, int _numberRecords)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = (from record in DB.tblEnglishes
@@ -674,7 +674,7 @@ namespace ltktDAO
             return lst.ToList();
         }
 
-        public static IList<tblEnglish> listEnglish(string _keyword)
+        public IList<tblEnglish> listEnglish(string _keyword)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
