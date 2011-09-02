@@ -15,13 +15,14 @@ namespace ltkt
     public partial class Upload : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                if (Session["User"] == null)
+                if (Session[CommonConstants.SES_USER] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect(CommonConstants.PAGE_LOGIN);
                 }
                 else
                 {
@@ -52,7 +53,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                tblUser user = (tblUser)Session["User"];
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 string username = CommonConstants.USER_GUEST;
                 if (user != null)
                 {
@@ -61,14 +62,14 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
 
         public void btnSubmitUpload_Click(object sender, EventArgs e)
         {
-            tblUser user = (tblUser)Session["User"];
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
             if (user != null)
             {
                 if (fileContent.HasFile)
@@ -129,7 +130,7 @@ namespace ltkt
                         {
                             case 0:
                                 {
-                                    if (fileSolvingSave != "")
+                                    if (fileSolvingSave != CommonConstants.BLANK)
                                     {
                                         ltktDAO.Contest.insertContest(txtboxTitle.Text,
                                                                         txtboxSummary.Text,
@@ -161,7 +162,7 @@ namespace ltkt
                                 }
                             case 1:
                                 {
-                                    ltktDAO.Informatics.insertInformatic(txtboxTitle.Text,
+                                    informaticsDAO.insertInformatic(txtboxTitle.Text,
                                         Convert.ToInt32(ddlType.SelectedValue),
                                         txtboxSummary.Text,
                                         user.Username,
@@ -187,7 +188,7 @@ namespace ltkt
                     {
                         log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), user.Username, ex.Message);
 
-                        Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                        Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                         Response.Redirect(CommonConstants.PAGE_ERROR);
                     }
 

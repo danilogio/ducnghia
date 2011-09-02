@@ -10,6 +10,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
+        EventLog log = new EventLog();
 
         #region Property
         #region Get Property
@@ -589,7 +590,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        public static Boolean insertInformatic(tblInformatic record)
+        public Boolean insertInformatic(tblInformatic record)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -602,10 +603,16 @@ namespace ltktDAO
                     DB.SubmitChanges();
 
                     ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile, record.Author, 
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE, 
+                                                                    record.ID.ToString(), 
+                                                                    CommonConstants.SQL_TABLE_INFORMATICS));
                 }
+                
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, record.Author, e.Message);
                 return false;
             }
             return true;
@@ -621,9 +628,10 @@ namespace ltktDAO
         /// <param name="_posted"></param>
         /// <param name="_location"></param>
         /// <returns></returns>
-        public static Boolean insertInformatic(string _title, int _type, string _content,
+        public Boolean insertInformatic(string _title, int _type, string _content,
             string _author, DateTime _posted, string _location, string _tag)
         {
+
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             try
@@ -637,7 +645,7 @@ namespace ltktDAO
                     record.Author = _author;
                     record.Posted = _posted;
                     record.Point = 0;
-                    record.State = 0;
+                    record.State = CommonConstants.STATE_UNCHECK;
                     record.Location = _location;
                     record.Tag = _tag;
 

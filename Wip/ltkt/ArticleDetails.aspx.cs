@@ -67,7 +67,7 @@ namespace ltkt
 
                     log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                    Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                     Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
 
@@ -162,7 +162,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -223,7 +223,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -285,7 +285,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -358,7 +358,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT ;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT ;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             txtName.Text = CommonConstants.BLANK;
@@ -423,7 +423,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             Page_Load(sender, e);
@@ -576,7 +576,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
 
-                Session[CommonConstants.CONST_SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             Page_Load(sender, e);
