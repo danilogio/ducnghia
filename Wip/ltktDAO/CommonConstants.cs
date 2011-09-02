@@ -340,7 +340,7 @@ namespace ltktDAO
         #endregion
 
         #region Messages(MSG)
-                /// <summary>
+            /// <summary>
             /// do not find out article record on DB
             /// </summary>
             public const string MSG_ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
@@ -349,10 +349,37 @@ namespace ltktDAO
             /// </summary>
             public const string MSG_COMMON_ERROR_TEXT = "Đã có lỗi xảy ra, xin vui lòng thử lại sau.";
             /// <summary>
-            /// Upload successful
+            /// Upload successful message 
             /// </summary>
             public const string MSG_UPLOAD_SUCCESSFUL = "Upload thành công";
-
+            /// <summary>
+            /// Login failed message
+            /// </summary>
+            public const string MSG_LOGIN_FAILED = "Tên đăng nhập hoặc mật khẩu không đúng. Xin vui lòng kiểm tra lại!";
+            /// <summary>
+            /// Username is conflict message
+            /// </summary>
+            public const string MSG_USERNAME_CONFLICT = "Tên đăng nhập đã được sử dụng.";
+            /// <summary>
+            /// Email is conflicted message
+            /// </summary>
+            public const string MSG_EMAIL_CONFLICT = "Email của bạn đã được đăng ký. Nếu bạn đã đăng ký mà không nhớ mật khẩu.<br/>Lấy lại mật khẩu <a href=\"ResetPassword.aspx\">tại đây</a>";
+            /// <summary>
+            /// Registry is successful message
+            /// </summary>
+            public const string MSG_REGISTRY_SUCCESSFUL = "Bạn đã đăng ký thành công. Xin vui lòng kiểm tra email để kích hoạt tài khoản!<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+            /// <summary>
+            /// Message registry failed
+            /// </summary>
+            public const string MSG_REGISTRY_FAILED = "Quá trình đăng ký không thành công. Xin vui lòng thử lại!";
+            /// <summary>
+            /// Message reset password is successful
+            /// </summary>
+            public const string MSG_RESET_PASSWORD_SUCCESSFUL = "Mật khẩu mới đã được gửi tới email của bạn. Xin vui lòng kiểm tra email.";
+            /// <summary>
+            /// Message reset password is failed
+            /// </summary>
+            public const string MSG_RESET_PASSWORD_FAILED = "Lỗi: Không tìm thấy email của bạn!";
         #endregion
 
         #region Administrator Function (AF)

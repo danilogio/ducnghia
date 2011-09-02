@@ -46,16 +46,16 @@ namespace ltkt
                     MasterPage page = (MasterPage)Master;
                     page.updateAccount(user);
 
-                    Response.Redirect("~/Home.aspx");
+                    Response.Redirect(CommonConstants.PAGE_HOME);
                 }
                 else
                 {
                     //Đăng nhập thất bại
-                    lMessage.Text = "Tên đăng nhập hoặc mật khẩu không đúng. Xin vui lòng kiểm tra lại!";
+                    lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
                     lMessage.Visible = true;
                     messagePanel.Visible = true;
 
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect(CommonConstants.PAGE_HOME);
                 }
             }
             catch (Exception ex)

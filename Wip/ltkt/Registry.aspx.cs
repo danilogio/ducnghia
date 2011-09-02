@@ -31,7 +31,7 @@ namespace ltkt
 
                 if (isExistedUsername)
                 {
-                    liMessage.Text = "Tên đăng nhập đã được sử dụng.";
+                    liMessage.Text = CommonConstants.MSG_USERNAME_CONFLICT;
                     liMessage.Visible = true;
                 }
                 else
@@ -44,9 +44,7 @@ namespace ltkt
                     string user = userDAO.existedEmail(strEmail);
                     if (user != null)
                     {
-                        liMessage.Text = "Email của bạn đã được đăng ký. ";
-                        liMessage.Text += "Nếu bạn đã đăng ký mà không nhớ mật khẩu.";
-                        liMessage.Text += "Lấy lại mật khẩu <a href=\"ResetPassword.aspx\">tại đây</a>";
+                        liMessage.Text = CommonConstants.MSG_EMAIL_CONFLICT;
                         liMessage.Visible = true;
                     }
                     else
@@ -55,16 +53,13 @@ namespace ltkt
 
                         if (success)
                         {
-                            liMessage.Text = "Bạn đã đăng ký thành công. ";
-                            liMessage.Text += "Xin vui lòng kiểm tra email để kích hoạt tài khoản!";
-                            liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                            liMessage.Text = CommonConstants.MSG_REGISTRY_SUCCESSFUL;
                             liMessage.Visible = true;
                             registerPanel.Visible = false;
                         }
                         else
                         {
-                            liMessage.Text = "Quá trình đăng ký không thành công. ";
-                            liMessage.Text += "Xin vui lòng thử lại!";
+                            liMessage.Text = CommonConstants.MSG_REGISTRY_FAILED;
                             liMessage.Visible = true;
                         }
                     }

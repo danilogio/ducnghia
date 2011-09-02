@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-
+using ltktDAO;
 namespace ltkt
 {
     public partial class ResetPassword : System.Web.UI.Page
@@ -32,13 +32,13 @@ namespace ltkt
                 // Gửi mật khẩu đến email
                 userDAO.sendNewPassword(strUsername, strNewPassword, strEmail);
 
-                liMessage.Text = "Mật khẩu mới đã được gửi tới email của bạn. Xin vui lòng kiểm tra email.";
+                liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_SUCCESSFUL;
                 liMessage.Visible = true;
                 requestPassword.Visible = false;
             }
             else
             {
-                liMessage.Text = "Lỗi: Không tìm thấy email của bạn!";
+                liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_FAILED;
                 liMessage.Visible = true;
             }
 
