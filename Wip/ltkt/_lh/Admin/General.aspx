@@ -24,43 +24,65 @@
 <asp:Content ID="GeneralAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     
     <div id="div_content">
-        <div id="Summary" class="block_text form_settings" style="margin: 5px;">
-            <p>
-                <span>Số thành viên:</span>
-                <asp:Literal ID="sumUsers" runat="server"></asp:Literal>
-            </p>
-            <p>
-                <span>Thành viên mới nhất:</span>
-                <asp:Literal ID="latestUser" runat="server"></asp:Literal>
-            </p>
-            <p>
-                <span>Thành viên đăng nhập gần nhất:</span>
-                <asp:Literal ID="latestLogin" runat="server" Text="asdf"></asp:Literal>
-            </p>
-            <p>
-                <span>Tổng số bài viết:</span>
-                <asp:Literal ID="sumArticle" runat="server"></asp:Literal>
-            </p>
-            <p>
-                <span>Tổng số đề thi đại học/cao đẳng:</span>
-                <asp:Literal ID="sumContest" runat="server"></asp:Literal>
-            </p>
-            <p>
-                <span>Tổng số bài viết anh văn:</span>
-                <asp:Literal ID="sumEnglish" runat="server"></asp:Literal>
-            </p>
-            <p>
-                <span>Tổng số bài viết tin học:</span>
-                <asp:Literal ID="sumInformatics" runat="server"></asp:Literal>
-            </p>
-            <p>
-                <span>Email mới:</span>
-                <asp:Literal ID="newsMails" runat="server" Text="Không"></asp:Literal>
-            </p>
-            <p>
-                <span>Lượt truy cập:</span>
-                <asp:Literal ID="pageView" runat="server" Text="asdfasdf"></asp:Literal>
-            </p>
+        <div id="Summary" class="block_text" style="margin: 5px;height:450px;">
+            <div>
+                <div>
+                    <div style="float:left;width:30%"><span>Số thành viên:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumUsers" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Thành viên mới nhất:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="latestUser" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Số thành viên đăng ký mới nhất:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="latestRegistryNum" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Thành viên đăng nhập gần nhất:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="latestLogin" runat="server" Text="asdf"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Tổng số bài viết:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumArticle" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Tổng số đề thi đại học/cao đẳng:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumContest" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Tổng số bài viết anh văn:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumEnglish" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Tổng số bài viết tin học:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumInformatics" runat="server"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Email mới:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="newsMails" runat="server" Text="Không"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Lượt truy cập:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="pageView" runat="server" Text="None"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Lượt truy cập trong ngày:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="pageViewADay" runat="server" Text="None"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Tổng lượt download trong ngày:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumDownload" runat="server" Text="None"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Tổng lượt upload:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumUpload" runat="server" Text="None"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Số comment trong ngày:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="sumCommentADay" runat="server" Text="None"></asp:Literal></div>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

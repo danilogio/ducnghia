@@ -13,6 +13,8 @@ namespace ltkt
     public partial class MasterPage : System.Web.UI.MasterPage
     {
         ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
+
         protected void Page_Load(object sender, EventArgs e)
         {
            
@@ -25,7 +27,10 @@ namespace ltkt
                 chxRemember.Checked = true;
                 if (user != null)
                 {
-                    updateAccount(user);
+                    if (user.State != CommonConstants.STATE_DELETED)
+                    {
+                        updateAccount(user);
+                    }
                 }
             }
 
@@ -60,6 +65,7 @@ namespace ltkt
             loginPanel.Visible = false;
             HpkUpload.Visible = true;
             userPanel.Visible = true;
+            statisticDAO.addLatestLoginUser(_user.Username);
         }
 
         private string[] readInformation()
@@ -115,28 +121,37 @@ namespace ltkt
 
             if (user != null)
             {
-
-                updateAccount(user);
-
-                Application.Lock();
-                Application["UserOnline"] = (Int32)Application["UserOnline"] + 1;
-                Application.UnLock();
-
-                if (chxRemember.Checked)
+                if (user.State != CommonConstants.STATE_DELETED)
                 {
-                    saveInformationForNext(strUsername, strPassword);
+                    updateAccount(user);
+
+                    Application.Lock();
+                    Application["UserOnline"] = (Int32)Application["UserOnline"] + 1;
+                    Application.UnLock();
+
+                    if (chxRemember.Checked)
+                    {
+                        saveInformationForNext(strUsername, strPassword);
+                    }
+                    else
+                    {
+                        clearCookies();
+                    }
+
+                    checkUserState(user);
                 }
                 else
                 {
-                    clearCookies();
+                    Session[CommonConstants.SES_USER] = CommonConstants.MSG_LOGIN_FAILED;
+                    //Đăng nhập thất bại
+                    Response.Redirect(CommonConstants.PAGE_LOGIN);
                 }
-
-                checkUserState(user); 
             }
             else
             {
+                Session[CommonConstants.SES_USER] = CommonConstants.MSG_LOGIN_FAILED;
                 //Đăng nhập thất bại
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
 
         }
@@ -145,7 +160,7 @@ namespace ltkt
         {
             switch (user.State)
             {
-                case 0: //Tài khoản chưa kích hoạt
+                case CommonConstants.STATE_NON_ACTIVE: //Tài khoản chưa kích hoạt
                     {
                         // Thông báo là tài khoản chưa kích hoạt.
 
@@ -153,24 +168,25 @@ namespace ltkt
 
                         break;
                     }
-                case 1: // Tài khoản đã kích hoạt, đăng nhập ok
-                case 2: // Bị báo xấu, đăng nhập ok
+                case CommonConstants.STATE_ACTIVE: // Tài khoản đã kích hoạt, đăng nhập ok
+                case CommonConstants.STATE_WARNING: // Bị báo xấu, đăng nhập ok
                     {
                         updateAccount(user);
                         break;
                     }
-                case 31: // KIA 3 ngày
-                case 32: // KIA 1 tuần
-                case 33: // KIA 2 tuần
-                case 34: // KIA 3 tuần
-                case 35: // KIA 1 tháng
+                case CommonConstants.STATE_KIA_3D: // KIA 3 ngày
+                case CommonConstants.STATE_KIA_1W: // KIA 1 tuần
+                case CommonConstants.STATE_KIA_2W: // KIA 2 tuần
+                case CommonConstants.STATE_KIA_3W: // KIA 3 tuần
+                case CommonConstants.STATE_KIA_1M: // KIA 1 tháng
                     {
                         // Kiểm tra ngày KIA
 
-                        // Kiểm tra xem hết chưa
+                        // Kiểm tra xem hết chưa. nếu hết thì mở khóa
 
                         break;
                     }
+                    
             }
         }
 
@@ -178,6 +194,7 @@ namespace ltkt
         {
             Session[CommonConstants.SES_USER] = null;
 
+            clearCookies();
             userStateTitle.Text = "Đăng nhập";
             loginPanel.Visible = true;
             userPanel.Visible = false;
@@ -187,7 +204,7 @@ namespace ltkt
             Application["UserOnline"] = (Int32)Application["UserOnline"] - 1;
             Application.UnLock();
 
-            Response.Redirect("~/Home.aspx");
+            Response.Redirect(CommonConstants.PAGE_HOME);
         }
         
     }

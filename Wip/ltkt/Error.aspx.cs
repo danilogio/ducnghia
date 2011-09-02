@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ltktDAO;
 
 public partial class Error : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string errorText = (string) Session["Error"];
+        string errorText = (string) Session[CommonConstants.SES_ERROR];
         if (errorText != null)
         {
             lblError.Text = "<br />";
@@ -24,10 +25,11 @@ public partial class Error : System.Web.UI.Page
             {
                 HpkPreviousPage.Visible = false;
             }
+            Session[CommonConstants.SES_ERROR] = null;
         }
         else
         {
-            Response.Redirect("Home.aspx");
+            Response.Redirect(CommonConstants.PAGE_HOME);
         }
     }
 }

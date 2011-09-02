@@ -12,16 +12,27 @@ namespace ltkt.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] != null)
+            if (Session[CommonConstants.SES_USER] != null)
             {
-                tblUser user = (tblUser)Session["User"];
-                lLogonUser.Text = user.DisplayName;
-                lLogonUser.Visible = true;
-                userPanel.Visible = true;
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                if (user.State != CommonConstants.STATE_DELETED
+                    && user.State != CommonConstants.STATE_KIA_1M
+                    && user.State != CommonConstants.STATE_KIA_3W
+                    && user.Type == false)
+                {
+                    lLogonUser.Text = user.DisplayName;
+                    lLogonUser.Visible = true;
+                    userPanel.Visible = true;
+                }
+                else
+                {
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LOGIN_FAILED;
+                    Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                }
             }
             else
             {
-                Response.Redirect("../Login.aspx");
+                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
 

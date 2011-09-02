@@ -13,7 +13,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-
+        EventLog log = new EventLog();
         #region Property
         #region Get Property
         /// <summary>
@@ -782,6 +782,104 @@ namespace ltktDAO
             return lst;
         }
 
+        public bool isNormalUser(string _username)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                var user = DB.tblUsers.Single(p => p.Username == _username);
+                if (user != null)
+                {
+                    return user.Type;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+            return true;
+        }
+
+        public bool isState(string _username, int _state)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                var user = DB.tblUsers.Single(p => p.Username == _username);
+                if (user != null)
+                {
+                    return user.State == _state ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+            return false;
+        }
+        public string formatUsername(string _username)
+        {
+            string item = CommonConstants.BLANK;
+            if (!BaseServices.isNullOrBlank(_username))
+            {
+                
+                if (!isNormalUser(_username))
+                {
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_I_TAG, _username);
+                }
+                else
+                {
+                    item = _username;
+                }
+
+                if (isState(_username, CommonConstants.STATE_NON_ACTIVE))
+                {
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG,CommonConstants.CS_NON_ACTIVE, CommonConstants.SX_NON_ACTIVE, item);
+                }
+                else if (isState(_username, CommonConstants.STATE_ACTIVE))
+                {
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_ACTIVE, CommonConstants.SX_ACTIVE, item);
+                }
+                else if (isState(_username, CommonConstants.STATE_DELETED))
+                {
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG,CommonConstants.CS_DELETED, CommonConstants.SX_DELETED, item);
+                }
+                else if (isState(_username, CommonConstants.STATE_WARNING))
+                {
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG,CommonConstants.CS_WARNING, CommonConstants.SX_WARNING, item);
+                }
+                else
+                {
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_KIA, CommonConstants.SX_KIA, item);
+                }
+            }
+            return item;
+        }
+        public string getLatestLogin()
+        {
+            Statistics statisticDAO = new Statistics();
+
+            string users = statisticDAO.getValue(CommonConstants.SF_LATEST_LOGIN).Trim();
+            string res = CommonConstants.BLANK;
+            try
+            {
+                if (!BaseServices.isNullOrBlank(users))
+                {
+                    string[] arrayUsers = users.Split(CommonConstants.COMMA_CHAR);
+                    for (int i = 0; i < arrayUsers.Length; i++)
+                    {
+                        res += formatUsername(arrayUsers[i]);
+                        res += CommonConstants.SPACE;
+                        res += CommonConstants.BAR;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+            return res;
+        }
         #endregion
     }
 }

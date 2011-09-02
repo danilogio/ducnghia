@@ -12,36 +12,54 @@ namespace ltkt.Admin
     public partial class Login : System.Web.UI.Page
     {
         ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] != null)
+            if (Session[CommonConstants.SES_USER] != null)
             {
-                Session["User"] = null;
+                Session[CommonConstants.SES_USER] = null;
             }
+            string errorText = (string)Session[CommonConstants.SES_ERROR];
+            if(!BaseServices.isNullOrBlank(errorText))
+            {
+                lMessage.Text = errorText;
+                Session[CommonConstants.SES_ERROR] = null;
+            }
+
         }
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
             string strUsername = txtboxLoginName.Text;
             string strPassword = txtboxPassword.Text;
-
+            txtboxLoginName.Text = CommonConstants.BLANK;
+            txtboxPassword.Text = CommonConstants.BLANK;
             tblUser user = userDAO.getUser(strUsername, strPassword, false);
 
             if (user != null)
             {
-                if (user.Type == false)
+                if (user.State != CommonConstants.STATE_DELETED)
                 {
-                    Session["User"] = user;
-                    Response.Redirect("./Admin/General.aspx");
+                    if (user.Type == false)
+                    {
+                        Session[CommonConstants.SES_USER] = user;
+                        statisticDAO.addLatestLoginUser(user.Username);
+                        Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
+                    }
+                    else
+                    {
+                        lMessage.Text = CommonConstants.MSG_ACCESS_DENIED;
+                        lMessage.Visible = true;
+                    }
                 }
                 else
                 {
-                    lMessage.Text = "Bạn không có quyền truy cập khu vực này!";
+                    lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
                     lMessage.Visible = true;
                 }
             }
             else
             {
-                lMessage.Text = "Tên đăng nhập hoặc mật khẩu không đúng. Xin vui lòng kiểm tra lại!";
+                lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
                 lMessage.Visible = true;
             }
         }

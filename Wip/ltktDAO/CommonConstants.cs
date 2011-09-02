@@ -52,22 +52,30 @@ namespace ltktDAO
             /// now
             /// </summary>
             public const string NOW = "now";
-            
+
             /// <summary>
-            /// comma character(,)
+            /// dot dtring (.)
+            /// </summary>
+            public const string DOT = ".";
+            /// <summary>
+            /// comma string(,)
             /// </summary>
             public const string COMMA = ",";
+            /// <summary>
+            /// comma character
+            /// </summary>
+            public const char COMMA_CHAR = ',';
             
             /// <summary>
-            /// one space character(" ")
+            /// one space string(" ")
             /// </summary>
             public const string SPACE = " ";
             
             /// <summary>
-            /// bar character
+            /// bar string
             /// </summary>
             public const string BAR = "-";
-        #endregion
+        #endregion     
 
         #region State (STATE)
             /// <summary>
@@ -131,6 +139,22 @@ namespace ltktDAO
             
         #endregion 
         
+        #region Color State (CS)
+            public const string CS_NON_ACTIVE = "yellow";
+            public const string CS_ACTIVE = "blue";
+            public const string CS_WARNING = "orange";
+            public const string CS_KIA = "violet";
+            public const string CS_DELETED = "gray";
+        #endregion
+
+        #region State Tooltip Text(SX)
+            public const string SX_NON_ACTIVE = "Non active";
+            public const string SX_ACTIVE = "Active";
+            public const string SX_WARNING = "Warning";
+            public const string SX_KIA = "Lock";
+            public const string SX_DELETED = "Deleted"; 
+        #endregion
+
         #region Article type (AT)
             /// <summary>
             /// Article has type lecture
@@ -392,6 +416,10 @@ namespace ltktDAO
             /// Message reply is sent failed
             /// </summary>
             public const string MSG_REPLY_FAILED = "Phản hồi của bạn gửi không thành công. Xin vui lòng kiểm tra lại địa chỉ email của bạn. \n <br/> <a href=\"Contact.aspx\">Thử lại</a>";
+            /// <summary>
+            /// Message access is denied
+            /// </summary>
+            public const string MSG_ACCESS_DENIED = "Bạn không có quyền truy cập khu vực này!";
         #endregion
 
         #region Administrator Function (AF)
@@ -526,6 +554,18 @@ namespace ltktDAO
             /// Tổng số thành viên đăng ký mới
             /// </summary>
             public const string SF_NUM_USER_REGISTRY = "NUM_USER_REGISTRY";
+            /// <summary>
+            /// Số email mới
+            /// </summary>
+            public const string SF_NUM_NEW_EMAIL = "NUM_NEW_EMAIL";
+            /// <summary>
+            /// Số lượt truy cập
+            /// </summary>
+            public const string SF_NUM_VIEWER = "NUM_VIEWER";
+            /// <summary>
+            /// Số lượt truy cập trong ngày
+            /// </summary>
+            public const string SF_NUM_VIEWER_DAY = "NUM_VIEWER_DAY";
         #endregion
             
         #region Control Function (CF)
@@ -576,6 +616,14 @@ namespace ltktDAO
         /// Article page
         /// </summary>
         public const string PAGE_ARTICLE_DETAILS = "ArticleDetails.aspx";
+        /// <summary>
+        /// Admin general page
+        /// </summary>
+        public const string PAGE_ADMIN_GENERAL = "./Admin/General.aspx";
+        /// <summary>
+        /// Admin login page
+        /// </summary>
+        public const string PAGE_ADMIN_LOGIN = "./Login.aspx";
     #endregion
 
         #region Application Constants (APP)
@@ -736,6 +784,18 @@ namespace ltktDAO
             /// Template A tag
             /// </summary>
             public const string TEMP_A_TAG = "<a href=\"{0}\">{1}</a>";
+            /// <summary>
+            /// Templte b tag
+            /// </summary>
+            public const string TEMP_I_TAG = "<i>{0}</i>";
+            /// <summary>
+            /// Template font tag
+            /// </summary>
+            public const string TEMP_FONT_TAG = "<span style=\"color:{0};\">{1}</span>";
+            /// <summary>
+            /// Template foe span tag
+            /// </summary>
+            public const string TEMP_SPAN_TAG = "<span style=\"color:{0};\" title=\"{1}\">{2}</span>";
         #endregion
 
         #region Action request (ACT)

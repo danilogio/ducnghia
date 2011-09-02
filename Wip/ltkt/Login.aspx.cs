@@ -16,7 +16,14 @@ namespace ltkt
         protected void Page_Load(object sender, EventArgs e)
         {
             MasterPage page = (MasterPage)Master;
-            page.hideLoginSidebar(); 
+            page.hideLoginSidebar();
+            string errorText = (string)Session[CommonConstants.SES_USER];
+            if (!BaseServices.isNullOrBlank(errorText))
+            {
+                lMessage.Text = errorText;
+                messagePanel.Visible = true;
+                Session[CommonConstants.SES_USER] = null;
+            }
 
         }
 
@@ -38,15 +45,18 @@ namespace ltkt
             }
             try
             {
-                tblUser user =userDAO.getUser(strUsername, strPassword, false);
+                tblUser user = userDAO.getUser(strUsername, strPassword, false);
 
                 if (user != null)
                 {
-                    //Đăng nhập thành công
-                    MasterPage page = (MasterPage)Master;
-                    page.updateAccount(user);
+                    if (user.State != CommonConstants.STATE_DELETED)
+                    {
+                        //Đăng nhập thành công
+                        MasterPage page = (MasterPage)Master;
+                        page.updateAccount(user);
 
-                    Response.Redirect(CommonConstants.PAGE_HOME);
+                        Response.Redirect(CommonConstants.PAGE_HOME);
+                    }
                 }
                 else
                 {

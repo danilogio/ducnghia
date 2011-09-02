@@ -104,7 +104,7 @@ namespace ltktDAO
             {
                 return CommonConstants.BLANK;
             }
-            return target;
+            return target.Trim();
         }
 
         public static bool isNullOrBlank(string target)
