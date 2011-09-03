@@ -677,7 +677,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
                                                             where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
-                                                            && p.State != 0
+                                                            && p.State != CommonConstants.STATE_UNCHECK
                                                             orderby p.Year
                                                            select p;
             return lst;
@@ -727,16 +727,53 @@ namespace ltktDAO
             return lst;
 
         }
-
+        /// <summary>
+        /// get number sticky article by posted day
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public IEnumerable<tblContestForUniversity> getStickyArticlebyPostedDay(int number)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = null;
+            if (number <= 0)
+                number = 1;
+            try
+            {
+                lst = (from p1 in DB.tblStickies
+                       from p2 in DB.tblContestForUniversities
+                       where p1.Article == p2.ID && p1.Type == CommonConstants.ST_UNI
+                       orderby p2.Posted descending
+                       select p2).Distinct().Take(number);
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+            return lst;
+        }
+        /// <summary>
+        /// get number latest article by posted day
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns>return article checked</returns>
         public IEnumerable<tblContestForUniversity> getLatestArticleByPostedDate(int number)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = null;
             if (number <= 0)
                 return getAll();
-            IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
-                                                        where p.State != 0
-                                                        orderby p.Posted descending
-                                                        select p).Take(number);
+            try
+            {
+                lst = (from p in DB.tblContestForUniversities
+                        where p.State != CommonConstants.STATE_UNCHECK
+                        orderby p.Posted descending
+                        select p).Take(number);
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
             return lst;
         }
 
@@ -745,7 +782,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        public Boolean insertContest(tblContestForUniversity record)
+        public Boolean insertContest(tblContestForUniversity record, string _username)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -758,10 +795,16 @@ namespace ltktDAO
                     DB.SubmitChanges();
 
                     ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile,
+                                        _username,
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                         record.ID.ToString(),
+                                                                         CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
                 }
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
                 return false;
             }
             return true;
@@ -794,7 +837,7 @@ namespace ltktDAO
                     record.Contents = _content;
                     record.Author = _author;
                     record.Posted = _posted;
-                    record.State = 0;//Chưa duyệt
+                    record.State = CommonConstants.STATE_UNCHECK;//Chưa duyệt
                     record.isUniversity = _isUniversity;
                     record.Branch = _branch;
                     record.Year = _year;
@@ -813,7 +856,11 @@ namespace ltktDAO
 
                     ts.Complete();
 
-                    log.writeLog(DBHelper.strPathLogFile, "insert contest id=" + record.ID + " successfully");
+                    log.writeLog(DBHelper.strPathLogFile,
+                                        _author,
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                         record.ID.ToString(),
+                                                                         CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
                 }
             }
             catch (Exception e)
@@ -831,7 +878,7 @@ namespace ltktDAO
         /// <param name="ID"></param>
         /// <param name="update"></param>
         /// <returns></returns>
-        public Boolean updateContest(int _id, tblContestForUniversity update)
+        public Boolean updateContest(int _id, tblContestForUniversity update, string _username)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -853,10 +900,16 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
                     ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile, 
+                                        _username, 
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, 
+                                                                         contest.ID.ToString(), 
+                                                                         CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
                 }
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
                 return false;
             }
             return true;
@@ -881,32 +934,27 @@ namespace ltktDAO
         /// <returns></returns>
         public static string convertBranchToString(int _branch)
         {
-            string strBranch = "";
+            string strBranch = CommonConstants.BLANK;
             switch (_branch)
             {
-                case 0:
+                case CommonConstants.AT_UNI_BRANCH_A:
                     {
-                        strBranch = "Khối A";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_A_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.AT_UNI_BRANCH_B:
                     {
-                        strBranch = "Khối B";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_B_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.AT_UNI_BRANCH_C:
                     {
-                        strBranch = "Khối C";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_C_NAME;
                         break;
                     }
-                case 3:
+                case CommonConstants.AT_UNI_BRANCH_D:
                     {
-                        strBranch = "Khối D";
-                        break;
-                    }
-                case 4:
-                    {
-                        strBranch = "Khối khác";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_D_NAME;
                         break;
                     }
                 default:

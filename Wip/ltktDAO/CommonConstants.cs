@@ -75,6 +75,10 @@ namespace ltktDAO
             /// bar string
             /// </summary>
             public const string BAR = "-";
+            /// <summary>
+            /// hline string (|)
+            /// </summary>
+            public const string HLINE = "|";
         #endregion     
 
         #region State (STATE)
@@ -186,6 +190,22 @@ namespace ltktDAO
                 /// Khối D
                 /// </summary>
                 public const int AT_UNI_BRANCH_D = 3;
+                /// <summary>
+                /// Khối A
+                /// </summary>
+                public const string AT_UNI_BRANCH_A_NAME = "Khối A";
+                /// <summary>
+                /// Khối B
+                /// </summary>
+                public const string AT_UNI_BRANCH_B_NAME = "Khối B";
+                /// <summary>
+                /// Khối C
+                /// </summary>
+                public const string AT_UNI_BRANCH_C_NAME = "Khối C";
+                /// <summary>
+                /// Khối D
+                /// </summary>
+                public const string AT_UNI_BRANCH_D_NAME = "Khối D";
             #endregion
 
             #region Informatics (AT_IT)
@@ -570,9 +590,21 @@ namespace ltktDAO
             
         #region Control Function (CF)
             /// <summary>
-            /// Lấy tiêu đề web
+            /// Logo trang web
             /// </summary>
-            public const string CF_TITLE = "TITLE";
+            public const string CF_LOGO = "LOGO";
+            /// <summary>
+            /// Lấy tiêu đề web (hiện ở title bar)
+            /// </summary>
+            public const string CF_TITLE_ON_HEADER = "TITLE_ON_HEADER";
+            /// <summary>
+            /// Lấy tiêu đề web (hiện cuối trang web)
+            /// </summary>
+            public const string CF_TITLE_ON_FOOTER= "TITLE_ON_FOOTER";
+            /// <summary>
+            /// Địa chỉ
+            /// </summary>
+            public const string CF_ADDRESS = "ADDRESS";
             /// <summary>
             /// Văn bản chào mừng tại trang chủ
             /// </summary>
@@ -601,6 +633,10 @@ namespace ltktDAO
             /// Tổng số bài hiển thị trong 1 tab tại trang chủ
             /// </summary>
             public const string CF_NUM_ARTICLE_ON_TAB = "NUM_ARTICLE_ON_TAB";
+            /// <summary>
+            /// Số tin được phép sticky
+            /// </summary>
+            public const string CF_NUM_ARTICLE_STICKY = "NUM_ARTICLE_STICKY";
         #endregion
         
         #region Pages Name (PAGE)
@@ -616,6 +652,10 @@ namespace ltktDAO
         /// Home page
         /// </summary>
         public const string PAGE_HOME = "Home.aspx";
+        /// <summary>
+        /// Home page name
+        /// </summary>
+        public const string PAGE_HOME_NAME = "Trang chủ";
         /// <summary>
         /// English page
         /// </summary>

@@ -16,7 +16,7 @@ namespace ltktDAO
         /// <param name="_type"></param>
         /// <param name="_article"></param>
         /// <returns></returns>
-        public static bool checkExisted(int _type, int _article)
+        public bool checkExisted(int _type, int _article)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblSticky> lst = DB.tblStickies.Where(r =>r.Type == _type && r.Article == _article);
@@ -31,7 +31,7 @@ namespace ltktDAO
             }
         }
 
-        public static bool insertSticky(tblSticky record, string _username)
+        public bool insertSticky(tblSticky record, string _username)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 

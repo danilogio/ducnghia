@@ -32,7 +32,16 @@ namespace ltktDAO
             tblControl r = getRecord(_code);
             if (r != null)
             {
-                return r.Value.Trim(); ;
+                return BaseServices.nullToBlank(r.Value.Trim());
+            }
+            return CommonConstants.BLANK;
+        }
+        public string getNameString(string _code)
+        {
+            tblControl r = getRecord(_code);
+            if (r != null)
+            {
+                return BaseServices.nullToBlank(r.Name.Trim());
             }
             return CommonConstants.BLANK;
         }
@@ -42,7 +51,7 @@ namespace ltktDAO
         /// <param name="_code"></param>
         /// <returns>0 if not found or not converte</returns>
 
-        public int getRecordByInt(string _code)
+        public int getValueByInt(string _code)
         {
             tblControl r = getRecord(_code);
             int num = 0;

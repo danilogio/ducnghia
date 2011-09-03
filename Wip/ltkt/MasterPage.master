@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <asp:ContentPlaceHolder ID="cphMasterHearder" runat="server">
-        <title>Website Luyện thi Kinh tế</title>
+        <title>
+            <asp:Label ID="lblHeaderTitle" runat="server" Text="Website Luyện thi kinh tế"></asp:Label>
+        </title>
 
         <script type="text/javascript">
             function init() {
@@ -118,8 +120,8 @@
                     <tr>
                         <td style="width: 30%; float: left; margin-top: 40px;">
                             <a href="Home.aspx">
-                                <asp:Image ID="imgLogo" Height="88px" runat="server" ImageUrl="~/images/logp.png"
-                                    Width="100px" AlternateText="www.luyenthikinhte.com" /></a>
+                                <asp:Image ID="imgLogo" Height="88px" runat="server" ImageUrl="images/logp.png" Width="100px"
+                                    AlternateText="www.luyenthikinhte.com" /></a>
                         </td>
                         <td style="width: 60%; float: left; margin-top: 40px;">
                             <%--<a href="AdContact.aspx">
@@ -132,7 +134,7 @@
             </div>
             <div id="nav">
                 <div id="center-ul">
-                    <ul type="disc">
+                     <ul>
                         <li>
                             <asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
                         <li>
@@ -142,7 +144,11 @@
                         <li>
                             <asp:HyperLink ID="HpkSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="#" Visible="false">Admin</asp:HyperLink></li>
+                            <asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="~/_lh/Login.aspx" Visible="false">Admin</asp:HyperLink></li>
+                        <li>
+                            <%--<asp:Menu ID="Menu1" runat="server">
+                            </asp:Menu>--%>
+                            <%--<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Liên kết</asp:HyperLink>--%></li>
                         <li>
                             <asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
                     </ul>
@@ -462,10 +468,11 @@
             <div id="footer">
                 <div class="footer-content">
                     <p>
-                        &copy; Website Luyện Thi Kinh Tế 2011. <a href="#">Sơ đồ Web</a> | <a href="#">Quy định
-                            bảo mật</a>| <a href="#header">Đầu Trang</a></p>
+                        <asp:Label ID="lblFooterTitle" runat="server" Text="www.luyenthikinhte.com"></asp:Label>
+                        <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a>| <a href="#header">Đầu
+                            Trang</a></p>
                     <p>
-                        ĐC: 119/4 Trần Phú, Quận 5 - ĐT: 0909.596.002</p>
+                        <asp:Label ID="lblAddress" runat="server" Text=""></asp:Label></p>
                 </div>
             </div>
             <%--<div id="divAdRight" style="position: fixed; bottom: 50px; left: 0px;background-color:transparent;">

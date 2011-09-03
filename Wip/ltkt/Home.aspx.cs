@@ -15,29 +15,59 @@ namespace ltkt
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        ltktDAO.Control controlDAO = new ltktDAO.Control();
+        ltktDAO.Sticky stickDAO = new ltktDAO.Sticky();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblWelcomeTitle.Text = "Chào mừng quý vị đến với Website Luyện thi Kinh tế";
-            lblWelcomeText.Text = "Tại đây các bạn sẽ được cung cấp kho tư liệu về đề thi cũng như các giải đáp thắc mắc về đề thi các năm."
-                                + "Chúng tôi tập trung vào 3 mảng chính: Luyện thi, Tin học và Anh văn";
-
+            lblWelcomeTitle.Text = controlDAO.getNameString(CommonConstants.CF_WELCOME_TEXT);
+            lblWelcomeText.Text = controlDAO.getValueString(CommonConstants.CF_WELCOME_TEXT);
+            MasterPage page = (MasterPage)Master;
+            //page.updateTitle("");
+            Label headerTxt = (Label)page.FindControl("lblHeaderTitle");
+            if (headerTxt != null)
+            {
+                headerTxt.Text = CommonConstants.PAGE_HOME_NAME 
+                            + CommonConstants.SPACE
+                            + CommonConstants.HLINE
+                            + CommonConstants.SPACE
+                            + controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+            
+            }
+            //lblTitle.Text = 
         }
 
         public string loadDataForUniversityArticles()
         {
-            string data = "";
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblContestForUniversity> lst = contestDAO.getLatestArticleByPostedDate(CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblContestForUniversity> items = lst.ToList();
+                int numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
+                int numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
 
+                IEnumerable<tblContestForUniversity> lst1 = contestDAO.getStickyArticlebyPostedDay(numberStickyArtOnTab);
+                IEnumerable<tblContestForUniversity> lst2 = contestDAO.getLatestArticleByPostedDate(numberArtOnTab - lst1.Count());
+                
+                IList<tblContestForUniversity> items1 = lst1.ToList();
+                IList<tblContestForUniversity> items2 = lst2.ToList();
+                
 
-                if (items.Count > 0)
+                if (items1.Count > 0)
                 {
 
-                    foreach (var item in items)
+                    foreach (var item in items1)
                     {
                         data += buildExamLessonForUniversity(item);
+                    }
+                    if (items1.Count > 0)
+                    {
+                        foreach (var item in items2)
+                        {
+                            if (!stickDAO.checkExisted(item.ID, CommonConstants.ST_UNI))
+                            {
+                                data += buildExamLessonForUniversity(item);
+                            }
+                        }
                     }
                     data += "<br/>\n<div class='referlink'>\n"
                             + "<a href='ContestUniversity.aspx'>Xem thêm</a></div>\n";

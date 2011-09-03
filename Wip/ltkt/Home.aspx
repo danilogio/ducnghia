@@ -2,7 +2,8 @@
     CodeFile="Home.aspx.cs" Inherits="ltkt.Home" %>
 
 <asp:Content ID="HomeHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Trang chủ | Website luyện thi kinh tế</title>
+    <title>
+        <asp:Label ID="lblTitle" runat="server" Text="Website luyện thi kinh tế"></asp:Label></title>
     <link type="text/css" href="css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
