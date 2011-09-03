@@ -27,7 +27,8 @@ namespace ltkt
                 chxRemember.Checked = true;
                 if (user != null)
                 {
-                    if (user.State != CommonConstants.STATE_DELETED)
+                    if (user.State != CommonConstants.STATE_DELETED 
+                        && user.State != CommonConstants.STATE_NON_ACTIVE)
                     {
                         updateAccount(user);
                     }
@@ -121,7 +122,8 @@ namespace ltkt
 
             if (user != null)
             {
-                if (user.State != CommonConstants.STATE_DELETED)
+                if (user.State != CommonConstants.STATE_DELETED
+                    && user.State != CommonConstants.STATE_NON_ACTIVE)
                 {
                     updateAccount(user);
 
@@ -137,11 +139,10 @@ namespace ltkt
                     {
                         clearCookies();
                     }
-
-                    checkUserState(user);
                 }
                 else
                 {
+                    checkUserState(user);
                     Session[CommonConstants.SES_USER] = CommonConstants.MSG_LOGIN_FAILED;
                     //Đăng nhập thất bại
                     Response.Redirect(CommonConstants.PAGE_LOGIN);
@@ -153,7 +154,6 @@ namespace ltkt
                 //Đăng nhập thất bại
                 Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
-
         }
 
         private void checkUserState(tblUser user)

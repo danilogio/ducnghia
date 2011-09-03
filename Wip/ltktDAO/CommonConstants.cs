@@ -585,6 +585,22 @@ namespace ltktDAO
             /// Nội dung thông báo
             /// </summary>
             public const string CF_ANNOUCEMENT = "ANNOUCEMENT";
+            /// <summary>
+            /// TỔng số bài hiển thị trong trang English
+            /// </summary>
+            public const string CF_NUM_ARTICLE_ON_EL = "NUM_ARTICLE_ON_EL";
+            /// <summary>
+            /// Tổng số bài hiển thị trong trang IT
+            /// </summary>
+            public const string CF_NUM_ARTICLE_ON_IT = "NUM_ARTICLE_ON_IT";
+            /// <summary>
+            /// Tổng số bài hiển thị trong trang LTDH
+            /// </summary>
+            public const string CF_NUM_ARTICLE_ON_UNI = "NUM_ARTICLE_ON_UNI";
+            /// <summary>
+            /// Tổng số bài hiển thị trong 1 tab tại trang chủ
+            /// </summary>
+            public const string CF_NUM_ARTICLE_ON_TAB = "NUM_ARTICLE_ON_TAB";
         #endregion
         
         #region Pages Name (PAGE)
@@ -920,6 +936,11 @@ namespace ltktDAO
             /// Table Advertisement
             /// </summary>
             public const string SQL_TABLE_ADVERTISEMENT = "tblAdvertisement";
+            /// <summary>
+            /// Table control;
+            /// </summary>
+            public const string SQL_TABLE_CONTROL = "tblControl";
+
         #endregion
     }
 }

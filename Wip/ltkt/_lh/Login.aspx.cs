@@ -37,7 +37,8 @@ namespace ltkt.Admin
 
             if (user != null)
             {
-                if (user.State != CommonConstants.STATE_DELETED)
+                if (user.State != CommonConstants.STATE_DELETED 
+                    && user.State != CommonConstants.STATE_NON_ACTIVE)
                 {
                     if (user.Type == false)
                     {

@@ -62,6 +62,7 @@
     <Compile Include="CommonConstants.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Contest.cs" />
+    <Compile Include="Control.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="English.cs" />
     <Compile Include="EventLog.cs" />

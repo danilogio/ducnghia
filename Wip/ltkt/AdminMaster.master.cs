@@ -18,6 +18,7 @@ namespace ltkt.Admin
                 if (user.State != CommonConstants.STATE_DELETED
                     && user.State != CommonConstants.STATE_KIA_1M
                     && user.State != CommonConstants.STATE_KIA_3W
+                    && user.State != CommonConstants.STATE_NON_ACTIVE
                     && user.Type == false)
                 {
                     lLogonUser.Text = user.DisplayName;

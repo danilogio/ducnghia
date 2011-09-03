@@ -24,9 +24,8 @@ namespace ltkt
                 messagePanel.Visible = true;
                 Session[CommonConstants.SES_USER] = null;
             }
-
         }
-
+        
 
         public void updateMessage(string _message)
         {
@@ -49,7 +48,8 @@ namespace ltkt
 
                 if (user != null)
                 {
-                    if (user.State != CommonConstants.STATE_DELETED)
+                    if (user.State != CommonConstants.STATE_DELETED 
+                        && user.State != CommonConstants.STATE_NON_ACTIVE)
                     {
                         //Đăng nhập thành công
                         MasterPage page = (MasterPage)Master;
