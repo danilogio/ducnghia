@@ -14,6 +14,7 @@ namespace ltkt.Admin
         EventLog log = new EventLog();
         ltktDAO.Ads adsDAO = new ltktDAO.Ads();
         ltktDAO.Control control = new ltktDAO.Control();
+        BaseServices bs = new BaseServices();
 
         public const int NoOfAdsPerPage = 10;
         
@@ -92,8 +93,8 @@ namespace ltkt.Admin
                 txtAddress.Text = Ads.Address.Trim();
                 txtEmail.Text = Ads.Email.Trim();
                 txtPhone.Text = Ads.Phone.Trim();
-                txtFromDate.Text = BaseServices.convertDateToString((DateTime)Ads.fromDate);
-                txtEndDate.Text = BaseServices.convertDateToString((DateTime)Ads.toDate); 
+                txtFromDate.Text = bs.convertDateToString((DateTime)Ads.fromDate);
+                txtEndDate.Text = bs.convertDateToString((DateTime)Ads.toDate); 
                 txtPrice.Text = Ads.Price.ToString();
                 txtDescription.Text = Ads.Description.Trim();
                 ddlState.SelectedIndex = Ads.State;
@@ -147,7 +148,7 @@ namespace ltkt.Admin
                 TableCell expiredCell = new TableCell();
                 expiredCell.CssClass = "table-cell";
                 expiredCell.Style["width"] = "80px";
-                expiredCell.Text = BaseServices.convertDateToString((DateTime)ads.toDate);
+                expiredCell.Text = bs.convertDateToString((DateTime)ads.toDate);
 
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
@@ -186,12 +187,14 @@ namespace ltkt.Admin
                 if (page > 1)
                 {
                     PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                                                                                CommonConstants.PAGE_ADMIN_ADS,
                                                                                 (page - 1).ToString(),
                                                                                 CommonConstants.PREVIOUS_PAGE);
                 }
                 if (page > 0 && page < totalPages)
                 {
                     NextPageLiteral.Text = BaseServices.createMsgByTemplate (CommonConstants.TEMP_SELF_LINK,
+                                                                             CommonConstants.PAGE_ADMIN_ADS,
                                                                              (page + 1).ToString(),
                                                                              CommonConstants.NEXT_PAGE);
                 }
