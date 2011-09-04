@@ -17,7 +17,7 @@ namespace ltkt
         {
             MasterPage page = (MasterPage)Master;
             page.hideLoginSidebar();
-            string errorText = (string)Session[CommonConstants.SES_USER];
+            string errorText = (string)Session[CommonConstants.SES_ERROR];
             if (!BaseServices.isNullOrBlank(errorText))
             {
                 lMessage.Text = errorText;

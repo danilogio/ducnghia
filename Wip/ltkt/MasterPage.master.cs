@@ -155,7 +155,7 @@ namespace ltkt
                 else
                 {
                     checkUserState(user);
-                    Session[CommonConstants.SES_USER] = CommonConstants.MSG_LOGIN_FAILED;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LOGIN_FAILED;
                     //Đăng nhập thất bại
                     Response.Redirect(CommonConstants.PAGE_LOGIN);
                 }

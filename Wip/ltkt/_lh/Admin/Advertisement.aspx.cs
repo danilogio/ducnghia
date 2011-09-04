@@ -15,7 +15,7 @@ namespace ltkt.Admin
 
         public const int NoOfAdsPerPage = 10;
         public const string SelfLink = "<a href=\"Advertisement.aspx?page={0}\">{1}</a>";
-        public const string DisplayNewsLink = "<a href=\"Advertisement.aspx?id={0}\" target=\"_blank\">{1}</a>";
+        public const string DisplayNewsLink = "<a href=\"Advertisement.aspx?action=view&id={0}\" target=\"_blank\">{1}</a>";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,12 +36,27 @@ namespace ltkt.Admin
                 string action = Request.QueryString["action"];
                 int _id = Convert.ToInt32(Request.QueryString["id"]);
 
-                if (action == "edit")
+                if (action == "view")
+                {
+
+                }
+                else if (action == "edit")
                 {
                     viewPanel.Visible = false;
                 }
                 else if (action == "delete")
                 {
+                    Boolean completeDelete = ltktDAO.Ads.deleteAds(_id);
+
+                    if (completeDelete)
+                    {
+                        Response.Write("alert (\"Xóa thành công!\")");
+                        Response.Redirect("Advertisement.aspx?page=1");
+                    }
+                    else
+                    {
+                        Response.Write("alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")");
+                    }
                 }
             }
             else
@@ -56,8 +71,8 @@ namespace ltkt.Admin
             // Computing total pages
             int totalPages;
             int mod = totalAds % NoOfAdsPerPage;
-            String actionLink = "<span title=\"Sửa tin tức\"><a href = \"News.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
-            actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"News.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
+            String actionLink = "<span title=\"Sửa tin tức\"><a href = \"Advertisement.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
+            actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"Advertisement.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
 
             IEnumerable<tblAdvertisement> lst = ltktDAO.Ads.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
 
@@ -91,8 +106,8 @@ namespace ltkt.Admin
 
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
-                stateCell.Style["width"] = "30px";
-                stateCell.Text = ads.State.ToString();
+                stateCell.Style["width"] = "40px";
+                stateCell.Text = ltktDAO.Ads.convertStateToString((int)ads.State);
 
                 TableCell actionCell = new TableCell();
                 actionCell.CssClass = "table-cell";

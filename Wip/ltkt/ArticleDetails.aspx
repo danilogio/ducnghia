@@ -123,8 +123,7 @@
             <hr />
             <br />
             <div id="postedComment">
-                <asp:Label ID="txtPostedComment" runat="server" TextMode="MultiLine" ReadOnly="true"
-                    BackColor="White">
+                <asp:Label ID="txtPostedComment" runat="server" BackColor="White">
                 </asp:Label>
             </div>
             <div>

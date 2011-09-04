@@ -49,6 +49,7 @@ namespace ltkt.Admin
 
                     if (completeDelete)
                     {
+                        Response.Write("alert (\"Xóa thành công!\")");
                         Response.Redirect("News.aspx?page=1");
                     }
                     else

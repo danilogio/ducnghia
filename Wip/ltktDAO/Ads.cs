@@ -14,6 +14,87 @@ namespace ltktDAO
 
         #region Property
         #region Get Property
+        
+        /// <summary>
+        /// Lấy trạng thái của một quảng cáo qua id
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static string getState(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            var ads = DB.tblAdvertisements.Single(a => a.ID == _id);
+            string strState = null;
+
+            if (ads != null)
+            {
+                switch (ads.State)
+                {
+                    case 0:
+                        {
+                            strState = "Chưa duyệt";
+                            break;
+                        }
+                    case 1:
+                        {
+                            strState = "Đang quảng cáo";
+                            break;
+                        }
+                    case 10:
+                        {
+                            strState = "Sắp hết hạn";
+                            break;
+                        }
+                    case 13:
+                        {
+                            strState = "Sticky";
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+
+            return strState;
+        }
+
+        /// <summary>
+        /// Chuyển trạng thái của một quảng cáo qua dạng chuỗi
+        /// </summary>
+        /// <param name="_state"></param>
+        /// <returns></returns>
+        public static string convertStateToString(int _state)
+        {
+            string strState = null;
+
+            switch (_state)
+            {
+                case 0:
+                    {
+                        strState = "Chưa duyệt";
+                        break;
+                    }
+                case 1:
+                    {
+                        strState = "Đang quảng cáo";
+                        break;
+                    }
+                case 10:
+                    {
+                        strState = "Sắp hết hạn";
+                        break;
+                    }
+                case 13:
+                    {
+                        strState = "Sticky";
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            return strState;
+        }
         #endregion
 
         #region Set Property
@@ -92,8 +173,39 @@ namespace ltktDAO
             return lst;
         }
 
-        #endregion
+        /// <summary>
+        /// Xóa 1 record quảng cáo
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public static bool deleteAds(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var ads = DB.tblAdvertisements.Single(a => a.ID == _id);
+
+                    DB.tblAdvertisements.DeleteOnSubmit(ads);
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, e.Message);
+
+                return false;
+            }
+
+            return true;
+        }
 
         
+
+        #endregion
+
     }
 }

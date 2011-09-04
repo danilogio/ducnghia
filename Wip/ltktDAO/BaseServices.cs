@@ -124,6 +124,7 @@ namespace ltktDAO
             }
             return Int32.Parse(target);
         }
+        
         public static string createMsgByTemplate(string template, string arg1)
         {
             string msg = CommonConstants.BLANK;
@@ -133,6 +134,7 @@ namespace ltktDAO
             }
             return msg;
         }
+        
         public static string createMsgByTemplate(string template, string arg1, string arg2)
         {
             string msg = CommonConstants.BLANK;
@@ -142,6 +144,7 @@ namespace ltktDAO
             }
             return msg;
         }
+        
         public static string createMsgByTemplate(string template, string arg1, string arg2, string arg3)
         {
             string msg = CommonConstants.BLANK;
@@ -151,6 +154,7 @@ namespace ltktDAO
             }
             return msg;
         }
+        
         public static string getNameByCode(string code)
         {
             if(isNullOrBlank(code))
@@ -222,5 +226,7 @@ namespace ltktDAO
             }
             return links;
         }
+    
+        
     }
 }

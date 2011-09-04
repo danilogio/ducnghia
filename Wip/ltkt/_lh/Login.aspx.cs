@@ -11,7 +11,7 @@ namespace ltkt.Admin
 {
     public partial class Login : System.Web.UI.Page
     {
-        ltktDAO.Users userDAO = new ltktDAO.Users();
+        Users userDAO = new Users();
         ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
         protected void Page_Load(object sender, EventArgs e)
         {
