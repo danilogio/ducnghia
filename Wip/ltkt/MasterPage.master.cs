@@ -55,6 +55,8 @@ namespace ltkt
                 userPanel.Visible = true;
                 HpkUpload.Visible = true;
             }
+            //display annoucement
+            ltAnnoucement.Text = "<MARQUEE WIDTH=100% BEHAVIOR=SCROLL HEIGHT=20 BGColor=white><span style=\"color:red\">Thông báo: trang web đang được xây dựng phần Admin....</span></MARQUEE>";
 
         }
         //public void updateTitle(string title)

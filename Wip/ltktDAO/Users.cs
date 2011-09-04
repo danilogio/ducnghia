@@ -894,13 +894,20 @@ namespace ltktDAO
         /// <returns></returns>
         public bool isAllow(string strPermission, string _codePermission)
         {
-            if (!BaseServices.isNullOrBlank(_codePermission))
+            strPermission = BaseServices.nullToBlank(strPermission);
+
+            if (!BaseServices.isNullOrBlank(_codePermission) 
+                && !BaseServices.isNullOrBlank(strPermission))
             {
                 Permission permitDAO = new Permission();
                 int p = permitDAO.getValue(_codePermission);
-                if (strPermission.Contains(p.ToString().Trim()))
+                string[] arrayPermit = strPermission.Split(CommonConstants.COMMA_CHAR);
+                for (int i = 0; i < arrayPermit.Length; i++)
                 {
-                    return true;
+                    if (arrayPermit[i].Equals(p.ToString().Trim()))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
