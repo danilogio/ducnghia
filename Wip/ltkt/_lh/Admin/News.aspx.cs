@@ -14,6 +14,7 @@ namespace ltkt.Admin
         EventLog log = new EventLog();
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.News newsDAO = new ltktDAO.News();
+        private ltktDAO.Users userDAO = new ltktDAO.Users();
 
         public const int NoOfNewsPerPage = 10;
         public const string SelfLink = "<a href=\"News.aspx?page={0}\">{1}</a>";
@@ -21,53 +22,68 @@ namespace ltkt.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AdminMaster pageMaster = (AdminMaster)Master;
-            pageMaster.updateHeader(CommonConstants.PAGE_ADMIN_NEWS_NAME);
-
-            liTitle.Text = CommonConstants.PAGE_ADMIN_NEWS_NAME
-                           + CommonConstants.SPACE + CommonConstants.HLINE
-                           + CommonConstants.SPACE
-                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-
-            int page = 1;
-
-            if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            if (user != null)
             {
-                viewPanel.Visible = true;
-                addPanel.Visible = false;
-
-                page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                btnSave.Text = "Thêm tin tức";
-                showNews(page);
-            }
-            else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
-            {
-                string action = Request.QueryString[CommonConstants.REQ_ACTION];
-                int newsID = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
-
-                if (action == CommonConstants.ACT_EDIT)
+                if (userDAO.isAllow(user.Permission, CommonConstants.P_A_CONTROL)
+                    || userDAO.isAllow(user.Permission, CommonConstants.P_A_FULL_CONTROL))
                 {
-                    viewPanel.Visible = false;
-                    editNews(newsID);
-                }
-                else if (action == CommonConstants.ACT_DELETE)
-                {
-                    Boolean completeDelete = newsDAO.deleteNews(newsID);
+                    ///DO WORK HERE ONLY//////////////////////////////
+                    AdminMaster pageMaster = (AdminMaster)Master;
+                    pageMaster.updateHeader(CommonConstants.PAGE_ADMIN_NEWS_NAME);
 
-                    if (completeDelete)
+                    liTitle.Text = CommonConstants.PAGE_ADMIN_NEWS_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+                    int page = 1;
+
+                    if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
                     {
-                        Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
-                        Response.Redirect("News.aspx?page=1");
+                        viewPanel.Visible = true;
+                        addPanel.Visible = false;
+
+                        page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+                        btnSave.Text = "Thêm tin tức";
+                        showNews(page);
+                    }
+                    else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
+                    {
+                        string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                        int newsID = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+
+                        if (action == CommonConstants.ACT_EDIT)
+                        {
+                            viewPanel.Visible = false;
+                            editNews(newsID);
+                        }
+                        else if (action == CommonConstants.ACT_DELETE)
+                        {
+                            Boolean completeDelete = newsDAO.deleteNews(newsID);
+
+                            if (completeDelete)
+                            {
+                                Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
+                                Response.Redirect("News.aspx?page=1");
+                            }
+                            else
+                            {
+                                Response.Write(CommonConstants.ALERT_DELETE_FAIL);
+                            }
+                        }
                     }
                     else
                     {
-                        Response.Write(CommonConstants.ALERT_DELETE_FAIL);
+                        Response.Redirect("News.aspx?page=1");
                     }
+                    //////////////////////////////////////////////////
                 }
             }
             else
             {
-                Response.Redirect("News.aspx?page=1");
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
                 
