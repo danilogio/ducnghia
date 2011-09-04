@@ -10,7 +10,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-        LTDHDataContext DB = new LTDHDataContext();
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
         EventLog log = new EventLog();
         /// <summary>
         /// get record
