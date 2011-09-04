@@ -2,7 +2,7 @@
     CodeFile="Error.aspx.cs" Inherits="Error" %>
 
 <asp:Content ID="ErrorHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Error</title>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="ErrorContent" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="block_text">

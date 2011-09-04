@@ -1,7 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Informatics.aspx.cs" Inherits="ltkt.Informatics" %>
 
-<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
+<%--<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>--%>
+
+<asp:Content ID="InformaticsHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+    
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+            background-color: white;
+        }
+    </style>
+</asp:Content>
+
 <asp:Content ID="Informatics" ContentPlaceHolderID="cphContent" runat="Server">
     <%-- 
     <br /><br /><br /><h2><span>Power point</span></h2><br /><br /><br /><br /><br />
@@ -15,13 +28,13 @@
     
     
 --%>
-    <style type="text/css">
+    <%--<style type="text/css">
         .style1
         {
             width: 100%;
             background-color: white;
         }
-    </style>
+    </style>--%>
     <div id="content" class="block_text">
         <h2>
             <asp:Label ID="lblTitle" runat="server" Text="Luyện Thi Đại Học"></asp:Label></h2>

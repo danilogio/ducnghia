@@ -12,9 +12,15 @@ namespace ltkt
         Contest contestDAO = new Contest();
         EventLog log = new EventLog();
         BaseServices service = new BaseServices();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         public void Page_Load(object sender, EventArgs e)
         {
+            liTitle.Text = CommonConstants.PAGE_UNIVERSITY_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
             ArticleSCO articleSCO = new ArticleSCO();
             try
             {

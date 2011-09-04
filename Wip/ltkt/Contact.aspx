@@ -4,7 +4,7 @@
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 
 <asp:Content ID="ContactHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Liên hệ/Góp ý | Website luyện thi kinh tế</title>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="Contact" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="contact" class="block_text">

@@ -17,6 +17,7 @@ namespace ltkt
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         ltktDAO.Control controlDAO = new ltktDAO.Control();
         ltktDAO.Sticky stickDAO = new ltktDAO.Sticky();
+        ltktDAO.News newsDAO = new ltktDAO.News();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -206,7 +207,7 @@ namespace ltkt
             string data = "";
             try
             {
-                IEnumerable<tblNew> lst = ltktDAO.News.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB);
                 IList<tblNew> items = lst.ToList();
                 if (items.Count > 0)
                 {

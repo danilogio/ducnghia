@@ -14,9 +14,15 @@ namespace ltkt
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            liTitleHeader.Text = CommonConstants.PAGE_SEARCH_NAME
+                               + CommonConstants.SPACE + CommonConstants.HLINE
+                               + CommonConstants.SPACE
+                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
             resultPanel.Visible = false;
         }
 

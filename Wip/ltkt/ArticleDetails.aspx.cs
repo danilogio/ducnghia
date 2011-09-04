@@ -16,6 +16,8 @@ namespace ltkt
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        ltktDAO.Control control = new ltktDAO.Control();
+        BaseServices bs = new BaseServices();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,6 +60,10 @@ namespace ltkt
                         default:
                             break;
                     }
+
+                    liTitle.Text += CommonConstants.SPACE + CommonConstants.HLINE
+                                    + CommonConstants.SPACE
+                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
                 }
                 catch (Exception ex)
                 {
@@ -117,7 +123,7 @@ namespace ltkt
                     lblLiker.Text = contest.Point.ToString();
 
                     lblAuthor.Text = ltktDAO.Contest.getAuthor(id);
-                    lblPostedDate.Text = ltktDAO.BaseServices.convertDateToString(contest.Posted);
+                    lblPostedDate.Text = bs.convertDateToString(contest.Posted);
                     lblChecker.Text = contest.Checker;
 
                     lblOverview.Text = contest.Contents.Replace("\n", "<br />");
@@ -183,7 +189,7 @@ namespace ltkt
                     lblLiker.Text = english.Point.ToString();
 
                     lblAuthor.Text = ltktDAO.English.getAuthor(id);
-                    lblPostedDate.Text = ltktDAO.BaseServices.convertDateToString(english.Posted);
+                    lblPostedDate.Text = bs.convertDateToString(english.Posted);
                     lblChecker.Text = english.Checker;
 
                     lblOverview.Text = english.Contents.Replace("\n", "<br />");
@@ -244,7 +250,7 @@ namespace ltkt
                     lblLiker.Text = informatic.Point.ToString();
 
                     lblAuthor.Text = ltktDAO.Informatics.getAuthor(id);
-                    lblPostedDate.Text = ltktDAO.BaseServices.convertDateToString(informatic.Posted);
+                    lblPostedDate.Text = bs.convertDateToString(informatic.Posted);
                     lblChecker.Text = informatic.Checker;
 
                     lblOverview.Text = informatic.Contents.Replace("\n", "<br />");
@@ -319,7 +325,7 @@ namespace ltkt
                     currentUser = author;
                 }
 
-                date = ltktDAO.BaseServices.convertDateToString(DateTime.Now);
+                date = bs.convertDateToString(DateTime.Now);
                 comment = txtContent.Text.Replace("\n", "<br />");
 
                 newComment += "<span>";

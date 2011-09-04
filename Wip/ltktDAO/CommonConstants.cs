@@ -438,6 +438,30 @@ namespace ltktDAO
 
         #region Messages(MSG)
         /// <summary>
+        /// Message back to home
+        /// </summary>
+        public const string MSG_BACK_TO_HOME = "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+        /// <summary>
+        /// Change password successful
+        /// </summary>
+        public const string MSG_CHANGE_PASSWORD_SUCCESSFUL = "Bạn đã đổi mật khẩu thành công!";
+        /// <summary>
+        /// Password required wrong
+        /// </summary>
+        public const string MSG_PASSWORD_REQUIRED_WRONG = "Mật khẩu hiện tại không đúng. Xin vui lòng kiểm tra lại!";
+        /// <summary>
+        /// update profile successful
+        /// </summary>
+        public const string MSG_UPDATE_PROFILE_SUCCESSFUL = "Bạn đã cập nhật hồ sơ thành công!";
+        /// <summary>
+        /// News page error
+        /// </summary>
+        public const string MSG_NEWS_ERROR = "Đường dẫn trang web không hợp lệ, xin vui lòng kiểm tra lại!";
+        /// <summary>
+        /// News not found
+        /// </summary>
+        public const string MSG_NEWS_NOT_FOUND = "Tin tức không tồn tại hoặc đã bị xóa!";
+        /// <summary>
         /// do not find out article record on DB
         /// </summary>
         public const string MSG_ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
@@ -714,22 +738,83 @@ namespace ltktDAO
         /// Home page name
         /// </summary>
         public const string PAGE_HOME_NAME = "Trang chủ";
+
+        /// <summary>
+        /// Ads contact page name
+        /// </summary>
+        public const string PAGE_ADS_NAME = "Liên hệ quảng cáo";
+
+        /// <summary>
+        /// Contact page name
+        /// </summary>
+        public const string PAGE_CONTACT_NAME = "Liên hệ/Góp ý";
         /// <summary>
         /// English page
         /// </summary>
         public const string PAGE_ENGLISH = "English.aspx";
+
+        /// <summary>
+        /// English page name
+        /// </summary>
+        public const string PAGE_ENGLISH_NAME = "Anh văn";
         /// <summary>
         /// Informatics page
         /// </summary>
         public const string PAGE_INFORMATICS = "Informatics.aspx";
         /// <summary>
+        /// Informatics page name
+        /// </summary>
+        public const string PAGE_INFORMATICS_NAME = "Tin học";
+        /// <summary>
         /// University page
         /// </summary>
         public const string PAGE_UNIVERSITY = "ContestUniversity.aspx";
         /// <summary>
+        /// University page name
+        /// </summary>
+        public const string PAGE_UNIVERSITY_NAME = "Luyện thi đại học";
+        /// <summary>
+        /// Error page name
+        /// </summary>
+        public const string PAGE_ERROR_NAME = "Trang lỗi";
+        /// <summary>
         /// Article page
         /// </summary>
         public const string PAGE_ARTICLE_DETAILS = "ArticleDetails.aspx";
+
+
+        /// <summary>
+        /// search page name
+        /// </summary>
+        public const string PAGE_SEARCH_NAME = "Tìm kiếm";
+        /// <summary>
+        /// reset password page name
+        /// </summary>
+        public const string PAGE_RESET_PASSWORD_NAME = "Lấy lai mật khẩu";
+        /// <summary>
+        /// registry page name
+        /// </summary>
+        public const string PAGE_REGISTRY_NAME = "Đăng ký tài khoản";
+        /// <summary>
+        /// profile page name
+        /// </summary>
+        public const string PAGE_PROFILE_NAME = "Hồ sơ cá nhân";
+        /// <summary>
+        /// news page name
+        /// </summary>
+        public const string PAGE_NEWS_NAME = "Tin tức";
+        /// <summary>
+        /// login page name
+        /// </summary>
+        public const string PAGE_LOGIN_NAME = "Đăng nhập";
+        /// <summary>
+        /// under construction name
+        /// </summary>
+        public const string PAGE_UNDERCONSTRUCTION_NAME = "Đang bảo trì";
+        /// <summary>
+        /// upload page name
+        /// </summary>
+        public const string PAGE_UPLOAD_NAME = "Gửi bài viết";
         /// <summary>
         /// Admin general page
         /// </summary>
@@ -777,6 +862,10 @@ namespace ltktDAO
         /// constant of session error text
         /// </summary>
         public const string SES_ERROR = "Error";
+        /// <summary>
+        /// session edit news
+        /// </summary>
+        public const string SES_EDIT_NEWS = "editNews";
         #endregion
 
         #region Request Constants (REQ)

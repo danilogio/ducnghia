@@ -12,11 +12,18 @@ namespace ltkt
     {
         EventLog log = new EventLog();
         ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             MasterPage page = (MasterPage)Master;
             page.hideLoginSidebar();
+
+            liTitle.Text = CommonConstants.PAGE_LOGIN_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
             string errorText = (string)Session[CommonConstants.SES_ERROR];
             if (!BaseServices.isNullOrBlank(errorText))
             {

@@ -8,8 +8,15 @@ using ltktDAO;
 
 public partial class Error : System.Web.UI.Page
 {
+    ltktDAO.Control control = new ltktDAO.Control();
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        liTitle.Text = CommonConstants.PAGE_ERROR_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
         string errorText = (string) Session[CommonConstants.SES_ERROR];
         if (errorText != null)
         {

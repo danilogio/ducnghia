@@ -11,6 +11,8 @@ namespace ltktDAO
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
 
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
         #region Property
 
         #region Get Property
@@ -19,9 +21,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static string getTitle(int newsID)
+        public string getTitle(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -37,9 +38,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static string getChapeau(int newsID)
+        public string getChapeau(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -57,9 +57,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static string getContent(int newsID)
+        public string getContent(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -77,9 +76,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static DateTime getPosted(int newsID)
+        public DateTime getPosted(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -97,9 +95,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static string getAuthor(int newsID)
+        public string getAuthor(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
                       join news in DB.tblNews on author.Username equals news.Author
                       where news.ID == newsID
@@ -117,10 +114,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static tblNew getNews(int newsID)
+        public tblNew getNews(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            
             IEnumerable<tblNew> news = from record in DB.tblNews
                                        where record.ID == newsID
                                        select record;
@@ -142,10 +137,8 @@ namespace ltktDAO
         /// <param name="newsID"></param>
         /// <param name="strTitle"></param>
         /// <returns></returns>
-        public static Boolean setTitle(int newsID, string strTitle)
+        public Boolean setTitle(int newsID, string strTitle)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblNews.Single(TB => TB.ID == newsID);
@@ -164,10 +157,8 @@ namespace ltktDAO
         /// <param name="newsID"></param>
         /// <param name="strChapeau"></param>
         /// <returns></returns>
-        public static Boolean setChapeau(int newsID, string strChapeau)
+        public Boolean setChapeau(int newsID, string strChapeau)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblNews.Single(TB => TB.ID == newsID);
@@ -186,10 +177,8 @@ namespace ltktDAO
         /// <param name="newsID"></param>
         /// <param name="timePosted"></param>
         /// <returns></returns>
-        public static Boolean setPosted(int newsID, DateTime timePosted)
+        public Boolean setPosted(int newsID, DateTime timePosted)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblNews.Single(TB => TB.ID == newsID);
@@ -208,10 +197,8 @@ namespace ltktDAO
         /// <param name="newsID"></param>
         /// <param name="authorID"></param>
         /// <returns></returns>
-        public static Boolean setAuthor(int newsID, string author)
+        public Boolean setAuthor(int newsID, string author)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblNews.Single(TB => TB.ID == newsID);
@@ -230,10 +217,8 @@ namespace ltktDAO
         /// <param name="newsID"></param>
         /// <param name="strContent"></param>
         /// <returns></returns>
-        public static Boolean setContent(int newsID, string strContent)
+        public Boolean setContent(int newsID, string strContent)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblNews.Single(TB => TB.ID == newsID);
@@ -255,9 +240,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_numNews"></param>
         /// <returns></returns>
-        public static IEnumerable<tblNew> getLatestNewsByDate(int _numNews)
+        public IEnumerable<tblNew> getLatestNewsByDate(int _numNews)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = (from p in DB.tblNews
                                       orderby p.Posted descending
                                        select p).Take(_numNews);
@@ -268,9 +252,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="newsID"></param>
         /// <returns></returns>
-        public static bool checkNewsExists(int newsID)
+        public  bool checkNewsExists(int newsID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       where record.ID == newsID
                                       select record;
@@ -286,10 +269,8 @@ namespace ltktDAO
         /// Lấy ra số lượng tin tức
         /// </summary>
         /// <returns>int</returns>
-        public static int countNews()
+        public int countNews()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             return DB.tblNews.Count();
         }
 
@@ -298,10 +279,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="record"></param>
         /// <returns>Boolean</returns>
-        public static Boolean insertNews(tblNew record)
+        public Boolean insertNews(tblNew record)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -327,10 +306,8 @@ namespace ltktDAO
         /// <param name="_chapeau"></param>
         /// <param name="_content"></param>
         /// <returns></returns>
-        public static Boolean insertNews(string _author, string _title, string _chapeau, string _content)
+        public Boolean insertNews(string _author, string _title, string _chapeau, string _content)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -361,10 +338,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="recordUpdate"></param>
         /// <returns></returns>
-        public static Boolean updateNews(int newsID, tblNew recordUpdate)
+        public Boolean updateNews(int newsID, tblNew recordUpdate)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -396,10 +371,8 @@ namespace ltktDAO
         /// <param name="_chapeau"></param>
         /// <param name="_content"></param>
         /// <returns></returns>
-        public static Boolean updateNews(int newsID, string _author, string _title, string _chapeau, string _content)
+        public Boolean updateNews(int newsID, string _author, string _title, string _chapeau, string _content)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -424,9 +397,8 @@ namespace ltktDAO
         /// Tổng số tin
         /// </summary>
         /// <returns></returns>
-        public static int numberOfNews()
+        public int numberOfNews()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             var lst = from record in DB.tblNews
                       select record;
 
@@ -437,9 +409,8 @@ namespace ltktDAO
         /// Lấy toàn bộ tin tức
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<tblNew> getAll()
+        public IEnumerable<tblNew> getAll()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = from record in DB.tblNews
                                       select record;
 
@@ -452,9 +423,8 @@ namespace ltktDAO
         /// <param name="start"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static IEnumerable<tblNew> fetchNewsList(int start, int count)
+        public IEnumerable<tblNew> fetchNewsList(int start, int count)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblNew> lst = (from record in DB.tblNews
                                        orderby record.ID descending
                                        select record).Skip(start).Take(count);
@@ -467,10 +437,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static Boolean deleteNews(int _id)
+        public  Boolean deleteNews(int _id)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             try
             {
                 using (TransactionScope ts = new TransactionScope())

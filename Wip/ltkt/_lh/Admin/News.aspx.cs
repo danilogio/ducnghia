@@ -13,6 +13,7 @@ namespace ltkt.Admin
     {
         EventLog log = new EventLog();
         ltktDAO.Control control = new ltktDAO.Control();
+        ltktDAO.News newsDAO = new ltktDAO.News();
 
         public const int NoOfNewsPerPage = 10;
         public const string SelfLink = "<a href=\"News.aspx?page={0}\">{1}</a>";
@@ -30,37 +31,37 @@ namespace ltkt.Admin
 
             int page = 1;
 
-            if (Request.QueryString["page"] != null)
+            if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
             {
                 viewPanel.Visible = true;
                 addPanel.Visible = false;
 
-                page = Convert.ToInt32(Request.QueryString["page"]);
+                page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
                 btnSave.Text = "Thêm tin tức";
                 showNews(page);
             }
-            else if (Request.QueryString["action"] != null)
+            else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
             {
-                string action = Request.QueryString["action"];
-                int newsID = Convert.ToInt32(Request.QueryString["id"]);
-                
-                if (action == "edit")
+                string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                int newsID = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+
+                if (action == CommonConstants.ACT_EDIT)
                 {
                     viewPanel.Visible = false;
                     editNews(newsID);
                 }
-                else if (action == "delete")
+                else if (action == CommonConstants.ACT_DELETE)
                 {
-                    Boolean completeDelete = ltktDAO.News.deleteNews(newsID);
+                    Boolean completeDelete = newsDAO.deleteNews(newsID);
 
                     if (completeDelete)
                     {
-                        Response.Write("alert (\"Xóa thành công!\")");
+                        Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
                         Response.Redirect("News.aspx?page=1");
                     }
                     else
                     {
-                        Response.Write("alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")");
+                        Response.Write(CommonConstants.ALERT_DELETE_FAIL);
                     }
                 }
             }
@@ -72,14 +73,12 @@ namespace ltkt.Admin
                 
         private void showNews(int page)
         {
-            int totalNews = ltktDAO.News.countNews();
+            int totalNews = newsDAO.countNews();
             // Computing total pages
             int totalPages;
             int mod = totalNews % NoOfNewsPerPage;
-            String actionLink = "<span title=\"Sửa tin tức\"><a href = \"News.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
-            actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"News.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
 
-            IEnumerable<tblNew> lst = ltktDAO.News.fetchNewsList(((page - 1) * NoOfNewsPerPage), NoOfNewsPerPage);
+            IEnumerable<tblNew> lst = newsDAO.fetchNewsList(((page - 1) * NoOfNewsPerPage), NoOfNewsPerPage);
 
             if (mod == 0)
             {
@@ -107,7 +106,17 @@ namespace ltkt.Admin
                 TableCell actionCell = new TableCell();
                 actionCell.CssClass = "table-cell";
                 actionCell.Style["width"] = "40px";
-                actionCell.Text = String.Format(actionLink, news.ID);
+                actionCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_NEWS,
+                                                                     CommonConstants.ACT_EDIT,
+                                                                     Convert.ToString(news.ID),
+                                                                     CommonConstants.HTML_EDIT_ADMIN);
+
+                actionCell.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_NEWS,
+                                                                     CommonConstants.ACT_DELETE,
+                                                                     Convert.ToString(news.ID),
+                                                                     CommonConstants.HTML_DELETE_ADMIN);
 
                 TableRow newsRow = new TableRow();
                 newsRow.Cells.Add(noCell);
@@ -121,10 +130,16 @@ namespace ltkt.Admin
             if (totalPages > 1)
             {
                 if (page > 1)
-                    PreviousPageLiteral.Text = String.Format(SelfLink, page - 1, "Previous Page");
+                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                                                                                CommonConstants.PAGE_ADMIN_NEWS, 
+                                                                                (page - 1).ToString(),
+                                                                                CommonConstants.PREVIOUS_PAGE);
 
                 if (page > 0 && page < totalPages)
-                    NextPageLiteral.Text = String.Format(SelfLink, page + 1, "Next Page");
+                    NextPageLiteral.Text = BaseServices.createMsgByTemplate (CommonConstants.TEMP_SELF_LINK,
+                                                                             CommonConstants.PAGE_ADMIN_NEWS,
+                                                                             (page + 1).ToString(),
+                                                                             CommonConstants.NEXT_PAGE);
             }
         }
 
@@ -134,15 +149,15 @@ namespace ltkt.Admin
             addPanel.Visible = true;
             btnAddNews.Text = "Thêm bài viết";
             btnSticky.Visible = false;
-            Session["editNews"] = null;
+            Session[CommonConstants.SES_EDIT_NEWS] = null;
         }
 
         private void editNews (int newsID)
         {
-            if (Session["editNews"] == null)
+            if (Session[CommonConstants.SES_EDIT_NEWS] == null)
             {
-                tblNew editNews = ltktDAO.News.getNews(newsID);
-                Session["editNews"] = editNews;
+                tblNew editNews = newsDAO.getNews(newsID);
+                Session[CommonConstants.SES_EDIT_NEWS] = editNews;
 
                 btnSave.Text = "Sửa";
                 btnSticky.Visible = true;
@@ -161,21 +176,21 @@ namespace ltkt.Admin
             string strChapeau = txtChapeau.Text;
             string strContent = Server.HtmlDecode(txtContent.Text);
 
-            if (Session["User"] != null)
+            if (Session[CommonConstants.SES_USER] != null)
             {
-                tblUser author = (tblUser)Session["User"];
+                tblUser author = (tblUser)Session[CommonConstants.SES_USER];
                 try
                 {
-                    tblNew editNews = (tblNew)Session["editNews"];
+                    tblNew editNews = (tblNew)Session[CommonConstants.SES_EDIT_NEWS];
                     if (editNews == null)//thêm mới
                     {
-                        ltktDAO.News.insertNews(author.Username, strTitlte, strChapeau, strContent);
+                        newsDAO.insertNews(author.Username, strTitlte, strChapeau, strContent);
                         Page_Load(sender, e);
                     }
                     else//edit
                     {
-                        ltktDAO.News.updateNews(editNews.ID, author.Username, strTitlte, strChapeau, strContent);
-                        Session["editNews"] = null;
+                        newsDAO.updateNews(editNews.ID, author.Username, strTitlte, strChapeau, strContent);
+                        Session[CommonConstants.SES_EDIT_NEWS] = null;
                         Response.Redirect("News.aspx?page=1");
                     }
                 }
@@ -184,7 +199,7 @@ namespace ltkt.Admin
                     liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
                     liMessage.Visible = true;
 
-                    tblUser user = (tblUser)Session["User"];
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                     string username = CommonConstants.USER_GUEST;
                     if (user != null)
                     {
@@ -205,16 +220,16 @@ namespace ltkt.Admin
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            tblNew editNews = (tblNew)Session["editNews"];
+            tblNew editNews = (tblNew)Session[CommonConstants.SES_EDIT_NEWS];
             if (editNews == null)//thêm mới
             {
-                txtTitle.Text = "";
-                txtChapeau.Text = "";
-                txtContent.Text = Server.HtmlEncode("");
+                txtTitle.Text = CommonConstants.BLANK;
+                txtChapeau.Text = CommonConstants.BLANK;
+                txtContent.Text = Server.HtmlEncode(CommonConstants.BLANK);
             }
             else//edit
             {
-                Session["editNews"] = null;
+                Session[CommonConstants.SES_EDIT_NEWS] = null;
             }
             
 

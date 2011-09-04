@@ -3,7 +3,8 @@
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Đăng ký thành viên | Website luyện thi kinh tế</title>
+    <%--<title>Đăng ký thành viên | Website luyện thi kinh tế</title>--%>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="Register" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="signupForm" class="block_text">
@@ -72,7 +73,7 @@
                         PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
                 </div>
                 <p style="padding-top: 15px">
-                    <span>&nbsp;</span><asp:Button ID="btnSubmitSignup" runat="server" Text="Đăng ký"
+                    <asp:Button ID="btnSubmitSignup" runat="server" Text="Đăng ký"
                         CssClass="submit" OnClick="btnRegistry_Click" /></p>
             </div>
         </asp:Panel>

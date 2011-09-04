@@ -2,8 +2,8 @@
     CodeFile="News.aspx.cs" Inherits="ltkt.News" %>
 
 <asp:Content ID="newsHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Tin tức | Website luyện thi kinh tế</title>
-  
+    <%--<title>Tin tức | Website luyện thi kinh tế</title>--%>
+    <title><asp:Literal ID="liTitleHeader" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="newsContent" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="block_text">

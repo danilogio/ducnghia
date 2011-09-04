@@ -18,8 +18,15 @@ namespace ltkt
     {
         EventLog log = new EventLog();
         ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Control control = new ltktDAO.Control();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            liTitle.Text = CommonConstants.PAGE_PROFILE_NAME
+                               + CommonConstants.SPACE + CommonConstants.HLINE
+                               + CommonConstants.SPACE
+                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
             if (Session[CommonConstants.SES_USER] != null)
             {
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
@@ -60,8 +67,8 @@ namespace ltkt
                     // Thành công
                     if (isOK)
                     {
-                        lMessage.Text = "Bạn đã đổi mật khẩu thành công!";
-                        lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                        lMessage.Text = CommonConstants.MSG_CHANGE_PASSWORD_SUCCESSFUL;
+                        lMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
                         lMessage.Visible = true;
 
                         messagePanel.Visible = true;
@@ -70,7 +77,7 @@ namespace ltkt
                 }
                 else
                 {
-                    lMessage.Text = "Mật khẩu hiện tại không đúng. Xin vui lòng kiểm tra lại!";
+                    lMessage.Text = CommonConstants.MSG_PASSWORD_REQUIRED_WRONG;
                     lMessage.Visible = true;
 
                     messagePanel.Visible = true;
@@ -125,8 +132,8 @@ namespace ltkt
                 bool isOK = userDAO.updateUser(user.Username, user);
                 if (isOK)
                 {
-                    lMessage.Text = "Bạn đã cập nhật hồ sơ thành công!";
-                    lMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    lMessage.Text = CommonConstants.MSG_UPDATE_PROFILE_SUCCESSFUL;
+                    lMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
                     lMessage.Visible = true;
 
                     messagePanel.Visible = true;

@@ -10,32 +10,40 @@ namespace ltkt
 {
     public partial class News : System.Web.UI.Page
     {
+        ltktDAO.Control control = new ltktDAO.Control();
+        BaseServices bs = new BaseServices();
+        ltktDAO.News newsDAO = new ltktDAO.News();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["id"] != null)
+            liTitleHeader.Text = CommonConstants.PAGE_NEWS_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+            if (Request.QueryString[CommonConstants.REQ_ID] != null)
             {
                 int newsID = 1;
                 try
                 {
-                    newsID = Convert.ToInt32(Request.QueryString["id"]);
+                    newsID = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
                 }
                 catch (Exception ex)
                 {
-                    Session["Error"] = "Đường dẫn trang web không hợp lệ, xin vui lòng kiểm tra lại!";
-                    Response.Redirect("Error.aspx");
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_NEWS_ERROR;
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
-                tblNew news = ltktDAO.News.getNews(newsID);
+                tblNew news = newsDAO.getNews(newsID);
                 if (news != null)
                 {
 
                     liTitle.Text = news.Title;
-                    liPosted.Text = ltktDAO.BaseServices.convertDateToString((DateTime)news.Posted);
-                    liAuthor.Text = ltktDAO.News.getAuthor(newsID);
+                    liPosted.Text = bs.convertDateToString((DateTime)news.Posted);
+                    liAuthor.Text = newsDAO.getAuthor(newsID);
 
                     lblContent.Text = news.Contents;
 
-
-                    IList<tblNew> lst = ltktDAO.News.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB).ToList();
+                    IList<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB).ToList();
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < lst.Count; i++)
                     {
@@ -51,8 +59,8 @@ namespace ltkt
                 }
                 else
                 {
-                    liMessage.Text = "Tin tức không tồn tại hoặc đã bị xóa!";
-                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text = CommonConstants.MSG_NEWS_NOT_FOUND;
+                    liMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
                     messagePanel.Visible = true;
                     newsPanel.Visible = false;
                 }

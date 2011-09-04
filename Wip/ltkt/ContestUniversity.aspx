@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="ContestUniversity.aspx.cs" Inherits="ltkt.ContestUniversity" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="cphContent" runat="Server">
+<asp:Content ID="ContestHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+    
     <style type="text/css">
         .style1
         {
@@ -9,6 +11,8 @@
             background-color: white;
         }
     </style>
+</asp:Content>
+<asp:Content ID="Contest" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="content" class="block_text">
         <h2>
             <asp:Label ID="lblTitle" runat="server" Text="Luyện Thi Đại Học"></asp:Label></h2>
@@ -25,9 +29,11 @@
                     <li><a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
                         <img src="<%#Eval("Thumbnail")%>" alt="" />
                         <br />
-                        <center><%#Eval("Title")%></center>
+                        <center>
+                            <%#Eval("Title")%></center>
                         <div class="block_details_text">
-                            <center><%#Eval("Year")%></center>
+                            <center>
+                                <%#Eval("Year")%></center>
                         </div>
                     </a></li>
                 </ItemTemplate>
@@ -45,19 +51,18 @@
             <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
                 <Fields>
-                    <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" PreviousPageText="<" FirstPageText="<<"/>
+                    <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False"
+                        PreviousPageText="<" FirstPageText="<<" />
                     <asp:NumericPagerField />
-                    <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" LastPageText=">>"  NextPageText=">"  />
+                    <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False"
+                        LastPageText=">>" NextPageText=">" />
                 </Fields>
             </asp:DataPager>
         </div>
-        
         <hr />
         <br />
         <h4>
             Các đề liên quan</h4>
-            <asp:Label ID="lblOlderLinks" runat="server"></asp:Label>
+        <asp:Label ID="lblOlderLinks" runat="server"></asp:Label>
     </div>
-    
-    
 </asp:Content>

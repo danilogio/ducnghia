@@ -2,7 +2,7 @@
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 
 <asp:Content ID="EnglishHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Anh văn | Website luyện thi kinh tế</title>
+    <title><asp:Literal ID="liTitleHeader" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="English" ContentPlaceHolderID="cphContent" Runat="Server">
     <div id="main" class="block_text">

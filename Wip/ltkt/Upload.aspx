@@ -2,11 +2,10 @@
     CodeFile="Upload.aspx.cs" Inherits="ltkt.Upload" %>
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
-
 <asp:Content ID="UploadHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Gửi bài viết | Website luyện thi kinh tế</title>
-</asp:Content>
-<asp:Content ID="Upload" ContentPlaceHolderID="cphContent" runat="Server">
+    <%--<title>Gửi bài viết | Website luyện thi kinh tế</title>--%>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
@@ -34,6 +33,33 @@
 	    }
     </script>
 
+</asp:Content>
+<asp:Content ID="Upload" ContentPlaceHolderID="cphContent" runat="Server">
+    <%--<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
+
+    <script type="text/javascript">
+	    $(document).ready(function() {
+	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
+	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
+
+	            if (selectedIndex == 0) {
+	                $('#divLessonType').hide();
+	                $('#divContest').show();
+	            }
+	            else {
+	                $('#divLessonType').show();
+	                $('#divContest').hide();
+	            }
+	        });
+	    });
+
+	    function init() {
+	        $('#<%= ddlSubject.ClientID%>').val(0);
+	        $('#divLessonType').hide();
+	    }
+    </script>--%>
     <div id="divContact" class="block_text">
         <h2>
             Gửi bài</h2>

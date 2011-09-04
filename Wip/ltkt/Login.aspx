@@ -4,7 +4,8 @@
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 
 <asp:Content ID="LoginHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Đăng nhập | Website luyện thi kinh tế</title>
+    <%--<title>Đăng nhập | Website luyện thi kinh tế</title>--%>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="Login" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="loginForm" class="block_text">

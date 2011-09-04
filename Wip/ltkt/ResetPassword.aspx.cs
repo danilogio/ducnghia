@@ -13,8 +13,14 @@ namespace ltkt
         ltktDAO.Users userDAO = new ltktDAO.Users();
         EventLog log = new EventLog();
 
+        ltktDAO.Control control = new ltktDAO.Control();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            liTitle.Text = CommonConstants.PAGE_RESET_PASSWORD_NAME
+                               + CommonConstants.SPACE + CommonConstants.HLINE
+                               + CommonConstants.SPACE
+                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
         }
 

@@ -18,9 +18,14 @@ namespace ltkt
         ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            liTitle.Text = CommonConstants.PAGE_UPLOAD_NAME
+                               + CommonConstants.SPACE + CommonConstants.HLINE
+                               + CommonConstants.SPACE
+                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
             try
             {
                 if (Session[CommonConstants.SES_USER] == null)
@@ -200,7 +205,7 @@ namespace ltkt
                     liMessage.Text = CommonConstants.MSG_UPLOAD_SUCCESSFUL;
                     liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
                     liMessage.Text += "<br />Bài viết của bạn sẽ được kiểm duyệt trong vòng 24h";
-                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a><br />";
+                    liMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
                 }
             }
             else

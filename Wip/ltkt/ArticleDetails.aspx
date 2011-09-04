@@ -3,9 +3,7 @@
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 <asp:Content ID="ArticleDetailsHead" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>
-        <asp:Literal ID="liTitle" runat="server" ></asp:Literal>
-        | Website Luyện thi Kinh tế</title>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
     <style type="text/css">
         .comment
         {

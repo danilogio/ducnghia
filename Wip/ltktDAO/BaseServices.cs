@@ -47,25 +47,33 @@ namespace ltktDAO
 
         public string getDefaultAppropriateThumbnail(string extension)
         {
-            if (extension.Contains("docx")
-                || extension.Contains("doc"))
+            string strThumbnail = CommonConstants.BLANK;
+            switch (extension)
             {
-                return "word.png";
+                case ".doc":
+                case ".docx":
+                    strThumbnail = "word-icon.png";
+                    break;
+                case ".ppt":
+                case ".pptx":
+                case ".pps":
+                case ".ppsx":
+                    strThumbnail = "powerpoint-icon.png";
+                    break;
+                case ".rar":
+                case ".zip":
+                case ".7z":
+                    strThumbnail = "archive-icon.png";
+                    break;
+                case ".pdf":
+                    strThumbnail = "pdf-icon.png";
+                    break;
+                default:
+                    strThumbnail = "unknown_icon.png";
+                    break; ;
             }
-            else if (extension.Contains("ppt")
-                || extension.Contains("ppts")
-                || extension.Contains("pptx")
-                || extension.Contains("ppsx"))
-            {
-                return "pp.png";
-            }
-            else if (extension.Contains("rar")
-                || extension.Contains("zip")
-                || extension.Contains("7z"))
-            {
 
-            }
-            return "unknown.png";
+            return strThumbnail;
         }
 
         /// <summary>
@@ -73,7 +81,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static string convertDateToString(DateTime date)
+        public string convertDateToString(DateTime date)
         {
             string strDate = "";
             if (date != null)

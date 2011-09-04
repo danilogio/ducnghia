@@ -1,12 +1,12 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Profile.aspx.cs" Inherits="ltkt.Profiles" Title="Hồ sơ cá nhân" %>
 
-<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
-
+<%--<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>--%>
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="ProfileHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Hồ sơ cá nhân | Website luyện thi kinh tế</title>
+    <%--<title>Hồ sơ cá nhân | Website luyện thi kinh tế</title>--%>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 </asp:Content>
-
 <asp:Content ID="Profile" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="loginForm" class="block_text">
         <h2>
@@ -67,7 +67,7 @@
                         ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Email không đúng định dạng"
                         Display="None" />
                 </p>
-                <center>
+                <%--<center>
                     <cc1:CaptchaControl ID="ccJoin" runat="server" CaptchaBackgroundNoise="High" CaptchaLength="5"
                         CaptchaHeight="60" CaptchaWidth="200" CaptchaLineNoise="High" CaptchaMinTimeout="5"
                         CaptchaMaxTimeout="240" BorderColor="#333300" BorderWidth="2px" CaptchaChars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpoqrstuvwxyz$%?&#"
@@ -76,7 +76,11 @@
                 <span>Mã xác nhận:</span><asp:TextBox ID="txtboxCaptcha" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="reqCaptcha" runat="server" ErrorMessage="Vui lòng nhập mã xác nhận"
                     ControlToValidate="txtboxCaptcha" Display="none">
-                </asp:RequiredFieldValidator>
+                </asp:RequiredFieldValidator>--%>
+                <div align="center" style="margin-top: 10px; margin-left: 100px">
+                    <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
+                        PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
+                </div>
                 <p style="padding-top: 15px">
                     <span>&nbsp;</span><asp:Button ID="btnSubmitUpdateProfile" runat="server" Text="Cập nhật"
                         CssClass="submit" OnClick="btnSubmitUpdateProfile_Click" /></p>

@@ -12,6 +12,9 @@ using System.Text;
 public partial class Contact : System.Web.UI.Page
 {
     EventLog log = new EventLog();
+    ltktDAO.Control control = new ltktDAO.Control();
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session[CommonConstants.SES_USER] != null)
@@ -20,6 +23,11 @@ public partial class Contact : System.Web.UI.Page
             txtboxContactName.Text = user.DisplayName;
             txtboxContactEmail.Text = user.Email.Trim();
         }
+
+        liTitle.Text = CommonConstants.PAGE_CONTACT_NAME
+                       + CommonConstants.SPACE + CommonConstants.HLINE
+                       + CommonConstants.SPACE
+                       + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
     }
 
     protected void btnSubmitContact_Click(object sender, EventArgs e)
