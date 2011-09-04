@@ -844,6 +844,9 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_SELF_LINK = "<a href=\"{0}?page={1}\">{2}</a>";
 
+        /// <summary>
+        /// Display link template
+        /// </summary>
         public const string TEMP_DISPLAY_LINK = "<a href=\"{0}?action={1}&id={2}\" target=\"_blank\">{3}</a>";
 
         /// <summary>

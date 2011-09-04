@@ -3,12 +3,15 @@
 
 <asp:Content ID="HomeHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title>
-        <asp:Label ID="lblTitle" runat="server" Text="Website luyện thi kinh tế"></asp:Label></title>
+        <%--<asp:Label ID="lblTitle" runat="server" Text="Website luyện thi kinh tế"></asp:Label>--%>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
     <link type="text/css" href="css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
+
     <script type="text/javascript">
         $(function() {
             // Tabs
@@ -17,6 +20,7 @@
             $('#EnglishLesson').tabs();
         });
     </script>
+
 </asp:Content>
 <asp:Content ID="Home" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="block_text" class="block_text">
@@ -67,7 +71,8 @@
                 <li><a href="#EnglishLesson03">Chứng Chỉ</a></li>
             </ul>
             <!-- start EglishLesson-1-->
-            <div id="EnglishLesson01"></a>
+            <div id="EnglishLesson01">
+                </a>
                 <%=loadDataForELLectures() %>
             </div>
             <!-- start EglishLesson-2-->

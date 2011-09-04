@@ -22,19 +22,10 @@ namespace ltkt
         {
             lblWelcomeTitle.Text = controlDAO.getNameString(CommonConstants.CF_WELCOME_TEXT);
             lblWelcomeText.Text = controlDAO.getValueString(CommonConstants.CF_WELCOME_TEXT);
-            MasterPage page = (MasterPage)Master;
-            //page.updateTitle("");
-            Label headerTxt = (Label)page.FindControl("lblHeaderTitle");
-            if (headerTxt != null)
-            {
-                headerTxt.Text = CommonConstants.PAGE_HOME_NAME 
-                            + CommonConstants.SPACE
-                            + CommonConstants.HLINE
-                            + CommonConstants.SPACE
-                            + controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-            
-            }
-            //lblTitle.Text = 
+
+            liTitle.Text = CommonConstants.PAGE_HOME_NAME + CommonConstants.SPACE
+                + CommonConstants.HLINE + CommonConstants.SPACE
+                + controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
         }
 
         public string loadDataForUniversityArticles()
