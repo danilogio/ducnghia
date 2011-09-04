@@ -613,6 +613,8 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     tblUser user = new tblUser();
+                    Permission permitDAO = new Permission();
+
                     user.Username = _username;
                     user.DisplayName = _displayName;
                     user.Sex = _sex;
@@ -621,10 +623,10 @@ namespace ltktDAO
                     user.Note = "Password: " + _password;
 
                     user.Type = true;
-                    user.Permission = "Normal";
+                    user.Permission = permitDAO.getValue(CommonConstants.P_N_GENERAL).ToString();
                     user.RegisterDate = DateTime.Today;
                     user.NumberOfArticles = 0;
-                    user.State = 0;
+                    user.State = CommonConstants.STATE_NON_ACTIVE;
 
                     DB.tblUsers.InsertOnSubmit(user);
                     DB.SubmitChanges();
@@ -855,6 +857,10 @@ namespace ltktDAO
             }
             return item;
         }
+        /// <summary>
+        /// get latest login
+        /// </summary>
+        /// <returns></returns>
         public string getLatestLogin()
         {
             Statistics statisticDAO = new Statistics();
@@ -879,6 +885,74 @@ namespace ltktDAO
                 log.writeLog(DBHelper.strPathLogFile, ex.Message);
             }
             return res;
+        }
+        /// <summary>
+        /// check permission
+        /// </summary>
+        /// <param name="strPermission"></param>
+        /// <param name="_codePermission"></param>
+        /// <returns></returns>
+        public bool isAllow(string strPermission, string _codePermission)
+        {
+            if (!BaseServices.isNullOrBlank(_codePermission))
+            {
+                Permission permitDAO = new Permission();
+                int p = permitDAO.getValue(_codePermission);
+                if (strPermission.Contains(p.ToString().Trim()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool addPermission(string _username, string _codePermit, string _usernameAdmin)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            Permission permitDAO = new Permission();
+
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblUser u = DB.tblUsers.Single(p=>p.Username == _username.Trim());
+
+                    if (u != null)
+                    {
+
+                        //user had this permisssion
+                        if (isAllow(u.Permission, _codePermit))
+                        {
+                            ts.Complete();
+                            return true;
+                        }
+                        else
+                        {
+                            if (!u.Permission.Trim().EndsWith(CommonConstants.COMMA))
+                            {
+                                u.Permission += CommonConstants.COMMA;
+                            }
+                            u.Permission += permitDAO.getValue(_codePermit).ToString();
+                            DB.SubmitChanges();
+                            ts.Complete();
+
+                            //write log
+                            log.writeLog(DBHelper.strPathLogFile, 
+                                        _usernameAdmin, 
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, 
+                                                                _username + CommonConstants.BAR + _codePermit, 
+                                                                CommonConstants.SQL_TABLE_PERMISSION));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _usernameAdmin, ex.Message);
+                return false;
+            }
+            return false;
+
         }
         #endregion
     }
