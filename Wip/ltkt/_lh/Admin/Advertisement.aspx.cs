@@ -12,10 +12,12 @@ namespace ltkt.Admin
     public partial class Advertisement : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Ads adsDAO = new ltktDAO.Ads();
 
         public const int NoOfAdsPerPage = 10;
         public const string SelfLink = "<a href=\"Advertisement.aspx?page={0}\">{1}</a>";
         public const string DisplayNewsLink = "<a href=\"Advertisement.aspx?action=view&id={0}\" target=\"_blank\">{1}</a>";
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,7 +35,7 @@ namespace ltkt.Admin
             }
             else if (Request.QueryString["action"] != null)
             {
-                string action = Request.QueryString["action"];
+                string action = Request.QueryString[CommonConstants.REQ_ACTION];
                 int _id = Convert.ToInt32(Request.QueryString["id"]);
 
                 if (action == "view")
@@ -46,7 +48,7 @@ namespace ltkt.Admin
                 }
                 else if (action == "delete")
                 {
-                    Boolean completeDelete = ltktDAO.Ads.deleteAds(_id);
+                    Boolean completeDelete = adsDAO.deleteAds(_id);
 
                     if (completeDelete)
                     {
@@ -67,14 +69,12 @@ namespace ltkt.Admin
 
         private void showAds(int page)
         {
-            int totalAds = ltktDAO.Ads.countAds();
+            int totalAds = adsDAO.countAds();
             // Computing total pages
             int totalPages;
             int mod = totalAds % NoOfAdsPerPage;
-            String actionLink = "<span title=\"Sửa tin tức\"><a href = \"Advertisement.aspx?action=edit&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></a></span>";
-            actionLink += "&nbsp;&nbsp;<span title=\"Xóa tin tức\"><a href = \"Advertisement.aspx?action=delete&id={0}\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></a></span>";
-
-            IEnumerable<tblAdvertisement> lst = ltktDAO.Ads.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
+            
+            IEnumerable<tblAdvertisement> lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
 
             if (mod == 0)
             {
@@ -97,7 +97,12 @@ namespace ltkt.Admin
                 TableCell companyCell = new TableCell();
                 companyCell.CssClass = "table-cell";
                 companyCell.Style["width"] = "200px";
-                companyCell.Text = String.Format(DisplayNewsLink, ads.ID, ads.Company);
+                //companyCell.Text = String.Format(DisplayNewsLink, ads.ID, ads.Company);
+                companyCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_ADS,
+                                                                     CommonConstants.ACT_VIEW,
+                                                                     ads.ID.ToString(),
+                                                                     ads.Company);
 
                 TableCell expiredCell = new TableCell();
                 expiredCell.CssClass = "table-cell";
@@ -107,13 +112,24 @@ namespace ltkt.Admin
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
                 stateCell.Style["width"] = "40px";
-                stateCell.Text = ltktDAO.Ads.convertStateToString((int)ads.State);
+                stateCell.Text = adsDAO.convertStateToString((int)ads.State);
 
                 TableCell actionCell = new TableCell();
                 actionCell.CssClass = "table-cell";
                 actionCell.Style["width"] = "40px";
-                actionCell.Text = String.Format(actionLink, ads.ID);
+                actionCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_ADS,
+                                                                     CommonConstants.ACT_EDIT,
+                                                                     ads.ID.ToString(),
+                                                                     CommonConstants.HTML_EDIT_ADMIN);
 
+                actionCell.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_ADS,
+                                                                     CommonConstants.ACT_DELETE,
+                                                                     ads.ID.ToString(),
+                                                                     CommonConstants.HTML_DELETE_ADMIN);
+
+                
                 TableRow adsRow = new TableRow();
                 adsRow.Cells.Add(noCell);
                 adsRow.Cells.Add(companyCell);
@@ -128,10 +144,17 @@ namespace ltkt.Admin
             if (totalPages > 1)
             {
                 if (page > 1)
-                    PreviousPageLiteral.Text = String.Format(SelfLink, page - 1, "Previous Page");
-
+                {
+                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                                                                                (page - 1).ToString(),
+                                                                                "Trang trước");
+                }
                 if (page > 0 && page < totalPages)
-                    NextPageLiteral.Text = String.Format(SelfLink, page + 1, "Next Page");
+                {
+                    NextPageLiteral.Text = BaseServices.createMsgByTemplate (CommonConstants.TEMP_SELF_LINK,
+                                                                             (page + 1).ToString(),
+                                                                             "Trang sau");
+                }
             }
         }
     }

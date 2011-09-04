@@ -154,6 +154,16 @@ namespace ltktDAO
             }
             return msg;
         }
+
+        public static string createMsgByTemplate(string template, string arg1, string arg2, string arg3, string arg4)
+        {
+            string msg = CommonConstants.BLANK;
+            if (!isNullOrBlank(template))
+            {
+                msg = String.Format(template, arg1.Trim(), arg2.Trim(), arg3.Trim(), arg4.Trim());
+            }
+            return msg;
+        }
         
         public static string getNameByCode(string code)
         {

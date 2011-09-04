@@ -12,6 +12,7 @@ namespace ltkt
     public partial class AdContact : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Ads adsDAO = new ltktDAO.Ads();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,8 +36,8 @@ namespace ltkt
 
             try
             {
-                bool isOK = ltktDAO.Ads.insertAds(_companyName, _address, _email, _phone, _fromDate, _endDate, _description);
-
+                bool isOK;
+                isOK = adsDAO.insertAds(_companyName, _address, _email, _phone, _fromDate, _endDate, _description);
                 if (isOK)
                 {
                     contactPanel.Visible = false;
@@ -54,7 +55,7 @@ namespace ltkt
             {
                 string username = CommonConstants.USER_GUEST;
 
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);

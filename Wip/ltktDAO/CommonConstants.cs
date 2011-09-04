@@ -31,8 +31,18 @@ namespace ltktDAO
         /// <summary>
         /// path of event log
         /// </summary>
-        public const string LOG_FILE_PATH = "Log\\EventLog";
+        public const string PATH_LOG_FILE = "Log\\EventLog";
 
+        /// <summary>
+        /// html for edit icon on admin page
+        /// </summary>
+        public const string HTML_EDIT_ADMIN = "<img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/>";
+
+        /// <summary>
+        /// html for delete icon on admin page
+        /// </summary>
+        public const string HTML_DELETE_ADMIN = "<img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/>";
+        
         /// <summary>
         /// Like page
         /// </summary>
@@ -83,13 +93,25 @@ namespace ltktDAO
 
         #region State (STATE)
         /// <summary>
-        /// state is unchec
+        /// state is unchecked
         /// </summary>
         public const int STATE_UNCHECK = 0;
+
+        /// <summary>
+        /// Name of state uncheck
+        /// </summary>
+        public const string STATE_UNCHECK_NAME = "Chưa duyệt";
+        
         /// <summary>
         /// state is checked
         /// </summary>
         public const int STATE_CHECKED = 1;
+
+        /// <summary>
+        /// Name of state checked
+        /// </summary>
+        public const string STATE_CHECKED_NAME = "Đã duyệt";
+
         /// <summary>
         /// state is bad
         /// </summary>
@@ -136,10 +158,20 @@ namespace ltktDAO
         /// state is pending
         /// </summary>
         public const int STATE_PENDING = 10;
+
+        /// <summary>
+        /// Name of state pending
+        /// </summary>
+        public const string STATE_PENDING_NAME = "Sắp hết hạn";
         /// <summary>
         /// state is sticky
         /// </summary>
         public const int STATE_STICKY = 13;
+
+        /// <summary>
+        /// Name of state sticky
+        /// </summary>
+        public const string STATE_STICKY_NAME = "Sticky";
 
         #endregion
 
@@ -880,6 +912,22 @@ namespace ltktDAO
         /// Action Click
         /// </summary>
         public const string ACT_CLICK = "click";
+
+        /// <summary>
+        /// Action for delete
+        /// </summary>
+        public const string ACT_DELETE = "delete";
+
+        /// <summary>
+        /// Action for edit
+        /// </summary>
+        public const string ACT_EDIT = "edit";
+
+        /// <summary>
+        /// Action for view
+        /// </summary>
+        public const string ACT_VIEW = "view";
+
         #endregion
 
         #region Advertisement (ADS)

@@ -72,7 +72,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -92,7 +92,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -112,7 +112,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -132,7 +132,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -153,7 +153,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -174,7 +174,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -195,7 +195,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -225,7 +225,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -247,7 +247,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -273,7 +273,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -303,7 +303,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -333,7 +333,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -358,7 +358,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -382,7 +382,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -411,7 +411,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.LOG_FILE_PATH), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }

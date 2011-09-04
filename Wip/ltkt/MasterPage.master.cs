@@ -57,12 +57,12 @@ namespace ltkt
             }
 
         }
-        public void updateTitle(string title)
-        {
-            lblHeaderTitle = new System.Web.UI.WebControls.Label();
-            lblHeaderTitle.Text = title;
-            lblHeaderTitle.Visible = true;
-        }
+        //public void updateTitle(string title)
+        //{
+        //    lblHeaderTitle = new System.Web.UI.WebControls.Label();
+        //    lblHeaderTitle.Text = title;
+        //    lblHeaderTitle.Visible = true;
+        //}
         public void hideLoginSidebar()
         {
             loginSidebar.Visible = false;

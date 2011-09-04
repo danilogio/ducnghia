@@ -39,7 +39,7 @@ namespace ltktDAO
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.PATH_LOG_FILE, ex.Message);
                 return false;
             }
             log.writeLog("[" + _username + "]:Change state ON successful");
@@ -61,7 +61,7 @@ namespace ltktDAO
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.PATH_LOG_FILE, ex.Message);
                 return false;
             }
             log.writeLog("[" + _username + "]:Change state OFF successful");

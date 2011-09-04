@@ -10,19 +10,19 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-        static EventLog log = new EventLog();
+        EventLog log = new EventLog();
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
         #region Property
         #region Get Property
-        
+
         /// <summary>
         /// Lấy trạng thái của một quảng cáo qua id
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static string getState(int _id)
+        public string getState(int _id)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             var ads = DB.tblAdvertisements.Single(a => a.ID == _id);
             string strState = null;
 
@@ -30,24 +30,24 @@ namespace ltktDAO
             {
                 switch (ads.State)
                 {
-                    case 0:
+                    case CommonConstants.STATE_UNCHECK:
                         {
-                            strState = "Chưa duyệt";
+                            strState = CommonConstants.STATE_UNCHECK_NAME;
                             break;
                         }
-                    case 1:
+                    case CommonConstants.STATE_CHECKED:
                         {
-                            strState = "Đang quảng cáo";
+                            strState = CommonConstants.STATE_CHECKED_NAME;
                             break;
                         }
-                    case 10:
+                    case CommonConstants.STATE_PENDING:
                         {
-                            strState = "Sắp hết hạn";
+                            strState = CommonConstants.STATE_PENDING_NAME;
                             break;
                         }
-                    case 13:
+                    case CommonConstants.STATE_STICKY:
                         {
-                            strState = "Sticky";
+                            strState = CommonConstants.STATE_STICKY_NAME;
                             break;
                         }
                     default:
@@ -63,30 +63,30 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_state"></param>
         /// <returns></returns>
-        public static string convertStateToString(int _state)
+        public string convertStateToString(int _state)
         {
             string strState = null;
 
             switch (_state)
             {
-                case 0:
+                case CommonConstants.STATE_UNCHECK:
                     {
-                        strState = "Chưa duyệt";
+                        strState = CommonConstants.STATE_UNCHECK_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.STATE_CHECKED:
                     {
-                        strState = "Đang quảng cáo";
+                        strState = CommonConstants.STATE_CHECKED_NAME;
                         break;
                     }
-                case 10:
+                case CommonConstants.STATE_PENDING:
                     {
-                        strState = "Sắp hết hạn";
+                        strState = CommonConstants.STATE_PENDING_NAME;
                         break;
                     }
-                case 13:
+                case CommonConstants.STATE_STICKY:
                     {
-                        strState = "Sticky";
+                        strState = CommonConstants.STATE_STICKY_NAME;
                         break;
                     }
                 default:
@@ -102,13 +102,24 @@ namespace ltktDAO
         #endregion
 
         #region Method
-        public static bool insertAds(string _companyName,
-                                        string _address,
-                                        string _email,
-                                        string _phone,
-                                        DateTime _from,
-                                        DateTime _end,
-                                        string _description)
+        /// <summary>
+        /// Thêm một quảng cáo
+        /// </summary>
+        /// <param name="_companyName"></param>
+        /// <param name="_address"></param>
+        /// <param name="_email"></param>
+        /// <param name="_phone"></param>
+        /// <param name="_from"></param>
+        /// <param name="_end"></param>
+        /// <param name="_description"></param>
+        /// <returns></returns>
+        public bool insertAds(string _companyName,
+                                string _address,
+                                string _email,
+                                string _phone,
+                                DateTime _from,
+                                DateTime _end,
+                                string _description)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -132,7 +143,10 @@ namespace ltktDAO
 
                     ts.Complete();
 
-                    log.writeLog(DBHelper.strPathLogFile, "insert ads id=" + record.ID + " successfully");
+                    log.writeLog(DBHelper.strPathLogFile,
+                                BaseServices.createMsgByTemplate (CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                    record.ID.ToString(),
+                                                                    CommonConstants.SQL_TABLE_ADVERTISEMENT));
                 }
             }
             catch (Exception e)
@@ -141,7 +155,7 @@ namespace ltktDAO
 
                 return false;
             }
-            
+
             return true;
         }
 
@@ -149,10 +163,10 @@ namespace ltktDAO
         /// Tổng số quảng cáo
         /// </summary>
         /// <returns></returns>
-        public static int countAds()
+        public int countAds()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            
+
             return (from record in DB.tblAdvertisements select record).Count();
         }
 
@@ -162,7 +176,7 @@ namespace ltktDAO
         /// <param name="start"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static IEnumerable<tblAdvertisement> fetchAdsList(int start, int count)
+        public IEnumerable<tblAdvertisement> fetchAdsList(int start, int count)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -178,7 +192,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static bool deleteAds(int _id)
+        public bool deleteAds(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -191,6 +205,11 @@ namespace ltktDAO
                     DB.SubmitChanges();
 
                     ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile,
+                                BaseServices.createMsgByTemplate (CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                    _id.ToString(),
+                                                                    CommonConstants.SQL_TABLE_ADVERTISEMENT));
                 }
             }
             catch (Exception e)
@@ -203,7 +222,7 @@ namespace ltktDAO
             return true;
         }
 
-        
+
 
         #endregion
 

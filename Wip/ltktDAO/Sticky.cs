@@ -49,7 +49,7 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, e.Message);
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.PATH_LOG_FILE, e.Message);
                 return false;
             }
             log.writeLog("[" + _username + "]:INSERT Sticky successful");
@@ -71,7 +71,7 @@ namespace ltktDAO
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile + CommonConstants.LOG_FILE_PATH, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile + CommonConstants.PATH_LOG_FILE, ex.Message);
                 return false;
             }
             log.writeLog("[" + _username + "]:DELETE Sticky successful");
