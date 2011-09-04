@@ -906,6 +906,13 @@ namespace ltktDAO
             return false;
         }
 
+        /// <summary>
+        /// add permission for user
+        /// </summary>
+        /// <param name="_username"></param>
+        /// <param name="_codePermit"></param>
+        /// <param name="_usernameAdmin"></param>
+        /// <returns></returns>
         public bool addPermission(string _username, string _codePermit, string _usernameAdmin)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);

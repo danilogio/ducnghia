@@ -10,20 +10,11 @@ namespace ltktDAO
     {
         public string getThumbnail(string thumbnail, string location)
         {
-            if (thumbnail != null)
-            {
-                thumbnail = thumbnail.Trim();
-            }
-            else
-            {
-                thumbnail = "";
-            }
-            if (location != null)
-            {
-                location = location.Trim();
-            }
-            DirectoryInfo d = new DirectoryInfo(".");
-            string sPath = d.FullName + "\\ltkt\\";
+            thumbnail = nullToBlank(thumbnail);
+            location = nullToBlank(location);
+
+            //DirectoryInfo d = new DirectoryInfo(".");
+            string sPath = DBHelper.strCurrentPath;
             FileInfo f = new FileInfo(sPath + thumbnail);
             
             if (thumbnail == "" || thumbnail == null || f.Exists == false)

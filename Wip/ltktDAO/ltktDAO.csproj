@@ -76,6 +76,7 @@
       <DependentUpon>LTDH.dbml</DependentUpon>
     </Compile>
     <Compile Include="News.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
