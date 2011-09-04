@@ -50,37 +50,46 @@
                             <span>Chức năng</span></h4>
                         <ul class="blocklist">
                             <li>
-                                <asp:HyperLink ID="HpkGeneral" runat="server" NavigateUrl="~/_lh/Admin/General.aspx">Chung</asp:HyperLink>
+                                <asp:HyperLink ID="HpkGeneral" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/General.aspx">Chung</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkUser" runat="server" NavigateUrl="~/_lh/Admin/Users.aspx">Người dùng</asp:HyperLink>
+                                <asp:HyperLink ID="HpkUser" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Users.aspx">Người dùng</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/_lh/Admin/News.aspx">Tin tức</asp:HyperLink>
+                                <asp:HyperLink ID="HpkNews" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/News.aspx">Tin tức</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkPermisson" runat="server" NavigateUrl="~/_lh/Admin/Permisson.aspx">Phân quyền</asp:HyperLink>
+                                <asp:HyperLink ID="HpkPermisson" runat="server" Visible ="false" NavigateUrl="~/_lh/Admin/Permisson.aspx">Phân quyền</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkComment" runat="server" NavigateUrl="~/_lh/Admin/Comment.aspx">Comment</asp:HyperLink>
+                                <asp:HyperLink ID="HpkSecurity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Security.aspx">Bảo mật</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkUniversity" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx">LTĐH</asp:HyperLink>
+                                <asp:HyperLink ID="HpkControl" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Control.aspx">Điều khiển</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkEnglish" runat="server" NavigateUrl="~/_lh/Admin/English.aspx">Tiếng Anh</asp:HyperLink>
+                                <asp:HyperLink ID="HpkComment" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Comment.aspx">Comment</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkIt" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx">Tin học</asp:HyperLink>
+                                <asp:HyperLink ID="HpkUniversity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx">LTĐH</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkAds" runat="server" NavigateUrl="~/_lh/Admin/Advertisement.aspx">Quảng cáo</asp:HyperLink>
+                                <asp:HyperLink ID="HpkEnglish" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/English.aspx">Tiếng Anh</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/_lh/Admin/Contact.aspx">Liên hệ/góp ý</asp:HyperLink>
+                                <asp:HyperLink ID="HpkIt" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Informatics.aspx">Tin học</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkEmail" runat="server" NavigateUrl="~/_lh/Admin/Mailbox.aspx?page=1">Email</asp:HyperLink>
+                                <asp:HyperLink ID="HpkAds" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Advertisement.aspx">Quảng cáo</asp:HyperLink>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="HpkContact" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Contact.aspx">Liên hệ/góp ý</asp:HyperLink>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="HpkEmail" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Mailbox.aspx?page=1">Email</asp:HyperLink>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="HpkLog" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Log.aspx">Log</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkLogout" runat="server" NavigateUrl="~/_lh/Login.aspx">Thoát</asp:HyperLink>
