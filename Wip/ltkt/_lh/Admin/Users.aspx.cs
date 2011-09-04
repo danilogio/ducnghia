@@ -12,15 +12,32 @@ namespace ltkt.Admin
 {
     public partial class Users : System.Web.UI.Page
     {
+        private ltktDAO.Users userDAO = new ltktDAO.Users();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            AdminMaster page = (AdminMaster)Master;
-            page.updateHeader("Quản lý thành viên");
-
-            if (!IsPostBack)
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            if (user != null)
             {
-                //gvUsers.DataSource = ltktDAO.Users.getAll();
-                //gvUsers.DataBind();
+                if (userDAO.isAllow(user.Permission, CommonConstants.P_A_USER)
+                    || userDAO.isAllow(user.Permission, CommonConstants.P_A_FULL_CONTROL))
+                {
+                    ///DO WORK HERE ONLY//////////////////////////////
+                    AdminMaster page = (AdminMaster)Master;
+                    page.updateHeader("Quản lý thành viên");
+
+                    if (!IsPostBack)
+                    {
+                        //gvUsers.DataSource = ltktDAO.Users.getAll();
+                        //gvUsers.DataBind();
+                    }
+                    //////////////////////////////////////////////////
+                }
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
         /*

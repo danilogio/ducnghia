@@ -31,45 +31,61 @@ namespace ltkt.Admin
         public const int NoOfEmailsPerPage = 6;
         public const string SelfLink = "<a href=\"Mailbox.aspx?page={0}\">{1}</a>";
         public const string DisplayEmailLink = "<a href=\"Mailbox.aspx?emailID={0}\">{1}</a>";
+        private ltktDAO.Users userDAO = new ltktDAO.Users();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AdminMaster pageMaster = (AdminMaster)Master;
-            pageMaster.updateHeader("Hộp thư");
-
-            if (getEmailConfig())
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            if (user != null)
             {
-
-                int page = 1;
-                int emailID = -1;
-
-                if (Request.QueryString["page"] != null)
+                if (userDAO.isAllow(user.Permission, CommonConstants.P_A_EMAIL)
+                    || userDAO.isAllow(user.Permission, CommonConstants.P_A_FULL_CONTROL))
                 {
-                    EmailsTable.Visible = true;
-                    EmailDetailTable.Visible = false;
+                    ///DO WORK HERE ONLY//////////////////////////////
+                    AdminMaster pageMaster = (AdminMaster)Master;
+                    pageMaster.updateHeader("Hộp thư");
 
-                    page = Convert.ToInt32(Request.QueryString["page"]);
-                    showEmail(page);
-                }
-                else if (Request.QueryString["emailID"] != null)
-                {
-                    EmailsTable.Visible = false;
-                    EmailDetailTable.Visible = true;
+                    if (getEmailConfig())
+                    {
 
-                    emailID = Convert.ToInt32(Request.QueryString["emailID"]);
-                    ltktDAO.Contact.setRead(emailID, true);
-                    showDetails(emailID);
-                }
-                else if (Request.QueryString["page"] == null)
-                {
-                    Response.Redirect("Mailbox.aspx?page=1");
+                        int page = 1;
+                        int emailID = -1;
+
+                        if (Request.QueryString["page"] != null)
+                        {
+                            EmailsTable.Visible = true;
+                            EmailDetailTable.Visible = false;
+
+                            page = Convert.ToInt32(Request.QueryString["page"]);
+                            showEmail(page);
+                        }
+                        else if (Request.QueryString["emailID"] != null)
+                        {
+                            EmailsTable.Visible = false;
+                            EmailDetailTable.Visible = true;
+
+                            emailID = Convert.ToInt32(Request.QueryString["emailID"]);
+                            ltktDAO.Contact.setRead(emailID, true);
+                            showDetails(emailID);
+                        }
+                        else if (Request.QueryString["page"] == null)
+                        {
+                            Response.Redirect("Mailbox.aspx?page=1");
+                        }
+                    }
+                    else
+                    {
+                        viewPanel.Visible = false;
+                        composePanel.Visible = false;
+                        configPanel.Visible = true;
+                    }
+                    //////////////////////////////////////////////////
                 }
             }
             else
             {
-                viewPanel.Visible = false;
-                composePanel.Visible = false;
-                configPanel.Visible = true;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
 
