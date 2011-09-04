@@ -95,6 +95,25 @@ namespace ltktDAO
 
             return strState;
         }
+
+        /// <summary>
+        /// Lấy ra một quảng cáo
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public tblAdvertisement getAds(int _id)
+        {
+            IEnumerable<tblAdvertisement> lst = from record in DB.tblAdvertisements
+                                                where record.ID == _id
+                                                select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+
+            return null;
+        }
         #endregion
 
         #region Set Property

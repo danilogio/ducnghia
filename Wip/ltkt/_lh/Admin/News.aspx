@@ -2,7 +2,9 @@
     CodeFile="News.aspx.cs" Inherits="ltkt.Admin.News" ValidateRequest="false" %>
 
 <asp:Content ID="NewsAdminHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
-    <title>Quản lý tin tức | Website luyện thi kinh tế</title>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -40,7 +42,7 @@
 
         });
     </script>
-    
+
 </asp:Content>
 <asp:Content ID="NewsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content" class="block_text">

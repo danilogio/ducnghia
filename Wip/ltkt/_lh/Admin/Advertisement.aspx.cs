@@ -13,57 +13,89 @@ namespace ltkt.Admin
     {
         EventLog log = new EventLog();
         ltktDAO.Ads adsDAO = new ltktDAO.Ads();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         public const int NoOfAdsPerPage = 10;
-        public const string SelfLink = "<a href=\"Advertisement.aspx?page={0}\">{1}</a>";
-        public const string DisplayNewsLink = "<a href=\"Advertisement.aspx?action=view&id={0}\" target=\"_blank\">{1}</a>";
         
 
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster pageAdmin = (AdminMaster)Master;
-            pageAdmin.updateHeader("Quản lý quảng cáo");
+            pageAdmin.updateHeader(CommonConstants.PAGE_ADMIN_ADS_NAME);
+
+            liTitle.Text = CommonConstants.PAGE_ADMIN_ADS_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE 
+                           + control.getValueString (CommonConstants.CF_TITLE_ON_HEADER);
 
             int page = 1;
 
-            if (Request.QueryString["page"] != null)
+            if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
             {
                 viewPanel.Visible = true;
+                detailsPanel.Visible = false;
+                messagePanel.Visible = false;
 
-                page = Convert.ToInt32(Request.QueryString["page"]);
+                page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
                 showAds(page);
             }
-            else if (Request.QueryString["action"] != null)
+            else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
             {
                 string action = Request.QueryString[CommonConstants.REQ_ACTION];
-                int _id = Convert.ToInt32(Request.QueryString["id"]);
+                int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
-                if (action == "view")
-                {
-
-                }
-                else if (action == "edit")
+                if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
                 {
                     viewPanel.Visible = false;
+                    detailsPanel.Visible = true;
+                    messagePanel.Visible = false;
+
+                    showAdsDetails(_id);
                 }
-                else if (action == "delete")
+                else if (action == CommonConstants.ACT_DELETE)
                 {
                     Boolean completeDelete = adsDAO.deleteAds(_id);
 
                     if (completeDelete)
                     {
-                        Response.Write("alert (\"Xóa thành công!\")");
+                        Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
                         Response.Redirect("Advertisement.aspx?page=1");
                     }
                     else
                     {
-                        Response.Write("alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")");
+                        Response.Write(CommonConstants.ALERT_DELETE_FAIL);
                     }
                 }
             }
             else
             {
                 Response.Redirect("Advertisement.aspx?page=1");
+            }
+        }
+
+        private void showAdsDetails(int _id)
+        {
+            tblAdvertisement Ads = adsDAO.getAds(_id);
+
+            if (Ads != null)
+            {
+                txtCompany.Text = Ads.Company;
+                txtAddress.Text = Ads.Address;
+                txtEmail.Text = Ads.Email;
+                txtPhone.Text = Ads.Phone;
+                txtFromDate.Text = Ads.fromDate;
+                txtEndDate.Text = Ads.toDate;
+                txtPrice.Text = Ads.Price.ToString();
+                txtDescription.Text = Ads.Description;
+                
+            }
+            else
+            {
+                messagePanel.Visible = true;
+                detailsPanel.Visible = false;
+
+                liMessage.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+
             }
         }
 
@@ -147,15 +179,24 @@ namespace ltkt.Admin
                 {
                     PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
                                                                                 (page - 1).ToString(),
-                                                                                "Trang trước");
+                                                                                CommonConstants.PREVIOUS_PAGE);
                 }
                 if (page > 0 && page < totalPages)
                 {
                     NextPageLiteral.Text = BaseServices.createMsgByTemplate (CommonConstants.TEMP_SELF_LINK,
                                                                              (page + 1).ToString(),
-                                                                             "Trang sau");
+                                                                             CommonConstants.NEXT_PAGE);
                 }
             }
         }
-    }
+        
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+}
 }

@@ -42,6 +42,27 @@ namespace ltktDAO
         /// html for delete icon on admin page
         /// </summary>
         public const string HTML_DELETE_ADMIN = "<img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/>";
+
+        /// <summary>
+        /// Next page
+        /// </summary>
+        public const string NEXT_PAGE = "Trang sau";
+
+        /// <summary>
+        /// Previous page
+        /// </summary>
+        public const string PREVIOUS_PAGE = "Trang trước";
+
+        /// <summary>
+        /// alert when delete successful
+        /// </summary>
+        public const string ALERT_DELETE_SUCCESSFUL = "alert (\"Xóa thành công!\")";
+
+        /// <summary>
+        /// alert when delete fail
+        /// </summary>
+        public const string ALERT_DELETE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
+        
         
         /// <summary>
         /// Like page
@@ -472,6 +493,11 @@ namespace ltktDAO
         /// Message access is denied
         /// </summary>
         public const string MSG_ACCESS_DENIED = "Bạn không có quyền truy cập khu vực này!";
+
+        /// <summary>
+        /// Message resourse not found
+        /// </summary>
+        public const string MSG_RESOURSE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
         #endregion
 
         #region Administrator Function (AF)
@@ -716,12 +742,23 @@ namespace ltktDAO
         /// <summary>
         /// Admin news page
         /// </summary>
-        public const string PAGE_ADMIN_NEWS = "./Admin/News.aspx";
+        public const string PAGE_ADMIN_NEWS = "News.aspx";
+        
+        /// <summary>
+        /// Name of admin news page
+        /// </summary>
+        public const string PAGE_ADMIN_NEWS_NAME = "Quản lý tin tức";
 
         /// <summary>
         /// Admin ads page
         /// </summary>
-        public const string PAGE_ADMIN_ADS = "./Admin/Advertisement.aspx";
+        public const string PAGE_ADMIN_ADS = "Advertisement.aspx";
+
+        /// <summary>
+        /// Name of admin ads page
+        /// </summary>
+        public const string PAGE_ADMIN_ADS_NAME = "Quản lý quảng cáo";
+
         #endregion
 
         #region Application Constants (APP)
@@ -767,6 +804,11 @@ namespace ltktDAO
         /// Request Action
         /// </summary>
         public const string REQ_ACTION = "action";
+
+        /// <summary>
+        /// request page
+        /// </summary>
+        public const string REQ_PAGE = "page";
         #endregion
 
         #region Section Uni,It,EL (SEC)
@@ -1050,6 +1092,25 @@ namespace ltktDAO
         /// </summary>
         public const string SQL_TABLE_CONTROL = "tblControl";
 
+        #endregion
+
+        #region Permission (P)
+        public const string P_N_GENERAL = "N_GENERAL";
+        public const string P_A_GENERAL = "A_GENERAL";
+        public const string P_A_ADS = "A_ADS";
+        public const string P_A_USER = "A_USER";
+        public const string P_A_NEWS = "A_NEWS";
+        public const string P_A_UNIVERSITY = "A_UNIVERSITY";
+        public const string P_A_ENGLISH = "A_ENGLISH";
+        public const string P_A_INFORMATICS = "A_INFORMATICS";
+        public const string P_A_SECURITY = "A_SECURITY";
+        public const string P_A_CONTACT = "A_CONTACT";
+        public const string P_A_COMMENT = "A_COMMENT";
+        public const string P_A_LOG = "A_LOG";
+        public const string P_A_CONTROL = "A_CONTROL";
+        public const string P_A_EMAIL = "A_EMAIL";
+        public const string P_A_AUTHORITY = "A_AUTHORITY";
+        public const string P_A_FULL_CONTROL = "A_FULL_CONTROL"; 
         #endregion
     }
 }

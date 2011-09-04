@@ -12,6 +12,7 @@ namespace ltkt.Admin
     public partial class News : System.Web.UI.Page
     {
         EventLog log = new EventLog();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         public const int NoOfNewsPerPage = 10;
         public const string SelfLink = "<a href=\"News.aspx?page={0}\">{1}</a>";
@@ -20,7 +21,12 @@ namespace ltkt.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             AdminMaster pageMaster = (AdminMaster)Master;
-            pageMaster.updateHeader("Quản lý tin tức");
+            pageMaster.updateHeader(CommonConstants.PAGE_ADMIN_NEWS_NAME);
+
+            liTitle.Text = CommonConstants.PAGE_ADMIN_NEWS_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
             int page = 1;
 
