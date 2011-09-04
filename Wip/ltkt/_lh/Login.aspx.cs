@@ -34,7 +34,6 @@ namespace ltkt.Admin
             txtboxLoginName.Text = CommonConstants.BLANK;
             txtboxPassword.Text = CommonConstants.BLANK;
             tblUser user = userDAO.getUser(strUsername, strPassword, false);
-
             if (user != null)
             {
                 if (user.State != CommonConstants.STATE_DELETED 
@@ -62,6 +61,7 @@ namespace ltkt.Admin
             {
                 lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
                 lMessage.Visible = true;
+                
             }
         }
     }

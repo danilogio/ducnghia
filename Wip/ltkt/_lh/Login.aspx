@@ -12,6 +12,8 @@
     <script type="text/javascript" language="javascript" src="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.js"></script>
     <script type="text/javascript">
         $(function() {
+        $("#divLoader").hide();
+        
         $("#btnSubmitLogin").buttonCaptcha({
                 codeWord: 5,
                 codeZone: false,
@@ -19,7 +21,16 @@
                 verifyMustName: 'codeWordReal'
             });
         });
-
+        function showLoading() {
+            if (document.getElementById('<%=txtboxLoginName.ClientID%>').value != null
+            && document.getElementById('<%=txtboxLoginName.ClientID%>').value != ""
+            && document.getElementById('<%=txtboxPassword.ClientID%>').value != null
+            && document.getElementById('<%=txtboxPassword.ClientID%>').value != "") {
+                $("#divLoader").show();
+            }
+            //alert(document.getElementById('<%=txtboxLoginName.ClientID%>').value);
+        }
+       
     </script>
 
     <style type="text/css">
@@ -57,10 +68,15 @@
                 <asp:Literal ID="lMessage" runat="server"></asp:Literal>
             </center>
         </asp:Panel>
+        
+           
+        
         <asp:Panel ID="loginPanel" runat="server">
+       
             <form action="Login.aspx" method="post" runat="server">
             <center>
-                <table class="style1">
+                 
+                <table>
                     <tr>
                         <td colspan="2">
                             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowSummary="true"
@@ -122,7 +138,16 @@
                         </td>
                         <td>
                             <asp:Button ID="btnSubmitLogin" runat="server" Text="Đăng nhập" CssClass="submit"
-                                OnClick="BtnLogin_Click" />
+                                OnClick="BtnLogin_Click" OnClientClick="showLoading()" />
+                            <br />
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                       
                         </td>
                     </tr>
                 </table>
@@ -130,6 +155,11 @@
             </center>
             </form>
         </asp:Panel>
+        <center>
+            <div id="divLoader" style="margin-left:90px;">
+                 <img id="imgLoader" src="../images/loader.gif" alt=""/>
+            </div>
+        </center>
     </div>
 </body>
 </html>
