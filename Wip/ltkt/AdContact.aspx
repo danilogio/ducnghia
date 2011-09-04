@@ -3,7 +3,7 @@
 
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="AdContactHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title>Liên hệ quảng cáo | Website luyện thi kinh tế</title>
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
