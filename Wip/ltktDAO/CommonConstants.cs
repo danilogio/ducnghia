@@ -921,7 +921,7 @@ namespace ltktDAO
         /// <summary>
         /// Display link template
         /// </summary>
-        public const string TEMP_DISPLAY_LINK = "<a href=\"{0}?action={1}&id={2}\" target=\"_blank\">{3}</a>";
+        public const string TEMP_DISPLAY_LINK = "<a href=\"{0}?action={1}&id={2}\">{3}</a>";
 
         /// <summary>
         /// Label tag template

@@ -3,7 +3,8 @@
 
 <asp:Content ID="AdvertisementAdminHeader" ContentPlaceHolderID="cphAdminHeader"
     runat="Server">
-    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -20,6 +21,20 @@
             padding: 20px 5px;
         }
     </style>
+
+    <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/calendar-blue.css" />
+    <link type="text/css" href="../../css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".calendar").datepicker({
+                dateFormat : 'dd-mm-yy'
+            });
+        }); 
+    </script>
+
 </asp:Content>
 <asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div class="block_text">
@@ -58,10 +73,9 @@
         </asp:Panel>
         <asp:Panel ID="detailsPanel" runat="server" Visible="false">
             <div id="divFunction">
-                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" 
-                    onclick="btnEdit_Click" />&nbsp;&nbsp;
-                <asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" 
-                    onclick="btnCancel_Click" />
+                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />&nbsp;&nbsp;
+                <asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" OnClick="btnCancel_Click" />
+                <hr />
             </div>
             <div id="divDetails" class="form_settings">
                 <p>
@@ -82,11 +96,11 @@
                 </p>
                 <p>
                     <span>Bắt đầu quảng cáo từ ngày:</span>
-                    <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFromDate" runat="server" CssClass="calendar"></asp:TextBox>
                 </p>
                 <p>
                     <span>Kết thúc quảng cáo vào ngày:</span>
-                    <asp:TextBox ID="txtEndDate" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtEndDate" runat="server" CssClass="calendar"></asp:TextBox>
                 </p>
                 <p>
                     <span>Giá:</span>
@@ -103,6 +117,7 @@
                 <p>
                     <span>Trạng thái:</span>
                     <asp:DropDownList ID="ddlState" runat="server">
+                        <asp:ListItem></asp:ListItem>
                     </asp:DropDownList>
                 </p>
             </div>

@@ -50,6 +50,15 @@ namespace ltkt.Admin
                     detailsPanel.Visible = true;
                     messagePanel.Visible = false;
 
+                    if (ddlState.Items.Count == 1)
+                    {
+                        ddlState.Items.RemoveAt(0);
+                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
+                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
+                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+                    }
+
                     showAdsDetails(_id);
                 }
                 else if (action == CommonConstants.ACT_DELETE)
@@ -76,18 +85,18 @@ namespace ltkt.Admin
         private void showAdsDetails(int _id)
         {
             tblAdvertisement Ads = adsDAO.getAds(_id);
-
+            
             if (Ads != null)
             {
-                txtCompany.Text = Ads.Company;
-                txtAddress.Text = Ads.Address;
-                txtEmail.Text = Ads.Email;
-                txtPhone.Text = Ads.Phone;
-                txtFromDate.Text = Ads.fromDate;
-                txtEndDate.Text = Ads.toDate;
+                txtCompany.Text = Ads.Company.Trim();
+                txtAddress.Text = Ads.Address.Trim();
+                txtEmail.Text = Ads.Email.Trim();
+                txtPhone.Text = Ads.Phone.Trim();
+                txtFromDate.Text = BaseServices.convertDateToString((DateTime)Ads.fromDate);
+                txtEndDate.Text = BaseServices.convertDateToString((DateTime)Ads.toDate); 
                 txtPrice.Text = Ads.Price.ToString();
-                txtDescription.Text = Ads.Description;
-                
+                txtDescription.Text = Ads.Description.Trim();
+                ddlState.SelectedIndex = Ads.State;
             }
             else
             {
@@ -95,7 +104,6 @@ namespace ltkt.Admin
                 detailsPanel.Visible = false;
 
                 liMessage.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
-
             }
         }
 
