@@ -7,9 +7,13 @@
     <title>Login to configuration website</title>
     <link type="text/css" href="../css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.styles.css" />
+
     <script type="text/javascript" src="../js/jquery-1.5.1.min.js"></script>
+
     <script type="text/javascript" src="../js/jquery-ui-1.8.10.custom.min.js"></script>
+
     <script type="text/javascript" language="javascript" src="../js/plugins/buttonCaptcha/jquery.buttonCaptcha.js"></script>
+
     <script type="text/javascript">
         $(function() {
         $("#divLoader").hide();
@@ -55,7 +59,6 @@
         {
             width: 100%;
         }
-        
     </style>
 </head>
 <body>
@@ -68,14 +71,9 @@
                 <asp:Literal ID="lMessage" runat="server"></asp:Literal>
             </center>
         </asp:Panel>
-        
-           
-        
         <asp:Panel ID="loginPanel" runat="server">
-       
             <form action="Login.aspx" method="post" runat="server">
             <center>
-                 
                 <table>
                     <tr>
                         <td colspan="2">
@@ -140,14 +138,12 @@
                             <asp:Button ID="btnSubmitLogin" runat="server" Text="Đăng nhập" CssClass="submit"
                                 OnClick="BtnLogin_Click" OnClientClick="showLoading()" />
                             <br />
-                            
                         </td>
                     </tr>
                     <tr>
                         <td>
                         </td>
                         <td>
-                       
                         </td>
                     </tr>
                 </table>
@@ -156,8 +152,8 @@
             </form>
         </asp:Panel>
         <center>
-            <div id="divLoader" style="margin-left:90px;">
-                 <img id="imgLoader" src="../images/loader.gif" alt=""/>
+            <div id="divLoader" style="margin-left: 90px;">
+                <img id="imgLoader" src="../images/loader.gif" alt="" />
             </div>
         </center>
     </div>

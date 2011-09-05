@@ -13,6 +13,7 @@ namespace ltkt.Admin
     {
         Users userDAO = new Users();
         ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session[CommonConstants.SES_USER] != null)
