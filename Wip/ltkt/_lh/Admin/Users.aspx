@@ -3,8 +3,7 @@
 
 <asp:Content ID="UsersAdminHead" ContentPlaceHolderID="cphAdminHeader" runat="Server">
     <title>Quản lý thành viên | Website luyện thi kinh tế</title>
-    
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
         {
@@ -19,13 +18,14 @@
         {
             padding: 20px 5px;
         }
+    </style>--%>
+    <style type="text/css">
         .style1
         {
             width: 100%;
             background-color: white;
         }
     </style>
-    
     <style type="text/css">
         .users-table
         {
@@ -131,7 +131,6 @@
                     <EditRowStyle Wrap="True"></EditRowStyle>
                     <AlternatingRowStyle BackColor="White" />
                 </asp:GridView>--%>
-                
             </div>
         </div>
         <div class="block_text">

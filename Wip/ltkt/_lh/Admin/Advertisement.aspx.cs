@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using ltktDAO;
+using System.IO;
 
 namespace ltkt.Admin
 {
@@ -17,7 +18,7 @@ namespace ltkt.Admin
         BaseServices bs = new BaseServices();
 
         public const int NoOfAdsPerPage = 10;
-        
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,8 +27,8 @@ namespace ltkt.Admin
 
             liTitle.Text = CommonConstants.PAGE_ADMIN_ADS_NAME
                            + CommonConstants.SPACE + CommonConstants.HLINE
-                           + CommonConstants.SPACE 
-                           + control.getValueString (CommonConstants.CF_TITLE_ON_HEADER);
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
             int page = 1;
 
@@ -60,7 +61,7 @@ namespace ltkt.Admin
                         ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
                     }
 
-                    showAdsDetails(_id);
+                    showAdsDetails(_id, action);
                 }
                 else if (action == CommonConstants.ACT_DELETE)
                 {
@@ -83,21 +84,31 @@ namespace ltkt.Admin
             }
         }
 
-        private void showAdsDetails(int _id)
+        private void showAdsDetails(int _id, string _action)
         {
             tblAdvertisement Ads = adsDAO.getAds(_id);
-            
-            if (Ads != null)
+
+            if (Ads != null && Session[CommonConstants.SES_EDIT_ADS] == null)
             {
                 txtCompany.Text = Ads.Company.Trim();
                 txtAddress.Text = Ads.Address.Trim();
                 txtEmail.Text = Ads.Email.Trim();
                 txtPhone.Text = Ads.Phone.Trim();
                 txtFromDate.Text = bs.convertDateToString((DateTime)Ads.fromDate);
-                txtEndDate.Text = bs.convertDateToString((DateTime)Ads.toDate); 
+                txtEndDate.Text = bs.convertDateToString((DateTime)Ads.toDate);
                 txtPrice.Text = Ads.Price.ToString();
                 txtDescription.Text = Ads.Description.Trim();
                 ddlState.SelectedIndex = Ads.State;
+
+                if (File.Exists(Ads.Location))
+                {
+                    liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage(" + Ads.Location + ")\" />";
+                }
+                else
+                {
+                    liAds.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+                    liAds.Text += "&nbsp;<input type=\"button\" value=\"Tải hình lên\" class=\"formbutton\" onclick=\"upload()\" />";
+                }
             }
             else
             {
@@ -105,6 +116,39 @@ namespace ltkt.Admin
                 detailsPanel.Visible = false;
 
                 liMessage.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+            }
+
+            if (_action == CommonConstants.ACT_EDIT)
+            {
+                Session[CommonConstants.SES_EDIT_ADS] = Ads;
+
+                txtCompany.ReadOnly = false;
+                txtAddress.ReadOnly = false;
+                txtEmail.ReadOnly = false;
+                txtPhone.ReadOnly = false;
+                txtFromDate.ReadOnly = false;
+                txtEndDate.ReadOnly = false;
+                txtFromDate.CssClass = "calendar";
+                txtEndDate.CssClass = "calendar";
+                txtPrice.ReadOnly = false;
+                txtDescription.ReadOnly = false;
+                ddlState.Enabled = true;
+            }
+            else
+            {
+                Session[CommonConstants.SES_EDIT_ADS] = null;
+
+                txtCompany.ReadOnly = true;
+                txtAddress.ReadOnly = true;
+                txtEmail.ReadOnly = true;
+                txtPhone.ReadOnly = true;
+                txtFromDate.ReadOnly = true;
+                txtEndDate.ReadOnly = true;
+                txtFromDate.CssClass = "";
+                txtEndDate.CssClass = "";
+                txtPrice.ReadOnly = true;
+                txtDescription.ReadOnly = true;
+                ddlState.Enabled = false;
             }
         }
 
@@ -114,7 +158,7 @@ namespace ltkt.Admin
             // Computing total pages
             int totalPages;
             int mod = totalAds % NoOfAdsPerPage;
-            
+
             IEnumerable<tblAdvertisement> lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
 
             if (mod == 0)
@@ -170,7 +214,7 @@ namespace ltkt.Admin
                                                                      ads.ID.ToString(),
                                                                      CommonConstants.HTML_DELETE_ADMIN);
 
-                
+
                 TableRow adsRow = new TableRow();
                 adsRow.Cells.Add(noCell);
                 adsRow.Cells.Add(companyCell);
@@ -193,21 +237,107 @@ namespace ltkt.Admin
                 }
                 if (page > 0 && page < totalPages)
                 {
-                    NextPageLiteral.Text = BaseServices.createMsgByTemplate (CommonConstants.TEMP_SELF_LINK,
+                    NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
                                                                              CommonConstants.PAGE_ADMIN_ADS,
                                                                              (page + 1).ToString(),
                                                                              CommonConstants.NEXT_PAGE);
                 }
             }
         }
-        
+
         protected void btnEdit_Click(object sender, EventArgs e)
         {
+            if (Request.QueryString[CommonConstants.REQ_ACTION] == CommonConstants.ACT_VIEW)
+            {
+                txtFromDate.CssClass = "calendar";
+                txtEndDate.CssClass = "calendar";
 
+                Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                                   + CommonConstants.ADD_PARAMETER
+                                   + CommonConstants.REQ_ACTION
+                                   + CommonConstants.EQUAL
+                                   + CommonConstants.ACT_EDIT
+                                   + CommonConstants.AND
+                                   + CommonConstants.REQ_ID
+                                   + CommonConstants.EQUAL
+                                   + Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]));
+            }
+
+            try
+            {
+                if (Session[CommonConstants.SES_EDIT_ADS] != null)
+                {
+                    tblAdvertisement Ads = (tblAdvertisement)Session[CommonConstants.SES_EDIT_ADS];
+
+                    string _company = txtCompany.Text;
+                    string _address = txtAddress.Text;
+                    string _email = txtEmail.Text;
+                    string _phone = txtPhone.Text;
+                    //DateTime _fromDate = DateTime.TryParse(txtFromDate.Text);
+                    //DateTime _toDate = DateTime.TryParse(txtEndDate.Text);
+                    int _price = Convert.ToInt32(txtPrice.Text);
+                    string _description = txtDescription.Text;
+
+                    int _state = CommonConstants.STATE_UNCHECK;
+                    switch (Convert.ToInt32(ddlState.SelectedValue))
+                    {
+                        case CommonConstants.STATE_UNCHECK:
+                            _state = CommonConstants.STATE_UNCHECK;
+                            break;
+                        case CommonConstants.STATE_CHECKED:
+                            _state = CommonConstants.STATE_CHECKED;
+                            break;
+                        case CommonConstants.STATE_PENDING:
+                            _state = CommonConstants.STATE_PENDING;
+                            break;
+                        case CommonConstants.STATE_STICKY:
+                            _state = CommonConstants.STATE_STICKY;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (fileAds.HasFile)
+                    {
+                        string folder = "imagesAd";
+                        string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
+                        string filename = rootFolder + fileAds.FileName;
+                        string fileSave = folder + "\\" + fileAds.FileName;
+                        // save file
+                        if (!Directory.Exists(rootFolder))
+                        {
+                            Directory.CreateDirectory(rootFolder);
+                        }
+
+                        fileAds.SaveAs(filename);
+                    }
+
+                    Session[CommonConstants.SES_EDIT_ADS] = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
+                               CommonConstants.ADD_PARAMETER +
+                               CommonConstants.REQ_PAGE + "=1");
         }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            Session[CommonConstants.SES_EDIT_ADS] = null;
 
+            detailsPanel.Visible = false;
+            viewPanel.Visible = true;
+            Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
+                               CommonConstants.ADD_PARAMETER +
+                               CommonConstants.REQ_PAGE + "=1");
         }
-}
+    }
 }

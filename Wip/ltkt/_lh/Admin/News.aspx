@@ -5,7 +5,7 @@
     <title>
         <asp:Literal ID="liTitle" runat="server"></asp:Literal>
     </title>
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
         {
@@ -20,7 +20,7 @@
         {
             padding: 20px 5px;
         }
-    </style>
+    </style>--%>
     <%--tinyMCE--%>
 
     <script type="text/javascript" src="../../js/tinyMCE/tiny_mce.js"></script>

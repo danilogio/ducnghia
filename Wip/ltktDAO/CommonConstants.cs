@@ -110,6 +110,18 @@ namespace ltktDAO
         /// hline string (|)
         /// </summary>
         public const string HLINE = "|";
+        /// <summary>
+        /// add parameter to address
+        /// </summary>
+        public const string ADD_PARAMETER = "?";
+        /// <summary>
+        /// =
+        /// </summary>
+        public const string EQUAL = "=";
+        /// <summary>
+        /// &
+        /// </summary>
+        public const string AND = "&";
         #endregion
 
         #region State (STATE)
@@ -822,7 +834,7 @@ namespace ltktDAO
         /// <summary>
         /// Admin login page
         /// </summary>
-        public const string PAGE_ADMIN_LOGIN = "./Login.aspx";
+        public const string PAGE_ADMIN_LOGIN = "../Login.aspx";
 
         /// <summary>
         /// Admin news page
@@ -866,6 +878,11 @@ namespace ltktDAO
         /// session edit news
         /// </summary>
         public const string SES_EDIT_NEWS = "editNews";
+
+        /// <summary>
+        /// session edit ads
+        /// </summary>
+        public const string SES_EDIT_ADS = "editAds";
         #endregion
 
         #region Request Constants (REQ)

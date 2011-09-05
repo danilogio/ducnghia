@@ -35,7 +35,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
 

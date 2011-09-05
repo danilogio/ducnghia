@@ -3,9 +3,8 @@
 
 <asp:Content ID="AdvertisementAdminHeader" ContentPlaceHolderID="cphAdminHeader"
     runat="Server">
-    <title>
-        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
         {
@@ -20,10 +19,12 @@
         {
             padding: 20px 5px;
         }
-    </style>
+    </style>--%>
 
     <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+
     <script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+
     <link rel="stylesheet" type="text/css" media="all" href="../../css/calendar-blue.css" />
     <link type="text/css" href="../../css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
 
@@ -33,6 +34,33 @@
                 dateFormat : 'dd-mm-yy'
             });
         }); 
+    </script>
+
+    <script type="text/javascript">
+	    function init() {
+	        $('#upload').hide();
+	    }
+	    
+	    function upload()
+	    {
+	    $('#upload').show();
+	    }
+    </script>
+
+    <script type="text/javascript">
+    function DisplayFullImage(srcImg) 
+    { 
+        txtCode = "<HTML><HEAD>" 
+        +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
+        + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage " 
+        + "onload='window.resizeTo(document.FullImage.width,document.FullImage.height)'>"  
+        + "</CENTER>"   
+        + "</BODY></HTML>"; 
+        mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 
+        mywindow.document.open(); 
+        mywindow.document.write(txtCode); 
+        mywindow.document.close();
+    }
     </script>
 
 </asp:Content>
@@ -78,29 +106,49 @@
                 <hr />
             </div>
             <div id="divDetails" class="form_settings">
+                <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
                 <p>
                     <span>Tên công ty:</span>
                     <asp:TextBox ID="txtCompany" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqCompany" runat="server" ErrorMessage="Vui lòng nhập tên công ty"
+                        ControlToValidate="txtCompany" Display="None"></asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Địa chỉ:</span>
                     <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqAddress" runat="server" ErrorMessage="Vui lòng nhập địa chỉ"
+                        ControlToValidate="txtAddress" Display="None"></asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Email:</span>
                     <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqEmail" runat="server" ErrorMessage="Vui lòng nhập email liên lạc"
+                        ControlToValidate="txtEmail" Display="none">
+                    </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="valEmail" runat="server" ControlToValidate="txtEmail"
+                        ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Email không đúng định dạng"
+                        Display="None" />
                 </p>
                 <p>
                     <span>Điện thoại:</span>
                     <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqPhone" runat="server" ErrorMessage="Vui lòng nhập số điện thoại"
+                        ControlToValidate="txtPhone" Display="None"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="valPhone" runat="server" ErrorMessage="Xin vui lòng kiểm tra lại số điện thoại"
+                        ControlToValidate="txtPhone" Display="None" ValidationExpression="^['0-9'.\S]{10,11}$">
+                    </asp:RegularExpressionValidator>
                 </p>
                 <p>
                     <span>Bắt đầu quảng cáo từ ngày:</span>
                     <asp:TextBox ID="txtFromDate" runat="server" CssClass="calendar"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqFromDate" runat="server" ErrorMessage="Vui lòng nhập ngày bắt đầu"
+                        ControlToValidate="txtFromDate" Display="None"></asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Kết thúc quảng cáo vào ngày:</span>
                     <asp:TextBox ID="txtEndDate" runat="server" CssClass="calendar"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqEndDate" runat="server" ErrorMessage="Vui lòng nhập ngày kết thúc"
+                        ControlToValidate="txtEndDate" Display="None"></asp:RequiredFieldValidator>
                 </p>
                 <p>
                     <span>Giá:</span>
@@ -108,6 +156,11 @@
                 </p>
                 <p>
                     <span>Tập tin quảng cáo:</span>
+                    <%--<asp:FileUpload ID="fileAds" runat="server" />--%>
+                    <asp:Literal ID="liAds" runat="server" Text="ad"></asp:Literal>
+                </p>
+                <p id="upload">
+                    <span>Tải hình lên</span>
                     <asp:FileUpload ID="fileAds" runat="server" />
                 </p>
                 <p>

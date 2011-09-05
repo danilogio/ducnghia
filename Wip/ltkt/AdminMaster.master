@@ -22,9 +22,15 @@
     </style>
     <asp:ContentPlaceHolder ID="cphAdminHeader" runat="server">
         <title></title>
+
+        <script type="text/javascript">
+            function init() {
+            }
+        </script>
+
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="init()">
     <form id="frmAdmin" runat="server">
     <div id="headerAdmin" style="width: 100%; height: 60px; float: left; margin-top: 10px;
         border-color: black; border-width: 1px">
@@ -59,7 +65,7 @@
                                 <asp:HyperLink ID="HpkNews" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/News.aspx">Tin tức</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkPermisson" runat="server" Visible ="false" NavigateUrl="~/_lh/Admin/Permisson.aspx">Phân quyền</asp:HyperLink>
+                                <asp:HyperLink ID="HpkPermisson" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Permisson.aspx">Phân quyền</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkSecurity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Security.aspx">Bảo mật</asp:HyperLink>

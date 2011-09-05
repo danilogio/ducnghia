@@ -4,7 +4,7 @@
 <asp:Content ID="PermissionAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
     <title>Quản lý phân quyền | Website luyện thi kinh tế</title>
     
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
         {
@@ -19,7 +19,7 @@
         {
             padding: 20px 5px;
         }
-    </style>
+    </style>--%>
 </asp:Content>
 
 <asp:Content ID="PermissonAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">

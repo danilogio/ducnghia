@@ -4,7 +4,7 @@
 <asp:Content ID="InformacticAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
     <title>Quản lý chủ đề tin học | Website luyện thi kinh tế</title>
     
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
         {
@@ -19,7 +19,7 @@
         {
             padding: 20px 5px;
         }
-    </style>
+    </style>--%>
 </asp:Content>
 
 <asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">

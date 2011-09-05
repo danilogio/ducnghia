@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="ltkt.Admin.Login" %>
 
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
+
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -18,12 +20,12 @@
         $(function() {
         $("#divLoader").hide();
         
-        $("#btnSubmitLogin").buttonCaptcha({
-                codeWord: 5,
-                codeZone: false,
-                verifyMustBe: true,
-                verifyMustName: 'codeWordReal'
-            });
+//        $("#btnSubmitLogin").buttonCaptcha({
+//                codeWord: 5,
+//                codeZone: false,
+//                verifyMustBe: true,
+//                verifyMustName: 'codeWordReal'
+//            });
         });
         function showLoading() {
             if (document.getElementById('<%=txtboxLoginName.ClientID%>').value != null
@@ -108,6 +110,15 @@
                             </asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                        <%--<td colspan="2" align="right">--%>
+                            <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
+                        PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
+                        </td>
+                    </tr>
+                    
                     <%--<tr>
                         <td>
                         

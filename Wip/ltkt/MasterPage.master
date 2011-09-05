@@ -134,7 +134,7 @@
             </div>
             <div id="nav">
                 <div id="center-ul">
-                     <ul>
+                    <ul>
                         <li>
                             <asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
                         <li>
@@ -156,7 +156,7 @@
             </div>
             <div id="body">
                 <asp:Panel ID="panelAnnoucement" runat="server" Visible="true">
-                    <asp:Literal id="ltAnnoucement" runat="server"></asp:Literal>
+                    <asp:Literal ID="ltAnnoucement" runat="server"></asp:Literal>
                 </asp:Panel>
                 <div style="width: 100%; margin-left: 6px;">
                     <asp:HyperLink ID="hpkTopLeader" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=topleader">
