@@ -100,9 +100,10 @@ namespace ltkt.Admin
                 txtDescription.Text = Ads.Description.Trim();
                 ddlState.SelectedIndex = Ads.State;
 
-                if (File.Exists(Ads.Location))
+                string filename = Server.MapPath("~") + "\\" + Ads.Location.Trim();
+                if (File.Exists (filename))
                 {
-                    liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage(" + Ads.Location + ")\" />";
+                    liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + Ads.Location.Trim() + "')\" />";
                 }
                 else
                 {
@@ -299,7 +300,7 @@ namespace ltkt.Admin
 
                     if (fileAds.HasFile)
                     {
-                        string folder = "imagesAd";
+                        string folder = CommonConstants.FOLDER_IMG_ADS;
                         string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
                         string filename = rootFolder + fileAds.FileName;
                         string fileSave = folder + "\\" + fileAds.FileName;

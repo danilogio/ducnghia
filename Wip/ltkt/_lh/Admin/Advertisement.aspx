@@ -53,7 +53,7 @@
         txtCode = "<HTML><HEAD>" 
         +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
         + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage " 
-        + "onload='window.resizeTo(document.FullImage.width,document.FullImage.height)'>"  
+        + "onload='window.resizeTo(document.FullImage.width+45,document.FullImage.height+65)'>"  
         + "</CENTER>"   
         + "</BODY></HTML>"; 
         mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 

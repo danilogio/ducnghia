@@ -122,6 +122,10 @@ namespace ltktDAO
         /// &
         /// </summary>
         public const string AND = "&";
+        /// <summary>
+        /// folder containt images of ads
+        /// </summary>
+        public const string FOLDER_IMG_ADS = "imagesAd";
         #endregion
 
         #region State (STATE)
