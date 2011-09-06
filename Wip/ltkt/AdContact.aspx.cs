@@ -18,7 +18,7 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!adminDAO.isON(CommonConstants.AF_ADS))
+            if (adminDAO.isON(CommonConstants.AF_ADS))
             {
                 liTitle.Text = CommonConstants.PAGE_ADS_NAME
                                + CommonConstants.SPACE + CommonConstants.HLINE
@@ -31,8 +31,8 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(reason))
                 {
                     Session[CommonConstants.SES_ERROR] = reason;
-                    Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
+                Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
 

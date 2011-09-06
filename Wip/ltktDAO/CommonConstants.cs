@@ -530,6 +530,8 @@ namespace ltktDAO
         /// Message resourse not found
         /// </summary>
         public const string MSG_RESOURSE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
+
+        public const string MSG_UNDERCONSTRUCTION = "Website is underconstruction!";
         #endregion
 
         #region Administrator Function (AF)

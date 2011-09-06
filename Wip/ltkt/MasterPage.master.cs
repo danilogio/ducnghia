@@ -77,7 +77,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(reason))
                 {
                     Session[CommonConstants.SES_ERROR] = reason;
-                    //Response.Redirect(CommonConstants.PAGE_UNDERCONSTRUCTION);
+                    Response.Redirect(CommonConstants.PAGE_UNDERCONSTRUCTION);
                 }
             }
         }

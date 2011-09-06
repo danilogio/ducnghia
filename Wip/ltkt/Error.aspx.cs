@@ -18,25 +18,23 @@ public partial class Error : System.Web.UI.Page
                            + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
         string errorText = (string) Session[CommonConstants.SES_ERROR];
-        if (errorText != null)
+        if (errorText == null)
         {
-            lblError.Text = "<br />";
-            lblError.Text += errorText;
-            lblError.Text += "<br /><br />";
+            errorText = CommonConstants.MSG_COMMON_ERROR_TEXT;
+        }
+        lblError.Text = "<br />";
+        lblError.Text += errorText;
+        lblError.Text += "<br /><br />";
 
-            if (Request.UrlReferrer != null)
-            {
-                HpkPreviousPage.NavigateUrl = Request.UrlReferrer.ToString();
-            }
-            else
-            {
-                HpkPreviousPage.Visible = false;
-            }
-            Session[CommonConstants.SES_ERROR] = null;
+        if (Request.UrlReferrer != null)
+        {
+            HpkPreviousPage.NavigateUrl = Request.UrlReferrer.ToString();
         }
         else
         {
-            Response.Redirect(CommonConstants.PAGE_HOME);
+            HpkPreviousPage.Visible = false;
         }
+        Session[CommonConstants.SES_ERROR] = null;
+        
     }
 }
