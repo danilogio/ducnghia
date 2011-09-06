@@ -378,6 +378,8 @@ namespace ltktDAO
                     record.State = CommonConstants.STATE_UNCHECK;
                     record.Location = _location;
                     record.Tag = _tag;
+                    record.StickyFlg = false;
+                    record.Score = 0;
 
                     DB.tblInformatics.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -418,6 +420,8 @@ namespace ltktDAO
                     informatic.State = update.State;
                     informatic.Point = update.Point;
                     informatic.Tag = update.Tag;
+                    informatic.HtmlEmbedLink = update.HtmlEmbedLink;
+                    informatic.HtmlPreview = update.HtmlPreview;
 
                     DB.SubmitChanges();
                     ts.Complete();
@@ -511,7 +515,7 @@ namespace ltktDAO
                 {
                     var informatic = DB.tblInformatics.Single(info => info.ID == _id);
                     informatic.Point -= 1;
-                    informatic.State = 2; // Bad
+                    informatic.State = CommonConstants.STATE_BAD; // Bad
 
                     DB.SubmitChanges();
                     ts.Complete();

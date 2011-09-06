@@ -740,11 +740,10 @@ namespace ltktDAO
                 number = 1;
             try
             {
-                lst = (from p1 in DB.tblStickies
-                       from p2 in DB.tblContestForUniversities
-                       where p1.Article == p2.ID && p1.Type == CommonConstants.ST_UNI
-                       orderby p2.Posted descending
-                       select p2).Distinct().Take(number);
+                lst = (from p in DB.tblContestForUniversities
+                       where p.StickyFlg == true
+                       orderby p.Posted descending
+                       select p).Take(number);
             }
             catch (Exception ex)
             {
@@ -766,7 +765,7 @@ namespace ltktDAO
             try
             {
                 lst = (from p in DB.tblContestForUniversities
-                        where p.State != CommonConstants.STATE_UNCHECK
+                        where p.State != CommonConstants.STATE_UNCHECK && p.StickyFlg == false
                         orderby p.Posted descending
                         select p).Take(number);
             }
@@ -841,9 +840,11 @@ namespace ltktDAO
                     record.isUniversity = _isUniversity;
                     record.Branch = _branch;
                     record.Year = _year;
-                    record.Point = 0;//điểm
+                    record.Point = 0;//điểm = số người view
                     record.Location = _location;
                     record.Tag = _tag;
+                    record.StickyFlg = false;
+                    record.Score = 0;//điểm của checker
 
                     if (isSolved)
                     {
@@ -897,6 +898,11 @@ namespace ltktDAO
                     contest.Solving = update.Solving;
                     contest.Point = update.Point;
                     contest.Tag = update.Tag;
+                    contest.StickyFlg = update.StickyFlg;
+                    contest.Score = update.Score;
+                    contest.HtmlEmbedLink = update.HtmlEmbedLink;
+                    contest.HtmlPreview = update.HtmlPreview;
+                    contest.Location = update.Location;
 
                     DB.SubmitChanges();
                     ts.Complete();
@@ -1034,7 +1040,7 @@ namespace ltktDAO
                 {
                     var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
                     contest.Point -= 1;
-                    contest.State = 2; // Bad
+                    contest.State = CommonConstants.STATE_BAD; // Bad
 
                     DB.SubmitChanges();
                     ts.Complete();

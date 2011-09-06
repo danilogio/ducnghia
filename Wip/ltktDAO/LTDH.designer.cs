@@ -60,9 +60,6 @@ namespace ltktDAO
     partial void InserttblStatistic(tblStatistic instance);
     partial void UpdatetblStatistic(tblStatistic instance);
     partial void DeletetblStatistic(tblStatistic instance);
-    partial void InserttblSticky(tblSticky instance);
-    partial void UpdatetblSticky(tblSticky instance);
-    partial void DeletetblSticky(tblSticky instance);
     #endregion
 		
 		public LTDHDataContext() : 
@@ -182,14 +179,6 @@ namespace ltktDAO
 				return this.GetTable<tblStatistic>();
 			}
 		}
-		
-		public System.Data.Linq.Table<tblSticky> tblStickies
-		{
-			get
-			{
-				return this.GetTable<tblSticky>();
-			}
-		}
 	}
 	
 	[Table(Name="dbo.tblAdmin")]
@@ -204,6 +193,8 @@ namespace ltktDAO
 		
 		private bool _State;
 		
+		private string _Reason;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -214,6 +205,8 @@ namespace ltktDAO
     partial void OnMessageChanged();
     partial void OnStateChanging(bool value);
     partial void OnStateChanged();
+    partial void OnReasonChanging(string value);
+    partial void OnReasonChanged();
     #endregion
 		
 		public tblAdmin()
@@ -277,6 +270,26 @@ namespace ltktDAO
 					this._State = value;
 					this.SendPropertyChanged("State");
 					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Reason", DbType="NVarChar(500)")]
+		public string Reason
+		{
+			get
+			{
+				return this._Reason;
+			}
+			set
+			{
+				if ((this._Reason != value))
+				{
+					this.OnReasonChanging(value);
+					this.SendPropertyChanging();
+					this._Reason = value;
+					this.SendPropertyChanged("Reason");
+					this.OnReasonChanged();
 				}
 			}
 		}
@@ -1418,13 +1431,15 @@ namespace ltktDAO
 		
 		private string _Comment;
 		
-		private System.Nullable<int> _Score;
+		private int _Score;
 		
 		private string _Checker;
 		
 		private string _HtmlPreview;
 		
 		private string _HtmlEmbedLink;
+		
+		private bool _StickyFlg;
 		
 		private EntityRef<tblUser> _tblUser;
 		
@@ -1466,7 +1481,7 @@ namespace ltktDAO
     partial void OnSubjectChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanging(int value);
     partial void OnScoreChanged();
     partial void OnCheckerChanging(string value);
     partial void OnCheckerChanged();
@@ -1474,6 +1489,8 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
+    partial void OnStickyFlgChanging(bool value);
+    partial void OnStickyFlgChanged();
     #endregion
 		
 		public tblContestForUniversity()
@@ -1807,8 +1824,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Score", DbType="Int")]
-		public System.Nullable<int> Score
+		[Column(Storage="_Score", DbType="Int NOT NULL")]
+		public int Score
 		{
 			get
 			{
@@ -1887,6 +1904,26 @@ namespace ltktDAO
 					this._HtmlEmbedLink = value;
 					this.SendPropertyChanged("HtmlEmbedLink");
 					this.OnHtmlEmbedLinkChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_StickyFlg", DbType="Bit NOT NULL")]
+		public bool StickyFlg
+		{
+			get
+			{
+				return this._StickyFlg;
+			}
+			set
+			{
+				if ((this._StickyFlg != value))
+				{
+					this.OnStickyFlgChanging(value);
+					this.SendPropertyChanging();
+					this._StickyFlg = value;
+					this.SendPropertyChanged("StickyFlg");
+					this.OnStickyFlgChanged();
 				}
 			}
 		}
@@ -2112,13 +2149,13 @@ namespace ltktDAO
 		
 		private int _State;
 		
-		private System.Nullable<int> _Point;
+		private int _Point;
 		
 		private string _Tag;
 		
 		private string _Location;
 		
-		private System.Nullable<int> _Score;
+		private int _Score;
 		
 		private string _Comment;
 		
@@ -2128,7 +2165,9 @@ namespace ltktDAO
 		
 		private string _HtmlEmbedLink;
 		
-		private System.Nullable<int> _Class;
+		private int _Class;
+		
+		private bool _StickyFlg;
 		
 		private EntityRef<tblUser> _tblUser;
 		
@@ -2154,13 +2193,13 @@ namespace ltktDAO
     partial void OnPostedChanged();
     partial void OnStateChanging(int value);
     partial void OnStateChanged();
-    partial void OnPointChanging(System.Nullable<int> value);
+    partial void OnPointChanging(int value);
     partial void OnPointChanged();
     partial void OnTagChanging(string value);
     partial void OnTagChanged();
     partial void OnLocationChanging(string value);
     partial void OnLocationChanged();
-    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanging(int value);
     partial void OnScoreChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -2170,8 +2209,10 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
-    partial void OnClassChanging(System.Nullable<int> value);
+    partial void OnClassChanging(int value);
     partial void OnClassChanged();
+    partial void OnStickyFlgChanging(bool value);
+    partial void OnStickyFlgChanged();
     #endregion
 		
 		public tblEnglish()
@@ -2345,8 +2386,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Point", DbType="Int")]
-		public System.Nullable<int> Point
+		[Column(Storage="_Point", DbType="Int NOT NULL")]
+		public int Point
 		{
 			get
 			{
@@ -2405,8 +2446,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Score", DbType="Int")]
-		public System.Nullable<int> Score
+		[Column(Storage="_Score", DbType="Int NOT NULL")]
+		public int Score
 		{
 			get
 			{
@@ -2509,8 +2550,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Class", DbType="Int")]
-		public System.Nullable<int> Class
+		[Column(Storage="_Class", DbType="Int NOT NULL")]
+		public int Class
 		{
 			get
 			{
@@ -2525,6 +2566,26 @@ namespace ltktDAO
 					this._Class = value;
 					this.SendPropertyChanged("Class");
 					this.OnClassChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_StickyFlg", DbType="Bit NOT NULL")]
+		public bool StickyFlg
+		{
+			get
+			{
+				return this._StickyFlg;
+			}
+			set
+			{
+				if ((this._StickyFlg != value))
+				{
+					this.OnStickyFlgChanging(value);
+					this.SendPropertyChanging();
+					this._StickyFlg = value;
+					this.SendPropertyChanged("StickyFlg");
+					this.OnStickyFlgChanged();
 				}
 			}
 		}
@@ -2644,11 +2705,11 @@ namespace ltktDAO
 		
 		private int _State;
 		
-		private System.Nullable<int> _Leitmotif;
+		private int _Leitmotif;
 		
-		private System.Nullable<int> _Score;
+		private int _Score;
 		
-		private System.Nullable<int> _Point;
+		private int _Point;
 		
 		private string _Tag;
 		
@@ -2659,6 +2720,8 @@ namespace ltktDAO
 		private string _HtmlPreview;
 		
 		private string _HtmlEmbedLink;
+		
+		private bool _StickyFlg;
 		
 		private EntityRef<tblUser> _tblUser;
 		
@@ -2688,11 +2751,11 @@ namespace ltktDAO
     partial void OnPostedChanged();
     partial void OnStateChanging(int value);
     partial void OnStateChanged();
-    partial void OnLeitmotifChanging(System.Nullable<int> value);
+    partial void OnLeitmotifChanging(int value);
     partial void OnLeitmotifChanged();
-    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanging(int value);
     partial void OnScoreChanged();
-    partial void OnPointChanging(System.Nullable<int> value);
+    partial void OnPointChanging(int value);
     partial void OnPointChanged();
     partial void OnTagChanging(string value);
     partial void OnTagChanged();
@@ -2704,6 +2767,8 @@ namespace ltktDAO
     partial void OnHtmlPreviewChanged();
     partial void OnHtmlEmbedLinkChanging(string value);
     partial void OnHtmlEmbedLinkChanged();
+    partial void OnStickyFlgChanging(bool value);
+    partial void OnStickyFlgChanged();
     #endregion
 		
 		public tblInformatic()
@@ -2917,8 +2982,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Leitmotif", DbType="Int")]
-		public System.Nullable<int> Leitmotif
+		[Column(Storage="_Leitmotif", DbType="Int NOT NULL")]
+		public int Leitmotif
 		{
 			get
 			{
@@ -2937,8 +3002,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Score", DbType="Int")]
-		public System.Nullable<int> Score
+		[Column(Storage="_Score", DbType="Int NOT NULL")]
+		public int Score
 		{
 			get
 			{
@@ -2957,8 +3022,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Point", DbType="Int")]
-		public System.Nullable<int> Point
+		[Column(Storage="_Point", DbType="Int NOT NULL")]
+		public int Point
 		{
 			get
 			{
@@ -3077,6 +3142,26 @@ namespace ltktDAO
 					this._HtmlEmbedLink = value;
 					this.SendPropertyChanged("HtmlEmbedLink");
 					this.OnHtmlEmbedLinkChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_StickyFlg", DbType="Bit NOT NULL")]
+		public bool StickyFlg
+		{
+			get
+			{
+				return this._StickyFlg;
+			}
+			set
+			{
+				if ((this._StickyFlg != value))
+				{
+					this.OnStickyFlgChanging(value);
+					this.SendPropertyChanging();
+					this._StickyFlg = value;
+					this.SendPropertyChanged("StickyFlg");
+					this.OnStickyFlgChanged();
 				}
 			}
 		}
@@ -3541,92 +3626,6 @@ namespace ltktDAO
 					this._Value = value;
 					this.SendPropertyChanged("Value");
 					this.OnValueChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.tblSticky")]
-	public partial class tblSticky : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Type;
-		
-		private int _Article;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTypeChanging(int value);
-    partial void OnTypeChanged();
-    partial void OnArticleChanging(int value);
-    partial void OnArticleChanged();
-    #endregion
-		
-		public tblSticky()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_Type", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Article", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Article
-		{
-			get
-			{
-				return this._Article;
-			}
-			set
-			{
-				if ((this._Article != value))
-				{
-					this.OnArticleChanging(value);
-					this.SendPropertyChanging();
-					this._Article = value;
-					this.SendPropertyChanged("Article");
-					this.OnArticleChanged();
 				}
 			}
 		}

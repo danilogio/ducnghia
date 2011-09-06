@@ -16,7 +16,6 @@ namespace ltkt
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         ltktDAO.Control controlDAO = new ltktDAO.Control();
-        ltktDAO.Sticky stickDAO = new ltktDAO.Sticky();
         ltktDAO.News newsDAO = new ltktDAO.News();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -37,7 +36,7 @@ namespace ltkt
                 int numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
                 int numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
 
-                IEnumerable<tblContestForUniversity> lst1 = contestDAO.getStickyArticlebyPostedDay(numberStickyArtOnTab);
+                IEnumerable<tblContestForUniversity> lst1 = contestDAO.getStickyArticlebyPostedDay(BaseServices.min(numberArtOnTab, numberStickyArtOnTab));
                 IEnumerable<tblContestForUniversity> lst2 = contestDAO.getLatestArticleByPostedDate(numberArtOnTab - lst1.Count());
                 
                 IList<tblContestForUniversity> items1 = lst1.ToList();
@@ -51,20 +50,24 @@ namespace ltkt
                     {
                         data += buildExamLessonForUniversity(item);
                     }
-                    if (items1.Count > 0)
+                    
+                    
+
+
+                }
+                if (items2.Count > 0)
+                {
+                    foreach (var item in items2)
                     {
-                        foreach (var item in items2)
-                        {
-                            if (!stickDAO.checkExisted(item.ID, CommonConstants.ST_UNI))
-                            {
-                                data += buildExamLessonForUniversity(item);
-                            }
-                        }
+
+                        data += buildExamLessonForUniversity(item);
+
                     }
+                }
+                if (data != CommonConstants.BLANK)
+                {
                     data += "<br/>\n<div class='referlink'>\n"
                             + "<a href='ContestUniversity.aspx'>Xem thêm</a></div>\n";
-
-
                 }
                 else
                 {

@@ -19,57 +19,67 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-            ltsItem.Width = 240;
-            string[] sInformation = readInformation();
-            //get cookie successful
-            if (sInformation != null)
+            if (!adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION))
             {
-                tblUser user = userDAO.getUser(sInformation[0], sInformation[1], true);
-                chxRemember.Checked = true;
-                if (user != null)
+                ltsItem.Width = 240;
+                string[] sInformation = readInformation();
+                //get cookie successful
+                if (sInformation != null)
                 {
-                    if (user.State != CommonConstants.STATE_DELETED 
-                        && user.State != CommonConstants.STATE_NON_ACTIVE)
+                    tblUser user = userDAO.getUser(sInformation[0], sInformation[1], true);
+                    chxRemember.Checked = true;
+                    if (user != null)
                     {
-                        updateAccount(user);
+                        if (user.State != CommonConstants.STATE_DELETED
+                            && user.State != CommonConstants.STATE_NON_ACTIVE)
+                        {
+                            updateAccount(user);
+                        }
+                    }
+                    lblFooterTitle.Text = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_FOOTER);
+                    string va = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                    lblAddress.Text = controlDAO.getValueString(CommonConstants.CF_ADDRESS);
+                    imgLogo.ImageUrl = controlDAO.getValueString(CommonConstants.CF_LOGO);
+                }
+
+                if (Session[CommonConstants.SES_USER] == null)
+                {
+                    userStateTitle.Text = "Đăng nhập";
+                    loginPanel.Visible = true;
+                    userPanel.Visible = false;
+                }
+                else
+                {
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    userStateTitle.Text = "Thông tin tài khoản";
+                    loginUser.Text = user.DisplayName;
+                    loginPanel.Visible = false;
+                    userPanel.Visible = true;
+                    HpkUpload.Visible = true;
+                }
+                //display annoucement
+                if (adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
+                {
+                    string annouceText = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
+                    if (!BaseServices.isNullOrBlank(annouceText))
+                    {
+                        panelAnnoucement.Visible = true;
+                        ltAnnoucement.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
+                                                                            CommonConstants.CS_ANNOUCEMENT_BGCOLOR,
+                                                                            CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR,
+                                                                            annouceText);
                     }
                 }
-                lblFooterTitle.Text = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_FOOTER);
-                string va  = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-                lblAddress.Text = controlDAO.getValueString(CommonConstants.CF_ADDRESS);
-                imgLogo.ImageUrl = controlDAO.getValueString(CommonConstants.CF_LOGO);
-            }
-
-            if (Session[CommonConstants.SES_USER] == null)
-            {
-                userStateTitle.Text = "Đăng nhập";
-                loginPanel.Visible = true;
-                userPanel.Visible = false;
             }
             else
             {
-                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                userStateTitle.Text = "Thông tin tài khoản";
-                loginUser.Text = user.DisplayName;
-                loginPanel.Visible = false;
-                userPanel.Visible = true;
-                HpkUpload.Visible = true;
-            }
-            //display annoucement
-            if(adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
-            {
-                string annouceText = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
-                if(!BaseServices.isNullOrBlank(annouceText))
+                string reason = adminDAO.getReason(CommonConstants.AF_UNDERCONTRUCTION);
+                if (!BaseServices.isNullOrBlank(reason))
                 {
-                    panelAnnoucement.Visible = true;
-                    ltAnnoucement.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
-                                                                        CommonConstants.CS_ANNOUCEMENT_BGCOLOR, 
-                                                                        CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR, 
-                                                                        annouceText);
+                    Session[CommonConstants.SES_ERROR] = reason;
+                    //Response.Redirect(CommonConstants.PAGE_UNDERCONSTRUCTION);
                 }
             }
-
         }
         //public void updateTitle(string title)
         //{

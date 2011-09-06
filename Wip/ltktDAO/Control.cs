@@ -12,7 +12,17 @@ namespace ltktDAO
         static string strPathDB = DBHelper.strPathDB;
         LTDHDataContext DB = new LTDHDataContext(@strPathDB);
         EventLog log = new EventLog();
+
         /// <summary>
+        /// Get all record
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<tblControl> getAll()
+        {
+            IEnumerable<tblControl> items = from p in DB.tblControls
+                                          select p;
+            return items;
+        }/// <summary>
         /// get record
         /// </summary>
         /// <param name="_code"></param>

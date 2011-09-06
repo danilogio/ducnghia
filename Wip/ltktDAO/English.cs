@@ -519,6 +519,8 @@ namespace ltktDAO
                     record.State = 0;
                     record.Point = 0;
                     record.Tag = _tag;
+                    record.StickyFlg = false;
+                    record.Class = CommonConstants.AT_UNCLASSIFIED;
 
                     DB.tblEnglishes.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -556,6 +558,9 @@ namespace ltktDAO
                     english.State = update.State;
                     english.Point = update.Point;
                     english.Tag = update.Tag;
+                    english.HtmlEmbedLink = update.HtmlEmbedLink;
+                    english.HtmlPreview = update.HtmlPreview;
+                    english.StickyFlg = english.StickyFlg;
 
                     DB.SubmitChanges();
                     ts.Complete();
@@ -646,7 +651,7 @@ namespace ltktDAO
                 {
                     var english = DB.tblEnglishes.Single(e => e.ID == _id);
                     english.Point -= 1;
-                    english.State = 2; // Bad
+                    english.State = CommonConstants.STATE_BAD; // Bad
 
                     DB.SubmitChanges();
                     ts.Complete();

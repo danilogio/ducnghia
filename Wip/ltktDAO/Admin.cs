@@ -11,8 +11,17 @@ namespace ltktDAO
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
         static EventLog log = new EventLog();
-        
-
+        /// <summary>
+        /// Get all record
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<tblAdmin> getAll()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblAdmin> items = from p in DB.tblAdmins
+                                         select p;
+            return items;
+        }
         /// <summary>
         /// Get record of TblAdmin
         /// </summary>
@@ -35,7 +44,22 @@ namespace ltktDAO
             IEnumerable<tblAdmin> lst = getRecord(_code);
             if (lst.Count() > 0)
             {
-                res = lst.ElementAt(0).Code;
+                res = lst.ElementAt(0).Message;
+            }
+            return res;
+        }
+        /// <summary>
+        /// get reason of admin function
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <returns></returns>
+        public string getReason(string _code)
+        {
+            string res = CommonConstants.BLANK;
+            IEnumerable<tblAdmin> lst = getRecord(_code);
+            if (lst.Count() > 0)
+            {
+                res = lst.ElementAt(0).Reason;
             }
             return res;
         }

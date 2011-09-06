@@ -14,13 +14,26 @@ namespace ltkt
         EventLog log = new EventLog();
         ltktDAO.Ads adsDAO = new ltktDAO.Ads();
         ltktDAO.Control control = new ltktDAO.Control();
+        ltktDAO.Admin adminDAO = new ltktDAO.Admin();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            liTitle.Text = CommonConstants.PAGE_ADS_NAME
-                           + CommonConstants.SPACE + CommonConstants.HLINE
-                           + CommonConstants.SPACE
-                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+            if (!adminDAO.isON(CommonConstants.AF_ADS))
+            {
+                liTitle.Text = CommonConstants.PAGE_ADS_NAME
+                               + CommonConstants.SPACE + CommonConstants.HLINE
+                               + CommonConstants.SPACE
+                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+            }
+            else
+            {
+                string reason = adminDAO.getReason(CommonConstants.AF_ADS);
+                if (!BaseServices.isNullOrBlank(reason))
+                {
+                    Session[CommonConstants.SES_ERROR] = reason;
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                }
+            }
         }
 
         protected void btnSubmitContact_Click(object sender, EventArgs e)

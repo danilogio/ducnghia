@@ -97,6 +97,14 @@ namespace ltktDAO
             return strDate;
         }
 
+        public static int min(int a, int b)
+        {
+            if (a > b)
+            {
+                return b;
+            }
+            return a;
+        }
         public static string nullToBlank(string target)
         {
             if (target == null)

@@ -243,6 +243,10 @@ namespace ltktDAO
         /// Article has type Examination
         /// </summary>
         public const int AT_EXAM = 2;
+        /// <summary>
+        /// Article is not classified
+        /// </summary>
+        public const int AT_UNCLASSIFIED = 0;
 
         #region University (AT_UNI)
         /// <summary>
@@ -280,10 +284,7 @@ namespace ltktDAO
         #endregion
 
         #region Informatics (AT_IT)
-        /// <summary>
-        /// Article IT with type word
-        /// </summary>
-        public const int AT_IT_OFFICE_WORD = 0;
+        
         /// <summary>
         /// Article IT with type Excel
         /// </summary>
@@ -297,13 +298,17 @@ namespace ltktDAO
         /// </summary>
         public const int AT_IT_OFFICE_ACCESS = 3;
         /// <summary>
+        /// Article IT with type word
+        /// </summary>
+        public const int AT_IT_OFFICE_WORD = 4;
+        /// <summary>
         /// Article IT with type simple tip
         /// </summary>
-        public const int AT_IT_OFFICE_SIMPLE_TIP = 4;
+        public const int AT_IT_OFFICE_SIMPLE_TIP = 10;
         /// <summary>
         /// Article IT type with type advance tip
         /// </summary>
-        public const int AT_IT_OFFICE_ADVANCE_TIP = 5;
+        public const int AT_IT_OFFICE_ADVANCE_TIP = 20;
         #endregion
 
         #region English Type (AT_EL)
@@ -437,21 +442,6 @@ namespace ltktDAO
         public const int AT_EL_IELTS = 50;
         #endregion
 
-        #endregion
-
-        #region Sticky Type (ST)
-        /// <summary>
-        /// Sticky University
-        /// </summary>
-        public const int ST_UNI = 0;
-        /// <summary>
-        /// Sticky English
-        /// </summary>
-        public const int ST_EL = 1;
-        /// <summary>
-        /// Sticky Informatics
-        /// </summary>
-        public const int ST_IT = 2;
         #endregion
 
         #region Messages(MSG)
@@ -826,6 +816,10 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_LOGIN_NAME = "Đăng nhập";
         /// <summary>
+        /// page under construction
+        /// </summary>
+        public const string PAGE_UNDERCONSTRUCTION = "UnderConstruction.aspx";
+        /// <summary>
         /// under construction name
         /// </summary>
         public const string PAGE_UNDERCONSTRUCTION_NAME = "Đang bảo trì";
@@ -1165,7 +1159,6 @@ namespace ltktDAO
         /// </summary>
         public const string SQL_CHANGE_STATE_OFF = " Change code {0} of " + SQL_TABLE_ADMIN + " is OFF";
         #endregion
-
 
         #region SQL table (SQL_TABLE)
         /// <summary>
