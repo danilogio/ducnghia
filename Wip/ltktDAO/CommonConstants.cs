@@ -218,6 +218,8 @@ namespace ltktDAO
         public const string CS_WARNING = "orange";
         public const string CS_KIA = "violet";
         public const string CS_DELETED = "gray";
+        public const string CS_ANNOUCEMENT_BGCOLOR = "white";
+        public const string CS_ANNOUCEMENT_TEXTCOLOR = "red";
         #endregion
 
         #region State Tooltip Text(SX)
@@ -1057,6 +1059,10 @@ namespace ltktDAO
         /// Template foe span tag
         /// </summary>
         public const string TEMP_SPAN_TAG = "<span style=\"color:{0};\" title=\"{1}\">{2}</span>";
+        /// <summary>
+        /// Template of annoucement;
+        /// </summary>
+        public const string TEMP_MARQUEE_TAG = "<div style=\"margin-left:20px;\"><MARQUEE WIDTH=100% BEHAVIOR=SCROLL HEIGHT=20 BGColor={0} onmouseover=\"this.stop();\" onmouseout=\"this.start();\"><span style=\"color:{1}\">{2}</span></MARQUEE></div>";
         #endregion
 
         #region Action request (ACT)
@@ -1150,7 +1156,16 @@ namespace ltktDAO
         /// update query template, require 2 argument
         /// </summary>
         public const string SQL_UPDATE_FAILED_TEMPLATE = " Delete record {0} to Table {1} failed";
+        /// <summary>
+        /// change state on template, required _adminCode
+        /// </summary>
+        public const string SQL_CHANGE_STATE_ON = " Change code {0} of " + SQL_TABLE_ADMIN + " is ON";
+        /// <summary>
+        /// change state off template, require _adminCode
+        /// </summary>
+        public const string SQL_CHANGE_STATE_OFF = " Change code {0} of " + SQL_TABLE_ADMIN + " is OFF";
         #endregion
+
 
         #region SQL table (SQL_TABLE)
         /// <summary>

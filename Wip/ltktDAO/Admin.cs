@@ -18,53 +18,103 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static IQueryable<tblAdmin> getRecord(string _code)
+        public IEnumerable<tblAdmin> getRecord(string _code)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            var item = DB.tblAdmins.Where(p => p.Code == _code);
+            IEnumerable<tblAdmin> item = DB.tblAdmins.Where(p => p.Code == _code);
             return item;
         }
-        public static bool changeStateON(string _code, string _username)
+        /// <summary>
+        /// get message con admin function
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <returns></returns>
+        public string getMessage(string _code)
+        {
+            string res = CommonConstants.BLANK;
+            IEnumerable<tblAdmin> lst = getRecord(_code);
+            if (lst.Count() > 0)
+            {
+                res = lst.ElementAt(0).Code;
+            }
+            return res;
+        }
+        /// <summary>
+        /// check function is ON
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <returns></returns>
+        public bool isON(string _code)
+        {
+
+            IEnumerable<tblAdmin> lst = getRecord(_code);
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).State;
+            }
+            return false;
+
+        }
+        /// <summary>
+        /// change state of function is ON
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <param name="_username"></param>
+        /// <returns></returns>
+        public bool changeStateON(string _code, string _username)
         {
             try
             {
-                log.writeLog("[" + _username + "]:Change state id=" + _code + " is ON");
+                
                 using (TransactionScope ts = new TransactionScope())
                 {
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
                     var record = DB.tblAdmins.Single(p => p.Code == _code);
                     record.State = true;
                     DB.SubmitChanges();
+                    ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile, 
+                                _username, 
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_CHANGE_STATE_ON, 
+                                                                _code));
                 }
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile + CommonConstants.PATH_LOG_FILE, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
                 return false;
             }
-            log.writeLog("[" + _username + "]:Change state ON successful");
+            
             return true;
         }
-
-        public static bool changeStateOFF(string _code, string _username)
+        /// <summary>
+        /// change state of function is OFF
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <param name="_username"></param>
+        /// <returns></returns>
+        public bool changeStateOFF(string _code, string _username)
         {
             try
             {
-                log.writeLog("[" + _username + "]:Change state id=" + _code + " is OFF");
                 using (TransactionScope ts = new TransactionScope())
                 {
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
                     var record = DB.tblAdmins.Single(p => p.Code == _code);
                     record.State = false;
                     DB.SubmitChanges();
+                    ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile,
+                                _username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_CHANGE_STATE_OFF,
+                                                                _code));
                 }
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile + CommonConstants.PATH_LOG_FILE, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
                 return false;
             }
-            log.writeLog("[" + _username + "]:Change state OFF successful");
             return true;
         }
     }

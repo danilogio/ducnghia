@@ -15,6 +15,7 @@ namespace ltkt
         ltktDAO.Users userDAO = new ltktDAO.Users();
         ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
         ltktDAO.Control controlDAO = new ltktDAO.Control();
+        ltktDAO.Admin adminDAO = new ltktDAO.Admin();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,7 +57,18 @@ namespace ltkt
                 HpkUpload.Visible = true;
             }
             //display annoucement
-            ltAnnoucement.Text = "<MARQUEE WIDTH=100% BEHAVIOR=SCROLL HEIGHT=20 BGColor=white><span style=\"color:red\">Thông báo: trang web đang được xây dựng phần Admin....</span></MARQUEE>";
+            if(adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
+            {
+                string annouceText = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
+                if(!BaseServices.isNullOrBlank(annouceText))
+                {
+                    panelAnnoucement.Visible = true;
+                    ltAnnoucement.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
+                                                                        CommonConstants.CS_ANNOUCEMENT_BGCOLOR, 
+                                                                        CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR, 
+                                                                        annouceText);
+                }
+            }
 
         }
         //public void updateTitle(string title)

@@ -155,7 +155,7 @@
                 </div>
             </div>
             <div id="body">
-                <asp:Panel ID="panelAnnoucement" runat="server" Visible="true">
+                <asp:Panel ID="panelAnnoucement" runat="server" Visible="false">
                     <asp:Literal ID="ltAnnoucement" runat="server"></asp:Literal>
                 </asp:Panel>
                 <div style="width: 100%; margin-left: 6px;">
