@@ -94,8 +94,8 @@ namespace ltkt.Admin
                 txtAddress.Text = Ads.Address.Trim();
                 txtEmail.Text = Ads.Email.Trim();
                 txtPhone.Text = Ads.Phone.Trim();
-                txtFromDate.Text = bs.convertDateToString((DateTime)Ads.fromDate);
-                txtEndDate.Text = bs.convertDateToString((DateTime)Ads.toDate);
+                txtFromDate.Text = Ads.fromDate.ToString();
+                txtEndDate.Text = Ads.toDate.ToString();
                 txtPrice.Text = Ads.Price.ToString();
                 txtDescription.Text = Ads.Description.Trim();
                 ddlState.SelectedIndex = Ads.State;
@@ -104,11 +104,12 @@ namespace ltkt.Admin
                 if (File.Exists (filename))
                 {
                     liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + Ads.Location.Trim() + "')\" />";
+                    //liAds.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
                 }
                 else
                 {
                     liAds.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
-                    liAds.Text += "&nbsp;<input type=\"button\" value=\"Tải hình lên\" class=\"formbutton\" onclick=\"upload()\" />";
+                    //liAds.Text += "&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
                 }
             }
             else
@@ -134,6 +135,8 @@ namespace ltkt.Admin
                 txtPrice.ReadOnly = false;
                 txtDescription.ReadOnly = false;
                 ddlState.Enabled = true;
+
+                liAds.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
             }
             else
             {
@@ -150,6 +153,8 @@ namespace ltkt.Admin
                 txtPrice.ReadOnly = true;
                 txtDescription.ReadOnly = true;
                 ddlState.Enabled = false;
+
+                liAds.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
             }
         }
 
@@ -274,8 +279,8 @@ namespace ltkt.Admin
                     string _address = txtAddress.Text;
                     string _email = txtEmail.Text;
                     string _phone = txtPhone.Text;
-                    //DateTime _fromDate = DateTime.TryParse(txtFromDate.Text);
-                    //DateTime _toDate = DateTime.TryParse(txtEndDate.Text);
+                    DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
+                    DateTime _toDate = DateTime.Parse(txtEndDate.Text);
                     int _price = Convert.ToInt32(txtPrice.Text);
                     string _description = txtDescription.Text;
 
@@ -298,12 +303,13 @@ namespace ltkt.Admin
                             break;
                     }
 
+                    string fileSave = Ads.Location.Trim();
                     if (fileAds.HasFile)
                     {
                         string folder = CommonConstants.FOLDER_IMG_ADS;
                         string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
                         string filename = rootFolder + fileAds.FileName;
-                        string fileSave = folder + "\\" + fileAds.FileName;
+                        fileSave = folder + "/" + fileAds.FileName;
                         // save file
                         if (!Directory.Exists(rootFolder))
                         {
@@ -312,7 +318,29 @@ namespace ltkt.Admin
 
                         fileAds.SaveAs(filename);
                     }
+                    
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    bool isOK = adsDAO.updateAds(Ads.ID, user.Username,
+                                                 _company,
+                                                 _address,
+                                                 _email,
+                                                 _phone,
+                                                 _fromDate,
+                                                 _toDate,
+                                                 _price,
+                                                 fileSave,
+                                                 _description,
+                                                 _state);
 
+                    if (isOK)
+                    {
+                        Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
+                    }
+                    else
+                    {
+                        Response.Write(CommonConstants.ALERT_UPDATE_FAIL);
+                    }
+                    
                     Session[CommonConstants.SES_EDIT_ADS] = null;
                 }
             }
@@ -339,6 +367,8 @@ namespace ltkt.Admin
             Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
                                CommonConstants.ADD_PARAMETER +
                                CommonConstants.REQ_PAGE + "=1");
+
+            
         }
     }
 }

@@ -241,9 +241,69 @@ namespace ltktDAO
             return true;
         }
 
+        /// <summary>
+        /// Update Ads
+        /// </summary>
+        /// <param name="adsID"></param>
+        /// <param name="_company"></param>
+        /// <param name="_address"></param>
+        /// <param name="_email"></param>
+        /// <param name="_phone"></param>
+        /// <param name="_fromDate"></param>
+        /// <param name="_toDate"></param>
+        /// <param name="_price"></param>
+        /// <param name="fileSave"></param>
+        /// <param name="_description"></param>
+        /// <param name="_state"></param>
+        public bool updateAds(int adsID, string _username,
+                              string _company,
+                              string _address,
+                              string _email,
+                              string _phone,
+                              DateTime _fromDate,
+                              DateTime _toDate,
+                              int _price,
+                              string fileSave,
+                              string _description,
+                              int _state)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var ads = DB.tblAdvertisements.Single(a => a.ID == adsID);
 
+                    ads.Company = _company;
+                    ads.Address = _address;
+                    ads.Email = _email;
+                    ads.Phone = _phone;
+                    ads.fromDate = _fromDate;
+                    ads.toDate = _toDate;
+                    ads.Price = _price;
+                    ads.Location = fileSave;
+                    ads.Description = _description;
+                    ads.State = _state;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, _username,
+                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, Convert.ToString (adsID), CommonConstants.SQL_TABLE_ADVERTISEMENT));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE, Convert.ToString(adsID), CommonConstants.SQL_TABLE_ADVERTISEMENT));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
+
+                return false;
+            }
+            return true;
+        }
 
         #endregion
 
+        
     }
 }

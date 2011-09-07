@@ -62,7 +62,16 @@ namespace ltktDAO
         /// alert when delete fail
         /// </summary>
         public const string ALERT_DELETE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
-        
+
+        /// <summary>
+        /// alert when update fail
+        /// </summary>
+        public const string ALERT_UPDATE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
+
+        /// <summary>
+        /// alert when update successful
+        /// </summary>
+        public const string ALERT_UPDATE_SUCCESSFUL = "alert (\"Cập nhật thành công!\")";
         
         /// <summary>
         /// Like page
