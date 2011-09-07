@@ -461,7 +461,23 @@ namespace ltktDAO
 
         #region Method
 
-
+        /// <summary>
+        /// get max point article
+        /// </summary>
+        /// <returns></returns>
+        public tblEnglish getMaxPoint()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblEnglish> lst = from p in DB.tblEnglishes
+                             where p.Point == DB.tblEnglishes.Max(p2=>p2.Point)
+                             orderby p.Posted descending
+                             select p;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+            return null;
+        }
         /// <summary>
         /// Thêm một bài viết mới
         /// </summary>

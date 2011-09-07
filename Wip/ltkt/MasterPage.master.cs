@@ -44,7 +44,7 @@ namespace ltkt
 
                 if (Session[CommonConstants.SES_USER] == null)
                 {
-                    userStateTitle.Text = "Đăng nhập";
+                    userStateTitle.Text = CommonConstants.LOGIN_TEXT;
                     loginPanel.Visible = true;
                     userPanel.Visible = false;
                 }

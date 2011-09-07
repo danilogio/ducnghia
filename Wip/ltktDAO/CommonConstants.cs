@@ -147,6 +147,10 @@ namespace ltktDAO
         /// view all
         /// </summary>
         public const string VIEW_ALL = "Xem tất cả";
+        /// <summary>
+        /// login text
+        /// </summary>
+        public const string LOGIN_TEXT = "Đăng nhập";
         #endregion
 
         #region Css (CSS)

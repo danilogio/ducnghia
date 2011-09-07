@@ -279,7 +279,23 @@ namespace ltktDAO
         #endregion
 
         #region Method
-
+        /// <summary>
+        /// get max point article
+        /// </summary>
+        /// <returns></returns>
+        public tblInformatic getMaxPoint()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
+                                                       where p.Point == DB.tblInformatics.Max(p2 => p2.Point)
+                                                        orderby p.Posted descending
+                                                       select p;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+            return null;
+        }
         /// <summary>
         /// Get amount of latest article by posted date with range type
         /// </summary>

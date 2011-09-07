@@ -392,7 +392,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
+                        <%--<li>
                             <h4>
                                 Tài liệu mới</h4>
                             <ul style="background: white; border: 1px solid #a6c9e2;">
@@ -403,7 +403,7 @@
                                 <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a>
                                     - brilliant premium templates</li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li style="background: white; border: 1px solid #a6c9e2;">
                             <h4>
                                 Tài liệu được quan tâm</h4>

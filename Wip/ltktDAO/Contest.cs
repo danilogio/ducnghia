@@ -668,6 +668,23 @@ namespace ltktDAO
 
         #region Method
         /// <summary>
+        /// get max point article
+        /// </summary>
+        /// <returns></returns>
+        public tblContestForUniversity getMaxPoint()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                          where p.Point == DB.tblContestForUniversities.Max(p2 => p2.Point)
+                                          orderby p.Posted descending
+                                          select p;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+            return null;
+        }
+        /// <summary>
         /// get Article by Subject and by time
         /// </summary>
         /// <param name="articleSCO"></param>
