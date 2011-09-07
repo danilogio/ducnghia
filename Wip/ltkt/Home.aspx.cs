@@ -17,6 +17,7 @@ namespace ltkt
         private ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         private ltktDAO.Control controlDAO = new ltktDAO.Control();
         private ltktDAO.News newsDAO = new ltktDAO.News();
+        private ltktDAO.Statistics statisDAO = new ltktDAO.Statistics();
         private int numberArtOnTab = CommonConstants.NUMBER_RECORD_ON_TAB;
         private int numberStickyArtOnTab = 0;
 
@@ -31,6 +32,15 @@ namespace ltkt
             //init
             numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
             numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
+            lNumUni.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_UNI).ToString() 
+                            + CommonConstants.SPACE 
+                            + CommonConstants.ARTICLE_NAME;
+            lNumEL.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_EL).ToString()
+                            + CommonConstants.SPACE
+                            + CommonConstants.ARTICLE_NAME; ;
+            lNumIT.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_IT).ToString()
+                            + CommonConstants.SPACE
+                            + CommonConstants.ARTICLE_NAME; ;
 
         }
 
@@ -456,6 +466,15 @@ namespace ltkt
                 else
                 {
                     data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG, data);
+                    data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS, 
+                                                            CommonConstants.CSS_REFERLINK, 
+                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, 
+                                                                                            items[0].ID.ToString(), 
+                                                                                            CommonConstants.VIEW_ALL));
                 }
             }
             catch (Exception ex)

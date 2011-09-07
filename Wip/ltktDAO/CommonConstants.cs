@@ -139,6 +139,18 @@ namespace ltktDAO
         /// view more
         /// </summary>
         public const string VIEW_MORE = "Xem tiếp";
+        /// <summary>
+        /// Article name
+        /// </summary>
+        public const string ARTICLE_NAME = "Bài";
+        /// <summary>
+        /// view all
+        /// </summary>
+        public const string VIEW_ALL = "Xem tất cả";
+        #endregion
+
+        #region Css (CSS)
+            public const string CSS_REFERLINK = "referlink"; 
         #endregion
 
         #region State (STATE)
@@ -1069,7 +1081,9 @@ namespace ltktDAO
         /// link template for article details
         /// </summary>
         public const string TEMP_ARTICLE_DETAILS_LINK = "<a href='" + PAGE_ARTICLE_DETAILS + "?" + REQ_SECTION + "={0}&" + REQ_ID + "={1}'>{2}</a>";
-
+        /// <summary>
+        /// link template for news page
+        /// </summary>
         public const string TEMP_NEWS_LINK = "<a href='" + PAGE_NEWS + "?id={0}'>{1}</a>";
         /// <summary>
         /// image thumbnail for article
@@ -1113,6 +1127,18 @@ namespace ltktDAO
         /// Template of annoucement;
         /// </summary>
         public const string TEMP_MARQUEE_TAG = "<div style=\"margin-left:20px;\"><MARQUEE WIDTH=100% BEHAVIOR=SCROLL HEIGHT=20 BGColor={0} onmouseover=\"this.stop();\" onmouseout=\"this.start();\"><span style=\"color:{1}\">{2}</span></MARQUEE></div>";
+        /// <summary>
+        /// div template with no property, require 1 value for text
+        /// </summary>
+        public const string TEMP_DIV_TAG = "<div>{0}</div>";
+        /// <summary>
+        /// div template with 2 param: class and text
+        /// </summary>
+        public const string TEMP_DIV_TAG_WITH_CLASS= "<div class='{0}'>{1}</div>";
+        /// <summary>
+        /// div template with 2 param: style and text
+        /// </summary>
+        public const string TEMP_DIV_TAG_WITH_STYLE = "<div style='{0}'>{1}</div>";
         #endregion
 
         #region Action request (ACT)
@@ -1286,5 +1312,6 @@ namespace ltktDAO
         public const string P_A_AUTHORITY = "A_AUTHORITY";
         public const string P_A_FULL_CONTROL = "A_FULL_CONTROL"; 
         #endregion
+
     }
 }

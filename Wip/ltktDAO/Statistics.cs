@@ -39,7 +39,7 @@ namespace ltktDAO
         public string getValue(string _code)
         {
             tblStatistic statistic = getRecord(_code);
-            return statistic.Value;
+            return statistic.Value.Trim();
         }
         
         /// <summary>

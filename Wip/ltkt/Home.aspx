@@ -31,8 +31,17 @@
             <asp:Label ID="lblWelcomeText" runat="server"></asp:Label></p>
     </div>
     <div id="ExamLesson" class="block_text">
-        <h2>
-            Thư viện đề thi đại học, cao đẳng</h2>
+        <table>
+            <tr>
+                <td align="left">
+                    <h2>
+                        Thư viện đề thi đại học, cao đẳng</h2>
+                </td>
+                <td align="right">
+                    <asp:Label ID="lNumUni" runat="server" CssClass="gray_text"></asp:Label>
+                </td>
+            </tr>
+        </table>
         <ul>
             <li><a href="#ExamLesson01">Đề thi</a></li>
         </ul>
@@ -41,8 +50,17 @@
         </div>
     </div>
     <div id="EnglishLesson" class="block_text">
-        <h2>
-            Thư viện Anh Văn</h2>
+        <table>
+            <tr>
+                <td align="left">
+                    <h2>
+                        Thư viện Anh Văn</h2>
+                </td>
+                <td align="right">
+                    <asp:Label ID="lNumEL" runat="server" CssClass="gray_text"></asp:Label>
+                </td>
+            </tr>
+        </table>
         <div>
             <ul>
                 <li><a href="#EnglishLesson01">Phổ Thông</a></li>
@@ -65,8 +83,17 @@
         </div>
     </div>
     <div id="ItLesson" class="block_text">
-        <h2>
-            Thư viện Tin học</h2>
+        <table>
+            <tr>
+                <td align="left">
+                    <h2>
+                        Thư viện Tin học</h2>
+                </td>
+                <td align="right">
+                    <asp:Label ID="lNumIT" runat="server" CssClass="gray_text"></asp:Label>
+                </td>
+            </tr>
+        </table>
         <ul>
             <li><a href="#ItLesson01">Tin học Văn phòng</a></li>
             <li><a href="#ItLesson02">Thủ thuật căn bản</a></li>
@@ -85,16 +112,10 @@
             <%=loadDataForITTipAdvance() %>
         </div>
     </div>
-    
     <div id="news" class="block_text">
         <h2>
             Tin tức thư viện</h2>
         <hr />
-        <div>
-            <%=loadLatestNews()%>
-        </div>
-        <div class="referlink">
-            <asp:HyperLink ID="HpkViewAllNsew" runat="server" NavigateUrl="~/News.aspx">Xem tất cả >></asp:HyperLink>
-        </div>
+          <%=loadLatestNews()%>
     </div>
 </asp:Content>
