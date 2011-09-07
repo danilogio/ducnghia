@@ -135,6 +135,10 @@ namespace ltktDAO
         /// folder containt images of ads
         /// </summary>
         public const string FOLDER_IMG_ADS = "imagesAd";
+        /// <summary>
+        /// view more
+        /// </summary>
+        public const string VIEW_MORE = "Xem tiếp";
         #endregion
 
         #region State (STATE)
@@ -293,7 +297,15 @@ namespace ltktDAO
         #endregion
 
         #region Informatics (AT_IT)
-        
+        /// <summary>
+        /// Informatics office start
+        /// </summary>
+        public const int AT_IT_OFFICE_START = 1;
+        /// <summary>
+        /// informatics office end
+        /// </summary>
+        public const int AT_IT_OFFICE_END = 9;
+
         /// <summary>
         /// Article IT with type Excel
         /// </summary>
@@ -313,14 +325,38 @@ namespace ltktDAO
         /// <summary>
         /// Article IT with type simple tip
         /// </summary>
-        public const int AT_IT_OFFICE_SIMPLE_TIP = 10;
+        public const int AT_IT_SIMPLE_TIP = 10;
         /// <summary>
         /// Article IT type with type advance tip
         /// </summary>
-        public const int AT_IT_OFFICE_ADVANCE_TIP = 20;
+        public const int AT_IT_ADVANCE_TIP = 20;
         #endregion
 
         #region English Type (AT_EL)
+        /// <summary>
+        /// Class english class
+        /// </summary>
+        public const int AT_EL_CLASS_START = 1;
+        /// <summary>
+        /// Class english end
+        /// </summary>
+        public const int AT_EL_CLASS_END = 19;
+        /// <summary>
+        /// Major English start
+        /// </summary>
+        public const int AT_EL_MJ_START = 20;
+        /// <summary>
+        /// Major English end
+        /// </summary>
+        public const int AT_EL_MJ_END = 29;
+        /// <summary>
+        /// Certificate English Start
+        /// </summary>
+        public const int AT_EL_CERT_START = 30;
+        /// <summary>
+        /// Certificate English end
+        /// </summary>
+        public const int AT_EL_CERT_END = 69;
         /// <summary>
         /// Anh văn lớp 1
         /// </summary>
@@ -754,6 +790,10 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_HOME = "Home.aspx";
         /// <summary>
+        /// News page
+        /// </summary>
+        public const string PAGE_NEWS = "News.aspx";
+        /// <summary>
         /// Home page name
         /// </summary>
         public const string PAGE_HOME_NAME = "Trang chủ";
@@ -800,8 +840,6 @@ namespace ltktDAO
         /// Article page
         /// </summary>
         public const string PAGE_ARTICLE_DETAILS = "ArticleDetails.aspx";
-
-
         /// <summary>
         /// search page name
         /// </summary>
@@ -944,15 +982,15 @@ namespace ltktDAO
         /// <summary>
         /// Section university code
         /// </summary>
-        public const string SEC_UNIVERSITY = "Luyện thi Đại học";
+        public const string SEC_UNIVERSITY_NAME = "Luyện thi Đại học";
         /// <summary>
         /// Section informatics code
         /// </summary>
-        public const string SEC_INFORMATICS = "Tin học";
+        public const string SEC_INFORMATICS_NAME = "Tin học";
         /// <summary>
         /// Section english code
         /// </summary>
-        public const string SEC_ENGLISH = "Anh văn";
+        public const string SEC_ENGLISH_NAME = "Anh văn";
         #endregion
 
         #region Subjects Math,Phy,Chem,Bio,Lit,His,Geo,Eng (SUB)
@@ -1027,9 +1065,16 @@ namespace ltktDAO
         /// University link template
         /// </summary>
         public const string TEMP_UNI_LINK = "<a href=\"" + PAGE_UNIVERSITY + "?" + REQ_SUBJECT + "={0}&" + REQ_TIME + "={1}\">{2}</a>";
-
+        /// <summary>
+        /// link template for article details
+        /// </summary>
         public const string TEMP_ARTICLE_DETAILS_LINK = "<a href='" + PAGE_ARTICLE_DETAILS + "?" + REQ_SECTION + "={0}&" + REQ_ID + "={1}'>{2}</a>";
 
+        public const string TEMP_NEWS_LINK = "<a href='" + PAGE_NEWS + "?id={0}'>{1}</a>";
+        /// <summary>
+        /// image thumbnail for article
+        /// </summary>
+        public const string TEMP_IMG_THUMBNAIL = "<img width='50px' height='50px' src='{0}' alt='{1}'/>";
         /// <summary>
         /// Self Link template
         /// </summary>
@@ -1061,7 +1106,7 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_FONT_TAG = "<span style=\"color:{0};\">{1}</span>";
         /// <summary>
-        /// Template foe span tag
+        /// Template for span tag
         /// </summary>
         public const string TEMP_SPAN_TAG = "<span style=\"color:{0};\" title=\"{1}\">{2}</span>";
         /// <summary>

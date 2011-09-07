@@ -40,6 +40,30 @@
             <%=loadDataForUniversityArticles() %>
         </div>
     </div>
+    <div id="EnglishLesson" class="block_text">
+        <h2>
+            Thư viện Anh Văn</h2>
+        <div>
+            <ul>
+                <li><a href="#EnglishLesson01">Phổ Thông</a></li>
+                <li><a href="#EnglishLesson02">Chuyên Ngành</a></li>
+                <li><a href="#EnglishLesson03">Chứng Chỉ</a></li>
+            </ul>
+            <!-- start EglishLesson-1-->
+            <div id="EnglishLesson01">
+                </a>
+                <%=loadDataForELCommon() %>
+            </div>
+            <!-- start EglishLesson-2-->
+            <div id="EnglishLesson02">
+                <%=loadDataForELMajor() %>
+            </div>
+            <!-- start EglishLesson-3-->
+            <div id="EnglishLesson03">
+                <%=loadDataForELCertificate() %>
+            </div>
+        </div>
+    </div>
     <div id="ItLesson" class="block_text">
         <h2>
             Thư viện Tin học</h2>
@@ -61,30 +85,7 @@
             <%=loadDataForITTipAdvance() %>
         </div>
     </div>
-    <div id="EnglishLesson" class="block_text">
-        <h2>
-            Thư viện Anh Văn</h2>
-        <div>
-            <ul>
-                <li><a href="#EnglishLesson01">Phổ Thông</a></li>
-                <li><a href="#EnglishLesson02">Chuyên Ngành</a></li>
-                <li><a href="#EnglishLesson03">Chứng Chỉ</a></li>
-            </ul>
-            <!-- start EglishLesson-1-->
-            <div id="EnglishLesson01">
-                </a>
-                <%=loadDataForELLectures() %>
-            </div>
-            <!-- start EglishLesson-2-->
-            <div id="EnglishLesson02">
-                <%=loadDataForELPractise() %>
-            </div>
-            <!-- start EglishLesson-3-->
-            <div id="EnglishLesson03">
-                <%=loadDataForELExamination() %>
-            </div>
-        </div>
-    </div>
+    
     <div id="news" class="block_text">
         <h2>
             Tin tức thư viện</h2>

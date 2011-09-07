@@ -625,18 +625,78 @@ namespace ltktDAO
             }
             return true;
         }
-
-        public IEnumerable<tblEnglish> getLatestArticlesByPostedDate(int _type, int numberRecord)
+        /// <summary>
+        /// get latest article by posted date
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="numberRecord"></param>
+        /// <returns></returns>
+        public IEnumerable<tblEnglish> getLatestArticlesByPostedDate(int _class, int numberRecord)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (numberRecord <= 0)
                 numberRecord = 1;
             IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
-                                           where p.Type == _type
+                                           where p.Class == _class && p.StickyFlg == false
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             return lst;
         }
+
+        /// <summary>
+        /// get latest sticky article by posted date
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="numberRecord"></param>
+        /// <returns></returns>
+        public IEnumerable<tblEnglish> getLatestStickyArticlesByPostedDate(int _class, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (numberRecord <= 0)
+                numberRecord = 1;
+            IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
+                                           where p.Class == _class && p.StickyFlg == true
+                                           orderby p.Posted descending
+                                           select p).Take(numberRecord);
+            return lst;
+        }
+
+        /// <summary>
+        /// get latest article by posted date
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="numberRecord"></param>
+        /// <returns></returns>
+        public IEnumerable<tblEnglish> getLatestArticlesByPostedDate(int _startClass, int _endClass, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (numberRecord <= 0)
+                numberRecord = 1;
+            IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
+                                           where p.Class >= _startClass && p.Class <= _endClass && p.StickyFlg == false
+                                           orderby p.Posted descending
+                                           select p).Take(numberRecord);
+            return lst;
+        }
+
+        /// <summary>
+        /// get latest sticky article by posted date
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="numberRecord"></param>
+        /// <returns></returns>
+        public IEnumerable<tblEnglish> getLatestStickyArticlesByPostedDate(int _startClass, int _endClass, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (numberRecord <= 0)
+                numberRecord = 1;
+            IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
+                                           where p.Class >= _startClass && p.Class <= _endClass && p.StickyFlg == true
+                                           orderby p.Posted descending
+                                           select p).Take(numberRecord);
+            return lst;
+        }
+
         /// <summary>
         /// when check button dislike article
         /// </summary>

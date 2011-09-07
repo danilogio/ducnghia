@@ -28,7 +28,7 @@ namespace ltkt
                 articleSCO.Time = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_TIME]);
 
                 Session[CommonConstants.SES_ARTICLE_SCO] = articleSCO;
-                lblTitle.Text = CommonConstants.SEC_UNIVERSITY;
+                lblTitle.Text = CommonConstants.SEC_UNIVERSITY_NAME;
 
                 if (!IsPostBack)
                 {
@@ -66,7 +66,7 @@ namespace ltkt
         {
             ArticleSCO articleSCO = new ArticleSCO();
             articleSCO = (ArticleSCO)Session[CommonConstants.SES_ARTICLE_SCO];
-            lblTitle.Text = CommonConstants.SEC_UNIVERSITY;
+            lblTitle.Text = CommonConstants.SEC_UNIVERSITY_NAME;
             if (articleSCO != null)
             {
                 try

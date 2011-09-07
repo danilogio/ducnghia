@@ -11,12 +11,14 @@ namespace ltkt
 {
     public partial class Home : System.Web.UI.Page
     {
-        EventLog log = new EventLog();
-        ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
-        ltktDAO.English englishDAO = new ltktDAO.English();
-        ltktDAO.Contest contestDAO = new ltktDAO.Contest();
-        ltktDAO.Control controlDAO = new ltktDAO.Control();
-        ltktDAO.News newsDAO = new ltktDAO.News();
+        private EventLog log = new EventLog();
+        private ltktDAO.Informatics informaticsDAO = new ltktDAO.Informatics();
+        private ltktDAO.English englishDAO = new ltktDAO.English();
+        private ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        private ltktDAO.Control controlDAO = new ltktDAO.Control();
+        private ltktDAO.News newsDAO = new ltktDAO.News();
+        private int numberArtOnTab = CommonConstants.NUMBER_RECORD_ON_TAB;
+        private int numberStickyArtOnTab = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +28,10 @@ namespace ltkt
             liTitle.Text = CommonConstants.PAGE_HOME_NAME + CommonConstants.SPACE
                 + CommonConstants.HLINE + CommonConstants.SPACE
                 + controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+            //init
+            numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
+            numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
+
         }
 
         public string loadDataForUniversityArticles()
@@ -33,27 +39,29 @@ namespace ltkt
             string data = CommonConstants.BLANK;
             try
             {
-                int numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
-                int numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
-
-                IEnumerable<tblContestForUniversity> lst1 = contestDAO.getStickyArticlebyPostedDay(BaseServices.min(numberArtOnTab, numberStickyArtOnTab));
-                IEnumerable<tblContestForUniversity> lst2 = contestDAO.getLatestArticleByPostedDate(numberArtOnTab - lst1.Count());
-                
-                IList<tblContestForUniversity> items1 = lst1.ToList();
-                IList<tblContestForUniversity> items2 = lst2.ToList();
-                
-
-                if (items1.Count > 0)
+                IList<tblContestForUniversity> items1 = null;
+                IEnumerable<tblContestForUniversity> lst1 = contestDAO.getStickyArticlebyPostedDay(BaseServices.min(numberArtOnTab, 
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
                 {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblContestForUniversity> lst2 = contestDAO.getLatestArticleByPostedDate(numberArtOnTab - remain);
+                
+                IList<tblContestForUniversity> items2 = lst2.ToList();
 
-                    foreach (var item in items1)
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
                     {
-                        data += buildExamLessonForUniversity(item);
+
+                        foreach (var item in items1)
+                        {
+                            data += buildExamLessonForUniversity(item);
+                        }
                     }
-                    
-                    
-
-
                 }
                 if (items2.Count > 0)
                 {
@@ -67,7 +75,8 @@ namespace ltkt
                 if (data != CommonConstants.BLANK)
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                            + "<a href='ContestUniversity.aspx'>Xem thêm</a></div>\n";
+                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_UNIVERSITY, CommonConstants.VIEW_MORE)
+                         + "</div>\n";
                 }
                 else
                 {
@@ -88,11 +97,45 @@ namespace ltkt
         /// <returns></returns>
         public string loadDataForITOffice()
         {
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_WORD, CommonConstants.AT_IT_OFFICE_ACCESS, CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblInformatic> items = lst.ToList();
-                return loadDetailsForITArticles(items);
+                IList<tblInformatic> items1 = null;
+                IEnumerable<tblInformatic> lst1 = informaticsDAO.getLatestStickyArticleByPostedDate(CommonConstants.AT_IT_OFFICE_START, 
+                                                                                                    CommonConstants.AT_IT_OFFICE_END, 
+                                                                                                    BaseServices.min(numberArtOnTab, 
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
+                {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblInformatic> lst2 = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_START, 
+                                                                                                CommonConstants.AT_IT_OFFICE_END, 
+                                                                                               numberArtOnTab - remain);
+                IList<tblInformatic> items2 = lst2.ToList();
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
+                    {
+                        data += loadDetailsForITArticles(items1);
+                    }
+                }
+                if (items2.Count > 0)
+                {
+                    data += loadDetailsForITArticles(items2);
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data += "<br/>\n<div class='referlink'>\n"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.VIEW_MORE)
+                        + "</div>\n";
+                }
+                else
+                {
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
             }
             catch (Exception ex)
             {
@@ -100,7 +143,7 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            return null;
+            return data;
         }
         /// <summary>
         /// load data for Practise Tab
@@ -108,11 +151,43 @@ namespace ltkt
         /// <returns></returns>
         public string loadDataForITTipSimple()
         {
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_SIMPLE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblInformatic> items = lst.ToList();
-                return loadDetailsForITArticles(items);
+                IList<tblInformatic> items1 = null;
+                IEnumerable<tblInformatic> lst1 = informaticsDAO.getLatestStickyArticleByPostedDate(CommonConstants.AT_IT_SIMPLE_TIP,
+                                                                                                    BaseServices.min(numberArtOnTab,
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
+                {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblInformatic> lst2 = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_SIMPLE_TIP,
+                                                                                               numberArtOnTab - remain);
+                IList<tblInformatic> items2 = lst2.ToList();
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
+                    {
+                        data += loadDetailsForITArticles(items1);
+                    }
+                }
+                if (items2.Count > 0)
+                {
+                    data += loadDetailsForITArticles(items2);
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data += "<br/>\n<div class='referlink'>\n"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.VIEW_MORE)
+                        + "</div>\n";
+                }
+                else
+                {
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
             }
             catch (Exception ex)
             {
@@ -120,7 +195,7 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            return null;
+            return data;
         }
         /// <summary>
         /// Load data for Examination Tab
@@ -128,11 +203,43 @@ namespace ltkt
         /// <returns></returns>
         public string loadDataForITTipAdvance()
         {
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblInformatic> lst = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_OFFICE_ADVANCE_TIP, CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblInformatic> items = lst.ToList();
-                return loadDetailsForITArticles(items);
+                IList<tblInformatic> items1 = null;
+                IEnumerable<tblInformatic> lst1 = informaticsDAO.getLatestStickyArticleByPostedDate(CommonConstants.AT_IT_ADVANCE_TIP,
+                                                                                                    BaseServices.min(numberArtOnTab,
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
+                {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblInformatic> lst2 = informaticsDAO.getLatestArticleByPostedDate(CommonConstants.AT_IT_ADVANCE_TIP,
+                                                                                               numberArtOnTab - remain);
+                IList<tblInformatic> items2 = lst2.ToList();
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
+                    {
+                        data += loadDetailsForITArticles(items1);
+                    }
+                }
+                if (items2.Count > 0)
+                {
+                    data += loadDetailsForITArticles(items2);
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data += "<br/>\n<div class='referlink'>\n"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.VIEW_MORE)
+                        + "</div>\n";
+                }
+                else
+                {
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
             }
             catch (Exception ex)
             {
@@ -140,20 +247,54 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            return null;
+            return data;
         }
 
         /// <summary>
         /// load data for Lecture Tab
         /// </summary>
         /// <returns></returns>
-        public string loadDataForELLectures()
+        public string loadDataForELCommon()
         {
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblEnglish> items = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_LECTURE, CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblEnglish> lst = items.ToList();
-                return loadDetailsForELArticles(lst);
+                IList<tblEnglish> items1 = null;
+                IEnumerable<tblEnglish> lst1 = englishDAO.getLatestStickyArticlesByPostedDate(CommonConstants.AT_EL_CLASS_START,
+                                                                                                    CommonConstants.AT_EL_CLASS_END,
+                                                                                                    BaseServices.min(numberArtOnTab,
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
+                {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblEnglish> lst2 = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_EL_CLASS_START,
+                                                                                       CommonConstants.AT_EL_CLASS_END,
+                                                                                       numberArtOnTab - remain);
+                IList<tblEnglish> items2 = lst2.ToList();
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
+                    {
+                        data += loadDetailsForELArticles(items1);
+                    }
+                }
+                if (items2.Count > 0)
+                {
+                    data += loadDetailsForELArticles(items2);
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data += "<br/>\n<div class='referlink'>\n"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.VIEW_MORE) 
+                        + "</div>\n";
+                }
+                else
+                {
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
             }
             catch (Exception ex)
             {
@@ -161,20 +302,54 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            return null;
+            return data;
 
         }
         /// <summary>
         /// load data for Practise Tab
         /// </summary>
         /// <returns></returns>
-        public string loadDataForELPractise()
+        public string loadDataForELMajor()
         {
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblEnglish> items = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_PRACTISE, CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblEnglish> lst = items.ToList();
-                return loadDetailsForELArticles(lst);
+                IList<tblEnglish> items1 = null;
+                IEnumerable<tblEnglish> lst1 = englishDAO.getLatestStickyArticlesByPostedDate(CommonConstants.AT_EL_MJ_START,
+                                                                                                    CommonConstants.AT_EL_MJ_END,
+                                                                                                    BaseServices.min(numberArtOnTab,
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
+                {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblEnglish> lst2 = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_EL_MJ_START,
+                                                                                        CommonConstants.AT_EL_MJ_END,
+                                                                                        numberArtOnTab - remain);
+                IList<tblEnglish> items2 = lst2.ToList();
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
+                    {
+                        data += loadDetailsForELArticles(items1);
+                    }
+                }
+                if (items2.Count > 0)
+                {
+                    data += loadDetailsForELArticles(items2);
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data += "<br/>\n<div class='referlink'>\n"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.VIEW_MORE)
+                        + "</div>\n";
+                }
+                else
+                {
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
             }
             catch (Exception ex)
             {
@@ -182,20 +357,53 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            return null;
-
+            return data;
         }
         /// <summary>
         /// Load data for Examination Tab
         /// </summary>
         /// <returns></returns>
-        public string loadDataForELExamination()
+        public string loadDataForELCertificate()
         {
+            string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblEnglish> items = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_EXAM, CommonConstants.NUMBER_RECORD_ON_TAB);
-                IList<tblEnglish> lst = items.ToList();
-                return loadDetailsForELArticles(lst);
+                IList<tblEnglish> items1 = null;
+                IEnumerable<tblEnglish> lst1 = englishDAO.getLatestStickyArticlesByPostedDate(CommonConstants.AT_EL_CERT_START,
+                                                                                                    CommonConstants.AT_EL_CERT_END,
+                                                                                                    BaseServices.min(numberArtOnTab,
+                                                                                                                    numberStickyArtOnTab));
+                int remain = 0;
+                if (lst1 != null)
+                {
+                    remain = lst1.Count();
+                    items1 = lst1.ToList();
+                }
+                IEnumerable<tblEnglish> lst2 = englishDAO.getLatestArticlesByPostedDate(CommonConstants.AT_EL_CERT_START,
+                                                                                        CommonConstants.AT_EL_CERT_END,
+                                                                                        numberArtOnTab - remain);
+                IList<tblEnglish> items2 = lst2.ToList();
+                if (items1 != null)
+                {
+                    if (items1.Count > 0)
+                    {
+                        data += loadDetailsForELArticles(items1);
+                    }
+                }
+                if (items2.Count > 0)
+                {
+                    data += loadDetailsForELArticles(items2);
+                }
+                if (!BaseServices.isNullOrBlank(data))
+                {
+                    data += "<br/>\n<div class='referlink'>\n"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.VIEW_MORE)
+                        + "</div>\n";
+                }
+                else
+                {
+                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                }
             }
             catch (Exception ex)
             {
@@ -203,11 +411,34 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            return null;
+            return data;
         }
+        /// <summary>
+        /// load details data for English
+        /// </summary>
+        /// <param name="lst"></param>
+        /// <returns></returns>
+        private string loadDetailsForELArticles(IList<tblEnglish> lst)
+        {
+
+            string data = CommonConstants.BLANK;
+                if (lst.Count > 0)
+                {
+                    foreach (var item in lst)
+                    {
+                        data += buildArticleForEnglish(item);
+                    }
+                }
+            return data;
+        }
+
+        /// <summary>
+        /// load latest news
+        /// </summary>
+        /// <returns></returns>
         public string loadLatestNews()
         {
-            string data = "";
+            string data = CommonConstants.BLANK;
             try
             {
                 IEnumerable<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB);
@@ -246,7 +477,7 @@ namespace ltkt
                 data += "                Post ngày " + item.Posted + " bởi <b>" + item.tblUser.DisplayName.Trim() + "</b></h5>\n";
                 data += "            <p>\n";
                 data += item.Chapaeu.Trim() + "...";
-                data += "              <a href='News.aspx?id=" + item.ID + "'>Xem tiếp >></a>\n";
+                data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, item.ID.ToString(), CommonConstants.VIEW_MORE);
                 data += "            </p>\n";
             }
             catch (Exception ex)
@@ -267,7 +498,7 @@ namespace ltkt
                 for (int i = 1; i < items.Count; i++)
                 {
                     data += "                <li>";
-                    data += "                    <a href='News.aspx?id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a><div";
+                    data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, items[i].ID.ToString(), items[i].Title.Trim()) + "<div";
                     data += "                        class='date'>";
                     data += "                        (" + items[i].Posted + ")</div>";
                     data += "                </li>";
@@ -283,80 +514,47 @@ namespace ltkt
             }
             return data;
         }
-        private string loadDetailsForELArticles(IList<tblEnglish> lst)
-        {
-
-            string data = "";
-            try
-            {
-                if (lst.Count > 0)
-                {
-                    foreach (var item in lst)
-                    {
-                        data += buildArticleForEnglish(item);
-
-                    }
-                    data += "<br/>\n<div class='referlink'>\n"
-                            + "<a href='English.aspx'>Xem thêm</a></div>\n";
-
-                }
-                else
-                {
-                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
-                Response.Redirect(CommonConstants.PAGE_ERROR);
-            }
-            return data;
-        }
-
+        
+        /// <summary>
+        /// load details for informatics article
+        /// </summary>
+        /// <param name="lst"></param>
+        /// <returns></returns>
         private string loadDetailsForITArticles(IList<tblInformatic> lst)
         {
-            string data = "";
-            try
+            string data = CommonConstants.BLANK;
+            if (lst.Count > 0)
             {
-                if (lst.Count > 0)
+                foreach (var item in lst)
                 {
-                    foreach (var item in lst)
-                    {
-                        data += buildArticleForInformatics(item);
-
-                    }
-                    data += "<br/>\n<div class='referlink'>\n"
-                            + "<a href='Informatics.aspx'>Xem thêm</a></div>\n";
-
-                }
-                else
-                {
-                    data = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                    data += buildArticleForInformatics(item);
                 }
             }
-            catch (Exception ex)
-            {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
-                Response.Redirect(CommonConstants.PAGE_ERROR);
-            }
+                   
             return data;
         }
 
+        /// <summary>
+        /// build article for english
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         private string buildArticleForEnglish(tblEnglish item)
         {
-            string data = "";
+            string data = CommonConstants.BLANK;
             try
             {
 
                 BaseServices bs = new BaseServices();
                 data += "              <div class='block_details'>\n"
                         + "                <div class='block_details_img'>\n"
-                        + "                    <span title='" + item.Title + "'><img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='" + item.Title.Trim() + "'/></span>\n"
+                        + "                    <span title='" + item.Title + "'>" 
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_THUMBNAIL, bs.getThumbnail(item.Thumbnail, item.Location),item.Title.Trim()) 
+                        + "</span>\n"
                         + "                </div>\n"
                         + "                <div class='block_details_title'>\n"
-                        + "                    <span title='" + item.Title + "'><a href=\"ArticleDetails.aspx?sec=el&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
+                        + "                    <span title='" + item.Title + "'>"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_ENGLISH_CODE, item.ID.ToString(), bs.subString(item.Title))
                         + "                </div>\n"
                         + "            </div>\n";
             }
@@ -369,18 +567,27 @@ namespace ltkt
             return data;
         }
 
+        /// <summary>
+        /// build article for informatics
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         private string buildArticleForInformatics(tblInformatic item)
         {
-            string data = "";
+            string data = CommonConstants.BLANK;
             try
             {
                 BaseServices bs = new BaseServices();
                 data += "              <div class='block_details'>\n"
                         + "                <div class='block_details_img'>\n"
-                        + "                    <span title='" + item.Title + "'><img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='" + item.Title + "' /></span>\n"
+                        + "                    <span title='" + item.Title + "'>"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_THUMBNAIL, bs.getThumbnail(item.Thumbnail, item.Location), item.Title.Trim()) 
+                        + "</span>\n"
                         + "                </div>\n"
                         + "                <div class='block_details_title'>\n"
-                        + "                    <span title='" + item.Title + "'><a href=\"ArticleDetails.aspx?sec=it&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
+                        + "                    <span title='" + item.Title + "'>"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_INFORMATICS_CODE, item.ID.ToString(), bs.subString(item.Title))
+                        + "</span>\n"
                         + "                </div>\n"
                         + "            </div>\n";
             }
@@ -393,18 +600,28 @@ namespace ltkt
             return data;
 
         }
+
+        /// <summary>
+        /// build exam lesson for university
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         private string buildExamLessonForUniversity(tblContestForUniversity item)
         {
-            string res = "";
+            string res = CommonConstants.BLANK;
             try
             {
                 BaseServices bs = new BaseServices();
                 res += "                <div class='block_details'>\n"
                         + "                <div class='block_details_img'>\n"
-                        + "                    <span title='" + item.Title + "'><img width='50px' height='50px' src='" + bs.getThumbnail(item.Thumbnail, item.Location) + "' alt='" + item.Title + "' /></span>\n"
+                        + "                    <span title='" + item.Title + "'>"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_THUMBNAIL, bs.getThumbnail(item.Thumbnail, item.Location), item.Title.Trim()) 
+                        + "</span>\n"
                         + "                </div>\n"
                         + "                <div class='block_details_title'>\n"
-                        + "                    <span title='" + item.Title + "'><a href=\"ArticleDetails.aspx?sec=uni&id=" + item.ID + "\">" + bs.subString(item.Title) + "</a></span>\n"
+                        + "                    <span title='" + item.Title + "'>"
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_UNIVERSITY_CODE, item.ID.ToString(), bs.subString(item.Title))
+                        + "</span>\n"
                         + "                </div>\n"
                         + "                <div class='block_details_text'>\n"
                         + "                    " + BaseServices.getNameByCode(item.Subject.Trim()) + "<br />\n"
@@ -422,7 +639,5 @@ namespace ltkt
 
             return res;
         }
-
-
     }
 }
