@@ -138,7 +138,7 @@ namespace ltkt
 
                     txtPostedComment.Text = contest.Comment;
 
-                    IList<tblContestForUniversity> items = contestDAO.getRelativeByYear(contest.Year, CommonConstants.NUMBER_RECORD_RELATIVE);
+                    IList<tblContestForUniversity> items = contestDAO.getRelativeByYear(contest.Year, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
@@ -197,7 +197,7 @@ namespace ltkt
                     hpkDownloadlink.Text = english.Title;
                     hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
 
-                    IList<tblEnglish> items = englishDAO.getRelativeByType(english.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
+                    IList<tblEnglish> items = englishDAO.getRelativeByType(english.Type, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
@@ -258,7 +258,7 @@ namespace ltkt
                     hpkDownloadlink.Text = informatic.Title;
                     hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
 
-                    IList<tblInformatic> items = informaticsDAO.getRelativeByType(informatic.Type, CommonConstants.NUMBER_RECORD_RELATIVE);
+                    IList<tblInformatic> items = informaticsDAO.getRelativeByType(informatic.Type, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {

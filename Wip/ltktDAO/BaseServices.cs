@@ -27,9 +27,9 @@ namespace ltktDAO
         public string subString(string str)
         {
             if (str == null) return null;
-            else if (str.Length > CommonConstants.NUMBER_OF_CHARACTER_ON_STRING)
+            else if (str.Length > CommonConstants.DEFAULT_NUMBER_OF_CHARACTER_ON_STRING)
             {
-                return (str.Substring(0, CommonConstants.NUMBER_OF_CHARACTER_ON_STRING) + "..." );
+                return (str.Substring(0, CommonConstants.DEFAULT_NUMBER_OF_CHARACTER_ON_STRING) + "..." );
             }
             return str.Trim();
         }

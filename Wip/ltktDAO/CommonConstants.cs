@@ -11,17 +11,17 @@ namespace ltktDAO
         /// <summary>
         /// Number record on one tab
         /// </summary>
-        public const int NUMBER_RECORD_ON_TAB = 8;
+        public const int DEFAULT_NUMBER_RECORD_ON_TAB = 8;
 
         /// <summary>
         /// Number record of relative a article
         /// </summary>
-        public const int NUMBER_RECORD_RELATIVE = 5;
+        public const int DEFAULT_NUMBER_RECORD_RELATIVE = 5;
 
         /// <summary>
         /// number of character string
         /// </summary>
-        public const int NUMBER_OF_CHARACTER_ON_STRING = 15;
+        public const int DEFAULT_NUMBER_OF_CHARACTER_ON_STRING = 15;
 
         /// <summary>
         /// Blank value
@@ -42,37 +42,6 @@ namespace ltktDAO
         /// html for delete icon on admin page
         /// </summary>
         public const string HTML_DELETE_ADMIN = "<img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/>";
-
-        /// <summary>
-        /// Next page
-        /// </summary>
-        public const string NEXT_PAGE = "Trang sau";
-
-        /// <summary>
-        /// Previous page
-        /// </summary>
-        public const string PREVIOUS_PAGE = "Trang trước";
-
-        /// <summary>
-        /// alert when delete successful
-        /// </summary>
-        public const string ALERT_DELETE_SUCCESSFUL = "alert (\"Xóa thành công!\")";
-
-        /// <summary>
-        /// alert when delete fail
-        /// </summary>
-        public const string ALERT_DELETE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
-
-        /// <summary>
-        /// alert when update fail
-        /// </summary>
-        public const string ALERT_UPDATE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
-
-        /// <summary>
-        /// alert when update successful
-        /// </summary>
-        public const string ALERT_UPDATE_SUCCESSFUL = "alert (\"Cập nhật thành công!\")";
-        
         /// <summary>
         /// Like page
         /// </summary>
@@ -135,25 +104,67 @@ namespace ltktDAO
         /// folder containt images of ads
         /// </summary>
         public const string FOLDER_IMG_ADS = "imagesAd";
-        /// <summary>
-        /// view more
-        /// </summary>
-        public const string VIEW_MORE = "Xem tiếp";
-        /// <summary>
-        /// Article name
-        /// </summary>
-        public const string ARTICLE_NAME = "Bài";
-        /// <summary>
-        /// view all
-        /// </summary>
-        public const string VIEW_ALL = "Xem tất cả";
-        /// <summary>
-        /// login text
-        /// </summary>
-        public const string LOGIN_TEXT = "Đăng nhập";
+        
+        #endregion
+
+        #region Alert (ALERT)
+            /// <summary>
+            /// alert when delete successful
+            /// </summary>
+            public const string ALERT_DELETE_SUCCESSFUL = "alert (\"Xóa thành công!\")";
+
+            /// <summary>
+            /// alert when delete fail
+            /// </summary>
+            public const string ALERT_DELETE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
+
+            /// <summary>
+            /// alert when update fail
+            /// </summary>
+            public const string ALERT_UPDATE_FAIL = "alert (\"Đã có lỗi xảy ra, xin vui lòng thử lại\")";
+
+            /// <summary>
+            /// alert when update successful
+            /// </summary>
+            public const string ALERT_UPDATE_SUCCESSFUL = "alert (\"Cập nhật thành công!\")";
+            
+        #endregion
+
+        #region Text display (TXT)
+            /// <summary>
+            /// Next page
+            /// </summary>
+            public const string TXT_NEXT_PAGE = "Trang sau";
+            /// <summary>
+            /// Previous page
+            /// </summary>
+            public const string TXT_PREVIOUS_PAGE = "Trang trước";
+            /// <summary>
+            /// view more
+            /// </summary>
+            public const string TXT_VIEW_MORE = "Xem tiếp";
+            /// <summary>
+            /// Article name
+            /// </summary>
+            public const string TXT_ARTICLE_NAME = "Bài";
+            /// <summary>
+            /// view all
+            /// </summary>
+            public const string TXT_VIEW_ALL = "Xem tất cả";
+            /// <summary>
+            /// login text
+            /// </summary>
+            public const string TXT_LOGIN = "Đăng nhập";
+            /// <summary>
+            /// account information text
+            /// </summary>
+            public const string TXT_ACCOUNT_INFOR = "Thông tin tài khoản"; 
         #endregion
 
         #region Css (CSS)
+            /// <summary>
+            /// Css class referlink
+            /// </summary>
             public const string CSS_REFERLINK = "referlink"; 
         #endregion
 
@@ -586,7 +597,6 @@ namespace ltktDAO
         /// Message access is denied
         /// </summary>
         public const string MSG_ACCESS_DENIED = "Bạn không có quyền truy cập khu vực này!";
-
         /// <summary>
         /// Message resourse not found
         /// </summary>
@@ -800,6 +810,10 @@ namespace ltktDAO
         /// max size of file
         /// </summary>
         public const string CF_MAX_FILE_SIZE = "MAX_FILE_SIZE";
+        /// <summary>
+        /// Number record relative
+        /// </summary>
+        public const string CF_NUM_RECORD_RELATIVE = "NUM_RECORD_RELATIVE";
         #endregion
 
         #region Pages Name (PAGE)

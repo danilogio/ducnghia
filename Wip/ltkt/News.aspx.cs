@@ -43,7 +43,7 @@ namespace ltkt
 
                     lblContent.Text = news.Contents;
 
-                    IList<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB).ToList();
+                    IList<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB).ToList();
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < lst.Count; i++)
                     {

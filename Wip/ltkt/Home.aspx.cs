@@ -18,7 +18,7 @@ namespace ltkt
         private ltktDAO.Control controlDAO = new ltktDAO.Control();
         private ltktDAO.News newsDAO = new ltktDAO.News();
         private ltktDAO.Statistics statisDAO = new ltktDAO.Statistics();
-        private int numberArtOnTab = CommonConstants.NUMBER_RECORD_ON_TAB;
+        private int numberArtOnTab = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
         private int numberStickyArtOnTab = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -34,13 +34,13 @@ namespace ltkt
             numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
             lNumUni.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_UNI).ToString() 
                             + CommonConstants.SPACE 
-                            + CommonConstants.ARTICLE_NAME;
+                            + CommonConstants.TXT_ARTICLE_NAME;
             lNumEL.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_EL).ToString()
                             + CommonConstants.SPACE
-                            + CommonConstants.ARTICLE_NAME; ;
+                            + CommonConstants.TXT_ARTICLE_NAME; ;
             lNumIT.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_IT).ToString()
                             + CommonConstants.SPACE
-                            + CommonConstants.ARTICLE_NAME; ;
+                            + CommonConstants.TXT_ARTICLE_NAME; ;
 
         }
 
@@ -85,7 +85,7 @@ namespace ltkt
                 if (data != CommonConstants.BLANK)
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_UNIVERSITY, CommonConstants.VIEW_MORE)
+                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_UNIVERSITY, CommonConstants.TXT_VIEW_MORE)
                          + "</div>\n";
                 }
                 else
@@ -139,7 +139,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.VIEW_MORE)
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.TXT_VIEW_MORE)
                         + "</div>\n";
                 }
                 else
@@ -191,7 +191,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.VIEW_MORE)
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.TXT_VIEW_MORE)
                         + "</div>\n";
                 }
                 else
@@ -243,7 +243,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.VIEW_MORE)
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.TXT_VIEW_MORE)
                         + "</div>\n";
                 }
                 else
@@ -298,7 +298,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.VIEW_MORE) 
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.TXT_VIEW_MORE) 
                         + "</div>\n";
                 }
                 else
@@ -353,7 +353,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.VIEW_MORE)
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.TXT_VIEW_MORE)
                         + "</div>\n";
                 }
                 else
@@ -407,7 +407,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.VIEW_MORE)
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.TXT_VIEW_MORE)
                         + "</div>\n";
                 }
                 else
@@ -451,7 +451,7 @@ namespace ltkt
             string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB);
                 IList<tblNew> items = lst.ToList();
                 if (items.Count > 0)
                 {
@@ -474,7 +474,7 @@ namespace ltkt
                                                             CommonConstants.CSS_REFERLINK, 
                                                             BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, 
                                                                                             items[0].ID.ToString(), 
-                                                                                            CommonConstants.VIEW_ALL));
+                                                                                            CommonConstants.TXT_VIEW_ALL));
                 }
             }
             catch (Exception ex)
@@ -496,7 +496,7 @@ namespace ltkt
                 data += "                Post ngày " + item.Posted + " bởi <b>" + item.tblUser.DisplayName.Trim() + "</b></h5>\n";
                 data += "            <p>\n";
                 data += item.Chapaeu.Trim() + "...";
-                data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, item.ID.ToString(), CommonConstants.VIEW_MORE);
+                data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, item.ID.ToString(), CommonConstants.TXT_VIEW_MORE);
                 data += "            </p>\n";
             }
             catch (Exception ex)

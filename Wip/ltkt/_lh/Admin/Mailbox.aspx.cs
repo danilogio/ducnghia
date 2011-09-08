@@ -213,7 +213,7 @@ namespace ltkt.Admin
                     PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
                                                                                 CommonConstants.PAGE_ADMIN_MAIL,
                                                                                 (page - 1).ToString(),
-                                                                                CommonConstants.PREVIOUS_PAGE);
+                                                                                CommonConstants.TXT_PREVIOUS_PAGE);
                 }
 
                 if (page > 0 && page < totalPages)
@@ -222,7 +222,7 @@ namespace ltkt.Admin
                     NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
                                                                              CommonConstants.PAGE_ADMIN_MAIL,
                                                                              (page + 1).ToString(),
-                                                                             CommonConstants.NEXT_PAGE);
+                                                                             CommonConstants.TXT_NEXT_PAGE);
                 }
             }
         }
