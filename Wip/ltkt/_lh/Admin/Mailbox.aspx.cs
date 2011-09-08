@@ -29,12 +29,21 @@ namespace ltkt.Admin
         public const string SmtpPort = "465";
 
         public const int NoOfEmailsPerPage = 6;
-        public const string SelfLink = "<a href=\"Mailbox.aspx?page={0}\">{1}</a>";
-        public const string DisplayEmailLink = "<a href=\"Mailbox.aspx?emailID={0}\">{1}</a>";
+        //public const string SelfLink = "<a href=\"Mailbox.aspx?page={0}\">{1}</a>";
+        //public const string DisplayEmailLink = "<a href=\"Mailbox.aspx?emailID={0}\">{1}</a>";
+
         private ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Control control = new ltktDAO.Control();
+        ltktDAO.Contact contactDAO = new ltktDAO.Contact();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //change title
+            liTitle.Text = CommonConstants.PAGE_ADMIN_MAIL_NAME
+                           + CommonConstants.SPACE + CommonConstants.HLINE
+                           + CommonConstants.SPACE
+                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
             tblUser user = (tblUser)Session[CommonConstants.SES_USER];
             if (user != null)
             {
@@ -43,7 +52,7 @@ namespace ltkt.Admin
                 {
                     ///DO WORK HERE ONLY//////////////////////////////
                     AdminMaster pageMaster = (AdminMaster)Master;
-                    pageMaster.updateHeader("Hộp thư");
+                    pageMaster.updateHeader(CommonConstants.PAGE_ADMIN_MAIL_NAME);
 
                     if (getEmailConfig())
                     {
@@ -51,26 +60,36 @@ namespace ltkt.Admin
                         int page = 1;
                         int emailID = -1;
 
-                        if (Request.QueryString["page"] != null)
+                        if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
                         {
                             EmailsTable.Visible = true;
                             EmailDetailTable.Visible = false;
 
-                            page = Convert.ToInt32(Request.QueryString["page"]);
+                            page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
                             showEmail(page);
                         }
-                        else if (Request.QueryString["emailID"] != null)
+                        else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
                         {
-                            EmailsTable.Visible = false;
-                            EmailDetailTable.Visible = true;
-
-                            emailID = Convert.ToInt32(Request.QueryString["emailID"]);
-                            ltktDAO.Contact.setRead(emailID, true);
-                            showDetails(emailID);
+                            string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                            emailID = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                            switch (action)
+                            {
+                                case CommonConstants.ACT_VIEW:
+                                    showDetails(emailID);
+                                    break;
+                                case CommonConstants.ACT_DELETE:
+                                    deleteEmail(emailID, user.Username);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                        else if (Request.QueryString["page"] == null)
+                        else if (Request.QueryString[CommonConstants.REQ_PAGE] == null)
                         {
-                            Response.Redirect("Mailbox.aspx?page=1");
+                            Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL + "1");
                         }
                     }
                     else
@@ -85,19 +104,48 @@ namespace ltkt.Admin
             else
             {
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
-                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
+        }
+
+        private void deleteEmail(int emailID, string username)
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+
+                bool isOK = contactDAO.deleteEmail(id, user.Username);
+
+                if (isOK)
+                {
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                        + CommonConstants.ADD_PARAMETER
+                                        + CommonConstants.REQ_PAGE
+                                        + CommonConstants.EQUAL + "1");
+                }
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Session[CommonConstants.SES_EMAIL] = null;
         }
 
         private void showEmail(int page)
         {
-            IEnumerable<tblContact> lst = ltktDAO.Contact.getAll();
+            liHeaderTitle.Text = "Hộp thư đến";
 
-            int totalEmails = ltktDAO.Contact.sumEmails();
+            int totalEmails = contactDAO.sumEmails();
 
             // Computing total pages
             int totalPages;
             int mod = totalEmails % NoOfEmailsPerPage;
+
+            IEnumerable<tblContact> lst = contactDAO.fetchEmailList(((page - 1) * NoOfEmailsPerPage), NoOfEmailsPerPage);
 
             if (mod == 0)
             {
@@ -124,17 +172,33 @@ namespace ltkt.Admin
                 TableCell subjectCell = new TableCell();
                 subjectCell.CssClass = "table-cell";
                 subjectCell.Style["width"] = "300px";
-                subjectCell.Text = String.Format(DisplayEmailLink, email.ID, email.Subject);
+                //subjectCell.Text = String.Format(DisplayEmailLink, email.ID, email.Subject);
+                subjectCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_MAIL,
+                                                                     CommonConstants.ACT_VIEW,
+                                                                     Convert.ToString(email.ID),
+                                                                     email.Subject);
+
 
                 TableCell dateCell = new TableCell();
                 dateCell.CssClass = "table-cell";
                 dateCell.Text = email.Posted.ToString();
+
+                TableCell actionCell = new TableCell();
+                actionCell.CssClass = "table-cell";
+                actionCell.Style["width"] = "20px";
+                actionCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                     CommonConstants.PAGE_ADMIN_MAIL,
+                                                                     CommonConstants.ACT_DELETE,
+                                                                     Convert.ToString(email.ID),
+                                                                     CommonConstants.HTML_DELETE_ADMIN);
 
                 TableRow emailRow = new TableRow();
                 emailRow.Cells.Add(noCell);
                 emailRow.Cells.Add(fromCell);
                 emailRow.Cells.Add(subjectCell);
                 emailRow.Cells.Add(dateCell);
+                emailRow.Cells.Add(actionCell);
 
                 EmailsTable.Rows.AddAt(2 + idx, emailRow);
             }
@@ -143,23 +207,55 @@ namespace ltkt.Admin
             if (totalPages > 1)
             {
                 if (page > 1)
-                    PreviousPageLiteral.Text = String.Format(SelfLink, page - 1, "Previous Page");
+                {
+                    //PreviousPageLiteral.Text = String.Format(SelfLink, page - 1, "Previous Page");
+                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                                                                                CommonConstants.PAGE_ADMIN_MAIL,
+                                                                                (page - 1).ToString(),
+                                                                                CommonConstants.PREVIOUS_PAGE);
+                }
 
                 if (page > 0 && page < totalPages)
-                    NextPageLiteral.Text = String.Format(SelfLink, page + 1, "Next Page");
+                {
+                    //NextPageLiteral.Text = String.Format(SelfLink, page + 1, "Next Page");
+                    NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                                                                             CommonConstants.PAGE_ADMIN_MAIL,
+                                                                             (page + 1).ToString(),
+                                                                             CommonConstants.NEXT_PAGE);
+                }
             }
         }
 
         private void showDetails(int emailID)
         {
-            tblContact email = ltktDAO.Contact.getEmail(emailID);
+            EmailsTable.Visible = false;
+
+            tblContact email = contactDAO.getEmail(emailID);
             if (email != null)
             {
+                btnReply.Visible = true;
+                btnForward.Visible = true;
+                btnDelete.Visible = true;
+
+                EmailDetailTable.Visible = true;
+
+                contactDAO.setRead(emailID, true);
+
                 EmailIdLiteral.Text = email.ID.ToString();
                 DateLiteral.Text = email.Posted.ToString();
                 FromLiteral.Text = email.EmailFrom;
                 SubjectLiteral.Text = email.Subject;
                 BodyLiteral.Text = email.Contents;
+
+                Session[CommonConstants.SES_EMAIL] = email;
+            }
+            else
+            {
+                Session[CommonConstants.SES_EMAIL] = null;
+
+                EmailDetailTable.Visible = false;
+                liMessageDetails.Visible = true;
+                liMessageDetails.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
             }
         }
 
@@ -206,7 +302,8 @@ namespace ltkt.Admin
 
                 SmtpMail.Send(message);
 
-                Boolean isOK = ltktDAO.Contact.insertEmail(Email, strTo, strSubject, strContent, DateTime.Now);
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                Boolean isOK = contactDAO.insertEmail(user.Username, Email, strTo, strSubject, strContent, DateTime.Now);
 
                 composePanel.Visible = false;
                 viewPanel.Visible = true;
@@ -244,6 +341,15 @@ namespace ltkt.Admin
 
         protected void btnSubmitConfig_Click(object sender, EventArgs e)
         {
+            string _username = txtAccount.Text.Trim();
+            string _password = txtPassword.Text;
+            string _Host = txtHost.Text.Trim();
+            int _HostPort = Convert.ToInt32(txtHostPort.Text.Trim());
+            string _SmtpServer = txtSmtpServer.Text.Trim();
+            int _SmptPort = Convert.ToInt32(txtSmtpPort.Text.Trim());
+
+            control.getValueString(CommonConstants.CF_EMAIL_CONFIG);
+            //host - port; username; password; smtpserver - port;
 
         }
 
@@ -251,5 +357,99 @@ namespace ltkt.Admin
         {
             return true;
         }
+        
+        protected void btnReply_Click(object sender, EventArgs e)
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                if (Session[CommonConstants.SES_EMAIL] != null)
+                {
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    tblContact contact = (tblContact)Session[CommonConstants.SES_EMAIL];
+
+                    viewPanel.Visible = false;
+                    composePanel.Visible = true;
+
+                    txtTo.Text = contact.EmailFrom.Trim();
+                    txtSubject.Text = "Re: " + contact.Subject.Trim();
+                }
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Session[CommonConstants.SES_EMAIL] = null;
+        }
+       
+        protected void btnForward_Click(object sender, EventArgs e)
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                if (Session[CommonConstants.SES_EMAIL] != null)
+                {
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    tblContact contact = (tblContact)Session[CommonConstants.SES_EMAIL];
+
+                    viewPanel.Visible = false;
+                    composePanel.Visible = true;
+
+                    txtTo.Text = contact.EmailFrom.Trim();
+                    txtSubject.Text = "Fwd: " + contact.Subject.Trim();
+                    txtContent.Text = "<br /><br />---------- Forwarded message ----------";
+                    txtContent.Text += "<br />";
+                    txtContent.Text += "Từ: ";
+                    txtContent.Text += contact.EmailFrom.Trim();
+                    txtContent.Text += "<br />";
+                    txtContent.Text += "Ngày gửi: ";
+                    txtContent.Text += contact.Posted.ToString();
+                    txtContent.Text += "<br />";
+                    txtContent.Text += "Tới: ";
+                    txtContent.Text += contact.EmailTo.Trim();
+                    txtContent.Text += "<br />";
+                    txtContent.Text += "Chủ đề: ";
+                    txtContent.Text += contact.Subject.Trim();
+                    txtContent.Text += "<br />";
+                    txtContent.Text += contact.Contents;
+                }
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Session[CommonConstants.SES_EMAIL] = null;
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+
+                bool isOK = contactDAO.deleteEmail(id, user.Username);
+
+                if (isOK)
+                {
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                        + CommonConstants.ADD_PARAMETER
+                                        + CommonConstants.REQ_PAGE
+                                        + CommonConstants.EQUAL + "1");
+                }
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Session[CommonConstants.SES_EMAIL] = null;
+        }
+    
     }
 }

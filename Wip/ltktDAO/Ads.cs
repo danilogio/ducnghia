@@ -210,8 +210,9 @@ namespace ltktDAO
         /// Xóa 1 record quảng cáo
         /// </summary>
         /// <param name="_id"></param>
+        /// <param name="_username"></param>
         /// <returns></returns>
-        public bool deleteAds(int _id)
+        public bool deleteAds(int _id, string _username)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -225,7 +226,7 @@ namespace ltktDAO
 
                     ts.Complete();
 
-                    log.writeLog(DBHelper.strPathLogFile,
+                    log.writeLog(DBHelper.strPathLogFile, _username,
                                 BaseServices.createMsgByTemplate (CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
                                                                     _id.ToString(),
                                                                     CommonConstants.SQL_TABLE_ADVERTISEMENT));
@@ -233,7 +234,11 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                    _id.ToString(),
+                                                                    CommonConstants.SQL_TABLE_ADVERTISEMENT));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
 
                 return false;
             }

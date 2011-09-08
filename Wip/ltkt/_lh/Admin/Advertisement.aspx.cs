@@ -65,12 +65,18 @@ namespace ltkt.Admin
                 }
                 else if (action == CommonConstants.ACT_DELETE)
                 {
-                    Boolean completeDelete = adsDAO.deleteAds(_id);
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    Boolean completeDelete = adsDAO.deleteAds(_id, user.Username);
 
                     if (completeDelete)
                     {
                         Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
-                        Response.Redirect("Advertisement.aspx?page=1");
+                        
+                        Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                                          + CommonConstants.ADD_PARAMETER
+                                          + CommonConstants.REQ_PAGE
+                                          + CommonConstants.EQUAL
+                                          + "1");
                     }
                     else
                     {
@@ -80,7 +86,11 @@ namespace ltkt.Admin
             }
             else
             {
-                Response.Redirect("Advertisement.aspx?page=1");
+                Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                                          + CommonConstants.ADD_PARAMETER
+                                          + CommonConstants.REQ_PAGE
+                                          + CommonConstants.EQUAL
+                                          + "1");
             }
         }
 

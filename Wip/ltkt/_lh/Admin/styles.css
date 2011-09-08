@@ -72,6 +72,11 @@ form input, form select, form textarea
 	color: #333;
 }
 
+form #leftMailbox input.formbutton
+{
+	width: 110px;
+}
+
 form input.formbutton
 {
 	border: none;
@@ -390,6 +395,12 @@ li ol, li ul
 	margin-left: 5px;
 	border-color: #a6c9e2;
 }
+
+#mailbox.block_text
+{
+	height: 500px;
+}
+
 hr
 {
 	border-color: #a6c9e2;

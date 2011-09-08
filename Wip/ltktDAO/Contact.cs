@@ -11,6 +11,8 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+        EventLog log = new EventLog();
 
         #region Property
         #region Get
@@ -23,9 +25,8 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_from"></param>
         /// <returns></returns>
-        public static Boolean setEmailFrom(int _id, string _from)
+        public Boolean setEmailFrom(int _id, string _from)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -52,9 +53,8 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_to"></param>
         /// <returns></returns>
-        public static Boolean setEmailTo(int _id, string _to)
+        public Boolean setEmailTo(int _id, string _to)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -81,9 +81,8 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_subject"></param>
         /// <returns></returns>
-        public static Boolean setSubject(int _id, string _subject)
+        public Boolean setSubject(int _id, string _subject)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -110,9 +109,8 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_contents"></param>
         /// <returns></returns>
-        public static Boolean setContents (int _id, string _contents)
+        public Boolean setContents(int _id, string _contents)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -139,9 +137,8 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_posted"></param>
         /// <returns></returns>
-        public static Boolean setPosted(int _id, DateTime _posted)
+        public Boolean setPosted(int _id, DateTime _posted)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -170,9 +167,8 @@ namespace ltktDAO
         /// <param name="_id"></param>
         /// <param name="_read"></param>
         /// <returns></returns>
-        public static Boolean setRead(int _id, Boolean _read)
+        public Boolean setRead(int _id, Boolean _read)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -202,9 +198,8 @@ namespace ltktDAO
         /// Lấy toàn bộ email liên hệ/góp ý.
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<tblContact> getAll()
+        public IEnumerable<tblContact> getAll()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             return (from record in DB.tblContacts select record);
         }
 
@@ -213,9 +208,8 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static tblContact getEmail(int _id)
+        public tblContact getEmail(int _id)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContact> lst = from record in DB.tblContacts
                                           where record.ID == _id
                                           select record;
@@ -235,10 +229,10 @@ namespace ltktDAO
         /// <param name="_content"></param>
         /// <param name="_posted"></param>
         /// <returns></returns>
-        public static Boolean insertEmail(string _from, string _to,
+        public Boolean insertEmail(string _username, string _from, string _to,
                                         string _subject, string _content, DateTime _posted)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            int id = 0;
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -254,10 +248,27 @@ namespace ltktDAO
                     DB.tblContacts.InsertOnSubmit(contact);
                     DB.SubmitChanges();
                     ts.Complete();
+
+                    id = contact.ID;
+
+                    log.writeLog(DBHelper.strPathLogFile,
+                                  _username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                   Convert.ToString(id),
+                                                                   CommonConstants.SQL_TABLE_CONTACT));
+
                 }
             }
             catch (Exception e)
             {
+
+                log.writeLog(DBHelper.strPathLogFile,
+                                  _username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                   Convert.ToString(id),
+                                                                   CommonConstants.SQL_TABLE_CONTACT));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
+
                 return false;
             }
 
@@ -268,9 +279,8 @@ namespace ltktDAO
         /// Lấy ra số lượng thư chưa đọc
         /// </summary>
         /// <returns></returns>
-        public static int sumUnread()
+        public int sumUnread()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContact> lst = from record in DB.tblContacts
                                           where record.isRead == false
                                           select record;
@@ -281,9 +291,8 @@ namespace ltktDAO
         /// Lấy ra các email chưa đọc
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<tblContact> getEmailUnread()
+        public IEnumerable<tblContact> getEmailUnread()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContact> lst = from record in DB.tblContacts
                                           where record.isRead == false
                                           select record;
@@ -294,14 +303,74 @@ namespace ltktDAO
         /// Tổng số emails
         /// </summary>
         /// <returns></returns>
-        public static int sumEmails()
+        public int sumEmails()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContact> lst = from record in DB.tblContacts
                                           select record;
             return lst.Count();
         }
 
+        /// <summary>
+        /// get cound email fromt id=start
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public IEnumerable<tblContact> fetchEmailList(int start, int count)
+        {
+            IEnumerable<tblContact> lst = (from record in DB.tblContacts
+                                           select record).Skip(start).Take(count);
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Delete a email
+        /// </summary>
+        /// <param name="emailID"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool deleteEmail(int emailID, string username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var email = DB.tblContacts.Single (e =>e.ID == emailID);
+
+                    DB.tblContacts.DeleteOnSubmit (email);
+                    DB.SubmitChanges ();
+                    ts.Complete ();
+
+                    log.writeLog (DBHelper.strPathLogFile,
+                              username,
+                              BaseServices.createMsgByTemplate (CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                Convert.ToString (emailID),
+                                                                CommonConstants.SQL_TABLE_CONTACT));
+
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog (DBHelper.strPathLogFile,
+                              username,
+                              BaseServices.createMsgByTemplate (CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                Convert.ToString (emailID),
+                                                                CommonConstants.SQL_TABLE_CONTACT));
+
+                log.writeLog(DBHelper.strPathLogFile,
+                              username,
+                              e.Message);
+
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
+
+
+
     }
 }

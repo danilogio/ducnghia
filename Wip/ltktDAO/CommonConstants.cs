@@ -921,6 +921,16 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_ADMIN_ADS_NAME = "Quản lý quảng cáo";
 
+        /// <summary>
+        /// Mailbox page
+        /// </summary>
+        public const string PAGE_ADMIN_MAIL = "Mailbox.aspx";
+
+        /// <summary>
+        /// Mailbox page name
+        /// </summary>
+        public const string PAGE_ADMIN_MAIL_NAME = "Hộp thư";
+
         #endregion
 
         #region Application Constants (APP)
@@ -939,6 +949,11 @@ namespace ltktDAO
         /// constant of session error text
         /// </summary>
         public const string SES_ERROR = "Error";
+
+        /// <summary>
+        /// Session for email
+        /// </summary>
+        public const string SES_EMAIL = "Email";
         /// <summary>
         /// session edit news
         /// </summary>
@@ -1100,6 +1115,7 @@ namespace ltktDAO
 
         /// <summary>
         /// Display link template
+        /// "<a href=\"{0}?action={1}&id={2}\">{3}</a>"
         /// </summary>
         public const string TEMP_DISPLAY_LINK = "<a href=\"{0}?action={1}&id={2}\">{3}</a>";
 
