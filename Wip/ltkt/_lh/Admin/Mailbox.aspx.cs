@@ -35,6 +35,7 @@ namespace ltkt.Admin
         private ltktDAO.Users userDAO = new ltktDAO.Users();
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.Contact contactDAO = new ltktDAO.Contact();
+        ltktDAO.Email emailConf = new Email();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -284,26 +285,26 @@ namespace ltkt.Admin
             try
             {
                 MailMessage message = new MailMessage();
-                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", SmtpServer);
-                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", SmtpPort);
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", emailConf.SmptServer);
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", emailConf.SmptPort);
                 message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusing", "2");
                 message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
                 //Use 0 for anonymous
-                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", Email);
-                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", Password);
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", emailConf.Username);
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", emailConf.Password);
                 message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
                 message.To = strTo;
-                message.From = Email;
+                message.From = emailConf.Username;
                 message.Subject = strSubject;
                 message.BodyFormat = MailFormat.Html;
                 message.Body = strContent;
                 message.BodyEncoding = Encoding.UTF8;
-                SmtpMail.SmtpServer = SmtpServer + ":" + SmtpPort;
+                SmtpMail.SmtpServer = emailConf.SmptServer + ":" + emailConf.SmptPort;
 
                 SmtpMail.Send(message);
 
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                Boolean isOK = contactDAO.insertEmail(user.Username, Email, strTo, strSubject, strContent, DateTime.Now);
+                Boolean isOK = contactDAO.insertEmail(user.Username, emailConf.Username, strTo, strSubject, strContent, DateTime.Now);
 
                 composePanel.Visible = false;
                 viewPanel.Visible = true;
@@ -355,9 +356,11 @@ namespace ltkt.Admin
 
         private bool getEmailConfig()
         {
+            emailConf = control.getEmailConfig();
+            
             return true;
         }
-        
+
         protected void btnReply_Click(object sender, EventArgs e)
         {
             if (Session[CommonConstants.SES_USER] != null)
@@ -383,7 +386,7 @@ namespace ltkt.Admin
 
             Session[CommonConstants.SES_EMAIL] = null;
         }
-       
+
         protected void btnForward_Click(object sender, EventArgs e)
         {
             if (Session[CommonConstants.SES_USER] != null)
@@ -397,7 +400,6 @@ namespace ltkt.Admin
                     viewPanel.Visible = false;
                     composePanel.Visible = true;
 
-                    txtTo.Text = contact.EmailFrom.Trim();
                     txtSubject.Text = "Fwd: " + contact.Subject.Trim();
                     txtContent.Text = "<br /><br />---------- Forwarded message ----------";
                     txtContent.Text += "<br />";
@@ -450,6 +452,6 @@ namespace ltkt.Admin
 
             Session[CommonConstants.SES_EMAIL] = null;
         }
-    
+
     }
 }

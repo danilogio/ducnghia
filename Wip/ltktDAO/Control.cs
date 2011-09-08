@@ -22,7 +22,9 @@ namespace ltktDAO
             IEnumerable<tblControl> items = from p in DB.tblControls
                                           select p;
             return items;
-        }/// <summary>
+        }
+        
+        /// <summary>
         /// get record
         /// </summary>
         /// <param name="_code"></param>
@@ -32,6 +34,7 @@ namespace ltktDAO
             var r = DB.tblControls.Single(p => p.Code == _code);
             return r;
         }
+        
         /// <summary>
         /// get value by string type
         /// </summary>
@@ -46,6 +49,7 @@ namespace ltktDAO
             }
             return CommonConstants.BLANK;
         }
+        
         public string getNameString(string _code)
         {
             tblControl r = getRecord(_code);
@@ -60,7 +64,6 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_code"></param>
         /// <returns>0 if not found or not converte</returns>
-
         public int getValueByInt(string _code)
         {
             tblControl r = getRecord(_code);
@@ -74,6 +77,7 @@ namespace ltktDAO
             }
             return 0;
         }
+
         /// <summary>
         /// update new value
         /// </summary>
@@ -98,6 +102,29 @@ namespace ltktDAO
             {
                 log.writeLog(DBHelper.strPathLogFile, ex.Message);
             }
+        }
+
+
+        public Email getEmailConfig()
+        {
+            Email emailConf = new Email();
+            string strEmailConf = getValueString(CommonConstants.CF_EMAIL_CONFIG);
+            //host - port; username; password; smtpserver - port;
+            char[] delimiterChars = { '-', ';',};
+
+            string[] emailConfDetails = strEmailConf.Split(delimiterChars);
+
+            if (emailConfDetails.Count() > 5)
+            {
+                emailConf.Host = emailConfDetails[0];
+                emailConf.HostPort = emailConfDetails[1];
+                emailConf.Username = emailConfDetails[2];
+                emailConf.Password = emailConfDetails[3];
+                emailConf.SmptServer = emailConfDetails[4];
+                emailConf.SmptPort = emailConfDetails[5];
+            }
+
+            return emailConf;
         }
     }
 }
