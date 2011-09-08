@@ -591,8 +591,14 @@ namespace ltktDAO
         /// Message resourse not found
         /// </summary>
         public const string MSG_RESOURSE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
-
-        public const string MSG_UNDERCONSTRUCTION = "Website is underconstruction!";
+        /// <summary>
+        /// website is under construction.
+        /// </summary>
+        public const string MSG_UNDERCONSTRUCTION = "Website is under construction!";
+        /// <summary>
+        /// file zise is too large
+        /// </summary>
+        public const string MSG_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
         #endregion
 
         #region Administrator Function (AF)
@@ -790,6 +796,10 @@ namespace ltktDAO
         /// Số tin được phép sticky
         /// </summary>
         public const string CF_NUM_ARTICLE_STICKY = "NUM_ARTICLE_STICKY";
+        /// <summary>
+        /// max size of file
+        /// </summary>
+        public const string CF_MAX_FILE_SIZE = "MAX_FILE_SIZE";
         #endregion
 
         #region Pages Name (PAGE)
