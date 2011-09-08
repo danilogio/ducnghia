@@ -51,7 +51,7 @@ namespace ltkt
                 else
                 {
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    userStateTitle.Text = "Thông tin tài khoản";
+                    userStateTitle.Text = CommonConstants.TXT_ACCOUNT_INFOR;
                     loginUser.Text = user.DisplayName;
                     loginPanel.Visible = false;
                     userPanel.Visible = true;
@@ -96,7 +96,7 @@ namespace ltkt
         {
             Session[CommonConstants.SES_USER] = _user;
             loginUser.Text = _user.DisplayName;
-            userStateTitle.Text = "Thông tin tài khoản";
+            userStateTitle.Text = CommonConstants.TXT_ACCOUNT_INFOR;
             loginPanel.Visible = false;
             HpkUpload.Visible = true;
             userPanel.Visible = true;
@@ -109,12 +109,12 @@ namespace ltkt
 
         private string[] readInformation()
         {
-            string[] inform = new string[2] { "", "" };
-            if (Request.Cookies["Username"] != null
-                && Request.Cookies["Password"] != null)
+            string[] inform = new string[2] { CommonConstants.BLANK, CommonConstants.BLANK };
+            if (Request.Cookies[CommonConstants.COOKIE_USERNAME] != null
+                && Request.Cookies[CommonConstants.COOKIE_PASSWORD] != null)
             {
-                string sUsername = Server.HtmlEncode( Request.Cookies["Username"].Value);
-                string sPassword = Server.HtmlEncode(Request.Cookies["Password"].Value);
+                string sUsername = Server.HtmlEncode( Request.Cookies[CommonConstants.COOKIE_USERNAME].Value);
+                string sPassword = Server.HtmlEncode(Request.Cookies[CommonConstants.COOKIE_PASSWORD].Value);
                 inform[0] = sUsername;
                 inform[1] = sPassword;
                 return inform;
@@ -125,10 +125,10 @@ namespace ltkt
         private void saveInformationForNext(string sUsername,string sPassword)
         {
             //if cookie has'nt been written for 2 weeks.
-            if (Response.Cookies["Username"] != null && Response .Cookies["Password"] != null)
+            if (Response.Cookies[CommonConstants.COOKIE_USERNAME] != null && Response .Cookies[CommonConstants.COOKIE_PASSWORD] != null)
             {
-                HttpCookie cookUsername = new HttpCookie("Username");
-                HttpCookie cookPassword = new HttpCookie("Password");
+                HttpCookie cookUsername = new HttpCookie(CommonConstants.COOKIE_USERNAME);
+                HttpCookie cookPassword = new HttpCookie(CommonConstants.COOKIE_PASSWORD);
 
                 cookUsername.Value = sUsername;
                 cookPassword.Value = userDAO.encryptPassword(sPassword);
@@ -144,10 +144,10 @@ namespace ltkt
 
         private void clearCookies()
         {
-            if (Response.Cookies["Username"] != null && Response.Cookies["Password"] != null)
+            if (Response.Cookies[CommonConstants.COOKIE_USERNAME] != null && Response.Cookies[CommonConstants.COOKIE_PASSWORD] != null)
             {
-                Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies[CommonConstants.COOKIE_USERNAME].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies[CommonConstants.COOKIE_PASSWORD].Expires = DateTime.Now.AddDays(-1);
             }
         }
 
@@ -166,7 +166,7 @@ namespace ltkt
                     updateAccount(user);
 
                     Application.Lock();
-                    Application["UserOnline"] = (Int32)Application["UserOnline"] + 1;
+                    Application[CommonConstants.APP_USER_ONLINE] = (Int32)Application[CommonConstants.APP_USER_ONLINE] + 1;
                     Application.UnLock();
 
                     if (chxRemember.Checked)
@@ -233,17 +233,74 @@ namespace ltkt
             Session[CommonConstants.SES_USER] = null;
 
             clearCookies();
-            userStateTitle.Text = "Đăng nhập";
+            userStateTitle.Text = CommonConstants.TXT_LOGIN;
             loginPanel.Visible = true;
             userPanel.Visible = false;
             HpkUpload.Visible = false;
 
             Application.Lock();
-            Application["UserOnline"] = (Int32)Application["UserOnline"] - 1;
+            Application[CommonConstants.APP_USER_ONLINE] = (Int32)Application[CommonConstants.APP_USER_ONLINE] - 1;
             Application.UnLock();
 
             Response.Redirect(CommonConstants.PAGE_HOME);
         }
-        
+        public string loadMaxPointArticle()
+        {
+            string data = CommonConstants.BLANK;
+            string temp = CommonConstants.BLANK;
+            string sum = CommonConstants.BLANK;
+            ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+            ltktDAO.English englishDAO = new ltktDAO.English();
+            ltktDAO.Informatics inforDAO = new ltktDAO.Informatics();
+            BaseServices bs = new BaseServices();
+
+            tblContestForUniversity uni = contestDAO.getMaxPoint();
+            tblEnglish el = englishDAO.getMaxPoint();
+            tblInformatic it = inforDAO.getMaxPoint();
+            if (uni != null)
+            {
+                temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, 
+                                                        CommonConstants.SEC_UNIVERSITY_CODE, 
+                                                        uni.ID.ToString(), 
+                                                        BaseServices.createMsgByTemplate(CommonConstants.TEMP_STRONG_TAG, 
+                                                                                        uni.Title.Trim()));
+
+                sum = uni.Contents.Trim();
+                if (!BaseServices.isNullOrBlank(sum))
+                {
+                    temp += CommonConstants.SPACE + bs.subString(sum);
+                }
+                data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+            }
+            if (el != null)
+            {
+                temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
+                                                        CommonConstants.SEC_UNIVERSITY_CODE,
+                                                        el.ID.ToString(),
+                                                        BaseServices.createMsgByTemplate(CommonConstants.TEMP_STRONG_TAG,
+                                                                                       el.Title.Trim()));
+                sum = el.Contents.Trim();
+                if (!BaseServices.isNullOrBlank(sum))
+                {
+                    temp += CommonConstants.SPACE + bs.subString(sum);
+                }
+                data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+            }
+            if (it != null)
+            {
+                temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
+                                                        CommonConstants.SEC_UNIVERSITY_CODE,
+                                                        it.ID.ToString(),
+                                                        BaseServices.createMsgByTemplate(CommonConstants.TEMP_STRONG_TAG,
+                                                                                        it.Title.Trim()));
+                sum = it.Contents.Trim();
+                if (!BaseServices.isNullOrBlank(sum))
+                {
+                    temp += CommonConstants.SPACE + bs.subString(sum);
+                }
+                data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+            }
+            return data;
+        }
     }
 }

@@ -365,16 +365,16 @@
                                     <h3>
                                         <a href="#">Tin học Văn Phòng</a></h3>
                                     <div class="dialog_link">
-                                        <a href="Informatics.aspx?Leit=word&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="Informatics.aspx?leit=word&time=now" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Word&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="Informatics.aspx?Leit=excel&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="Informatics.aspx?leit=excel&time=now" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Excel&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="Informatics.aspx?Leit=pp&time=now" class="ui-state-default ui-corner-all"><span
+                                        <a href="Informatics.aspx?leit=pp&time=now" class="ui-state-default ui-corner-all"><span
                                             class="ui-icon ui-icon-newwin"></span>PowerPoint&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="Informatics.aspx?Leit=acc&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="Informatics.aspx?leit=acc&time=now" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Access&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                                     </div>
                                 </div>
@@ -382,10 +382,10 @@
                                     <h3>
                                         <a href="#">Thủ thuật vi tính</a></h3>
                                     <div class="dialog_link">
-                                        <a href="Informatics.aspx?Leit=simtip&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="Informatics.aspx?leit=simtip&time=now" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Thủ thuật căn bản&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="Informatics.aspx?Leit=advtip&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="Informatics.aspx?leit=advtip&time=now" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Thủ thuật nâng cao&nbsp&nbsp</a><br />
                                         <br />
                                     </div>
@@ -404,16 +404,11 @@
                                     - brilliant premium templates</li>
                             </ul>
                         </li>--%>
-                        <li style="background: white; border: 1px solid #a6c9e2;">
+                        <li>
                             <h4>
                                 Tài liệu được quan tâm</h4>
                             <ul style="background: white; border: 1px solid #a6c9e2;">
-                                <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates"><strong>
-                                    ThemeForest</strong></a> - premium HTML templates, WordPress themes and PHP scripts</li>
-                                <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting"><strong>Web
-                                    hosting</strong></a> - 50 dollars off when you use promocode <strong>awesome50</strong></li>
-                                <li><a href="http://www.4templates.com/?aff=spykawg" title="4templates"><strong>4templates</strong></a>
-                                    - brilliant premium templates</li>
+                               <%=loadMaxPointArticle() %>
                             </ul>
                         </li>
                         <li>

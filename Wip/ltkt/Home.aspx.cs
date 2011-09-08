@@ -85,7 +85,7 @@ namespace ltkt
                 if (data != CommonConstants.BLANK)
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_UNIVERSITY, CommonConstants.TXT_VIEW_MORE)
+                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_UNI_LINK,CommonConstants.ALL,CommonConstants.NOW, CommonConstants.TXT_VIEW_MORE)
                          + "</div>\n";
                 }
                 else
@@ -139,7 +139,7 @@ namespace ltkt
                 if (!BaseServices.isNullOrBlank(data))
                 {
                     data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.TXT_VIEW_MORE)
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK, CommonConstants.ALL, CommonConstants.NOW, CommonConstants.TXT_VIEW_MORE)
                         + "</div>\n";
                 }
                 else

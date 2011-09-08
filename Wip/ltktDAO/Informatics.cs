@@ -292,7 +292,7 @@ namespace ltktDAO
                                                        select p;
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0);
+                return lst.ElementAt(BaseServices.random(0, lst.Count()));
             }
             return null;
         }

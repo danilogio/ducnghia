@@ -61,7 +61,10 @@ namespace ltktDAO
         /// now
         /// </summary>
         public const string NOW = "now";
-
+        /// <summary>
+        /// all
+        /// </summary>
+        public const string ALL = "all";
         /// <summary>
         /// dot dtring (.)
         /// </summary>
@@ -958,6 +961,10 @@ namespace ltktDAO
         #endregion
 
         #region Application Constants (APP)
+            /// <summary>
+            /// Users asre online
+            /// </summary>
+            public const string APP_USER_ONLINE = "UserOnline";
         #endregion
 
         #region Session Constants (SES)
@@ -1014,7 +1021,14 @@ namespace ltktDAO
         /// Request Action
         /// </summary>
         public const string REQ_ACTION = "action";
-
+        /// <summary>
+        /// Request class
+        /// </summary>
+        public const string REQ_CLASS = "class";
+        /// <summary>
+        /// Request Leitmotif
+        /// </summary>
+        public const string REQ_LEITMOTIF = "leit";
         /// <summary>
         /// request page
         /// </summary>
@@ -1046,6 +1060,44 @@ namespace ltktDAO
         /// Section english code
         /// </summary>
         public const string SEC_ENGLISH_NAME = "Anh văn";
+        #endregion
+
+        #region Parameters (PARAM)
+            /// <summary>
+            /// THPT
+            /// </summary>
+            public const string PARAM_EL_COMMON = "com";
+            /// <summary>
+            /// Chuyên ngành
+            /// </summary>
+            public const string PARAM_EL_MAJOR = "maj";
+            /// <summary>
+            /// Chứng chỉ
+            /// </summary>
+            public const string PARAM_EL_CERT = "cert";
+            /// <summary>
+            /// THVP
+            /// </summary>
+            public const string PARAM_IT_OFFICE = "off";
+            /// <summary>
+            /// Thủ thuật căn bản
+            /// </summary>
+            public const string PARAM_IT_SIMPLE = "simp";
+            /// <summary>
+            /// Thủ thuật nâng cao
+            /// </summary>
+            public const string PARAM_IT_ADVANCE = "adv"; 
+        #endregion
+
+        #region Cookie (COOKIE)
+            /// <summary>
+            /// Cookie username
+            /// </summary>
+            public const string COOKIE_USERNAME = "Username";
+            /// <summary>
+            /// Cookie Password
+            /// </summary>
+            public const string COOKIE_PASSWORD = "Password"; 
         #endregion
 
         #region Subjects Math,Phy,Chem,Bio,Lit,His,Geo,Eng (SUB)
@@ -1125,6 +1177,14 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_ARTICLE_DETAILS_LINK = "<a href='" + PAGE_ARTICLE_DETAILS + "?" + REQ_SECTION + "={0}&" + REQ_ID + "={1}'>{2}</a>";
         /// <summary>
+        /// link template for english page
+        /// </summary>
+        public const string TEMP_ENGLISH_LINK = "<a href='" + PAGE_ENGLISH + "?" + REQ_CLASS + "={0}&" + REQ_TIME + "={1}'>{2}</a>";
+        /// <summary>
+        /// link template for informatics page
+        /// </summary>
+        public const string TEMP_INFORMATICS_LINK = "<a href='" + PAGE_INFORMATICS + "?" + REQ_LEITMOTIF + "={0}&" + REQ_TIME + "={1}'>{2}</a>";
+        /// <summary>
         /// link template for news page
         /// </summary>
         public const string TEMP_NEWS_LINK = "<a href='" + PAGE_NEWS + "?id={0}'>{1}</a>";
@@ -1159,6 +1219,10 @@ namespace ltktDAO
         /// Templte b tag
         /// </summary>
         public const string TEMP_I_TAG = "<i>{0}</i>";
+        /// <summary>
+        /// Template strong tag
+        /// </summary>
+        public const string TEMP_STRONG_TAG = "<strong>{0}</strong>";
         /// <summary>
         /// Template font tag
         /// </summary>

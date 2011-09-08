@@ -44,7 +44,13 @@ namespace ltktDAO
             }
             return res;
         }
-
+        public static int random(int min, int max)
+        {
+            Random rd = new Random();
+            int r = 0;
+            r = rd.Next(min, max);
+            return r;
+        }
         public string getDefaultAppropriateThumbnail(string extension)
         {
             string strThumbnail = CommonConstants.BLANK;
