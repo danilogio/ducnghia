@@ -21,12 +21,12 @@ namespace ltkt.Admin
 {
     public partial class Mailbox : System.Web.UI.Page
     {
-        public const string Host = "pop.gmail.com";
-        public const int Port = 995;
-        public const string Email = "";
-        public const string Password = "";
-        public const string SmtpServer = "smtp.gmail.com";
-        public const string SmtpPort = "465";
+        //public const string Host = "pop.gmail.com";
+        //public const int Port = 995;
+        //public const string Email = "";
+        //public const string Password = "";
+        //public const string SmtpServer = "smtp.gmail.com";
+        //public const string SmtpPort = "465";
 
         public const int NoOfEmailsPerPage = 6;
         //public const string SelfLink = "<a href=\"Mailbox.aspx?page={0}\">{1}</a>";
@@ -35,7 +35,7 @@ namespace ltkt.Admin
         private ltktDAO.Users userDAO = new ltktDAO.Users();
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.Contact contactDAO = new ltktDAO.Contact();
-        ltktDAO.Email emailConf = new Email();
+        ltktDAO.EmailConf emailConf = new EmailConf();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -67,7 +67,20 @@ namespace ltkt.Admin
                             EmailDetailTable.Visible = false;
 
                             page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                            showEmail(page);
+                            showEmail(page, true);
+
+
+
+                            //List<Email> emails;
+
+                            //using (Pop3Client client = new Pop3Client(emailConf.Host, emailConf.HostPort, emailConf.Username, emailConf.Password, true))
+                            //{
+                            //    client.Connect();
+
+                            //    int totalEmails = client.GetEmailCount();
+                            //    emails = client.FetchEmailList(((page - 1) *
+                            //        NoOfEmailsPerPage) + 1, NoOfEmailsPerPage);
+                            //}
                         }
                         else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
                         {
@@ -136,9 +149,16 @@ namespace ltkt.Admin
             Session[CommonConstants.SES_EMAIL] = null;
         }
 
-        private void showEmail(int page)
+        private void showEmail(int page, bool isInbox)
         {
-            liHeaderTitle.Text = "Hộp thư đến";
+            if (isInbox)
+            {
+                liHeaderTitle.Text = "Hộp thư đến";
+            }
+            else
+            {
+                liHeaderTitle.Text = "Hộp thư đi";
+            }
 
             int totalEmails = contactDAO.sumEmails();
 
@@ -146,7 +166,7 @@ namespace ltkt.Admin
             int totalPages;
             int mod = totalEmails % NoOfEmailsPerPage;
 
-            IEnumerable<tblContact> lst = contactDAO.fetchEmailList(((page - 1) * NoOfEmailsPerPage), NoOfEmailsPerPage);
+            IEnumerable<tblContact> lst = contactDAO.fetchEmailList(isInbox, ((page - 1) * NoOfEmailsPerPage), NoOfEmailsPerPage);
 
             if (mod == 0)
             {
@@ -155,6 +175,16 @@ namespace ltkt.Admin
             else
             {
                 totalPages = ((totalEmails - mod) / NoOfEmailsPerPage) + 1;
+            }
+
+            if (EmailsTable.Rows.Count > 3)
+            {
+                int idx = 2;
+                for (; idx < EmailsTable.Rows.Count -1; idx++)
+                {
+                    EmailsTable.Rows.RemoveAt(idx);
+                }
+                EmailsTable.Rows.RemoveAt(idx -1);
             }
 
             for (int idx = 0; idx < lst.Count(); ++idx)
@@ -168,7 +198,16 @@ namespace ltkt.Admin
 
                 TableCell fromCell = new TableCell();
                 fromCell.CssClass = "table-cell";
-                fromCell.Text = email.EmailFrom;
+                if (isInbox)
+                {
+                    liFromTo.Text = "Người gửi";
+                    fromCell.Text = email.EmailFrom;
+                }
+                else
+                {
+                    liFromTo.Text = "Người nhận";
+                    fromCell.Text = email.EmailTo;
+                }
 
                 TableCell subjectCell = new TableCell();
                 subjectCell.CssClass = "table-cell";
@@ -262,12 +301,13 @@ namespace ltkt.Admin
 
         protected void btnInbox_Click(object sender, EventArgs e)
         {
+            showEmail(1, true);
         }
 
         protected void btnSent_Click(object sender, EventArgs e)
         {
+            showEmail(1, false);
         }
-
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -300,7 +340,7 @@ namespace ltkt.Admin
                 message.Body = strContent;
                 message.BodyEncoding = Encoding.UTF8;
                 SmtpMail.SmtpServer = emailConf.SmptServer + ":" + emailConf.SmptPort;
-
+                
                 SmtpMail.Send(message);
 
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
@@ -338,6 +378,20 @@ namespace ltkt.Admin
             viewPanel.Visible = false;
             composePanel.Visible = false;
             configPanel.Visible = true;
+
+            txtAccount.Text = emailConf.Username;
+            txtHost.Text = emailConf.Host;
+            txtHostPort.Text = emailConf.HostPort;
+            txtSmtpServer.Text = emailConf.SmptServer;
+            txtSmtpPort.Text = emailConf.SmptPort;
+        }
+
+        protected void btnCancelConfig_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                   + CommonConstants.ADD_PARAMETER
+                                   + CommonConstants.REQ_PAGE
+                                   + CommonConstants.EQUAL + "1");
         }
 
         protected void btnSubmitConfig_Click(object sender, EventArgs e)
@@ -345,12 +399,31 @@ namespace ltkt.Admin
             string _username = txtAccount.Text.Trim();
             string _password = txtPassword.Text;
             string _Host = txtHost.Text.Trim();
-            int _HostPort = Convert.ToInt32(txtHostPort.Text.Trim());
+            string _HostPort = txtHostPort.Text.Trim();
             string _SmtpServer = txtSmtpServer.Text.Trim();
-            int _SmptPort = Convert.ToInt32(txtSmtpPort.Text.Trim());
+            string _SmptPort = txtSmtpPort.Text.Trim();
 
-            control.getValueString(CommonConstants.CF_EMAIL_CONFIG);
+            //control.getValueString(CommonConstants.CF_EMAIL_CONFIG);
             //host - port; username; password; smtpserver - port;
+
+            tblUser user = (tblUser)Session [CommonConstants.SES_USER];
+            if (user != null)
+            {
+                control.updateValue(CommonConstants.CF_EMAIL_CONFIG,
+                                     _Host + "-" + _HostPort + ";" + _username + ";" + _password + ";" + _SmtpServer + "-" + _SmptPort,
+                                     user.Username);
+
+                Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                   + CommonConstants.ADD_PARAMETER
+                                   + CommonConstants.REQ_PAGE
+                                   + CommonConstants.EQUAL + "1");
+
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
 
         }
 

@@ -105,9 +105,9 @@ namespace ltktDAO
         }
 
 
-        public Email getEmailConfig()
+        public EmailConf getEmailConfig()
         {
-            Email emailConf = new Email();
+            EmailConf emailConf = new EmailConf();
             string strEmailConf = getValueString(CommonConstants.CF_EMAIL_CONFIG);
             //host - port; username; password; smtpserver - port;
             char[] delimiterChars = { '-', ';',};

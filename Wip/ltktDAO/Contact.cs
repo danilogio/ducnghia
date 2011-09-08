@@ -13,6 +13,8 @@ namespace ltktDAO
         static string strPathDB = DBHelper.strPathDB;
         LTDHDataContext DB = new LTDHDataContext(@strPathDB);
         EventLog log = new EventLog();
+        EmailConf emailConf = new EmailConf();
+        Control control = new Control();
 
         #region Property
         #region Get
@@ -313,13 +315,28 @@ namespace ltktDAO
         /// <summary>
         /// get cound email fromt id=start
         /// </summary>
+        /// <param name="isInbox"></param>
         /// <param name="start"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public IEnumerable<tblContact> fetchEmailList(int start, int count)
+        public IEnumerable<tblContact> fetchEmailList(bool isInbox, int start, int count)
         {
-            IEnumerable<tblContact> lst = (from record in DB.tblContacts
-                                           select record).Skip(start).Take(count);
+            IEnumerable<tblContact> lst = null;
+            emailConf = control.getEmailConfig();
+            if (isInbox)
+            {
+                lst = (from record in DB.tblContacts
+                       orderby record.ID descending
+                       where record.EmailTo == emailConf.Username
+                       select record).Skip(start).Take(count);
+            }
+            else
+            {
+                lst = (from record in DB.tblContacts
+                       orderby record.ID descending
+                       where record.EmailFrom == emailConf.Username
+                       select record).Skip(start).Take(count);
+            }
 
             return lst;
         }

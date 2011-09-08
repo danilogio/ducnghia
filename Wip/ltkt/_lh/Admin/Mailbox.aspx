@@ -37,12 +37,12 @@
                     OnClick="btnCompose_Click" />&nbsp;
                 <asp:Button ID="btnCheck" runat="server" Text="Kiểm tra thư" CssClass="formbutton"
                     OnClick="btnCheck_Click" />&nbsp;
-                <asp:Button ID="btnReply" runat="server" Text="Trả lời" Visible="false" 
-                    CssClass="formbutton" onclick="btnReply_Click" />&nbsp;
-                <asp:Button ID="btnForward" runat="server" Text="Chuyển tiếp" Visible="false" 
-                    CssClass="formbutton" onclick="btnForward_Click" />&nbsp;
-                <asp:Button ID="btnDelete" runat="server" Text="Xóa" Visible="false" 
-                    CssClass="formbutton" onclick="btnDelete_Click" />&nbsp;
+                <asp:Button ID="btnReply" runat="server" Text="Trả lời" Visible="false" CssClass="formbutton"
+                    OnClick="btnReply_Click" />&nbsp;
+                <asp:Button ID="btnForward" runat="server" Text="Chuyển tiếp" Visible="false" CssClass="formbutton"
+                    OnClick="btnForward_Click" />&nbsp;
+                <asp:Button ID="btnDelete" runat="server" Text="Xóa" Visible="false" CssClass="formbutton"
+                    OnClick="btnDelete_Click" />&nbsp;
                 <div style="float: right; padding-right: 20px;">
                     <asp:Button ID="btnConfig" runat="server" Text="Cấu hình" CssClass="formbutton" OnClick="btnConfig_Click" />
                 </div>
@@ -71,7 +71,9 @@
                         </asp:TableHeaderRow>
                         <asp:TableRow>
                             <asp:TableCell CssClass="table-header-cell">#</asp:TableCell>
-                            <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell">
+                                <asp:Literal ID="liFromTo" runat="server"></asp:Literal>
+                            </asp:TableCell>
                             <asp:TableCell CssClass="table-header-cell">Chủ đề</asp:TableCell>
                             <asp:TableCell CssClass="table-header-cell">Ngày gửi</asp:TableCell>
                             <asp:TableCell CssClass="table-header-cell">Xóa</asp:TableCell>
@@ -164,7 +166,7 @@
                 </p>
                 <p>
                     <span>Mật khẩu:</span>
-                    <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
                 </p>
                 <p>
                     <span>Máy chủ nhận thư:</span>
@@ -182,9 +184,11 @@
                     <span>Cổng kết nối</span>
                     <asp:TextBox ID="txtSmtpPort" runat="server"></asp:TextBox>
                 </p>
-                <p style="padding-left: 425px">
+                <p style="padding-left: 350px">
                     <asp:Button ID="btnSubmitConfig" runat="server" CssClass="formbutton" Text="Cấu hình"
                         OnClick="btnSubmitConfig_Click" />
+                    <asp:Button ID="btnCancelConfig" runat="server" CssClass="formbutton" Text="Trở về"
+                        OnClick="btnCancelConfig_Click" />
                 </p>
             </div>
         </asp:Panel>

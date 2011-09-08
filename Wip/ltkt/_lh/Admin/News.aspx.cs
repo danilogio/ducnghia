@@ -216,13 +216,7 @@ namespace ltkt.Admin
                     liMessage.Visible = true;
 
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    string username = CommonConstants.USER_GUEST;
-                    if (user != null)
-                    {
-                        username = user.Username;
-                    }
-
-                    log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+                    log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
                     Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                     Response.Redirect(CommonConstants.PAGE_ERROR);
