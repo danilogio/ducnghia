@@ -77,6 +77,11 @@ form #leftMailbox input.formbutton
 	width: 110px;
 }
 
+form #leftUsers input.formbutton
+{
+	width: 180px;
+}
+
 form input.formbutton
 {
 	border: none;
@@ -399,6 +404,11 @@ li ol, li ul
 #mailbox.block_text
 {
 	height: 500px;
+}
+
+#divUsers.block_text
+{
+	height: 325px;
 }
 
 hr

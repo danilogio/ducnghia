@@ -92,7 +92,7 @@
                                 <asp:HyperLink ID="HpkContact" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Contact.aspx">Liên hệ/góp ý</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkEmail" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Mailbox.aspx?page=1">Email</asp:HyperLink>
+                                <asp:HyperLink ID="HpkEmail" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Mailbox.aspx">Email</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkLog" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Log.aspx">Log</asp:HyperLink>

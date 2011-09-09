@@ -132,7 +132,7 @@ namespace ltktDAO
 
             return null;
         }
-                
+
         public void Close()
         {
             if (Client != null)
@@ -173,16 +173,11 @@ namespace ltktDAO
 
         protected void Login()
         {
-            try
-            {
-                if (!IsResponseOk(SendCommand("USER " + Username)) ||
-                  !IsResponseOk(SendCommand("PASS " + Password)))
-                    throw new Exception("User/password not accepted");
-            }
-            catch (Exception e)
-            {
-                log.writeLog(DBHelper.strPathLogFile, e.Message);
-            }
+
+            if (!IsResponseOk(SendCommand("USER " + Username)) ||
+              !IsResponseOk(SendCommand("PASS " + Password)))
+                throw new Exception("User/password not accepted");
+
         }
 
         protected void Logout()
@@ -223,21 +218,14 @@ namespace ltktDAO
 
         protected bool IsResponseOk(string response)
         {
-            try
-            {
-                if (response.StartsWith("+OK"))
-                    return true;
-                if (response.StartsWith("-ERR"))
-                    return false;
 
-                throw new Exception("Cannot understand server response: " + response);
-            }
-            catch (Exception e)
-            {
-                log.writeLog(DBHelper.strPathLogFile, e.Message);
-            }
+            if (response.StartsWith("+OK"))
+                return true;
+            if (response.StartsWith("-ERR"))
+                return false;
 
-            return false;
+            throw new Exception("Cannot understand server response: " + response);
+
         }
 
     }

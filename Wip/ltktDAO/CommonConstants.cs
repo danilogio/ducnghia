@@ -107,6 +107,11 @@ namespace ltktDAO
         /// folder containt images of ads
         /// </summary>
         public const string FOLDER_IMG_ADS = "imagesAd";
+
+        /// <summary>
+        /// user system
+        /// </summary>
+        public const string USER_SYSTEM = "System";
         
         #endregion
 
@@ -612,6 +617,13 @@ namespace ltktDAO
         /// file zise is too large
         /// </summary>
         public const string MSG_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
+
+        /// <summary>
+        /// Message when error
+        /// </summary>
+        public const string MSG_ERROR = "Đã có lỗi xảy ra, vui lòng thử lại sau!";
+
+        
         #endregion
 
         #region Administrator Function (AF)
@@ -958,6 +970,16 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_ADMIN_MAIL_NAME = "Hộp thư";
 
+        /// <summary>
+        /// Users page name
+        /// </summary>
+        public const string PAGE_ADMIN_USERS_NAME = "Quản lý thành viên";
+
+        /// <summary>
+        /// users admin page
+        /// </summary>
+        public const string PAGE_ADMIN_USERS = "Users.aspx";
+
         #endregion
 
         #region Application Constants (APP)
@@ -1033,6 +1055,11 @@ namespace ltktDAO
         /// request page
         /// </summary>
         public const string REQ_PAGE = "page";
+
+        /// <summary>
+        /// request type
+        /// </summary>
+        public const string REQ_TYPE = "type";
         #endregion
 
         #region Section Uni,It,EL (SEC)
@@ -1197,6 +1224,12 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_SELF_LINK = "<a href=\"{0}?page={1}\">{2}</a>";
 
+
+        /// <summary>
+        /// Self Link template
+        /// </summary>
+        public const string TEMP_MINOR_SELF_LINK = "<a href=\"{0}?type={1}&page={2}\">{3}</a>";
+
         /// <summary>
         /// Display link template
         /// "<a href=\"{0}?action={1}&id={2}\">{3}</a>"
@@ -1274,6 +1307,30 @@ namespace ltktDAO
         /// </summary>
         public const string ACT_VIEW = "view";
 
+        /// <summary>
+        /// Action for inbox
+        /// </summary>
+        public const string ACT_INBOX = "inbox";
+
+        /// <summary>
+        /// action for sent
+        /// </summary>
+        public const string ACT_SENT = "sent";
+
+        /// <summary>
+        /// action for normal user
+        /// </summary>
+        public const string ACT_NORMAL = "normal";
+
+        /// <summary>
+        /// action for KIA user
+        /// </summary>
+        public const string ACT_KIA = "KIA";
+
+        /// <summary>
+        /// action for admin user
+        /// </summary>
+        public const string ACT_ADMIN = "admin";
         #endregion
 
         #region Advertisement (ADS)

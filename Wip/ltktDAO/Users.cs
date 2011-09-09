@@ -14,6 +14,11 @@ namespace ltktDAO
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
         EventLog log = new EventLog();
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+        Control control = new Control();
+        EmailConf emailConf = new EmailConf();
+        ltktDAO.Contact contactDAO = new ltktDAO.Contact();
+
         #region Property
         #region Get Property
         /// <summary>
@@ -21,9 +26,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        public static string getDisplayName(string username)
+        public string getDisplayName(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -39,9 +44,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static string getEmail(string username)
+        public string getEmail(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -57,9 +62,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static DateTime getRegisterDate(string username)
+        public DateTime getRegisterDate(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -74,9 +79,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static string getUserType(string username)
+        public string getUserType(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -95,9 +100,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static string getUserState(string username)
+        public string getUserState(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -159,9 +164,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static string getNote(string username)
+        public string getNote(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -174,9 +179,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static int getNumberOfArticles(string username)
+        public int getNumberOfArticles(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -189,9 +194,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static string getRole(string username)
+        public string getRole(string username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == username
                                        select record;
@@ -209,9 +214,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_password"></param>
         /// <returns></returns>
-        public static Boolean setPassword(string username, string _password)
+        public Boolean setPassword(string username, string _password)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -231,9 +236,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_displayName"></param>
         /// <returns></returns>
-        public static Boolean setDisplayName(string username, string _displayName)
+        public Boolean setDisplayName(string username, string _displayName)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -253,9 +258,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_email"></param>
         /// <returns></returns>
-        public static Boolean setEmail(string username, string _email)
+        public Boolean setEmail(string username, string _email)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -277,9 +282,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public static Boolean setType(string username, Boolean _type)
+        public Boolean setType(string username, Boolean _type)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -307,9 +312,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_state"></param>
         /// <returns></returns>
-        public static Boolean setUserState(string username, int _state)
+        public Boolean setUserState(string username, int _state)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -329,9 +334,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_registerDate"></param>
         /// <returns></returns>
-        public static Boolean setRegisterDate(string username, DateTime _registerDate)
+        public Boolean setRegisterDate(string username, DateTime _registerDate)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -351,9 +356,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_numberOfArticles"></param>
         /// <returns></returns>
-        public static Boolean setNumberOfArticles(string username, int _numberOfArticles)
+        public Boolean setNumberOfArticles(string username, int _numberOfArticles)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -373,9 +378,9 @@ namespace ltktDAO
         /// <param name="username"></param>
         /// <param name="_note"></param>
         /// <returns></returns>
-        public static Boolean setNote(string username, string _note)
+        public Boolean setNote(string username, string _note)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -707,28 +712,41 @@ namespace ltktDAO
 
                 if (isOK)
                 {
+                    emailConf = control.getEmailConfig();
+
                     MailMessage message = new MailMessage();
-                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", "smtp.gmail.com");
-                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", "465");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", emailConf.SmptServer);
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", emailConf.SmptPort);
                     message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusing", "2");
                     message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
                     //Use 0 for anonymous
-                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", "trungtamducnghia@gmail.com");
-                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", "123456987");
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", emailConf.Username);
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", emailConf.Password);
                     message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
-                    message.From = "trungtamducnghia@gmail.com";
+                    message.From = emailConf.Username;
                     message.To = _email;
-                    message.Subject = "Mật khẩu mới tại trang web luyện thi kinh tế";
+                    message.Subject = "Mật khẩu mới tại trang web" + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
                     message.BodyFormat = MailFormat.Text;
                     message.BodyEncoding = Encoding.UTF8;
-                    message.Body = "Tên đăng nhập: " + _username + "\n" + "Mật khẩu: " + _newPassword;
-                    SmtpMail.SmtpServer = "smtp.gmail.com:465";
+                    message.Body = "Tên đăng nhập: " + _username + "<br />" + "Mật khẩu: " + _newPassword;
+                    SmtpMail.SmtpServer = emailConf.SmptServer + ":" + emailConf.SmptPort;
 
                     SmtpMail.Send(message);
+
+                    contactDAO.insertEmail(CommonConstants.USER_SYSTEM,
+                                                          emailConf.Username,
+                                                          _email,
+                                                          "Mật khẩu mới tại trang web" + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER),
+                                                          "Tên đăng nhập: " + _username + "<br />" + "Mật khẩu: " + _newPassword,
+                                                          DateTime.Now);
                 }
             }
             catch (Exception ex)
             {
+                log.writeLog(DBHelper.strPathLogFile,
+                              CommonConstants.USER_SYSTEM,
+                              ex.Message);
+
                 return false;
             }
 
@@ -742,7 +760,7 @@ namespace ltktDAO
         /// <returns></returns>
         public int numberOfUsers()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             var lst = from record in DB.tblUsers
                       select record;
 
@@ -755,7 +773,7 @@ namespace ltktDAO
         /// <returns></returns>
         public string latestUser()
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IQueryable<tblUser> lst = (from record in DB.tblUsers
                                        orderby record.ID descending
                                        select record).Take(1);
@@ -776,7 +794,7 @@ namespace ltktDAO
         /// <returns></returns>
         public IEnumerable<tblUser> fetchUserList(int start, int count)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = (from record in DB.tblUsers
 
                                         select record).Skip(start).Take(count);
@@ -786,7 +804,7 @@ namespace ltktDAO
 
         public bool isNormalUser(string _username)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 var user = DB.tblUsers.Single(p => p.Username == _username);
@@ -804,7 +822,7 @@ namespace ltktDAO
 
         public bool isState(string _username, int _state)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 var user = DB.tblUsers.Single(p => p.Username == _username);
@@ -824,7 +842,7 @@ namespace ltktDAO
             string item = CommonConstants.BLANK;
             if (!BaseServices.isNullOrBlank(_username))
             {
-                
+
                 if (!isNormalUser(_username))
                 {
                     item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_I_TAG, _username);
@@ -836,7 +854,7 @@ namespace ltktDAO
 
                 if (isState(_username, CommonConstants.STATE_NON_ACTIVE))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG,CommonConstants.CS_NON_ACTIVE, CommonConstants.SX_NON_ACTIVE, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_NON_ACTIVE, CommonConstants.SX_NON_ACTIVE, item);
                 }
                 else if (isState(_username, CommonConstants.STATE_ACTIVE))
                 {
@@ -844,11 +862,11 @@ namespace ltktDAO
                 }
                 else if (isState(_username, CommonConstants.STATE_DELETED))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG,CommonConstants.CS_DELETED, CommonConstants.SX_DELETED, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_DELETED, CommonConstants.SX_DELETED, item);
                 }
                 else if (isState(_username, CommonConstants.STATE_WARNING))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG,CommonConstants.CS_WARNING, CommonConstants.SX_WARNING, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_WARNING, CommonConstants.SX_WARNING, item);
                 }
                 else
                 {
@@ -896,7 +914,7 @@ namespace ltktDAO
         {
             strPermission = BaseServices.nullToBlank(strPermission);
 
-            if (!BaseServices.isNullOrBlank(_codePermission) 
+            if (!BaseServices.isNullOrBlank(_codePermission)
                 && !BaseServices.isNullOrBlank(strPermission))
             {
                 Permission permitDAO = new Permission();
@@ -922,14 +940,14 @@ namespace ltktDAO
         /// <returns></returns>
         public bool addPermission(string _username, string _codePermit, string _usernameAdmin)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             Permission permitDAO = new Permission();
 
             try
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    tblUser u = DB.tblUsers.Single(p=>p.Username == _username.Trim());
+                    tblUser u = DB.tblUsers.Single(p => p.Username == _username.Trim());
 
                     if (u != null)
                     {
@@ -951,10 +969,10 @@ namespace ltktDAO
                             ts.Complete();
 
                             //write log
-                            log.writeLog(DBHelper.strPathLogFile, 
-                                        _usernameAdmin, 
-                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, 
-                                                                _username + CommonConstants.BAR + _codePermit, 
+                            log.writeLog(DBHelper.strPathLogFile,
+                                        _usernameAdmin,
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                _username + CommonConstants.BAR + _codePermit,
                                                                 CommonConstants.SQL_TABLE_PERMISSION));
                         }
                     }
@@ -968,6 +986,78 @@ namespace ltktDAO
             return false;
 
         }
+
+        /// <summary>
+        /// sum of normal user
+        /// </summary>
+        /// <returns></returns>
+        public int sumNormalUser()
+        {
+            return (from record in DB.tblUsers
+                    where record.Type == true
+                    select record).Count();
+        }
+
+        /// <summary>
+        /// sum of user who is kia
+        /// </summary>
+        /// <returns></returns>
+        public int sumLockedUser()
+        {
+            return (from record in DB.tblUsers
+                    where record.State == CommonConstants.STATE_KIA_3D
+                    || record.State == CommonConstants.STATE_KIA_1W
+                    || record.State == CommonConstants.STATE_KIA_2W
+                    || record.State == CommonConstants.STATE_KIA_3W
+                    || record.State == CommonConstants.STATE_KIA_1M
+                    select record).Count();
+        }
+
+        /// <summary>
+        /// sum of admin user
+        /// </summary>
+        /// <returns></returns>
+        public int sumAdminUser()
+        {
+            return (from record in DB.tblUsers
+                    where record.Type == false
+                    select record).Count();
+        }
+
+        public IEnumerable<tblUser> fetchUsesList(string normalOrAdminOrKIA, int start, int count)
+        {
+            IEnumerable<tblUser> lst = null;
+            switch (normalOrAdminOrKIA)
+            {
+                case CommonConstants.ACT_NORMAL:
+                    lst = (from record in DB.tblUsers
+                           where record.Type == true
+                           orderby record.ID descending
+                           select record).Skip(start).Take(count);
+                    break;
+                case CommonConstants.ACT_ADMIN:
+                    lst = (from record in DB.tblUsers
+                           where record.Type == false
+                           orderby record.ID descending
+                           select record).Skip(start).Take(count);
+                    break;
+                case CommonConstants.ACT_KIA:
+                    lst = (from record in DB.tblUsers
+                           where record.State == CommonConstants.STATE_KIA_3D
+                                || record.State == CommonConstants.STATE_KIA_1W
+                                || record.State == CommonConstants.STATE_KIA_2W
+                                || record.State == CommonConstants.STATE_KIA_3W
+                                || record.State == CommonConstants.STATE_KIA_1M
+                           orderby record.ID descending
+                           select record).Skip(start).Take(count);
+                    break;
+                default: break;
+            }
+
+            return lst;
+        }
         #endregion
+
+        
     }
 }

@@ -61,26 +61,23 @@ namespace ltkt.Admin
                         int page = 1;
                         int emailID = -1;
 
-                        if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
+                        if (Request.QueryString[CommonConstants.REQ_TYPE] != null)
                         {
                             EmailsTable.Visible = true;
                             EmailDetailTable.Visible = false;
 
                             page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                            showEmail(page, true);
-
-
-
-                            //List<Email> emails;
-
-                            //using (Pop3Client client = new Pop3Client(emailConf.Host, emailConf.HostPort, emailConf.Username, emailConf.Password, true))
-                            //{
-                            //    client.Connect();
-
-                            //    int totalEmails = client.GetEmailCount();
-                            //    emails = client.FetchEmailList(((page - 1) *
-                            //        NoOfEmailsPerPage) + 1, NoOfEmailsPerPage);
-                            //}
+                            switch (Request.QueryString[CommonConstants.REQ_TYPE])
+                            {
+                                case CommonConstants.ACT_INBOX:
+                                    showEmail(page, true);
+                                    break;
+                                case CommonConstants.ACT_SENT:
+                                    showEmail(page, false);
+                                    break;
+                                default: break;
+                            }
+                            
                         }
                         else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
                         {
@@ -102,6 +99,10 @@ namespace ltkt.Admin
                         {
                             Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
                                               + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_TYPE 
+                                              + CommonConstants.EQUAL 
+                                              + CommonConstants.ACT_INBOX
+                                              + CommonConstants.AND
                                               + CommonConstants.REQ_PAGE
                                               + CommonConstants.EQUAL + "1");
                         }
@@ -151,13 +152,18 @@ namespace ltkt.Admin
 
         private void showEmail(int page, bool isInbox)
         {
+            string type = CommonConstants.BLANK;
             if (isInbox)
             {
                 liHeaderTitle.Text = "Hộp thư đến";
+                liFromTo.Text = "Người gửi";
+                type = CommonConstants.ACT_INBOX;
             }
             else
             {
                 liHeaderTitle.Text = "Hộp thư đi";
+                liFromTo.Text = "Người nhận";
+                type = CommonConstants.ACT_SENT;
             }
 
             int totalEmails = contactDAO.sumEmails();
@@ -200,12 +206,12 @@ namespace ltkt.Admin
                 fromCell.CssClass = "table-cell";
                 if (isInbox)
                 {
-                    liFromTo.Text = "Người gửi";
+                    
                     fromCell.Text = email.EmailFrom;
                 }
                 else
                 {
-                    liFromTo.Text = "Người nhận";
+                    
                     fromCell.Text = email.EmailTo;
                 }
 
@@ -249,8 +255,9 @@ namespace ltkt.Admin
                 if (page > 1)
                 {
                     //PreviousPageLiteral.Text = String.Format(SelfLink, page - 1, "Previous Page");
-                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MINOR_SELF_LINK,
                                                                                 CommonConstants.PAGE_ADMIN_MAIL,
+                                                                                type,
                                                                                 (page - 1).ToString(),
                                                                                 CommonConstants.TXT_PREVIOUS_PAGE);
                 }
@@ -258,8 +265,9 @@ namespace ltkt.Admin
                 if (page > 0 && page < totalPages)
                 {
                     //NextPageLiteral.Text = String.Format(SelfLink, page + 1, "Next Page");
-                    NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                    NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MINOR_SELF_LINK,
                                                                              CommonConstants.PAGE_ADMIN_MAIL,
+                                                                             type,
                                                                              (page + 1).ToString(),
                                                                              CommonConstants.TXT_NEXT_PAGE);
                 }
@@ -301,12 +309,26 @@ namespace ltkt.Admin
 
         protected void btnInbox_Click(object sender, EventArgs e)
         {
-            showEmail(1, true);
+            Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_TYPE
+                                              + CommonConstants.EQUAL
+                                              + CommonConstants.ACT_INBOX
+                                              + CommonConstants.AND
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL + "1");
         }
 
         protected void btnSent_Click(object sender, EventArgs e)
         {
-            showEmail(1, false);
+            Response.Redirect(CommonConstants.PAGE_ADMIN_MAIL
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_TYPE
+                                              + CommonConstants.EQUAL
+                                              + CommonConstants.ACT_SENT
+                                              + CommonConstants.AND
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL + "1");
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -368,9 +390,27 @@ namespace ltkt.Admin
 
         protected void btnCheck_Click(object sender, EventArgs e)
         {
+            EmailsTable.Visible = false;
             EmailDetailTable.Visible = false;
-            EmailsTable.Visible = true;
-            Response.Redirect("Mailbox.aspx?page=1");
+            int page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+            try
+            {
+                List<Email> emails;
+
+                using (Pop3Client client = new Pop3Client(emailConf.Host, emailConf.HostPort, emailConf.Username, emailConf.Password, true))
+                {
+                    client.Connect();
+
+                    int totalEmails = client.GetEmailCount();
+                    emails = client.FetchEmailList(((page - 1) * NoOfEmailsPerPage) + 1, NoOfEmailsPerPage);
+                }
+            }
+            catch (Exception ex)
+            {
+                liMessageDetails.Text = CommonConstants.MSG_ERROR;
+                liMessageDetails.Visible = true;
+
+            }
         }
 
         protected void btnConfig_Click(object sender, EventArgs e)
