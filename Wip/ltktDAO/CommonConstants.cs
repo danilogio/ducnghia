@@ -1220,9 +1220,13 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_I_TAG = "<i>{0}</i>";
         /// <summary>
-        /// Template strong tag
+        /// Template strong tag, 1 param
         /// </summary>
         public const string TEMP_STRONG_TAG = "<strong>{0}</strong>";
+        /// <summary>
+        /// Template br tag, no param
+        /// </summary>
+        public const string TEMP_BR_TAG = "<br/>";
         /// <summary>
         /// Template font tag
         /// </summary>

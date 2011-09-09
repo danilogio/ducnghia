@@ -84,9 +84,13 @@ namespace ltkt
                 }
                 if (data != CommonConstants.BLANK)
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_UNI_LINK,CommonConstants.ALL,CommonConstants.NOW, CommonConstants.TXT_VIEW_MORE)
-                         + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                       + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                           CommonConstants.CSS_REFERLINK,
+                                                           BaseServices.createMsgByTemplate(CommonConstants.TEMP_UNI_LINK,
+                                                                                           CommonConstants.ALL,
+                                                                                           CommonConstants.NOW,
+                                                                                           CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
@@ -138,9 +142,13 @@ namespace ltkt
                 }
                 if (!BaseServices.isNullOrBlank(data))
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK, CommonConstants.ALL, CommonConstants.NOW, CommonConstants.TXT_VIEW_MORE)
-                        + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                       + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                           CommonConstants.CSS_REFERLINK,
+                                                           BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
+                                                                                           CommonConstants.PARAM_IT_OFFICE,
+                                                                                           CommonConstants.NOW,
+                                                                                           CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
@@ -190,9 +198,13 @@ namespace ltkt
                 }
                 if (!BaseServices.isNullOrBlank(data))
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.TXT_VIEW_MORE)
-                        + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                       + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                           CommonConstants.CSS_REFERLINK,
+                                                           BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
+                                                                                           CommonConstants.PARAM_IT_SIMPLE,
+                                                                                           CommonConstants.NOW,
+                                                                                           CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
@@ -242,9 +254,13 @@ namespace ltkt
                 }
                 if (!BaseServices.isNullOrBlank(data))
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_INFORMATICS, CommonConstants.TXT_VIEW_MORE)
-                        + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                       + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                           CommonConstants.CSS_REFERLINK,
+                                                           BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
+                                                                                           CommonConstants.PARAM_IT_ADVANCE,
+                                                                                           CommonConstants.NOW,
+                                                                                           CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
@@ -297,9 +313,13 @@ namespace ltkt
                 }
                 if (!BaseServices.isNullOrBlank(data))
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.TXT_VIEW_MORE) 
-                        + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                       + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                           CommonConstants.CSS_REFERLINK,
+                                                           BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_LINK,
+                                                                                           CommonConstants.PARAM_EL_COMMON,
+                                                                                           CommonConstants.NOW,
+                                                                                           CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
@@ -352,9 +372,13 @@ namespace ltkt
                 }
                 if (!BaseServices.isNullOrBlank(data))
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.TXT_VIEW_MORE)
-                        + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                       + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                           CommonConstants.CSS_REFERLINK,
+                                                           BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_LINK,
+                                                                                           CommonConstants.PARAM_EL_MAJOR,
+                                                                                           CommonConstants.NOW,
+                                                                                           CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
@@ -406,9 +430,13 @@ namespace ltkt
                 }
                 if (!BaseServices.isNullOrBlank(data))
                 {
-                    data += "<br/>\n<div class='referlink'>\n"
-                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, CommonConstants.PAGE_ENGLISH, CommonConstants.TXT_VIEW_MORE)
-                        + "</div>\n";
+                    data += CommonConstants.TEMP_BR_TAG
+                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
+                                                            CommonConstants.CSS_REFERLINK,
+                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_LINK,
+                                                                                            CommonConstants.PARAM_EL_CERT,
+                                                                                            CommonConstants.NOW,
+                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else
                 {
