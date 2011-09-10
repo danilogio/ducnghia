@@ -142,7 +142,7 @@ namespace ltkt
                     hpkDownloadlink.Text = BaseServices.nullToBlank(contest.Title);
                     hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(contest.Location.Replace("\\", "/"));
 
-                    if (BaseServices.isNullOrBlank(contest.Solving))
+                    if (!BaseServices.isNullOrBlank(contest.Solving))
                     {
                         //lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
                         lblResolve.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, 
@@ -160,7 +160,7 @@ namespace ltkt
                         string temp = CommonConstants.BLANK;
                         temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_UNIVERSITY_CODE, items[i].ID.ToString(), items[i].Title.Trim());
                         temp += "(" + items[i].Posted + ")";
-                        lblRelative.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+                        lblRelative.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
 
                         /*lblRelative.Text += "<li>";
                         lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
@@ -237,7 +237,7 @@ namespace ltkt
                        string temp = CommonConstants.BLANK;
                        temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_ENGLISH_CODE, items[i].ID.ToString(), items[i].Title.Trim());
                        temp += "(" + items[i].Posted + ")";
-                       lblRelative.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+                       lblRelative.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
                        
                        /*lblRelative.Text += "<li>";
                        lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
@@ -322,7 +322,7 @@ namespace ltkt
                                                                 items[i].ID.ToString(), 
                                                                 items[i].Title.Trim());
                         temp += "(" + items[i].Posted + ")";
-                        lblRelative.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+                        lblRelative.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
 
                         /*lblRelative.Text += "<li>";
                         lblRelative.Text += "<a href='ArticleDetails.aspx?sec=it&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";

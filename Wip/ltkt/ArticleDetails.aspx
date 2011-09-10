@@ -54,7 +54,7 @@
                 <%--<asp:ImageButton ID="btnLike" runat="server" ImageUrl="~/images/like-hand-blue.png" Width="32px" Height="32px" OnClick="btnLike_Click"/>
                 <asp:ImageButton ID="btnDislike" runat="server" ImageUrl="~/images/dislike-hand-blue.png" Width="32px" Height="32px"  OnClick="btnDislike_Click"/>--%>
                 </div>
-            <div id="overview">
+            <div id="overview" style="margin-bottom:5px;">
                 <h5>
                     Có
                     <asp:Label ID="lblLiker" runat="server" Text=""></asp:Label>

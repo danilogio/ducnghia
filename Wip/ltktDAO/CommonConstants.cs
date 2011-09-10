@@ -1315,7 +1315,7 @@ namespace ltktDAO
         /// <summary>
         /// image rating
         /// </summary>
-        public const string TEMP_IMG_RATING = "<img src=\"{0}\" alt=\"\" width=\"15px\" height=\"15px\"/>";
+        public const string TEMP_IMG_RATING = "<img src='{0}' alt='' width='15px' height='15px'/>";
         /// <summary>
         /// Self Link template
         /// </summary>

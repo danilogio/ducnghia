@@ -265,7 +265,7 @@ namespace ltktDAO
         {
             string data = CommonConstants.BLANK;
             
-            if (score > 0 && maxScore > 0 && maxScore >= score)
+            if (score >= 0 && maxScore >= 0 && maxScore >= score)
             {
                 maxScore = maxScore / 2;
                 score = score / 2;

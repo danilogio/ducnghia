@@ -744,7 +744,10 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var english = DB.tblEnglishes.Single(e => e.ID == _id);
-                    english.Point -= 1;
+                    if (english.Point > 0)
+                    {
+                        english.Point -= 1;
+                    }
                     english.State = CommonConstants.STATE_BAD; // Bad
 
                     DB.SubmitChanges();

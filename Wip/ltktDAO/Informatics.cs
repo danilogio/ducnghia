@@ -579,7 +579,10 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var informatic = DB.tblInformatics.Single(info => info.ID == _id);
-                    informatic.Point -= 1;
+                    if (informatic.Point > 0)
+                    {
+                        informatic.Point -= 1;
+                    }
                     informatic.State = CommonConstants.STATE_BAD; // Bad
 
                     DB.SubmitChanges();

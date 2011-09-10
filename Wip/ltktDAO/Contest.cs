@@ -1076,7 +1076,10 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
-                    contest.Point -= 1;
+                    if (contest.Point > 0)
+                    {
+                        contest.Point -= 1;
+                    }
                     contest.State = CommonConstants.STATE_BAD; // Bad
 
                     DB.SubmitChanges();
