@@ -170,7 +170,6 @@
                 <p>
                     <span>Trạng thái:</span>
                     <asp:DropDownList ID="ddlState" runat="server">
-                        <asp:ListItem></asp:ListItem>
                     </asp:DropDownList>
                 </p>
             </div>

@@ -30,134 +30,132 @@
         }
     </style>
     <link rel="stylesheet" href="styles.css" type="text/css" />
-    <%--<style type="text/css">
-        .users-table
-        {
-            border: solid 1px #444444;
-        }
-        .users-table-header
-        {
-            font-family: "Trebuchet MS";
-            font-size: 9pt;
-            background-color: #0099B9;
-            color: white;
-            border: solid 1px #444444;
-        }
-        .users-table-header-cell
-        {
-            font-family: "Georgia";
-            font-size: 9pt;
-            font-weight: bold;
-            border: solid 1px #666666;
-            padding: 6px;
-        }
-        .users-table-cell
-        {
-            font-family: "Georgia";
-            font-size: 9pt;
-            width: 300px;
-            border: solid 1px #666666;
-            padding: 6px;
-        }
-        .users-table-footer
-        {
-            border: solid 1px #666666;
-            padding: 3px;
-            width: 50%;
-        }
-        .users-datetime
-        {
-            float: right;
-            color: #666666;
-        }
-        a:hover
-        {
-            color: red;
-        }
-    </style>--%>
+
+    <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/calendar-blue.css" />
+    <link type="text/css" href="../../css/redmond/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".calendar").datepicker({
+                dateFormat : 'dd-mm-yy'
+            });
+        }); 
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+	        $('#<%= ddlState.ClientID %>').change(function(e) {
+	            var selectedIndex = $('#<%= ddlState.ClientID%>').get(0).selectedIndex;
+	            //var selectedValue = $('#<%= ddlState.ClientID%>').get(0).selectedValue;
+
+                switch (selectedIndex)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 8:
+                        $('#KIADate').hide();
+                        break;
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        $('#KIADate').show();
+                        break;
+                }
+	        });
+	    });
+	    
+	    function init() {
+	        //$('#KIADate').hide();
+	        var selectedIndex = $('#<%= ddlState.ClientID%>').get(0).selectedIndex;
+	            //var selectedValue = $('#<%= ddlState.ClientID%>').get(0).selectedValue;
+
+                switch (selectedIndex)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 8:
+                        $('#KIADate').hide();
+                        break;
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        $('#KIADate').show();
+                        break;
+                }
+	    }
+    </script>
+
 </asp:Content>
 <asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
-    <div id="divUsers" class="block_text">
-        <%--<form id="form1">--%>
-        <asp:Panel ID="viewPanel" runat="server">
-            <div>
-                <%--<h4>
+    <%--<div id="divUsers" class="block_text">--%>
+    <%--<form id="form1">--%>
+    <asp:Panel ID="messagePanel" runat="server" Visible="false">
+        <div class="block_text">
+            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+        </div>
+    </asp:Panel>
+    <asp:Panel ID="viewPanel" runat="server" Visible="false">
+        <div id="divUsers" class="block_text">
+            <%--<h4>
                     Danh sách thành viên
                 </h4>
                 <hr />--%>
-                <br />
-                <div>
-                    <div id="leftUsers" style="float: left; width: 25%;">
-                        <br />
-                        <asp:Button ID="btnNormal" runat="server" Text="Thành viên" 
-                            CssClass="formbutton" onclick="btnNormal_Click" />
-                        <br />
-                        <br />
-                        <asp:Button ID="btnKIA" runat="server" Text="Thành viên bị khóa" 
-                            CssClass="formbutton" onclick="btnKIA_Click" />
-                        <br />
-                        <br />
-                        <asp:Button ID="btnAdmin" runat="server" Text="Admin" CssClass="formbutton" 
-                            onclick="btnAdmin_Click" />
-                    </div>
-                    <div id="right" style="float: left; width: 74%;">
-                        <asp:Table ID="listUsers" runat="server" CssClass="table" Width="620px">
-                            <asp:TableHeaderRow>
-                                <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                                    <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>
-                                </asp:TableHeaderCell>
-                            </asp:TableHeaderRow>
-                            <asp:TableRow>
-                                <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
-                                <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
-                                <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
-                                <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableFooterRow>
-                                <asp:TableCell CssClass="table-footer" ColumnSpan="5">
-                                    <asp:Table ID="normalFooter" Width="100%" BorderWidth="0" runat="server">
-                                        <asp:TableRow>
-                                            <asp:TableCell>
-                                                <asp:Literal ID="liNormalPre" runat="server" />
-                                            </asp:TableCell>
-                                            <asp:TableCell HorizontalAlign="Right">
-                                                <asp:Literal ID="liNormalNext" runat="server" />
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-                                    </asp:Table>
-                                </asp:TableCell>
-                            </asp:TableFooterRow>
-                        </asp:Table>
-                    </div>
+            <br />
+            <div>
+                <div id="leftUsers" style="float: left; width: 25%;">
+                    <br />
+                    <asp:Button ID="btnNormal" runat="server" Text="Thành viên" CssClass="formbutton"
+                        OnClick="btnNormal_Click" />
+                    <br />
+                    <br />
+                    <asp:Button ID="btnKIA" runat="server" Text="Thành viên bị khóa" CssClass="formbutton"
+                        OnClick="btnKIA_Click" />
+                    <br />
+                    <br />
+                    <asp:Button ID="btnAdmin" runat="server" Text="Admin" CssClass="formbutton" OnClick="btnAdmin_Click" />
                 </div>
-                <%--<asp:Table ID="listUsers" runat="server" CssClass="table">
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                            <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>
-                        </asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableFooterRow>
-                        <asp:TableCell CssClass="table-footer" ColumnSpan="5">
-                            <asp:Table ID="normalFooter" Width="100%" BorderWidth="0" runat="server">
-                                <asp:TableRow>
-                                    <asp:TableCell>
-                                        <asp:Literal ID="liNormalPre" runat="server" />
-                                    </asp:TableCell>
-                                    <asp:TableCell HorizontalAlign="Right">
-                                        <asp:Literal ID="liNormalNext" runat="server" />
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                            </asp:Table>
-                        </asp:TableCell>
-                    </asp:TableFooterRow>
-                </asp:Table>--%>
-                <%--<div class="form_settings">
+                <div id="right" style="float: left; width: 74%;">
+                    <asp:Table ID="listUsers" runat="server" CssClass="table" Width="620px">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
+                                <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>
+                            </asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell">Tên hiển thị</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableFooterRow>
+                            <asp:TableCell CssClass="table-footer" ColumnSpan="5">
+                                <asp:Table ID="normalFooter" Width="100%" BorderWidth="0" runat="server">
+                                    <asp:TableRow>
+                                        <asp:TableCell>
+                                            <asp:Literal ID="liNormalPre" runat="server" />
+                                        </asp:TableCell>
+                                        <asp:TableCell HorizontalAlign="Right">
+                                            <asp:Literal ID="liNormalNext" runat="server" />
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </asp:TableCell>
+                        </asp:TableFooterRow>
+                    </asp:Table>
+                </div>
+            </div>
+            <%--<div class="form_settings">
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
                 <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" BackColor="Black"
@@ -211,76 +209,73 @@
                     <AlternatingRowStyle BackColor="White" />
                 </asp:GridView>
             </div>--%>
+        </div>
+    </asp:Panel>
+    <asp:Panel ID="detailPanel" runat="server">
+        <div class="block_text">
+            <div id="divFunction">
+                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />&nbsp;&nbsp;
+                <asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" OnClick="btnCancel_Click" />
+                <hr />
             </div>
-            <%--<div class="block_text">
-                <h4>
-                    Thành viên bị khóa
-                </h4>
-                <hr /><br />
-                <asp:Table ID="listKIAUser" runat="server" CssClass="table">
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                            <asp:Literal ID="liKIAUserTitle" runat="server" Text="Danh sách thành viên bị khóa"></asp:Literal>
-                        </asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableFooterRow>
-                        <asp:TableCell CssClass="table-footer" ColumnSpan="5">
-                            <asp:Table ID="KIAFooter" Width="100%" BorderWidth="0" runat="server">
-                                <asp:TableRow>
-                                    <asp:TableCell>
-                                        <asp:Literal ID="liKIAPre" runat="server" />
-                                    </asp:TableCell>
-                                    <asp:TableCell HorizontalAlign="Right">
-                                        <asp:Literal ID="liKIANext" runat="server" />
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                            </asp:Table>
-                        </asp:TableCell>
-                    </asp:TableFooterRow>
-                </asp:Table>
+            <div class="form_settings">
+                <p>
+                    <span>Tài khoản:</span>
+                    <asp:TextBox ID="txtUsername" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Tên hiển thị:</span>
+                    <asp:TextBox ID="txtDisplayName" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Giới tính:</span>
+                    <asp:DropDownList ID="ddlSex" runat="server" Enabled="false">
+                        <asp:ListItem Text="Nam" Value="true"></asp:ListItem>
+                        <asp:ListItem Text="Nữ" Value="false"></asp:ListItem>
+                    </asp:DropDownList>
+                </p>
+                <p>
+                    <span>Email:</span>
+                    <asp:TextBox ID="txtEmail" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Vai trò (role):</span>
+                    <asp:TextBox ID="txtRole" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Quyền (permission):</span>
+                </p>
+                <%--<asp:Label ID="liPermission" runat="server" Text="asdf"></asp:Label>--%>
+                <br />
+                <div id="checkbox">
+                    <asp:CheckBoxList ID="chxPermission" runat="server" CssClass="checkboxlist">
+                    </asp:CheckBoxList>
+                </div>
+                <br />
+                <p>
+                    <span>Ngày đăng ký:</span>
+                    <asp:TextBox ID="txtRegisterDate" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Trạng thái:</span>
+                    <asp:DropDownList ID="ddlState" runat="server" Enabled="false">
+                    </asp:DropDownList>
+                </p>
+                <p id="KIADate">
+                    <span>Ngày KIA:</span>
+                    <asp:TextBox ID="txtKIADate" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Số bài viết:</span>
+                    <asp:TextBox ID="txtNumberOfArticles" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Ghi chú:</span>
+                    <asp:TextBox ID="txtNote" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
+                </p>
             </div>
-            <div class="block_text">
-                <h4>
-                    Thành viên quản trị
-                </h4>
-                <hr /><br />
-                <asp:Table ID="listAdmin" runat="server" CssClass="table">
-                    <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                            <asp:Literal ID="liAdminTitle" runat="server" Text="Danh sách thành viên quản trị"></asp:Literal>
-                        </asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                    <asp:TableRow>
-                        <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableFooterRow>
-                        <asp:TableCell CssClass="table-footer" ColumnSpan="5">
-                            <asp:Table ID="adminFooter" Width="100%" BorderWidth="0" runat="server">
-                                <asp:TableRow>
-                                    <asp:TableCell>
-                                        <asp:Literal ID="liAdminPre" runat="server" />
-                                    </asp:TableCell>
-                                    <asp:TableCell HorizontalAlign="Right">
-                                        <asp:Literal ID="liAdminNext" runat="server" />
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                            </asp:Table>
-                        </asp:TableCell>
-                    </asp:TableFooterRow>
-                </asp:Table>
-            </div>--%>
-        </asp:Panel>
-        <asp:Panel ID="detailPanel" runat="server" Visible="false">
-        </asp:Panel>
-        <%--</form>--%>
-    </div>
+        </div>
+    </asp:Panel>
+    <%--</form>--%>
+    <%--</div>--%>
 </asp:Content>

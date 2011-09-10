@@ -175,6 +175,37 @@ namespace ltktDAO
         }
 
         /// <summary>
+        /// Get set of permission of a users through id
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public IList<tblPermission> getPermissions(int _id)
+        {
+            IList<tblPermission> lstResult = new List<tblPermission>();
+            IEnumerable<tblUser> lstUser = from u in DB.tblUsers
+                                           where u.ID == _id
+                                           select u;
+
+            if (lstUser.Count() > 0)
+            {
+                tblUser user = lstUser.ElementAt(0);
+                string[] permits = user.Permission.Split(',');
+
+                foreach (string permit in permits)
+                {
+                    IEnumerable<tblPermission> lstPermits = from p in DB.tblPermissions
+                                                            where p.Value == Convert.ToInt32(permit)
+                                                            select p;
+
+                    if (lstPermits.Count() > 0)
+                        lstResult.Add(lstPermits.ElementAt(0));
+                }
+            }
+
+            return lstResult;
+        }
+
+        /// <summary>
         /// Lấy số bài viết của user.
         /// </summary>
         /// <param name="username"></param>
@@ -519,6 +550,25 @@ namespace ltktDAO
 
             IEnumerable<tblUser> lst = from record in DB.tblUsers
                                        where record.Username == _username && record.Password == pwd
+                                       select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Lấy ra user bằng id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public tblUser getUser(int id)
+        {
+            IEnumerable<tblUser> lst = from record in DB.tblUsers
+                                       where record.ID == id
                                        select record;
 
             if (lst.Count() > 0)
@@ -995,6 +1045,11 @@ namespace ltktDAO
         {
             return (from record in DB.tblUsers
                     where record.Type == true
+                    && (record.State != CommonConstants.STATE_KIA_3D
+                    || record.State != CommonConstants.STATE_KIA_1W
+                    || record.State != CommonConstants.STATE_KIA_2W
+                    || record.State != CommonConstants.STATE_KIA_3W
+                    || record.State != CommonConstants.STATE_KIA_1M)
                     select record).Count();
         }
 
@@ -1032,6 +1087,11 @@ namespace ltktDAO
                 case CommonConstants.ACT_NORMAL:
                     lst = (from record in DB.tblUsers
                            where record.Type == true
+                           && (record.State != CommonConstants.STATE_KIA_3D
+                            || record.State != CommonConstants.STATE_KIA_1W
+                            || record.State != CommonConstants.STATE_KIA_2W
+                            || record.State != CommonConstants.STATE_KIA_3W
+                            || record.State != CommonConstants.STATE_KIA_1M)
                            orderby record.ID descending
                            select record).Skip(start).Take(count);
                     break;
@@ -1056,7 +1116,11 @@ namespace ltktDAO
 
             return lst;
         }
+
+        
         #endregion
+
+
 
         
     }

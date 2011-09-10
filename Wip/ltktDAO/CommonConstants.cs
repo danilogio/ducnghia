@@ -36,12 +36,12 @@ namespace ltktDAO
         /// <summary>
         /// html for edit icon on admin page
         /// </summary>
-        public const string HTML_EDIT_ADMIN = "<img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/>";
+        public const string HTML_EDIT_ADMIN = "<span title=\"Sửa\"><img width=\"24px\" height=\"24\" src=\"../../images/edit.png\"/></span>";
 
         /// <summary>
         /// html for delete icon on admin page
         /// </summary>
-        public const string HTML_DELETE_ADMIN = "<img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/>";
+        public const string HTML_DELETE_ADMIN = "<span title=\"Xóa\"><img width=\"24px\" height=\"24\" src=\"../../images/delete.png\" onclick=\"return confirm('Do you want to delete?')\"/></span>";
         /// <summary>
         /// Like page
         /// </summary>
@@ -208,37 +208,82 @@ namespace ltktDAO
         public const int STATE_NON_ACTIVE = 0;
 
         /// <summary>
+        /// Chưa kích hoạt
+        /// </summary>
+        public const string STATE_NON_ACTIVE_NAME = "Chưa kích hoạt";
+
+        /// <summary>
         /// state is active
         /// </summary>
         public const int STATE_ACTIVE = 1;
+
+        /// <summary>
+        /// Đang hoạt động
+        /// </summary>
+        public const string STATE_ACTIVE_NAME = "Đang hoạt động";
         /// <summary>
         /// state is warning
         /// </summary>
         public const int STATE_WARNING = 2;
+
+        /// <summary>
+        /// Cảnh cáo
+        /// </summary>
+        public const string STATE_WARNING_NAME = "Cảnh cáo";
         /// <summary>
         /// state is kia 3 day
         /// </summary>
         public const int STATE_KIA_3D = 31;
+
+        /// <summary>
+        /// KIA 3 ngày
+        /// </summary>
+        public const string STATE_KIA_3D_NAME = "KIA 3 ngày";
         /// <summary>
         /// state is kia 1 week
         /// </summary>
         public const int STATE_KIA_1W = 32;
+
+        /// <summary>
+        /// KIA 1 tuần
+        /// </summary>
+        public const string STATE_KIA_1W_NAME = "KIA 1 tuần";
         /// <summary>
         /// state is kia 2 week
         /// </summary>
         public const int STATE_KIA_2W = 33;
+
+        /// <summary>
+        /// KIA 2 tuần
+        /// </summary>
+        public const string STATE_KIA_2W_NAME = "KIA 2 tuần";
         /// <summary>
         /// state is kia 3 week
         /// </summary>
         public const int STATE_KIA_3W = 34;
+
+        /// <summary>
+        /// KIA 3 tuần
+        /// </summary>
+        public const string STATE_KIA_3W_NAME = "KIA 3 tuần";
         /// <summary>
         /// state is kia 1 Month
         /// </summary>
         public const int STATE_KIA_1M = 35;
+
+        /// <summary>
+        /// KIA 1 tháng
+        /// </summary>
+        public const string STATE_KIA_1M_NAME = "KIA 1 tháng";
         /// <summary>
         /// state is deleted
         /// </summary>
         public const int STATE_DELETED = 4;
+
+        /// <summary>
+        /// state is deleted
+        /// </summary>
+        public const string STATE_DELETED_NAME = "Đã xóa";
         /// <summary>
         /// state is pending
         /// </summary>
@@ -622,6 +667,11 @@ namespace ltktDAO
         /// Message when error
         /// </summary>
         public const string MSG_ERROR = "Đã có lỗi xảy ra, vui lòng thử lại sau!";
+
+        /// <summary>
+        /// Message when link error
+        /// </summary>
+        public const string MSG_LINK_ERROR = "Đường dẫn không đúng, xin vui lòng kiểm tra lại";
 
         
         #endregion
@@ -1016,6 +1066,11 @@ namespace ltktDAO
         /// session edit ads
         /// </summary>
         public const string SES_EDIT_ADS = "editAds";
+
+        /// <summary>
+        /// session edit user
+        /// </summary>
+        public const string SES_EDIT_USER = "editUsers";
         #endregion
 
         #region Request Constants (REQ)

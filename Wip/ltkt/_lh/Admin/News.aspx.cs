@@ -116,7 +116,7 @@ namespace ltkt.Admin
 
                 TableCell titleCell = new TableCell();
                 titleCell.CssClass = "table-cell";
-                titleCell.Style["width"] = "300px";
+                //titleCell.Style["width"] = "300px";
                 titleCell.Text = String.Format(DisplayNewsLink, news.ID, news.Title);
 
                 TableCell actionCell = new TableCell();

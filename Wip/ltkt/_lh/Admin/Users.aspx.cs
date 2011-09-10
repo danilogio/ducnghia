@@ -15,6 +15,7 @@ namespace ltkt.Admin
     {
         private ltktDAO.Users userDAO = new ltktDAO.Users();
         ltktDAO.Control control = new ltktDAO.Control();
+        EventLog log = new EventLog();
 
         public const int NoOfUsesPerPage = 6;
 
@@ -42,38 +43,78 @@ namespace ltkt.Admin
                         //gvUsers.DataBind();
                     }
 
+
                     int page = 1;
                     int id = 0;
                     if (Request.QueryString[CommonConstants.REQ_TYPE] != null)
                     {
-                        page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+                        viewPanel.Visible = true;
+                        detailPanel.Visible = false;
 
-                        switch (Request.QueryString[CommonConstants.REQ_TYPE])
+                        try
                         {
-                            case CommonConstants.ACT_NORMAL:
-                                showUsers(CommonConstants.ACT_NORMAL, page);
-                                break;
-                            case CommonConstants.ACT_KIA:
-                                showUsers(CommonConstants.ACT_KIA, page);
-                                break;
-                            case CommonConstants.ACT_ADMIN:
-                                showUsers(CommonConstants.ACT_ADMIN, page);
-                                break;
-                            default: break;
+                            page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+
+                            switch (Request.QueryString[CommonConstants.REQ_TYPE])
+                            {
+                                case CommonConstants.ACT_NORMAL:
+                                    showUsers(CommonConstants.ACT_NORMAL, page);
+                                    break;
+                                case CommonConstants.ACT_KIA:
+                                    showUsers(CommonConstants.ACT_KIA, page);
+                                    break;
+                                case CommonConstants.ACT_ADMIN:
+                                    showUsers(CommonConstants.ACT_ADMIN, page);
+                                    break;
+                                default: break;
+                            }
                         }
-                        
+                        catch (Exception ex)
+                        {
+                            log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
+                            log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
+                            //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
+                            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                                           + CommonConstants.ADD_PARAMETER
+                                           + CommonConstants.REQ_TYPE
+                                           + CommonConstants.EQUAL
+                                           + CommonConstants.ACT_NORMAL
+                                           + CommonConstants.AND
+                                           + CommonConstants.REQ_PAGE
+                                           + CommonConstants.EQUAL + "1");
+                        }
+
                     }
                     else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
                     {
-                        id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
-                        switch (Request.QueryString[CommonConstants.REQ_ACTION])
+                        try
                         {
-                            case CommonConstants.ACT_VIEW:
-                                break;
-                            case CommonConstants.ACT_EDIT:
-                                break;
-                            case CommonConstants.ACT_DELETE:
-                                break;
+                            id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                            switch (Request.QueryString[CommonConstants.REQ_ACTION])
+                            {
+                                case CommonConstants.ACT_EDIT:
+                                case CommonConstants.ACT_VIEW:
+                                    {
+                                        showUserDetail(id, Request.QueryString[CommonConstants.REQ_ACTION]);
+                                    }
+                                    break;
+                                case CommonConstants.ACT_DELETE:
+                                    break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
+                            log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
+                            //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
+                            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                                           + CommonConstants.ADD_PARAMETER
+                                           + CommonConstants.REQ_TYPE
+                                           + CommonConstants.EQUAL
+                                           + CommonConstants.ACT_NORMAL
+                                           + CommonConstants.AND
+                                           + CommonConstants.REQ_PAGE
+                                           + CommonConstants.EQUAL + "1");
                         }
                     }
                     else
@@ -87,23 +128,145 @@ namespace ltkt.Admin
                                            + CommonConstants.REQ_PAGE
                                            + CommonConstants.EQUAL + "1");
                     }
-                    
-                    //////////////////////////////////////////////////
+
+
+                //////////////////////////////////////////////////
                 }
+                else
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
                 //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
+        }
+
+        private void showUserDetail(int id, string action)
+        {
+            tblUser user = userDAO.getUser(id);
+            if (user != null && Session[CommonConstants.SES_EDIT_USER] == null)
+            {
+
+                txtUsername.Text = user.Username.Trim();
+                txtDisplayName.Text = user.DisplayName.Trim();
+                ddlSex.SelectedIndex = (user.Sex == true ? 1 : 0);
+                txtEmail.Text = user.Email.Trim();
+
+                if (user.Role != null)
+                    txtRole.Text = user.Role.Trim();
+
+                IList<tblPermission> lstPermits = userDAO.getPermissions(user.ID);
+                if (chxPermission.Items.Count == 0)
+                {
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_FULL_CONTROL, CommonConstants.P_A_FULL_CONTROL));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_AUTHORITY, CommonConstants.P_A_AUTHORITY));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_EMAIL, CommonConstants.P_A_EMAIL));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_CONTROL, CommonConstants.P_A_CONTROL));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_LOG, CommonConstants.P_A_LOG));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_COMMENT, CommonConstants.P_A_COMMENT));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_CONTACT, CommonConstants.P_A_CONTACT));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_SECURITY, CommonConstants.P_A_SECURITY));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_INFORMATICS, CommonConstants.P_A_INFORMATICS));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_ENGLISH, CommonConstants.P_A_ENGLISH));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_UNIVERSITY, CommonConstants.P_A_UNIVERSITY));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_NEWS, CommonConstants.P_A_NEWS));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_USER, CommonConstants.P_A_USER));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_ADS, CommonConstants.P_A_ADS));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_GENERAL, CommonConstants.P_A_GENERAL));
+                    chxPermission.Items.Add(new ListItem(CommonConstants.P_N_GENERAL, CommonConstants.P_N_GENERAL));
+                }
+                //liPermission.Text = "<div><span>";
+                
+                //for (int idx = 0; idx < lstPermits.Count; ++idx)
+                //{
+                //    liPermission.Text += lstPermits[idx].Name;
+                //    liPermission.Text += "<br />";
+                //}
+                //liPermission.Text += "</span></div><br />";
+
+                txtRegisterDate.Text = user.RegisterDate.ToString();
+                if (user.KIADate != null)
+                    txtKIADate.Text = user.KIADate.ToString();
+
+                if (ddlState.Items.Count == 0)
+                {
+                    //ddlState.Items.RemoveAt(0);
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_DELETED_NAME, CommonConstants.STATE_DELETED.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_KIA_1M_NAME, CommonConstants.STATE_KIA_1M.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_KIA_3W_NAME, CommonConstants.STATE_KIA_3W.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_KIA_2W_NAME, CommonConstants.STATE_KIA_2W.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_KIA_1W_NAME, CommonConstants.STATE_KIA_1W.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_KIA_3D_NAME, CommonConstants.STATE_KIA_3D.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_WARNING_NAME, CommonConstants.STATE_WARNING.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_ACTIVE_NAME, CommonConstants.STATE_ACTIVE.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_NON_ACTIVE_NAME, CommonConstants.STATE_NON_ACTIVE.ToString()));
+                }
+                for (int idx = 0; idx < ddlState.Items.Count; ++idx)
+                {
+                    if (ddlState.Items[idx].Value == user.State.ToString())
+                    {
+                        ddlState.SelectedIndex = idx;
+                    }
+                }
+
+                txtNumberOfArticles.Text = Convert.ToString(user.NumberOfArticles);
+                txtNote.Text = user.Note.Trim();
+
+
+                switch (action)
+                {
+                    case CommonConstants.ACT_VIEW:
+                        {
+                            txtDisplayName.ReadOnly = true;
+                            ddlSex.Enabled = false;
+                            txtEmail.ReadOnly = true;
+                            txtRole.ReadOnly = true;
+                            txtRegisterDate.ReadOnly = true;
+                            txtKIADate.ReadOnly = true;
+                            txtRegisterDate.CssClass = "";
+                            txtKIADate.CssClass = "";
+                            ddlState.Enabled = false;
+                            txtNumberOfArticles.ReadOnly = true;
+                            txtNote.ReadOnly = true;
+                            break;
+                        }
+                    case CommonConstants.ACT_EDIT:
+                        {
+                            txtDisplayName.ReadOnly = false;
+                            ddlSex.Enabled = true;
+                            txtEmail.ReadOnly = false;
+                            txtRole.ReadOnly = false;
+                            txtRegisterDate.ReadOnly = false;
+                            txtKIADate.ReadOnly = false;
+                            txtRegisterDate.CssClass = "calendar";
+                            txtKIADate.CssClass = "calendar";
+                            ddlState.Enabled = true;
+                            txtNumberOfArticles.ReadOnly = false;
+                            txtNote.ReadOnly = false;
+                            break;
+                        }
+                }
+
+            }
+            else
+            {
+                messagePanel.Visible = true;
+                detailPanel.Visible = false;
+
+                liMessage.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+            }
+
+
         }
 
         private void showUsers(string type, int page)
         {
             int totalUsers = 0;
             IEnumerable<tblUser> lst = null;
-            
+
             switch (type)
             {
                 case CommonConstants.ACT_NORMAL:
@@ -154,12 +317,17 @@ namespace ltkt.Admin
 
                 TableCell userCell = new TableCell();
                 userCell.CssClass = "table-cell";
-                //userCell.Style["width"] = "80px";
+                userCell.Style["width"] = "80px";
                 userCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
                                                                       CommonConstants.PAGE_ADMIN_USERS,
                                                                       CommonConstants.ACT_VIEW,
                                                                       Convert.ToString(user.ID),
                                                                       user.Username);
+
+                TableCell displayCell = new TableCell();
+                displayCell.CssClass = "table-cell";
+                displayCell.Style["width"] = "180px";
+                displayCell.Text = user.DisplayName.Trim();
 
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
@@ -168,7 +336,7 @@ namespace ltkt.Admin
 
                 TableCell actionCell = new TableCell();
                 actionCell.CssClass = "table-cell";
-                actionCell.Style["width"] = "40px";
+                actionCell.Style["width"] = "60px";
                 actionCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
                                                                      CommonConstants.PAGE_ADMIN_USERS,
                                                                      CommonConstants.ACT_EDIT,
@@ -184,12 +352,13 @@ namespace ltkt.Admin
                 TableRow normalUserRow = new TableRow();
                 normalUserRow.Cells.Add(noCell);
                 normalUserRow.Cells.Add(userCell);
+                normalUserRow.Cells.Add(displayCell);
                 normalUserRow.Cells.Add(stateCell);
                 normalUserRow.Cells.Add(actionCell);
 
                 listUsers.Rows.AddAt(2 + idx, normalUserRow);
             }
-            
+
             // Creating links to previous and next pages
             if (totalPages > 1)
             {
@@ -263,6 +432,7 @@ namespace ltkt.Admin
         */
 
 
+
         protected void btnNormal_Click(object sender, EventArgs e)
         {
             Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
@@ -274,7 +444,7 @@ namespace ltkt.Admin
                                            + CommonConstants.REQ_PAGE
                                            + CommonConstants.EQUAL + "1");
         }
-        
+
         protected void btnKIA_Click(object sender, EventArgs e)
         {
             Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
@@ -286,7 +456,7 @@ namespace ltkt.Admin
                                            + CommonConstants.REQ_PAGE
                                            + CommonConstants.EQUAL + "1");
         }
-        
+
         protected void btnAdmin_Click(object sender, EventArgs e)
         {
             Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
@@ -298,5 +468,66 @@ namespace ltkt.Admin
                                            + CommonConstants.REQ_PAGE
                                            + CommonConstants.EQUAL + "1");
         }
-}
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (Request.QueryString[CommonConstants.REQ_ACTION] == CommonConstants.ACT_VIEW)
+            {
+                //txtFromDate.CssClass = "calendar";
+                //txtEndDate.CssClass = "calendar";
+
+                Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                                   + CommonConstants.ADD_PARAMETER
+                                   + CommonConstants.REQ_ACTION
+                                   + CommonConstants.EQUAL
+                                   + CommonConstants.ACT_EDIT
+                                   + CommonConstants.AND
+                                   + CommonConstants.REQ_ID
+                                   + CommonConstants.EQUAL
+                                   + Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]));
+            }
+
+            try
+            {
+                //
+
+
+                Session[CommonConstants.SES_EDIT_USER] = null;
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                              + CommonConstants.ADD_PARAMETER
+                              + CommonConstants.REQ_TYPE
+                              + CommonConstants.EQUAL
+                              + CommonConstants.ACT_NORMAL
+                              + CommonConstants.AND
+                              + CommonConstants.REQ_PAGE + "1");
+
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Session[CommonConstants.SES_EDIT_USER] = null;
+
+            detailPanel.Visible = false;
+            viewPanel.Visible = true;
+
+            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                               + CommonConstants.ADD_PARAMETER
+                               + CommonConstants.REQ_TYPE
+                               + CommonConstants.EQUAL
+                               + CommonConstants.ACT_NORMAL
+                               + CommonConstants.AND
+                               + CommonConstants.REQ_PAGE
+                               + CommonConstants.EQUAL + "1");
+        }
+    }
 }

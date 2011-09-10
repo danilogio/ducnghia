@@ -530,6 +530,13 @@ div.block_details_text
 	color: #FFF;
 }
 
+.form_settings #checkbox input, .form_settings #checkbox textarea
+{
+    width: 30px;
+    border: white;
+    margin-left: 190px;
+}
+
 .form_settings textarea, .form_settings select
 {
 	font: 100% arial;

@@ -52,9 +52,8 @@ namespace ltkt.Admin
                     detailsPanel.Visible = true;
                     messagePanel.Visible = false;
 
-                    if (ddlState.Items.Count == 1)
+                    if (ddlState.Items.Count == 0)
                     {
-                        ddlState.Items.RemoveAt(0);
                         ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
                         ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
                         ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
