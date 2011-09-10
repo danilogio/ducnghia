@@ -48,15 +48,23 @@
                 <asp:Label ID="lblTitle" runat="server" Text=""></asp:Label>
             </h2>
             <div id="feedback" style="float: right;">
+            <br />
                 <asp:Button ID="btnLike" runat="server" Text="Thích" CssClass="formbutton" OnClick="btnLike_Click" />
                 &nbsp;<asp:Button ID="btnDislike" runat="server" Text="Báo xấu" CssClass="formbutton" OnClick="btnDislike_Click" />
-            </div>
+                <%--<asp:ImageButton ID="btnLike" runat="server" ImageUrl="~/images/like-hand-blue.png" Width="32px" Height="32px" OnClick="btnLike_Click"/>
+                <asp:ImageButton ID="btnDislike" runat="server" ImageUrl="~/images/dislike-hand-blue.png" Width="32px" Height="32px"  OnClick="btnDislike_Click"/>--%>
+                </div>
             <div id="overview">
                 <h5>
                     Có
                     <asp:Label ID="lblLiker" runat="server" Text=""></asp:Label>
                     người quan tâm tới bài viết này.
                 </h5>
+                <img src="images/star-y.png" alt="" width="15px" height="15px"/>
+                <img src="images/star-y.png" alt="" width="15px" height="15px"/>
+                <img src="images/star-y.png" alt="" width="15px" height="15px"/>
+                <img src="images/star-g.png" alt="" width="15px" height="15px"/>
+                <img src="images/star-g.png" alt="" width="15px" height="15px"/>
             </div>
             <hr />
             <br />
