@@ -474,7 +474,7 @@ namespace ltktDAO
         /// <returns></returns>
         public Boolean updateUser(string _username, tblUser update)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -502,6 +502,55 @@ namespace ltktDAO
             }
             return true;
         }
+
+        /// <summary>
+        /// Cập nhật user
+        /// </summary>
+        /// <param name="_userAdmin"></param>
+        /// <param name="_username"></param>
+        /// <param name="_displayName"></param>
+        /// <param name="_email"></param>
+        /// <param name="_state"></param>
+        /// <param name="_notes"></param>
+        /// <returns></returns>
+        public bool updateUser(string _userAdmin,
+            string _username, string _displayName, string _email, string _notes)
+        {
+            int id = 0;
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var user = DB.tblUsers.Single(u => u.Username == _username);
+
+                    user.DisplayName = _displayName;
+                    user.Email = _email;
+                    user.Note = _notes;
+
+                    id = user.ID;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, _userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                    Convert.ToString(user.ID),
+                                                                    CommonConstants.SQL_TABLE_USER));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE,
+                                                                    Convert.ToString(id),
+                                                                    CommonConstants.SQL_TABLE_USER));
+                log.writeLog(DBHelper.strPathLogFile, _userAdmin, e.Message);
+
+                return false;
+            }
+            return true;
+        }
+                   
 
         /// <summary>
         /// Mã hóa mật khẩu

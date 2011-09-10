@@ -473,6 +473,13 @@ div.block_details_text
 	padding: 0 0 4px 0;
 }
 
+
+.form_settings #checkbox span
+{
+	float: left;
+	width: 500px;
+	text-align: left;
+}
 .form_settings span
 {
 	float: left;

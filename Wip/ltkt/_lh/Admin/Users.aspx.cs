@@ -16,6 +16,7 @@ namespace ltkt.Admin
         private ltktDAO.Users userDAO = new ltktDAO.Users();
         ltktDAO.Control control = new ltktDAO.Control();
         EventLog log = new EventLog();
+        ltktDAO.Permission permitDAO = new ltktDAO.Permission();
 
         public const int NoOfUsesPerPage = 6;
 
@@ -130,11 +131,11 @@ namespace ltkt.Admin
                     }
 
 
-                //////////////////////////////////////////////////
+                    //////////////////////////////////////////////////
                 }
                 else
                     Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
-                
+
             }
             else
             {
@@ -161,29 +162,57 @@ namespace ltkt.Admin
                 IList<tblPermission> lstPermits = userDAO.getPermissions(user.ID);
                 if (chxPermission.Items.Count == 0)
                 {
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_FULL_CONTROL, CommonConstants.P_A_FULL_CONTROL));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_AUTHORITY, CommonConstants.P_A_AUTHORITY));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_EMAIL, CommonConstants.P_A_EMAIL));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_CONTROL, CommonConstants.P_A_CONTROL));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_LOG, CommonConstants.P_A_LOG));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_COMMENT, CommonConstants.P_A_COMMENT));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_CONTACT, CommonConstants.P_A_CONTACT));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_SECURITY, CommonConstants.P_A_SECURITY));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_INFORMATICS, CommonConstants.P_A_INFORMATICS));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_ENGLISH, CommonConstants.P_A_ENGLISH));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_UNIVERSITY, CommonConstants.P_A_UNIVERSITY));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_NEWS, CommonConstants.P_A_NEWS));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_USER, CommonConstants.P_A_USER));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_ADS, CommonConstants.P_A_ADS));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_A_GENERAL, CommonConstants.P_A_GENERAL));
-                    chxPermission.Items.Add(new ListItem(CommonConstants.P_N_GENERAL, CommonConstants.P_N_GENERAL));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_N_GENERAL),
+                                                         CommonConstants.P_N_GENERAL, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_GENERAL),
+                                                         CommonConstants.P_A_GENERAL, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_ADS),
+                                                         CommonConstants.P_A_ADS, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_USER),
+                                                         CommonConstants.P_A_USER, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_NEWS),
+                                                         CommonConstants.P_A_NEWS, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_UNIVERSITY),
+                                                         CommonConstants.P_A_UNIVERSITY, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_ENGLISH),
+                                                         CommonConstants.P_A_ENGLISH, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_INFORMATICS),
+                                                         CommonConstants.P_A_INFORMATICS, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_SECURITY),
+                                                         CommonConstants.P_A_SECURITY, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_CONTACT),
+                                                         CommonConstants.P_A_CONTACT, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_COMMENT),
+                                                         CommonConstants.P_A_COMMENT, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_LOG),
+                                                         CommonConstants.P_A_LOG, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_CONTROL),
+                                                         CommonConstants.P_A_CONTROL, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_EMAIL),
+                                                         CommonConstants.P_A_EMAIL, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_AUTHORITY),
+                                                         CommonConstants.P_A_AUTHORITY, false));
+                    chxPermission.Items.Add(new ListItem(permitDAO.getName(CommonConstants.P_A_FULL_CONTROL),
+                                                         CommonConstants.P_A_FULL_CONTROL, false));
                 }
+
+                for (int outer = 0; outer < lstPermits.Count; ++outer)
+                {
+                    for (int inner = 0; inner < chxPermission.Items.Count; ++inner)
+                    {
+                        if (chxPermission.Items[inner].Value.Trim() == lstPermits[outer].Code.Trim())
+                        {
+                            chxPermission.Items[inner].Selected = true;
+                        }
+                    }
+                }
+
                 //liPermission.Text = "<div><span>";
-                
+
                 //for (int idx = 0; idx < lstPermits.Count; ++idx)
                 //{
-                //    liPermission.Text += lstPermits[idx].Name;
-                //    liPermission.Text += "<br />";
+                    //    liPermission.Text += lstPermits[idx].Name;
+                    //    liPermission.Text += "<br />";
                 //}
                 //liPermission.Text += "</span></div><br />";
 
