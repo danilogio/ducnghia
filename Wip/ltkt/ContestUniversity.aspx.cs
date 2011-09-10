@@ -13,6 +13,7 @@ namespace ltkt
         EventLog log = new EventLog();
         BaseServices service = new BaseServices();
         ltktDAO.Control control = new ltktDAO.Control();
+        private int numberArtOnPage = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
 
         public void Page_Load(object sender, EventArgs e)
         {
@@ -20,6 +21,12 @@ namespace ltkt
                            + CommonConstants.SPACE + CommonConstants.HLINE
                            + CommonConstants.SPACE
                            + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+            numberArtOnPage = control.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_UNI);
+            if (numberArtOnPage < 1)
+            {
+                numberArtOnPage = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
+            }
+            pagerCons.PageSize = numberArtOnPage;
 
             ArticleSCO articleSCO = new ArticleSCO();
             try
@@ -34,10 +41,14 @@ namespace ltkt
                 {
                     if (!BaseServices.isNullOrBlank(articleSCO.Subject) && !BaseServices.isNullOrBlank(articleSCO.Time))
                     {
-                        lblTitle.Text += CommonConstants.SPACE;
-                        lblTitle.Text += CommonConstants.BAR;
-                        lblTitle.Text += CommonConstants.SPACE;
-                        lblTitle.Text += BaseServices.getNameByCode(articleSCO.Subject);
+                        string subject = BaseServices.getNameByCode(articleSCO.Subject);
+                        if (subject != CommonConstants.ALL)
+                        {
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += CommonConstants.BAR;
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += subject;
+                        }
                         IEnumerable<tblContestForUniversity> lst = contestDAO.getArticleBySubjectAndTime(articleSCO);
                         productList.DataSource = lst;
                         productList.DataBind();
@@ -73,10 +84,14 @@ namespace ltkt
                 {
                     if (!BaseServices.isNullOrBlank(articleSCO.Subject) && !BaseServices.isNullOrBlank(articleSCO.Time))
                     {
-                        lblTitle.Text += CommonConstants.SPACE;
-                        lblTitle.Text += CommonConstants.BAR;
-                        lblTitle.Text += CommonConstants.SPACE;
-                        lblTitle.Text += BaseServices.getNameByCode(articleSCO.Subject);
+                        string subject = BaseServices.getNameByCode(articleSCO.Subject);
+                        if(subject != CommonConstants.ALL)
+                        {
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += CommonConstants.BAR;
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += subject;
+                        }
                         IEnumerable<tblContestForUniversity> lst = contestDAO.getArticleBySubjectAndTime(articleSCO);
                         productList.DataSource = lst;
                         productList.DataBind();

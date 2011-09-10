@@ -2,8 +2,8 @@
     CodeFile="ContestUniversity.aspx.cs" Inherits="ltkt.ContestUniversity" %>
 
 <asp:Content ID="ContestHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
-    
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
     <style type="text/css">
         .style1
         {
@@ -26,16 +26,19 @@
                     </ul>
                 </LayoutTemplate>
                 <ItemTemplate>
-                    <li><a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
-                        <img src="<%#Eval("Thumbnail")%>" alt="" />
+                    <li>
+                        <img src="<%#Eval("Thumbnail")%>" alt="" width="120px" height="120px" />
                         <br />
-                        <center>
-                            <%#Eval("Title")%></center>
+                        <br />
+                        <a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
+                            <center>
+                                <%#Eval("Title")%></center>
+                        </a>
                         <div class="block_details_text">
                             <center>
                                 <%#Eval("Year")%></center>
                         </div>
-                    </a></li>
+                    </li>
                 </ItemTemplate>
                 <EmptyDataTemplate>
                     <div>
@@ -48,8 +51,8 @@
             <br />
             <br />
             <hr />
-            <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
-                PagedControlID="productList" runat="server">
+            <asp:DataPager ID="pagerCons" OnPreRender="DataPagerArticles_PreRender" PagedControlID="productList"
+                runat="server">
                 <Fields>
                     <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False"
                         PreviousPageText="<" FirstPageText="<<" />

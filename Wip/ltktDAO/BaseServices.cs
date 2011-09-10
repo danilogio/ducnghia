@@ -218,6 +218,10 @@ namespace ltktDAO
                     {
                         return CommonConstants.SUB_ENGLISH;
                     }
+                case CommonConstants.ALL:
+                    {
+                        return CommonConstants.ALL;
+                    }
                 default:
                     {
                         return CommonConstants.BLANK;

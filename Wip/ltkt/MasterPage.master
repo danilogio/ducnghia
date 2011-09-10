@@ -218,6 +218,7 @@
                                             <div>
                                                 <div style="float: left; width: 75%;">
                                                     <div id="divInfo" style="width: 100%; margin-top: 0px">
+                                                        <img src="images/user-icon-small.png" alt="" align=left width="20px" height="20px" />
                                                         <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
                                                             Font-Italic="True">
                                                             <label>
@@ -239,7 +240,9 @@
                         </li>
                         <li>
                             <h4>
+                                <%--<img src="images/search-small.png" align="bottom" alt="" width="14px" height="13px"/>--%>
                                 Tìm kiếm
+                                
                             </h4>
                             <form method="get" class="searchform" action="Home.aspx">
                             <ul style="background: white; border: 1px solid #a6c9e2;">
@@ -255,6 +258,7 @@
                                     <p>
                                         <asp:TextBox ID="txtBoxSearch" OnClick="this.value=''" runat="server">Nhập nội dung</asp:TextBox>
                                         <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton" />
+                                        
                                     </p>
                                     <asp:HyperLink ID="hpkAdvanceSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm nâng cao</asp:HyperLink>
                                 </li>

@@ -692,11 +692,21 @@ namespace ltktDAO
         public IEnumerable<tblContestForUniversity> getArticleBySubjectAndTime(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
-                                                            where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
-                                                            && p.State != CommonConstants.STATE_UNCHECK
-                                                            orderby p.Year
-                                                           select p;
+            IEnumerable<tblContestForUniversity> lst;
+            if (articleSCO.Subject == CommonConstants.ALL)
+            {
+                lst = from p in DB.tblContestForUniversities
+                      where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                      && p.State != CommonConstants.STATE_UNCHECK
+                      orderby p.Year descending
+                      select p;
+                return lst;
+            }
+             lst = from p in DB.tblContestForUniversities
+                    where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                    && p.State != CommonConstants.STATE_UNCHECK
+                    orderby p.Year descending
+                   select p;
             return lst;
         }
         /// <summary>
