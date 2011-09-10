@@ -32,7 +32,14 @@ namespace ltktDAO
         /// path of event log
         /// </summary>
         public const string PATH_LOG_FILE = "Log\\EventLog";
-
+        /// <summary>
+        /// active icon
+        /// </summary>
+        public const string PATH_ACTIVE_RATING_ICON = "images/star-y.png";
+        /// <summary>
+        /// inactive rating icon
+        /// </summary>
+        public const string PATH_INACTIVE_RATING_ICON = "images/star-g.png";
         /// <summary>
         /// html for edit icon on admin page
         /// </summary>
@@ -78,6 +85,10 @@ namespace ltktDAO
         /// </summary>
         public const char COMMA_CHAR = ',';
 
+        /// <summary>
+        /// sharp character
+        /// </summary>
+        public const string SHARP = "#";
         /// <summary>
         /// one space string(" ")
         /// </summary>
@@ -166,7 +177,31 @@ namespace ltktDAO
             /// <summary>
             /// account information text
             /// </summary>
-            public const string TXT_ACCOUNT_INFOR = "Thông tin tài khoản"; 
+            public const string TXT_ACCOUNT_INFOR = "Thông tin tài khoản";
+            /// <summary>
+            /// University name
+            /// </summary>
+            public const string TXT_UNIVERSITY = "Đại học";
+            /// <summary>
+            /// Colleague name
+            /// </summary>
+            public const string TXT_COLLEAGUE = "Cao đẳng";
+            /// <summary>
+            /// English name
+            /// </summary>
+            public const string TXT_ENGLISH = "Anh văn";
+            /// <summary>
+            /// Informatics name
+            /// </summary>
+            public const string TXT_INFORMATICS = "Tin học";
+            /// <summary>
+            /// Back to home
+            /// </summary>
+            public const string TXT_BACK_TO_HOME = "Quay về trang chủ";
+            /// <summary>
+            /// Resolved Direction
+            /// </summary>
+            public const string TXT_RESOLVING = "Hướng dẫn giải";
         #endregion
 
         #region Css (CSS)
@@ -201,22 +236,22 @@ namespace ltktDAO
         /// state is bad
         /// </summary>
         public const int STATE_BAD = 2;
-
+        /// <summary>
+        /// state bad name
+        /// </summary>
+        public const string STATE_BAD_NAME = "Bad";
         /// <summary>
         /// state is non active
         /// </summary>
         public const int STATE_NON_ACTIVE = 0;
-
         /// <summary>
         /// Chưa kích hoạt
         /// </summary>
         public const string STATE_NON_ACTIVE_NAME = "Chưa kích hoạt";
-
         /// <summary>
         /// state is active
         /// </summary>
         public const int STATE_ACTIVE = 1;
-
         /// <summary>
         /// Đang hoạt động
         /// </summary>
@@ -225,7 +260,6 @@ namespace ltktDAO
         /// state is warning
         /// </summary>
         public const int STATE_WARNING = 2;
-
         /// <summary>
         /// Cảnh cáo
         /// </summary>
@@ -234,7 +268,6 @@ namespace ltktDAO
         /// state is kia 3 day
         /// </summary>
         public const int STATE_KIA_3D = 31;
-
         /// <summary>
         /// KIA 3 ngày
         /// </summary>
@@ -243,7 +276,6 @@ namespace ltktDAO
         /// state is kia 1 week
         /// </summary>
         public const int STATE_KIA_1W = 32;
-
         /// <summary>
         /// KIA 1 tuần
         /// </summary>
@@ -252,7 +284,6 @@ namespace ltktDAO
         /// state is kia 2 week
         /// </summary>
         public const int STATE_KIA_2W = 33;
-
         /// <summary>
         /// KIA 2 tuần
         /// </summary>
@@ -261,7 +292,6 @@ namespace ltktDAO
         /// state is kia 3 week
         /// </summary>
         public const int STATE_KIA_3W = 34;
-
         /// <summary>
         /// KIA 3 tuần
         /// </summary>
@@ -270,7 +300,6 @@ namespace ltktDAO
         /// state is kia 1 Month
         /// </summary>
         public const int STATE_KIA_1M = 35;
-
         /// <summary>
         /// KIA 1 tháng
         /// </summary>
@@ -279,7 +308,6 @@ namespace ltktDAO
         /// state is deleted
         /// </summary>
         public const int STATE_DELETED = 4;
-
         /// <summary>
         /// state is deleted
         /// </summary>
@@ -288,7 +316,6 @@ namespace ltktDAO
         /// state is pending
         /// </summary>
         public const int STATE_PENDING = 10;
-
         /// <summary>
         /// Name of state pending
         /// </summary>
@@ -297,7 +324,6 @@ namespace ltktDAO
         /// state is sticky
         /// </summary>
         public const int STATE_STICKY = 13;
-
         /// <summary>
         /// Name of state sticky
         /// </summary>
@@ -329,13 +355,25 @@ namespace ltktDAO
         /// </summary>
         public const int AT_LECTURE = 0;
         /// <summary>
+        /// Article lecture name
+        /// </summary>
+        public const string AT_LECTURE_NAME = "Bài giảng";
+        /// <summary>
         /// Article has type a practise
         /// </summary>
         public const int AT_PRACTISE = 1;
         /// <summary>
+        /// Article practise name
+        /// </summary>
+        public const string AT_PRACTISE_NAME = "Bài tập";
+        /// <summary>
         /// Article has type Examination
         /// </summary>
         public const int AT_EXAM = 2;
+        /// <summary>
+        /// Article examination name
+        /// </summary>
+        public const string AT_EXAM_NAME = "Đề thi";
         /// <summary>
         /// Article is not classified
         /// </summary>
@@ -653,7 +691,7 @@ namespace ltktDAO
         /// <summary>
         /// Message resourse not found
         /// </summary>
-        public const string MSG_RESOURSE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
+        public const string MSG_RESOURCE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
         /// <summary>
         /// website is under construction.
         /// </summary>
@@ -1275,11 +1313,13 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_IMG_THUMBNAIL = "<img width='50px' height='50px' src='{0}' alt='{1}'/>";
         /// <summary>
+        /// image rating
+        /// </summary>
+        public const string TEMP_IMG_RATING = "<img src=\"{0}\" alt=\"\" width=\"15px\" height=\"15px\"/>";
+        /// <summary>
         /// Self Link template
         /// </summary>
         public const string TEMP_SELF_LINK = "<a href=\"{0}?page={1}\">{2}</a>";
-
-
         /// <summary>
         /// Self Link template
         /// </summary>

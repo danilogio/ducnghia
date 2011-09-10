@@ -57,7 +57,7 @@ namespace ltktDAO
         /// <param name="sErrMsg"></param>
         public void writeLog(string pathLog, string username, string sErrMsg)
         {
-            writeLog(pathLog, "[" + username + "]:" + sErrMsg);
+            writeLog(pathLog, "[" + username.Trim() + "]:" + sErrMsg);
         }
     }
 }

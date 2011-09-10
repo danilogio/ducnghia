@@ -104,12 +104,23 @@ namespace ltkt
                 commentPanel.Visible = false;
                 relativePanel.Visible = false;
                 invalidArticle.Visible = true;
-                liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                //20110911 TrungDV change create message START
+                //liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
+                //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                liMessage.Text += CommonConstants.TEMP_BR_TAG
+                                    + CommonConstants.TEMP_BR_TAG
+                                    + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
+                                                                        CommonConstants.PAGE_HOME,
+                                                                        CommonConstants.TXT_BACK_TO_HOME);
+                //20110911 TrungDV change create message END
             }
 
         }
-
+        public string createRatingBar(int score)
+        {
+            return bs.createRatingBar(score % 10, 10);
+        }
         private void showContest(int id)
         {
             try
@@ -117,37 +128,50 @@ namespace ltkt
                 tblContestForUniversity contest = ltktDAO.Contest.getContest(id);
                 if (contest != null)
                 {
-                    liTitle.Text = contest.Title;
+                    liTitle.Text = BaseServices.nullToBlank( contest.Title);
 
-                    lblTitle.Text = contest.Title;
-                    lblLiker.Text = contest.Point.ToString();
+                    lblTitle.Text = BaseServices.nullToBlank(contest.Title);
+                    lblLiker.Text = BaseServices.nullToBlank(contest.Point.ToString());
 
-                    lblAuthor.Text = ltktDAO.Contest.getAuthor(id);
-                    lblPostedDate.Text = bs.convertDateToString(contest.Posted);
-                    lblChecker.Text = contest.Checker;
+                    lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.Contest.getAuthor(id));
+                    lblPostedDate.Text = BaseServices.nullToBlank( bs.convertDateToString(contest.Posted));
+                    lblChecker.Text = BaseServices.nullToBlank(contest.Checker);
 
-                    lblOverview.Text = contest.Contents.Replace("\n", "<br />");
+                    lblOverview.Text = BaseServices.nullToBlank( contest.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = contest.Title;
-                    hpkDownloadlink.NavigateUrl = contest.Location.Replace("\\", "/");
+                    hpkDownloadlink.Text = BaseServices.nullToBlank(contest.Title);
+                    hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(contest.Location.Replace("\\", "/"));
 
-                    if (contest.Solving != null)
+                    if (BaseServices.isNullOrBlank(contest.Solving))
                     {
-                        lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
+                        //lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
+                        lblResolve.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, 
+                                                                        contest.Solving.Replace("\\", "/"), 
+                                                                        CommonConstants.TXT_RESOLVING);
                     }
 
-                    txtPostedComment.Text = contest.Comment;
-
-                    IList<tblContestForUniversity> items = contestDAO.getRelativeByYear(contest.Year, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
+                    txtPostedComment.Text = BaseServices.nullToBlank( contest.Comment);
+                    int numberRecordRelative = control.getValueByInt(CommonConstants.CF_NUM_RECORD_RELATIVE);
+                    IList<tblContestForUniversity> items = contestDAO.getRelativeByYear(contest.Year, numberRecordRelative);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
-                        lblRelative.Text += "<li>";
-                        lblRelative.Text += "<a href='ArticleDetails.aspx?sec=uni&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                        //20110911 TrungDV change creation relative START
+                        string temp = CommonConstants.BLANK;
+                        temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_UNIVERSITY_CODE, items[i].ID.ToString(), items[i].Title.Trim());
+                        temp += "(" + items[i].Posted + ")";
+                        lblRelative.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+
+                        /*lblRelative.Text += "<li>";
+                        lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
                         lblRelative.Text += "(" + items[i].Posted + ")";
-                        lblRelative.Text += "</li>";
+                        lblRelative.Text += "</li>";*/
+                        //20110911 TrungDV change creation relative END
                     }
                     lblRelative.Text += "</ul>";
+
+                    int score = contestDAO.getScore(id);
+                    lRatingBar.Text = createRatingBar(score);
 
                 }
                 else
@@ -156,8 +180,16 @@ namespace ltkt
                     commentPanel.Visible = false;
                     relativePanel.Visible = false;
                     invalidArticle.Visible = true;
-                    liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    lRatingBar.Visible = false;
+                    //20110911 TrungDV change create message START
+                    //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liMessage.Text += CommonConstants.TEMP_BR_TAG
+                                        + CommonConstants.TEMP_BR_TAG
+                                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
+                                                                            CommonConstants.PAGE_HOME,
+                                                                            CommonConstants.TXT_BACK_TO_HOME);
+                    //20110911 TrungDV change create message END
                 }
             }
             catch (Exception ex)
@@ -183,32 +215,42 @@ namespace ltkt
                 tblEnglish english = ltktDAO.English.getEnglish(id);
                 if (english != null)
                 {
-                    liTitle.Text = english.Title;
+                    liTitle.Text = BaseServices.nullToBlank( english.Title);
 
-                    lblTitle.Text = english.Title;
+                    lblTitle.Text = BaseServices.nullToBlank(english.Title);
                     lblLiker.Text = english.Point.ToString();
 
-                    lblAuthor.Text = ltktDAO.English.getAuthor(id);
-                    lblPostedDate.Text = bs.convertDateToString(english.Posted);
-                    lblChecker.Text = english.Checker;
+                    lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.English.getAuthor(id));
+                    lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(english.Posted));
+                    lblChecker.Text = BaseServices.nullToBlank( english.Checker);
 
-                    lblOverview.Text = english.Contents.Replace("\n", "<br />");
+                    lblOverview.Text = BaseServices.nullToBlank( english.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = english.Title;
-                    hpkDownloadlink.NavigateUrl = english.Location.Replace("\\", "/");
+                    hpkDownloadlink.Text = BaseServices.nullToBlank(english.Title);
+                    hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(english.Location.Replace("\\", "/"));
 
                     IList<tblEnglish> items = englishDAO.getRelativeByType(english.Type, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
-                        lblRelative.Text += "<li>";
-                        lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
-                        lblRelative.Text += "(" + items[i].Posted + ")";
-                        lblRelative.Text += "</li>";
+                       //20110911 TrungDV change creation relative START
+                       string temp = CommonConstants.BLANK;
+                       temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_ENGLISH_CODE, items[i].ID.ToString(), items[i].Title.Trim());
+                       temp += "(" + items[i].Posted + ")";
+                       lblRelative.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+                       
+                       /*lblRelative.Text += "<li>";
+                       lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                       lblRelative.Text += "(" + items[i].Posted + ")";
+                       lblRelative.Text += "</li>";*/
+                       //20110911 TrungDV change creation relative END
                     }
                     lblRelative.Text += "</ul>";
 
-                    txtPostedComment.Text = english.Comment;
+                    txtPostedComment.Text = BaseServices.nullToBlank( english.Comment);
+
+                    int score = englishDAO.getScore(id);
+                    lRatingBar.Text = createRatingBar(score);
 
                 }
                 else
@@ -217,8 +259,17 @@ namespace ltkt
                     commentPanel.Visible = false;
                     relativePanel.Visible = false;
                     invalidArticle.Visible = true;
-                    liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    lRatingBar.Visible = false;
+                    
+                    //20110911 TrungDV change creation relative START
+                    //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liMessage.Text += CommonConstants.TEMP_BR_TAG 
+                                        + CommonConstants.TEMP_BR_TAG 
+                                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, 
+                                                                            CommonConstants.PAGE_HOME, 
+                                                                            CommonConstants.TXT_BACK_TO_HOME);
+                    //20110911 TrungDV change creation relative END
                 }
             }
             catch (Exception ex)
@@ -244,28 +295,40 @@ namespace ltkt
                 tblInformatic informatic = ltktDAO.Informatics.getInformatic(id);
                 if (informatic != null)
                 {
-                    liTitle.Text = informatic.Title;
+                    liTitle.Text = BaseServices.nullToBlank(informatic.Title);
 
-                    lblTitle.Text = informatic.Title;
-                    lblLiker.Text = informatic.Point.ToString();
+                    lblTitle.Text = BaseServices.nullToBlank(informatic.Title);
+                    lblLiker.Text = BaseServices.nullToBlank( informatic.Point.ToString());
 
-                    lblAuthor.Text = ltktDAO.Informatics.getAuthor(id);
-                    lblPostedDate.Text = bs.convertDateToString(informatic.Posted);
-                    lblChecker.Text = informatic.Checker;
+                    lblAuthor.Text =BaseServices.nullToBlank(ltktDAO.Informatics.getAuthor(id));
+                    lblPostedDate.Text = BaseServices.nullToBlank( bs.convertDateToString(informatic.Posted));
+                    lblChecker.Text = BaseServices.nullToBlank(informatic.Checker);
 
-                    lblOverview.Text = informatic.Contents.Replace("\n", "<br />");
+                    lblOverview.Text = BaseServices.nullToBlank(informatic.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = informatic.Title;
-                    hpkDownloadlink.NavigateUrl = informatic.Location.Replace("\\", "/");
+                    hpkDownloadlink.Text = BaseServices.nullToBlank( informatic.Title);
+                    hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(informatic.Location.Replace("\\", "/"));
 
-                    IList<tblInformatic> items = informaticsDAO.getRelativeByType(informatic.Type, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
+                    int numberRelativeRecord = control.getValueByInt(CommonConstants.CF_NUM_RECORD_RELATIVE);
+                       
+                    IList<tblInformatic> items = informaticsDAO.getRelativeByType(informatic.Type, numberRelativeRecord);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
-                        lblRelative.Text += "<li>";
+                        //20110911 TrungDV change creation relative START
+                        string temp = CommonConstants.BLANK;
+                        temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, 
+                                                                CommonConstants.SEC_INFORMATICS_CODE, 
+                                                                items[i].ID.ToString(), 
+                                                                items[i].Title.Trim());
+                        temp += "(" + items[i].Posted + ")";
+                        lblRelative.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+
+                        /*lblRelative.Text += "<li>";
                         lblRelative.Text += "<a href='ArticleDetails.aspx?sec=it&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
                         lblRelative.Text += "(" + items[i].Posted + ")";
-                        lblRelative.Text += "</li>";
+                        lblRelative.Text += "</li>";*/
+                        //20110911 TrungDV change creation relative END
                     }
                     lblRelative.Text += "</ul>";
 
@@ -279,8 +342,15 @@ namespace ltkt
                     commentPanel.Visible = false;
                     relativePanel.Visible = false;
                     invalidArticle.Visible = true;
-                    liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
-                    liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    //20110911 TrungDV change creation relative START
+                    //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+                    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liMessage.Text += CommonConstants.TEMP_BR_TAG
+                                        + CommonConstants.TEMP_BR_TAG
+                                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
+                                                                            CommonConstants.PAGE_HOME,
+                                                                            CommonConstants.TXT_BACK_TO_HOME);
+                    //20110911 TrungDV change creation relative END
                 }
             }
             catch (Exception ex)
@@ -316,13 +386,13 @@ namespace ltkt
                 if (Session[CommonConstants.SES_USER] != null)
                 {
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    author = user.DisplayName;
-                    currentUser = user.Username;
+                    author = BaseServices.nullToBlank( user.DisplayName);
+                    currentUser = BaseServices.nullToBlank(user.Username);
                 }
                 else
                 {
-                    author = txtName.Text;
-                    currentUser = author;
+                    author = BaseServices.nullToBlank(txtName.Text);
+                    currentUser = BaseServices.nullToBlank(author);
                 }
 
                 date = bs.convertDateToString(DateTime.Now);

@@ -28,9 +28,9 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Title;
+                return lst.ElementAt(0).Title.Trim();
             }
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Contents;
+                return lst.ElementAt(0).Contents.Trim();
             }
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -66,10 +66,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Solving;
+                return lst.ElementAt(0).Solving.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -87,10 +87,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).DisplayName;
+                return lst.ElementAt(0).DisplayName.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -129,22 +129,22 @@ namespace ltktDAO
                                                        select record;
 
             int state = lst.ElementAt(0).State;
-            string strState = "";
+            string strState = CommonConstants.BLANK;
             switch (state)
             {
-                case 0:
+                case CommonConstants.STATE_CHECKED:
                     {
-                        strState = "Uncheck";
+                        strState = CommonConstants.STATE_CHECKED_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.STATE_UNCHECK:
                     {
-                        strState = "Checked";
+                        strState = CommonConstants.STATE_UNCHECK_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.STATE_BAD:
                     {
-                        strState = "Bad";
+                        strState = CommonConstants.STATE_BAD_NAME;
                         break;
                     }
                 default:
@@ -168,10 +168,10 @@ namespace ltktDAO
 
             if (lst.ElementAt(0).isUniversity == false)
             {
-                return "Đại học";
+                return CommonConstants.TXT_UNIVERSITY;
             }
 
-            return "Cao đẳng";
+            return CommonConstants.TXT_COLLEAGUE;
         }
 
         /// <summary>
@@ -187,32 +187,27 @@ namespace ltktDAO
                                                        select record;
 
             int branch = lst.ElementAt(0).Branch;
-            string strBranch = "";
+            string strBranch = CommonConstants.BLANK;
             switch (branch)
             {
-                case 0:
+                case CommonConstants.AT_UNI_BRANCH_A:
                     {
-                        strBranch = "Khối A";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_A_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.AT_UNI_BRANCH_B:
                     {
-                        strBranch = "Khối B";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_B_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.AT_UNI_BRANCH_C:
                     {
-                        strBranch = "Khối C";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_C_NAME;
                         break;
                     }
-                case 3:
+                case CommonConstants.AT_UNI_BRANCH_D:
                     {
-                        strBranch = "Khối D";
-                        break;
-                    }
-                case 4:
-                    {
-                        strBranch = "Các khối khác";
+                        strBranch = CommonConstants.AT_UNI_BRANCH_D_NAME;
                         break;
                     }
                 default:
@@ -239,7 +234,7 @@ namespace ltktDAO
                 return lst.ElementAt(0).Year;
             }
 
-            return -1;
+            return 1970;
         }
         /// <summary>
         /// Lấy điểm bài viết
@@ -255,10 +250,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return (int)lst.ElementAt(0).Point;
+                return lst.ElementAt(0).Point;
             }
 
-            return -1;
+            return 0;
         }
 
         /// <summary>
@@ -275,12 +270,26 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Tag;
+                return lst.ElementAt(0).Tag.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
+        public int getScore(int ID)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
+                                                       where record.ID == ID
+                                                       select record;
+
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0).Score;
+            }
+
+            return 0;
+        }
         /// <summary>
         /// Lấy comment
         /// </summary>
@@ -295,10 +304,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Comment;
+                return lst.ElementAt(0).Comment.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -322,7 +331,7 @@ namespace ltktDAO
         }
 
         #endregion
-
+        /*
         #region Set Property
         /// <summary>
         /// Xét tiêu đề
@@ -664,6 +673,7 @@ namespace ltktDAO
 
 
         #endregion
+        */
         #endregion
 
         #region Method
@@ -1087,6 +1097,8 @@ namespace ltktDAO
         /// <returns></returns>
         public IList<tblContestForUniversity> getRelativeByYear(int _year, int _numberRecords)
         {
+            if (_numberRecords < 1)
+                _numberRecords = CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE;
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
                                                         where record.Year == _year

@@ -117,7 +117,7 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    liAds.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+                    liAds.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
                     //liAds.Text += "&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
                 }
             }
@@ -126,7 +126,7 @@ namespace ltkt.Admin
                 messagePanel.Visible = true;
                 detailsPanel.Visible = false;
 
-                liMessage.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+                liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
             }
 
             if (_action == CommonConstants.ACT_EDIT)

@@ -256,7 +256,7 @@ namespace ltkt.Admin
                 messagePanel.Visible = true;
                 detailPanel.Visible = false;
 
-                liMessage.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+                liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
             }
 
 

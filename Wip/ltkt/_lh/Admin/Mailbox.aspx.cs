@@ -303,7 +303,7 @@ namespace ltkt.Admin
 
                 EmailDetailTable.Visible = false;
                 liMessageDetails.Visible = true;
-                liMessageDetails.Text = CommonConstants.MSG_RESOURSE_NOT_FOUND;
+                liMessageDetails.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
             }
         }
 

@@ -60,11 +60,13 @@
                     <asp:Label ID="lblLiker" runat="server" Text=""></asp:Label>
                     người quan tâm tới bài viết này.
                 </h5>
-                <img src="images/star-y.png" alt="" width="15px" height="15px"/>
-                <img src="images/star-y.png" alt="" width="15px" height="15px"/>
-                <img src="images/star-y.png" alt="" width="15px" height="15px"/>
-                <img src="images/star-g.png" alt="" width="15px" height="15px"/>
-                <img src="images/star-g.png" alt="" width="15px" height="15px"/>
+                <asp:Literal ID="lRatingBar" runat="server" >
+                    <%--<img src="images/star-y.png" alt="" width="15px" height="15px"/>
+                    <img src="images/star-y.png" alt="" width="15px" height="15px"/>
+                    <img src="images/star-y.png" alt="" width="15px" height="15px"/>
+                    <img src="images/star-g.png" alt="" width="15px" height="15px"/>
+                    <img src="images/star-g.png" alt="" width="15px" height="15px"/>--%>
+                </asp:Literal>
             </div>
             <hr />
             <br />

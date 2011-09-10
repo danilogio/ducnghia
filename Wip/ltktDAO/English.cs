@@ -27,10 +27,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Title;
+                return lst.ElementAt(0).Title.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -46,22 +46,22 @@ namespace ltktDAO
                                           select record;
 
             int type = lst.ElementAt(0).Type;
-            string strType = "";
+            string strType = CommonConstants.BLANK;
             switch (type)
             {
-                case 0:
+                case CommonConstants.AT_LECTURE:
                     {
-                        strType = "Bài giảng";
+                        strType = CommonConstants.AT_LECTURE_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.AT_EXAM:
                     {
-                        strType = "Đề thi";
+                        strType = CommonConstants.AT_EXAM_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.AT_PRACTISE:
                     {
-                        strType = "Bài tập";
+                        strType = CommonConstants.AT_PRACTISE_NAME;
                         break;
                     }
                 default:
@@ -88,7 +88,7 @@ namespace ltktDAO
                 return lst.ElementAt(0).Contents;
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -140,22 +140,22 @@ namespace ltktDAO
                                           select record;
 
             int state = lst.ElementAt(0).State;
-            string strState = "";
+            string strState = CommonConstants.BLANK;
             switch (state)
             {
-                case 0:
+                case CommonConstants.STATE_UNCHECK:
                     {
-                        strState = "Uncheck";
+                        strState = CommonConstants.STATE_UNCHECK_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.STATE_CHECKED:
                     {
-                        strState = "Checked";
+                        strState = CommonConstants.STATE_CHECKED_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.STATE_BAD:
                     {
-                        strState = "Bad";
+                        strState = CommonConstants.STATE_BAD_NAME;
                         break;
                     }
                 default:
@@ -182,7 +182,26 @@ namespace ltktDAO
                 return (int)lst.ElementAt(0).Point;
             }
 
-            return -1;
+            return 0;
+        }
+        /// <summary>
+        /// Lấy điểm checker
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public int getScore(int ID)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
+                                          where record.ID == ID
+                                          select record;
+
+            if (lst.Count() > 0)
+            {
+                return (int)lst.ElementAt(0).Score;
+            }
+
+            return 0;
         }
 
         /// <summary>
@@ -199,10 +218,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Tag;
+                return lst.ElementAt(0).Tag.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -218,10 +237,10 @@ namespace ltktDAO
                                           select record;
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Comment;
+                return lst.ElementAt(0).Comment.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -245,7 +264,7 @@ namespace ltktDAO
 
         #endregion
 
-        #region Set Property
+        /*#region Set Property
         /// <summary>
         /// Xét tiêu đề
         /// </summary>
@@ -255,7 +274,6 @@ namespace ltktDAO
         public static Boolean setTitle(int ID, string _title)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-
             using (TransactionScope ts = new TransactionScope())
             {
                 var record = DB.tblEnglishes.Single(TB => TB.ID == ID);
@@ -456,7 +474,7 @@ namespace ltktDAO
             return true;
         }
 
-        #endregion
+        #endregion*/
         #endregion
 
         #region Method

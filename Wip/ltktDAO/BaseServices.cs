@@ -89,7 +89,7 @@ namespace ltktDAO
         /// <returns></returns>
         public string convertDateToString(DateTime date)
         {
-            string strDate = "";
+            string strDate = CommonConstants.BLANK;
             if (date != null)
             {
                 strDate += date.ToShortTimeString();
@@ -116,6 +116,14 @@ namespace ltktDAO
             if (target == null)
             {
                 return CommonConstants.BLANK;
+            }
+            return target.Trim();
+        }
+        public static string nullToSharp(string target)
+        {
+            if (target == null || target == CommonConstants.BLANK)
+            {
+                return CommonConstants.SHARP;
             }
             return target.Trim();
         }
@@ -253,7 +261,33 @@ namespace ltktDAO
             }
             return links;
         }
-    
+        public string createRatingBar(int score, int maxScore)
+        {
+            string data = CommonConstants.BLANK;
+            
+            if (score > 0 && maxScore > 0 && maxScore >= score)
+            {
+                maxScore = maxScore / 2;
+                score = score / 2;
+                int lackScore = maxScore - score;
+                string item = CommonConstants.BLANK;
+
+                //build score
+                for (int i = 0; i < score; i++)
+                {
+                    item = createMsgByTemplate(CommonConstants.TEMP_IMG_RATING, CommonConstants.PATH_ACTIVE_RATING_ICON);
+                    data += item;
+                }
+
+                //build lake score
+                for (int i = 0; i < lackScore; i++)
+                {
+                    item = createMsgByTemplate(CommonConstants.TEMP_IMG_RATING, CommonConstants.PATH_INACTIVE_RATING_ICON);
+                    data += item;
+                }
+            }
+            return data;
+        }
         
     }
 }

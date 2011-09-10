@@ -603,7 +603,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (_numberRecords < 1)
-                _numberRecords = 1;
+                _numberRecords = CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE;
             IEnumerable<tblInformatic> lst = (from record in DB.tblInformatics
                                               where record.Type == _type
                                               select record).Take(_numberRecords);
