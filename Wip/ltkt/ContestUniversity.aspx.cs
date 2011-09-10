@@ -39,6 +39,14 @@ namespace ltkt
 
                 if (!IsPostBack)
                 {
+                    if(BaseServices.isNullOrBlank(articleSCO.Subject))
+                    {
+                        articleSCO.Subject = CommonConstants.ALL;
+                    }
+                    if(BaseServices.isNullOrBlank(articleSCO.Time))
+                    {
+                        articleSCO.Time = CommonConstants.NOW;
+                    }
                     if (!BaseServices.isNullOrBlank(articleSCO.Subject) && !BaseServices.isNullOrBlank(articleSCO.Time))
                     {
                         string subject = BaseServices.getNameByCode(articleSCO.Subject);

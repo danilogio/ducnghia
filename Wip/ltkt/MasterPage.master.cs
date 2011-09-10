@@ -69,6 +69,14 @@ namespace ltkt
                                                                             CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR,
                                                                             annouceText);
                     }
+                    else
+                    {
+                        ltAnnoucement.Visible = false;
+                    }
+                }
+                else
+                {
+                    ltAnnoucement.Visible = false;
                 }
             }
             else
