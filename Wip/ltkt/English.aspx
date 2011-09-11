@@ -27,10 +27,7 @@
                                 <center>
                                     <%#Eval("Title")%></center>
                             </a>
-                            <div class="block_details_text">
-                                <center>
-                                    <%#Eval("Year")%></center>
-                            </div>
+                            
                         </div>
                     </li>
                 </ItemTemplate>

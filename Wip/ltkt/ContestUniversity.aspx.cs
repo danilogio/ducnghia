@@ -49,7 +49,7 @@ namespace ltkt
                     }
                     if (!BaseServices.isNullOrBlank(articleSCO.Subject) && !BaseServices.isNullOrBlank(articleSCO.Time))
                     {
-                        string subject = BaseServices.getNameByCode(articleSCO.Subject);
+                        string subject = BaseServices.getNameSubjectByCode(articleSCO.Subject);
                         if (subject != CommonConstants.ALL)
                         {
                             lblTitle.Text += CommonConstants.SPACE;
@@ -90,9 +90,17 @@ namespace ltkt
             {
                 try
                 {
+                    if (BaseServices.isNullOrBlank(articleSCO.Subject))
+                    {
+                        articleSCO.Subject = CommonConstants.ALL;
+                    }
+                    if (BaseServices.isNullOrBlank(articleSCO.Time))
+                    {
+                        articleSCO.Time = CommonConstants.NOW;
+                    }
                     if (!BaseServices.isNullOrBlank(articleSCO.Subject) && !BaseServices.isNullOrBlank(articleSCO.Time))
                     {
-                        string subject = BaseServices.getNameByCode(articleSCO.Subject);
+                        string subject = BaseServices.getNameSubjectByCode(articleSCO.Subject);
                         if(subject != CommonConstants.ALL)
                         {
                             lblTitle.Text += CommonConstants.SPACE;

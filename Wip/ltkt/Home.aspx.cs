@@ -671,7 +671,7 @@ namespace ltkt
                         + "</span>\n"
                         + "                </div>\n"
                         + "                <div class='block_details_text'>\n"
-                        + "                    " + BaseServices.getNameByCode(item.Subject.Trim()) + "<br />\n"
+                        + "                    " + BaseServices.getNameSubjectByCode(item.Subject.Trim()) + "<br />\n"
                         + Contest.getBranch(item.ID) + "<br/>\n"
                         + item.Year
                         + "                </div>\n"

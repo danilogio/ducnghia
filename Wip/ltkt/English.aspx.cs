@@ -50,17 +50,17 @@ namespace ltkt
                     }
                     if (!BaseServices.isNullOrBlank(articleSCO.Classes) && !BaseServices.isNullOrBlank(articleSCO.Time))
                     {
-                        string subject = BaseServices.getNameByCode(articleSCO.Classes);
-                        if (subject != CommonConstants.ALL)
+                        string classes = BaseServices.getNameSubjectByCode(articleSCO.Classes);
+                        if (classes != CommonConstants.ALL)
                         {
                             lblTitle.Text += CommonConstants.SPACE;
                             lblTitle.Text += CommonConstants.BAR;
                             lblTitle.Text += CommonConstants.SPACE;
-                            lblTitle.Text += subject;
+                            lblTitle.Text += classes;
                         }
-                        //IEnumerable<tblEnglish> lst = englishDAO.
-                        //productList.DataSource = lst;
-                        //productList.DataBind();
+                        IEnumerable<tblEnglish> lst = englishDAO.searchArticles(articleSCO, numberArtOnPage);
+                        productList.DataSource = lst;
+                        productList.DataBind();
 
                         //lblOlderLinks.Text = getOlderLinks(articleSCO);
                     }
@@ -85,7 +85,53 @@ namespace ltkt
     
         protected void DataPagerArticles_PreRender(object sender, EventArgs e)
         {
-            
+            ArticleSCO articleSCO = new ArticleSCO();
+            articleSCO = (ArticleSCO)Session[CommonConstants.SES_ARTICLE_SCO];
+            lblTitle.Text = CommonConstants.SEC_ENGLISH_NAME;
+            if (articleSCO != null)
+            {
+                try
+                {
+                    if (BaseServices.isNullOrBlank(articleSCO.Classes))
+                    {
+                        articleSCO.Classes = CommonConstants.ALL;
+                    }
+                    if (BaseServices.isNullOrBlank(articleSCO.Time))
+                    {
+                        articleSCO.Time = CommonConstants.NOW;
+                    }
+                    if (!BaseServices.isNullOrBlank(articleSCO.Classes) && !BaseServices.isNullOrBlank(articleSCO.Time))
+                    {
+                        string classes = BaseServices.getNameSubjectByCode(articleSCO.Classes);
+                        if (classes != CommonConstants.ALL && classes != CommonConstants.BLANK)
+                        {
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += CommonConstants.BAR;
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += classes;
+                        }
+                        IEnumerable<tblEnglish> lst = englishDAO.searchArticles(articleSCO, numberArtOnPage);
+                        productList.DataSource = lst;
+                        productList.DataBind();
+
+                        //lblOlderLinks.Text = getOlderLinks(articleSCO);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    string username = CommonConstants.USER_GUEST;
+                    if (user != null)
+                    {
+                        username = user.Username;
+                    }
+
+                    log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                }
+            }
         }
         private string getOlderLinks(ArticleSCO articleSCO)
         {

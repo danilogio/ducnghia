@@ -676,7 +676,226 @@ namespace ltktDAO
                                            select p).Take(numberRecord);
             return lst;
         }
+        private IEnumerable<tblEnglish> searchArticleByClassAndTime(ArticleSCO articleSCO, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (numberRecord < 1)
+                numberRecord = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
 
+            int start = 0; 
+            int end = 0;
+            if (articleSCO.Classes == CommonConstants.PARAM_EL_COMMON)
+            {
+
+                start = CommonConstants.AT_EL_CLASS_START;
+                end = CommonConstants.AT_EL_CLASS_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_MAJOR)
+            {
+                start = CommonConstants.AT_EL_MJ_START;
+                end = CommonConstants.AT_EL_MJ_END;
+
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_CERT)
+            {
+                start = CommonConstants.AT_EL_CERT_START;
+                end = CommonConstants.AT_EL_CERT_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_CLASS_1_TO_9)
+            {
+                start = CommonConstants.AT_EL_CLASS_1;
+                end = CommonConstants.AT_EL_CLASS_9;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_MATH_ECO)
+            {
+                start = CommonConstants.AT_EL_MJ_MATH;
+                end = CommonConstants.AT_EL_MJ_ECO;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_CHEM_BIO_MAT)
+            {
+                start = CommonConstants.AT_EL_MJ_CHEM;
+                end = CommonConstants.AT_EL_MJ_MATERIAL;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_PHY_TELE_IT)
+            {
+                start = CommonConstants.AT_EL_MJ_PHY;
+                end = CommonConstants.AT_EL_MJ_IT;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_OTHER_MJ)
+            {
+                start = CommonConstants.AT_EL_MJ_IT + 1;
+                end = CommonConstants.AT_EL_MJ_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_TOEIC)
+            {
+                start = CommonConstants.AT_EL_CERT_TOEIC_START;
+                end = CommonConstants.AT_EL_CERT_TOEIC_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_TOEFL)
+            {
+                start = CommonConstants.AT_EL_CERT_TOEFL_START;
+                end = CommonConstants.AT_EL_CERT_TOEFL_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_IELTS)
+            {
+                start = CommonConstants.AT_EL_CERT_IELTS_START;
+                end = CommonConstants.AT_EL_CERT_IELTS_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_ABC)
+            {
+                start = CommonConstants.AT_EL_CERT_ABC_START;
+                end = CommonConstants.AT_EL_CERT_ABC_END;
+            }
+            if (start > 0 && end > 0 && end >= start)
+            {
+                IEnumerable<tblEnglish> lst1 = (from p in DB.tblEnglishes
+                                               where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                     && p.State != CommonConstants.STATE_UNCHECK
+                                                     && p.StickyFlg == false
+                                                     && p.Class >= start && p.Class <= end
+                                               orderby p.Posted descending
+                                               select p).Take(numberRecord);
+                return lst1;
+            }
+            if (articleSCO.Classes != CommonConstants.ALL)
+            {
+                IEnumerable<tblEnglish> lst2 = (from p in DB.tblEnglishes
+                                                where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                      && p.State != CommonConstants.STATE_UNCHECK
+                                                      && p.StickyFlg == false
+                                                      && p.Class == BaseServices.getValueClassByCode(articleSCO.Classes)
+                                                orderby p.Posted descending
+                                                select p).Take(numberRecord);
+                return lst2;
+            }
+
+            IEnumerable<tblEnglish> lst3 = (from p in DB.tblEnglishes
+                                            where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                  && p.State != CommonConstants.STATE_UNCHECK
+                                                  && p.StickyFlg == false
+                                            orderby p.Posted descending
+                                            select p).Take(numberRecord);
+            return lst3;
+        }
+
+        private IEnumerable<tblEnglish> searchStickyArticleByClassAndTime(ArticleSCO articleSCO, int numberRecord)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (numberRecord < 1)
+                numberRecord = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
+
+            int start = 0;
+            int end = 0;
+            if (articleSCO.Classes == CommonConstants.PARAM_EL_COMMON)
+            {
+
+                start = CommonConstants.AT_EL_CLASS_START;
+                end = CommonConstants.AT_EL_CLASS_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_MAJOR)
+            {
+                start = CommonConstants.AT_EL_MJ_START;
+                end = CommonConstants.AT_EL_MJ_END;
+
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_CERT)
+            {
+                start = CommonConstants.AT_EL_CERT_START;
+                end = CommonConstants.AT_EL_CERT_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_CLASS_1_TO_9)
+            {
+                start = CommonConstants.AT_EL_CLASS_1;
+                end = CommonConstants.AT_EL_CLASS_9;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_MATH_ECO)
+            {
+                start = CommonConstants.AT_EL_MJ_MATH;
+                end = CommonConstants.AT_EL_MJ_ECO;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_CHEM_BIO_MAT)
+            {
+                start = CommonConstants.AT_EL_MJ_CHEM;
+                end = CommonConstants.AT_EL_MJ_MATERIAL;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_PHY_TELE_IT)
+            {
+                start = CommonConstants.AT_EL_MJ_PHY;
+                end = CommonConstants.AT_EL_MJ_IT;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_OTHER_MJ)
+            {
+                start = CommonConstants.AT_EL_MJ_IT + 1;
+                end = CommonConstants.AT_EL_MJ_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_TOEIC)
+            {
+                start = CommonConstants.AT_EL_CERT_TOEIC_START;
+                end = CommonConstants.AT_EL_CERT_TOEIC_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_TOEFL)
+            {
+                start = CommonConstants.AT_EL_CERT_TOEFL_START;
+                end = CommonConstants.AT_EL_CERT_TOEFL_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_IELTS)
+            {
+                start = CommonConstants.AT_EL_CERT_IELTS_START;
+                end = CommonConstants.AT_EL_CERT_IELTS_END;
+            }
+            else if (articleSCO.Classes == CommonConstants.PARAM_EL_ABC)
+            {
+                start = CommonConstants.AT_EL_CERT_ABC_START;
+                end = CommonConstants.AT_EL_CERT_ABC_END;
+            }
+            if (start > 0 && end > 0 && end >= start)
+            {
+                IEnumerable<tblEnglish> lst1 = (from p in DB.tblEnglishes
+                                                where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                      && p.State != CommonConstants.STATE_UNCHECK
+                                                      && p.StickyFlg == true
+                                                      && p.Class >= start && p.Class <= end
+                                                orderby p.Posted descending
+                                                select p).Take(numberRecord);
+                return lst1;
+            }
+            if (articleSCO.Classes != CommonConstants.ALL)
+            {
+                IEnumerable<tblEnglish> lst2 = (from p in DB.tblEnglishes
+                                                where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                      && p.State != CommonConstants.STATE_UNCHECK
+                                                      && p.StickyFlg == true
+                                                      && p.Class == BaseServices.getValueClassByCode(articleSCO.Classes)
+                                                orderby p.Posted descending
+                                                select p).Take(numberRecord);
+                return lst2;
+            }
+            IEnumerable<tblEnglish> lst3 = (from p in DB.tblEnglishes
+                                            where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                  && p.State != CommonConstants.STATE_UNCHECK
+                                                  && p.StickyFlg == true
+                                            orderby p.Posted descending
+                                            select p).Take(numberRecord);
+            return lst3;
+
+        }
+
+        public IEnumerable<tblEnglish> searchArticles(ArticleSCO articleSCO, int numberRecord)
+        {
+            IEnumerable<tblEnglish> lst1 = searchArticleByClassAndTime(articleSCO, numberRecord);
+
+            IEnumerable<tblEnglish> lst2 = searchStickyArticleByClassAndTime(articleSCO, numberRecord);
+
+            if(lst2 != null)
+            {
+                if( lst2.Count() > 0)
+                {
+                    lst2.ToList().AddRange(lst1);
+                    lst1 = lst2;
+                }
+            }
+            return lst1;
+        }
         /// <summary>
         /// get latest sticky article by posted date
         /// </summary>
@@ -692,6 +911,7 @@ namespace ltktDAO
                                            where p.Class == _class && p.StickyFlg == true
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
+            
             return lst;
         }
 

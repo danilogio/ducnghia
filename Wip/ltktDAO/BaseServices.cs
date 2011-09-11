@@ -185,8 +185,26 @@ namespace ltktDAO
             }
             return msg;
         }
-        
-        public static string getNameByCode(string code)
+        public static int getValueClassByCode(string code)
+        {
+            switch (code)
+            {
+                case CommonConstants.AT_EL_CLASS_10_CODE:
+                    {
+                        return CommonConstants.AT_EL_CLASS_10;
+                    }
+                case CommonConstants.AT_EL_CLASS_11_CODE:
+                    {
+                        return CommonConstants.AT_EL_CLASS_11;
+                    }
+                case CommonConstants.AT_EL_CLASS_12_CODE:
+                    {
+                        return CommonConstants.AT_EL_CLASS_12;
+                    }
+            }
+            return -1;
+        }
+        public static string getNameSubjectByCode(string code)
         {
             if(isNullOrBlank(code))
             {

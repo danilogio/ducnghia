@@ -475,54 +475,110 @@ namespace ltktDAO
         /// Certificate English end
         /// </summary>
         public const int AT_EL_CERT_END = 69;
+        public const int AT_EL_CERT_TOEIC_START = 40;
+        public const int AT_EL_CERT_TOEIC_END = 49;
+        public const int AT_EL_CERT_TOEFL_START = 30;
+        public const int AT_EL_CERT_TOEFL_END = 39;
+        public const int AT_EL_CERT_IELTS_START = 50;
+        public const int AT_EL_CERT_IELTS_END = 59;
+        public const int AT_EL_CERT_ABC_START = 60;
+        public const int AT_EL_CERT_ABC_END = 69;
         /// <summary>
         /// Anh văn lớp 1
         /// </summary>
         public const int AT_EL_CLASS_1 = 1;
         /// <summary>
+        /// Anh văn lớp 1
+        /// </summary>
+        public const string AT_EL_CLASS_1_CODE = "1";
+        /// <summary>
         /// Anh văn lớp 2
         /// </summary>
         public const int AT_EL_CLASS_2 = 2;
+        /// <summary>
+        /// Anh văn lớp 2
+        /// </summary>
+        public const string AT_EL_CLASS_2_CODE = "2";
         /// <summary>
         /// Anh văn lớp 3
         /// </summary>
         public const int AT_EL_CLASS_3 = 3;
         /// <summary>
+        /// Anh văn lớp 3
+        /// </summary>
+        public const string AT_EL_CLASS_3_CODE = "3";
+        /// <summary>
         /// Anh văn lớp 4
         /// </summary>
         public const int AT_EL_CLASS_4 = 4;
+        /// <summary>
+        /// Anh văn lớp 4
+        /// </summary>
+        public const string AT_EL_CLASS_4_CODE = "4";
         /// <summary>
         /// Anh văn lớp 5
         /// </summary>
         public const int AT_EL_CLASS_5 = 5;
         /// <summary>
+        /// Anh văn lớp 5
+        /// </summary>
+        public const string AT_EL_CLASS_5_CODE = "5";
+        /// <summary>
         /// Anh văn lớp 6
         /// </summary>
         public const int AT_EL_CLASS_6 = 6;
+        /// <summary>
+        /// Anh văn lớp 6
+        /// </summary>
+        public const string AT_EL_CLASS_6_CODE = "6";
         /// <summary>
         /// Anh văn lớp 7
         /// </summary>
         public const int AT_EL_CLASS_7 = 7;
         /// <summary>
+        /// Anh văn lớp 7
+        /// </summary>
+        public const string AT_EL_CLASS_7_CODE = "7";
+        /// <summary>
         /// Anh văn lớp 8
         /// </summary>
         public const int AT_EL_CLASS_8 = 8;
+        /// <summary>
+        /// anh văn lớp 8
+        /// </summary>
+        public const string AT_EL_CLASS_8_CODE = "8";
         /// <summary>
         /// Anh văn lớp 9
         /// </summary>
         public const int AT_EL_CLASS_9 = 9;
         /// <summary>
+        /// Anh văn lớp 9
+        /// </summary>
+        public const string AT_EL_CLASS_9_CODE = "9";
+        /// <summary>
         /// Anh văn lớp 10
         /// </summary>
         public const int AT_EL_CLASS_10 = 10;
+        /// <summary>
+        /// Anh văn lớp 10
+        /// </summary>
+        public const string AT_EL_CLASS_10_CODE = "10";
         /// <summary>
         /// Anh văn lớp 11
         /// </summary>
         public const int AT_EL_CLASS_11 = 11;
         /// <summary>
+        /// Anh văn 11
+        /// </summary>
+        public const string AT_EL_CLASS_11_CODE = "11";
+        /// <summary>
         /// Anh văn lớp 12
         /// </summary>
         public const int AT_EL_CLASS_12 = 12;
+        /// <summary>
+        /// Anh văn 12
+        /// </summary>
+        public const string AT_EL_CLASS_12_CODE = "12";
         /// <summary>
         /// CN Toán
         /// </summary>
@@ -598,7 +654,7 @@ namespace ltktDAO
         /// <summary>
         /// TOEFL
         /// </summary>
-        public const int AT_EL_TOEFL = 40;
+        public const int AT_EL_TOEFL = 30;
         /// <summary>
         /// IELTS
         /// </summary>
@@ -1188,17 +1244,62 @@ namespace ltktDAO
             /// </summary>
             public const string PARAM_EL_COMMON = "com";
             /// <summary>
+            /// THPT
+            /// </summary>
+            public const string PARAM_EL_COMMON_NAME = "THPT";
+            /// <summary>
             /// Chuyên ngành
             /// </summary>
             public const string PARAM_EL_MAJOR = "maj";
+            /// <summary>
+            /// CN
+            /// </summary>
+            public const string PARAM_EL_MAJOR_NAME = "CN";
             /// <summary>
             /// Chứng chỉ
             /// </summary>
             public const string PARAM_EL_CERT = "cert";
             /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_1_TO_9 = "1-9";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_MATH_ECO = "math-eco";
+            /// <summary>
+            /// Chemical - Biography - Material
+            /// </summary>
+            public const string PARAM_EL_CHEM_BIO_MAT = "chem-bio-mat";
+            /// <summary>
+            /// Physical - Telecom - IT
+            /// </summary>
+            public const string PARAM_EL_PHY_TELE_IT = "phy-tele-it";
+            /// <summary>
+            /// other major
+            /// </summary>
+            public const string PARAM_EL_OTHER_MJ = "other-mj";
+            /// <summary>
+            /// TOEFL
+            /// </summary>
+            public const string PARAM_EL_TOEFL = "toefl";
+            /// <summary>
+            /// TOEIC
+            /// </summary>
+            public const string PARAM_EL_TOEIC = "toeic";
+            /// <summary>
+            /// IELTS
+            /// </summary>
+            public const string PARAM_EL_IELTS = "ielts";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_ABC = "abc";
+            /// <summary>
             /// THVP
             /// </summary>
             public const string PARAM_IT_OFFICE = "off";
+            
             /// <summary>
             /// Thủ thuật căn bản
             /// </summary>
