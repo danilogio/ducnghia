@@ -11,7 +11,11 @@ namespace ltkt
 {
     public partial class English : System.Web.UI.Page
     {
+        ltktDAO.English englishDAO = new ltktDAO.English();
+        EventLog log = new EventLog();
+        BaseServices service = new BaseServices();
         ltktDAO.Control control = new ltktDAO.Control();
+        private int numberArtOnPage = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,41 +23,78 @@ namespace ltkt
                            + CommonConstants.SPACE + CommonConstants.HLINE
                            + CommonConstants.SPACE
                            + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-
-            if (Request.QueryString["section"] != null)
+            numberArtOnPage = control.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_UNI);
+            if (numberArtOnPage < 1)
             {
-                string section = "";
-                section = Request.QueryString["section"];
+                numberArtOnPage = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
+            }
+            pagerCons.PageSize = numberArtOnPage;
 
-                switch (section)
+            ArticleSCO articleSCO = new ArticleSCO();
+            try
+            {
+                articleSCO.Classes = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_CLASS]);
+                articleSCO.Time = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_TIME]);
+
+                Session[CommonConstants.SES_ARTICLE_SCO] = articleSCO;
+                lblTitle.Text = CommonConstants.SEC_ENGLISH_NAME;
+                if (!IsPostBack)
                 {
-                    case "lecture":
+                    if (BaseServices.isNullOrBlank(articleSCO.Classes))
+                    {
+                        articleSCO.Classes = CommonConstants.ALL;
+                    }
+                    if (BaseServices.isNullOrBlank(articleSCO.Time))
+                    {
+                        articleSCO.Time = CommonConstants.NOW;
+                    }
+                    if (!BaseServices.isNullOrBlank(articleSCO.Classes) && !BaseServices.isNullOrBlank(articleSCO.Time))
+                    {
+                        string subject = BaseServices.getNameByCode(articleSCO.Classes);
+                        if (subject != CommonConstants.ALL)
                         {
-                            liTitle.Text = "Anh văn - Bài giảng";
-                            break;
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += CommonConstants.BAR;
+                            lblTitle.Text += CommonConstants.SPACE;
+                            lblTitle.Text += subject;
                         }
-                    case "exercise":
-                        {
-                            liTitle.Text = "Anh văn - Bài tập";
-                            break;
-                        }
-                    case "subject":
-                        {
-                            liTitle.Text = "Anh văn - Đề thi";
-                            break;
-                        }
-                    default:
-                        {
-                            Session["Error"] = "Đường dẫn trang web không hợp lệ, xin vui lòng kiểm tra lại!";
-                            Response.Redirect("Error.aspx");
-                            break;
-                        }
+                        //IEnumerable<tblEnglish> lst = englishDAO.
+                        //productList.DataSource = lst;
+                        //productList.DataBind();
+
+                        //lblOlderLinks.Text = getOlderLinks(articleSCO);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Redirect("English.aspx?section=lecture");
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
+
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
             }
+            
         }
+    
+        protected void DataPagerArticles_PreRender(object sender, EventArgs e)
+        {
+            
+        }
+        private string getOlderLinks(ArticleSCO articleSCO)
+        {
+            articleSCO.Section = CommonConstants.SEC_ENGLISH_CODE;
+
+            string links = service.createOlderLink(CommonConstants.TEMP_ENGLISH_LINK, articleSCO, 10);
+
+            return links;
+        }
+
     }
 }

@@ -5,23 +5,62 @@
     <title><asp:Literal ID="liTitleHeader" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="English" ContentPlaceHolderID="cphContent" Runat="Server">
-    <div id="main" class="block_text">
+    <div id="content" class="block_text">
         <h2>
-            <asp:Literal ID="liTitle" runat="server"></asp:Literal>
-        </h2>
+            <asp:Label ID="lblTitle" runat="server" Text="Anh văn"></asp:Label></h2>
         <hr />
         <br />
-        
-        <asp:Panel ID="messagePanel" runat="server">
-            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
-        </asp:Panel>
-        <asp:Panel ID="lessonPanel" runat="server">
-            
-        </asp:Panel>
-        <asp:Panel ID="exercisePanel" runat="server">
-        </asp:Panel>
-        <asp:Panel ID="examPanel" runat="server">
-        </asp:Panel>
+        <div>
+            <asp:ListView ID="productList" runat="server">
+                <LayoutTemplate>
+                    <ul class="articleList">
+                        <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                    </ul>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <li>
+                        <div id='<%#Eval("ID")%>' onmouseover="hover(<%#Eval("ID")%>)" class="temp" >
+                            <center><img src="<%#Eval("Thumbnail")%>" alt="" width="130px" height="120px" style="margin-top:10px;" /></center>
+                            <br />
+                            <br />
+                            <a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
+                                <center>
+                                    <%#Eval("Title")%></center>
+                            </a>
+                            <div class="block_details_text">
+                                <center>
+                                    <%#Eval("Year")%></center>
+                            </div>
+                        </div>
+                    </li>
+                </ItemTemplate>
+                <EmptyDataTemplate>
+                    <div>
+                        Hiện tại chưa có tài liệu nào
+                    </div>
+                </EmptyDataTemplate>
+            </asp:ListView>
+        </div>
+        <div class="datapager">
+            <br />
+            <br />
+            <hr />
+            <asp:DataPager ID="pagerCons" OnPreRender="DataPagerArticles_PreRender" PagedControlID="productList"
+                runat="server">
+                <Fields>
+                    <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False"
+                        PreviousPageText="<" FirstPageText="<<" />
+                    <asp:NumericPagerField />
+                    <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False"
+                        LastPageText=">>" NextPageText=">" />
+                </Fields>
+            </asp:DataPager>
+        </div>
+        <hr />
+        <br />
+        <h4>
+            Các đề liên quan</h4>
+        <asp:Label ID="lblOlderLinks" runat="server"></asp:Label>
     </div>
 </asp:Content>
 
