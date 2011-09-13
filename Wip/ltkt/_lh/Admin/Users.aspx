@@ -235,13 +235,18 @@
                     </asp:DropDownList>
                 </p>
                 <p>
+                    <span>Mật khẩu:</span>
+                    <asp:Button ID="btnResetPassword" Text="Đổi mật khẩu" runat="server" 
+                        CssClass="formbutton" Enabled="false" onclick="btnResetPassword_Click"/>
+                </p>
+                <p>
                     <span>Email:</span>
                     <asp:TextBox ID="txtEmail" runat="server" ReadOnly="true"></asp:TextBox>
                 </p>
-                <p>
+                <%--<p>
                     <span>Vai trò (role):</span>
                     <asp:TextBox ID="txtRole" runat="server" ReadOnly="true"></asp:TextBox>
-                </p>
+                </p>--%>
                 <p>
                     <span>Quyền (permission):</span>
                 </p>

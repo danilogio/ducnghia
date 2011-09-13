@@ -25,7 +25,7 @@ namespace ltkt.Admin
             tblUser user = (tblUser)Session[CommonConstants.SES_USER];
             if (user != null)
             {
-                if (userDAO.isAllow(user.Permission, CommonConstants.P_A_CONTROL)
+                if (userDAO.isAllow(user.Permission, CommonConstants.P_A_NEWS)
                     || userDAO.isAllow(user.Permission, CommonConstants.P_A_FULL_CONTROL))
                 {
                     ///DO WORK HERE ONLY//////////////////////////////

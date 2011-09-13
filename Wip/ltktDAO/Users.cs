@@ -510,9 +510,8 @@ namespace ltktDAO
         /// <param name="_username"></param>
         /// <param name="_displayName"></param>
         /// <param name="_email"></param>
-        /// <param name="_state"></param>
         /// <param name="_notes"></param>
-        /// <returns></returns>
+        /// <returns>true if success</returns>
         public bool updateUser(string _userAdmin,
             string _username, string _displayName, string _email, string _notes)
         {
@@ -526,6 +525,68 @@ namespace ltktDAO
                     user.DisplayName = _displayName;
                     user.Email = _email;
                     user.Note = _notes;
+
+                    id = user.ID;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, _userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                    Convert.ToString(user.ID),
+                                                                    CommonConstants.SQL_TABLE_USER));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE,
+                                                                    Convert.ToString(id),
+                                                                    CommonConstants.SQL_TABLE_USER));
+                log.writeLog(DBHelper.strPathLogFile, _userAdmin, e.Message);
+
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Update users
+        /// </summary>
+        /// <param name="_userAdmin"></param>
+        /// <param name="_username"></param>
+        /// <param name="changePassword"></param>
+        /// <param name="_newPassword"></param>
+        /// <param name="_displayName"></param>
+        /// <param name="_email"></param>
+        /// <param name="_state"></param>
+        /// <param name="_notes"></param>
+        /// <returns></returns>
+        public bool updateUser(string _userAdmin,
+            string _username, bool changePassword, string _newPassword, string _displayName, string _email, int _state, string _notes)
+        {
+            int id = 0;
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var user = DB.tblUsers.Single(u => u.Username == _username);
+
+                    user.DisplayName = _displayName;
+                    user.Email = _email;
+                    user.Note = _notes;
+                    user.State = _state;
+                    if (_state == CommonConstants.STATE_KIA_3D 
+                        || _state == CommonConstants.STATE_KIA_1W
+                        || _state == CommonConstants.STATE_KIA_2W
+                        || _state == CommonConstants.STATE_KIA_3W
+                        || _state == CommonConstants.STATE_KIA_1M)
+                    {
+                        user.KIADate = DateTime.Now;
+                    }
+
+                    if (changePassword)
+                        user.Password = _newPassword;
 
                     id = user.ID;
 
@@ -712,6 +773,7 @@ namespace ltktDAO
             string _password)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -735,10 +797,23 @@ namespace ltktDAO
                     DB.tblUsers.InsertOnSubmit(user);
                     DB.SubmitChanges();
                     ts.Complete();
+
+                    
+                    log.writeLog(DBHelper.strPathLogFile, CommonConstants.USER_GUEST,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                    _username,
+                                                                    CommonConstants.SQL_TABLE_USER));
                 }
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, CommonConstants.USER_GUEST,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_FAILED_TEMPLATE,
+                                                                    _username,
+                                                                    CommonConstants.SQL_TABLE_USER));
+
+                log.writeLog(DBHelper.strPathLogFile, CommonConstants.USER_GUEST, e.Message);
+
                 return false;
             }
 
@@ -785,10 +860,22 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
                     ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, CommonConstants.USER_GUEST,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                    _username,
+                                                                    CommonConstants.SQL_TABLE_USER));
                 }
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, CommonConstants.USER_GUEST,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_FAILED_TEMPLATE,
+                                                                    _username,
+                                                                    CommonConstants.SQL_TABLE_USER));
+
+                log.writeLog(DBHelper.strPathLogFile, CommonConstants.USER_GUEST, e.Message);
+
                 return false;
             }
 
@@ -1147,6 +1234,11 @@ namespace ltktDAO
                 case CommonConstants.ACT_ADMIN:
                     lst = (from record in DB.tblUsers
                            where record.Type == false
+                           && (record.State != CommonConstants.STATE_KIA_3D
+                            || record.State != CommonConstants.STATE_KIA_1W
+                            || record.State != CommonConstants.STATE_KIA_2W
+                            || record.State != CommonConstants.STATE_KIA_3W
+                            || record.State != CommonConstants.STATE_KIA_1M)
                            orderby record.ID descending
                            select record).Skip(start).Take(count);
                     break;
@@ -1165,6 +1257,20 @@ namespace ltktDAO
 
             return lst;
         }
+
+        //public bool isSuperAdmin(string username)
+        //{
+        //    IEnumerable<tblUser> lst = from r in DB.tblUsers
+        //                               where r.Username == username
+        //                               select r;
+
+        //    if (lst.Count() > 0)
+        //    {
+        //        tblUser user = lst.ElementAt(0);
+        //        string[] permissions = user.Permission.Split(CommonConstants.COMMA);
+
+        //    }
+        //}
 
         
         #endregion

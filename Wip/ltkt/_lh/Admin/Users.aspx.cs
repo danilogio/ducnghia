@@ -44,97 +44,16 @@ namespace ltkt.Admin
                         //gvUsers.DataBind();
                     }
 
-
-                    int page = 1;
-                    int id = 0;
-                    if (Request.QueryString[CommonConstants.REQ_TYPE] != null)
-                    {
-                        viewPanel.Visible = true;
-                        detailPanel.Visible = false;
-
-                        try
-                        {
-                            page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-
-                            switch (Request.QueryString[CommonConstants.REQ_TYPE])
-                            {
-                                case CommonConstants.ACT_NORMAL:
-                                    showUsers(CommonConstants.ACT_NORMAL, page);
-                                    break;
-                                case CommonConstants.ACT_KIA:
-                                    showUsers(CommonConstants.ACT_KIA, page);
-                                    break;
-                                case CommonConstants.ACT_ADMIN:
-                                    showUsers(CommonConstants.ACT_ADMIN, page);
-                                    break;
-                                default: break;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
-                            log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
-                            //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
-                            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
-                                           + CommonConstants.ADD_PARAMETER
-                                           + CommonConstants.REQ_TYPE
-                                           + CommonConstants.EQUAL
-                                           + CommonConstants.ACT_NORMAL
-                                           + CommonConstants.AND
-                                           + CommonConstants.REQ_PAGE
-                                           + CommonConstants.EQUAL + "1");
-                        }
-
-                    }
-                    else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
-                    {
-                        try
-                        {
-                            id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
-                            switch (Request.QueryString[CommonConstants.REQ_ACTION])
-                            {
-                                case CommonConstants.ACT_EDIT:
-                                case CommonConstants.ACT_VIEW:
-                                    {
-                                        showUserDetail(id, Request.QueryString[CommonConstants.REQ_ACTION]);
-                                    }
-                                    break;
-                                case CommonConstants.ACT_DELETE:
-                                    break;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
-                            log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
-                            //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
-                            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
-                                           + CommonConstants.ADD_PARAMETER
-                                           + CommonConstants.REQ_TYPE
-                                           + CommonConstants.EQUAL
-                                           + CommonConstants.ACT_NORMAL
-                                           + CommonConstants.AND
-                                           + CommonConstants.REQ_PAGE
-                                           + CommonConstants.EQUAL + "1");
-                        }
-                    }
-                    else
-                    {
-                        Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
-                                           + CommonConstants.ADD_PARAMETER
-                                           + CommonConstants.REQ_TYPE
-                                           + CommonConstants.EQUAL
-                                           + CommonConstants.ACT_NORMAL
-                                           + CommonConstants.AND
-                                           + CommonConstants.REQ_PAGE
-                                           + CommonConstants.EQUAL + "1");
-                    }
+                    pageLoad(sender, e, user);
 
 
                     //////////////////////////////////////////////////
                 }
                 else
+                {
                     Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
+                }
 
             }
             else
@@ -145,19 +64,89 @@ namespace ltkt.Admin
             }
         }
 
+        private void pageLoad(object sender, EventArgs e, tblUser user)
+        {
+            int page = 1;
+            int id = 0;
+            
+            try
+            {
+                if (Request.QueryString[CommonConstants.REQ_TYPE] != null)
+                {
+                    viewPanel.Visible = true;
+                    detailPanel.Visible = false;
+
+                    page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+
+                    switch (Request.QueryString[CommonConstants.REQ_TYPE])
+                    {
+                        case CommonConstants.ACT_NORMAL:
+                            showUsers(CommonConstants.ACT_NORMAL, page);
+                            break;
+                        case CommonConstants.ACT_KIA:
+                            showUsers(CommonConstants.ACT_KIA, page);
+                            break;
+                        case CommonConstants.ACT_ADMIN:
+                            showUsers(CommonConstants.ACT_ADMIN, page);
+                            break;
+                        default: break;
+                    }
+                }
+                else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
+                {
+                    id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    switch (Request.QueryString[CommonConstants.REQ_ACTION])
+                    {
+                        case CommonConstants.ACT_EDIT:
+                        case CommonConstants.ACT_VIEW:
+                            {
+                                showUserDetail(id, Request.QueryString[CommonConstants.REQ_ACTION]);
+                            }
+                            break;
+                        case CommonConstants.ACT_DELETE:
+                            break;
+                    }
+                }
+                else
+                {
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                                       + CommonConstants.ADD_PARAMETER
+                                       + CommonConstants.REQ_TYPE
+                                       + CommonConstants.EQUAL
+                                       + CommonConstants.ACT_NORMAL
+                                       + CommonConstants.AND
+                                       + CommonConstants.REQ_PAGE
+                                       + CommonConstants.EQUAL + "1");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
+                //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
+                               + CommonConstants.ADD_PARAMETER
+                               + CommonConstants.REQ_TYPE
+                               + CommonConstants.EQUAL
+                               + CommonConstants.ACT_NORMAL
+                               + CommonConstants.AND
+                               + CommonConstants.REQ_PAGE
+                               + CommonConstants.EQUAL + "1");
+            }
+        }
+
         private void showUserDetail(int id, string action)
         {
             tblUser user = userDAO.getUser(id);
             if (user != null && Session[CommonConstants.SES_EDIT_USER] == null)
             {
-
                 txtUsername.Text = user.Username.Trim();
                 txtDisplayName.Text = user.DisplayName.Trim();
                 ddlSex.SelectedIndex = (user.Sex == true ? 1 : 0);
                 txtEmail.Text = user.Email.Trim();
 
-                if (user.Role != null)
-                    txtRole.Text = user.Role.Trim();
+                //if (user.Role != null)
+                //    txtRole.Text = user.Role.Trim();
 
                 IList<tblPermission> lstPermits = userDAO.getPermissions(user.ID);
                 if (chxPermission.Items.Count == 0)
@@ -196,6 +185,7 @@ namespace ltkt.Admin
                                                          CommonConstants.P_A_FULL_CONTROL, false));
                 }
 
+                
                 for (int outer = 0; outer < lstPermits.Count; ++outer)
                 {
                     for (int inner = 0; inner < chxPermission.Items.Count; ++inner)
@@ -204,17 +194,11 @@ namespace ltkt.Admin
                         {
                             chxPermission.Items[inner].Selected = true;
                         }
+
+                        if (lstPermits [outer].Code.Trim() == CommonConstants.P_A_FULL_CONTROL)
+                            chxPermission.Items[inner].Selected = true;
                     }
                 }
-
-                //liPermission.Text = "<div><span>";
-
-                //for (int idx = 0; idx < lstPermits.Count; ++idx)
-                //{
-                    //    liPermission.Text += lstPermits[idx].Name;
-                    //    liPermission.Text += "<br />";
-                //}
-                //liPermission.Text += "</span></div><br />";
 
                 txtRegisterDate.Text = user.RegisterDate.ToString();
                 if (user.KIADate != null)
@@ -252,7 +236,8 @@ namespace ltkt.Admin
                             txtDisplayName.ReadOnly = true;
                             ddlSex.Enabled = false;
                             txtEmail.ReadOnly = true;
-                            txtRole.ReadOnly = true;
+                            //txtRole.ReadOnly = true;
+                            btnResetPassword.Enabled = false;
                             txtRegisterDate.ReadOnly = true;
                             txtKIADate.ReadOnly = true;
                             txtRegisterDate.CssClass = "";
@@ -265,16 +250,29 @@ namespace ltkt.Admin
                     case CommonConstants.ACT_EDIT:
                         {
                             txtDisplayName.ReadOnly = false;
-                            ddlSex.Enabled = true;
+                            //ddlSex.Enabled = true;
                             txtEmail.ReadOnly = false;
-                            txtRole.ReadOnly = false;
-                            txtRegisterDate.ReadOnly = false;
+                            //txtRole.ReadOnly = false;
+                            //txtRegisterDate.ReadOnly = false;
                             txtKIADate.ReadOnly = false;
-                            txtRegisterDate.CssClass = "calendar";
+                            //txtRegisterDate.CssClass = "calendar";
                             txtKIADate.CssClass = "calendar";
-                            ddlState.Enabled = true;
+                            //ddlState.Enabled = true;
                             txtNumberOfArticles.ReadOnly = false;
                             txtNote.ReadOnly = false;
+
+                            tblUser userAdmin = (tblUser)Session[CommonConstants.SES_USER];
+                            if (userDAO.isAllow(userAdmin.Permission, CommonConstants.P_A_FULL_CONTROL))
+                            {
+                                btnResetPassword.Enabled = true;
+                                ddlState.Enabled = true;
+                            }
+                            else if (userDAO.isAllow(user.Permission, CommonConstants.P_N_GENERAL))
+                            {
+                                btnResetPassword.Enabled = true;
+                                ddlState.Enabled = true;
+                            }
+
                             break;
                         }
                 }
@@ -518,8 +516,34 @@ namespace ltkt.Admin
 
             try
             {
-                //
+                int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                tblUser userAdmin = (tblUser)Session[CommonConstants.SES_USER];
+                if (userAdmin != null)
+                {
+                    tblUser userEdit = userDAO.getUser(id);//always exist
 
+                    string displayName = txtDisplayName.Text;
+                    string email = txtEmail.Text;
+                    string note = txtNote.Text;
+
+                    if (userDAO.isAllow(userAdmin.Permission, CommonConstants.P_A_FULL_CONTROL)
+                        || userDAO.isAllow (userEdit.Permission,CommonConstants.P_N_GENERAL))
+                    {
+                        
+                    }
+                    else
+                    {
+                        if (userDAO.updateUser(userAdmin.Username, userEdit.Username, displayName, email, note))
+                        {
+                            btnCancel_Click(sender, e);
+                        }
+                    }
+                }
+                else
+                {
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+                }
 
                 Session[CommonConstants.SES_EDIT_USER] = null;
             }
@@ -542,6 +566,7 @@ namespace ltkt.Admin
                               + CommonConstants.REQ_PAGE + "1");
 
         }
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Session[CommonConstants.SES_EDIT_USER] = null;
@@ -558,5 +583,10 @@ namespace ltkt.Admin
                                + CommonConstants.REQ_PAGE
                                + CommonConstants.EQUAL + "1");
         }
-    }
+        
+        protected void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            
+        }
+}
 }

@@ -95,6 +95,16 @@ namespace ltktDAO
         public const string SPACE = " ";
 
         /// <summary>
+        /// admin
+        /// </summary>
+        public const string ADMIN = "Admin";
+
+        /// <summary>
+        /// splash
+        /// </summary>
+        public const string SPLASH = "/";
+
+        /// <summary>
         /// bar string
         /// </summary>
         public const string BAR = "-";
@@ -1078,7 +1088,8 @@ namespace ltktDAO
         /// <summary>
         /// Admin general page
         /// </summary>
-        public const string PAGE_ADMIN_GENERAL = "./Admin/General.aspx";
+        //public const string PAGE_ADMIN_GENERAL = "./Admin/General.aspx";
+        public const string PAGE_ADMIN_GENERAL = "General.aspx";
         /// <summary>
         /// Admin login page
         /// </summary>

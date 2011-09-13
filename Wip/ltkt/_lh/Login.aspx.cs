@@ -44,7 +44,7 @@ namespace ltkt.Admin
                     {
                         Session[CommonConstants.SES_USER] = user;
                         statisticDAO.addLatestLoginUser(user.Username);
-                        Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
+                        Response.Redirect(CommonConstants.ADMIN + CommonConstants.SPLASH + CommonConstants.PAGE_ADMIN_GENERAL);
                     }
                     else
                     {
