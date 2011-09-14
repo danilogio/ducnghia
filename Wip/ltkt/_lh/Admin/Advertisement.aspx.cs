@@ -16,80 +16,120 @@ namespace ltkt.Admin
         ltktDAO.Ads adsDAO = new ltktDAO.Ads();
         ltktDAO.Control control = new ltktDAO.Control();
         BaseServices bs = new BaseServices();
+        ltktDAO.Users userDAO = new ltktDAO.Users();
 
         public const int NoOfAdsPerPage = 10;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AdminMaster pageAdmin = (AdminMaster)Master;
-            pageAdmin.updateHeader(CommonConstants.PAGE_ADMIN_ADS_NAME);
-
-            liTitle.Text = CommonConstants.PAGE_ADMIN_ADS_NAME
-                           + CommonConstants.SPACE + CommonConstants.HLINE
-                           + CommonConstants.SPACE
-                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-
-            int page = 1;
-
-            if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            if (user != null)
             {
-                viewPanel.Visible = true;
-                detailsPanel.Visible = false;
-                messagePanel.Visible = false;
-
-                page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                showAds(page);
-            }
-            else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
-            {
-                string action = Request.QueryString[CommonConstants.REQ_ACTION];
-                int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
-
-                if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
+                if (userDAO.isAllow(user.Permission, CommonConstants.P_A_ADS)
+                    || userDAO.isAllow(user.Permission, CommonConstants.P_A_FULL_CONTROL))
                 {
-                    viewPanel.Visible = false;
-                    detailsPanel.Visible = true;
+                    AdminMaster pageAdmin = (AdminMaster)Master;
+                    pageAdmin.updateHeader(CommonConstants.PAGE_ADMIN_ADS_NAME);
+
+                    liTitle.Text = CommonConstants.PAGE_ADMIN_ADS_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+
+                    pageLoad(sender, e, user);
+
+                }
+                else
+                {
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
+                }
+            }
+        }
+
+        private void pageLoad(object sender, EventArgs e, tblUser user)
+        {
+            try
+            {
+                int page = 1;
+
+                if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
+                {
+                    viewPanel.Visible = true;
+                    detailsPanel.Visible = false;
                     messagePanel.Visible = false;
 
-                    if (ddlState.Items.Count == 0)
-                    {
-                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
-                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
-                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
-                        ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
-                    }
-
-                    showAdsDetails(_id, action);
+                    page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+                    showAds(page);
                 }
-                else if (action == CommonConstants.ACT_DELETE)
+                else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
                 {
-                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    Boolean completeDelete = adsDAO.deleteAds(_id, user.Username);
+                    string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                    int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
-                    if (completeDelete)
+                    if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
                     {
-                        Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
-                        
-                        Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
-                                          + CommonConstants.ADD_PARAMETER
-                                          + CommonConstants.REQ_PAGE
-                                          + CommonConstants.EQUAL
-                                          + "1");
+                        viewPanel.Visible = false;
+                        detailsPanel.Visible = true;
+                        messagePanel.Visible = false;
+
+                        if (ddlState.Items.Count == 0)
+                        {
+                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
+                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
+                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+                        }
+
+                        showAdsDetails(_id, action);
                     }
-                    else
+                    else if (action == CommonConstants.ACT_DELETE)
                     {
-                        Response.Write(CommonConstants.ALERT_DELETE_FAIL);
+                        //tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                        //Boolean completeDelete = adsDAO.deleteAds(_id, user.Username);
+
+                        //if (completeDelete)
+                        //{
+                        //Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
+
+                        //Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                        //                  + CommonConstants.ADD_PARAMETER
+                        //                  + CommonConstants.REQ_PAGE
+                        //                  + CommonConstants.EQUAL
+                        //                  + "1");
+                        //}
+                        //else
+                        //{
+                        //    Response.Write(CommonConstants.ALERT_DELETE_FAIL);
+                        //}
+
+                        if (adsDAO.deleteAds(_id, user.Username))
+                        {
+                            Page_Load(sender, e);
+                        }
                     }
+                }
+                else
+                {
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL
+                                              + "1");
                 }
             }
-            else
+            catch (Exception ex)
             {
+                log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
+                //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
-                                          + CommonConstants.ADD_PARAMETER
-                                          + CommonConstants.REQ_PAGE
-                                          + CommonConstants.EQUAL
-                                          + "1");
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL
+                                              + "1");
             }
         }
 
@@ -110,7 +150,7 @@ namespace ltkt.Admin
                 ddlState.SelectedIndex = Ads.State;
 
                 string filename = Server.MapPath("~") + "\\" + Ads.Location.Trim();
-                if (File.Exists (filename))
+                if (File.Exists(filename))
                 {
                     liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + Ads.Location.Trim() + "')\" />";
                     //liAds.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
@@ -327,7 +367,7 @@ namespace ltkt.Admin
 
                         fileAds.SaveAs(filename);
                     }
-                    
+
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                     bool isOK = adsDAO.updateAds(Ads.ID, user.Username,
                                                  _company,
@@ -349,7 +389,7 @@ namespace ltkt.Admin
                     {
                         Response.Write(CommonConstants.ALERT_UPDATE_FAIL);
                     }
-                    
+
                     Session[CommonConstants.SES_EDIT_ADS] = null;
                 }
             }
@@ -377,7 +417,7 @@ namespace ltkt.Admin
                                CommonConstants.ADD_PARAMETER +
                                CommonConstants.REQ_PAGE + "=1");
 
-            
+
         }
     }
 }

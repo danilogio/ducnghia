@@ -363,7 +363,7 @@ namespace ltkt.Admin
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
                 stateCell.Style["width"] = "80px";
-                stateCell.Text = user.State.ToString();
+                stateCell.Text = userDAO.getState(user.State);
 
                 TableCell actionCell = new TableCell();
                 actionCell.CssClass = "table-cell";
@@ -636,5 +636,30 @@ namespace ltkt.Admin
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
-    }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            //resultPanel.Visible = true;
+            string strKeyword = txtSearch.Text;
+            IList<tblUser> lst = userDAO.search(strKeyword);
+            
+            lblResult.Text = "<ul>";
+            for (int idx = 0; idx < lst.Count(); ++idx)
+            {
+                string temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
+                                                                      CommonConstants.PAGE_ADMIN_USERS,
+                                                                      CommonConstants.ACT_VIEW,
+                                                                      Convert.ToString(lst[idx].ID),
+                                                                      lst[idx].Username);
+                lblResult.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG,
+                                                                        temp);
+            }
+
+            lblResult.Text += "</ul>";
+
+            if (lblResult.Text == "<ul></ul>")
+            {
+                lblResult.Text = CommonConstants.MSG_SEARCH_NOT_FOUND;
+            }
+        }
+}
 }

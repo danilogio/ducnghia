@@ -160,6 +160,11 @@ ul, ol
 {
 	margin: 0 0 35px 35px;
 }
+#searchUserResult ul, ol
+{
+	padding-left: 200px;
+	margin: 0 0 35px 35px;
+}
 
 li
 {
@@ -408,7 +413,7 @@ li ol, li ul
 
 #divUsers.block_text
 {
-	height: 325px;
+	height: 575px;
 }
 
 hr
@@ -480,6 +485,13 @@ div.block_details_text
 	width: 500px;
 	text-align: left;
 }
+
+.form_settings #searchUserResult span
+{
+	
+	float:none;
+}
+
 .form_settings span
 {
 	float: left;

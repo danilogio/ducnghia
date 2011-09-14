@@ -110,6 +110,19 @@
                     Danh sách thành viên
                 </h4>
                 <hr />--%>
+            <div class="form_settings">
+                <p style="padding-left: 200px">
+                    <span>Nhập tên tài khoản:</span>
+                    <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                    <asp:Button ID="btnSearch" runat="server" Text="Tìm" CssClass="formbutton" OnClick="btnSearch_Click" />
+                </p>
+                <%--<asp:Panel ID="resultPanel" runat="server" Visible="true">--%>
+                <div id="searchUserResult">
+                    <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                </div>
+                <%--</asp:Panel>--%>
+                <hr />
+            </div>
             <br />
             <div>
                 <div id="leftUsers" style="float: left; width: 25%;">
@@ -236,8 +249,8 @@
                 </p>
                 <p>
                     <span>Mật khẩu:</span>
-                    <asp:Button ID="btnResetPassword" Text="Đổi mật khẩu" runat="server" 
-                        CssClass="formbutton" Enabled="false" onclick="btnResetPassword_Click"/>
+                    <asp:Button ID="btnResetPassword" Text="Đổi mật khẩu" runat="server" CssClass="formbutton"
+                        Enabled="false" OnClick="btnResetPassword_Click" />
                 </p>
                 <p>
                     <span>Email:</span>

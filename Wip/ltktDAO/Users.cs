@@ -1264,6 +1264,56 @@ namespace ltktDAO
         //    }
         //}
 
+        public string getState(int state)
+        {
+            string strState = CommonConstants.BLANK;
+            switch (state)
+            {
+                case CommonConstants.STATE_NON_ACTIVE:
+                    strState = CommonConstants.STATE_NON_ACTIVE_NAME;
+                    break;
+                case CommonConstants.STATE_ACTIVE:
+                    strState = CommonConstants.STATE_ACTIVE_NAME;
+                    break;
+                case CommonConstants.STATE_KIA_3D:
+                    strState = CommonConstants.STATE_KIA_3D_NAME;
+                    break;
+                case CommonConstants.STATE_KIA_1W:
+                    strState = CommonConstants.STATE_KIA_1W_NAME;
+                    break;
+                case CommonConstants.STATE_KIA_2W:
+                    strState = CommonConstants.STATE_KIA_2W_NAME;
+                    break;
+                case CommonConstants.STATE_KIA_3W:
+                    strState = CommonConstants.STATE_KIA_3W_NAME;
+                    break;
+                case CommonConstants.STATE_KIA_1M:
+                    strState = CommonConstants.STATE_KIA_1M_NAME;
+                    break;
+                case CommonConstants.STATE_WARNING:
+                    strState = CommonConstants.STATE_WARNING_NAME;
+                    break;
+                default:
+                    break;
+            }
+
+            return strState;
+        }
+
+        public IList<tblUser> search(string _keyword)
+        {
+            IList<tblUser> results = new List<tblUser>();
+            IEnumerable<tblUser> lst = from r in DB.tblUsers
+                                       where r.Username.Contains(_keyword)
+                                       select r;
+
+            if (lst.Count() > 0)
+            {
+                results = lst.ToList();
+            }
+
+            return results;
+        }
         
         #endregion
 
