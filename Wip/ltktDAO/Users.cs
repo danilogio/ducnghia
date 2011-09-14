@@ -555,17 +555,15 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_userAdmin"></param>
         /// <param name="_username"></param>
-        /// <param name="changePassword"></param>
-        /// <param name="_newPassword"></param>
         /// <param name="_displayName"></param>
         /// <param name="_email"></param>
         /// <param name="_state"></param>
+        /// <param name="KIADate"></param>
         /// <param name="_notes"></param>
         /// <returns></returns>
         public bool updateUser(string _userAdmin,
-            string _username, bool changePassword, string _newPassword, string _displayName, string _email, int _state, string _notes)
+            string _username, string _displayName, string _email, int _state, DateTime KIADate, string _notes)
         {
-            int id = 0;
             try
             {
                 using (TransactionScope ts = new TransactionScope())
@@ -576,26 +574,21 @@ namespace ltktDAO
                     user.Email = _email;
                     user.Note = _notes;
                     user.State = _state;
-                    if (_state == CommonConstants.STATE_KIA_3D 
+                    if (_state == CommonConstants.STATE_KIA_3D
                         || _state == CommonConstants.STATE_KIA_1W
                         || _state == CommonConstants.STATE_KIA_2W
                         || _state == CommonConstants.STATE_KIA_3W
                         || _state == CommonConstants.STATE_KIA_1M)
                     {
-                        user.KIADate = DateTime.Now;
+                        user.KIADate = KIADate;
                     }
-
-                    if (changePassword)
-                        user.Password = _newPassword;
-
-                    id = user.ID;
 
                     DB.SubmitChanges();
                     ts.Complete();
 
                     log.writeLog(DBHelper.strPathLogFile, _userAdmin,
                                   BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
-                                                                    Convert.ToString(user.ID),
+                                                                    _username,
                                                                     CommonConstants.SQL_TABLE_USER));
                 }
             }
@@ -603,7 +596,7 @@ namespace ltktDAO
             {
                 log.writeLog(DBHelper.strPathLogFile, _userAdmin,
                                   BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE,
-                                                                    Convert.ToString(id),
+                                                                    _username,
                                                                     CommonConstants.SQL_TABLE_USER));
                 log.writeLog(DBHelper.strPathLogFile, _userAdmin, e.Message);
 
@@ -611,7 +604,6 @@ namespace ltktDAO
             }
             return true;
         }
-                   
 
         /// <summary>
         /// Mã hóa mật khẩu
@@ -911,7 +903,7 @@ namespace ltktDAO
                     message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
                     message.From = emailConf.Username;
                     message.To = _email;
-                    message.Subject = "Mật khẩu mới tại trang web" + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                    message.Subject = "Mật khẩu mới tại " + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
                     message.BodyFormat = MailFormat.Text;
                     message.BodyEncoding = Encoding.UTF8;
                     message.Body = "Tên đăng nhập: " + _username + "<br />" + "Mật khẩu: " + _newPassword;
@@ -1275,8 +1267,5 @@ namespace ltktDAO
         
         #endregion
 
-
-
-        
     }
 }

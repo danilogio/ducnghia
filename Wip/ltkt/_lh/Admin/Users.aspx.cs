@@ -68,7 +68,7 @@ namespace ltkt.Admin
         {
             int page = 1;
             int id = 0;
-            
+
             try
             {
                 if (Request.QueryString[CommonConstants.REQ_TYPE] != null)
@@ -185,7 +185,7 @@ namespace ltkt.Admin
                                                          CommonConstants.P_A_FULL_CONTROL, false));
                 }
 
-                
+
                 for (int outer = 0; outer < lstPermits.Count; ++outer)
                 {
                     for (int inner = 0; inner < chxPermission.Items.Count; ++inner)
@@ -195,7 +195,7 @@ namespace ltkt.Admin
                             chxPermission.Items[inner].Selected = true;
                         }
 
-                        if (lstPermits [outer].Code.Trim() == CommonConstants.P_A_FULL_CONTROL)
+                        if (lstPermits[outer].Code.Trim() == CommonConstants.P_A_FULL_CONTROL)
                             chxPermission.Items[inner].Selected = true;
                     }
                 }
@@ -278,7 +278,7 @@ namespace ltkt.Admin
                 }
 
             }
-            else
+            else if (user == null)
             {
                 messagePanel.Visible = true;
                 detailPanel.Visible = false;
@@ -286,7 +286,11 @@ namespace ltkt.Admin
                 liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
             }
 
-
+            if (Request.QueryString[CommonConstants.REQ_ACTION] == CommonConstants.ACT_EDIT)
+            {
+                tblUser userEdit = userDAO.getUser(id);
+                Session[CommonConstants.SES_EDIT_USER] = userEdit;
+            }
         }
 
         private void showUsers(string type, int page)
@@ -502,6 +506,9 @@ namespace ltkt.Admin
             {
                 //txtFromDate.CssClass = "calendar";
                 //txtEndDate.CssClass = "calendar";
+                //int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                //tblUser userEdit = userDAO.getUser(id);
+                //Session[CommonConstants.SES_EDIT_USER] = userEdit;
 
                 Response.Redirect(CommonConstants.PAGE_ADMIN_USERS
                                    + CommonConstants.ADD_PARAMETER
@@ -529,14 +536,26 @@ namespace ltkt.Admin
                     if (userDAO.isAllow(userAdmin.Permission, CommonConstants.P_A_FULL_CONTROL)
                         || userDAO.isAllow (userEdit.Permission,CommonConstants.P_N_GENERAL))
                     {
+                        int state = Convert.ToInt32(ddlState.SelectedValue);
+                        DateTime KIADate = DateTime.Now;
+                        if ((state > CommonConstants.STATE_KIA_3D 
+                            && state < CommonConstants.STATE_KIA_1M)
+                            && txtKIADate.Text != CommonConstants.BLANK)
+                        {
+                            KIADate = DateTime.Parse (txtKIADate.Text);
+                        }
+
+                        userDAO.updateUser(userAdmin.Username, userEdit.Username, displayName, email, state, KIADate, note);
                         
+                        detailPanel.Visible = false;
+                        viewPanel.Visible = true;
                     }
                     else
                     {
-                        if (userDAO.updateUser(userAdmin.Username, userEdit.Username, displayName, email, note))
-                        {
-                            btnCancel_Click(sender, e);
-                        }
+                        userDAO.updateUser(userAdmin.Username, userEdit.Username, displayName, email, note);
+                        
+                        detailPanel.Visible = false;
+                        viewPanel.Visible = true;
                     }
                 }
                 else
@@ -583,10 +602,39 @@ namespace ltkt.Admin
                                + CommonConstants.REQ_PAGE
                                + CommonConstants.EQUAL + "1");
         }
-        
+
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {
-            
+            tblUser userAdmin = (tblUser)Session[CommonConstants.SES_USER];
+            if (userAdmin != null)
+            {
+                try
+                {
+                    int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    tblUser userEdit = userDAO.getUser(id);
+
+                    if (userEdit != null)
+                    {
+                        // Phát sinh mật khẩu bất kỳ
+                        string strNewPassword = userDAO.generatePassword();
+
+                        // Gửi mật khẩu đến email
+                        userDAO.sendNewPassword(userEdit.Username.Trim(), strNewPassword, userEdit.Email.Trim());
+
+                        //Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.writeLog(DBHelper.strPathLogFile, userAdmin.Username, ex.Message);
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+                }
+            }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
         }
-}
+    }
 }
