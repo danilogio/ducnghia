@@ -534,26 +534,26 @@ namespace ltkt.Admin
                     string note = txtNote.Text;
 
                     if (userDAO.isAllow(userAdmin.Permission, CommonConstants.P_A_FULL_CONTROL)
-                        || userDAO.isAllow (userEdit.Permission,CommonConstants.P_N_GENERAL))
+                        || userDAO.isAllow(userEdit.Permission, CommonConstants.P_N_GENERAL))
                     {
                         int state = Convert.ToInt32(ddlState.SelectedValue);
                         DateTime KIADate = DateTime.Now;
-                        if ((state > CommonConstants.STATE_KIA_3D 
+                        if ((state > CommonConstants.STATE_KIA_3D
                             && state < CommonConstants.STATE_KIA_1M)
                             && txtKIADate.Text != CommonConstants.BLANK)
                         {
-                            KIADate = DateTime.Parse (txtKIADate.Text);
+                            KIADate = DateTime.Parse(txtKIADate.Text);
                         }
 
                         userDAO.updateUser(userAdmin.Username, userEdit.Username, displayName, email, state, KIADate, note);
-                        
+
                         detailPanel.Visible = false;
                         viewPanel.Visible = true;
                     }
                     else
                     {
                         userDAO.updateUser(userAdmin.Username, userEdit.Username, displayName, email, note);
-                        
+
                         detailPanel.Visible = false;
                         viewPanel.Visible = true;
                     }
@@ -641,7 +641,7 @@ namespace ltkt.Admin
             //resultPanel.Visible = true;
             string strKeyword = txtSearch.Text;
             IList<tblUser> lst = userDAO.search(strKeyword);
-            
+
             lblResult.Text = "<ul>";
             for (int idx = 0; idx < lst.Count(); ++idx)
             {
@@ -661,5 +661,5 @@ namespace ltkt.Admin
                 lblResult.Text = CommonConstants.MSG_SEARCH_NOT_FOUND;
             }
         }
-}
+    }
 }

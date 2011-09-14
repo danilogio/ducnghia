@@ -1126,6 +1126,15 @@ namespace ltktDAO
         public const string PAGE_ADMIN_MAIL_NAME = "Hộp thư";
 
         /// <summary>
+        /// permission admin page
+        /// </summary>
+        public const string PAGE_ADMIN_PERMISSION = "Permission.aspx";
+        /// <summary>
+        /// permission admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_PERMISSION_NAME = "Quản lý phân quyền";
+
+        /// <summary>
         /// Users page name
         /// </summary>
         public const string PAGE_ADMIN_USERS_NAME = "Quản lý thành viên";
