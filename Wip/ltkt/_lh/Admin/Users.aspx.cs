@@ -286,7 +286,7 @@ namespace ltkt.Admin
                 liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
             }
 
-            if (Request.QueryString[CommonConstants.REQ_ACTION] == CommonConstants.ACT_EDIT)
+            if (action == CommonConstants.ACT_EDIT)
             {
                 tblUser userEdit = userDAO.getUser(id);
                 Session[CommonConstants.SES_EDIT_USER] = userEdit;
@@ -621,7 +621,9 @@ namespace ltkt.Admin
                         // Gửi mật khẩu đến email
                         userDAO.sendNewPassword(userEdit.Username.Trim(), strNewPassword, userEdit.Email.Trim());
 
-                        //Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
+                        Session[CommonConstants.SES_EDIT_USER] = null;
+                        Page_Load(sender, e);
+                        
                     }
                 }
                 catch (Exception ex)

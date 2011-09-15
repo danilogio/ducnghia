@@ -189,7 +189,10 @@ namespace ltktDAO
             if (lstUser.Count() > 0)
             {
                 tblUser user = lstUser.ElementAt(0);
-                string[] permits = user.Permission.Split(',');
+                if (user.Permission.Trim().EndsWith(CommonConstants.COMMA))
+                    user.Permission = user.Permission.Substring(0, user.Permission.Trim().LastIndexOf(CommonConstants.COMMA));
+
+                string[] permits = user.Permission.Split(Convert.ToChar (CommonConstants.COMMA));
 
                 foreach (string permit in permits)
                 {
@@ -839,7 +842,7 @@ namespace ltktDAO
         /// <param name="_newPassword"></param>
         public Boolean updateUserPassword(string _username, string _newPassword)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             try
             {
@@ -1314,8 +1317,44 @@ namespace ltktDAO
 
             return results;
         }
-        
+
+        public bool updatePermission(string _userAdmin, string _username, string permits)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var user = DB.tblUsers.Single(u => u.Username == _username);
+
+                    user.Permission = permits;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, _userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                    _username,
+                                                                    CommonConstants.SQL_TABLE_USER));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE,
+                                                                    _username,
+                                                                    CommonConstants.SQL_TABLE_USER));
+
+                log.writeLog(DBHelper.strPathLogFile, _userAdmin, e.Message);
+
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
 
+
+        
     }
 }

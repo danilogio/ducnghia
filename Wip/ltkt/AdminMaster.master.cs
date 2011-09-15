@@ -45,6 +45,7 @@ namespace ltkt.Admin
                     || userDAO.isAllow(permission, CommonConstants.P_A_FULL_CONTROL))
             {
                 HpkGeneral.Visible = true;
+                //HpkGeneral.NavigateUrl = CommonConstants.PAGE_ADMIN_GENERAL;
             }
             if (userDAO.isAllow(permission, CommonConstants.P_A_USER)
                     || userDAO.isAllow(permission, CommonConstants.P_A_FULL_CONTROL))
