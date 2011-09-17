@@ -133,6 +133,11 @@ namespace ltktDAO
         /// user system
         /// </summary>
         public const string USER_SYSTEM = "System";
+
+
+        
+
+        
         
         #endregion
 
@@ -1185,6 +1190,17 @@ namespace ltktDAO
         /// session edit user
         /// </summary>
         public const string SES_EDIT_USER = "editUsers";
+
+        /// <summary>
+        /// session for permission search
+        /// </summary>
+        public const string SES_PERMISSION_SEARCH = "permission_Search";
+
+        /// <summary>
+        /// session for permission step edit
+        /// </summary>
+        public const string SES_PERMISSION_EDIT = "permission_Edit";
+
         #endregion
 
         #region Request Constants (REQ)

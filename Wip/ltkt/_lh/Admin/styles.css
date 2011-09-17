@@ -482,8 +482,9 @@ div.block_details_text
 .form_settings #checkbox span
 {
 	float: left;
-	width: 500px;
+	width: 900px;
 	text-align: left;
+	margin-left: 180px;
 }
 
 .form_settings #searchUserResult span

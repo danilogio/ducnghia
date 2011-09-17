@@ -1267,6 +1267,11 @@ namespace ltktDAO
         //    }
         //}
 
+        /// <summary>
+        /// get state through state id
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
         public string getState(int state)
         {
             string strState = CommonConstants.BLANK;
@@ -1303,6 +1308,11 @@ namespace ltktDAO
             return strState;
         }
 
+        /// <summary>
+        /// search user
+        /// </summary>
+        /// <param name="_keyword"></param>
+        /// <returns></returns>
         public IList<tblUser> search(string _keyword)
         {
             IList<tblUser> results = new List<tblUser>();
@@ -1318,7 +1328,15 @@ namespace ltktDAO
             return results;
         }
 
-        public bool updatePermission(string _userAdmin, string _username, string permits)
+        /// <summary>
+        /// Update permission, role
+        /// </summary>
+        /// <param name="_userAdmin"></param>
+        /// <param name="_username"></param>
+        /// <param name="permits"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool updatePermission(string _userAdmin, string _username, string permits, string role)
         {
             try
             {
@@ -1327,6 +1345,7 @@ namespace ltktDAO
                     var user = DB.tblUsers.Single(u => u.Username == _username);
 
                     user.Permission = permits;
+                    user.Role = role;
 
                     DB.SubmitChanges();
                     ts.Complete();

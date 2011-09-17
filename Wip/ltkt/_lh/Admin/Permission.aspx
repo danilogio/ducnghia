@@ -20,9 +20,7 @@
 <asp:Content ID="PermissonAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div class="block_text">
         <asp:Panel ID="messagePanel" runat="server" Visible="false">
-            <div class="block_text">
-                <asp:Literal ID="liMessage" runat="server"></asp:Literal>
-            </div>
+            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="searchPanel" runat="server">
             <div class="form_settings">
@@ -37,11 +35,6 @@
             </div>
         </asp:Panel>
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
-            <div id="divFunction">
-                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />&nbsp;&nbsp;
-                <asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" OnClick="btnCancel_Click" />
-                <hr />
-            </div>
             <div class="form_settings">
                 <p>
                     <span>Tài khoản:</span>
@@ -52,15 +45,30 @@
                     <asp:TextBox ID="txtDisplayName" runat="server" ReadOnly="true"></asp:TextBox>
                 </p>
                 <p>
+                    <span>Vai trò:</span>
+                    <asp:TextBox ID="txtRole" runat="server"></asp:TextBox>
+                </p>
+                <p>
                     <span>Quyền (permission):</span>
                 </p>
                 <br />
                 <div id="checkbox">
-                    <asp:CheckBoxList ID="chxPermission" runat="server" CssClass="checkboxlist" 
-                        onselectedindexchanged="chxPermission_SelectedIndexChanged">
+                    <asp:CheckBoxList ID="chxPermission" runat="server" CssClass="checkboxlist" OnSelectedIndexChanged="chxPermission_SelectedIndexChanged">
                     </asp:CheckBoxList>
+                    <asp:Label ID="lblPermission" runat="server" Visible="false"></asp:Label>
                 </div>
+            </div>
+            <div id="divFunction">
+                <br />
+                <hr /><span style="padding-left: 180px;"></span>
+                    <asp:Button ID="btnCancel" runat="server" CssClass="formbutton" OnClick="btnCancel_Click"
+                        Text="Quay về" />&nbsp;&nbsp;
+                    <asp:Button ID="btnContinue" runat="server" Text="Tiếp tục" CssClass="formbutton"
+                        OnClick="btnContinue_Click" />
             </div>
         </asp:Panel>
     </div>
+
+    <script type="text/javascript"></script>
+
 </asp:Content>
