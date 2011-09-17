@@ -23,7 +23,7 @@ namespace ltkt
                            + CommonConstants.SPACE + CommonConstants.HLINE
                            + CommonConstants.SPACE
                            + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-            numberArtOnPage = control.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_UNI);
+            numberArtOnPage = control.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_EL);
             if (numberArtOnPage < 1)
             {
                 numberArtOnPage = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;

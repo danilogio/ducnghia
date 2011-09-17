@@ -379,7 +379,229 @@ namespace ltktDAO
                                               select p).Take(_numRecord);
             return lst;
         }
+        public int countTotalRecord(ArticleSCO articleSCO)
+        {
+            int num = 0;
+            int start = 0;
+            int end = 0;
+            int year = BaseServices.getYearFromString(articleSCO.Time);
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
+            locateArticleIndex(articleSCO, out start, out end);
+            /*if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE)
+            {
+                start = CommonConstants.AT_IT_OFFICE_START;
+                end = CommonConstants.AT_IT_OFFICE_END;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_SIMPLE)
+            {
+                start = CommonConstants.AT_IT_SIMPLE_TIP;
+                end = CommonConstants.AT_IT_SIMPLE_TIP;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_ADVANCE)
+            {
+                start = CommonConstants.AT_IT_ADVANCE_TIP;
+                end = CommonConstants.AT_IT_ADVANCE_TIP;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_WORD)
+            {
+                start = CommonConstants.AT_IT_OFFICE_WORD;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_EXCEL)
+            {
+                start = CommonConstants.AT_IT_OFFICE_EXCEL;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_PP)
+            {
+                start = CommonConstants.AT_IT_OFFICE_POWERPOINT;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_ACCESS)
+            {
+                start = CommonConstants.AT_IT_OFFICE_ACCESS;
+                end = start;
+            }
+            else */
+            if (articleSCO.Leitmotif == CommonConstants.ALL)
+            {
+                return (from p in DB.tblInformatics
+                        where p.Posted.Year <= year
+                                && p.State != CommonConstants.STATE_UNCHECK
+                            select p).Count();
+                                
+            }
+            if (start > 0 && end > 0 && end > start)
+            {
+                num = (from p in DB.tblInformatics
+                       where p.Posted.Year <= year
+                         && p.State != CommonConstants.STATE_UNCHECK
+                         && p.Leitmotif >= start
+                         && p.Leitmotif <= end
+                       select p).Count();
+            }
+            return num;
+        }
+        public IEnumerable<tblInformatic> searchArticle(ArticleSCO articleSCO)
+        {
+            IEnumerable<tblInformatic> lst1 = null;
+            if(articleSCO.CurrentPage == 1)
+            {
+                lst1 = searchLatestStickyArticle(articleSCO);
+            }
+            if(lst1 != null)
+            {
+                int remain = articleSCO.NumArticleOnPage - lst1.Count();
+                articleSCO.NumArticleOnPage = remain;
+            }
+            IEnumerable<tblInformatic> lst2 = searchLatestArticle(articleSCO);
+            if (lst1 != null)
+            {
+                if (lst1.Count() > 0)
+                {
+                    List<tblInformatic> l1 = lst1.ToList();
+                    l1.AddRange(lst2.ToList());
+                    lst2 = l1;
+                }
+            }
+            return lst2;
+        }
+        private IEnumerable<tblInformatic> searchLatestArticle(ArticleSCO articleSCO)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = null;
+            int start = 0;
+            int end = 0;
+            int year = BaseServices.getYearFromString(articleSCO.Time);
+            locateArticleIndex(articleSCO,out start, out end);
+            /*if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE)
+            {
+                start = CommonConstants.AT_IT_OFFICE_START;
+                end = CommonConstants.AT_IT_OFFICE_END;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_SIMPLE)
+            {
+                start = CommonConstants.AT_IT_SIMPLE_TIP;
+                end = CommonConstants.AT_IT_SIMPLE_TIP;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_ADVANCE)
+            {
+                start = CommonConstants.AT_IT_ADVANCE_TIP;
+                end = CommonConstants.AT_IT_ADVANCE_TIP;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_WORD)
+            {
+                start = CommonConstants.AT_IT_OFFICE_WORD;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_EXCEL)
+            {
+                start = CommonConstants.AT_IT_OFFICE_EXCEL;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_PP)
+            {
+                start = CommonConstants.AT_IT_OFFICE_POWERPOINT;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_ACCESS)
+            {
+                start = CommonConstants.AT_IT_OFFICE_ACCESS;
+                end = start;
+            }*/
+            
+            if (articleSCO.Leitmotif == CommonConstants.ALL)
+            {
+                return (from p in DB.tblInformatics
+                        where p.Posted.Year <= year
+                                && p.State != CommonConstants.STATE_UNCHECK
+                                && p.StickyFlg == false
+                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
+
+            }
+            if (start > 0 && end > 0 && end > start)
+            {
+                lst = (from p in DB.tblInformatics
+                       where p.Posted.Year <= year
+                         && p.State != CommonConstants.STATE_UNCHECK
+                         && p.Leitmotif >= start
+                         && p.Leitmotif <= end
+                         && p.StickyFlg == false
+                       select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
+            }
+            return lst;
+        }
+        private IEnumerable<tblInformatic> searchLatestStickyArticle(ArticleSCO articleSCO)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = null;
+            int start = 0;
+            int end = 0;
+            int year = BaseServices.getYearFromString(articleSCO.Time);
+            locateArticleIndex(articleSCO, out start, out end);
+
+            if (articleSCO.Leitmotif == CommonConstants.ALL)
+            {
+                return (from p in DB.tblInformatics
+                        where p.Posted.Year <= year
+                                && p.State != CommonConstants.STATE_UNCHECK
+                                && p.StickyFlg == true
+                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
+
+            }
+            if (start > 0 && end > 0 && end > start)
+            {
+                lst = (from p in DB.tblInformatics
+                       where p.Posted.Year <= year
+                         && p.State != CommonConstants.STATE_UNCHECK
+                         && p.Leitmotif >= start
+                         && p.Leitmotif <= end
+                         && p.StickyFlg == true
+                       select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
+            }
+            return lst;
+        }
+        private void locateArticleIndex(ArticleSCO articleSCO, out int start, out int end)
+        {
+            start = 0;
+            end = 0;
+            if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE)
+            {
+                start = CommonConstants.AT_IT_OFFICE_START;
+                end = CommonConstants.AT_IT_OFFICE_END;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_SIMPLE)
+            {
+                start = CommonConstants.AT_IT_SIMPLE_TIP;
+                end = CommonConstants.AT_IT_SIMPLE_TIP;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_ADVANCE)
+            {
+                start = CommonConstants.AT_IT_ADVANCE_TIP;
+                end = CommonConstants.AT_IT_ADVANCE_TIP;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_WORD)
+            {
+                start = CommonConstants.AT_IT_OFFICE_WORD;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_EXCEL)
+            {
+                start = CommonConstants.AT_IT_OFFICE_EXCEL;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_PP)
+            {
+                start = CommonConstants.AT_IT_OFFICE_POWERPOINT;
+                end = start;
+            }
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_ACCESS)
+            {
+                start = CommonConstants.AT_IT_OFFICE_ACCESS;
+                end = start;
+            }
+        }
         /// <summary>
         /// Thêm bài mới
         /// </summary>

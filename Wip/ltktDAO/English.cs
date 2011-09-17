@@ -684,6 +684,7 @@ namespace ltktDAO
 
             int start = 0; 
             int end = 0;
+            int year = BaseServices.getYearFromString(articleSCO.Time);
             if (articleSCO.Classes == CommonConstants.PARAM_EL_COMMON)
             {
 
@@ -748,8 +749,9 @@ namespace ltktDAO
             }
             if (start > 0 && end > 0 && end >= start)
             {
+                
                 IEnumerable<tblEnglish> lst1 = (from p in DB.tblEnglishes
-                                               where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                               where p.Posted.Year <= year
                                                      && p.State != CommonConstants.STATE_UNCHECK
                                                      && p.StickyFlg == false
                                                      && p.Class >= start && p.Class <= end
@@ -760,7 +762,7 @@ namespace ltktDAO
             if (articleSCO.Classes != CommonConstants.ALL)
             {
                 IEnumerable<tblEnglish> lst2 = (from p in DB.tblEnglishes
-                                                where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                where p.Posted.Year <= year
                                                       && p.State != CommonConstants.STATE_UNCHECK
                                                       && p.StickyFlg == false
                                                       && p.Class == BaseServices.getValueClassByCode(articleSCO.Classes)
@@ -770,7 +772,7 @@ namespace ltktDAO
             }
 
             IEnumerable<tblEnglish> lst3 = (from p in DB.tblEnglishes
-                                            where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                            where p.Posted.Year <= year
                                                   && p.State != CommonConstants.STATE_UNCHECK
                                                   && p.StickyFlg == false
                                             orderby p.Posted descending
@@ -781,6 +783,7 @@ namespace ltktDAO
         private IEnumerable<tblEnglish> searchStickyArticleByClassAndTime(ArticleSCO articleSCO, int numberRecord)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            int year = BaseServices.getYearFromString(articleSCO.Time);
             if (numberRecord < 1)
                 numberRecord = CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB;
 
@@ -851,7 +854,7 @@ namespace ltktDAO
             if (start > 0 && end > 0 && end >= start)
             {
                 IEnumerable<tblEnglish> lst1 = (from p in DB.tblEnglishes
-                                                where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                where p.Posted.Year <= year
                                                       && p.State != CommonConstants.STATE_UNCHECK
                                                       && p.StickyFlg == true
                                                       && p.Class >= start && p.Class <= end
@@ -862,7 +865,7 @@ namespace ltktDAO
             if (articleSCO.Classes != CommonConstants.ALL)
             {
                 IEnumerable<tblEnglish> lst2 = (from p in DB.tblEnglishes
-                                                where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                                where p.Posted.Year <= year
                                                       && p.State != CommonConstants.STATE_UNCHECK
                                                       && p.StickyFlg == true
                                                       && p.Class == BaseServices.getValueClassByCode(articleSCO.Classes)
@@ -871,7 +874,7 @@ namespace ltktDAO
                 return lst2;
             }
             IEnumerable<tblEnglish> lst3 = (from p in DB.tblEnglishes
-                                            where p.Posted.Year == BaseServices.getYearFromString(articleSCO.Time)
+                                            where p.Posted.Year <= year
                                                   && p.State != CommonConstants.STATE_UNCHECK
                                                   && p.StickyFlg == true
                                             orderby p.Posted descending
@@ -890,8 +893,19 @@ namespace ltktDAO
             {
                 if( lst2.Count() > 0)
                 {
-                    lst2.ToList().AddRange(lst1);
-                    lst1 = lst2;
+                    //lst2.ToList().AddRange(lst1.ToList());
+                    /*int n = lst1.Count();
+                    for (int i = 0; i < n; i++)
+                    {
+                        lst2.ToList().Add(lst1.ElementAt(i));
+                    }
+                    //lst1 = lst2;
+                    List<tblEnglish> l = lst1.ToList();
+                    l.Add(lst1.ElementAt(8));
+                    IEnumerable<tblEnglish> h = l;*/
+                    List<tblEnglish> l2 = lst2.ToList();
+                    l2.AddRange(lst1.ToList());
+                    lst1 = l2;
                 }
             }
             return lst1;

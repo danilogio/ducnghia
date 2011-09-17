@@ -119,6 +119,19 @@ namespace ltktDAO
             }
             return target.Trim();
         }
+        public static int convertStringToInt(string target)
+        {
+            int r = 0;
+            try
+            {
+                Int32.TryParse(target, out r);
+            }
+            catch
+            {
+                return 0;
+            }
+            return r;
+        }
         public static string nullToSharp(string target)
         {
             if (target == null || target == CommonConstants.BLANK)
@@ -306,6 +319,23 @@ namespace ltktDAO
             }
             return data;
         }
-        
+        public static int getNumberPage(int totalRecord, int numOnePage)
+        {
+           
+            int mod = totalRecord % numOnePage;
+            if (mod == 0)
+            {
+                return totalRecord / numOnePage;
+            }
+            return totalRecord / numOnePage + 1;
+        }
+        public static int getRecordFrom(int currentPage, int numberOnPage)
+        {
+            return (currentPage - 1) * numberOnPage;
+        }
+        public static int getRecordTo(int recordFrom, int numberOnPage)
+        {
+            return recordFrom + numberOnPage;
+        }
     }
 }

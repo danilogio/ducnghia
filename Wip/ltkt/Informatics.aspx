@@ -2,10 +2,9 @@
     CodeFile="Informatics.aspx.cs" Inherits="ltkt.Informatics" %>
 
 <%--<%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>--%>
-
 <asp:Content ID="InformaticsHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
-    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
-    
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
     <style type="text/css">
         .style1
         {
@@ -14,7 +13,6 @@
         }
     </style>
 </asp:Content>
-
 <asp:Content ID="Informatics" ContentPlaceHolderID="cphContent" runat="Server">
     <%-- 
     <br /><br /><br /><h2><span>Power point</span></h2><br /><br /><br /><br /><br />
@@ -41,7 +39,7 @@
         <hr />
         <br />
         <div>
-            <asp:ListView ID="productList" runat="server">
+           <%-- <asp:ListView ID="productList" runat="server">
                 <LayoutTemplate>
                     <ul class="articleList">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
@@ -51,10 +49,12 @@
                     <li><a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
                         <img src="<%#Eval("Thumbnail")%>" alt="" />
                         <br />
-                        <center><%#Eval("Title")%></center>
+                        <center>
+                            <%#Eval("Title")%></center>
                         <br />
                         <div class="block_details_text">
-                            <center><%#Eval("Year")%></center>
+                            <center>
+                                <%#Eval("Year")%></center>
                         </div>
                     </a></li>
                 </ItemTemplate>
@@ -63,17 +63,21 @@
                         Hiện tại chưa có tài liệu nào
                     </div>
                 </EmptyDataTemplate>
-            </asp:ListView>
+            </asp:ListView>--%>
+            <asp:Literal ID="list_items" runat="server">
+            
+            </asp:Literal>
+            
         </div>
         <div class="datapager">
-            <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
+           <%-- <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
                 <Fields>
                     <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" />
                     <asp:NumericPagerField />
                     <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" />
                 </Fields>
-            </asp:DataPager>
+            </asp:DataPager>--%>
         </div>
     </div>
 </asp:Content>
