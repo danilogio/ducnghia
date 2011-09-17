@@ -139,6 +139,7 @@ namespace ltktDAO
 
         
         
+        
         #endregion
 
         #region Alert (ALERT)
@@ -1191,6 +1192,7 @@ namespace ltktDAO
         /// </summary>
         public const string SES_EDIT_USER = "editUsers";
 
+
         /// <summary>
         /// session for permission search
         /// </summary>
@@ -1245,6 +1247,11 @@ namespace ltktDAO
         /// request type
         /// </summary>
         public const string REQ_TYPE = "type";
+
+        /// <summary>
+        /// request page
+        /// </summary>
+        public const string SES_CURRENT_PAGE = "currentPage";
         #endregion
 
         #region Section Uni,It,EL (SEC)
@@ -1343,7 +1350,24 @@ namespace ltktDAO
             /// <summary>
             /// Thủ thuật nâng cao
             /// </summary>
-            public const string PARAM_IT_ADVANCE = "adv"; 
+            public const string PARAM_IT_ADVANCE = "adv";
+            
+            /// <summary>
+            /// office word
+            /// </summary>
+            public const string PARAM_IT_OFFICE_WORD = "word";
+            /// <summary>
+            /// office excel
+            /// </summary>
+            public const string PARAM_IT_OFFICE_EXCEL = "excel";
+            /// <summary>
+            /// office powerpoint
+            /// </summary>
+            public const string PARAM_IT_OFFICE_PP = "pp";
+            /// <summary>
+            /// power point access
+            /// </summary>
+            public const string PARAM_IT_OFFICE_ACCESS = "acc";
         #endregion
 
         #region Cookie (COOKIE)
