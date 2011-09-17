@@ -48,7 +48,8 @@ namespace ltkt.Admin
                 else
                 {
                     Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
-                    Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                    //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
                 }
             }
         }

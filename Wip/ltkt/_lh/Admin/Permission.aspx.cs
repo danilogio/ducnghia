@@ -34,7 +34,10 @@ namespace ltkt.Admin
                     //////////////////////////////////////////////////
                 }
                 else
+                {
                     Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
+                }
             }
             else
             {
@@ -373,7 +376,8 @@ namespace ltkt.Admin
 
             int sum = chxPermission.Items.Count;
             for (int idx = 1; idx < sum; ++idx)
-                if (chxPermission.Items[idx].Selected)
+                if (chxPermission.Items[idx].Selected 
+                    && (txtRole.Text == CommonConstants.BLANK || txtRole.Text == "Normal"))
                 {
                     txtRole.Text = CommonConstants.ADMIN;
                     break;
@@ -432,12 +436,28 @@ namespace ltkt.Admin
                     string role = txtRole.Text;
                     string permits = CommonConstants.BLANK;
                     int count = chxPermission.Items.Count;
+                    bool didIt = false;
                     for (int idx = 0; idx < count; ++idx)
+                    {
                         if (chxPermission.Items[idx].Selected)
                         {
+                            if (idx > 0 && !didIt)
+                            {
+                                permits += Convert.ToString(permitDAO.getValue(CommonConstants.P_A_GENERAL));
+                                permits += CommonConstants.COMMA;
+
+                                didIt = true;
+                            }
+                            
                             permits += Convert.ToString(permitDAO.getValue(chxPermission.Items[idx].Value));
                             permits += CommonConstants.COMMA;
+
+
                         }
+                    }
+
+                    if (permits.Contains("99"))
+                        permits = "99";
 
                     userDAO.updatePermission(userAdmin.Username, userEdit.Username, permits, role);
 

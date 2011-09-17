@@ -12,6 +12,7 @@ namespace ltktDAO
         LTDHDataContext DB = new LTDHDataContext(@strPathDB);
         EventLog log = new EventLog();
 
+        
         /// <summary>
         /// Get all record
         /// </summary>

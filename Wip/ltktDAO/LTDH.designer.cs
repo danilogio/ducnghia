@@ -63,7 +63,7 @@ namespace ltktDAO
     #endregion
 		
 		public LTDHDataContext() : 
-				base(global::ltktDAO.Properties.Settings.Default.LTDHConnectionString1, mappingSource)
+				base(global::ltktDAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -569,7 +569,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Permission", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Permission", DbType="NChar(50) NOT NULL", CanBeNull=false)]
 		public string Permission
 		{
 			get
@@ -689,7 +689,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", OtherKey="Author")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities
 		{
 			get
@@ -702,7 +702,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblContestForUniversities1", ThisKey="Username", OtherKey="Checker")]
+		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblContestForUniversities1", OtherKey="Checker")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities1
 		{
 			get
@@ -715,7 +715,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", OtherKey="Author")]
 		public EntitySet<tblEnglish> tblEnglishes
 		{
 			get
@@ -728,7 +728,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish1", Storage="_tblEnglishes1", ThisKey="Username", OtherKey="Checker")]
+		[Association(Name="tblUser_tblEnglish1", Storage="_tblEnglishes1", OtherKey="Checker")]
 		public EntitySet<tblEnglish> tblEnglishes1
 		{
 			get
@@ -741,7 +741,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", OtherKey="Author")]
 		public EntitySet<tblInformatic> tblInformatics
 		{
 			get
@@ -754,7 +754,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic1", Storage="_tblInformatics1", ThisKey="Username", OtherKey="Checker")]
+		[Association(Name="tblUser_tblInformatic1", Storage="_tblInformatics1", OtherKey="Checker")]
 		public EntitySet<tblInformatic> tblInformatics1
 		{
 			get
@@ -767,7 +767,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
+		[Association(Name="tblUser_tblNew", Storage="_tblNews", OtherKey="Author")]
 		public EntitySet<tblNew> tblNews
 		{
 			get
@@ -1928,7 +1928,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1962,7 +1962,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblUser1", ThisKey="Checker", IsForeignKey=true)]
 		public tblUser tblUser1
 		{
 			get
@@ -2590,7 +2590,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -2624,7 +2624,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish1", Storage="_tblUser1", ThisKey="Checker", IsForeignKey=true)]
 		public tblUser tblUser1
 		{
 			get
@@ -3166,7 +3166,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -3200,7 +3200,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic1", Storage="_tblUser1", ThisKey="Checker", IsForeignKey=true)]
 		public tblUser tblUser1
 		{
 			get
@@ -3423,7 +3423,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
+		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
