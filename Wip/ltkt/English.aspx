@@ -3,6 +3,14 @@
 
 <asp:Content ID="EnglishHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <title><asp:Literal ID="liTitleHeader" runat="server"></asp:Literal></title>
+    <script type="text/javascript">
+        function hover(id) {
+            //alert('' + id);
+            $('div .temp').css("background-color", "white");
+            $('#' + id).css("background-color", "#dce6f4");
+
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="English" ContentPlaceHolderID="cphContent" Runat="Server">
     <div id="content" class="block_text">

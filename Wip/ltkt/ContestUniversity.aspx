@@ -11,17 +11,19 @@
             background-color: white;
         }
     </style>
+
     <script type="text/javascript">
         function hover(id) {
             //alert('' + id);
             $('div .temp').css("background-color", "white");
             $('#' + id).css("background-color", "#dce6f4");
-           
-       }
-       function onOut() {
-           alert('' + id);
-       }
+
+        }
+//        function onOut() {
+//            alert('' + id);
+//        }
     </script>
+
 </asp:Content>
 <asp:Content ID="Contest" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="content" class="block_text">
@@ -38,8 +40,9 @@
                 </LayoutTemplate>
                 <ItemTemplate>
                     <li>
-                        <div id='<%#Eval("ID")%>' onmouseover="hover(<%#Eval("ID")%>)" class="temp" >
-                            <center><img src="<%#Eval("Thumbnail")%>" alt="" width="130px" height="120px" style="margin-top:10px;" /></center>
+                        <div id='<%#Eval("ID")%>' onmouseover="hover(<%#Eval("ID")%>)" class="temp">
+                            <center>
+                                <img src="<%#Eval("Thumbnail")%>" alt="" width="130px" height="120px" style="margin-top: 10px;" /></center>
                             <br />
                             <br />
                             <a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">

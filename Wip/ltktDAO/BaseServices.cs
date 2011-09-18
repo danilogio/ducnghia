@@ -111,6 +111,15 @@ namespace ltktDAO
             }
             return a;
         }
+        public static int max(int a, int b)
+        {
+            if (a > b)
+            {
+                return a;
+            }
+            return b;
+        }
+
         public static string nullToBlank(string target)
         {
             if (target == null)
@@ -319,7 +328,7 @@ namespace ltktDAO
             }
             return data;
         }
-        public static int getNumberPage(int totalRecord, int numOnePage)
+        public static int getTotalPage(int totalRecord, int numOnePage)
         {
            
             int mod = totalRecord % numOnePage;
@@ -337,5 +346,115 @@ namespace ltktDAO
         {
             return recordFrom + numberOnPage;
         }
+        public static string createPagingLink(string url, int currentPage, int totalPage)
+        {
+            string links = CommonConstants.BLANK;
+            string preLink = CommonConstants.BLANK;
+            string sufLink = CommonConstants.BLANK;
+            string backLink = CommonConstants.BLANK;
+            string nextLink = CommonConstants.BLANK;
+            string firstLink = CommonConstants.BLANK;
+            string lastLink = CommonConstants.BLANK;
+            string curPageLink = CommonConstants.BLANK;
+            if (!BaseServices.isNullOrBlank(url))
+            {
+                if (currentPage < 0)
+                {
+                    currentPage = BaseServices.convertStringToInt(CommonConstants.PAGE_NUMBER_FIRST);
+                }
+                else if (currentPage > totalPage)
+                {
+                    currentPage = totalPage;
+                }
+                //prefix link
+                int k = max(0, currentPage - 4);
+                for (int i = k; i < currentPage; i++)
+                {
+                    preLink += BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                                + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + (i + 1).ToString(),
+                                                                (i + 1).ToString());
+                    preLink += CommonConstants.SPACE;
+                    preLink += CommonConstants.SPACE;
+                }
+                k = min(totalPage, currentPage + 4);
+                for (int i = 0; i < k; i++)
+                {
+                    sufLink += BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                                + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + (i + 1).ToString(),
+                                                                (i + 1).ToString());
+                    sufLink += CommonConstants.SPACE;
+                    sufLink += CommonConstants.SPACE;
+                }
+                int next = 0;
+                int back = 0;
+                next = currentPage + 1;
+                back = currentPage - 1;
+                if (next > totalPage)
+                {
+                    next = totalPage;
+                }
+                if (back < convertStringToInt(CommonConstants.PAGE_NUMBER_FIRST))
+                {
+                    back = convertStringToInt(CommonConstants.PAGE_NUMBER_FIRST);
+                }
+               
+                
+                if (currentPage > convertStringToInt(CommonConstants.PAGE_NUMBER_FIRST))
+                {
+                    backLink = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                               + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + back.ToString()
+                                                                  , CommonConstants.BACK_BUTTON);
+                    firstLink = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                                    + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + CommonConstants.PAGE_NUMBER_FIRST
+                                                                    , CommonConstants.FIRST_BUTTON);
+                }
+                else
+                {
+                    firstLink = createMsgByTemplate(CommonConstants.TEMP_LABEL_TAG, CommonConstants.FIRST_BUTTON);
+                    backLink = createMsgByTemplate(CommonConstants.TEMP_LABEL_TAG, CommonConstants.BACK_BUTTON);
+                }
+                if (currentPage < totalPage)
+                {
+                    lastLink = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                                    + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + totalPage
+                                                                    , CommonConstants.LAST_BUTTON);
+                    nextLink = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                                + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + next.ToString()
+                                                                , CommonConstants.NEXT_BUTTON);
+                }
+                else
+                {
+                    lastLink = CommonConstants.LAST_BUTTON;
+                    nextLink = CommonConstants.NEXT_BUTTON;
+                }
+                curPageLink = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
+                                                                + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + currentPage
+                                                                , currentPage.ToString());
+                curPageLink = BaseServices.createMsgByTemplate(CommonConstants.TEMP_STRONG_TAG, curPageLink);
+                
+                links += firstLink + CommonConstants.SPACE + CommonConstants.SPACE;
+                links += backLink + CommonConstants.SPACE + CommonConstants.SPACE;
+                if (back != currentPage)
+                {
+                    links += preLink + CommonConstants.SPACE + CommonConstants.SPACE;
+                }
+                links += curPageLink + CommonConstants.SPACE + CommonConstants.SPACE;
+                if (next != currentPage)
+                {
+                    links += sufLink + CommonConstants.SPACE + CommonConstants.SPACE;
+                }
+
+                links += nextLink + CommonConstants.SPACE + CommonConstants.SPACE;
+                if (currentPage < totalPage)
+                {
+                    links += CommonConstants.DOT 
+                        + CommonConstants.DOT 
+                        + CommonConstants.DOT;
+                }
+                links += lastLink;
+            }
+            return links;
+        }
     }
+    
 }

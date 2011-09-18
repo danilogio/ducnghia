@@ -148,6 +148,7 @@ namespace ltkt
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
                                                                                            CommonConstants.PARAM_IT_OFFICE,
                                                                                            CommonConstants.NOW,
+                                                                                           CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else
@@ -204,6 +205,7 @@ namespace ltkt
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
                                                                                            CommonConstants.PARAM_IT_SIMPLE,
                                                                                            CommonConstants.NOW,
+                                                                                           CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else
@@ -260,6 +262,7 @@ namespace ltkt
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
                                                                                            CommonConstants.PARAM_IT_ADVANCE,
                                                                                            CommonConstants.NOW,
+                                                                                           CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else

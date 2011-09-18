@@ -22,7 +22,10 @@ namespace ltktDAO
         /// number of character string
         /// </summary>
         public const int DEFAULT_NUMBER_OF_CHARACTER_ON_STRING = 15;
-
+        /// <summary>
+        /// first number page
+        /// </summary>
+        public const string PAGE_NUMBER_FIRST = "1";
         /// <summary>
         /// Blank value
         /// </summary>
@@ -133,8 +136,22 @@ namespace ltktDAO
         /// user system
         /// </summary>
         public const string USER_SYSTEM = "System";
-
-
+        /// <summary>
+        /// <![CDATA[>]]>
+        /// </summary>
+        public const string NEXT_BUTTON = ">";
+        /// <summary>
+        /// <![CDATA[<]]>
+        /// </summary>
+        public const string BACK_BUTTON = "<";
+        /// <summary>
+        /// <![CDATA[<<]]>
+        /// </summary>
+        public const string FIRST_BUTTON = "<<";
+        /// <summary>
+        /// <![CDATA[>>]]>
+        /// </summary>
+        public const string LAST_BUTTON = ">>";
         
 
         
@@ -225,6 +242,7 @@ namespace ltktDAO
             /// Css class referlink
             /// </summary>
             public const string CSS_REFERLINK = "referlink"; 
+            public const string CSS_ARTICLE_LIST = "articleList";
         #endregion
 
         #region State (STATE)
@@ -355,6 +373,7 @@ namespace ltktDAO
         public const string CS_DELETED = "gray";
         public const string CS_ANNOUCEMENT_BGCOLOR = "white";
         public const string CS_ANNOUCEMENT_TEXTCOLOR = "red";
+        public const string CS_NORMAL = "black";
         #endregion
 
         #region State Tooltip Text(SX)
@@ -431,6 +450,22 @@ namespace ltktDAO
         #endregion
 
         #region Informatics (AT_IT)
+        /// <summary>
+        /// Informatics simple tip start
+        /// </summary>
+        public const int AT_IT_SIMPLE_TIP_START = AT_IT_SIMPLE_TIP;
+        /// <summary>
+        /// Informatics simple tip end
+        /// </summary>
+        public const int AT_IT_SIMPLE_TIP_END = 19;
+        /// <summary>
+        /// Informatics simple tip start
+        /// </summary>
+        public const int AT_IT_ADVANCE_TIP_START = AT_IT_ADVANCE_TIP;
+        /// <summary>
+        /// Informatics simple tip end
+        /// </summary>
+        public const int AT_IT_ADVANCE_TIP_END = 29;
         /// <summary>
         /// Informatics office start
         /// </summary>
@@ -1464,7 +1499,11 @@ namespace ltktDAO
         /// <summary>
         /// link template for informatics page
         /// </summary>
-        public const string TEMP_INFORMATICS_LINK = "<a href='" + PAGE_INFORMATICS + "?" + REQ_LEITMOTIF + "={0}&" + REQ_TIME + "={1}'>{2}</a>";
+        public const string TEMP_INFORMATICS_LINK = "<a href='" + TEMP_INFORMATICS_URL + "&" + REQ_PAGE + "={2}'>{3}</a>";
+        /// <summary>
+        /// url template of informatics page
+        /// </summary>
+        public const string TEMP_INFORMATICS_URL = PAGE_INFORMATICS + "?" + REQ_LEITMOTIF + "={0}&" + REQ_TIME + "={1}";
         /// <summary>
         /// link template for news page
         /// </summary>
@@ -1473,6 +1512,10 @@ namespace ltktDAO
         /// image thumbnail for article
         /// </summary>
         public const string TEMP_IMG_THUMBNAIL = "<img width='50px' height='50px' src='{0}' alt='{1}'/>";
+        /// <summary>
+        /// thumbnail image for article details
+        /// </summary>
+        public const string TEMP_IMG_ARTICLE_DETAIL_THUMBNAIL = "<img src=\"{0}\" alt='' width='130px' height='120px' style='margin-top:10px;' />";
         /// <summary>
         /// image rating
         /// </summary>
@@ -1540,6 +1583,26 @@ namespace ltktDAO
         /// div template with 2 param: style and text
         /// </summary>
         public const string TEMP_DIV_TAG_WITH_STYLE = "<div style='{0}'>{1}</div>";
+        /// <summary>
+        /// div template for article details
+        /// </summary>
+        public const string TEMP_DIV_TAG_ARTICLE_DETAIL = "<div id='{0}' onmouseover='hover({0})' class='temp'>{1}</div>";
+        /// <summary>
+        /// tag center, 1 argument required
+        /// </summary>
+        public const string TEMP_CENTER_TAG = "<center>{0}</center>";
+        /// <summary>
+        /// tag ul with class, 2 arg required
+        /// </summary>
+        public const string TEMP_UL_TAG_WITH_CLASS = "<ul class='{0}'>{1}</ul>";
+        /// <summary>
+        /// hr tag <![CDATA[]]>
+        /// </summary>
+        public const string TEMP_HR_TAG = "<hr/";
+        /// <summary>
+        /// CDATA[]
+        /// </summary>
+        public const string TEMP_CDATA = "<![CDATA[{0}]]>";
         #endregion
 
         #region Action request (ACT)

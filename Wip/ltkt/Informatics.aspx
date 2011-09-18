@@ -12,6 +12,14 @@
             background-color: white;
         }
     </style>
+    <script type="text/javascript">
+        function hover(id) {
+            //alert('' + id);
+            $('div .temp').css("background-color", "white");
+            $('#' + id).css("background-color", "#dce6f4");
+
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Informatics" ContentPlaceHolderID="cphContent" runat="Server">
     <%-- 
@@ -35,7 +43,7 @@
     </style>--%>
     <div id="content" class="block_text">
         <h2>
-            <asp:Label ID="lblTitle" runat="server" Text="Luyện Thi Đại Học"></asp:Label></h2>
+            <asp:Label ID="lblSubTitle" runat="server" Text="Luyện Thi Đại Học"></asp:Label></h2>
         <hr />
         <br />
         <div>
@@ -46,17 +54,18 @@
                     </ul>
                 </LayoutTemplate>
                 <ItemTemplate>
-                    <li><a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
-                        <img src="<%#Eval("Thumbnail")%>" alt="" />
-                        <br />
-                        <center>
-                            <%#Eval("Title")%></center>
-                        <br />
-                        <div class="block_details_text">
-                            <center>
-                                <%#Eval("Year")%></center>
+                     <li>
+                        <div id='<%#Eval("ID")%>' onmouseover="hover(<%#Eval("ID")%>)" class="temp" >
+                            <center><img src="<%#Eval("Thumbnail")%>" alt="" width="130px" height="120px" style="margin-top:10px;" /></center>
+                            <br />
+                            <br />
+                            <a href="ArticleDetails.aspx?sec=uni&id=<%#Eval("ID")%>">
+                                <center>
+                                    <%#Eval("Title")%></center>
+                            </a>
+                            
                         </div>
-                    </a></li>
+                    </li>
                 </ItemTemplate>
                 <EmptyDataTemplate>
                     <div>
@@ -64,11 +73,14 @@
                     </div>
                 </EmptyDataTemplate>
             </asp:ListView>--%>
+            
             <asp:Literal ID="list_items" runat="server">
             
             </asp:Literal>
             
         </div>
+        <br />
+        
         <div class="datapager">
            <%-- <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
@@ -78,6 +90,10 @@
                     <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" />
                 </Fields>
             </asp:DataPager>--%>
+            
+            <asp:Literal ID="lDataPager" runat ="server">
+            
+            </asp:Literal>
         </div>
     </div>
 </asp:Content>

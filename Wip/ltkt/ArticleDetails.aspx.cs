@@ -335,6 +335,9 @@ namespace ltkt
 
                     txtPostedComment.Text = informatic.Comment;
 
+                    int score = informaticsDAO.getScore(id);
+                    lRatingBar.Text = createRatingBar(score);
+
                 }
                 else
                 {

@@ -28,12 +28,31 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Title;
+                return lst.ElementAt(0).Title.Trim(); ;
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
+        /// <summary>
+        /// Lấy điểm checker
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public int getScore(int ID)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
+                                          where record.ID == ID
+                                          select record;
+
+            if (lst.Count() > 0)
+            {
+                return (int)lst.ElementAt(0).Score;
+            }
+
+            return 0;
+        }
 
         /// <summary>
         /// Lấy chapeau
@@ -49,10 +68,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Chapeau;
+                return lst.ElementAt(0).Chapeau.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK ;
         }
 
         /// <summary>
@@ -71,19 +90,19 @@ namespace ltktDAO
             string strType = "";
             switch (type)
             {
-                case 0:
+                case CommonConstants.AT_LECTURE:
                     {
-                        strType = "Bài giảng";
+                        strType = CommonConstants.AT_LECTURE_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.AT_PRACTISE:
                     {
-                        strType = "Đề thi";
+                        strType = CommonConstants.AT_PRACTISE_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.AT_EXAM:
                     {
-                        strType = "Bài tập";
+                        strType = CommonConstants.AT_EXAM_NAME;
                         break;
                     }
                 default:
@@ -107,10 +126,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Contents;
+                return lst.ElementAt(0).Contents.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -128,10 +147,10 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).DisplayName;
+                return lst.ElementAt(0).DisplayName.Trim();
             }
 
-            return null;
+            return CommonConstants.BLANK;
         }
 
 
@@ -168,22 +187,22 @@ namespace ltktDAO
                                              select record;
 
             int state = lst.ElementAt(0).State;
-            string strState = "";
+            string strState = CommonConstants.BLANK;
             switch (state)
             {
-                case 0:
+                case CommonConstants.STATE_UNCHECK:
                     {
-                        strState = "Uncheck";
+                        strState = CommonConstants.STATE_UNCHECK_NAME;
                         break;
                     }
-                case 1:
+                case CommonConstants.STATE_CHECKED:
                     {
-                        strState = "Checked";
+                        strState = CommonConstants.STATE_CHECKED_NAME;
                         break;
                     }
-                case 2:
+                case CommonConstants.STATE_BAD:
                     {
-                        strState = "Bad";
+                        strState = CommonConstants.STATE_BAD_NAME;
                         break;
                     }
                 default:
@@ -210,7 +229,7 @@ namespace ltktDAO
                 return (int)lst.ElementAt(0).Point;
             }
 
-            return -1;
+            return 0;
         }
 
         /// <summary>
@@ -227,7 +246,7 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Tag;
+                return lst.ElementAt(0).Tag.Trim();
             }
 
             return null;
@@ -247,7 +266,7 @@ namespace ltktDAO
 
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(0).Comment;
+                return lst.ElementAt(0).Comment.Trim();
             }
 
             return null;
@@ -432,7 +451,7 @@ namespace ltktDAO
                             select p).Count();
                                 
             }
-            if (start > 0 && end > 0 && end > start)
+            if (start > 0 && end > 0 && end >= start)
             {
                 num = (from p in DB.tblInformatics
                        where p.Posted.Year <= year
@@ -520,7 +539,7 @@ namespace ltktDAO
                         select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
 
             }
-            if (start > 0 && end > 0 && end > start)
+            if (start > 0 && end > 0 && end >= start)
             {
                 lst = (from p in DB.tblInformatics
                        where p.Posted.Year <= year
@@ -550,7 +569,7 @@ namespace ltktDAO
                         select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
 
             }
-            if (start > 0 && end > 0 && end > start)
+            if (start > 0 && end > 0 && end >= start)
             {
                 lst = (from p in DB.tblInformatics
                        where p.Posted.Year <= year
@@ -573,13 +592,13 @@ namespace ltktDAO
             }
             else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_SIMPLE)
             {
-                start = CommonConstants.AT_IT_SIMPLE_TIP;
-                end = CommonConstants.AT_IT_SIMPLE_TIP;
+                start = CommonConstants.AT_IT_SIMPLE_TIP_START;
+                end = CommonConstants.AT_IT_SIMPLE_TIP_END;
             }
             else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_ADVANCE)
             {
-                start = CommonConstants.AT_IT_ADVANCE_TIP;
-                end = CommonConstants.AT_IT_ADVANCE_TIP;
+                start = CommonConstants.AT_IT_ADVANCE_TIP_START;
+                end = CommonConstants.AT_IT_ADVANCE_TIP_END;
             }
             else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE_WORD)
             {
