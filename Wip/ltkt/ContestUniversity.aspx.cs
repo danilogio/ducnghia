@@ -33,6 +33,8 @@ namespace ltkt
             {
                 articleSCO.Subject = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_SUBJECT]);
                 articleSCO.Time = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_TIME]);
+                articleSCO.CurrentPage = BaseServices.convertStringToInt(BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_PAGE]));
+                
 
                 Session[CommonConstants.SES_ARTICLE_SCO] = articleSCO;
                 lblTitle.Text = CommonConstants.SEC_UNIVERSITY_NAME;
