@@ -322,6 +322,7 @@ namespace ltkt
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_LINK,
                                                                                            CommonConstants.PARAM_EL_COMMON,
                                                                                            CommonConstants.NOW,
+                                                                                           CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else
@@ -381,6 +382,7 @@ namespace ltkt
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_LINK,
                                                                                            CommonConstants.PARAM_EL_MAJOR,
                                                                                            CommonConstants.NOW,
+                                                                                           CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else
@@ -439,6 +441,7 @@ namespace ltkt
                                                             BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_LINK,
                                                                                             CommonConstants.PARAM_EL_CERT,
                                                                                             CommonConstants.NOW,
+                                                                                            CommonConstants.PAGE_NUMBER_FIRST,
                                                                                             CommonConstants.TXT_VIEW_MORE));
                 }
                 else

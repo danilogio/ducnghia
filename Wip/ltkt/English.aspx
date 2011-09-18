@@ -19,7 +19,7 @@
         <hr />
         <br />
         <div>
-            <asp:ListView ID="productList" runat="server">
+           <%-- <asp:ListView ID="productList" runat="server">
                 <LayoutTemplate>
                     <ul class="articleList">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
@@ -44,13 +44,16 @@
                         Hiện tại chưa có tài liệu nào
                     </div>
                 </EmptyDataTemplate>
-            </asp:ListView>
+            </asp:ListView>--%>
+            <asp:Literal ID="list_items" runat="server">
+            
+            </asp:Literal>
         </div>
         <div class="datapager">
             <br />
             <br />
-            <hr />
-            <asp:DataPager ID="pagerCons" OnPreRender="DataPagerArticles_PreRender" PagedControlID="productList"
+            
+            <%--<asp:DataPager ID="pagerCons" OnPreRender="DataPagerArticles_PreRender" PagedControlID="productList"
                 runat="server">
                 <Fields>
                     <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False"
@@ -59,7 +62,9 @@
                     <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False"
                         LastPageText=">>" NextPageText=">" />
                 </Fields>
-            </asp:DataPager>
+            </asp:DataPager>--%>
+            <asp:Literal ID="lDataPager" runat="server">
+            </asp:Literal>
         </div>
         <hr />
         <br />

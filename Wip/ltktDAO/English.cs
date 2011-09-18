@@ -796,6 +796,7 @@ namespace ltktDAO
             int start = 0; 
             int end = 0;
             int year = BaseServices.getYearFromString(articleSCO.Time);
+            IEnumerable<tblEnglish> lst = null;
             //if (articleSCO.Classes == CommonConstants.PARAM_EL_COMMON)
             //{
 
@@ -862,34 +863,24 @@ namespace ltktDAO
             if (start > 0 && end > 0 && end >= start)
             {
                 
-                IEnumerable<tblEnglish> lst1 = from p in DB.tblEnglishes
+                                        lst = from p in DB.tblEnglishes
                                                where p.Posted.Year <= year
                                                      && p.State != CommonConstants.STATE_UNCHECK
                                                      && p.StickyFlg == false
                                                      && p.Class >= start && p.Class <= end
                                                orderby p.Posted descending
                                                select p;
-                return lst1;
             }
-            if (articleSCO.Classes != CommonConstants.ALL)
+            else if (articleSCO.Classes == CommonConstants.ALL)
             {
-                IEnumerable<tblEnglish> lst2 = from p in DB.tblEnglishes
-                                                where p.Posted.Year <= year
-                                                      && p.State != CommonConstants.STATE_UNCHECK
-                                                      && p.StickyFlg == false
-                                                      && p.Class == BaseServices.getValueClassByCode(articleSCO.Classes)
-                                                orderby p.Posted descending
-                                                select p;
-                return lst2;
+                 lst = from p in DB.tblEnglishes
+                       where p.Posted.Year <= year
+                             && p.State != CommonConstants.STATE_UNCHECK
+                             && p.StickyFlg == false
+                       orderby p.Posted descending
+                       select p;
             }
-            //class = all
-            IEnumerable<tblEnglish> lst3 = from p in DB.tblEnglishes
-                                            where p.Posted.Year <= year
-                                                  && p.State != CommonConstants.STATE_UNCHECK
-                                                  && p.StickyFlg == false
-                                            orderby p.Posted descending
-                                            select p;
-            return lst3;
+            return lst;
         }
 
         private IEnumerable<tblEnglish> searchStickyArticleByClassAndTime(ArticleSCO articleSCO)
@@ -898,6 +889,7 @@ namespace ltktDAO
             int year = BaseServices.getYearFromString(articleSCO.Time);
             int start = 0;
             int end = 0;
+            IEnumerable<tblEnglish> lst = null;
             //if (articleSCO.Classes == CommonConstants.PARAM_EL_COMMON)
             //{
 
@@ -963,39 +955,29 @@ namespace ltktDAO
             locateArticleIndex(articleSCO, out start,out end);
             if (start > 0 && end > 0 && end >= start)
             {
-                IEnumerable<tblEnglish> lst1 = from p in DB.tblEnglishes
+                                        lst = from p in DB.tblEnglishes
                                                 where p.Posted.Year <= year
                                                       && p.State != CommonConstants.STATE_UNCHECK
                                                       && p.StickyFlg == true
                                                       && p.Class >= start && p.Class <= end
                                                 orderby p.Posted descending
                                                 select p;
-                return lst1;
             }
-            if (articleSCO.Classes != CommonConstants.ALL)
+            else if (articleSCO.Classes == CommonConstants.ALL)
             {
-                IEnumerable<tblEnglish> lst2 = from p in DB.tblEnglishes
-                                                where p.Posted.Year <= year
-                                                      && p.State != CommonConstants.STATE_UNCHECK
-                                                      && p.StickyFlg == true
-                                                      && p.Class == BaseServices.getValueClassByCode(articleSCO.Classes)
-                                                orderby p.Posted descending
-                                                select p;
-                return lst2;
-            }
-            IEnumerable<tblEnglish> lst3 = from p in DB.tblEnglishes
+                                    lst  = from p in DB.tblEnglishes
                                             where p.Posted.Year <= year
                                                   && p.State != CommonConstants.STATE_UNCHECK
                                                   && p.StickyFlg == true
                                             orderby p.Posted descending
                                             select p;
-            return lst3;
-
+            }
+            return lst;
         }
 
-        public IEnumerable<tblEnglish> searchArticles(ArticleSCO articleSCO, int numberRecord)
+        public IEnumerable<tblEnglish> searchArticles(ArticleSCO articleSCO)
         {
-            IEnumerable<tblEnglish> lst1 = searchArticleByClassAndTime(articleSCO);
+            /*IEnumerable<tblEnglish> lst1 = searchArticleByClassAndTime(articleSCO);
 
             IEnumerable<tblEnglish> lst2 = searchStickyArticleByClassAndTime(articleSCO);
 
@@ -1012,13 +994,35 @@ namespace ltktDAO
                     //lst1 = lst2;
                     List<tblEnglish> l = lst1.ToList();
                     l.Add(lst1.ElementAt(8));
-                    IEnumerable<tblEnglish> h = l;*/
+                    IEnumerable<tblEnglish> h = l;
                     List<tblEnglish> l2 = lst2.ToList();
                     l2.AddRange(lst1.ToList());
                     lst1 = l2;
                 }
             }
-            return lst1;
+            return lst1;*/
+            IEnumerable<tblEnglish> lst1 = null;
+            if (articleSCO.CurrentPage == 1)
+            {
+                lst1 = searchStickyArticleByClassAndTime(articleSCO);
+            }
+            if (lst1 != null)
+            {
+                int remain = articleSCO.NumArticleOnPage - lst1.Count();
+                articleSCO.NumArticleOnPage = remain;
+            }
+            IEnumerable<tblEnglish> lst2 = searchArticleByClassAndTime(articleSCO);
+            if (lst1 != null)
+            {
+                if (lst1.Count() > 0)
+                {
+                    List<tblEnglish> l1 = lst1.ToList();
+                    l1.AddRange(lst2.ToList());
+                    lst2 = l1;
+                }
+            }
+            return lst2;
+
         }
         /// <summary>
         /// get latest sticky article by posted date
@@ -1051,7 +1055,10 @@ namespace ltktDAO
             if (numberRecord <= 0)
                 numberRecord = 1;
             IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
-                                           where p.Class >= _startClass && p.Class <= _endClass && p.StickyFlg == false
+                                           where p.Class >= _startClass 
+                                           && p.Class <= _endClass 
+                                           && p.StickyFlg == false
+                                           && p.State != CommonConstants.STATE_UNCHECK
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             return lst;
@@ -1069,7 +1076,10 @@ namespace ltktDAO
             if (numberRecord <= 0)
                 numberRecord = 1;
             IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
-                                           where p.Class >= _startClass && p.Class <= _endClass && p.StickyFlg == true
+                                           where p.Class >= _startClass 
+                                           && p.Class <= _endClass 
+                                           && p.StickyFlg == true
+                                           && p.State != CommonConstants.STATE_UNCHECK
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             return lst;

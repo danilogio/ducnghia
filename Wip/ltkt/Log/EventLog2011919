@@ -1,0 +1,6 @@
+9/19/2011 12:03:45 AM ==> [dvtrung]:   at ltktDAO.BaseServices.createMsgByTemplate(String template, String arg1, String arg2) in E:\Data\Projects\ducnghia\Wip\ltktDAO\BaseServices.cs:line 186
+   at ltkt.English.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\English.aspx.cs:line 72
+9/19/2011 1:17:27 AM ==> [dvtrung]:Object reference not set to an instance of an object.
+9/19/2011 1:17:27 AM ==> [dvtrung]:   at ltktDAO.BaseServices.createMsgByTemplate(String template, String arg1) in E:\Data\Projects\ducnghia\Wip\ltktDAO\BaseServices.cs:line 176
+   at ltkt.English.listItem(List`1 items) in e:\Data\Projects\ducnghia\Wip\ltkt\English.aspx.cs:line 119
+   at ltkt.English.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\English.aspx.cs:line 72

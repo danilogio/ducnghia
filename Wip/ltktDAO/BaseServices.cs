@@ -270,6 +270,18 @@ namespace ltktDAO
                     {
                         return CommonConstants.ALL;
                     }
+                case CommonConstants.PARAM_EL_COMMON:
+                    {
+                        return CommonConstants.PARAM_EL_COMMON_NAME;
+                    }
+                case CommonConstants.PARAM_EL_MAJOR:
+                    {
+                        return CommonConstants.PARAM_EL_MAJOR_NAME;
+                    }
+                case CommonConstants.PARAM_EL_CERT:
+                    {
+                        return CommonConstants.PARAM_EL_CERT_NAME;
+                    }
                 default:
                     {
                         return CommonConstants.BLANK;

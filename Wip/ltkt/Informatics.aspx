@@ -79,9 +79,11 @@
             </asp:Literal>
             
         </div>
-        <br />
+        
         
         <div class="datapager">
+        <br />
+        <br />
            <%-- <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
                 <Fields>

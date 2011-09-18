@@ -1332,11 +1332,15 @@ namespace ltktDAO
             /// <summary>
             /// CN
             /// </summary>
-            public const string PARAM_EL_MAJOR_NAME = "CN";
+            public const string PARAM_EL_MAJOR_NAME = "Chuyên Ngành";
             /// <summary>
             /// Chứng chỉ
             /// </summary>
             public const string PARAM_EL_CERT = "cert";
+            /// <summary>
+            /// cert name
+            /// </summary>
+            public const string PARAM_EL_CERT_NAME = "Chứng chỉ";
             /// <summary>
             /// Class 1 to 9
             /// </summary>
@@ -1495,7 +1499,11 @@ namespace ltktDAO
         /// <summary>
         /// link template for english page
         /// </summary>
-        public const string TEMP_ENGLISH_LINK = "<a href='" + PAGE_ENGLISH + "?" + REQ_CLASS + "={0}&" + REQ_TIME + "={1}'>{2}</a>";
+        public const string TEMP_ENGLISH_LINK = "<a href='" + TEMP_ENGLISH_URL + "&" + REQ_PAGE + "={2}'>{3}</a>";
+        /// <summary>
+        /// url template of english page
+        /// </summary>
+        public const string TEMP_ENGLISH_URL = PAGE_ENGLISH + "?" + REQ_CLASS + "={0}&" + REQ_TIME + "={1}";
         /// <summary>
         /// link template for informatics page
         /// </summary>

@@ -309,16 +309,16 @@
                                     <h3>
                                         <a href="#">Phổ thông</a></h3>
                                     <div class="dialog_link">
-                                        <a href="English.aspx?class=12&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=12&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Lớp 12&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=11&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=11&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Lớp 11&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=10&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=10&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Lớp 10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=1-9&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=1-9&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Lớp 1->9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                     </div>
@@ -327,16 +327,16 @@
                                     <h3>
                                         <a href="#">Chuyên Ngành</a></h3>
                                     <div class="dialog_link">
-                                        <a href="English.aspx?class=math-eco&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=math-eco&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Toán - Kinh tế&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=chem-bio-mat&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=chem-bio-mat&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Hóa - Sinh - KHVL&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=phy-tele-it&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=phy-tele-it&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Lý - Viễn thông - CNTT</a><br />
                                         <br />
-                                        <a href="English.aspx?class=other-mj&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=other-mj&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Khác&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                     </div>
@@ -345,16 +345,16 @@
                                     <h3>
                                         <a href="#">Chứng chỉ</a></h3>
                                     <div class="dialog_link">
-                                        <a href="English.aspx?class=toefl&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=toefl&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>TOEFL&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=toeic&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=toeic&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>TOEIC&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=ielts&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=ielts&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>IELTS&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="English.aspx?class=abc&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="English.aspx?class=abc&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>A - B - C&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                     </div>
