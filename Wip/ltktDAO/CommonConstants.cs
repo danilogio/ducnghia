@@ -811,7 +811,7 @@ namespace ltktDAO
         /// <summary>
         /// Message when error
         /// </summary>
-        public const string MSG_ERROR = "Đã có lỗi xảy ra, vui lòng thử lại sau!";
+        //public const string MSG_ERROR = "Đã có lỗi xảy ra, vui lòng thử lại sau!";
 
         /// <summary>
         /// Message when link error

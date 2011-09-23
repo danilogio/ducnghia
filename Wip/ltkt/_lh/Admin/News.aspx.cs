@@ -64,18 +64,25 @@ namespace ltkt.Admin
 
                             if (completeDelete)
                             {
-                                Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
-                                Response.Redirect("News.aspx?page=1");
+                                //Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
+                                Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
+                                                  + CommonConstants.ADD_PARAMETER
+                                                  + CommonConstants.REQ_PAGE
+                                                  + CommonConstants.EQUAL + "1");
+
                             }
                             else
                             {
-                                Response.Write(CommonConstants.ALERT_DELETE_FAIL);
+                                //Response.Write(CommonConstants.ALERT_DELETE_FAIL);
                             }
                         }
                     }
                     else
                     {
-                        Response.Redirect("News.aspx?page=1");
+                        Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
+                                                  + CommonConstants.ADD_PARAMETER
+                                                  + CommonConstants.REQ_PAGE
+                                                  + CommonConstants.EQUAL + "1");
                     }
                     //////////////////////////////////////////////////
                 }
@@ -83,7 +90,8 @@ namespace ltkt.Admin
             else
             {
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
-                Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
                 
@@ -188,13 +196,14 @@ namespace ltkt.Admin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            string strTitlte = txtTitle.Text;
-            string strChapeau = txtChapeau.Text;
-            string strContent = Server.HtmlDecode(txtContent.Text);
-
             if (Session[CommonConstants.SES_USER] != null)
             {
                 tblUser author = (tblUser)Session[CommonConstants.SES_USER];
+
+                string strTitlte = txtTitle.Text;
+                string strChapeau = txtChapeau.Text;
+                string strContent = Server.HtmlDecode(txtContent.Text);
+
                 try
                 {
                     tblNew editNews = (tblNew)Session[CommonConstants.SES_EDIT_NEWS];
@@ -207,12 +216,16 @@ namespace ltkt.Admin
                     {
                         newsDAO.updateNews(editNews.ID, author.Username, strTitlte, strChapeau, strContent);
                         Session[CommonConstants.SES_EDIT_NEWS] = null;
-                        Response.Redirect("News.aspx?page=1");
+                        Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
+                                                  + CommonConstants.ADD_PARAMETER
+                                                  + CommonConstants.REQ_PAGE
+                                                  + CommonConstants.EQUAL + "1");
                     }
                 }
                 catch (Exception ex)
                 {
-                    liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
+                    //liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
+                    liMessage.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
                     liMessage.Visible = true;
 
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
@@ -244,7 +257,10 @@ namespace ltkt.Admin
             
 
             addPanel.Visible = false;
-            Response.Redirect("News.aspx?page=1");
+            Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
+                                                  + CommonConstants.ADD_PARAMETER
+                                                  + CommonConstants.REQ_PAGE
+                                                  + CommonConstants.EQUAL + "1");
         }
     }
 }

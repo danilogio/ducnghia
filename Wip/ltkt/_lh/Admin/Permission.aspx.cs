@@ -13,6 +13,7 @@ namespace ltkt.Admin
         private ltktDAO.Users userDAO = new ltktDAO.Users();
         EventLog log = new EventLog();
         ltktDAO.Permission permitDAO = new ltktDAO.Permission();
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,6 +61,9 @@ namespace ltkt.Admin
                     string action = Request.QueryString[CommonConstants.REQ_ACTION];
                     int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
+                    //string[] result = { txtSearch.Text.Trim(), lblResult.Text };
+                    Session[CommonConstants.SES_PERMISSION_SEARCH] = Session["temp"];
+
                     showDetail(id, action);
 
                     //switch (action)
@@ -83,6 +87,8 @@ namespace ltkt.Admin
                         txtSearch.Text = session[0];
                         lblResult.Text = session[1];
                         lblResult.Visible = true;
+
+                        Session[CommonConstants.SES_PERMISSION_SEARCH] = null;
                     }
 
                 }
@@ -259,7 +265,8 @@ namespace ltkt.Admin
             }
 
             string[] result = { strKeyword, lblResult.Text };
-            Session[CommonConstants.SES_PERMISSION_SEARCH] = result;
+            //Session[CommonConstants.SES_PERMISSION_SEARCH] = result;
+            Session["temp"] = result;
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -327,6 +334,7 @@ namespace ltkt.Admin
             {
                 case "Tiếp tục":
                     Session[CommonConstants.SES_PERMISSION_EDIT] = null;
+                    //Session[CommonConstants.SES_PERMISSION_SEARCH] = null;
                     Response.Redirect(CommonConstants.PAGE_ADMIN_PERMISSION);
                     break;
                 case "Cập nhật":

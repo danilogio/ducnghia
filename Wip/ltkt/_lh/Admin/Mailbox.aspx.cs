@@ -373,7 +373,7 @@ namespace ltkt.Admin
             }
             catch (Exception ex)
             {
-                liMessage.Text = "Vui lòng kiểm tra lại địa chỉ email";
+                liMessage.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 liMessage.Visible = true;
             }
         }
@@ -407,7 +407,7 @@ namespace ltkt.Admin
             }
             catch (Exception ex)
             {
-                liMessageDetails.Text = CommonConstants.MSG_ERROR;
+                liMessageDetails.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 liMessageDetails.Visible = true;
 
             }
