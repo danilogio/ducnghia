@@ -809,6 +809,17 @@ namespace ltktDAO
         public const string MSG_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
 
         /// <summary>
+        /// Invalid file type
+        /// </summary>
+        public const string MSG_E_UPLOAD = "Định dạng tập tin không cho phép hoặc tập tin có kích thước quá lớn";
+
+        public const string MSG_I_THANKS_FOR_UPLOADING = "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
+
+        public const string MSG_I_WAITING_FOR_CHECKED = "<br />Bài viết của bạn sẽ được kiểm duyệt trong vòng 24h";
+
+        public const string MSG_I_UPLOAD_AGAIN = "<br /><br /><a href=\"Upload.aspx\">Thử lại</a>";
+
+        /// <summary>
         /// Message when error
         /// </summary>
         //public const string MSG_ERROR = "Đã có lỗi xảy ra, vui lòng thử lại sau!";
@@ -1024,6 +1035,13 @@ namespace ltktDAO
         /// Number record relative
         /// </summary>
         public const string CF_NUM_RECORD_RELATIVE = "NUM_RECORD_RELATIVE";
+
+        /// <summary>
+        /// File type allow to upload
+        /// </summary>
+        public const string CF_FILE_TYPE_ALLOW = "FILE_TYPE_ALLOW";
+
+        public const string CF_FILE_SIZE = "FILE_SIZE";
         #endregion
 
         #region Pages Name (PAGE)
@@ -1174,6 +1192,16 @@ namespace ltktDAO
         /// permission admin page name
         /// </summary>
         public const string PAGE_ADMIN_PERMISSION_NAME = "Quản lý phân quyền";
+
+        /// <summary>
+        /// Comment admin page
+        /// </summary>
+        public const string PAGE_ADMIN_COMMENT = "Comment.aspx";
+
+        /// <summary>
+        /// Comment admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_COMMENT_NAME = "Quản lý bình luận (comment)";
 
         /// <summary>
         /// Users page name

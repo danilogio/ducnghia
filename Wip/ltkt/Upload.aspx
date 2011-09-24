@@ -5,7 +5,8 @@
 <asp:Content ID="UploadHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <%--<title>Gửi bài viết | Website luyện thi kinh tế</title>--%>
     <title>
-        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
@@ -31,6 +32,27 @@
 	        $('#<%= ddlSubject.ClientID%>').val(0);
 	        $('#divLessonType').hide();
 	    }
+	    
+//	    function checkFileExtension(elem) {
+//            var filePath = elem.value;
+
+//            if(filePath.indexOf('.') == -1)
+//                return false;
+//            
+//            var validExtensions = new Array();
+//            var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+//            //Add valid extentions in this array
+//            validExtensions[0] = 'doc';
+//            //validExtensions[1] = 'pdf';
+//        
+//            for(var i = 0; i < validExtensions.length; i++) {
+//                if(ext == validExtensions[i])
+//                    return true;
+//            }
+
+//            alert('The file extension ' + ext.toUpperCase() + ' is not allowed!');
+//            return false;
+//        }
     </script>
 
 </asp:Content>
@@ -102,7 +124,7 @@
                         ControlToValidate="txtboxSummary" Display="None"></asp:RequiredFieldValidator>
                 </p>
                 <p>
-                    <span>Tập tin nội dung:</span>
+                    <span>Tập tin nội dung<asp:Literal ID="liFileSize" runat="server"></asp:Literal></span>
                     <asp:FileUpload ID="fileContent" runat="server" CssClass="contact"></asp:FileUpload>
                     <asp:RequiredFieldValidator ID="reqFileContent" runat="server" ErrorMessage="Xin vui lòng chọn tập tin nội dung"
                         ControlToValidate="fileContent" Display="None"></asp:RequiredFieldValidator>

@@ -22,7 +22,7 @@ namespace ltkt.Admin
                 {
                     ///DO WORK HERE ONLY//////////////////////////////
                     AdminMaster page = (AdminMaster)Master;
-                    page.updateHeader("Quản lý bình luận (comment)");
+                    page.updateHeader(CommonConstants.PAGE_ADMIN_COMMENT_NAME);
 
                     //////////////////////////////////////////////////
                 }

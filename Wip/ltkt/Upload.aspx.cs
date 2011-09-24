@@ -28,12 +28,19 @@ namespace ltkt
                                + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
             try
             {
-                if (Session[CommonConstants.SES_USER] == null)
+                //if (Session[CommonConstants.SES_USER] == null)
+                //{
+                //    Response.Redirect(CommonConstants.PAGE_LOGIN);
+                //}
+                //else
+                //{
+
+                if (Session[CommonConstants.SES_USER] != null)
                 {
-                    Response.Redirect(CommonConstants.PAGE_LOGIN);
-                }
-                else
-                {
+                    liFileSize.Text = "(<=";
+                    liFileSize.Text += control.getValueByInt(CommonConstants.CF_FILE_SIZE);
+                    liFileSize.Text += "MB)";
+
                     string selIndex = Request["selIndex"];
                     int selectedIndex;
 
@@ -71,7 +78,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
-                Response.Redirect(CommonConstants.PAGE_ERROR);
+                Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
         }
 
@@ -119,21 +126,33 @@ namespace ltkt
                         Directory.CreateDirectory(rootFolder);
                     }
 
-                    fileContent.SaveAs(filename);
-
-                    if (fileSolving.HasFile)
-                    {
-                        fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
-                            Path.GetFileNameWithoutExtension(fileContent.FileName) +
-                            "_solved" + Path.GetExtension(fileSolving.FileName));
-
-                        fileSolvingSave = folder + "\\" +
-                            Path.GetFileNameWithoutExtension(fileContent.FileName) +
-                            "_solved" + Path.GetExtension(fileSolving.FileName);
-                    }
-                    // ghi xuống db
                     try
                     {
+                        int maxSize = control.getValueByInt (CommonConstants.CF_FILE_SIZE);
+                        maxSize = maxSize * 1024 * 1024;
+
+                        if (checkFileType(fileContent.FileName) 
+                            && fileContent.PostedFile.ContentLength <= maxSize)
+                                fileContent.SaveAs(filename);
+                        else
+                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
+
+                        if (fileSolving.HasFile 
+                            && checkFileType (fileSolving.FileName)
+                            && fileSolving.PostedFile.ContentLength <= maxSize)
+                        {
+                            fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
+                                Path.GetFileNameWithoutExtension(fileContent.FileName) +
+                                "_solved" + Path.GetExtension(fileSolving.FileName));
+
+                            fileSolvingSave = folder + "\\" +
+                                Path.GetFileNameWithoutExtension(fileContent.FileName) +
+                                "_solved" + Path.GetExtension(fileSolving.FileName);
+                        }
+
+                        // ghi xuống db
+                        //try
+                        //{
                         switch (type)
                         {
                             case 0:
@@ -191,27 +210,57 @@ namespace ltkt
                                     break;
                                 }
                         }
+
+                        upload.Visible = false;
+                        message.Visible = true;
+                        liMessage.Text = CommonConstants.MSG_UPLOAD_SUCCESSFUL;
+                        liMessage.Text += CommonConstants.MSG_I_THANKS_FOR_UPLOADING;
+                        liMessage.Text += CommonConstants.MSG_I_WAITING_FOR_CHECKED;
+                        liMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
                     }
                     catch (Exception ex)
                     {
+                        upload.Visible = false;
+                        message.Visible = true;
+                        liMessage.Text = CommonConstants.MSG_I_THANKS_FOR_UPLOADING;
+                        liMessage.Text += "<br />";
+                        liMessage.Text += "<br />";
+                        liMessage.Text += CommonConstants.MSG_COMMON_ERROR_TEXT;
+                        liMessage.Text += "<br />";
+                        liMessage.Text += CommonConstants.MSG_E_UPLOAD;
+                        liMessage.Text += "<br />Danh sách tập tin được hỗ trợ: ";
+                        liMessage.Text += control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+                        liMessage.Text += CommonConstants.MSG_I_UPLOAD_AGAIN;
+
+
                         log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
                         Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
-                        Response.Redirect(CommonConstants.PAGE_ERROR);
+                        //Response.Redirect(CommonConstants.PAGE_ERROR);
                     }
-
-                    upload.Visible = false;
-                    message.Visible = true;
-                    liMessage.Text = CommonConstants.MSG_UPLOAD_SUCCESSFUL;
-                    liMessage.Text += "<br /><br />Cám ơn bạn đã đóng góp cho trung tâm!";
-                    liMessage.Text += "<br />Bài viết của bạn sẽ được kiểm duyệt trong vòng 24h";
-                    liMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
                 }
             }
             else
             {
                 Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
+        }
+
+        private bool checkFileType(string filename)
+        {
+            string ext = Path.GetExtension(filename);
+            ext = ext.Substring(1, ext.Length -1);
+            string fileTypeAllows = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+            char[] delimiterChars = { ';' };
+            string[] arrFileTypeAllows = fileTypeAllows.Split(delimiterChars);
+
+            foreach (string fileType in arrFileTypeAllows)
+            {
+                if (ext.Equals(fileType))
+                    return true;
+            }
+
+            return false;
         }
 
 
