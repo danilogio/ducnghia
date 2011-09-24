@@ -306,7 +306,7 @@ namespace ltktDAO
                     }
                     else
                     {
-                        links += String.Format(linkTemplate, articleSCO.Subject, i.ToString(), i.ToString());
+                        links += String.Format(linkTemplate, articleSCO.Subject, i.ToString(), CommonConstants.PAGE_NUMBER_FIRST, i.ToString());
                     }
                     links += CommonConstants.SPACE;
                 }

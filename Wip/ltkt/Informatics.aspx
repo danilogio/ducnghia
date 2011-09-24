@@ -12,6 +12,7 @@
             background-color: white;
         }
     </style>
+
     <script type="text/javascript">
         function hover(id) {
             //alert('' + id);
@@ -20,6 +21,7 @@
 
         }
     </script>
+
 </asp:Content>
 <asp:Content ID="Informatics" ContentPlaceHolderID="cphContent" runat="Server">
     <%-- 
@@ -47,7 +49,7 @@
         <hr />
         <br />
         <div>
-           <%-- <asp:ListView ID="productList" runat="server">
+            <%-- <asp:ListView ID="productList" runat="server">
                 <LayoutTemplate>
                     <ul class="articleList">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
@@ -73,18 +75,18 @@
                     </div>
                 </EmptyDataTemplate>
             </asp:ListView>--%>
+       
+            <asp:Literal ID="list_stickyItems" runat="server">
             
+            </asp:Literal>
             <asp:Literal ID="list_items" runat="server">
             
             </asp:Literal>
-            
         </div>
-        
-        
         <div class="datapager">
-        <br />
-        <br />
-           <%-- <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
+            <br />
+            <br />
+            <%-- <asp:DataPager ID="DataPager1" OnPreRender="DataPagerArticles_PreRender" PageSize="6"
                 PagedControlID="productList" runat="server">
                 <Fields>
                     <asp:NextPreviousPagerField ShowFirstPageButton="True" ShowNextPageButton="False" />
@@ -92,8 +94,7 @@
                     <asp:NextPreviousPagerField ShowLastPageButton="True" ShowPreviousPageButton="False" />
                 </Fields>
             </asp:DataPager>--%>
-            
-            <asp:Literal ID="lDataPager" runat ="server">
+            <asp:Literal ID="lDataPager" runat="server">
             
             </asp:Literal>
         </div>

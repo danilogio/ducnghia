@@ -47,7 +47,6 @@ namespace ltkt
                     articleSCO.Time = CommonConstants.NOW;
                 }
                 articleSCO.TotalRecord = englishDAO.countTotalArticles(articleSCO);
-                bool hasRecord = false;
                 if (articleSCO.TotalRecord > 0)
                 {
                     string classes = BaseServices.getNameSubjectByCode(articleSCO.Classes);
@@ -63,25 +62,32 @@ namespace ltkt
                     articleSCO.TotalPage = BaseServices.getTotalPage(articleSCO.TotalRecord, articleSCO.NumArticleOnPage);
                     if (articleSCO.CurrentPage <= articleSCO.TotalPage && articleSCO.CurrentPage >= BaseServices.convertStringToInt(CommonConstants.PAGE_NUMBER_FIRST))
                     {
-                        IEnumerable<tblEnglish> lst = englishDAO.searchArticles(articleSCO);
+                        if (articleSCO.CurrentPage == BaseServices.convertStringToInt(CommonConstants.PAGE_NUMBER_FIRST))
+                        {
+                            IEnumerable<tblEnglish> slst = englishDAO.searchStickyArticleByClassAndTime(articleSCO);
+                            if (slst != null)
+                            {
+                                list_stickyItems.Text = listSItem(slst.ToList(), articleSCO.NumArticleOnPage);
+                            }
+                        }
+                        IEnumerable<tblEnglish> lst = englishDAO.searchArticleByClassAndTime(articleSCO);
                         if (lst != null)
                         {
-                            if (lst.Count() > 0)
-                            {
-                                hasRecord = true;
-                                list_items.Text = listItem(lst.ToList());
-                                lDataPager.Text = CommonConstants.TEMP_HR_TAG
-                                                + BaseServices.createPagingLink(BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_URL, articleSCO.Classes, articleSCO.Time),
-                                                                                articleSCO.CurrentPage,
-                                                                                articleSCO.TotalPage);
-                            }
+                            list_items.Text = listItem(lst.ToList());
+                            lDataPager.Text = CommonConstants.TEMP_HR_TAG
+                                            + BaseServices.createPagingLink(BaseServices.createMsgByTemplate(CommonConstants.TEMP_ENGLISH_URL, articleSCO.Classes, articleSCO.Time),
+                                                                            articleSCO.CurrentPage,
+                                                                            articleSCO.TotalPage);
                         }
                     }
                     //lblOlderLinks.Text = getOlderLinks(articleSCO);
                 }
-                if (!hasRecord)
+                if (BaseServices.isNullOrBlank(list_items.Text))
                 {
-                    list_items.Text = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                    if (BaseServices.isNullOrBlank(list_stickyItems.Text))
+                    {
+                        list_items.Text = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                    }
                     lDataPager.Visible = false;
                 }
 
@@ -103,26 +109,58 @@ namespace ltkt
             }
             
         }
-        protected string listItem(List<tblEnglish> items)
+        private string listItem(List<tblEnglish> items)
         {
             string datas = CommonConstants.BLANK;
-            foreach (var item in items)
+            for (int i = 0 ; i < items.Count; i++)
             {
                 string data = CommonConstants.BLANK;
                 string thumbnailTag = CommonConstants.BLANK;
                 string titleTag = CommonConstants.BLANK;
-                titleTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_CENTER_TAG, BaseServices.nullToBlank( item.Title));
+                titleTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_CENTER_TAG, BaseServices.nullToBlank( items[i].Title));
                 titleTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
                                                             CommonConstants.SEC_ENGLISH_CODE,
-                                                            item.ID.ToString(),
+                                                            items[i].ID.ToString(),
                                                             titleTag);
-                thumbnailTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_ARTICLE_DETAIL_THUMBNAIL, BaseServices.nullToBlank(item.Thumbnail));
+                thumbnailTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_ARTICLE_DETAIL_THUMBNAIL, BaseServices.nullToBlank(items[i].Thumbnail));
                 thumbnailTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_CENTER_TAG, thumbnailTag);
                 data = thumbnailTag
                         + CommonConstants.TEMP_BR_TAG
                         + CommonConstants.TEMP_BR_TAG
                         + titleTag;
-                data = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_ARTICLE_DETAIL, item.ID.ToString(), data);
+                data = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_ARTICLE_DETAIL, (i + 1).ToString(), data);
+                data = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, data);
+                datas += data;
+            }
+            if (datas != CommonConstants.BLANK)
+            {
+                datas = BaseServices.createMsgByTemplate(CommonConstants.TEMP_UL_TAG_WITH_CLASS, CommonConstants.CSS_ARTICLE_LIST, datas);
+            }
+            return datas;
+        }
+
+        private string listSItem(List<tblEnglish> items, int maxRecord)
+        {
+            string datas = CommonConstants.BLANK;
+            int size = items.Count;
+            int limit = BaseServices.min(maxRecord / 2, size);
+            for (int i = 0; i < limit; i++)
+            {
+                string data = CommonConstants.BLANK;
+                string thumbnailTag = CommonConstants.BLANK;
+                string titleTag = CommonConstants.BLANK;
+                titleTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_CENTER_TAG, items[i].Title);
+                titleTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
+                                                            CommonConstants.SEC_INFORMATICS_CODE,
+                                                            items[i].ID.ToString(),
+                                                            titleTag);
+                thumbnailTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_ARTICLE_DETAIL_THUMBNAIL, items[i].Thumbnail);
+                thumbnailTag = BaseServices.createMsgByTemplate(CommonConstants.TEMP_CENTER_TAG, thumbnailTag);
+                data = thumbnailTag
+                        + CommonConstants.TEMP_BR_TAG
+                        + CommonConstants.TEMP_BR_TAG
+                        + titleTag;
+                data = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_ARTICLE_DETAIL, (i + maxRecord + 1).ToString(), data);
                 data = BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, data);
                 datas += data;
             }

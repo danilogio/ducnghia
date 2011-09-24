@@ -273,28 +273,28 @@
                                     <h3>
                                         <a href="#">Danh sách môn</a></h3>
                                     <div class="dialog_link">
-                                        <a href="ContestUniversity.aspx?sub=math&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=math&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Toán&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=phy&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=phy&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Lý&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=chem&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=chem&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Hóa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=bio&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=bio&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Sinh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=lit&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=lit&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Văn&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=his&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=his&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Sử&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=geo&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=geo&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Địa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="ContestUniversity.aspx?sub=el&time=now" class="ui-state-default ui-corner-all">
+                                        <a href="ContestUniversity.aspx?sub=el&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Môn Anh&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                     </div>

@@ -90,6 +90,7 @@ namespace ltkt
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_UNI_LINK,
                                                                                            CommonConstants.ALL,
                                                                                            CommonConstants.NOW,
+                                                                                           CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
                 }
                 else

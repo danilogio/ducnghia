@@ -45,6 +45,9 @@
                     </div>
                 </EmptyDataTemplate>
             </asp:ListView>--%>
+            <asp:Literal ID="list_stickyItems" runat="server">
+            
+            </asp:Literal>
             <asp:Literal ID="list_items" runat="server">
             
             </asp:Literal>

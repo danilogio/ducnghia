@@ -699,25 +699,76 @@ namespace ltktDAO
         /// </summary>
         /// <param name="articleSCO"></param>
         /// <returns></returns>
-        public IEnumerable<tblContestForUniversity> getArticleBySubjectAndTime(ArticleSCO articleSCO)
+        public IEnumerable<tblContestForUniversity> searchLatestArticleBySubjectAndTime(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            IEnumerable<tblContestForUniversity> lst;
+            IEnumerable<tblContestForUniversity> lst = null;
+            if (articleSCO.Subject == CommonConstants.ALL)
+            {
+                lst = (from p in DB.tblContestForUniversities
+                       where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                       && p.State != CommonConstants.STATE_UNCHECK
+                       && p.StickyFlg == false
+                       orderby p.Year descending
+                       select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
+            }
+            else
+            {
+                lst = (from p in DB.tblContestForUniversities
+                       where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                       && p.State != CommonConstants.STATE_UNCHECK
+                       && p.StickyFlg == false
+                       orderby p.Year descending
+                       select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
+            }
+            return lst;
+        }
+
+        public IEnumerable<tblContestForUniversity> searchLatestStickyArticles(ArticleSCO articleSCO)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblContestForUniversity> lst = null;
             if (articleSCO.Subject == CommonConstants.ALL)
             {
                 lst = from p in DB.tblContestForUniversities
                       where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                       && p.State != CommonConstants.STATE_UNCHECK
+                      && p.StickyFlg == true
                       orderby p.Year descending
                       select p;
-                return lst;
             }
-             lst = from p in DB.tblContestForUniversities
-                    where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
-                    && p.State != CommonConstants.STATE_UNCHECK
-                    orderby p.Year descending
-                   select p;
+            else
+            {
+                lst = from p in DB.tblContestForUniversities
+                      where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                      && p.State != CommonConstants.STATE_UNCHECK
+                      && p.StickyFlg == true
+                      orderby p.Year descending
+                      select p;
+            }
             return lst;
+        }
+        public int countTotalRecord(ArticleSCO articleSCO)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            int num = 0;
+            if (articleSCO.Subject == CommonConstants.ALL)
+            {
+                num = (from p in DB.tblContestForUniversities
+                       where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                       && p.State != CommonConstants.STATE_UNCHECK
+                       orderby p.Year descending
+                       select p).Count();
+            }
+            else
+            {
+                num = (from p in DB.tblContestForUniversities
+                       where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
+                       && p.State != CommonConstants.STATE_UNCHECK
+                       orderby p.Year descending
+                       select p).Count();
+            }
+            return num;
         }
         /// <summary>
         /// get all records of Contest

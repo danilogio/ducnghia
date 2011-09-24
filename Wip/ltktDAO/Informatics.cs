@@ -486,7 +486,7 @@ namespace ltktDAO
             }
             return lst2;
         }
-        private IEnumerable<tblInformatic> searchLatestArticle(ArticleSCO articleSCO)
+        public IEnumerable<tblInformatic> searchLatestArticle(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = null;
@@ -551,7 +551,7 @@ namespace ltktDAO
             }
             return lst;
         }
-        private IEnumerable<tblInformatic> searchLatestStickyArticle(ArticleSCO articleSCO)
+        public IEnumerable<tblInformatic> searchLatestStickyArticle(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = null;

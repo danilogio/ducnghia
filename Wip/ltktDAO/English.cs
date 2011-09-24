@@ -790,7 +790,7 @@ namespace ltktDAO
                                            select p).Take(numberRecord);
             return lst;
         }
-        private IEnumerable<tblEnglish> searchArticleByClassAndTime(ArticleSCO articleSCO)
+        public IEnumerable<tblEnglish> searchArticleByClassAndTime(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             int start = 0; 
@@ -863,27 +863,27 @@ namespace ltktDAO
             if (start > 0 && end > 0 && end >= start)
             {
                 
-                                        lst = from p in DB.tblEnglishes
+                                        lst = (from p in DB.tblEnglishes
                                                where p.Posted.Year <= year
                                                      && p.State != CommonConstants.STATE_UNCHECK
                                                      && p.StickyFlg == false
                                                      && p.Class >= start && p.Class <= end
                                                orderby p.Posted descending
-                                               select p;
+                                               select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
             else if (articleSCO.Classes == CommonConstants.ALL)
             {
-                 lst = from p in DB.tblEnglishes
+                 lst = (from p in DB.tblEnglishes
                        where p.Posted.Year <= year
                              && p.State != CommonConstants.STATE_UNCHECK
                              && p.StickyFlg == false
                        orderby p.Posted descending
-                       select p;
+                       select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
             return lst;
         }
 
-        private IEnumerable<tblEnglish> searchStickyArticleByClassAndTime(ArticleSCO articleSCO)
+        public IEnumerable<tblEnglish> searchStickyArticleByClassAndTime(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             int year = BaseServices.getYearFromString(articleSCO.Time);
@@ -955,22 +955,22 @@ namespace ltktDAO
             locateArticleIndex(articleSCO, out start,out end);
             if (start > 0 && end > 0 && end >= start)
             {
-                                        lst = from p in DB.tblEnglishes
-                                                where p.Posted.Year <= year
-                                                      && p.State != CommonConstants.STATE_UNCHECK
-                                                      && p.StickyFlg == true
-                                                      && p.Class >= start && p.Class <= end
-                                                orderby p.Posted descending
-                                                select p;
+                lst = from p in DB.tblEnglishes
+                      where p.Posted.Year <= year
+                            && p.State != CommonConstants.STATE_UNCHECK
+                            && p.StickyFlg == true
+                            && p.Class >= start && p.Class <= end
+                      orderby p.Posted descending
+                      select p;
             }
             else if (articleSCO.Classes == CommonConstants.ALL)
             {
-                                    lst  = from p in DB.tblEnglishes
-                                            where p.Posted.Year <= year
-                                                  && p.State != CommonConstants.STATE_UNCHECK
-                                                  && p.StickyFlg == true
-                                            orderby p.Posted descending
-                                            select p;
+                lst = from p in DB.tblEnglishes
+                      where p.Posted.Year <= year
+                            && p.State != CommonConstants.STATE_UNCHECK
+                            && p.StickyFlg == true
+                      orderby p.Posted descending
+                      select p;
             }
             return lst;
         }
