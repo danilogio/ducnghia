@@ -3,7 +3,9 @@
 
 <asp:Content ID="AdvertisementAdminHeader" ContentPlaceHolderID="cphAdminHeader"
     runat="Server">
-    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
     <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body

@@ -11,6 +11,7 @@ namespace ltkt.Admin
     public partial class ContestUniversity : System.Web.UI.Page
     {
         private ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +23,14 @@ namespace ltkt.Admin
                 {
                     ///DO WORK HERE ONLY//////////////////////////////
                     AdminMaster page = (AdminMaster)Master;
-                    page.updateHeader("Quản lý chủ đề luyện thi đại học");
+                    page.updateHeader(CommonConstants.PAGE_ADMIN_UNIVERSITY_NAME);
+
+                    liTitle.Text = CommonConstants.PAGE_ADMIN_UNIVERSITY_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+                    pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
                 }
             }
@@ -32,6 +40,11 @@ namespace ltkt.Admin
                 //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
+        }
+
+        private void pageLoad(object sender, EventArgs e, tblUser user)
+        {
+            
         }
     }
 }

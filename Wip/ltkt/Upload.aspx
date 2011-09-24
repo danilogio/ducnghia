@@ -13,20 +13,20 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
 
     <script type="text/javascript">
-	    $(document).ready(function() {
-	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
-	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
+//	    $(document).ready(function() {
+//	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
+//	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
 
-	            if (selectedIndex == 0) {
-	                $('#divLessonType').hide();
-	                $('#divContest').show();
-	            }
-	            else {
-	                $('#divLessonType').show();
-	                $('#divContest').hide();
-	            }
-	        });
-	    });
+//	            if (selectedIndex == 0) {
+//	                $('#divLessonType').hide();
+//	                $('#divContest').show();
+//	            }
+//	            else {
+//	                $('#divLessonType').show();
+//	                $('#divContest').hide();
+//	            }
+//	        });
+//	    });
 
 	    function init() {
 	        $('#<%= ddlSubject.ClientID%>').val(0);
@@ -106,7 +106,7 @@
                     </asp:RequiredFieldValidator>
                 </p>
                 <%--Đối với Anh văn, Tin học--%>
-                <div id="divLessonType">
+                <%--<div id="divLessonType">
                     <p id="lessonType">
                         <span>Loại bài viết: </span>
                         <asp:DropDownList ID="ddlType" runat="server">
@@ -115,7 +115,7 @@
                             <asp:ListItem Text="Bài tập" Value="2"></asp:ListItem>
                         </asp:DropDownList>
                     </p>
-                </div>
+                </div>--%>
                 <%-- Chung --%>
                 <p>
                     <span>Tóm tắt:</span><asp:TextBox ID="txtboxSummary" TextMode="MultiLine" Rows="5"

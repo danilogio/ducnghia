@@ -914,6 +914,11 @@ namespace ltktDAO
         /// Bật/Tắt chức năng gửi email
         /// </summary>
         public const string AF_EMAIL_SEND = "EMAIL_SEND";
+
+        /// <summary>
+        /// Bật/tắt xem trước
+        /// </summary>
+        public const string AF_PREVIEW_ARTICLE = "PREVIEW_ARTICLE";
         #endregion
 
         #region Statistic Function (SF)
@@ -1203,6 +1208,16 @@ namespace ltktDAO
         /// Comment admin page name
         /// </summary>
         public const string PAGE_ADMIN_COMMENT_NAME = "Quản lý bình luận (comment)";
+
+        /// <summary>
+        /// contest for university page name
+        /// </summary>
+        public const string PAGE_ADMIN_UNIVERSITY_NAME = "Quản lý chủ đề luyện thi đại học";
+
+        /// <summary>
+        /// contest for university page
+        /// </summary>
+        public const string PAGE_ADMIN_UNIVERSITY = "ContestUniversity.aspx";
 
         /// <summary>
         /// Users page name
@@ -1589,9 +1604,15 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_A_TAG = "<a href=\"{0}\">{1}</a>";
         /// <summary>
-        /// Templte b tag
+        /// Templte i tag
         /// </summary>
         public const string TEMP_I_TAG = "<i>{0}</i>";
+
+        /// <summary>
+        /// Templte b tag
+        /// </summary>
+        public const string TEMP_B_TAG = "<b>{0}</b>";
+
         /// <summary>
         /// Template strong tag, 1 param
         /// </summary>
@@ -1599,7 +1620,11 @@ namespace ltktDAO
         /// <summary>
         /// Template br tag, no param
         /// </summary>
-        public const string TEMP_BR_TAG = "<br/>";
+        public const string TEMP_BR_TAG = "<br />";
+        /// <summary>
+        /// Template spane tag
+        /// </summary>
+        public const string TEMP_SPAN_TAG = "<span>{0}</span>";
         /// <summary>
         /// Template font tag
         /// </summary>
@@ -1607,7 +1632,7 @@ namespace ltktDAO
         /// <summary>
         /// Template for span tag
         /// </summary>
-        public const string TEMP_SPAN_TAG = "<span style=\"color:{0};\" title=\"{1}\">{2}</span>";
+        public const string TEMP_SPAN_TAG_WITH_COLOR = "<span style=\"color:{0};\" title=\"{1}\">{2}</span>";
         /// <summary>
         /// Template of annoucement;
         /// </summary>
@@ -1639,7 +1664,7 @@ namespace ltktDAO
         /// <summary>
         /// hr tag <![CDATA[]]>
         /// </summary>
-        public const string TEMP_HR_TAG = "<hr/";
+        public const string TEMP_HR_TAG = "<hr />";
         /// <summary>
         /// CDATA[]
         /// </summary>

@@ -128,17 +128,17 @@ namespace ltkt
 
                     try
                     {
-                        int maxSize = control.getValueByInt (CommonConstants.CF_FILE_SIZE);
+                        int maxSize = control.getValueByInt(CommonConstants.CF_FILE_SIZE);
                         maxSize = maxSize * 1024 * 1024;
 
-                        if (checkFileType(fileContent.FileName) 
+                        if (checkFileType(fileContent.FileName)
                             && fileContent.PostedFile.ContentLength <= maxSize)
-                                fileContent.SaveAs(filename);
+                            fileContent.SaveAs(filename);
                         else
                             throw new Exception(CommonConstants.MSG_E_UPLOAD);
 
-                        if (fileSolving.HasFile 
-                            && checkFileType (fileSolving.FileName)
+                        if (fileSolving.HasFile
+                            && checkFileType(fileSolving.FileName)
                             && fileSolving.PostedFile.ContentLength <= maxSize)
                         {
                             fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
@@ -190,7 +190,7 @@ namespace ltkt
                             case 1:
                                 {
                                     informaticsDAO.insertInformatic(txtboxTitle.Text,
-                                        Convert.ToInt32(ddlType.SelectedValue),
+                                        0,
                                         txtboxSummary.Text,
                                         user.Username,
                                         DateTime.Now,
@@ -201,7 +201,7 @@ namespace ltkt
                             case 2:
                                 {
                                     englishDAO.insertEnglish(txtboxTitle.Text,
-                                        Convert.ToInt32(ddlType.SelectedValue),
+                                        0,
                                         txtboxSummary.Text,
                                         user.Username,
                                         DateTime.Now,
@@ -249,7 +249,7 @@ namespace ltkt
         private bool checkFileType(string filename)
         {
             string ext = Path.GetExtension(filename);
-            ext = ext.Substring(1, ext.Length -1);
+            ext = ext.Substring(1, ext.Length - 1);
             string fileTypeAllows = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
             char[] delimiterChars = { ';' };
             string[] arrFileTypeAllows = fileTypeAllows.Split(delimiterChars);
@@ -262,7 +262,5 @@ namespace ltkt
 
             return false;
         }
-
-
     }
 }

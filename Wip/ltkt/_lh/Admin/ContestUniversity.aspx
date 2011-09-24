@@ -3,7 +3,10 @@
 
 <asp:Content ID="ContestForUniversityAdminHeader" ContentPlaceHolderID="cphAdminHeader"
     runat="Server">
-    <title>Quản lý đề thi đại học | Website luyện thi kinh tế</title>
+    <%--<title>Quản lý đề thi đại học | Website luyện thi kinh tế</title>--%>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
     
     <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
@@ -24,7 +27,11 @@
 </asp:Content>
 <asp:Content ID="ContestForUniversityAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content">
-        <h4>
-            Luyện thi đại học</h4>
+        <asp:Panel ID="messagePanel" runat="server" Visible="false">
+        </asp:Panel>
+        <asp:Panel ID="viewPanel" runat="server">
+        </asp:Panel>
+        <asp:Panel ID="detailPanel" runat="server" Visible="false">
+        </asp:Panel>
     </div>
 </asp:Content>

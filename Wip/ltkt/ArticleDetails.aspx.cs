@@ -18,76 +18,192 @@ namespace ltkt
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         ltktDAO.Control control = new ltktDAO.Control();
         BaseServices bs = new BaseServices();
+        ltktDAO.Admin adminDAO = new ltktDAO.Admin();
+        ltktDAO.Statistics statisticsDAO = new ltktDAO.Statistics();
 
         protected void Page_Load(object sender, EventArgs e)
+        {
+            // Title on header
+            liTitle.Text += CommonConstants.SPACE + CommonConstants.HLINE
+                                    + CommonConstants.SPACE
+                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+            //Turn on or off preview button
+            if (adminDAO.isON(CommonConstants.AF_PREVIEW_ARTICLE))
+                btnPreview.Visible = true;
+            else
+                btnPreview.Visible = false;
+
+
+            try
+            {
+                pageLoad(sender, e);
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
+
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
+                                            + CommonConstants.NEWLINE + ex.StackTrace);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
+
+
+            //if (Request.QueryString[CommonConstants.REQ_SECTION] != null)
+            //{
+            //    string sec = Request.QueryString[CommonConstants.REQ_SECTION];
+            //    int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+
+            //    if (checkDoOneTime(CommonConstants.LIKE, sec, id))
+            //    {
+            //        btnLike.Visible = false;
+            //    }
+            //    if (checkDoOneTime(CommonConstants.DISLIKE, sec, id))
+            //    {
+            //        btnDislike.Visible = false;
+            //    }
+
+            //    try
+            //    {
+            //        switch (sec)
+            //        {
+            //            case CommonConstants.SEC_UNIVERSITY_CODE:
+            //                {
+            //                    // do something
+            //                    showContest(id);
+            //                    break;
+            //                }
+            //            case CommonConstants.SEC_ENGLISH_CODE:
+            //                {
+            //                    // do something else
+            //                    showEnglish(id);
+            //                    break;
+            //                }
+            //            case CommonConstants.SEC_INFORMATICS_CODE:
+            //                {
+            //                    //do something
+            //                    showInformatic(id);
+            //                    break;
+            //                }
+            //            default:
+            //                break;
+            //        }
+
+                    
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            //        string username = CommonConstants.USER_GUEST;
+            //        if (user != null)
+            //        {
+            //            username = user.Username;
+            //        }
+
+            //        log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+
+            //        Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+            //        Response.Redirect(CommonConstants.PAGE_ERROR);
+            //    }
+
+            //    if (txtPostedComment.Text == String.Empty)
+            //    {
+            //        txtPostedComment.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        txtPostedComment.Visible = true;
+            //    }
+
+            //    if (Session[CommonConstants.SES_USER] != null)
+            //    {
+            //        nonUserPanel.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        nonUserPanel.Visible = true;
+            //    }
+            //}
+            //else
+            //{
+            //    viewArticle.Visible = false;
+            //    commentPanel.Visible = false;
+            //    relativePanel.Visible = false;
+            //    invalidArticle.Visible = true;
+            //    //20110911 TrungDV change create message START
+            //    //liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
+            //    //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+            //    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+            //    liMessage.Text += CommonConstants.TEMP_BR_TAG
+            //                        + CommonConstants.TEMP_BR_TAG
+            //                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
+            //                                                            CommonConstants.PAGE_HOME,
+            //                                                            CommonConstants.TXT_BACK_TO_HOME);
+            //    //20110911 TrungDV change create message END
+            //}
+
+        }
+
+        private void pageLoad(object sender, EventArgs e)
         {
             if (Request.QueryString[CommonConstants.REQ_SECTION] != null)
             {
                 string sec = Request.QueryString[CommonConstants.REQ_SECTION];
                 int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
-                
+
                 if (checkDoOneTime(CommonConstants.LIKE, sec, id))
                 {
                     btnLike.Visible = false;
                 }
-                if( checkDoOneTime(CommonConstants.DISLIKE, sec, id))
+                if (checkDoOneTime(CommonConstants.DISLIKE, sec, id))
                 {
                     btnDislike.Visible = false;
                 }
-                
-                try
+
+
+                switch (sec)
                 {
-                    switch (sec)
-                    {
-                        case CommonConstants.SEC_UNIVERSITY_CODE:
-                            {
-                                // do something
-                                showContest(id);
-                                break;
-                            }
-                        case CommonConstants.SEC_ENGLISH_CODE:
-                            {
-                                // do something else
-                                showEnglish(id);
-                                break;
-                            }
-                        case CommonConstants.SEC_INFORMATICS_CODE:
-                            {
-                                //do something
-                                showInformatic(id);
-                                break;
-                            }
-                        default:
+                    case CommonConstants.SEC_UNIVERSITY_CODE:
+                        {
+                            // do something
+                            showContest(id);
                             break;
-                    }
-
-                    liTitle.Text += CommonConstants.SPACE + CommonConstants.HLINE
-                                    + CommonConstants.SPACE
-                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-                }
-                catch (Exception ex)
-                {
-                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    string username = CommonConstants.USER_GUEST;
-                    if (user != null)
-                    {
-                        username = user.Username;
-                    }
-
-                    log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
-
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
-                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                        }
+                    case CommonConstants.SEC_ENGLISH_CODE:
+                        {
+                            // do something else
+                            showEnglish(id);
+                            break;
+                        }
+                    case CommonConstants.SEC_INFORMATICS_CODE:
+                        {
+                            //do something
+                            showInformatic(id);
+                            break;
+                        }
+                    default:
+                        break;
                 }
 
-                if (txtPostedComment.Text == String.Empty)
-                {
-                    txtPostedComment.Visible = false;
-                }
-                else
-                {
-                    txtPostedComment.Visible = true;
-                }
+
+                //if (adminDAO.isON(CommonConstants.AF_COMMENT))
+                //    showComment(txtPostedComment.Text);
+
+                //if (txtPostedComment.Text == String.Empty)
+                //{
+                //    txtPostedComment.Visible = false;
+                //}
+                //else
+                //{
+                //    txtPostedComment.Visible = true;
+                //}
 
                 if (Session[CommonConstants.SES_USER] != null)
                 {
@@ -97,6 +213,7 @@ namespace ltkt
                 {
                     nonUserPanel.Visible = true;
                 }
+
             }
             else
             {
@@ -115,12 +232,18 @@ namespace ltkt
                                                                         CommonConstants.TXT_BACK_TO_HOME);
                 //20110911 TrungDV change create message END
             }
-
         }
+
+        private void showComment(string comments)
+        {
+            
+        }
+
         public string createRatingBar(int score)
         {
             return bs.createRatingBar(score % 10, 10);
         }
+
         private void showContest(int id)
         {
             try
@@ -128,16 +251,16 @@ namespace ltkt
                 tblContestForUniversity contest = ltktDAO.Contest.getContest(id);
                 if (contest != null)
                 {
-                    liTitle.Text = BaseServices.nullToBlank( contest.Title);
+                    liTitle.Text = BaseServices.nullToBlank(contest.Title);
 
                     lblTitle.Text = BaseServices.nullToBlank(contest.Title);
                     lblLiker.Text = BaseServices.nullToBlank(contest.Point.ToString());
 
                     lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.Contest.getAuthor(id));
-                    lblPostedDate.Text = BaseServices.nullToBlank( bs.convertDateToString(contest.Posted));
+                    lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(contest.Posted));
                     lblChecker.Text = BaseServices.nullToBlank(contest.Checker);
 
-                    lblOverview.Text = BaseServices.nullToBlank( contest.Contents.Replace("\n", "<br />"));
+                    lblOverview.Text = BaseServices.nullToBlank(contest.Contents.Replace("\n", "<br />"));
 
                     hpkDownloadlink.Text = BaseServices.nullToBlank(contest.Title);
                     hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(contest.Location.Replace("\\", "/"));
@@ -145,12 +268,14 @@ namespace ltkt
                     if (!BaseServices.isNullOrBlank(contest.Solving))
                     {
                         //lblResolve.Text = "<a href=\"" + contest.Solving.Replace("\\", "/") + "\">Hướng dẫn giải</a>";
-                        lblResolve.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, 
-                                                                        contest.Solving.Replace("\\", "/"), 
+                        lblResolve.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
+                                                                        contest.Solving.Replace("\\", "/"),
                                                                         CommonConstants.TXT_RESOLVING);
                     }
 
-                    txtPostedComment.Text = BaseServices.nullToBlank( contest.Comment);
+                    //txtPostedComment.Text = BaseServices.nullToBlank(contest.Comment);
+                    showComment(contest.Comment);
+                    
                     int numberRecordRelative = control.getValueByInt(CommonConstants.CF_NUM_RECORD_RELATIVE);
                     IList<tblContestForUniversity> items = contestDAO.getRelativeByYear(contest.Year, numberRecordRelative);
                     lblRelative.Text = "<ul>";
@@ -215,16 +340,16 @@ namespace ltkt
                 tblEnglish english = ltktDAO.English.getEnglish(id);
                 if (english != null)
                 {
-                    liTitle.Text = BaseServices.nullToBlank( english.Title);
+                    liTitle.Text = BaseServices.nullToBlank(english.Title);
 
                     lblTitle.Text = BaseServices.nullToBlank(english.Title);
                     lblLiker.Text = english.Point.ToString();
 
                     lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.English.getAuthor(id));
                     lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(english.Posted));
-                    lblChecker.Text = BaseServices.nullToBlank( english.Checker);
+                    lblChecker.Text = BaseServices.nullToBlank(english.Checker);
 
-                    lblOverview.Text = BaseServices.nullToBlank( english.Contents.Replace("\n", "<br />"));
+                    lblOverview.Text = BaseServices.nullToBlank(english.Contents.Replace("\n", "<br />"));
 
                     hpkDownloadlink.Text = BaseServices.nullToBlank(english.Title);
                     hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(english.Location.Replace("\\", "/"));
@@ -233,21 +358,21 @@ namespace ltkt
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
-                       //20110911 TrungDV change creation relative START
-                       string temp = CommonConstants.BLANK;
-                       temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_ENGLISH_CODE, items[i].ID.ToString(), items[i].Title.Trim());
-                       temp += "(" + items[i].Posted + ")";
-                       lblRelative.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
-                       
-                       /*lblRelative.Text += "<li>";
-                       lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
-                       lblRelative.Text += "(" + items[i].Posted + ")";
-                       lblRelative.Text += "</li>";*/
-                       //20110911 TrungDV change creation relative END
+                        //20110911 TrungDV change creation relative START
+                        string temp = CommonConstants.BLANK;
+                        temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_ENGLISH_CODE, items[i].ID.ToString(), items[i].Title.Trim());
+                        temp += "(" + items[i].Posted + ")";
+                        lblRelative.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
+
+                        /*lblRelative.Text += "<li>";
+                        lblRelative.Text += "<a href='ArticleDetails.aspx?sec=el&id=" + items[i].ID + "'>" + items[i].Title.Trim() + "</a>";
+                        lblRelative.Text += "(" + items[i].Posted + ")";
+                        lblRelative.Text += "</li>";*/
+                        //20110911 TrungDV change creation relative END
                     }
                     lblRelative.Text += "</ul>";
 
-                    txtPostedComment.Text = BaseServices.nullToBlank( english.Comment);
+                    txtPostedComment.Text = BaseServices.nullToBlank(english.Comment);
 
                     int score = englishDAO.getScore(id);
                     lRatingBar.Text = createRatingBar(score);
@@ -260,14 +385,14 @@ namespace ltkt
                     relativePanel.Visible = false;
                     invalidArticle.Visible = true;
                     lRatingBar.Visible = false;
-                    
+
                     //20110911 TrungDV change creation relative START
                     //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
                     liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
-                    liMessage.Text += CommonConstants.TEMP_BR_TAG 
-                                        + CommonConstants.TEMP_BR_TAG 
-                                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, 
-                                                                            CommonConstants.PAGE_HOME, 
+                    liMessage.Text += CommonConstants.TEMP_BR_TAG
+                                        + CommonConstants.TEMP_BR_TAG
+                                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
+                                                                            CommonConstants.PAGE_HOME,
                                                                             CommonConstants.TXT_BACK_TO_HOME);
                     //20110911 TrungDV change creation relative END
                 }
@@ -298,28 +423,28 @@ namespace ltkt
                     liTitle.Text = BaseServices.nullToBlank(informatic.Title);
 
                     lblTitle.Text = BaseServices.nullToBlank(informatic.Title);
-                    lblLiker.Text = BaseServices.nullToBlank( informatic.Point.ToString());
+                    lblLiker.Text = BaseServices.nullToBlank(informatic.Point.ToString());
 
-                    lblAuthor.Text =BaseServices.nullToBlank(ltktDAO.Informatics.getAuthor(id));
-                    lblPostedDate.Text = BaseServices.nullToBlank( bs.convertDateToString(informatic.Posted));
+                    lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.Informatics.getAuthor(id));
+                    lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(informatic.Posted));
                     lblChecker.Text = BaseServices.nullToBlank(informatic.Checker);
 
                     lblOverview.Text = BaseServices.nullToBlank(informatic.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = BaseServices.nullToBlank( informatic.Title);
+                    hpkDownloadlink.Text = BaseServices.nullToBlank(informatic.Title);
                     hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(informatic.Location.Replace("\\", "/"));
 
                     int numberRelativeRecord = control.getValueByInt(CommonConstants.CF_NUM_RECORD_RELATIVE);
-                       
+
                     IList<tblInformatic> items = informaticsDAO.getRelativeByType(informatic.Type, numberRelativeRecord);
                     lblRelative.Text = "<ul>";
                     for (int i = 0; i < items.Count; i++)
                     {
                         //20110911 TrungDV change creation relative START
                         string temp = CommonConstants.BLANK;
-                        temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, 
-                                                                CommonConstants.SEC_INFORMATICS_CODE, 
-                                                                items[i].ID.ToString(), 
+                        temp = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK,
+                                                                CommonConstants.SEC_INFORMATICS_CODE,
+                                                                items[i].ID.ToString(),
                                                                 items[i].Title.Trim());
                         temp += "(" + items[i].Posted + ")";
                         lblRelative.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_LI_TAG, temp);
@@ -374,7 +499,7 @@ namespace ltkt
 
         protected void hpkDownloadLink_PreRender(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnSubmitComment_Click(object sender, EventArgs e)
@@ -384,12 +509,13 @@ namespace ltkt
             string comment = CommonConstants.BLANK;
             string newComment = CommonConstants.BLANK;
             string currentUser = CommonConstants.BLANK;
+            
             try
             {
                 if (Session[CommonConstants.SES_USER] != null)
                 {
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    author = BaseServices.nullToBlank( user.DisplayName);
+                    author = BaseServices.nullToBlank(user.DisplayName);
                     currentUser = BaseServices.nullToBlank(user.Username);
                 }
                 else
@@ -399,13 +525,19 @@ namespace ltkt
                 }
 
                 date = bs.convertDateToString(DateTime.Now);
-                comment = txtContent.Text.Replace("\n", "<br />");
+                comment = txtContent.Text.Replace(CommonConstants.NEWLINE, CommonConstants.TEMP_BR_TAG);
 
-                newComment += "<span>";
-                newComment += "<b>" + author + "</b>" + " (" + date + ")";
-                newComment += "<br />";
+                //newComment += "<span>";
+                //newComment += "<b>" + author + "</b>" + " (" + date + ")";
+                //newComment += "<br />";
+                //newComment += comment;
+                //newComment += "</span>";
+
+                newComment = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, author);
+                newComment += " (" + date + ")";
+                newComment += CommonConstants.TEMP_BR_TAG;
                 newComment += comment;
-                newComment += "</span>";
+                newComment = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, newComment);
 
                 // Write comment to db
                 string sec = Request.QueryString[CommonConstants.REQ_SECTION];
@@ -431,6 +563,22 @@ namespace ltkt
                     default:
                         break;
                 }
+
+                statisticsDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
+
+                txtName.Text = CommonConstants.BLANK;
+                txtEmail.Text = CommonConstants.BLANK; ;
+                txtContent.Text = CommonConstants.BLANK; ;
+
+                Response.Redirect(CommonConstants.PAGE_ARTICLE_DETAILS
+                                   + CommonConstants.ADD_PARAMETER
+                                   + CommonConstants.REQ_SECTION
+                                   + CommonConstants.EQUAL
+                                   + sec
+                                   + CommonConstants.AND
+                                   + CommonConstants.REQ_ID
+                                   + CommonConstants.EQUAL
+                                   + Convert.ToString(id));
             }
             catch (Exception ex)
             {
@@ -441,19 +589,19 @@ namespace ltkt
                     username = user.Username;
                 }
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
+                                            + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT ;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
-            txtName.Text = CommonConstants.BLANK;
-            txtEmail.Text = CommonConstants.BLANK; ;
-            txtContent.Text = CommonConstants.BLANK; ;
+            //txtName.Text = CommonConstants.BLANK;
+            //txtEmail.Text = CommonConstants.BLANK; ;
+            //txtContent.Text = CommonConstants.BLANK; ;
 
-            Page_Load(sender, e);
+            //Page_Load(sender, e);
         }
 
-        
         protected void btnLike_Click(object sender, EventArgs e)
         {
             try
@@ -520,13 +668,13 @@ namespace ltkt
             //it:1,2,3,4
             //el:1,2,3,4
             string str = readCookie(type + sec);
-            switch(sec)
+            switch (sec)
             {
                 case CommonConstants.SEC_UNIVERSITY_CODE:
                     {
                         if (Request.Cookies[type + sec] != null && str != null)
                         {
-                            if(str.Contains(id.ToString()))
+                            if (str.Contains(id.ToString()))
                             {
                                 return true;
                             }
@@ -573,14 +721,14 @@ namespace ltkt
             }
             return false;
         }
-        
+
         private void updateCookie(string type, string sec, int id)
         {
             //update
-            if (Request.Cookies[ type + sec] != null)
+            if (Request.Cookies[type + sec] != null)
             {
                 string str = readCookie(type + sec);
-                str += id.ToString()  + CommonConstants.COMMA;
+                str += id.ToString() + CommonConstants.COMMA;
                 writeCookie(type + sec, str);
             }
             else //write new
@@ -598,7 +746,7 @@ namespace ltkt
             }
             return CommonConstants.BLANK;
         }
-        
+
         //Do not use this method directly
         private void writeCookie(string name, string value)
         {
@@ -666,7 +814,7 @@ namespace ltkt
             }
             Page_Load(sender, e);
         }
-        
+
         protected void btnPreview_Click(object sender, EventArgs e)
         {
             if (previewPanel.Visible == true)
@@ -678,5 +826,5 @@ namespace ltkt
                 previewPanel.Visible = true;
             }
         }
-}
+    }
 }

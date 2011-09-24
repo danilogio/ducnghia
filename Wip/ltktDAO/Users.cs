@@ -1035,23 +1035,23 @@ namespace ltktDAO
 
                 if (isState(_username, CommonConstants.STATE_NON_ACTIVE))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_NON_ACTIVE, CommonConstants.SX_NON_ACTIVE, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG_WITH_COLOR, CommonConstants.CS_NON_ACTIVE, CommonConstants.SX_NON_ACTIVE, item);
                 }
                 else if (isState(_username, CommonConstants.STATE_ACTIVE))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_ACTIVE, CommonConstants.SX_ACTIVE, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG_WITH_COLOR, CommonConstants.CS_ACTIVE, CommonConstants.SX_ACTIVE, item);
                 }
                 else if (isState(_username, CommonConstants.STATE_DELETED))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_DELETED, CommonConstants.SX_DELETED, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG_WITH_COLOR, CommonConstants.CS_DELETED, CommonConstants.SX_DELETED, item);
                 }
                 else if (isState(_username, CommonConstants.STATE_WARNING))
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_WARNING, CommonConstants.SX_WARNING, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG_WITH_COLOR, CommonConstants.CS_WARNING, CommonConstants.SX_WARNING, item);
                 }
                 else
                 {
-                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, CommonConstants.CS_KIA, CommonConstants.SX_KIA, item);
+                    item = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG_WITH_COLOR, CommonConstants.CS_KIA, CommonConstants.SX_KIA, item);
                 }
             }
             return item;
