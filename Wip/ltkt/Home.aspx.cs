@@ -23,24 +23,33 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblWelcomeTitle.Text = controlDAO.getNameString(CommonConstants.CF_WELCOME_TEXT);
-            lblWelcomeText.Text = controlDAO.getValueString(CommonConstants.CF_WELCOME_TEXT);
+            try
+            {
+                lblWelcomeTitle.Text = controlDAO.getNameString(CommonConstants.CF_WELCOME_TEXT);
+                lblWelcomeText.Text = controlDAO.getValueString(CommonConstants.CF_WELCOME_TEXT);
 
-            liTitle.Text = CommonConstants.PAGE_HOME_NAME + CommonConstants.SPACE
-                + CommonConstants.HLINE + CommonConstants.SPACE
-                + controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-            //init
-            numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
-            numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
-            lNumUni.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_UNI).ToString() 
-                            + CommonConstants.SPACE 
-                            + CommonConstants.TXT_ARTICLE_NAME;
-            lNumEL.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_EL).ToString()
-                            + CommonConstants.SPACE
-                            + CommonConstants.TXT_ARTICLE_NAME; ;
-            lNumIT.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_IT).ToString()
-                            + CommonConstants.SPACE
-                            + CommonConstants.TXT_ARTICLE_NAME; ;
+                liTitle.Text = CommonConstants.PAGE_HOME_NAME + CommonConstants.SPACE
+                    + CommonConstants.HLINE + CommonConstants.SPACE
+                    + controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                //init
+                numberArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_TAB);
+                numberStickyArtOnTab = controlDAO.getValueByInt(CommonConstants.CF_NUM_ARTICLE_STICKY);
+                lNumUni.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_UNI).ToString()
+                                + CommonConstants.SPACE
+                                + CommonConstants.TXT_ARTICLE_NAME;
+                lNumEL.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_EL).ToString()
+                                + CommonConstants.SPACE
+                                + CommonConstants.TXT_ARTICLE_NAME; ;
+                lNumIT.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_IT).ToString()
+                                + CommonConstants.SPACE
+                                + CommonConstants.TXT_ARTICLE_NAME; ;
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
 
         }
 
@@ -100,7 +109,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -159,7 +168,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -216,7 +225,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -273,7 +282,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -333,7 +342,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -393,7 +402,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -452,7 +461,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -514,7 +523,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -536,7 +545,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -562,7 +571,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -614,7 +623,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -647,7 +656,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -686,7 +695,7 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }

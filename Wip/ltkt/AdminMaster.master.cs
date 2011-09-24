@@ -113,6 +113,10 @@ namespace ltkt.Admin
             {
                 HpkLog.Visible = true;
             }
+            if ( userDAO.isAllow(permission, CommonConstants.P_A_FULL_CONTROL))
+            {
+                HpkImportData.Visible = true;
+            }
 
         }
         public void updateHeader(string _header)

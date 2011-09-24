@@ -18,20 +18,32 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (adminDAO.isON(CommonConstants.AF_ADS))
+            try
             {
-                liTitle.Text = CommonConstants.PAGE_ADS_NAME
-                               + CommonConstants.SPACE + CommonConstants.HLINE
-                               + CommonConstants.SPACE
-                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-            }
-            else
-            {
-                string reason = adminDAO.getReason(CommonConstants.AF_ADS);
-                if (!BaseServices.isNullOrBlank(reason))
+                if (adminDAO.isON(CommonConstants.AF_ADS))
                 {
-                    Session[CommonConstants.SES_ERROR] = reason;
+                    liTitle.Text = CommonConstants.PAGE_ADS_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
                 }
+                else
+                {
+                    string reason = adminDAO.getReason(CommonConstants.AF_ADS);
+                    if (!BaseServices.isNullOrBlank(reason))
+                    {
+                        Session[CommonConstants.SES_ERROR] = reason;
+                    }
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                }
+            }
+            catch (Exception ex)
+            {
+                string username = CommonConstants.USER_GUEST;
+
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -65,14 +77,14 @@ namespace ltkt
                 else
                 {
                     messagePanel.Visible = true;
-                    liMessage.Text = "Đã có lỗi xảy ra, xin quý vị vui lòng thử lại!<br />";
+                    liMessage.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 }
             }
             catch (Exception ex)
             {
                 string username = CommonConstants.USER_GUEST;
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);

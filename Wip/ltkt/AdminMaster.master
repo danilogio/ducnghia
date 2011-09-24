@@ -98,6 +98,9 @@
                                 <asp:HyperLink ID="HpkLog" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Log.aspx">Log</asp:HyperLink>
                             </li>
                             <li>
+                                <asp:HyperLink ID="HpkImportData" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/ImportData.aspx">Import</asp:HyperLink>
+                            </li>
+                            <li>
                                 <asp:HyperLink ID="HpkLogout" runat="server" NavigateUrl="~/_lh/Login.aspx">Thoát</asp:HyperLink>
                             </li>
                         </ul>
