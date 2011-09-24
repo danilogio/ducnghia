@@ -114,9 +114,11 @@ namespace ltktDAO
 
             return null;
         }
-        #endregion
 
-        #region Set Property
+        //public string getImage(int _id)
+        //{
+
+        //}
         #endregion
         #endregion
 
@@ -154,8 +156,10 @@ namespace ltktDAO
                     record.fromDate = _from;
                     record.toDate = _end;
                     record.Price = 0;
-                    record.Location = "";
+                    record.Location = CommonConstants.BLANK;
                     record.Description = _description;
+                    record.Code = CommonConstants.ADS_INACTIVE;
+                    record.ClickCount = 0;
 
                     DB.tblAdvertisements.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -288,6 +292,7 @@ namespace ltktDAO
                     ads.Location = fileSave;
                     ads.Description = _description;
                     ads.State = _state;
+                    //ads.Code = 
 
                     DB.SubmitChanges();
                     ts.Complete();

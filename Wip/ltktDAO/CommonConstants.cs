@@ -1720,6 +1720,10 @@ namespace ltktDAO
 
         #region Advertisement (ADS)
         /// <summary>
+        /// Ads is inactived
+        /// </summary>
+        public const string ADS_INACTIVE = "inactive";
+        /// <summary>
         /// Banner Top
         /// </summary>
         public const string ADS_TOP_BANNER = "top";

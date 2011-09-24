@@ -63,7 +63,7 @@ namespace ltktDAO
     #endregion
 		
 		public LTDHDataContext() : 
-				base(global::ltktDAO.Properties.Settings.Default.LTDHConnectionString, mappingSource)
+				base(global::ltktDAO.Properties.Settings.Default.LTDHConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -689,7 +689,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", OtherKey="Author")]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblContestForUniversities", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities
 		{
 			get
@@ -702,7 +702,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblContestForUniversities1", OtherKey="Checker")]
+		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblContestForUniversities1", ThisKey="Username", OtherKey="Checker")]
 		public EntitySet<tblContestForUniversity> tblContestForUniversities1
 		{
 			get
@@ -715,7 +715,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", OtherKey="Author")]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblEnglishes", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblEnglish> tblEnglishes
 		{
 			get
@@ -728,7 +728,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish1", Storage="_tblEnglishes1", OtherKey="Checker")]
+		[Association(Name="tblUser_tblEnglish1", Storage="_tblEnglishes1", ThisKey="Username", OtherKey="Checker")]
 		public EntitySet<tblEnglish> tblEnglishes1
 		{
 			get
@@ -741,7 +741,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", OtherKey="Author")]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblInformatics", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblInformatic> tblInformatics
 		{
 			get
@@ -754,7 +754,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic1", Storage="_tblInformatics1", OtherKey="Checker")]
+		[Association(Name="tblUser_tblInformatic1", Storage="_tblInformatics1", ThisKey="Username", OtherKey="Checker")]
 		public EntitySet<tblInformatic> tblInformatics1
 		{
 			get
@@ -767,7 +767,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblNews", OtherKey="Author")]
+		[Association(Name="tblUser_tblNew", Storage="_tblNews", ThisKey="Username", OtherKey="Author")]
 		public EntitySet<tblNew> tblNews
 		{
 			get
@@ -893,6 +893,8 @@ namespace ltktDAO
 		
 		private int _ID;
 		
+		private string _Code;
+		
 		private string _Company;
 		
 		private string _Address;
@@ -913,12 +915,16 @@ namespace ltktDAO
 		
 		private int _State;
 		
+		private System.Nullable<int> _ClickCount;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
     partial void OnCompanyChanging(string value);
     partial void OnCompanyChanged();
     partial void OnAddressChanging(string value);
@@ -939,6 +945,8 @@ namespace ltktDAO
     partial void OnDescriptionChanged();
     partial void OnStateChanging(int value);
     partial void OnStateChanged();
+    partial void OnClickCountChanging(System.Nullable<int> value);
+    partial void OnClickCountChanged();
     #endregion
 		
 		public tblAdvertisement()
@@ -962,6 +970,26 @@ namespace ltktDAO
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Code", DbType="NChar(25)")]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this.OnCodeChanging(value);
+					this.SendPropertyChanging();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
 				}
 			}
 		}
@@ -1162,6 +1190,26 @@ namespace ltktDAO
 					this._State = value;
 					this.SendPropertyChanged("State");
 					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClickCount", DbType="Int")]
+		public System.Nullable<int> ClickCount
+		{
+			get
+			{
+				return this._ClickCount;
+			}
+			set
+			{
+				if ((this._ClickCount != value))
+				{
+					this.OnClickCountChanging(value);
+					this.SendPropertyChanging();
+					this._ClickCount = value;
+					this.SendPropertyChanged("ClickCount");
+					this.OnClickCountChanged();
 				}
 			}
 		}
@@ -1928,7 +1976,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -1962,7 +2010,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblUser1", ThisKey="Checker", IsForeignKey=true)]
+		[Association(Name="tblUser_tblContestForUniversity1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser1
 		{
 			get
@@ -2590,7 +2638,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -2624,7 +2672,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblEnglish1", Storage="_tblUser1", ThisKey="Checker", IsForeignKey=true)]
+		[Association(Name="tblUser_tblEnglish1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser1
 		{
 			get
@@ -3166,7 +3214,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
@@ -3200,7 +3248,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblInformatic1", Storage="_tblUser1", ThisKey="Checker", IsForeignKey=true)]
+		[Association(Name="tblUser_tblInformatic1", Storage="_tblUser1", ThisKey="Checker", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser1
 		{
 			get
@@ -3423,7 +3471,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", IsForeignKey=true)]
+		[Association(Name="tblUser_tblNew", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
 			get
