@@ -152,8 +152,8 @@ namespace ltktDAO
         /// <![CDATA[>>]]>
         /// </summary>
         public const string LAST_BUTTON = ">>";
-        
 
+        public const string NEWLINE = "\n";
         
         
         
@@ -243,6 +243,7 @@ namespace ltktDAO
             /// </summary>
             public const string CSS_REFERLINK = "referlink"; 
             public const string CSS_ARTICLE_LIST = "articleList";
+            public const string CSS_BLOCK_DETAIL_TEXT = "block_detail_text";
         #endregion
 
         #region State (STATE)
@@ -1519,7 +1520,11 @@ namespace ltktDAO
         /// <summary>
         /// University link template
         /// </summary>
-        public const string TEMP_UNI_LINK = "<a href=\"" + PAGE_UNIVERSITY + "?" + REQ_SUBJECT + "={0}&" + REQ_TIME + "={1}\">{2}</a>";
+        public const string TEMP_UNI_LINK = "<a href=\"" + TEMP_UNI_URL + "&" + REQ_PAGE + "={2}\">{3}</a>";
+        /// <summary>
+        /// University url template
+        /// </summary>
+        public const string TEMP_UNI_URL = PAGE_UNIVERSITY + "?" + REQ_SUBJECT + "={0}&" + REQ_TIME + "={1}";
         /// <summary>
         /// link template for article details
         /// </summary>
