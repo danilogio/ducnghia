@@ -742,7 +742,7 @@ namespace ltktDAO
                 {
                     var english = DB.tblEnglishes.Single(e => e.ID == _id);
                     english.Comment += _newComment;
-                    english.Comment += "<br /><br />";
+                    english.Comment += "<br /><br />;";
 
                     DB.SubmitChanges();
                     ts.Complete();

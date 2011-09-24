@@ -1073,7 +1073,7 @@ namespace ltktDAO
                 {
                     var contest = DB.tblContestForUniversities.Single(cont => cont.ID == _id);
                     contest.Comment += _newComment;
-                    contest.Comment += "<br /><br />";
+                    contest.Comment += "<br /><br />;";
                     DB.SubmitChanges();
                     ts.Complete();
                     log.writeLog(DBHelper.strPathLogFile, "insert comment for contest id=" + _id + " successfully");

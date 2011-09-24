@@ -1,20 +1,108 @@
-9/24/2011 9:41:50 AM ==> [dvtrung]:Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
-9/24/2011 9:41:50 AM ==> [dvtrung]:   at System.Text.StringBuilder.AppendFormat(IFormatProvider provider, String format, Object[] args)
-   at System.String.Format(IFormatProvider provider, String format, Object[] args)
-   at System.String.Format(String format, Object arg0, Object arg1)
-   at ltktDAO.BaseServices.createMsgByTemplate(String template, String arg1, String arg2) in E:\Data\Projects\ducnghia\Wip\ltktDAO\BaseServices.cs:line 186
-   at ltkt.English.listSItem(List`1 items, Int32 maxRecord) in e:\Data\Projects\ducnghia\Wip\ltkt\English.aspx.cs:line 163
-   at ltkt.English.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\English.aspx.cs:line 70
-9/24/2011 11:38:43 AM ==> Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
-9/24/2011 11:39:32 AM ==> Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
-9/24/2011 11:41:49 AM ==> [Guest]:Object reference not set to an instance of an object.
-9/24/2011 11:44:06 AM ==> [Guest]:Object reference not set to an instance of an object.
-   at ltktDAO.BaseServices.createMsgByTemplate(String template, String arg1, String arg2) in E:\Data\Projects\ducnghia\Wip\ltktDAO\BaseServices.cs:line 186
-   at ltkt.ContestUniversity.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\ContestUniversity.aspx.cs:line 82
-9/24/2011 11:48:46 AM ==> [Guest]:Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
-   at System.Text.StringBuilder.AppendFormat(IFormatProvider provider, String format, Object[] args)
-   at System.String.Format(IFormatProvider provider, String format, Object[] args)
-   at System.String.Format(String format, Object arg0, Object arg1, Object arg2)
-   at ltktDAO.BaseServices.createOlderLink(String linkTemplate, ArticleSCO articleSCO, Int32 numberOlder) in E:\Data\Projects\ducnghia\Wip\ltktDAO\BaseServices.cs:line 309
-   at ltkt.ContestUniversity.getOlderLinks(ArticleSCO articleSCO) in e:\Data\Projects\ducnghia\Wip\ltkt\ContestUniversity.aspx.cs:line 232
-   at ltkt.ContestUniversity.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\ContestUniversity.aspx.cs:line 87
+24-Sep-11 09:33:35 ==> [Guest]:Thread was being aborted.
+24-Sep-11 09:35:08 ==> [Guest]:Thread was being aborted.
+24-Sep-11 10:37:33 ==> [connhokia]:Định dạng tập tin không cho phép hoặc tập tin có kích thước quá lớn
+24-Sep-11 10:41:42 ==> [connhokia]:Định dạng tập tin không cho phép hoặc tập tin có kích thước quá lớn
+24-Sep-11 10:44:25 ==> [connhokia]:Định dạng tập tin không cho phép hoặc tập tin có kích thước quá lớn
+24-Sep-11 10:48:48 ==> [connhokia]:Index and length must refer to a location within the string.
+Parameter name: length
+24-Sep-11 16:07:04 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.btnSubmitComment_Click(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 593
+24-Sep-11 16:11:33 ==> [connhokia]:Object reference not set to an instance of an object.
+24-Sep-11 16:11:33 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 427
+   at ltkt.ArticleDetails.pageLoad(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 182
+   at ltkt.ArticleDetails.Page_Load(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 40
+24-Sep-11 16:11:53 ==> [connhokia]:Object reference not set to an instance of an object.
+24-Sep-11 16:11:53 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.showInformatic(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 513
+   at ltkt.ArticleDetails.pageLoad(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 188
+   at ltkt.ArticleDetails.Page_Load(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 40
+24-Sep-11 16:14:15 ==> [connhokia]:Object reference not set to an instance of an object.
+24-Sep-11 16:14:15 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 427
+   at ltkt.ArticleDetails.pageLoad(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 182
+   at ltkt.ArticleDetails.Page_Load(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 40
+24-Sep-11 16:15:53 ==> [connhokia]:Object reference not set to an instance of an object.
+   at ltkt.ArticleDetails.showComment(String comments) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 239
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 391
+24-Sep-11 16:15:53 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 429
+   at ltkt.ArticleDetails.pageLoad(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 182
+   at ltkt.ArticleDetails.Page_Load(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 40
+24-Sep-11 16:16:37 ==> [connhokia]:Object reference not set to an instance of an object.
+   at ltkt.ArticleDetails.showComment(String comments) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 239
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 391
+24-Sep-11 16:16:37 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 429
+   at ltkt.ArticleDetails.pageLoad(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 182
+   at ltkt.ArticleDetails.Page_Load(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 40
+24-Sep-11 16:18:29 ==> [connhokia]:Object reference not set to an instance of an object.
+   at ltkt.ArticleDetails.showComment(String comments) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 239
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 391
+24-Sep-11 16:18:29 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.showEnglish(Int32 id) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 429
+   at ltkt.ArticleDetails.pageLoad(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 182
+   at ltkt.ArticleDetails.Page_Load(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 40
+24-Sep-11 16:21:33 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.btnSubmitComment_Click(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 599
+24-Sep-11 16:21:56 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.btnSubmitComment_Click(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 599
+24-Sep-11 16:24:30 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.btnSubmitComment_Click(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 599
+24-Sep-11 16:25:04 ==> [connhokia]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.ArticleDetails.btnSubmitComment_Click(Object sender, EventArgs e) in d:\Career\LTKT\Wip\ltkt\ArticleDetails.aspx.cs:line 599

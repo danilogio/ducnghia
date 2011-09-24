@@ -775,7 +775,7 @@ namespace ltktDAO
                 {
                     var informatic = DB.tblInformatics.Single(info => info.ID == _id);
                     informatic.Comment += _newComment;
-                    informatic.Comment += "<br /><br />";
+                    informatic.Comment += "<br /><br />;";
 
                     DB.SubmitChanges();
                     ts.Complete();

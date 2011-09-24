@@ -236,7 +236,24 @@ namespace ltkt
 
         private void showComment(string comments)
         {
-            
+            if (comments == null)
+                comments = CommonConstants.BLANK;
+
+            string[] arrComment = comments.Split(';');
+            txtPostedComment.Text = CommonConstants.BLANK;
+
+            foreach (string comment in arrComment)
+            {
+                if (!comment.StartsWith("*"))
+                {
+                    txtPostedComment.Text += comment;
+                }
+            }
+
+            if (txtPostedComment.Text != CommonConstants.BLANK)
+                txtPostedComment.Visible = true;
+            else
+                txtPostedComment.Visible = false;
         }
 
         public string createRatingBar(int score)
@@ -326,7 +343,8 @@ namespace ltkt
                     username = user.Username;
                 }
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
+                                            + CommonConstants.NEWLINE + ex.StackTrace);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
@@ -372,7 +390,8 @@ namespace ltkt
                     }
                     lblRelative.Text += "</ul>";
 
-                    txtPostedComment.Text = BaseServices.nullToBlank(english.Comment);
+                    //txtPostedComment.Text = BaseServices.nullToBlank(english.Comment);
+                    showComment(english.Comment);
 
                     int score = englishDAO.getScore(id);
                     lRatingBar.Text = createRatingBar(score);
@@ -406,7 +425,8 @@ namespace ltkt
                     username = user.Username;
                 }
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
+                                            + CommonConstants.NEWLINE + ex.StackTrace);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
@@ -458,7 +478,9 @@ namespace ltkt
                     lblRelative.Text += "</ul>";
 
 
-                    txtPostedComment.Text = informatic.Comment;
+                    //txtPostedComment.Text = informatic.Comment;
+                    showComment(informatic.Comment);
+
 
                     int score = informaticsDAO.getScore(id);
                     lRatingBar.Text = createRatingBar(score);
@@ -490,7 +512,8 @@ namespace ltkt
                     username = user.Username;
                 }
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
+                                            + CommonConstants.NEWLINE + ex.StackTrace);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
@@ -509,6 +532,7 @@ namespace ltkt
             string comment = CommonConstants.BLANK;
             string newComment = CommonConstants.BLANK;
             string currentUser = CommonConstants.BLANK;
+            
             
             try
             {
@@ -538,6 +562,9 @@ namespace ltkt
                 newComment += CommonConstants.TEMP_BR_TAG;
                 newComment += comment;
                 newComment = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SPAN_TAG, newComment);
+
+                if (!adminDAO.isON (CommonConstants.AF_COMMENT_EASY))
+                    newComment = "*" + newComment;
 
                 // Write comment to db
                 string sec = Request.QueryString[CommonConstants.REQ_SECTION];
@@ -570,15 +597,15 @@ namespace ltkt
                 txtEmail.Text = CommonConstants.BLANK; ;
                 txtContent.Text = CommonConstants.BLANK; ;
 
-                Response.Redirect(CommonConstants.PAGE_ARTICLE_DETAILS
-                                   + CommonConstants.ADD_PARAMETER
-                                   + CommonConstants.REQ_SECTION
-                                   + CommonConstants.EQUAL
-                                   + sec
-                                   + CommonConstants.AND
-                                   + CommonConstants.REQ_ID
-                                   + CommonConstants.EQUAL
-                                   + Convert.ToString(id));
+                //Response.Redirect(CommonConstants.PAGE_ARTICLE_DETAILS
+                //                   + CommonConstants.ADD_PARAMETER
+                //                   + CommonConstants.REQ_SECTION
+                //                   + CommonConstants.EQUAL
+                //                   + sec
+                //                   + CommonConstants.AND
+                //                   + CommonConstants.REQ_ID
+                //                   + CommonConstants.EQUAL
+                //                   + Convert.ToString(id));
             }
             catch (Exception ex)
             {
