@@ -114,15 +114,86 @@ namespace ltktDAO
 
             return null;
         }
+        public tblAdvertisement getAds(string _code)
+        {
+            IEnumerable<tblAdvertisement> lst = from record in DB.tblAdvertisements
+                                                where record.Code == _code
+                                                select record;
 
-        //public string getImage(int _id)
-        //{
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
 
-        //}
+            return null;
+        }
+        /// <summary>
+        /// check quảng cáo tồn tại
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <returns></returns>
+        public bool isExisted(string _code)
+        {
+            IEnumerable<tblAdvertisement> lst = from p in DB.tblAdvertisements
+                                                where p.Code == _code
+                                                select p;
+            if (lst.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isExisted(int _id)
+        {
+            
+            IEnumerable<tblAdvertisement> lst = from p in DB.tblAdvertisements
+                                                where p.ID == _id
+                                                select p;
+            if (lst.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public string getImageUrl(string _code)
+        {
+            IEnumerable<tblAdvertisement> lst = from p in DB.tblAdvertisements
+                                                where p.Code == _code
+                                                select p;
+            if (lst.Count() > 0)
+            {
+                return "~/" + lst.ElementAt(0).Location.Trim();
+            }
+            
+            return CommonConstants.BLANK;
+        }
+        
         #endregion
         #endregion
 
         #region Method
+        public void addClickCount(string _code)
+        {
+            try
+            {
+                var r = DB.tblAdvertisements.Single(p => p.Code == _code);
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+
+                    if (r != null)
+                    {
+                        r.ClickCount += 1;
+                        DB.SubmitChanges();
+                        ts.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+            }
+        }
         /// <summary>
         /// Thêm một quảng cáo
         /// </summary>
@@ -174,7 +245,7 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, e.Message + CommonConstants.NEWLINE + e.StackTrace);
 
                 return false;
             }
@@ -242,7 +313,7 @@ namespace ltktDAO
                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
                                                                     _id.ToString(),
                                                                     CommonConstants.SQL_TABLE_ADVERTISEMENT));
-                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message + CommonConstants.NEWLINE + e.StackTrace);
 
                 return false;
             }
@@ -305,7 +376,7 @@ namespace ltktDAO
             {
                 log.writeLog(DBHelper.strPathLogFile, _username,
                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE, Convert.ToString(adsID), CommonConstants.SQL_TABLE_ADVERTISEMENT));
-                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message + CommonConstants.NEWLINE + e.StackTrace);
 
                 return false;
             }

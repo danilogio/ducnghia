@@ -1068,6 +1068,14 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_NEWS = "News.aspx";
         /// <summary>
+        /// Ads page
+        /// </summary>
+        public const string PAGE_ADS = "Ads.aspx";
+        /// <summary>
+        /// Advertisement Contact page
+        /// </summary>
+        public const string PAGE_ADCONTACT = "AdContact.aspx";
+        /// <summary>
         /// Home page name
         /// </summary>
         public const string PAGE_HOME_NAME = "Trang chủ";
@@ -1328,9 +1336,9 @@ namespace ltktDAO
         public const string REQ_TYPE = "type";
 
         /// <summary>
-        /// request page
+        /// request redirect 
         /// </summary>
-        public const string SES_CURRENT_PAGE = "currentPage";
+        public const string REQ_REDIRECT = "red";
         #endregion
 
         #region Section Uni,It,EL (SEC)
@@ -1564,6 +1572,10 @@ namespace ltktDAO
         /// link template for news page
         /// </summary>
         public const string TEMP_NEWS_LINK = "<a href='" + PAGE_NEWS + "?id={0}'>{1}</a>";
+        /// <summary>
+        /// link template for ads page
+        /// </summary>
+        public const string TEMP_ADS_URL = PAGE_ADS + "?" + REQ_ACTION + "=" + ACT_CLICK + "&" + REQ_ID + "={0}&" + REQ_REDIRECT + "={1}"; 
         /// <summary>
         /// image thumbnail for article
         /// </summary>

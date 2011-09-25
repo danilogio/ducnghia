@@ -43,6 +43,7 @@ namespace ltkt
                 lNumIT.Text = statisDAO.getValue(CommonConstants.SF_NUM_ARTICLE_ON_IT).ToString()
                                 + CommonConstants.SPACE
                                 + CommonConstants.TXT_ARTICLE_NAME; ;
+                
             }
             catch (Exception ex)
             {
@@ -677,12 +678,12 @@ namespace ltkt
                 BaseServices bs = new BaseServices();
                 res += "                <div class='block_details'>\n"
                         + "                <div class='block_details_img'>\n"
-                        + "                    <span title='" + item.Title + "'>"
+                        + "                    <span title='" + item.Title.Trim() + "'>"
                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_THUMBNAIL, bs.getThumbnail(item.Thumbnail, item.Location), item.Title.Trim()) 
                         + "</span>\n"
                         + "                </div>\n"
                         + "                <div class='block_details_title'>\n"
-                        + "                    <span title='" + item.Title + "'>"
+                        + "                    <span title='" + item.Title.Trim() + "'>"
                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_ARTICLE_DETAILS_LINK, CommonConstants.SEC_UNIVERSITY_CODE, item.ID.ToString(), bs.subString(item.Title))
                         + "</span>\n"
                         + "                </div>\n"

@@ -126,8 +126,8 @@
                         <td style="width: 60%; float: left; margin-top: 40px;">
                             <%--<a href="AdContact.aspx">
                                 <img src="imagesAd/default/top-up.gif" alt="luyenthikinhte.com" /></a>--%>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=top">
-                                <asp:Image ID="imgTop" runat="server" ImageUrl="~/imagesAd/default/top-up.gif" /></asp:HyperLink>
+                            <asp:HyperLink ID="HpkAdTopUp" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=top">
+                                <asp:Image ID="imgAdTopUp" runat="server" ImageUrl="~/imagesAd/default/top-up.gif" /></asp:HyperLink>
                         </td>
                     </tr>
                 </table>
@@ -159,8 +159,8 @@
                     <asp:Literal ID="ltAnnoucement" runat="server"></asp:Literal>
                 </asp:Panel>
                 <div style="width: 100%; margin-left: 6px;">
-                    <asp:HyperLink ID="hpkTopLeader" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=topleader">
-                        <asp:Image ID="imgTopLeader" runat="server" ImageUrl="~/imagesAd/top.gif" /></asp:HyperLink>
+                    <asp:HyperLink ID="HpkAdTopLeader" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=topleader">
+                        <asp:Image ID="imgAdTopLeader" runat="server" ImageUrl="~/imagesAd/top.gif" /></asp:HyperLink>
                 </div>
                 <br />
                 <form id="frmMain" runat="server">
@@ -418,13 +418,13 @@
                         <li>
                             <center>
                                 <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/Ads.aspx?action=click&id=bot1" runat="server">
-                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" /></asp:HyperLink>
+                                    <asp:Image ID="imgAdBottom1" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" Width="275px" Height="250px"/></asp:HyperLink>
                             </center>
                         </li>
                         <li>
                             <center>
                                 <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="~/Ads.aspx?action=click&id=bot2" runat="server">
-                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" /></asp:HyperLink>
+                                    <asp:Image ID="imgAdBottom2" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" Width="275px" Height="250px"/></asp:HyperLink>
                             </center>
                         </li>
                     </ul>
@@ -486,42 +486,42 @@
                 </div></p>--%>
             <div id="divAdRight" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/Ads.aspx?action=click&id=topright"
+                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/Ads.aspx?action=click&id=topright" Target="_blank"
                         runat="server">
-                        <asp:Image ID="imgTopRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" AlternateText="" /></asp:HyperLink>
+                        <asp:Image ID="imgAdRightTop" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="hpkMiddleRight" NavigateUrl="~/Ads.aspx?action=click&id=middleright"
+                    <asp:HyperLink ID="hpkAdRightMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleright" Target="_blank"
                         runat="server">
-                        <asp:Image ID="imgMiddleRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" AlternateText="" /></asp:HyperLink>
+                        <asp:Image ID="imgAdRightMiddle" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" Height="200px" AlternateText=""/></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomright"
+                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomright" Target="_blank"
                         runat="server">
-                        <asp:Image ID="imgBottomRight" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" AlternateText="" /></asp:HyperLink>
+                        <asp:Image ID="imgAdRightBottom" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
             </div>
             <div id="divAdLeft" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/Ads.aspx?action=click&id=topleft"
+                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/Ads.aspx?action=click&id=topleft" Target="_blank"
                         runat="server">
-                        <asp:Image ID="imgTopLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" AlternateText="" /></asp:HyperLink>
+                        <asp:Image ID="imgADLeftTop" runat="server" ImageUrl="~/imagesAd/default/Float.gif" 
+                            Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleleft"
+                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleleft" Target="_blank"
                         runat="server">
-                        <asp:Image ID="imgMiddleLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" AlternateText="" /></asp:HyperLink>
+                        <asp:Image ID="imgAdLeftMiddle" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomleft"
+                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomleft" Target="_blank"
                         runat="server">
-                        <asp:Image ID="imgBottomLeft" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" AlternateText="" /></asp:HyperLink>
+                        <asp:Image ID="imgAdLeftBottom" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
+                            Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
             </div>
         </div>

@@ -915,7 +915,9 @@ namespace ltktDAO
 		
 		private int _State;
 		
-		private System.Nullable<int> _ClickCount;
+		private int _ClickCount;
+		
+		private string _NavigateUrl;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -945,8 +947,10 @@ namespace ltktDAO
     partial void OnDescriptionChanged();
     partial void OnStateChanging(int value);
     partial void OnStateChanged();
-    partial void OnClickCountChanging(System.Nullable<int> value);
+    partial void OnClickCountChanging(int value);
     partial void OnClickCountChanged();
+    partial void OnNavigateUrlChanging(string value);
+    partial void OnNavigateUrlChanged();
     #endregion
 		
 		public tblAdvertisement()
@@ -974,7 +978,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Code", DbType="NChar(25)")]
+		[Column(Storage="_Code", DbType="NChar(25) NOT NULL", CanBeNull=false)]
 		public string Code
 		{
 			get
@@ -1194,8 +1198,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_ClickCount", DbType="Int")]
-		public System.Nullable<int> ClickCount
+		[Column(Storage="_ClickCount", DbType="Int NOT NULL")]
+		public int ClickCount
 		{
 			get
 			{
@@ -1210,6 +1214,26 @@ namespace ltktDAO
 					this._ClickCount = value;
 					this.SendPropertyChanged("ClickCount");
 					this.OnClickCountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NavigateUrl", DbType="NVarChar(254)")]
+		public string NavigateUrl
+		{
+			get
+			{
+				return this._NavigateUrl;
+			}
+			set
+			{
+				if ((this._NavigateUrl != value))
+				{
+					this.OnNavigateUrlChanging(value);
+					this.SendPropertyChanging();
+					this._NavigateUrl = value;
+					this.SendPropertyChanged("NavigateUrl");
+					this.OnNavigateUrlChanged();
 				}
 			}
 		}

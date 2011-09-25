@@ -37,7 +37,7 @@
   <Table Name="dbo.tblAdvertisement" Member="tblAdvertisements">
     <Type Name="tblAdvertisement">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Code" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
       <Column Name="Company" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
@@ -48,7 +48,8 @@
       <Column Name="Location" Type="System.String" DbType="NChar(254) NOT NULL" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ClickCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClickCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NavigateUrl" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblContact" Member="tblContacts">

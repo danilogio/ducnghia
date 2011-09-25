@@ -13,55 +13,57 @@ public partial class Ads : System.Web.UI.Page
     {
         string action = BaseServices.nullToBlank( Request.QueryString[CommonConstants.REQ_ACTION]);
         string id = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_ID]);
+        string red = BaseServices.nullToBlank(Request.QueryString[CommonConstants.REQ_REDIRECT]);
+        ltktDAO.Ads adsDAO = new ltktDAO.Ads();
+
+        if (red == CommonConstants.BLANK)
+        {
+            red = CommonConstants.PAGE_ADCONTACT;
+        }
         if (action == CommonConstants.ACT_CLICK)
         {
             if (id == CommonConstants.ADS_TOP_BANNER)
             {
-                Response.Redirect("http://www.google.com");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_TOP_LEADER_BANNER)
             {
-                Response.Redirect("http://bongdaso.com");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_TOP_RIGHT_BANNER)
             {
-                MessageBox.Show("click top right");
-                Response.Redirect("AdContact.aspx");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_MIDDLE_RIGHT_BANNER)
             {
-                MessageBox.Show("click middle right");
-                Response.Redirect("AdContact.aspx");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_BOTTOM_RIGHT_BANNER)
             {
-                MessageBox.Show("click bottom right");
-                Response.Redirect("AdContact.aspx");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_TOP_LEFT_BANNER)
             {
-                MessageBox.Show("click top left");
-                Response.Redirect("AdContact.aspx");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_MIDDLE_LEFT_BANNER)
             {
-                MessageBox.Show("click middle letf");
-                Response.Redirect("AdContact.aspx");
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_BOTTOM_LEFT_BANNER)
             {
-                MessageBox.Show("click bottom left");
-                Response.Redirect("AdContact.aspx");
+                adsDAO.addClickCount(CommonConstants.ADS_BOTTOM_LEFT_BANNER);
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_BOTTOM_1_BANNER)
             {
-                MessageBox.Show("click bottom 1 ");
-                Response.Redirect("AdContact.aspx");
+                adsDAO.addClickCount(CommonConstants.ADS_BOTTOM_1_BANNER);
+                Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_BOTTOM_2_BANNER)
             {
-                MessageBox.Show("click bottom 2");
-                Response.Redirect("AdContact.aspx");
+                adsDAO.addClickCount(CommonConstants.ADS_BOTTOM_2_BANNER);
+                Response.Redirect(red);
             }
         }
     }

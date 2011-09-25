@@ -16,77 +16,180 @@ namespace ltkt
         ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
         ltktDAO.Control controlDAO = new ltktDAO.Control();
         ltktDAO.Admin adminDAO = new ltktDAO.Admin();
+        ltktDAO.Ads adsDAO = new ltktDAO.Ads();
+        EventLog log = new EventLog();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION))
+            try
             {
-                ltsItem.Width = 240;
-                string[] sInformation = readInformation();
-                //get cookie successful
-                if (sInformation != null)
+                if (!adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION))
                 {
-                    tblUser user = userDAO.getUser(sInformation[0], sInformation[1], true);
-                    chxRemember.Checked = true;
-                    if (user != null)
+                    ltsItem.Width = 240;
+                    string[] sInformation = readInformation();
+                    //get cookie successful
+                    if (sInformation != null)
                     {
-                        if (user.State != CommonConstants.STATE_DELETED
-                            && user.State != CommonConstants.STATE_NON_ACTIVE)
+                        tblUser user = userDAO.getUser(sInformation[0], sInformation[1], true);
+                        chxRemember.Checked = true;
+                        if (user != null)
                         {
-                            updateAccount(user);
+                            if (user.State != CommonConstants.STATE_DELETED
+                                && user.State != CommonConstants.STATE_NON_ACTIVE)
+                            {
+                                updateAccount(user);
+                            }
                         }
+                        lblFooterTitle.Text = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_FOOTER);
+                        string va = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                        lblAddress.Text = controlDAO.getValueString(CommonConstants.CF_ADDRESS);
+                        imgLogo.ImageUrl = controlDAO.getValueString(CommonConstants.CF_LOGO);
                     }
-                    lblFooterTitle.Text = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_FOOTER);
-                    string va = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-                    lblAddress.Text = controlDAO.getValueString(CommonConstants.CF_ADDRESS);
-                    imgLogo.ImageUrl = controlDAO.getValueString(CommonConstants.CF_LOGO);
-                }
 
-                if (Session[CommonConstants.SES_USER] == null)
-                {
-                    userStateTitle.Text = CommonConstants.TXT_LOGIN;
-                    loginPanel.Visible = true;
-                    userPanel.Visible = false;
-                }
-                else
-                {
-                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    userStateTitle.Text = CommonConstants.TXT_ACCOUNT_INFOR;
-                    loginUser.Text = user.DisplayName;
-                    loginPanel.Visible = false;
-                    userPanel.Visible = true;
-                    HpkUpload.Visible = true;
-                }
-                //display annoucement
-                if (adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
-                {
-                    string annouceText = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
-                    if (!BaseServices.isNullOrBlank(annouceText))
+                    if (Session[CommonConstants.SES_USER] == null)
                     {
-                        panelAnnoucement.Visible = true;
-                        ltAnnoucement.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
-                                                                            CommonConstants.CS_ANNOUCEMENT_BGCOLOR,
-                                                                            CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR,
-                                                                            annouceText);
+                        userStateTitle.Text = CommonConstants.TXT_LOGIN;
+                        loginPanel.Visible = true;
+                        userPanel.Visible = false;
+                    }
+                    else
+                    {
+                        tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                        userStateTitle.Text = CommonConstants.TXT_ACCOUNT_INFOR;
+                        loginUser.Text = user.DisplayName;
+                        loginPanel.Visible = false;
+                        userPanel.Visible = true;
+                        HpkUpload.Visible = true;
+                    }
+                    //display annoucement
+                    if (adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
+                    {
+                        string annouceText = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
+                        if (!BaseServices.isNullOrBlank(annouceText))
+                        {
+                            panelAnnoucement.Visible = true;
+                            ltAnnoucement.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
+                                                                                CommonConstants.CS_ANNOUCEMENT_BGCOLOR,
+                                                                                CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR,
+                                                                                annouceText);
+                        }
+                        else
+                        {
+                            ltAnnoucement.Visible = false;
+                        }
                     }
                     else
                     {
                         ltAnnoucement.Visible = false;
                     }
+
+                    //display advertisement
+                    //top right
+                    if (adsDAO.isExisted(CommonConstants.ADS_TOP_RIGHT_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_RIGHT_BANNER);
+                        imgAdRightTop.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdRightTop.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_TOP_RIGHT_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //middle right
+                    if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_RIGHT_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_MIDDLE_RIGHT_BANNER);
+                        imgAdRightMiddle.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        hpkAdRightMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_MIDDLE_RIGHT_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //bottom right
+                    if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_RIGHT_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_RIGHT_BANNER);
+                        imgAdRightBottom.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdRightBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_BOTTOM_RIGHT_BANNER, 
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+
+                    }
+                    //top left
+                    if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEFT_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_LEFT_BANNER);
+                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_TOP_LEFT_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //middle left
+                    if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_LEFT_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_MIDDLE_LEFT_BANNER);
+                        imgAdLeftMiddle.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdLeftMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_MIDDLE_LEFT_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //bottom left
+                    if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_LEFT_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_LEFT_BANNER);
+                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_BOTTOM_LEFT_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+
+                    }
+                    //bottom 1 banner
+                    if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_1_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_1_BANNER);
+                        imgAdBottom1.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        hpkAdBottom1.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_BOTTOM_1_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //bottom 2 banner
+                    if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_2_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_2_BANNER);
+                        imgAdBottom2.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        hpkAdBottom2.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_BOTTOM_2_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //top
+                    if (adsDAO.isExisted(CommonConstants.ADS_TOP_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_BANNER);
+                        imgAdTopUp.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdTopUp.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_TOP_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
+                    //top leader
+                    if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
+                    {
+                        tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_LEADER_BANNER);
+                        imgAdTopLeader.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        HpkAdTopLeader.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                        CommonConstants.ADS_TOP_LEADER_BANNER,
+                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
+                    }
                 }
                 else
                 {
-                    ltAnnoucement.Visible = false;
+                    string reason = adminDAO.getReason(CommonConstants.AF_UNDERCONTRUCTION);
+                    if (!BaseServices.isNullOrBlank(reason))
+                    {
+                        Session[CommonConstants.SES_ERROR] = reason;
+                        Response.Redirect(CommonConstants.PAGE_UNDERCONSTRUCTION);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                string reason = adminDAO.getReason(CommonConstants.AF_UNDERCONTRUCTION);
-                if (!BaseServices.isNullOrBlank(reason))
-                {
-                    Session[CommonConstants.SES_ERROR] = reason;
-                    Response.Redirect(CommonConstants.PAGE_UNDERCONSTRUCTION);
-                }
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
             }
         }
         //public void updateTitle(string title)
