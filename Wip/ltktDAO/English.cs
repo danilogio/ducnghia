@@ -10,7 +10,7 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-
+        EventLog log = new EventLog();
         #region Property
         #region Get Property
         /// <summary>
@@ -632,6 +632,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, record.Author, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -677,6 +684,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, _author, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -716,6 +730,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, update.Author, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -746,9 +767,20 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
                     ts.Complete();
+                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
                 }
             }
-            catch (Exception e) { return false; }
+            catch (Exception e) {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false; 
+            }
 
             return true;
         }
@@ -769,6 +801,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -1110,6 +1149,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;

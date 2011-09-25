@@ -47,7 +47,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message 
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink );
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -110,7 +116,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -169,7 +181,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -226,7 +244,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -283,7 +307,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -343,7 +373,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -403,7 +439,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -462,7 +504,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -524,7 +572,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -546,7 +600,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -572,7 +632,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -624,7 +690,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -657,7 +729,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
@@ -696,7 +774,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }

@@ -189,7 +189,13 @@ namespace ltkt
             }
             catch (Exception ex)
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
             }
         }
         //public void updateTitle(string title)

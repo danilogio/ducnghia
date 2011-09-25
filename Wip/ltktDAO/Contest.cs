@@ -833,9 +833,15 @@ namespace ltktDAO
                        orderby p.Posted descending
                        select p).Take(number);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
             }
             return lst;
         }
@@ -857,9 +863,15 @@ namespace ltktDAO
                         orderby p.Posted descending
                         select p).Take(number);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
             }
             return lst;
         }
@@ -891,7 +903,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -954,7 +972,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, _author, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -1003,7 +1027,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, _username, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                                + CommonConstants.NEWLINE
+                                                                + e.Source
+                                                                + CommonConstants.NEWLINE
+                                                                + e.StackTrace
+                                                                + CommonConstants.NEWLINE
+                                                                + e.HelpLink);
                 return false;
             }
             return true;
@@ -1076,12 +1106,20 @@ namespace ltktDAO
                     contest.Comment += "<br /><br />;";
                     DB.SubmitChanges();
                     ts.Complete();
+                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
                     log.writeLog(DBHelper.strPathLogFile, "insert comment for contest id=" + _id + " successfully");
                 }
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, e.Message);
+                log.writeLog(DBHelper.strPathLogFile, e.Message 
+                                                        + CommonConstants.NEWLINE 
+                                                        + e.Source 
+                                                        + CommonConstants.NEWLINE 
+                                                        + e.StackTrace 
+                                                        + CommonConstants.NEWLINE 
+                                                        + e.HelpLink);
                 return false;
             }
 
@@ -1109,6 +1147,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
@@ -1139,6 +1184,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;
