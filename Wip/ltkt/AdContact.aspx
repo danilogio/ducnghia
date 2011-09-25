@@ -14,7 +14,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $(".calendar").datepicker({
-                dateFormat : 'dd-mm-yy'
+                dateFormat : 'mm/dd/yy'
             });
         }); 
     </script>
@@ -83,6 +83,9 @@
                     <asp:RequiredFieldValidator ID="reqPhone" runat="server" ControlToValidate="txtboxFone"
                         Display="None" ErrorMessage="Vui lòng nhập số điện thoại">
                     </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="valPhone" runat="server" ErrorMessage="Xin vui lòng kiểm tra lại số điện thoại"
+                        ControlToValidate="txtboxFone" Display="None" ValidationExpression="^['0-9'.\S]{10,11}$">
+                    </asp:RegularExpressionValidator>
                 </p>
                 <%--From date - To Date--%>
                 <p>
@@ -110,16 +113,16 @@
                 </p>
                 <div id="checkbox">
                     <asp:CheckBoxList ID="chxLocation" runat="server" CssClass="checkboxlist">
-                        <asp:ListItem Selected="True" Text="Top Banner" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Leader Banner" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Top-Left Banner" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Middle-Left Banner" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="Bottom-Left Banner" Value="4"></asp:ListItem>
-                        <asp:ListItem Text="Top-Right Banner" Value="5"></asp:ListItem>
-                        <asp:ListItem Text="Middle-Right Banner" Value="6"></asp:ListItem>
-                        <asp:ListItem Text="Bottom-Right Banner" Value="7"></asp:ListItem>
-                        <asp:ListItem Text="Bottom 1 Banner" Value="8"></asp:ListItem>
-                        <asp:ListItem Text="Bottom 2 Banner" Value="9"></asp:ListItem>
+                        <asp:ListItem Text="Top Banner" Value="top"></asp:ListItem>
+                        <asp:ListItem Text="Leader Banner" Value="topleader"></asp:ListItem>
+                        <asp:ListItem Text="Top-Left Banner" Value="topleft"></asp:ListItem>
+                        <asp:ListItem Text="Middle-Left Banner" Value="middleleft"></asp:ListItem>
+                        <asp:ListItem Text="Bottom-Left Banner" Value="bottomleft"></asp:ListItem>
+                        <asp:ListItem Text="Top-Right Banner" Value="topright"></asp:ListItem>
+                        <asp:ListItem Text="Middle-Right Banner" Value="middleright"></asp:ListItem>
+                        <asp:ListItem Text="Bottom-Right Banner" Value="bottomright"></asp:ListItem>
+                        <asp:ListItem Text="Bottom 1 Banner" Value="bót1"></asp:ListItem>
+                        <asp:ListItem Text="Bottom 2 Banner" Value="bot2"></asp:ListItem>
                     </asp:CheckBoxList>
                 </div>
                 <%--<p>

@@ -123,7 +123,7 @@ namespace ltkt.Admin
             catch (Exception ex)
             {
                 log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
-                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
                 //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
                                               + CommonConstants.ADD_PARAMETER
@@ -232,7 +232,7 @@ namespace ltkt.Admin
                 TableCell noCell = new TableCell();
                 noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "10px";
-                noCell.Text = Convert.ToString(ads.ID);
+                noCell.Text = Convert.ToString(idx + 1);
 
                 TableCell companyCell = new TableCell();
                 companyCell.CssClass = "table-cell";
@@ -397,7 +397,7 @@ namespace ltkt.Admin
             {
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);

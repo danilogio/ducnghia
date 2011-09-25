@@ -44,6 +44,7 @@ namespace ltkt.Admin
                     sumDownload.Text = statisticDAO.getValue(CommonConstants.SF_NUM_DOWNLOAD_A_DAY);
                     sumUpload.Text = statisticDAO.getValue(CommonConstants.SF_NUM_UPLOAD);
                     sumCommentADay.Text = statisticDAO.getValue(CommonConstants.SF_NUM_COMMENT_A_DAY);
+                    newAdsContact.Text = statisticDAO.getValue(CommonConstants.SF_NUM_NEW_ADV_CONTACT);
                 }
                 else
                 {

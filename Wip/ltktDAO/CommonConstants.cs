@@ -235,6 +235,10 @@ namespace ltktDAO
             /// Resolved Direction
             /// </summary>
             public const string TXT_RESOLVING = "Hướng dẫn giải";
+            /// <summary>
+            /// Location
+            /// </summary>
+            public const string TXT_LOCATION = "vị trí";
         #endregion
 
         #region Css (CSS)
@@ -808,7 +812,18 @@ namespace ltktDAO
         /// file zise is too large
         /// </summary>
         public const string MSG_E_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
-
+        /// <summary>
+        /// gửi quảng cáo thành công
+        /// </summary>
+        public const string MSG_I_ADVERTISEMENT_CONTACT_IS_SENT_SUCCESSFUL = "Quý vị đặt quảng cáo thành công! <br />Chúng tôi sẽ liên lạc với quý vị để thêm chi tiết<br />";
+        /// <summary>
+        /// Invalid from date
+        /// </summary>
+        public const string MSG_E_INVALID_FROM_DATE = "Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại";
+        /// <summary>
+        /// select one item
+        /// </summary>
+        public const string MSG_E_SELECT_ONE_ITEM = "Vui chọn 1 {0}";
         /// <summary>
         /// Invalid file type
         /// </summary>
@@ -982,6 +997,10 @@ namespace ltktDAO
         /// Số lượt truy cập trong ngày
         /// </summary>
         public const string SF_NUM_VIEWER_DAY = "NUM_VIEWER_DAY";
+        /// <summary>
+        /// Số đăng ký quảng cáo mới
+        /// </summary>
+        public const string SF_NUM_NEW_ADV_CONTACT = "NUM_NEW_ADV_CONTACT";
         #endregion
 
         #region Control Function (CF)

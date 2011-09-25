@@ -82,6 +82,10 @@
                     <div style="float:left;width:30%"><span>Số comment trong ngày:</span></div>
                     <div style="float:left;width:69%"><asp:Literal ID="sumCommentADay" runat="server" Text="None"></asp:Literal></div>
                 </div>
+                <div>
+                    <div style="float:left;width:30%"><span>Số đăng kí quảng cáo mới:</span></div>
+                    <div style="float:left;width:69%"><asp:Literal ID="newAdsContact" runat="server" Text="None"></asp:Literal></div>
+                </div>
             </div>
         </div>
     </div>

@@ -50,29 +50,46 @@ namespace ltkt
 
         protected void btnSubmitContact_Click(object sender, EventArgs e)
         {
-            if (!recaptcha.IsValid)
-            {
-                return;
-            }
-
-            string _companyName = txtboxCompanyName.Text;
-            string _address = txtAddress.Text;
-            string _email = txtboxContactEmail.Text;
-            string _phone = txtboxFone.Text;
-            DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
-            DateTime _endDate = DateTime.Parse(txtToDate.Text);
-            string _description = getLocation(sender, e);
-
             try
             {
-                bool isOK;
+                if (!recaptcha.IsValid)
+                {
+                    return;
+                }
+
+                string _companyName = txtboxCompanyName.Text;
+                string _address = txtAddress.Text;
+                string _email = txtboxContactEmail.Text;
+                string _phone = txtboxFone.Text;
+                
+                DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
+                bool isOK = false;
+                int o= _fromDate.CompareTo(DateTime.Today);
+                if (_fromDate.CompareTo(DateTime.Today) == -1)
+                {
+                    messagePanel.Visible = true;
+                    liMessage.Text = CommonConstants.MSG_E_INVALID_FROM_DATE;
+                    return;
+                }
+                DateTime _endDate = DateTime.Parse(txtToDate.Text);
+                string _description = getLocation(sender, e);
+
+                if (_description == CommonConstants.BLANK)
+                {
+                    liMessage.Visible = true;
+                    liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_SELECT_ONE_ITEM,
+                                                                        CommonConstants.TXT_LOCATION);
+                    return;
+                }
+                
                 isOK = adsDAO.insertAds(_companyName, _address, _email, _phone, _fromDate, _endDate, _description);
                 if (isOK)
                 {
                     contactPanel.Visible = false;
                     messagePanel.Visible = true;
-                    liMessage.Text = "Quý vị đặt quảng cáo thành công!";
-                    liMessage.Text += "<br />Chúng tôi sẽ liên lạc với quý vị để thêm chi tiết<br />";
+                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, "1" );
+                    liMessage.Text = CommonConstants.MSG_I_ADVERTISEMENT_CONTACT_IS_SENT_SUCCESSFUL;
                 }
                 else
                 {
@@ -101,17 +118,20 @@ namespace ltkt
                 {
                     if (sLocation != "[Loc]")
                     {
-                        sLocation += ",";
+                        sLocation += CommonConstants.COMMA;
                     }
-                    sLocation += chxLocation.Items[idx].Text;
+                    sLocation += chxLocation.Items[idx].Value;
                 }
             }
-            if (sLocation.EndsWith(","))
+            if (sLocation.EndsWith(CommonConstants.COMMA))
             {
                 sLocation = sLocation.Substring(0, sLocation.Length - 1);
             }
             sLocation += "[Loc]";
-
+            if (sLocation == "[Loc][Loc]")
+            {
+                return CommonConstants.BLANK;
+            }
             return sLocation;
         }
         
