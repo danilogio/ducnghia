@@ -24,30 +24,37 @@ public partial class Ads : System.Web.UI.Page
         {
             if (id == CommonConstants.ADS_TOP_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_TOP_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_TOP_LEADER_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_TOP_LEADER_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_TOP_RIGHT_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_TOP_RIGHT_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_MIDDLE_RIGHT_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_MIDDLE_RIGHT_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_BOTTOM_RIGHT_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_BOTTOM_RIGHT_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_TOP_LEFT_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_TOP_LEFT_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_MIDDLE_LEFT_BANNER)
             {
+                adsDAO.addClickCount(CommonConstants.ADS_MIDDLE_LEFT_BANNER);
                 Response.Redirect(red);
             }
             else if (id == CommonConstants.ADS_BOTTOM_LEFT_BANNER)

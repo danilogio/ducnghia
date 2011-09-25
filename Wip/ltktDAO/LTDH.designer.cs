@@ -919,6 +919,8 @@ namespace ltktDAO
 		
 		private string _NavigateUrl;
 		
+		private string _Size;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -951,6 +953,8 @@ namespace ltktDAO
     partial void OnClickCountChanged();
     partial void OnNavigateUrlChanging(string value);
     partial void OnNavigateUrlChanged();
+    partial void OnSizeChanging(string value);
+    partial void OnSizeChanged();
     #endregion
 		
 		public tblAdvertisement()
@@ -1234,6 +1238,26 @@ namespace ltktDAO
 					this._NavigateUrl = value;
 					this.SendPropertyChanged("NavigateUrl");
 					this.OnNavigateUrlChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Size", DbType="NChar(20)")]
+		public string Size
+		{
+			get
+			{
+				return this._Size;
+			}
+			set
+			{
+				if ((this._Size != value))
+				{
+					this.OnSizeChanging(value);
+					this.SendPropertyChanging();
+					this._Size = value;
+					this.SendPropertyChanged("Size");
+					this.OnSizeChanged();
 				}
 			}
 		}

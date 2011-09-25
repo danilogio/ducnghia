@@ -77,7 +77,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
         }
@@ -213,10 +213,10 @@ namespace ltkt
 
                         upload.Visible = false;
                         message.Visible = true;
-                        liMessage.Text = CommonConstants.MSG_UPLOAD_SUCCESSFUL;
+                        liMessage.Text = CommonConstants.MSG_I_UPLOAD_SUCCESSFUL;
                         liMessage.Text += CommonConstants.MSG_I_THANKS_FOR_UPLOADING;
                         liMessage.Text += CommonConstants.MSG_I_WAITING_FOR_CHECKED;
-                        liMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
+                        liMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
                     }
                     catch (Exception ex)
                     {
@@ -225,7 +225,7 @@ namespace ltkt
                         liMessage.Text = CommonConstants.MSG_I_THANKS_FOR_UPLOADING;
                         liMessage.Text += "<br />";
                         liMessage.Text += "<br />";
-                        liMessage.Text += CommonConstants.MSG_COMMON_ERROR_TEXT;
+                        liMessage.Text += CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                         liMessage.Text += "<br />";
                         liMessage.Text += CommonConstants.MSG_E_UPLOAD;
                         liMessage.Text += "<br />Danh sách tập tin được hỗ trợ: ";
@@ -235,7 +235,7 @@ namespace ltkt
 
                         log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
-                        Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                        Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                         //Response.Redirect(CommonConstants.PAGE_ERROR);
                     }
                 }

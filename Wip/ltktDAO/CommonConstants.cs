@@ -719,95 +719,95 @@ namespace ltktDAO
         /// <summary>
         /// Message back to home
         /// </summary>
-        public const string MSG_BACK_TO_HOME = "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+        public const string MSG_I_BACK_TO_HOME = "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
         /// <summary>
         /// Change password successful
         /// </summary>
-        public const string MSG_CHANGE_PASSWORD_SUCCESSFUL = "Bạn đã đổi mật khẩu thành công!";
+        public const string MSG_I_CHANGE_PASSWORD_SUCCESSFUL = "Bạn đã đổi mật khẩu thành công!";
         /// <summary>
         /// Password required wrong
         /// </summary>
-        public const string MSG_PASSWORD_REQUIRED_WRONG = "Mật khẩu hiện tại không đúng. Xin vui lòng kiểm tra lại!";
+        public const string MSG_E_PASSWORD_REQUIRED_WRONG = "Mật khẩu hiện tại không đúng. Xin vui lòng kiểm tra lại!";
         /// <summary>
         /// update profile successful
         /// </summary>
-        public const string MSG_UPDATE_PROFILE_SUCCESSFUL = "Bạn đã cập nhật hồ sơ thành công!";
+        public const string MSG_I_UPDATE_PROFILE_SUCCESSFUL = "Bạn đã cập nhật hồ sơ thành công!";
         /// <summary>
         /// News page error
         /// </summary>
-        public const string MSG_NEWS_ERROR = "Đường dẫn trang web không hợp lệ, xin vui lòng kiểm tra lại!";
+        public const string MSG_E_NEWS_ERROR = "Đường dẫn trang web không hợp lệ, xin vui lòng kiểm tra lại!";
         /// <summary>
         /// News not found
         /// </summary>
-        public const string MSG_NEWS_NOT_FOUND = "Tin tức không tồn tại hoặc đã bị xóa!";
+        public const string MSG_E_NEWS_NOT_FOUND = "Tin tức không tồn tại hoặc đã bị xóa!";
         /// <summary>
         /// do not find out article record on DB
         /// </summary>
-        public const string MSG_ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
+        public const string MSG_I_ARTICLE_EMPTY_RECORD = "Hiện tại chưa có bài viết nào";
         /// <summary>
         /// error text
         /// </summary>
-        public const string MSG_COMMON_ERROR_TEXT = "Đã có lỗi xảy ra, xin vui lòng thử lại sau.";
+        public const string MSG_E_COMMON_ERROR_TEXT = "Đã có lỗi xảy ra, xin vui lòng thử lại sau.";
         /// <summary>
         /// Upload successful message 
         /// </summary>
-        public const string MSG_UPLOAD_SUCCESSFUL = "Upload thành công";
+        public const string MSG_I_UPLOAD_SUCCESSFUL = "Upload thành công";
         /// <summary>
         /// Login failed message
         /// </summary>
-        public const string MSG_LOGIN_FAILED = "Tên đăng nhập hoặc mật khẩu không đúng. Xin vui lòng kiểm tra lại!";
+        public const string MSG_E_LOGIN_FAILED = "Tên đăng nhập hoặc mật khẩu không đúng. Xin vui lòng kiểm tra lại!";
         /// <summary>
         /// Username is conflict message
         /// </summary>
-        public const string MSG_USERNAME_CONFLICT = "Tên đăng nhập đã được sử dụng.";
+        public const string MSG_W_USERNAME_CONFLICT = "Tên đăng nhập đã được sử dụng.";
         /// <summary>
         /// Email is conflicted message
         /// </summary>
-        public const string MSG_EMAIL_CONFLICT = "Email của bạn đã được đăng ký. Nếu bạn đã đăng ký mà không nhớ mật khẩu.<br/>Lấy lại mật khẩu <a href=\"ResetPassword.aspx\">tại đây</a>";
+        public const string MSG_W_EMAIL_CONFLICT = "Email của bạn đã được đăng ký. Nếu bạn đã đăng ký mà không nhớ mật khẩu.<br/>Lấy lại mật khẩu <a href=\"ResetPassword.aspx\">tại đây</a>";
         /// <summary>
         /// Registry is successful message
         /// </summary>
-        public const string MSG_REGISTRY_SUCCESSFUL = "Bạn đã đăng ký thành công. Xin vui lòng kiểm tra email để kích hoạt tài khoản!<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
+        public const string MSG_I_REGISTRY_SUCCESSFUL = "Bạn đã đăng ký thành công. Xin vui lòng kiểm tra email để kích hoạt tài khoản!<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
         /// <summary>
         /// Message registry failed
         /// </summary>
-        public const string MSG_REGISTRY_FAILED = "Quá trình đăng ký không thành công. Xin vui lòng thử lại!";
+        public const string MSG_E_REGISTRY_FAILED = "Quá trình đăng ký không thành công. Xin vui lòng thử lại!";
         /// <summary>
         /// Message reset password is successful
         /// </summary>
-        public const string MSG_RESET_PASSWORD_SUCCESSFUL = "Mật khẩu mới đã được gửi tới email của bạn. Xin vui lòng kiểm tra email.";
+        public const string MSG_I_RESET_PASSWORD_SUCCESSFUL = "Mật khẩu mới đã được gửi tới email của bạn. Xin vui lòng kiểm tra email.";
         /// <summary>
         /// Message reset password is failed
         /// </summary>
-        public const string MSG_RESET_PASSWORD_FAILED = "Lỗi: Không tìm thấy email của bạn!";
+        public const string MSG_E_RESET_PASSWORD_FAILED = "Lỗi: Không tìm thấy email của bạn!";
         /// <summary>
         /// Message search not found
         /// </summary>
-        public const string MSG_SEARCH_NOT_FOUND = "<p><br />Rất tiếc, không có kết quả nào phù hợp với yêu cầu tìm kiếm của bạn.</p>";
+        public const string MSG_I_SEARCH_NOT_FOUND = "<p><br />Rất tiếc, không có kết quả nào phù hợp với yêu cầu tìm kiếm của bạn.</p>";
         /// <summary>
         /// Message reply is sent successful
         /// </summary>
-        public const string MSG_REPLY_SUCCESSFUL = "Phản hồi của bạn đã được gửi thành công đến cho chúng tôi. Chân thành cảm ơn đóng góp của bạn! ";
+        public const string MSG_I_REPLY_SUCCESSFUL = "Phản hồi của bạn đã được gửi thành công đến cho chúng tôi. Chân thành cảm ơn đóng góp của bạn! ";
         /// <summary>
         /// Message reply is sent failed
         /// </summary>
-        public const string MSG_REPLY_FAILED = "Phản hồi của bạn gửi không thành công. Xin vui lòng kiểm tra lại địa chỉ email của bạn. \n <br/> <a href=\"Contact.aspx\">Thử lại</a>";
+        public const string MSG_E_REPLY_FAILED = "Phản hồi của bạn gửi không thành công. Xin vui lòng kiểm tra lại địa chỉ email của bạn. \n <br/> <a href=\"Contact.aspx\">Thử lại</a>";
         /// <summary>
         /// Message access is denied
         /// </summary>
-        public const string MSG_ACCESS_DENIED = "Bạn không có quyền truy cập khu vực này!";
+        public const string MSG_E_ACCESS_DENIED = "Bạn không có quyền truy cập khu vực này!";
         /// <summary>
         /// Message resourse not found
         /// </summary>
-        public const string MSG_RESOURCE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
+        public const string MSG_E_RESOURCE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
         /// <summary>
         /// website is under construction.
         /// </summary>
-        public const string MSG_UNDERCONSTRUCTION = "Website is under construction!";
+        public const string MSG_I_UNDERCONSTRUCTION = "Website is under construction!";
         /// <summary>
         /// file zise is too large
         /// </summary>
-        public const string MSG_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
+        public const string MSG_E_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
 
         /// <summary>
         /// Invalid file type

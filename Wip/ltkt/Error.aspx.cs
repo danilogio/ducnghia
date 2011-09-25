@@ -20,7 +20,7 @@ public partial class Error : System.Web.UI.Page
         string errorText = (string) Session[CommonConstants.SES_ERROR];
         if (errorText == null)
         {
-            errorText = CommonConstants.MSG_COMMON_ERROR_TEXT;
+            errorText = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
         }
         lblError.Text = "<br />";
         lblError.Text += errorText;

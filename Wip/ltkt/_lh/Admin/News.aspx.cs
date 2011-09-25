@@ -89,7 +89,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
@@ -225,13 +225,13 @@ namespace ltkt.Admin
                 catch (Exception ex)
                 {
                     //liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
-                    liMessage.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                    liMessage.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                     liMessage.Visible = true;
 
                     tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                     log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                     Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
             }

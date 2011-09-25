@@ -37,7 +37,7 @@ namespace ltkt
 
                 if (isExistedUsername)
                 {
-                    liMessage.Text = CommonConstants.MSG_USERNAME_CONFLICT;
+                    liMessage.Text = CommonConstants.MSG_W_USERNAME_CONFLICT;
                     liMessage.Visible = true;
                 }
                 else
@@ -50,7 +50,7 @@ namespace ltkt
                     string user = userDAO.existedEmail(strEmail);
                     if (user != null)
                     {
-                        liMessage.Text = CommonConstants.MSG_EMAIL_CONFLICT;
+                        liMessage.Text = CommonConstants.MSG_W_EMAIL_CONFLICT;
                         liMessage.Visible = true;
                     }
                     else
@@ -59,13 +59,13 @@ namespace ltkt
 
                         if (success)
                         {
-                            liMessage.Text = CommonConstants.MSG_REGISTRY_SUCCESSFUL;
+                            liMessage.Text = CommonConstants.MSG_I_REGISTRY_SUCCESSFUL;
                             liMessage.Visible = true;
                             registerPanel.Visible = false;
                         }
                         else
                         {
-                            liMessage.Text = CommonConstants.MSG_REGISTRY_FAILED;
+                            liMessage.Text = CommonConstants.MSG_E_REGISTRY_FAILED;
                             liMessage.Visible = true;
                         }
                     }
@@ -76,7 +76,7 @@ namespace ltkt
             {
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), CommonConstants.USER_GUEST, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }

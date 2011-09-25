@@ -42,13 +42,13 @@ namespace ltkt
                     // Gửi mật khẩu đến email
                     userDAO.sendNewPassword(strUsername, strNewPassword, strEmail);
 
-                    liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_SUCCESSFUL;
+                    liMessage.Text = CommonConstants.MSG_I_RESET_PASSWORD_SUCCESSFUL;
                     liMessage.Visible = true;
                     requestPassword.Visible = false;
                 }
                 else
                 {
-                    liMessage.Text = CommonConstants.MSG_RESET_PASSWORD_FAILED;
+                    liMessage.Text = CommonConstants.MSG_E_RESET_PASSWORD_FAILED;
                     liMessage.Visible = true;
                 }
 
@@ -59,7 +59,7 @@ namespace ltkt
                 string username = CommonConstants.USER_GUEST;
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }

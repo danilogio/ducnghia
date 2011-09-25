@@ -25,7 +25,7 @@ namespace ltkt
             }
             else
             {
-                lMessage.Text = CommonConstants.MSG_UNDERCONSTRUCTION;
+                lMessage.Text = CommonConstants.MSG_I_UNDERCONSTRUCTION;
             }
         }
     }

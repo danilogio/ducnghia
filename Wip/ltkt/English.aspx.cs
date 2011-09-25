@@ -86,7 +86,7 @@ namespace ltkt
                 {
                     if (BaseServices.isNullOrBlank(list_stickyItems.Text))
                     {
-                        list_items.Text = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                        list_items.Text = CommonConstants.MSG_I_ARTICLE_EMPTY_RECORD;
                     }
                     lDataPager.Visible = false;
                 }
@@ -104,7 +104,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             

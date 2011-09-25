@@ -29,7 +29,7 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LOGIN_FAILED;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_LOGIN_FAILED;
                     //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
                     Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
                 }

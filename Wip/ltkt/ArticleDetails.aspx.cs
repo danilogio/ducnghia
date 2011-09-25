@@ -51,7 +51,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
                                             + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
 
@@ -224,7 +224,7 @@ namespace ltkt
                 //20110911 TrungDV change create message START
                 //liMessage.Text = "Bài viết này không có hoặc đã bị xóa!";
                 //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
                 liMessage.Text += CommonConstants.TEMP_BR_TAG
                                     + CommonConstants.TEMP_BR_TAG
                                     + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
@@ -325,7 +325,7 @@ namespace ltkt
                     lRatingBar.Visible = false;
                     //20110911 TrungDV change create message START
                     //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
                     liMessage.Text += CommonConstants.TEMP_BR_TAG
                                         + CommonConstants.TEMP_BR_TAG
                                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
@@ -346,7 +346,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
                                             + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -407,7 +407,7 @@ namespace ltkt
 
                     //20110911 TrungDV change creation relative START
                     //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
                     liMessage.Text += CommonConstants.TEMP_BR_TAG
                                         + CommonConstants.TEMP_BR_TAG
                                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
@@ -428,7 +428,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
                                             + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -494,7 +494,7 @@ namespace ltkt
                     invalidArticle.Visible = true;
                     //20110911 TrungDV change creation relative START
                     //liMessage.Text += "<br /><br /><a href=\"Home.aspx\">Quay về trang chủ</a>";
-                    liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
                     liMessage.Text += CommonConstants.TEMP_BR_TAG
                                         + CommonConstants.TEMP_BR_TAG
                                         + BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG,
@@ -515,7 +515,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
                                             + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -619,7 +619,7 @@ namespace ltkt
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
                                             + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             //txtName.Text = CommonConstants.BLANK;
@@ -683,7 +683,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             Page_Load(sender, e);
@@ -836,7 +836,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             Page_Load(sender, e);

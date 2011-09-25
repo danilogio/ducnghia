@@ -51,7 +51,7 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                     Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
                 }
 
@@ -288,7 +288,7 @@ namespace ltkt.Admin
                 messagePanel.Visible = true;
                 detailPanel.Visible = false;
 
-                liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
             }
 
             if (action == CommonConstants.ACT_EDIT)
@@ -565,7 +565,7 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                     Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
                 }
 
@@ -577,7 +577,7 @@ namespace ltkt.Admin
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 
@@ -639,7 +639,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
         }
@@ -665,7 +665,7 @@ namespace ltkt.Admin
 
             if (lblResult.Text == "<ul></ul>")
             {
-                lblResult.Text = CommonConstants.MSG_SEARCH_NOT_FOUND;
+                lblResult.Text = CommonConstants.MSG_I_SEARCH_NOT_FOUND;
             }
         }
     }

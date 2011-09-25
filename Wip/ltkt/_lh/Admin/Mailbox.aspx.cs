@@ -118,7 +118,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
@@ -143,7 +143,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 
@@ -303,7 +303,7 @@ namespace ltkt.Admin
 
                 EmailDetailTable.Visible = false;
                 liMessageDetails.Visible = true;
-                liMessageDetails.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                liMessageDetails.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
             }
         }
 
@@ -373,7 +373,7 @@ namespace ltkt.Admin
             }
             catch (Exception ex)
             {
-                liMessage.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                liMessage.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 liMessage.Visible = true;
             }
         }
@@ -407,7 +407,7 @@ namespace ltkt.Admin
             }
             catch (Exception ex)
             {
-                liMessageDetails.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                liMessageDetails.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 liMessageDetails.Visible = true;
 
             }
@@ -461,7 +461,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 
@@ -493,7 +493,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 
@@ -533,7 +533,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 
@@ -559,7 +559,7 @@ namespace ltkt.Admin
             }
             else
             {
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 

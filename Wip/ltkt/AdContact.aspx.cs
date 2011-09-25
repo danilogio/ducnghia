@@ -43,7 +43,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -77,7 +77,7 @@ namespace ltkt
                 else
                 {
                     messagePanel.Visible = true;
-                    liMessage.Text = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                    liMessage.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 }
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -94,7 +94,8 @@ namespace ltkt
         private string getLocation(object sender, EventArgs e)
         {
             string sLocation = "[Loc]";
-            for (int idx = 0; idx < chxLocation.Items.Count; ++idx)
+            int size = chxLocation.Items.Count;
+            for (int idx = 0; idx < size; ++idx)
             {
                 if (chxLocation.Items[idx].Selected)
                 {
@@ -104,6 +105,10 @@ namespace ltkt
                     }
                     sLocation += chxLocation.Items[idx].Text;
                 }
+            }
+            if (sLocation.EndsWith(","))
+            {
+                sLocation = sLocation.Substring(0, sLocation.Length - 1);
             }
             sLocation += "[Loc]";
 

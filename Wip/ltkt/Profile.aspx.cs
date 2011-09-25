@@ -67,8 +67,8 @@ namespace ltkt
                     // Thành công
                     if (isOK)
                     {
-                        lMessage.Text = CommonConstants.MSG_CHANGE_PASSWORD_SUCCESSFUL;
-                        lMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
+                        lMessage.Text = CommonConstants.MSG_I_CHANGE_PASSWORD_SUCCESSFUL;
+                        lMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
                         lMessage.Visible = true;
 
                         messagePanel.Visible = true;
@@ -77,7 +77,7 @@ namespace ltkt
                 }
                 else
                 {
-                    lMessage.Text = CommonConstants.MSG_PASSWORD_REQUIRED_WRONG;
+                    lMessage.Text = CommonConstants.MSG_E_PASSWORD_REQUIRED_WRONG;
                     lMessage.Visible = true;
 
                     messagePanel.Visible = true;
@@ -94,7 +94,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }
@@ -132,8 +132,8 @@ namespace ltkt
                 bool isOK = userDAO.updateUser(user.Username, user);
                 if (isOK)
                 {
-                    lMessage.Text = CommonConstants.MSG_UPDATE_PROFILE_SUCCESSFUL;
-                    lMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
+                    lMessage.Text = CommonConstants.MSG_I_UPDATE_PROFILE_SUCCESSFUL;
+                    lMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
                     lMessage.Visible = true;
 
                     messagePanel.Visible = true;
@@ -144,7 +144,7 @@ namespace ltkt
             {
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }

@@ -68,7 +68,7 @@ namespace ltkt
                 else
                 {
                     //Đăng nhập thất bại
-                    lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
+                    lMessage.Text = CommonConstants.MSG_E_LOGIN_FAILED;
                     lMessage.Visible = true;
                     messagePanel.Visible = true;
 
@@ -79,7 +79,7 @@ namespace ltkt
             {
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), CommonConstants.USER_GUEST, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }

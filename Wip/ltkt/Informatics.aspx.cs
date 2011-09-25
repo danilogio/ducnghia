@@ -79,7 +79,7 @@ namespace ltkt
             {
                 if (!hasSRecord)
                 {
-                    list_items.Text = CommonConstants.MSG_ARTICLE_EMPTY_RECORD;
+                    list_items.Text = CommonConstants.MSG_I_ARTICLE_EMPTY_RECORD;
                 }
 
                 lDataPager.Visible = false;

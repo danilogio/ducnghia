@@ -49,19 +49,19 @@ namespace ltkt.Admin
                     }
                     else
                     {
-                        lMessage.Text = CommonConstants.MSG_ACCESS_DENIED;
+                        lMessage.Text = CommonConstants.MSG_E_ACCESS_DENIED;
                         lMessage.Visible = true;
                     }
                 }
                 else
                 {
-                    lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
+                    lMessage.Text = CommonConstants.MSG_E_LOGIN_FAILED;
                     lMessage.Visible = true;
                 }
             }
             else
             {
-                lMessage.Text = CommonConstants.MSG_LOGIN_FAILED;
+                lMessage.Text = CommonConstants.MSG_E_LOGIN_FAILED;
                 lMessage.Visible = true;
                 
             }

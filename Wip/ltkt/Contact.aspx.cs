@@ -74,7 +74,7 @@ namespace ltkt
 
                 liMessage.Visible = true;
                 contactPanel.Visible = false;
-                liMessage.Text = CommonConstants.MSG_REPLY_SUCCESSFUL;
+                liMessage.Text = CommonConstants.MSG_I_REPLY_SUCCESSFUL;
 
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 Boolean isOK = contactDAO.insertEmail(user.Username, strContactEmail, Email,
@@ -83,7 +83,7 @@ namespace ltkt
             catch (Exception ex)
             {
                 liMessage.Visible = true;
-                liMessage.Text = CommonConstants.MSG_REPLY_FAILED;
+                liMessage.Text = CommonConstants.MSG_E_REPLY_FAILED;
                 contactPanel.Visible = false;
 
                 //Write to log
@@ -91,7 +91,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
 

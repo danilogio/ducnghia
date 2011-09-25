@@ -77,7 +77,7 @@ namespace ltkt
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
             resultPanel.Visible = true;
@@ -126,7 +126,7 @@ namespace ltkt
 
             if (lblResult.Text == "<p><ul></ul></p>")
             {
-                lblResult.Text = CommonConstants.MSG_SEARCH_NOT_FOUND;
+                lblResult.Text = CommonConstants.MSG_I_SEARCH_NOT_FOUND;
             }
 
         }

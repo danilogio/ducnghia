@@ -43,7 +43,7 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_ACCESS_DENIED;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                     Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
                 }
             }
@@ -157,7 +157,7 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    liAds.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                    liAds.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
                     //liAds.Text += "&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
                 }
             }
@@ -166,7 +166,7 @@ namespace ltkt.Admin
                 messagePanel.Visible = true;
                 detailsPanel.Visible = false;
 
-                liMessage.Text = CommonConstants.MSG_RESOURCE_NOT_FOUND;
+                liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
             }
 
             if (_action == CommonConstants.ACT_EDIT)
@@ -399,7 +399,7 @@ namespace ltkt.Admin
 
                 log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
 
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 

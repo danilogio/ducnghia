@@ -30,7 +30,7 @@ namespace ltkt
                 }
                 catch (Exception ex)
                 {
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_NEWS_ERROR;
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_NEWS_ERROR;
                     Response.Redirect(CommonConstants.PAGE_ERROR);
                 }
                 tblNew news = newsDAO.getNews(newsID);
@@ -59,8 +59,8 @@ namespace ltkt
                 }
                 else
                 {
-                    liMessage.Text = CommonConstants.MSG_NEWS_NOT_FOUND;
-                    liMessage.Text += CommonConstants.MSG_BACK_TO_HOME;
+                    liMessage.Text = CommonConstants.MSG_E_NEWS_NOT_FOUND;
+                    liMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
                     messagePanel.Visible = true;
                     newsPanel.Visible = false;
                 }
