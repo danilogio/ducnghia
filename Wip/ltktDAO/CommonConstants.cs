@@ -152,10 +152,14 @@ namespace ltktDAO
         /// <![CDATA[>>]]>
         /// </summary>
         public const string LAST_BUTTON = ">>";
-
+        /// <summary>
+        /// newline
+        /// </summary>
         public const string NEWLINE = "\n";
-        
-        
+        /// <summary>
+        /// File type csv
+        /// </summary>
+        public const string EXT_CSV = ".csv";
         
         #endregion
 
