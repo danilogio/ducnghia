@@ -1,0 +1,10 @@
+9/26/2011 12:29:14 AM ==> MSDTC on server 'DOVIETTRUNG-PC\6746E3F8-F7D7-4B' is unavailable.
+9/26/2011 12:29:13 AM ==> insert comment for contest id=6 successfully
+9/26/2011 12:29:13 AM ==> The transaction has aborted.
+System.Transactions
+   at System.Transactions.TransactionStateAborted.BeginCommit(InternalTransaction tx, Boolean asyncCommit, AsyncCallback asyncCallback, Object asyncState)
+   at System.Transactions.CommittableTransaction.Commit()
+   at System.Transactions.TransactionScope.InternalDispose()
+   at System.Transactions.TransactionScope.Dispose()
+   at ltktDAO.Contest.insertComment(Int32 _id, String _newComment) in E:\Data\Projects\ducnghia\Wip\ltktDAO\Contest.cs:line 1112
+

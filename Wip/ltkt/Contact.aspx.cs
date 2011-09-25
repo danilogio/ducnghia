@@ -26,17 +26,32 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session[CommonConstants.SES_USER] != null)
+            try
             {
-                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                txtboxContactName.Text = user.DisplayName;
-                txtboxContactEmail.Text = user.Email.Trim();
-            }
+                if (Session[CommonConstants.SES_USER] != null)
+                {
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    txtboxContactName.Text = user.DisplayName;
+                    txtboxContactEmail.Text = user.Email.Trim();
+                }
 
-            liTitle.Text = CommonConstants.PAGE_CONTACT_NAME
-                           + CommonConstants.SPACE + CommonConstants.HLINE
-                           + CommonConstants.SPACE
-                           + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                liTitle.Text = CommonConstants.PAGE_CONTACT_NAME
+                               + CommonConstants.SPACE + CommonConstants.HLINE
+                               + CommonConstants.SPACE
+                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
         }
 
         protected void btnSubmitContact_Click(object sender, EventArgs e)
@@ -88,8 +103,18 @@ namespace ltkt
 
                 //Write to log
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
+                string username = CommonConstants.USER_GUEST;
+                if (user != null)
+                {
+                    username = user.Username;
+                }
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), username, ex.Message
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.Source
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.StackTrace
+                                                                            + CommonConstants.NEWLINE
+                                                                            + ex.HelpLink);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ERROR);

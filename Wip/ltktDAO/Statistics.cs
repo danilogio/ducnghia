@@ -63,9 +63,46 @@ namespace ltktDAO
                     ts.Complete();
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile,ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+            }
+        }
+        public void resetToDefault(string _code)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var r = DB.tblStatistics.Single(p => p.Code == _code);
+                    if (BaseServices.nullToBlank(_code).StartsWith("NUM"))
+                    {
+                        r.Value = "0";
+                    }
+                    else
+                    {
+                        r.Value = CommonConstants.BLANK;
+                    }
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
             }
         }
         public void addLatestLoginUser(string username)
@@ -108,9 +145,15 @@ namespace ltktDAO
                     ts.Complete();
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
             }
         }
     }
