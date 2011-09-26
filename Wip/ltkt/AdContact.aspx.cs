@@ -78,9 +78,9 @@ namespace ltkt
                     return;
                 }
                 DateTime _endDate = DateTime.Parse(txtToDate.Text);
-                string _description = getLocation(sender, e);
+                string _location = getLocation(sender, e);
 
-                if (_description == CommonConstants.BLANK)
+                if (_location == CommonConstants.BLANK)
                 {
                     liMessage.Visible = true;
                     liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_SELECT_ONE_ITEM,
@@ -88,7 +88,7 @@ namespace ltkt
                     return;
                 }
                 
-                isOK = adsDAO.insertAds(_companyName, _address, _email, _phone, _fromDate, _endDate, _description);
+                isOK = adsDAO.insertAds(_companyName, _address, _email, _phone, _fromDate, _endDate, _location);
                 if (isOK)
                 {
                     contactPanel.Visible = false;
@@ -122,28 +122,21 @@ namespace ltkt
 
         private string getLocation(object sender, EventArgs e)
         {
-            string sLocation = "[Loc]";
+            string sLocation = CommonConstants.BLANK;
             int size = chxLocation.Items.Count;
             for (int idx = 0; idx < size; ++idx)
             {
                 if (chxLocation.Items[idx].Selected)
                 {
-                    if (sLocation != "[Loc]")
-                    {
-                        sLocation += CommonConstants.COMMA;
-                    }
                     sLocation += chxLocation.Items[idx].Value;
+                    sLocation += CommonConstants.COMMA;
                 }
             }
             if (sLocation.EndsWith(CommonConstants.COMMA))
             {
                 sLocation = sLocation.Substring(0, sLocation.Length - 1);
             }
-            sLocation += "[Loc]";
-            if (sLocation == "[Loc][Loc]")
-            {
-                return CommonConstants.BLANK;
-            }
+           
             return sLocation;
         }
         

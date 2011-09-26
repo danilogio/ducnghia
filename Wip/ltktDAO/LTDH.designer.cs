@@ -909,7 +909,7 @@ namespace ltktDAO
 		
 		private int _Price;
 		
-		private string _Location;
+		private string _FilePath;
 		
 		private string _Description;
 		
@@ -920,6 +920,8 @@ namespace ltktDAO
 		private string _NavigateUrl;
 		
 		private string _Size;
+		
+		private string _Location;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -943,8 +945,8 @@ namespace ltktDAO
     partial void OntoDateChanged();
     partial void OnPriceChanging(int value);
     partial void OnPriceChanged();
-    partial void OnLocationChanging(string value);
-    partial void OnLocationChanged();
+    partial void OnFilePathChanging(string value);
+    partial void OnFilePathChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
     partial void OnStateChanging(int value);
@@ -955,6 +957,8 @@ namespace ltktDAO
     partial void OnNavigateUrlChanged();
     partial void OnSizeChanging(string value);
     partial void OnSizeChanged();
+    partial void OnLocationChanging(string value);
+    partial void OnLocationChanged();
     #endregion
 		
 		public tblAdvertisement()
@@ -1142,22 +1146,22 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Location", DbType="NChar(254) NOT NULL", CanBeNull=false)]
-		public string Location
+		[Column(Storage="_FilePath", DbType="NChar(254) NOT NULL", CanBeNull=false)]
+		public string FilePath
 		{
 			get
 			{
-				return this._Location;
+				return this._FilePath;
 			}
 			set
 			{
-				if ((this._Location != value))
+				if ((this._FilePath != value))
 				{
-					this.OnLocationChanging(value);
+					this.OnFilePathChanging(value);
 					this.SendPropertyChanging();
-					this._Location = value;
-					this.SendPropertyChanged("Location");
-					this.OnLocationChanged();
+					this._FilePath = value;
+					this.SendPropertyChanged("FilePath");
+					this.OnFilePathChanged();
 				}
 			}
 		}
@@ -1258,6 +1262,26 @@ namespace ltktDAO
 					this._Size = value;
 					this.SendPropertyChanged("Size");
 					this.OnSizeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Location", DbType="NChar(20)")]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this.OnLocationChanging(value);
+					this.SendPropertyChanging();
+					this._Location = value;
+					this.SendPropertyChanged("Location");
+					this.OnLocationChanged();
 				}
 			}
 		}

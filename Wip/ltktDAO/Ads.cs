@@ -162,7 +162,7 @@ namespace ltktDAO
                                                 select p;
             if (lst.Count() > 0)
             {
-                return "~/" + lst.ElementAt(0).Location.Trim();
+                return "~/" + lst.ElementAt(0).FilePath.Trim();
             }
             
             return CommonConstants.BLANK;
@@ -189,9 +189,15 @@ namespace ltktDAO
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
             }
         }
         /// <summary>
@@ -211,7 +217,7 @@ namespace ltktDAO
                                 string _phone,
                                 DateTime _from,
                                 DateTime _end,
-                                string _description)
+                                string _location)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -227,10 +233,13 @@ namespace ltktDAO
                     record.fromDate = _from;
                     record.toDate = _end;
                     record.Price = 0;
-                    record.Location = CommonConstants.BLANK;
-                    record.Description = _description;
+                    record.FilePath = CommonConstants.BLANK;
+                    record.Location = _location;
                     record.Code = CommonConstants.ADS_INACTIVE;
                     record.ClickCount = 0;
+                    record.NavigateUrl = CommonConstants.BLANK;
+                    record.FilePath = CommonConstants.BLANK;
+                    record.Description = CommonConstants.BLANK;
 
                     DB.tblAdvertisements.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -245,8 +254,13 @@ namespace ltktDAO
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, e.Message + CommonConstants.NEWLINE + e.StackTrace);
-
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
 
@@ -313,8 +327,13 @@ namespace ltktDAO
                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
                                                                     _id.ToString(),
                                                                     CommonConstants.SQL_TABLE_ADVERTISEMENT));
-                log.writeLog(DBHelper.strPathLogFile, _username, e.Message + CommonConstants.NEWLINE + e.StackTrace);
-
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
 
@@ -345,6 +364,8 @@ namespace ltktDAO
                               int _price,
                               string fileSave,
                               string _description,
+                              string _navigation,
+                              string _size,
                               int _state)
         {
             try
@@ -360,8 +381,10 @@ namespace ltktDAO
                     ads.fromDate = _fromDate;
                     ads.toDate = _toDate;
                     ads.Price = _price;
-                    ads.Location = fileSave;
+                    ads.FilePath = fileSave;
                     ads.Description = _description;
+                    ads.NavigateUrl = _navigation;
+                    ads.Size = _size;
                     ads.State = _state;
                     //ads.Code = 
 
@@ -376,8 +399,13 @@ namespace ltktDAO
             {
                 log.writeLog(DBHelper.strPathLogFile, _username,
                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE, Convert.ToString(adsID), CommonConstants.SQL_TABLE_ADVERTISEMENT));
-                log.writeLog(DBHelper.strPathLogFile, _username, e.Message + CommonConstants.NEWLINE + e.StackTrace);
-
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
                 return false;
             }
             return true;

@@ -137,7 +137,9 @@ namespace ltkt.Admin
         {
             tblAdvertisement Ads = adsDAO.getAds(_id);
 
-            if (Ads != null && Session[CommonConstants.SES_EDIT_ADS] == null)
+            //if (Ads != null && Session[CommonConstants.SES_EDIT_ADS] == null)
+            //{
+            if (Ads != null)
             {
                 txtCompany.Text = Ads.Company.Trim();
                 txtAddress.Text = Ads.Address.Trim();
@@ -146,13 +148,18 @@ namespace ltkt.Admin
                 txtFromDate.Text = Ads.fromDate.ToString();
                 txtEndDate.Text = Ads.toDate.ToString();
                 txtPrice.Text = Ads.Price.ToString();
-                txtDescription.Text = Ads.Description.Trim();
+                txtDescription.Text = BaseServices.nullToBlank(Ads.Description).Trim();
+                txtNavigateUrl.Text = BaseServices.nullToBlank(Ads.NavigateUrl).Trim();
+                txtClickCount.Text = Ads.ClickCount.ToString();
+                txtSizeImg.Text = BaseServices.nullToBlank(Ads.Size).Trim();
+                txtLocation.Text = BaseServices.nullToBlank(Ads.Location).Trim();
+
                 ddlState.SelectedIndex = Ads.State;
 
-                string filename = Server.MapPath("~") + "\\" + Ads.Location.Trim();
+                string filename = Server.MapPath("~") + "\\" + Ads.FilePath.Trim();
                 if (File.Exists(filename))
                 {
-                    liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + Ads.Location.Trim() + "')\" />";
+                    liAds.Text = "<input type=\"button\" value=\"Xem\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + Ads.FilePath.Trim() + "')\" />";
                     //liAds.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
                 }
                 else
@@ -184,6 +191,9 @@ namespace ltkt.Admin
                 txtPrice.ReadOnly = false;
                 txtDescription.ReadOnly = false;
                 ddlState.Enabled = true;
+                txtNavigateUrl.ReadOnly = false;
+                txtSizeImg.ReadOnly = false;
+                txtLocation.ReadOnly = false;
 
                 liAds.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
             }
@@ -201,6 +211,11 @@ namespace ltkt.Admin
                 txtEndDate.CssClass = "";
                 txtPrice.ReadOnly = true;
                 txtDescription.ReadOnly = true;
+                txtNavigateUrl.ReadOnly = true;
+                txtSizeImg.ReadOnly = true;
+                txtClickCount.ReadOnly = true;
+                txtLocation.ReadOnly = true;
+
                 ddlState.Enabled = false;
 
                 liAds.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
@@ -332,6 +347,8 @@ namespace ltkt.Admin
                     DateTime _toDate = DateTime.Parse(txtEndDate.Text);
                     int _price = Convert.ToInt32(txtPrice.Text);
                     string _description = txtDescription.Text;
+                    string _navigateUrl = txtNavigateUrl.Text;
+                    string _size = txtSizeImg.Text;
 
                     int _state = CommonConstants.STATE_UNCHECK;
                     switch (Convert.ToInt32(ddlState.SelectedValue))
@@ -352,7 +369,7 @@ namespace ltkt.Admin
                             break;
                     }
 
-                    string fileSave = Ads.Location.Trim();
+                    string fileSave = Ads.FilePath.Trim();
                     if (fileAds.HasFile)
                     {
                         string folder = CommonConstants.FOLDER_IMG_ADS;
@@ -379,6 +396,8 @@ namespace ltkt.Admin
                                                  _price,
                                                  fileSave,
                                                  _description,
+                                                 _navigateUrl,
+                                                 _size,
                                                  _state);
 
                     if (isOK)

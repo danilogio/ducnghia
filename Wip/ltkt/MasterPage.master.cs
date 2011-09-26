@@ -88,7 +88,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_RIGHT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_RIGHT_BANNER);
-                        imgAdRightTop.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdRightTop.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdRightTop.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_RIGHT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -97,7 +97,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_RIGHT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_MIDDLE_RIGHT_BANNER);
-                        imgAdRightMiddle.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdRightMiddle.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         hpkAdRightMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_MIDDLE_RIGHT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -106,7 +106,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_RIGHT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_RIGHT_BANNER);
-                        imgAdRightBottom.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdRightBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdRightBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_RIGHT_BANNER, 
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -116,7 +116,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEFT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_LEFT_BANNER);
-                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_LEFT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -125,7 +125,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_LEFT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_MIDDLE_LEFT_BANNER);
-                        imgAdLeftMiddle.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdLeftMiddle.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdLeftMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_MIDDLE_LEFT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -134,7 +134,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_LEFT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_LEFT_BANNER);
-                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_LEFT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -144,7 +144,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_1_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_1_BANNER);
-                        imgAdBottom1.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdBottom1.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         hpkAdBottom1.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_1_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -153,7 +153,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_2_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_2_BANNER);
-                        imgAdBottom2.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdBottom2.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         hpkAdBottom2.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_2_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -162,7 +162,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_BANNER);
-                        imgAdTopUp.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdTopUp.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdTopUp.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
@@ -171,7 +171,7 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_LEADER_BANNER);
-                        imgAdTopLeader.ImageUrl = BaseServices.nullToBlank(ads.Location);
+                        imgAdTopLeader.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
                         HpkAdTopLeader.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_LEADER_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));

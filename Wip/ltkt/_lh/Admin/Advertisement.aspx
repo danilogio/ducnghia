@@ -157,6 +157,14 @@
                     <asp:TextBox ID="txtPrice" runat="server"></asp:TextBox>
                 </p>
                 <p>
+                    <span>Trang web công ty:</span>
+                    <asp:TextBox ID="txtNavigateUrl" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Số lần click:</span>
+                    <asp:TextBox ID="txtClickCount" runat="server" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
                     <span>Tập tin quảng cáo:</span>
                     <%--<asp:FileUpload ID="fileAds" runat="server" />--%>
                     <asp:Literal ID="liAds" runat="server" Text="ad"></asp:Literal>
@@ -164,6 +172,19 @@
                 <p id="upload">
                     <span>Tải hình lên</span>
                     <asp:FileUpload ID="fileAds" runat="server" />
+                </p>
+                <p>
+                    <span>Kích thước:</span>
+                    <asp:TextBox ID="txtSizeImg" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Vui lòng nhập kích thước hình ảnh"
+                        ControlToValidate="txtSizeImg" Display="None"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Xin vui lòng nhập đúng định dạng kích thước WidthxHeight (10x10)"
+                        ControlToValidate="txtSizeImg" Display="None" ValidationExpression="^\d{4}-\d{3}">
+                    </asp:RegularExpressionValidator>
+                </p>
+                <p>
+                    <span>Vị trí:</span>
+                    <asp:TextBox ID="txtLocation" runat="server"></asp:TextBox>
                 </p>
                 <p>
                     <span>Mô tả:</span>

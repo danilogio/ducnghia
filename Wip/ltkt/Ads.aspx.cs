@@ -18,7 +18,7 @@ public partial class Ads : System.Web.UI.Page
 
         if (red == CommonConstants.BLANK)
         {
-            red = CommonConstants.PAGE_ADCONTACT;
+            Response.Redirect(CommonConstants.PAGE_ADCONTACT);
         }
         if (action == CommonConstants.ACT_CLICK)
         {
