@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Collections;
 using ltktDAO;
 using System.IO;
 
@@ -123,7 +123,13 @@ namespace ltkt.Admin
             catch (Exception ex)
             {
                 log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
-                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.HelpLink);
                 //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
                                               + CommonConstants.ADD_PARAMETER
@@ -156,6 +162,35 @@ namespace ltkt.Admin
 
                 ddlState.SelectedIndex = Ads.State;
 
+
+                ArrayList lst = adsDAO.getFreeLocationList();
+                //Adv is pending or active
+                if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK)
+                {
+                    if (!BaseServices.isNullOrBlank(Ads.Code))
+                    {
+                        lst.Add(Ads.Code.Trim());
+                    }
+                }
+                else
+                {
+                    lst.Add(CommonConstants.CONST_ONE_NEGATIVE);
+                }
+                for (int i = lst.Count - 1; i >= 0; i--)
+                {
+                    ddlLocation.Items.Insert(0, new ListItem(adsDAO.getNameOfLocation(lst[i].ToString()),lst[i].ToString()));
+                }
+                if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK)
+                {
+                    if (!BaseServices.isNullOrBlank(Ads.Code))
+                    {
+                        ddlLocation.SelectedValue = Ads.Code.Trim();
+                    }
+                }
+                else
+                {
+                    ddlLocation.SelectedValue = CommonConstants.CONST_ONE_NEGATIVE;
+                }
                 string filename = Server.MapPath("~") + "\\" + Ads.FilePath.Trim();
                 if (File.Exists(filename))
                 {
@@ -416,7 +451,13 @@ namespace ltkt.Admin
             {
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message + CommonConstants.NEWLINE + ex.StackTrace);
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.Source
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.StackTrace
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.HelpLink);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);

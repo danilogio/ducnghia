@@ -26,6 +26,8 @@ namespace ltktDAO
         /// first number page
         /// </summary>
         public const string PAGE_NUMBER_FIRST = "1";
+        public const string CONST_ZERO = "0";
+        public const string CONST_ONE_NEGATIVE = "-1";
         /// <summary>
         /// Blank value
         /// </summary>
@@ -243,6 +245,10 @@ namespace ltktDAO
             /// Location
             /// </summary>
             public const string TXT_LOCATION = "vị trí";
+            /// <summary>
+            /// Please select of combobox
+            /// </summary>
+            public const string TXT_PLEASE_SELECT = "---Chọn---";
         #endregion
 
         #region Css (CSS)
@@ -1763,41 +1769,81 @@ namespace ltktDAO
         /// </summary>
         public const string ADS_TOP_BANNER = "top";
         /// <summary>
+        /// Banner Top name
+        /// </summary>
+        public const string ADS_TOP_BANNER_NAME = "Top";
+        /// <summary>
         /// Banner Top Leader
         /// </summary>
         public const string ADS_TOP_LEADER_BANNER = "topleader";
+        /// <summary>
+        /// Banner Top Leader Name
+        /// </summary>
+        public const string ADS_TOP_LEADER_BANNER_NAME = "Top Leader";
         /// <summary>
         /// Banner Top Right
         /// </summary>
         public const string ADS_TOP_RIGHT_BANNER = "topright";
         /// <summary>
+        /// Banner Top Right Name
+        /// </summary>
+        public const string ADS_TOP_RIGHT_BANNER_NAME = "Top Right";
+        /// <summary>
         /// Banner Middle right
         /// </summary>
         public const string ADS_MIDDLE_RIGHT_BANNER = "middleright";
+        /// <summary>
+        /// Banner Middle right Name
+        /// </summary>
+        public const string ADS_MIDDLE_RIGHT_BANNER_NAME = "Middle Right";
         /// <summary>
         /// Banner middle right
         /// </summary>
         public const string ADS_BOTTOM_RIGHT_BANNER = "bottomright";
         /// <summary>
+        /// Banner middle right Name
+        /// </summary>
+        public const string ADS_BOTTOM_RIGHT_BANNER_NAME = "Bottom Right";
+        /// <summary>
         /// Banner Top left
         /// </summary>
         public const string ADS_TOP_LEFT_BANNER = "topleft";
+        /// <summary>
+        /// Banner Top left Name
+        /// </summary>
+        public const string ADS_TOP_LEFT_BANNER_NAME = "Top Left";
         /// <summary>
         /// Banner middle left
         /// </summary>
         public const string ADS_MIDDLE_LEFT_BANNER = "middleleft";
         /// <summary>
+        /// Banner middle left Name
+        /// </summary>
+        public const string ADS_MIDDLE_LEFT_BANNER_NAME = "Middle Left";
+        /// <summary>
         /// Banner bottom left
         /// </summary>
         public const string ADS_BOTTOM_LEFT_BANNER = "bottomleft";
+        /// <summary>
+        /// Banner bottom left Name
+        /// </summary>
+        public const string ADS_BOTTOM_LEFT_BANNER_NAME = "Bottom Left";
         /// <summary>
         /// Banner bottom 1
         /// </summary>
         public const string ADS_BOTTOM_1_BANNER = "bot1";
         /// <summary>
+        /// Banner bottom 1 name
+        /// </summary>
+        public const string ADS_BOTTOM_1_BANNER_NAME = "Bottom 1";
+        /// <summary>
         /// Banner bottom 2
         /// </summary>
         public const string ADS_BOTTOM_2_BANNER = "bot2";
+        /// <summary>
+        /// Banner bottom 2 name
+        /// </summary>
+        public const string ADS_BOTTOM_2_BANNER_NAME = "Bottom 2";
         #endregion
 
         #region SQL query (SQL)

@@ -128,7 +128,7 @@ namespace ltkt
             {
                 if (chxLocation.Items[idx].Selected)
                 {
-                    sLocation += chxLocation.Items[idx].Value;
+                    sLocation += adsDAO.getNameOfLocation(chxLocation.Items[idx].Value);
                     sLocation += CommonConstants.COMMA;
                 }
             }

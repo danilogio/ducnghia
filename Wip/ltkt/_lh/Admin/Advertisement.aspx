@@ -104,7 +104,7 @@
         <asp:Panel ID="detailsPanel" runat="server" Visible="false">
             <div id="divFunction">
                 <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />&nbsp;&nbsp;
-                <asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" OnClick="btnCancel_Click" />
+                <%--<asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" OnClick="btnCancel_Click" />--%>
                 <hr />
             </div>
             <div id="divDetails" class="form_settings">
@@ -182,13 +182,19 @@
                         ControlToValidate="txtSizeImg" Display="None" ValidationExpression="^\d{4}-\d{3}">
                     </asp:RegularExpressionValidator>
                 </p>
-                <p>
-                    <span>Vị trí:</span>
-                    <asp:TextBox ID="txtLocation" runat="server"></asp:TextBox>
-                </p>
+                
                 <p>
                     <span>Mô tả:</span>
                     <asp:TextBox ID="txtDescription" TextMode="MultiLine" Rows="3" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Vị trí Đăng ký:</span>
+                    <asp:TextBox ID="txtLocation" runat="server"></asp:TextBox>
+                </p>
+                 <p>
+                    <span>Vị trí Quảng cáo chính thức:</span>
+                    <asp:DropDownList ID="ddlLocation" runat="server">
+                    </asp:DropDownList>
                 </p>
                 <p>
                     <span>Trạng thái:</span>

@@ -1,0 +1,191 @@
+9/27/2011 12:15:30 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:15:30 AM ==> [dvtrung]:Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+9/27/2011 12:15:34 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:15:34 AM ==> [dvtrung]:Collection was of a fixed size.
+   at System.SZArrayHelper.Add[T](T value)
+   at ltktDAO.Ads.getValidLocationList() in E:\Data\Projects\ducnghia\Wip\ltktDAO\Ads.cs:line 369
+   at ltkt.Admin.Advertisement.showAdsDetails(Int32 _id, String _action) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 161
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 86
+9/27/2011 12:15:40 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:15:40 AM ==> [dvtrung]:Collection was of a fixed size.
+   at System.SZArrayHelper.Add[T](T value)
+   at ltktDAO.Ads.getValidLocationList() in E:\Data\Projects\ducnghia\Wip\ltktDAO\Ads.cs:line 369
+   at ltkt.Admin.Advertisement.showAdsDetails(Int32 _id, String _action) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 161
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 86
+9/27/2011 12:24:00 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:24:00 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:24:05 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:24:05 AM ==> [dvtrung]:Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+mscorlib
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at ltkt.Admin.Advertisement.showAdsDetails(Int32 _id, String _action) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 170
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 86
+
+9/27/2011 12:27:23 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:27:23 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:29:41 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:29:41 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:35:50 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:35:50 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:37:23 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:37:23 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:41:06 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:41:06 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:42:42 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:42:42 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:48:04 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:48:04 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:49:28 AM ==> String or binary data would be truncated.
+The statement has been terminated.
+.Net SqlClient Data Provider
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at System.Data.Linq.SqlClient.SqlProvider.Execute(Expression query, QueryInfo queryInfo, IObjectReaderFactory factory, Object[] parentArgs, Object[] userArgs, ICompiledSubQuery[] subQueries, Object lastResult)
+   at System.Data.Linq.SqlClient.SqlProvider.ExecuteAll(Expression query, QueryInfo[] queryInfos, IObjectReaderFactory factory, Object[] userArguments, ICompiledSubQuery[] subQueries)
+   at System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   at System.Data.Linq.ChangeDirector.StandardChangeDirector.DynamicInsert(TrackedObject item)
+   at System.Data.Linq.ChangeDirector.StandardChangeDirector.Insert(TrackedObject item)
+   at System.Data.Linq.ChangeProcessor.SubmitChanges(ConflictMode failureMode)
+   at System.Data.Linq.DataContext.SubmitChanges(ConflictMode failureMode)
+   at System.Data.Linq.DataContext.SubmitChanges()
+   at ltktDAO.Ads.insertAds(String _companyName, String _address, String _email, String _phone, DateTime _from, DateTime _end, String _location) in E:\Data\Projects\ducnghia\Wip\ltktDAO\Ads.cs:line 247
+
+9/27/2011 12:49:54 AM ==> String or binary data would be truncated.
+The statement has been terminated.
+.Net SqlClient Data Provider
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at System.Data.Linq.SqlClient.SqlProvider.Execute(Expression query, QueryInfo queryInfo, IObjectReaderFactory factory, Object[] parentArgs, Object[] userArgs, ICompiledSubQuery[] subQueries, Object lastResult)
+   at System.Data.Linq.SqlClient.SqlProvider.ExecuteAll(Expression query, QueryInfo[] queryInfos, IObjectReaderFactory factory, Object[] userArguments, ICompiledSubQuery[] subQueries)
+   at System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   at System.Data.Linq.ChangeDirector.StandardChangeDirector.DynamicInsert(TrackedObject item)
+   at System.Data.Linq.ChangeDirector.StandardChangeDirector.Insert(TrackedObject item)
+   at System.Data.Linq.ChangeProcessor.SubmitChanges(ConflictMode failureMode)
+   at System.Data.Linq.DataContext.SubmitChanges(ConflictMode failureMode)
+   at System.Data.Linq.DataContext.SubmitChanges()
+   at ltktDAO.Ads.insertAds(String _companyName, String _address, String _email, String _phone, DateTime _from, DateTime _end, String _location) in E:\Data\Projects\ducnghia\Wip\ltktDAO\Ads.cs:line 247
+
+9/27/2011 12:52:21 AM ==>  Insert record 12 to Table tblAdvertisement successful
+9/27/2011 12:52:31 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:52:31 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:54:03 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:54:03 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+
+9/27/2011 12:54:23 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+9/27/2011 12:54:23 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
+

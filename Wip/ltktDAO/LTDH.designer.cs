@@ -1266,7 +1266,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Location", DbType="NChar(20)")]
+		[Column(Storage="_Location", DbType="NVarChar(254)")]
 		public string Location
 		{
 			get

@@ -51,7 +51,7 @@
       <Column Name="ClickCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NavigateUrl" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
       <Column Name="Size" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblContact" Member="tblContacts">

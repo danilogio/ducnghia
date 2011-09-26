@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -240,6 +241,7 @@ namespace ltktDAO
                     record.NavigateUrl = CommonConstants.BLANK;
                     record.FilePath = CommonConstants.BLANK;
                     record.Description = CommonConstants.BLANK;
+                    record.State = CommonConstants.STATE_UNCHECK;
 
                     DB.tblAdvertisements.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -295,6 +297,151 @@ namespace ltktDAO
             return lst;
         }
 
+        public string getNameOfLocation(string _code)
+        {
+           
+            switch (_code)
+            {
+                case CommonConstants.ADS_TOP_BANNER:
+                    {
+                        return CommonConstants.ADS_TOP_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_TOP_LEADER_BANNER:
+                    {
+                        return CommonConstants.ADS_TOP_LEADER_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_TOP_RIGHT_BANNER:
+                    {
+                        return CommonConstants.ADS_TOP_RIGHT_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_MIDDLE_RIGHT_BANNER:
+                    {
+                        return CommonConstants.ADS_MIDDLE_RIGHT_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_BOTTOM_RIGHT_BANNER:
+                    {
+                        return CommonConstants.ADS_BOTTOM_RIGHT_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_TOP_LEFT_BANNER:
+                    {
+                        return CommonConstants.ADS_TOP_LEFT_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_MIDDLE_LEFT_BANNER:
+                    {
+                        return CommonConstants.ADS_MIDDLE_LEFT_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_BOTTOM_LEFT_BANNER:
+                    {
+                        return CommonConstants.ADS_BOTTOM_LEFT_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_BOTTOM_1_BANNER:
+                    {
+                        return CommonConstants.ADS_BOTTOM_1_BANNER_NAME;
+                    }
+                case CommonConstants.ADS_BOTTOM_2_BANNER:
+                    {
+                        return CommonConstants.ADS_BOTTOM_2_BANNER_NAME;
+                    }
+                case CommonConstants.CONST_ONE_NEGATIVE:
+                    {
+                        return CommonConstants.TXT_PLEASE_SELECT;
+                    }
+            }
+            return CommonConstants.BLANK;
+        }
+
+        public ArrayList getFreeLocationList()
+        {
+            ArrayList lst = new ArrayList();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (!isExisted(CommonConstants.ADS_TOP_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_LEADER_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_TOP_RIGHT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_RIGHT_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_MIDDLE_RIGHT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_MIDDLE_RIGHT_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_BOTTOM_RIGHT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_RIGHT_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_LEADER_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_MIDDLE_LEFT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_MIDDLE_LEFT_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_BOTTOM_LEFT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_LEFT_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_BOTTOM_1_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_1_BANNER);
+            }
+            if (!isExisted(CommonConstants.ADS_BOTTOM_2_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_2_BANNER);
+            }
+            return lst;
+        }
+        public ArrayList getUnfreeLocationList()
+        {
+            ArrayList lst = new ArrayList();
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            if (isExisted(CommonConstants.ADS_TOP_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_LEADER_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_TOP_RIGHT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_RIGHT_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_MIDDLE_RIGHT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_MIDDLE_RIGHT_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_BOTTOM_RIGHT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_RIGHT_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_TOP_LEADER_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_MIDDLE_LEFT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_MIDDLE_LEFT_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_BOTTOM_LEFT_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_LEFT_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_BOTTOM_1_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_1_BANNER);
+            }
+            if (isExisted(CommonConstants.ADS_BOTTOM_2_BANNER))
+            {
+                lst.Add(CommonConstants.ADS_BOTTOM_2_BANNER);
+            }
+            return lst;
+        }
         /// <summary>
         /// Xóa 1 record quảng cáo
         /// </summary>
