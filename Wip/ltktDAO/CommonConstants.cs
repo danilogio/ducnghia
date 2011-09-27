@@ -162,6 +162,10 @@ namespace ltktDAO
         /// File type csv
         /// </summary>
         public const string EXT_CSV = ".csv";
+        /// <summary>
+        /// default size of image
+        /// </summary>
+        public const string DEFAULT_ADS_IMG_SIZE = "0x0";
         
         #endregion
 
@@ -244,11 +248,20 @@ namespace ltktDAO
             /// <summary>
             /// Location
             /// </summary>
-            public const string TXT_LOCATION = "vị trí";
+            public const string TXT_ADS_LOCATION = "vị trí quảng cáo";
             /// <summary>
             /// Please select of combobox
             /// </summary>
             public const string TXT_PLEASE_SELECT = "---Chọn---";
+            /// <summary>
+            /// Navigation Url
+            /// </summary>
+            public const string TXT_ADS_NAVIGATE_URL = "Trang web công ty";
+            /// <summary>
+            /// Image url
+            /// </summary>
+            public const string TXT_ADS_IMAGE_URL = "Tập tin quảng cáo";
+
         #endregion
 
         #region Css (CSS)
@@ -833,7 +846,7 @@ namespace ltktDAO
         /// <summary>
         /// select one item
         /// </summary>
-        public const string MSG_E_SELECT_ONE_ITEM = "Vui chọn 1 {0}";
+        public const string MSG_E_PLEASE_SELECT_ONE_ITEM = "Vui lòng chọn 1 {0}";
         /// <summary>
         /// Invalid file type
         /// </summary>
@@ -845,6 +858,7 @@ namespace ltktDAO
 
         public const string MSG_I_UPLOAD_AGAIN = "<br /><br /><a href=\"Upload.aspx\">Thử lại</a>";
 
+        public const string MSG_E_PLEASE_INPUT_DATA = "Vui lòng nhập {0}";
         /// <summary>
         /// Message when error
         /// </summary>
@@ -1077,6 +1091,14 @@ namespace ltktDAO
         public const string CF_FILE_TYPE_ALLOW = "FILE_TYPE_ALLOW";
 
         public const string CF_FILE_SIZE = "FILE_SIZE";
+        /// <summary>
+        /// Filesize max of image
+        /// </summary>
+        public const string CF_IMG_FILE_SIZE_MAX = "IMG_FILE_SIZE_MAX";
+        /// <summary>
+        /// File type allowed of image
+        /// </summary>
+        public const string CF_IMG_FILE_TYPE_ALLOW = "IMG_FILE_TYPE_ALLOW";
         #endregion
 
         #region Pages Name (PAGE)

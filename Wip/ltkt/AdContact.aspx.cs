@@ -83,8 +83,8 @@ namespace ltkt
                 if (_location == CommonConstants.BLANK)
                 {
                     liMessage.Visible = true;
-                    liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_SELECT_ONE_ITEM,
-                                                                        CommonConstants.TXT_LOCATION);
+                    liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_SELECT_ONE_ITEM,
+                                                                        CommonConstants.TXT_ADS_LOCATION);
                     return;
                 }
                 

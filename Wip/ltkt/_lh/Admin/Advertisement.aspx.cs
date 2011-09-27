@@ -81,9 +81,15 @@ namespace ltkt.Admin
                             ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
                             ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
                             ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+
+                            showAdsDetails(_id, action);
+                        }
+                        if (action == CommonConstants.ACT_VIEW)
+                        {
+                            btnEdit.Visible = false;
                         }
 
-                        showAdsDetails(_id, action);
+                        //showAdsDetails(_id, action);
                     }
                     else if (action == CommonConstants.ACT_DELETE)
                     {
@@ -229,7 +235,7 @@ namespace ltkt.Admin
                 txtNavigateUrl.ReadOnly = false;
                 txtSizeImg.ReadOnly = false;
                 txtLocation.ReadOnly = false;
-
+                ddlLocation.Enabled = true;
                 liAds.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
             }
             else
@@ -250,7 +256,7 @@ namespace ltkt.Admin
                 txtSizeImg.ReadOnly = true;
                 txtClickCount.ReadOnly = true;
                 txtLocation.ReadOnly = true;
-
+                ddlLocation.Enabled = false;
                 ddlState.Enabled = false;
 
                 liAds.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải hình\" class=\"formbutton\" onclick=\"upload()\" />";
@@ -352,100 +358,137 @@ namespace ltkt.Admin
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            if (Request.QueryString[CommonConstants.REQ_ACTION] == CommonConstants.ACT_VIEW)
-            {
-                txtFromDate.CssClass = "calendar";
-                txtEndDate.CssClass = "calendar";
+            //if (Request.QueryString[CommonConstants.REQ_ACTION] == CommonConstants.ACT_VIEW)
+            //{
+            //    txtFromDate.CssClass = "calendar";
+            //    txtEndDate.CssClass = "calendar";
 
-                Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
-                                   + CommonConstants.ADD_PARAMETER
-                                   + CommonConstants.REQ_ACTION
-                                   + CommonConstants.EQUAL
-                                   + CommonConstants.ACT_EDIT
-                                   + CommonConstants.AND
-                                   + CommonConstants.REQ_ID
-                                   + CommonConstants.EQUAL
-                                   + Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]));
-            }
+            //    Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+            //                       + CommonConstants.ADD_PARAMETER
+            //                       + CommonConstants.REQ_ACTION
+            //                       + CommonConstants.EQUAL
+            //                       + CommonConstants.ACT_EDIT
+            //                       + CommonConstants.AND
+            //                       + CommonConstants.REQ_ID
+            //                       + CommonConstants.EQUAL
+            //                       + Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]));
+            //}
 
             try
             {
-                if (Session[CommonConstants.SES_EDIT_ADS] != null)
+
+                tblAdvertisement Ads = (tblAdvertisement)Session[CommonConstants.SES_EDIT_ADS];
+
+                string _company = txtCompany.Text;
+                string _address = txtAddress.Text;
+                string _email = txtEmail.Text;
+                string _phone = txtPhone.Text;
+                DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
+                DateTime _toDate = DateTime.Parse(txtEndDate.Text);
+                int _price = Convert.ToInt32(txtPrice.Text);
+                string _description = txtDescription.Text;
+                string _navigateUrl = txtNavigateUrl.Text;
+                string _size = txtSizeImg.Text;
+
+
+                int _state = CommonConstants.STATE_UNCHECK;
+                switch (Convert.ToInt32(ddlState.SelectedValue))
                 {
-                    tblAdvertisement Ads = (tblAdvertisement)Session[CommonConstants.SES_EDIT_ADS];
-
-                    string _company = txtCompany.Text;
-                    string _address = txtAddress.Text;
-                    string _email = txtEmail.Text;
-                    string _phone = txtPhone.Text;
-                    DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
-                    DateTime _toDate = DateTime.Parse(txtEndDate.Text);
-                    int _price = Convert.ToInt32(txtPrice.Text);
-                    string _description = txtDescription.Text;
-                    string _navigateUrl = txtNavigateUrl.Text;
-                    string _size = txtSizeImg.Text;
-
-                    int _state = CommonConstants.STATE_UNCHECK;
-                    switch (Convert.ToInt32(ddlState.SelectedValue))
-                    {
-                        case CommonConstants.STATE_UNCHECK:
-                            _state = CommonConstants.STATE_UNCHECK;
-                            break;
-                        case CommonConstants.STATE_CHECKED:
-                            _state = CommonConstants.STATE_CHECKED;
-                            break;
-                        case CommonConstants.STATE_PENDING:
-                            _state = CommonConstants.STATE_PENDING;
-                            break;
-                        case CommonConstants.STATE_STICKY:
-                            _state = CommonConstants.STATE_STICKY;
-                            break;
-                        default:
-                            break;
-                    }
-
-                    string fileSave = Ads.FilePath.Trim();
-                    if (fileAds.HasFile)
-                    {
-                        string folder = CommonConstants.FOLDER_IMG_ADS;
-                        string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
-                        string filename = rootFolder + fileAds.FileName;
-                        fileSave = folder + "/" + fileAds.FileName;
-                        // save file
-                        if (!Directory.Exists(rootFolder))
-                        {
-                            Directory.CreateDirectory(rootFolder);
-                        }
-
-                        fileAds.SaveAs(filename);
-                    }
-
-                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    bool isOK = adsDAO.updateAds(Ads.ID, user.Username,
-                                                 _company,
-                                                 _address,
-                                                 _email,
-                                                 _phone,
-                                                 _fromDate,
-                                                 _toDate,
-                                                 _price,
-                                                 fileSave,
-                                                 _description,
-                                                 _navigateUrl,
-                                                 _size,
-                                                 _state);
-
-                    if (isOK)
-                    {
-                        Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
-                    }
-                    else
-                    {
-                        Response.Write(CommonConstants.ALERT_UPDATE_FAIL);
-                    }
-
-                    Session[CommonConstants.SES_EDIT_ADS] = null;
+                    case CommonConstants.STATE_UNCHECK:
+                        _state = CommonConstants.STATE_UNCHECK;
+                        break;
+                    case CommonConstants.STATE_CHECKED:
+                        _state = CommonConstants.STATE_CHECKED;
+                        break;
+                    case CommonConstants.STATE_PENDING:
+                        _state = CommonConstants.STATE_PENDING;
+                        break;
+                    case CommonConstants.STATE_STICKY:
+                        _state = CommonConstants.STATE_STICKY;
+                        break;
+                    default:
+                        break;
                 }
+
+                string fileSave = Ads.FilePath.Trim();
+                if (fileAds.HasFile)
+                {
+                    string folder = CommonConstants.FOLDER_IMG_ADS;
+                    string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
+                    string filename = rootFolder + fileAds.FileName;
+                    int filesizeMax = control.getValueByInt(CommonConstants.CF_IMG_FILE_SIZE_MAX);
+                    
+                    //check filetype
+                    string fileTypes = control.getValueString(CommonConstants.CF_IMG_FILE_TYPE_ALLOW);
+                    //check filesize max
+
+                    //check file existed: keep both
+
+                    fileSave = folder + "/" + fileAds.FileName;
+                    // save file
+                    if (!Directory.Exists(rootFolder))
+                    {
+                        Directory.CreateDirectory(rootFolder);
+                    }
+
+                    fileAds.SaveAs(filename);
+                }
+
+                string _code = ddlLocation.SelectedValue;
+                if (_state != CommonConstants.STATE_UNCHECK && _state != CommonConstants.STATE_STICKY)
+                {
+                    if (_code == CommonConstants.CONST_ONE_NEGATIVE)
+                    {
+                        liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_SELECT_ONE_ITEM, CommonConstants.TXT_ADS_LOCATION);
+                        messagePanel.Visible = true;
+                        return;
+                    }
+                    if (BaseServices.isNullOrBlank(_navigateUrl))
+                    {
+                        liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_NAVIGATE_URL);
+                        messagePanel.Visible = true;
+                        return;
+                    }
+                    if (BaseServices.isNullOrBlank(fileSave))
+                    {
+                        liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_IMAGE_URL);
+                        messagePanel.Visible = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    _code = CommonConstants.ADS_INACTIVE;
+                }
+               
+
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                bool isOK = adsDAO.updateAds(Ads.ID, user.Username,
+                                             _company,
+                                             _address,
+                                             _email,
+                                             _phone,
+                                             _fromDate,
+                                             _toDate,
+                                             _price,
+                                             fileSave,
+                                             _description,
+                                             _navigateUrl,
+                                             _size,
+                                             _state,
+                                             _code);
+
+                if (isOK)
+                {
+                    Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
+                }
+                else
+                {
+                    Response.Write(CommonConstants.ALERT_UPDATE_FAIL);
+                }
+
+                Session[CommonConstants.SES_EDIT_ADS] = null;
+
             }
             catch (Exception ex)
             {

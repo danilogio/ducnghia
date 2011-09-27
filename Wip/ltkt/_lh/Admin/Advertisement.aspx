@@ -68,8 +68,8 @@
 </asp:Content>
 <asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div class="block_text">
-        <asp:Panel ID="messagePanel" runat="server" Visible="false">
-            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+        <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
+            <asp:Literal ID="liMessage" runat="server" ></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="viewPanel" runat="server">
             <asp:Table ID="NewsTable" CssClass="table" runat="server">
@@ -178,13 +178,13 @@
                     <asp:TextBox ID="txtSizeImg" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Vui lòng nhập kích thước hình ảnh"
                         ControlToValidate="txtSizeImg" Display="None"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Xin vui lòng nhập đúng định dạng kích thước WidthxHeight (10x10)"
-                        ControlToValidate="txtSizeImg" Display="None" ValidationExpression="^\d{4}-\d{3}">
-                    </asp:RegularExpressionValidator>
+                    <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Xin vui lòng nhập đúng định dạng kích thước WidthxHeight (10x10)"
+                        ControlToValidate="txtSizeImg" Display="None" ValidationExpression="^\d{4}x\d{3}">
+                    </asp:RegularExpressionValidator>--%>
                 </p>
                 
                 <p>
-                    <span>Mô tả:</span>
+                    <span>Ghi chú:</span>
                     <asp:TextBox ID="txtDescription" TextMode="MultiLine" Rows="3" runat="server"></asp:TextBox>
                 </p>
                 <p>

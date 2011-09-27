@@ -633,3 +633,7 @@ div.block_details_text
 	float: right;
 	color: #666666;
 }
+.alert
+{
+	color:Red;
+}

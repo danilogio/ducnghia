@@ -241,6 +241,7 @@ namespace ltktDAO
                     record.NavigateUrl = CommonConstants.BLANK;
                     record.FilePath = CommonConstants.BLANK;
                     record.Description = CommonConstants.BLANK;
+                    record.Size = CommonConstants.DEFAULT_ADS_IMG_SIZE;
                     record.State = CommonConstants.STATE_UNCHECK;
 
                     DB.tblAdvertisements.InsertOnSubmit(record);
@@ -268,7 +269,31 @@ namespace ltktDAO
 
             return true;
         }
+        public void resetState(string _code)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
 
+                    var ads = DB.tblAdvertisements.Single(a => a.Code == _code);
+                    ads.Code = CommonConstants.ADS_INACTIVE;
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+            }
+        }
         /// <summary>
         /// Tổng số quảng cáo
         /// </summary>
@@ -513,7 +538,8 @@ namespace ltktDAO
                               string _description,
                               string _navigation,
                               string _size,
-                              int _state)
+                              int _state,
+                              string _code)
         {
             try
             {
@@ -533,7 +559,11 @@ namespace ltktDAO
                     ads.NavigateUrl = _navigation;
                     ads.Size = _size;
                     ads.State = _state;
-                    //ads.Code = 
+
+                    if (!isExisted(_code))
+                    {
+                        ads.Code = _code;
+                    }
 
                     DB.SubmitChanges();
                     ts.Complete();
