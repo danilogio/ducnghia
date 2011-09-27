@@ -44,6 +44,7 @@ namespace ltktDAO
             }
             return res;
         }
+        
         public static int random(int min, int max)
         {
             Random rd = new Random();
@@ -51,6 +52,7 @@ namespace ltktDAO
             r = rd.Next(min, max);
             return r;
         }
+        
         public string getDefaultAppropriateThumbnail(string extension)
         {
             string strThumbnail = CommonConstants.BLANK;
@@ -111,6 +113,7 @@ namespace ltktDAO
             }
             return a;
         }
+        
         public static int max(int a, int b)
         {
             if (a > b)
@@ -128,6 +131,7 @@ namespace ltktDAO
             }
             return target.Trim();
         }
+        
         public static int convertStringToInt(string target)
         {
             int r = 0;
@@ -141,6 +145,7 @@ namespace ltktDAO
             }
             return r;
         }
+        
         public static string nullToSharp(string target)
         {
             if (target == null || target == CommonConstants.BLANK)
@@ -207,6 +212,7 @@ namespace ltktDAO
             }
             return msg;
         }
+     
         public static int getValueClassByCode(string code)
         {
             switch (code)
@@ -226,6 +232,7 @@ namespace ltktDAO
             }
             return -1;
         }
+        
         public static string getNameSubjectByCode(string code)
         {
             if(isNullOrBlank(code))
@@ -313,6 +320,7 @@ namespace ltktDAO
             }
             return links;
         }
+       
         public string createRatingBar(int score, int maxScore)
         {
             string data = CommonConstants.BLANK;
@@ -340,6 +348,7 @@ namespace ltktDAO
             }
             return data;
         }
+ 
         public static int getTotalPage(int totalRecord, int numOnePage)
         {
            
@@ -350,14 +359,17 @@ namespace ltktDAO
             }
             return totalRecord / numOnePage + 1;
         }
+ 
         public static int getRecordFrom(int currentPage, int numberOnPage)
         {
             return (currentPage - 1) * numberOnPage;
         }
+  
         public static int getRecordTo(int recordFrom, int numberOnPage)
         {
             return recordFrom + numberOnPage;
         }
+    
         public static string createPagingLink(string url, int currentPage, int totalPage)
         {
             string links = CommonConstants.BLANK;
@@ -467,6 +479,36 @@ namespace ltktDAO
             }
             return links;
         }
+
+        public bool checkFileType(string filename, string fileTypeAllows)
+        {
+            string ext = Path.GetExtension(filename);
+            ext = ext.Substring(1, ext.Length - 1);
+            //string fileTypeAllows = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+            char[] delimiterChars = { ';', ',' };
+            string[] arrFileTypeAllows = fileTypeAllows.Split(delimiterChars);
+
+            foreach (string fileType in arrFileTypeAllows)
+            {
+                if (ext.Equals(fileType))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public string fileNameToSave(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                return Path.GetFileNameWithoutExtension(fileName)
+                              + "_2" + Path.GetExtension(fileName);
+            }
+
+            return fileName;
+        }
+
+        
     }
     
 }

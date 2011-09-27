@@ -836,6 +836,10 @@ namespace ltktDAO
         /// </summary>
         public const string MSG_E_FILE_SIZE_IS_TOO_LARGE = "Kích thước tài liệu quá giới hạn cho phép";
         /// <summary>
+        /// file zise is not allow
+        /// </summary>
+        public const string MSG_E_FILE_SIZE_IS_NOT_ALLOW = "Định dạng tài liệu không cho phép tải lên";
+        /// <summary>
         /// gửi quảng cáo thành công
         /// </summary>
         public const string MSG_I_ADVERTISEMENT_CONTACT_IS_SENT_SUCCESSFUL = "Quý vị đặt quảng cáo thành công! <br />Chúng tôi sẽ liên lạc với quý vị để thêm chi tiết<br />";
@@ -1090,7 +1094,7 @@ namespace ltktDAO
         /// </summary>
         public const string CF_FILE_TYPE_ALLOW = "FILE_TYPE_ALLOW";
 
-        public const string CF_FILE_SIZE = "FILE_SIZE";
+        
         /// <summary>
         /// Filesize max of image
         /// </summary>

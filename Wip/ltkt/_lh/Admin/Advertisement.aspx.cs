@@ -15,7 +15,7 @@ namespace ltkt.Admin
         EventLog log = new EventLog();
         ltktDAO.Ads adsDAO = new ltktDAO.Ads();
         ltktDAO.Control control = new ltktDAO.Control();
-        BaseServices bs = new BaseServices();
+        ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Users userDAO = new ltktDAO.Users();
 
         public const int NoOfAdsPerPage = 10;
@@ -184,7 +184,7 @@ namespace ltkt.Admin
                 }
                 for (int i = lst.Count - 1; i >= 0; i--)
                 {
-                    ddlLocation.Items.Insert(0, new ListItem(adsDAO.getNameOfLocation(lst[i].ToString()),lst[i].ToString()));
+                    ddlLocation.Items.Insert(0, new ListItem(adsDAO.getNameOfLocation(lst[i].ToString()), lst[i].ToString()));
                 }
                 if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK)
                 {
@@ -415,16 +415,23 @@ namespace ltkt.Admin
                 {
                     string folder = CommonConstants.FOLDER_IMG_ADS;
                     string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
-                    string filename = rootFolder + fileAds.FileName;
-                    int filesizeMax = control.getValueByInt(CommonConstants.CF_IMG_FILE_SIZE_MAX);
-                    
-                    //check filetype
-                    string fileTypes = control.getValueString(CommonConstants.CF_IMG_FILE_TYPE_ALLOW);
-                    //check filesize max
 
                     //check file existed: keep both
+                    string newFileName = bs.fileNameToSave(fileAds.FileName);
+                    string filename = rootFolder + newFileName;
 
-                    fileSave = folder + "/" + fileAds.FileName;
+                    //check filetype
+                    string fileTypes = control.getValueString(CommonConstants.CF_IMG_FILE_TYPE_ALLOW);
+                    if (!bs.checkFileType(fileAds.FileName, fileTypes))
+                        throw new Exception (CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                    
+                    //check filesize max
+                    int fileSizeMax = control.getValueByInt(CommonConstants.CF_IMG_FILE_SIZE_MAX);
+                    fileSizeMax = 1024 * fileSizeMax;
+                    if (fileAds.PostedFile.ContentLength > fileSizeMax)
+                        throw new Exception (CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+
+                    fileSave = folder + "/" + newFileName;
                     // save file
                     if (!Directory.Exists(rootFolder))
                     {
@@ -460,7 +467,7 @@ namespace ltkt.Admin
                 {
                     _code = CommonConstants.ADS_INACTIVE;
                 }
-               
+
 
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 bool isOK = adsDAO.updateAds(Ads.ID, user.Username,

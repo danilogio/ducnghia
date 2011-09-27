@@ -19,6 +19,7 @@ namespace ltkt
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         ltktDAO.Control control = new ltktDAO.Control();
+        ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +39,7 @@ namespace ltkt
                 if (Session[CommonConstants.SES_USER] != null)
                 {
                     liFileSize.Text = "(<=";
-                    liFileSize.Text += control.getValueByInt(CommonConstants.CF_FILE_SIZE);
+                    liFileSize.Text += control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
                     liFileSize.Text += "MB)";
 
                     string selIndex = Request["selIndex"];
@@ -117,9 +118,11 @@ namespace ltkt
                     }
 
                     string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
-                    string filename = rootFolder + fileContent.FileName;
-                    string fileSave = folder + "\\" + fileContent.FileName;
-                    string fileSolvingSave = "";
+                    string newFileName = bs.fileNameToSave(fileContent.FileName);
+                    string filename = rootFolder + newFileName;
+                    string fileSave = folder + "\\" + newFileName;
+                    
+                    string fileSolvingSave = CommonConstants.BLANK;
                     // save file
                     if (!Directory.Exists(rootFolder))
                     {
@@ -128,21 +131,21 @@ namespace ltkt
 
                     try
                     {
-                        int maxSize = control.getValueByInt(CommonConstants.CF_FILE_SIZE);
+                        int maxSize = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
                         maxSize = maxSize * 1024 * 1024;
 
-                        if (checkFileType(fileContent.FileName)
+                        if (bs.checkFileType(fileContent.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
                             && fileContent.PostedFile.ContentLength <= maxSize)
                             fileContent.SaveAs(filename);
                         else
                             throw new Exception(CommonConstants.MSG_E_UPLOAD);
 
                         if (fileSolving.HasFile
-                            && checkFileType(fileSolving.FileName)
+                            && bs.checkFileType(fileSolving.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
                             && fileSolving.PostedFile.ContentLength <= maxSize)
                         {
                             fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
-                                Path.GetFileNameWithoutExtension(fileContent.FileName) +
+                                Path.GetFileNameWithoutExtension(newFileName) +
                                 "_solved" + Path.GetExtension(fileSolving.FileName));
 
                             fileSolvingSave = folder + "\\" +
@@ -246,21 +249,6 @@ namespace ltkt
             }
         }
 
-        private bool checkFileType(string filename)
-        {
-            string ext = Path.GetExtension(filename);
-            ext = ext.Substring(1, ext.Length - 1);
-            string fileTypeAllows = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
-            char[] delimiterChars = { ';' };
-            string[] arrFileTypeAllows = fileTypeAllows.Split(delimiterChars);
-
-            foreach (string fileType in arrFileTypeAllows)
-            {
-                if (ext.Equals(fileType))
-                    return true;
-            }
-
-            return false;
-        }
+        
     }
 }
