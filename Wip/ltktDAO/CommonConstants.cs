@@ -1187,74 +1187,17 @@ namespace ltktDAO
         /// upload page name
         /// </summary>
         public const string PAGE_UPLOAD_NAME = "Gửi bài viết";
-        /// <summary>
-        /// Admin general page
-        /// </summary>
-        //public const string PAGE_ADMIN_GENERAL = "./Admin/General.aspx";
-        public const string PAGE_ADMIN_GENERAL = "General.aspx";
+        
         /// <summary>
         /// Admin login page
         /// </summary>
         public const string PAGE_ADMIN_LOGIN = "../Login.aspx";
 
         /// <summary>
-        /// Admin news page
+        /// Admin general page
         /// </summary>
-        public const string PAGE_ADMIN_NEWS = "News.aspx";
-        
-        /// <summary>
-        /// Name of admin news page
-        /// </summary>
-        public const string PAGE_ADMIN_NEWS_NAME = "Quản lý tin tức";
-
-        /// <summary>
-        /// Admin ads page
-        /// </summary>
-        public const string PAGE_ADMIN_ADS = "Advertisement.aspx";
-
-        /// <summary>
-        /// Name of admin ads page
-        /// </summary>
-        public const string PAGE_ADMIN_ADS_NAME = "Quản lý quảng cáo";
-
-        /// <summary>
-        /// Mailbox page
-        /// </summary>
-        public const string PAGE_ADMIN_MAIL = "Mailbox.aspx";
-
-        /// <summary>
-        /// Mailbox page name
-        /// </summary>
-        public const string PAGE_ADMIN_MAIL_NAME = "Hộp thư";
-
-        /// <summary>
-        /// permission admin page
-        /// </summary>
-        public const string PAGE_ADMIN_PERMISSION = "Permission.aspx";
-        /// <summary>
-        /// permission admin page name
-        /// </summary>
-        public const string PAGE_ADMIN_PERMISSION_NAME = "Quản lý phân quyền";
-
-        /// <summary>
-        /// Comment admin page
-        /// </summary>
-        public const string PAGE_ADMIN_COMMENT = "Comment.aspx";
-
-        /// <summary>
-        /// Comment admin page name
-        /// </summary>
-        public const string PAGE_ADMIN_COMMENT_NAME = "Quản lý bình luận (comment)";
-
-        /// <summary>
-        /// contest for university page name
-        /// </summary>
-        public const string PAGE_ADMIN_UNIVERSITY_NAME = "Quản lý chủ đề luyện thi đại học";
-
-        /// <summary>
-        /// contest for university page
-        /// </summary>
-        public const string PAGE_ADMIN_UNIVERSITY = "ContestUniversity.aspx";
+        //public const string PAGE_ADMIN_GENERAL = "./Admin/General.aspx";
+        public const string PAGE_ADMIN_GENERAL = "General.aspx";
 
         /// <summary>
         /// Users page name
@@ -1265,6 +1208,140 @@ namespace ltktDAO
         /// users admin page
         /// </summary>
         public const string PAGE_ADMIN_USERS = "Users.aspx";
+
+        /// <summary>
+        /// Name of admin news page
+        /// </summary>
+        public const string PAGE_ADMIN_NEWS_NAME = "Quản lý tin tức";
+
+        /// <summary>
+        /// Admin news page
+        /// </summary>
+        public const string PAGE_ADMIN_NEWS = "News.aspx";
+
+        /// <summary>
+        /// permission admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_PERMISSION_NAME = "Quản lý phân quyền";
+
+        /// <summary>
+        /// permission admin page
+        /// </summary>
+        public const string PAGE_ADMIN_PERMISSION = "Permission.aspx";
+
+        /// <summary>
+        /// security admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_SECURITY_NAME = "Bảo mật";
+
+        /// <summary>
+        /// security admin page
+        /// </summary>
+        public const string PAGE_ADMIN_SECURITY = "Security.aspx";
+
+        /// <summary>
+        /// control admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_CONTROL_NAME = "Điều kiển";
+
+        /// <summary>
+        /// control admin page 
+        /// </summary>
+        public const string PAGE_ADMIN_CONTROL = "Control.aspx";
+
+        /// <summary>
+        /// Comment admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_COMMENT_NAME = "Quản lý bình luận (comment)";
+
+        /// <summary>
+        /// Comment admin page
+        /// </summary>
+        public const string PAGE_ADMIN_COMMENT = "Comment.aspx";
+        
+        /// <summary>
+        /// contest for university page name
+        /// </summary>
+        public const string PAGE_ADMIN_UNIVERSITY_NAME = "Quản lý chủ đề luyện thi đại học";
+
+        /// <summary>
+        /// contest for university page
+        /// </summary>
+        public const string PAGE_ADMIN_UNIVERSITY = "ContestUniversity.aspx";
+        
+        /// <summary>
+        /// contest for english page name
+        /// </summary>
+        public const string PAGE_ADMIN_ENGLISH_NAME = "Quản lý chủ đề Tiếng Anh";
+
+        /// <summary>
+        /// contest for university page
+        /// </summary>
+        public const string PAGE_ADMIN_ENGLISH = "English.aspx";
+        
+        /// <summary>
+        /// contest for english page name
+        /// </summary>
+        public const string PAGE_ADMIN_INFORMATICS_NAME = "Quản lý chủ đề Tin học";
+
+        /// <summary>
+        /// contest for university page
+        /// </summary>
+        public const string PAGE_ADMIN_INFORMATICS = "Informatics.aspx";
+
+        /// <summary>
+        /// Name of admin ads page
+        /// </summary>
+        public const string PAGE_ADMIN_ADS_NAME = "Quản lý quảng cáo";
+
+        /// <summary>
+        /// Admin ads page
+        /// </summary>
+        public const string PAGE_ADMIN_ADS = "Advertisement.aspx";
+
+        /// <summary>
+        /// Mailbox page name
+        /// </summary>
+        public const string PAGE_ADMIN_MAIL_NAME = "Hộp thư";
+
+        /// <summary>
+        /// Mailbox page
+        /// </summary>
+        public const string PAGE_ADMIN_MAIL = "Mailbox.aspx";
+
+        /// <summary>
+        /// contact admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_CONTACT_NAME = "Liên hệ/Góp ý";
+
+        /// <summary>
+        /// contact admin page
+        /// </summary>
+        public const string PAGE_ADMIN_CONTACT = "Contact.aspx";
+
+        /// <summary>
+        /// log admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_LOG_NAME = "Nhật ký hệ thống";
+
+        /// <summary>
+        /// log admin page
+        /// </summary>
+        public const string PAGE_ADMIN_LOG = "Log.aspx";
+
+        /// <summary>
+        /// import admin page name
+        /// </summary>
+        public const string PAGE_ADMIN_IMPORT_NAME = "Nhập liệu";
+
+        /// <summary>
+        /// import admin page
+        /// </summary>
+        public const string PAGE_ADMIN_IMPORT = "Import.aspx";
+
+
+
+        
 
         #endregion
 

@@ -5,11 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
+using System.IO;
 namespace ltkt.Admin
 {
     public partial class ImportData : System.Web.UI.Page
     {
         private ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Control control = new ltktDAO.Control();
+        ltktDAO.EventLog log = new ltktDAO.EventLog();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             tblUser user = (tblUser)Session[CommonConstants.SES_USER];
@@ -21,7 +25,12 @@ namespace ltkt.Admin
                     ///DO WORK HERE ONLY//////////////////////////////
                     isValid = true;
                     AdminMaster page = (AdminMaster)Master;
-                    page.updateHeader("Import data");
+                    page.updateHeader(CommonConstants.PAGE_ADMIN_IMPORT_NAME);
+
+                    liTitle.Text = CommonConstants.PAGE_ADMIN_IMPORT_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
                     //////////////////////////////////////////////////
                 }
@@ -35,22 +44,54 @@ namespace ltkt.Admin
         }
         protected void btnImport_Click(object sender, EventArgs e)
         {
-            string url = fileContent.FileName;
-            if (!BaseServices.isNullOrBlank(url))
+            tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            if (user != null)
             {
-                string idx = ddlSubject.SelectedValue;
-                if (idx == CommonConstants.SEC_UNIVERSITY_CODE)
+                if (fileContent.HasFile)
                 {
+                    string folder = "Data/ImportData";
+                    string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
+                    string filename = rootFolder + fileContent.FileName;
+                    string fileSave = folder + "\\" + fileContent.FileName;
 
-                }
-                else if(idx == CommonConstants.SEC_ENGLISH_CODE)
-                {
+                    // save file
+                    try
+                    {
+                        if (!Directory.Exists(rootFolder))
+                            Directory.CreateDirectory(rootFolder);
 
-                }
-                else if (idx == CommonConstants.SEC_INFORMATICS_CODE)
-                {
+                        if (Path.GetExtension(fileContent.FileName) == CommonConstants.EXT_CSV)
+                            fileContent.SaveAs(filename);
+                        else
+                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
 
+                    }
+                    catch (Exception ex)
+                    {
+                        log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
+
+                        Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                        Response.Redirect(CommonConstants.DOT + CommonConstants.DOT + 
+                                          CommonConstants.SPLASH + CommonConstants.PAGE_LOGIN);
+                    }
+
+
+                    //string type = ddlSubject.SelectedValue;
+                    //switch (type)
+                    //{
+                    //    case CommonConstants.SEC_UNIVERSITY_CODE:
+                    //        break;
+                    //    case CommonConstants.SEC_ENGLISH_CODE:
+                    //        break;
+                    //    case CommonConstants.SEC_INFORMATICS_CODE:
+                    //        break;
+                    //    default: break;
+                    //}
                 }
+            }
+            else
+            {
+                Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
         }
     }

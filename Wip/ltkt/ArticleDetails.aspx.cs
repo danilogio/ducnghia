@@ -279,8 +279,12 @@ namespace ltkt
 
                     lblOverview.Text = BaseServices.nullToBlank(contest.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = BaseServices.nullToBlank(contest.Title);
-                    hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(contest.Location.Replace("\\", "/"));
+                    if (adminDAO.isON(CommonConstants.AF_DOWNLOAD)
+                        && adminDAO.isON(CommonConstants.AF_DOWNLOAD_UNI))
+                    {
+                        hpkDownloadlink.Text = BaseServices.nullToBlank(contest.Title);
+                        hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(contest.Location.Replace("\\", "/"));
+                    }
 
                     if (!BaseServices.isNullOrBlank(contest.Solving))
                     {
@@ -369,8 +373,12 @@ namespace ltkt
 
                     lblOverview.Text = BaseServices.nullToBlank(english.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = BaseServices.nullToBlank(english.Title);
-                    hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(english.Location.Replace("\\", "/"));
+                    if (adminDAO.isON(CommonConstants.AF_DOWNLOAD)
+                        && adminDAO.isON(CommonConstants.AF_DOWNLOAD_EL))
+                    {
+                        hpkDownloadlink.Text = BaseServices.nullToBlank(english.Title);
+                        hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(english.Location.Replace("\\", "/"));
+                    }
 
                     IList<tblEnglish> items = englishDAO.getRelativeByType(english.Type, CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE);
                     lblRelative.Text = "<ul>";
@@ -451,8 +459,12 @@ namespace ltkt
 
                     lblOverview.Text = BaseServices.nullToBlank(informatic.Contents.Replace("\n", "<br />"));
 
-                    hpkDownloadlink.Text = BaseServices.nullToBlank(informatic.Title);
-                    hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(informatic.Location.Replace("\\", "/"));
+                    if (adminDAO.isON(CommonConstants.AF_DOWNLOAD)
+                        && adminDAO.isON(CommonConstants.AF_DOWNLOAD_IT))
+                    {
+                        hpkDownloadlink.Text = BaseServices.nullToBlank(informatic.Title);
+                        hpkDownloadlink.NavigateUrl = BaseServices.nullToSharp(informatic.Location.Replace("\\", "/"));
+                    }
 
                     int numberRelativeRecord = control.getValueByInt(CommonConstants.CF_NUM_RECORD_RELATIVE);
 
@@ -566,7 +578,7 @@ namespace ltkt
                 if (!adminDAO.isON (CommonConstants.AF_COMMENT_EASY))
                     newComment = "*" + newComment;
 
-                // Write comment to db
+                // Write comment to db and load comments
                 string sec = Request.QueryString[CommonConstants.REQ_SECTION];
                 int id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
 
@@ -575,16 +587,19 @@ namespace ltkt
                     case CommonConstants.SEC_UNIVERSITY_CODE:
                         {
                             contestDAO.insertComment(id, newComment);
+                            showComment(contestDAO.getComments(id));
                             break;
                         }
                     case CommonConstants.SEC_ENGLISH_CODE:
                         {
                             englishDAO.insertComment(id, newComment);
+                            showComment(englishDAO.getComments(id));
                             break;
                         }
                     case CommonConstants.SEC_INFORMATICS_CODE:
                         {
                             informaticsDAO.insertComment(id, newComment, currentUser);
+                            showComment (informaticsDAO.getComment(id));
                             break;
                         }
                     default:
@@ -594,9 +609,10 @@ namespace ltkt
                 statisticsDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
 
                 txtName.Text = CommonConstants.BLANK;
-                txtEmail.Text = CommonConstants.BLANK; ;
-                txtContent.Text = CommonConstants.BLANK; ;
+                txtEmail.Text = CommonConstants.BLANK; 
+                txtContent.Text = CommonConstants.BLANK;
 
+                
                 //Response.Redirect(CommonConstants.PAGE_ARTICLE_DETAILS
                 //                   + CommonConstants.ADD_PARAMETER
                 //                   + CommonConstants.REQ_SECTION

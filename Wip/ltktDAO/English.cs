@@ -11,6 +11,7 @@ namespace ltktDAO
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
         EventLog log = new EventLog();
+
         #region Property
         #region Get Property
         /// <summary>
@@ -229,7 +230,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static string getComments(int _id)
+        public string getComments(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
@@ -767,8 +768,11 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
                     ts.Complete();
-                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
-                    statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
+                    
+                    //Cho cái này vào bị lỗi liên tục
+                    //2011-09-27 16:09 tktung bỏ
+                    //ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    //statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
                 }
             }
             catch (Exception e) {

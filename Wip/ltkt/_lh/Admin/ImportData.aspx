@@ -2,8 +2,14 @@
     CodeFile="ImportData.aspx.cs" Inherits="ltkt.Admin.ImportData" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphAdminHeader" runat="Server">
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
+
     <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+
     <script type="text/javascript" src="../../js/jquery-ui-1.8.10.custom.min.js"></script>
+
     <script type="text/javascript">
         $(function() {
             
@@ -22,6 +28,7 @@
         }
        
     </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div class="block_text">
@@ -39,15 +46,15 @@
                 <asp:RequiredFieldValidator ID="reqFileContent" runat="server" ErrorMessage="Vui lòng nhập đường dẫn tập tin"
                     ControlToValidate="fileContent" Display="None"></asp:RequiredFieldValidator>
             </p>
-            <p style="padding-top: 15px;margin-left:-100px">
+            <p style="padding-top: 15px;">
                 <span>&nbsp;</span><asp:Button ID="btnImport" runat="server" Text="Import" CssClass="submit"
-                    OnClick="btnImport_Click" OnClientClick="showLoading()"/>
+                    OnClick="btnImport_Click" OnClientClick="showLoading()" />
             </p>
-             <center>
-            <div id="divLoader" style="margin-left: -265px;">
-                <img id="imgLoader" src="../../images/loader.gif" alt="" />
-            </div>
-        </center>
+            <center>
+                <div id="divLoader" style="margin-left: -265px;">
+                    <img id="imgLoader" src="../../images/loader.gif" alt="" />
+                </div>
+            </center>
         </div>
     </div>
 </asp:Content>

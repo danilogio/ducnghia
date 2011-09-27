@@ -295,7 +295,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static string getComments(int _id)
+        public string getComments(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
@@ -1106,8 +1106,12 @@ namespace ltktDAO
                     contest.Comment += "<br /><br />;";
                     DB.SubmitChanges();
                     ts.Complete();
-                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
-                    statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
+                    
+                    //Cho cái này vào bị lỗi liên tục
+                    //2011-09-27 16:09 tktung bỏ
+                    //ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    //statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
+                    
                     log.writeLog(DBHelper.strPathLogFile, "insert comment for contest id=" + _id + " successfully");
                 }
             }

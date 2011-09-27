@@ -23,10 +23,11 @@ namespace ltktDAO
 
             //for example filename : ErrorLogYYYYMMDD
 
-            string sYear    = DateTime.Now.Year.ToString();
-            string sMonth    = DateTime.Now.Month.ToString();
-            string sDay    = DateTime.Now.Day.ToString();
-            sErrorTime = sYear+sMonth+sDay;
+            //string sYear    = DateTime.Now.Year.ToString();
+            //string sMonth    = DateTime.Now.Month.ToString();
+            //string sDay = DateTime.Now.Day.ToString(); 
+            //sErrorTime = sYear+sMonth+sDay;
+            sErrorTime = DateTime.Now.ToString("yyyyMMdd");
         }
 
         /// <summary>
