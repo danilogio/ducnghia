@@ -33,7 +33,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $(".calendar").datepicker({
-                dateFormat : 'dd-mm-yy'
+            dateFormat: 'mm/dd/yy'
             });
         }); 
     </script>
@@ -69,8 +69,9 @@
 <asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div class="block_text">
         <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
-            <asp:Literal ID="liMessage" runat="server" ></asp:Literal>
+            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
+        <br />
         <asp:Panel ID="viewPanel" runat="server">
             <asp:Table ID="NewsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
@@ -104,7 +105,7 @@
         <asp:Panel ID="detailsPanel" runat="server" Visible="false">
             <div id="divFunction">
                 <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />&nbsp;&nbsp;
-                <%--<asp:Button ID="btnCancel" runat="server" Text="Quay về" CssClass="formbutton" OnClick="btnCancel_Click" />--%>
+                <asp:Button ID="btnClone" runat="server" Text="Clone" CssClass="formbutton" OnClick="btnClone_Click" />
                 <hr />
             </div>
             <div id="divDetails" class="form_settings">
@@ -182,7 +183,6 @@
                         ControlToValidate="txtSizeImg" Display="None" ValidationExpression="^\d{4}x\d{3}">
                     </asp:RegularExpressionValidator>--%>
                 </p>
-                
                 <p>
                     <span>Ghi chú:</span>
                     <asp:TextBox ID="txtDescription" TextMode="MultiLine" Rows="3" runat="server"></asp:TextBox>
@@ -191,7 +191,7 @@
                     <span>Vị trí Đăng ký:</span>
                     <asp:TextBox ID="txtLocation" runat="server"></asp:TextBox>
                 </p>
-                 <p>
+                <p>
                     <span>Vị trí Quảng cáo chính thức:</span>
                     <asp:DropDownList ID="ddlLocation" runat="server">
                     </asp:DropDownList>

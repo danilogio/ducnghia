@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
 
     <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue.css" />
+    
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -41,7 +42,7 @@
         <h2>
             Liên hệ quảng cáo</h2>
         <hr />
-        <asp:Panel ID="messagePanel" Visible="false" runat="server">
+        <asp:Panel ID="messagePanel" Visible="false" runat="server" CssClass="alert">
             <div id="divMessage" class="form_settings">
                 <asp:Literal ID="liMessage" runat="server" Text=""></asp:Literal>
             </div>

@@ -166,6 +166,14 @@ namespace ltktDAO
         /// default size of image
         /// </summary>
         public const string DEFAULT_ADS_IMG_SIZE = "0x0";
+        /// <summary>
+        /// default size format
+        /// </summary>
+        public const string DEFAULT_SIZE_FORMAT = "WxH";
+        /// <summary>
+        /// character X;
+        /// </summary>
+        public const string X = "x";
         
         #endregion
 
@@ -261,6 +269,10 @@ namespace ltktDAO
             /// Image url
             /// </summary>
             public const string TXT_ADS_IMAGE_URL = "Tập tin quảng cáo";
+            /// <summary>
+            /// size img
+            /// </summary>
+            public const string TXT_ADS_IMAGE_SIZE = "Kích thước ảnh quảng cáo";
 
         #endregion
 
@@ -278,6 +290,14 @@ namespace ltktDAO
         /// state is unchecked
         /// </summary>
         public const int STATE_UNCHECK = 0;
+        /// <summary>
+        /// state is block
+        /// </summary>
+        public const string STATE_BLOCK_NAME = "Khóa";
+        /// <summary>
+        /// state is blocked
+        /// </summary>
+        public const int STATE_BLOCK = 56;
 
         /// <summary>
         /// Name of state uncheck
@@ -847,6 +867,8 @@ namespace ltktDAO
         /// Invalid from date
         /// </summary>
         public const string MSG_E_INVALID_FROM_DATE = "Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại";
+
+        public const string MSG_E_INVALID_TO_DATE = "Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu";
         /// <summary>
         /// select one item
         /// </summary>
@@ -863,6 +885,7 @@ namespace ltktDAO
         public const string MSG_I_UPLOAD_AGAIN = "<br /><br /><a href=\"Upload.aspx\">Thử lại</a>";
 
         public const string MSG_E_PLEASE_INPUT_DATA = "Vui lòng nhập {0}";
+        public const string MSG_E_PLEASE_INPUT_RIGHT_FORMAT = "Vui lòng nhập {0} theo định dạng {1}";
         /// <summary>
         /// Message when error
         /// </summary>

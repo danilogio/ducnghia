@@ -689,3 +689,7 @@ ul#icons span.ui-icon
 {
 	border-width:1px;
 }
+.alert
+{
+	color:Red;
+}

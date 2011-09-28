@@ -90,6 +90,11 @@ namespace ltktDAO
                         strState = CommonConstants.STATE_STICKY_NAME;
                         break;
                     }
+                case CommonConstants.STATE_BLOCK:
+                    {
+                        strState = CommonConstants.STATE_BLOCK_NAME;
+                        break;
+                    }
                 default:
                     break;
             }
@@ -136,7 +141,7 @@ namespace ltktDAO
         public bool isExisted(string _code)
         {
             IEnumerable<tblAdvertisement> lst = from p in DB.tblAdvertisements
-                                                where p.Code == _code
+                                                where p.Code.Trim() == _code
                                                 select p;
             if (lst.Count() > 0)
             {
@@ -537,6 +542,7 @@ namespace ltktDAO
                               string fileSave,
                               string _description,
                               string _navigation,
+                              string _location,
                               string _size,
                               int _state,
                               string _code)
@@ -559,8 +565,9 @@ namespace ltktDAO
                     ads.NavigateUrl = _navigation;
                     ads.Size = _size;
                     ads.State = _state;
+                    ads.Location = _location;
 
-                    if (!isExisted(_code))
+                    if (!isExisted(_code) || _state == CommonConstants.STATE_BLOCK)
                     {
                         ads.Code = _code;
                     }

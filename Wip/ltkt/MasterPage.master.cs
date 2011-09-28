@@ -93,6 +93,15 @@ namespace ltkt
                         HpkAdRightTop.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_RIGHT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int []size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdRightTop.Width = size[0];
+                                imgAdRightTop.Height = size[1];
+                            }
+                        }
                     }
                     //middle right
                     if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_RIGHT_BANNER))
@@ -103,6 +112,15 @@ namespace ltkt
                         hpkAdRightMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_MIDDLE_RIGHT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdRightMiddle.Width = size[0];
+                                imgAdRightMiddle.Height = size[1];
+                            }
+                        }
                     }
                     //bottom right
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_RIGHT_BANNER))
@@ -113,6 +131,15 @@ namespace ltkt
                         HpkAdRightBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_RIGHT_BANNER, 
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdRightBottom.Width = size[0];
+                                imgAdRightBottom.Height = size[1];
+                            }
+                        }
 
                     }
                     //top left
@@ -124,6 +151,16 @@ namespace ltkt
                         HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_LEFT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdLeftBottom.Width = size[0];
+                                imgAdLeftBottom.Height = size[1];
+                            }
+                        }
+
                     }
                     //middle left
                     if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_LEFT_BANNER))
@@ -134,6 +171,16 @@ namespace ltkt
                         HpkAdLeftMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_MIDDLE_LEFT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdLeftMiddle.Width = size[0];
+                                imgAdLeftMiddle.Height = size[1];
+                            }
+                        }
+
                     }
                     //bottom left
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_LEFT_BANNER))
@@ -144,6 +191,16 @@ namespace ltkt
                         HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_LEFT_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdLeftBottom.Width = size[0];
+                                imgAdLeftBottom.Height = size[1];
+                            }
+                        }
+
 
                     }
                     //bottom 1 banner
@@ -155,6 +212,16 @@ namespace ltkt
                         hpkAdBottom1.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_1_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdBottom1.Width = size[0];
+                                imgAdBottom1.Height = size[1];
+                            }
+                        }
+
                     }
                     //bottom 2 banner
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_2_BANNER))
@@ -165,6 +232,16 @@ namespace ltkt
                         hpkAdBottom2.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_BOTTOM_2_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdBottom2.Width = size[0];
+                                imgAdBottom2.Height = size[1];
+                            }
+                        }
+
                     }
                     //top
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_BANNER))
@@ -175,6 +252,16 @@ namespace ltkt
                         HpkAdTopUp.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdTopUp.Width = size[0];
+                                imgAdTopUp.Height = size[1];
+                            }
+                        }
+
                     }
                     //top leader
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))
@@ -185,6 +272,16 @@ namespace ltkt
                         HpkAdTopLeader.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
                                                                                         CommonConstants.ADS_TOP_LEADER_BANNER,
                                                                                         BaseServices.nullToBlank(ads.NavigateUrl));
+                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        {
+                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            {
+                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                imgAdTopLeader.Width = size[0];
+                                imgAdTopLeader.Height = size[1];
+                            }
+                        }
+
                     }
                 }
                 else

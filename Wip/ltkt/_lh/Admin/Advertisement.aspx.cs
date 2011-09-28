@@ -77,10 +77,10 @@ namespace ltkt.Admin
 
                         if (ddlState.Items.Count == 0)
                         {
-                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
-                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
-                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
-                            ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
+                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
+                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
 
                             showAdsDetails(_id, action);
                         }
@@ -166,12 +166,38 @@ namespace ltkt.Admin
                 txtSizeImg.Text = BaseServices.nullToBlank(Ads.Size).Trim();
                 txtLocation.Text = BaseServices.nullToBlank(Ads.Location).Trim();
 
-                ddlState.SelectedIndex = Ads.State;
-
+                if (Ads.State == CommonConstants.STATE_UNCHECK)
+                {
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                }
+                else if (Ads.State == CommonConstants.STATE_CHECKED)
+                {
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_BLOCK_NAME, CommonConstants.STATE_BLOCK.ToString()));
+                }
+                else if (Ads.State == CommonConstants.STATE_BLOCK)
+                {
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_BLOCK_NAME, CommonConstants.STATE_BLOCK.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+                }
+                else if (Ads.State == CommonConstants.STATE_STICKY)
+                {
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                }
+                else if (Ads.State == CommonConstants.STATE_PENDING)
+                {
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
+                    ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_BLOCK_NAME, CommonConstants.STATE_BLOCK.ToString()));
+                }
+                ddlState.SelectedValue = Ads.State.ToString();
 
                 ArrayList lst = adsDAO.getFreeLocationList();
-                //Adv is pending or active
-                if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK)
+                //Adv is pending or checked or block
+                if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK && Ads.State != CommonConstants.STATE_BLOCK)
                 {
                     if (!BaseServices.isNullOrBlank(Ads.Code))
                     {
@@ -182,11 +208,15 @@ namespace ltkt.Admin
                 {
                     lst.Add(CommonConstants.CONST_ONE_NEGATIVE);
                 }
+
+                //Add items for combobox
                 for (int i = lst.Count - 1; i >= 0; i--)
                 {
                     ddlLocation.Items.Insert(0, new ListItem(adsDAO.getNameOfLocation(lst[i].ToString()), lst[i].ToString()));
                 }
-                if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK)
+
+                //set default selected value for Location
+                if (Ads.State != CommonConstants.STATE_STICKY && Ads.State != CommonConstants.STATE_UNCHECK && Ads.State != CommonConstants.STATE_BLOCK)
                 {
                     if (!BaseServices.isNullOrBlank(Ads.Code))
                     {
@@ -383,13 +413,28 @@ namespace ltkt.Admin
                 string _address = txtAddress.Text;
                 string _email = txtEmail.Text;
                 string _phone = txtPhone.Text;
+
                 DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
+                if (_fromDate.CompareTo(DateTime.Today) == -1)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_INVALID_FROM_DATE);
+                    return;
+                }
+
                 DateTime _toDate = DateTime.Parse(txtEndDate.Text);
+                if (_toDate.CompareTo(_fromDate) == -1)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_INVALID_TO_DATE);
+                    return;
+                }
                 int _price = Convert.ToInt32(txtPrice.Text);
                 string _description = txtDescription.Text;
                 string _navigateUrl = txtNavigateUrl.Text;
                 string _size = txtSizeImg.Text;
-
+                string _location = txtLocation.Text;
+                bool _fileGood = false;
+                string rootFolder = CommonConstants.BLANK;
+                string filename = CommonConstants.BLANK;
 
                 int _state = CommonConstants.STATE_UNCHECK;
                 switch (Convert.ToInt32(ddlState.SelectedValue))
@@ -406,6 +451,11 @@ namespace ltkt.Admin
                     case CommonConstants.STATE_STICKY:
                         _state = CommonConstants.STATE_STICKY;
                         break;
+                    case CommonConstants.STATE_BLOCK:
+                        {
+                            _state = CommonConstants.STATE_BLOCK;
+                            break;
+                        }
                     default:
                         break;
                 }
@@ -414,60 +464,78 @@ namespace ltkt.Admin
                 if (fileAds.HasFile)
                 {
                     string folder = CommonConstants.FOLDER_IMG_ADS;
-                    string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
+                    rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
 
                     //check file existed: keep both
                     string newFileName = bs.fileNameToSave(fileAds.FileName);
-                    string filename = rootFolder + newFileName;
+                    filename = rootFolder + newFileName;
 
                     //check filetype
                     string fileTypes = control.getValueString(CommonConstants.CF_IMG_FILE_TYPE_ALLOW);
                     if (!bs.checkFileType(fileAds.FileName, fileTypes))
-                        throw new Exception (CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
-                    
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                        return;
+                    }
                     //check filesize max
                     int fileSizeMax = control.getValueByInt(CommonConstants.CF_IMG_FILE_SIZE_MAX);
                     fileSizeMax = 1024 * fileSizeMax;
                     if (fileAds.PostedFile.ContentLength > fileSizeMax)
-                        throw new Exception (CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
-
-                    fileSave = folder + "/" + newFileName;
-                    // save file
-                    if (!Directory.Exists(rootFolder))
                     {
-                        Directory.CreateDirectory(rootFolder);
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+                        return;
                     }
-
-                    fileAds.SaveAs(filename);
+                    fileSave = folder + "/" + newFileName;
+                    _fileGood = true;
+                    
                 }
 
                 string _code = ddlLocation.SelectedValue;
-                if (_state != CommonConstants.STATE_UNCHECK && _state != CommonConstants.STATE_STICKY)
+                string _oldCode = Ads.Code;
+
+                if (_state != CommonConstants.STATE_UNCHECK && _state != CommonConstants.STATE_STICKY && _state != CommonConstants.STATE_BLOCK)
                 {
                     if (_code == CommonConstants.CONST_ONE_NEGATIVE)
                     {
-                        liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_SELECT_ONE_ITEM, CommonConstants.TXT_ADS_LOCATION);
-                        messagePanel.Visible = true;
+                        showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_SELECT_ONE_ITEM, CommonConstants.TXT_ADS_LOCATION));
                         return;
                     }
                     if (BaseServices.isNullOrBlank(_navigateUrl))
                     {
-                        liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_NAVIGATE_URL);
-                        messagePanel.Visible = true;
+                        showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_NAVIGATE_URL));
                         return;
                     }
                     if (BaseServices.isNullOrBlank(fileSave))
                     {
-                        liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_IMAGE_URL);
-                        messagePanel.Visible = true;
+                        showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_IMAGE_URL));
                         return;
                     }
+                    if (BaseServices.isNullOrBlank(_size))
+                    {
+                        showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_ADS_IMAGE_SIZE));
+                        return;
+                    }
+                    else
+                    {
+                        if (!BaseServices.checkSizePattern(_size, CommonConstants.X))
+                        {
+                            showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_RIGHT_FORMAT, 
+                                                                            CommonConstants.TXT_ADS_IMAGE_SIZE, 
+                                                                            CommonConstants.DEFAULT_SIZE_FORMAT));
+                            return;
+                        }
+                    }
+
+                    //if state is pending: keep location
+                    if (_state == CommonConstants.STATE_PENDING)
+                    {
+                        _code = Ads.Code;
+                    }
                 }
-                else
+                else//state is uncheck or sticky or blocked
                 {
                     _code = CommonConstants.ADS_INACTIVE;
                 }
-
 
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
                 bool isOK = adsDAO.updateAds(Ads.ID, user.Username,
@@ -481,12 +549,23 @@ namespace ltkt.Admin
                                              fileSave,
                                              _description,
                                              _navigateUrl,
+                                             _location,
                                              _size,
                                              _state,
                                              _code);
 
+
                 if (isOK)
                 {
+                    if (_fileGood)
+                    {
+                        // save file
+                        if (!Directory.Exists(rootFolder))
+                        {
+                            Directory.CreateDirectory(rootFolder);
+                        }
+                        fileAds.SaveAs(filename);
+                    }
                     Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
                 }
                 else
@@ -517,17 +596,22 @@ namespace ltkt.Admin
                                CommonConstants.ADD_PARAMETER +
                                CommonConstants.REQ_PAGE + "=1");
         }
-        protected void btnCancel_Click(object sender, EventArgs e)
+        protected void btnClone_Click(object sender, EventArgs e)
         {
-            Session[CommonConstants.SES_EDIT_ADS] = null;
+            //Session[CommonConstants.SES_EDIT_ADS] = null;
 
-            detailsPanel.Visible = false;
-            viewPanel.Visible = true;
-            Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
-                               CommonConstants.ADD_PARAMETER +
-                               CommonConstants.REQ_PAGE + "=1");
+            //detailsPanel.Visible = false;
+            //viewPanel.Visible = true;
+            //Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
+            //                   CommonConstants.ADD_PARAMETER +
+            //                   CommonConstants.REQ_PAGE + "=1");
 
 
+        }
+        private void showErrorMessage(string errorText)
+        {
+            liMessage.Text = errorText;
+            messagePanel.Visible = true;
         }
     }
 }

@@ -78,11 +78,17 @@ namespace ltkt
                     return;
                 }
                 DateTime _endDate = DateTime.Parse(txtToDate.Text);
+                if (_endDate.CompareTo(_fromDate) == -1)
+                {
+                    messagePanel.Visible = true;
+                    liMessage.Text = CommonConstants.MSG_E_INVALID_TO_DATE;
+                    return;
+                }
                 string _location = getLocation(sender, e);
 
                 if (_location == CommonConstants.BLANK)
                 {
-                    liMessage.Visible = true;
+                    messagePanel.Visible = true;
                     liMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_SELECT_ONE_ITEM,
                                                                         CommonConstants.TXT_ADS_LOCATION);
                     return;

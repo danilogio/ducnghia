@@ -507,8 +507,34 @@ namespace ltktDAO
 
             return fileName;
         }
-
         
+        public static bool checkSizePattern(string size, string splitter)
+        {
+            if (!isNullOrBlank(size) && !isNullOrBlank(splitter))
+            {
+                string[] items = size.Split(splitter[0]);
+                if (items.Length == 2)
+                {
+                    int o = 0;
+                    if (Int32.TryParse(items[0],out o) && Int32.TryParse(items[1],out o))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public static int[] getSizeFromPattern(string pattern, string splitter)
+        {
+            int[] res = new int[2] { 0, 0 };
+            if (checkSizePattern(pattern, splitter))
+            {
+                string []items = pattern.Split(splitter[0]);
+                res[0] = Int32.Parse(items[0]);
+                res[1] = Int32.Parse(items[1]);
+            }
+            return res;
+        }
     }
     
 }
