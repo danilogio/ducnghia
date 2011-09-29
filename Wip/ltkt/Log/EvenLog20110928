@@ -1,55 +1,21 @@
-9/28/2011 11:41:31 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
-9/28/2011 11:41:31 PM ==> [dvtrung]:Thread was being aborted.
+28-Sep-11 00:41:52 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+28-Sep-11 00:41:52 ==> [tktung]:Thread was being aborted.
 mscorlib
    at System.Threading.Thread.AbortInternal()
    at System.Threading.Thread.Abort(Object stateInfo)
    at System.Web.HttpResponse.End()
    at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
    at System.Web.HttpResponse.Redirect(String url)
-   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
 
-9/28/2011 11:42:01 PM ==> [dvtrung]: Update record 7 to Table tblAdvertisement successful
-9/28/2011 11:43:15 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
-9/28/2011 11:43:15 PM ==> [dvtrung]:Thread was being aborted.
+28-Sep-11 00:47:29 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+28-Sep-11 00:47:29 ==> [tktung]:Thread was being aborted.
 mscorlib
    at System.Threading.Thread.AbortInternal()
    at System.Threading.Thread.Abort(Object stateInfo)
    at System.Web.HttpResponse.End()
    at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
    at System.Web.HttpResponse.Redirect(String url)
-   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 116
 
-9/28/2011 11:45:44 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
-9/28/2011 11:45:44 PM ==> [dvtrung]:Thread was being aborted.
-mscorlib
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
-   at System.Web.HttpResponse.Redirect(String url)
-   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
-
-9/28/2011 11:47:34 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
-9/28/2011 11:47:34 PM ==> [dvtrung]:Thread was being aborted.
-mscorlib
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
-   at System.Web.HttpResponse.Redirect(String url)
-   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
-
-9/28/2011 11:48:52 PM ==> [dvtrung]: Update record 7 to Table tblAdvertisement successful
-9/28/2011 11:54:01 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
-9/28/2011 11:54:01 PM ==> [dvtrung]:Thread was being aborted.
-mscorlib
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
-   at System.Web.HttpResponse.Redirect(String url)
-   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
-
-9/28/2011 11:54:20 PM ==> [dvtrung]: Update record 7 to Table tblAdvertisement successful
-9/28/2011 11:54:47 PM ==> [dvtrung]: Update record 7 to Table tblAdvertisement successful
-9/28/2011 11:55:25 PM ==> [dvtrung]: Update record 7 to Table tblAdvertisement successful
+28-Sep-11 02:36:27 ==> [connhokia]: Insert record 20 to Table tblContestForUniversity successful

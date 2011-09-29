@@ -37,6 +37,8 @@ namespace ltkt.Admin
                                    + CommonConstants.SPACE
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
+                    //Check state ads before show
+                    adsDAO.checkAds(user.Username);
 
                     pageLoad(sender, e, user);
 
@@ -62,7 +64,8 @@ namespace ltkt.Admin
                     messagePanel.Visible = false;
 
                     page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                    showAds(page);
+                    IEnumerable<tblAdvertisement> lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
+                    showAds(lst, page);
                 }
                 else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
                 {
@@ -293,14 +296,14 @@ namespace ltkt.Admin
             }
         }
 
-        private void showAds(int page)
+        private void showAds(IEnumerable<tblAdvertisement> lst, int page)
         {
             int totalAds = adsDAO.countAds();
             // Computing total pages
             int totalPages;
             int mod = totalAds % NoOfAdsPerPage;
 
-            IEnumerable<tblAdvertisement> lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
+            //IEnumerable<tblAdvertisement> lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
 
             if (mod == 0)
             {

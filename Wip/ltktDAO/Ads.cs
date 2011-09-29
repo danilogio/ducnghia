@@ -595,7 +595,52 @@ namespace ltktDAO
             return true;
         }
 
+        public bool checkAds(string _username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    IEnumerable<tblAdvertisement> lst = from record in DB.tblAdvertisements select record;
+                    foreach (tblAdvertisement record in lst)
+                    {
+                        if (record.State == CommonConstants.STATE_ACTIVE)
+                        {
+                            if ((DateTime)record.toDate < DateTime.Now)
+                            {
+                                record.State = CommonConstants.STATE_BLOCK;
+                            }
+                            else if ((DateTime)record.toDate >= DateTime.Now
+                                        && (DateTime)record.toDate <= DateTime.Now.Subtract(TimeSpan.FromDays(7)))
+                            {
+                                record.State = CommonConstants.STATE_PENDING;
+                            }
+                        }
+                    }
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
+
+
 
         
     }

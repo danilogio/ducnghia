@@ -11,6 +11,7 @@ namespace ltkt.Admin
     public partial class Comment : System.Web.UI.Page
     {
         private ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Control control = new ltktDAO.Control();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,6 +24,11 @@ namespace ltkt.Admin
                     ///DO WORK HERE ONLY//////////////////////////////
                     AdminMaster page = (AdminMaster)Master;
                     page.updateHeader(CommonConstants.PAGE_ADMIN_COMMENT_NAME);
+
+                    liTitle.Text = CommonConstants.PAGE_ADMIN_COMMENT_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
                     //////////////////////////////////////////////////
                 }

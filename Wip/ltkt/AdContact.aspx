@@ -21,12 +21,12 @@
     </script>
 
     <script type="text/javascript">
-    function DisplayFullImage() 
+    function DisplayAdsImage() 
     { 
         txtCode = "<HTML><HEAD>" 
         +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
-        + "<IMG src='" + "images/a.jpg" + "' BORDER=0 NAME=FullImage " 
-        + "onload='window.resizeTo(document.FullImage.width,700)'>"  
+        + "<IMG src='" + "images/Ads.jpg" + "' BORDER=0 NAME=FullImage " 
+        + "onload='window.resizeTo(document.FullImage.width+50,700)'>"  
         + "</CENTER>"   
         + "</BODY></HTML>"; 
         mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 
@@ -108,7 +108,7 @@
                     <%--<asp:Button ID="btnShowAdsLocation" runat="server" CssClass="formbutton"
                         OnClick="btnShowAdsLocation_Click" Text="Nhấp vào đây để xem vị trí quảng cáo"
                         Width="310px" />--%>
-                    <input type="button" onclick="DisplayFullImage();" class="formbutton" style="width: 310px;" value="Nhấp vào đây để xem vị trí quảng cáo" />
+                    <input type="button" onclick="DisplayAdsImage();" class="formbutton" style="width: 310px;" value="Nhấp vào đây để xem vị trí quảng cáo" />
                     <%--<asp:Image ID="imgLocationImage" runat="server" Visible="false" ImageUrl="~/images/a.jpg" onclick="DisplayFullImage(this);"
                         Height="25px" Width="25px" />--%>
                 </p>

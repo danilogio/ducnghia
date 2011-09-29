@@ -2,7 +2,10 @@
     CodeFile="Comment.aspx.cs" Inherits="ltkt.Admin.Comment" %>
 
 <asp:Content ID="CommentAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
-    <title>Quản lý bình luận, comment | Website luyện thi kinh tế</title>
+    <%--<title>Quản lý bình luận, comment | Website luyện thi kinh tế</title>--%>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
     
     <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">

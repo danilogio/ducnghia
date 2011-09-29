@@ -177,3 +177,113 @@ mscorlib
    at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
 
 9/29/2011 1:21:22 AM ==> [dvtrung]: Update record 11 to Table tblAdvertisement successful
+29-Sep-11 15:19:06 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 15:19:06 ==> [tktung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
+
+29-Sep-11 15:22:24 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 15:22:24 ==> [tktung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 122
+
+29-Sep-11 15:28:24 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 15:28:24 ==> [tktung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 123
+
+29-Sep-11 15:29:07 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 15:29:07 ==> [tktung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 123
+
+29-Sep-11 15:32:11 ==> [tktung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 15:32:11 ==> [tktung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 123
+
+29-Sep-11 15:47:25 ==> [connhokia]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 15:47:25 ==> [connhokia]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 123
+
+29-Sep-11 16:02:57 ==> [connhokia]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 16:02:57 ==> [connhokia]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 123
+
+29-Sep-11 16:26:14 ==> [connhokia]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 16:26:14 ==> [connhokia]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 125
+
+29-Sep-11 16:27:15 ==> [connhokia]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 16:27:15 ==> [connhokia]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 125
+
+29-Sep-11 16:38:04 ==> [connhokia]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 16:38:04 ==> [connhokia]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 125
+
+29-Sep-11 16:39:09 ==> [connhokia]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+29-Sep-11 16:39:09 ==> [connhokia]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in d:\Career\LTKT\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 125
+
