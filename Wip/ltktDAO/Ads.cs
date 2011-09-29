@@ -337,13 +337,13 @@ namespace ltktDAO
 
             return lst;
         }
-        public IEnumerable<tblAdvertisement> fetchAdsListByLocation()
+        public IEnumerable<tblAdvertisement> fetchAdsListByLocation(int start, int count)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            IEnumerable<tblAdvertisement> lst = from record in DB.tblAdvertisements
-                                                 where record.Code != CommonConstants.ADS_INACTIVE
+            IEnumerable<tblAdvertisement> lst = (from record in DB.tblAdvertisements
+                                                 where record.Code.Trim() != CommonConstants.ADS_INACTIVE
                                                  orderby record.toDate, record.State descending
-                                                 select record;
+                                                 select record).Skip(start).Take(count);
 
             return lst;
         }

@@ -106,7 +106,7 @@ namespace ltkt.Admin
                     }
                     else if (key == CommonConstants.PARAM_LOCATION)
                     {
-                        lst = adsDAO.fetchAdsListByLocation();
+                        lst = adsDAO.fetchAdsListByLocation(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
                     }
 
                     // show data
@@ -115,7 +115,7 @@ namespace ltkt.Admin
                     {
                         if (lst.Count() > 0)
                         {
-                            showAds(lst, page);
+                            showAds(lst, page, action, key);
                             isOK = true;
                         }
 
@@ -378,7 +378,7 @@ namespace ltkt.Admin
             }
         }
 
-        private void showAds(IEnumerable<tblAdvertisement> lst, int page)
+        private void showAds(IEnumerable<tblAdvertisement> lst, int page, string action, string key)
         {
             int totalAds = adsDAO.countAds();
             // Computing total pages
@@ -456,11 +456,11 @@ namespace ltkt.Admin
             {
                 string param = CommonConstants.REQ_ACTION 
                                 + CommonConstants.EQUAL 
-                                + Session[CommonConstants.REQ_ACTION]
+                                + action
                                 + CommonConstants.AND
                                 + CommonConstants.REQ_KEY
                                 + CommonConstants.EQUAL 
-                                + Session[CommonConstants.REQ_KEY]
+                                + key
                                 + CommonConstants.AND
                                 + CommonConstants.REQ_PAGE
                                 + CommonConstants.EQUAL;
@@ -550,12 +550,13 @@ namespace ltkt.Admin
                     default:
                         break;
                 }
-                //if change state from UNCHECK to CHECKED
-                if (Ads.State == CommonConstants.STATE_UNCHECK && _state == CommonConstants.STATE_CHECKED)
+                //if change state to CHECKED
+                if (_state == CommonConstants.STATE_CHECKED)
                 {
                     if (_fromDate.CompareTo(DateTime.Today) == -1)
                     {
-                        showErrorMessage(CommonConstants.MSG_W_ADS_FROM_DATE);
+                        showErrorMessage(CommonConstants.MSG_E_INVALID_FROM_DATE);
+                        return;
                     }
                 }
                 string fileSave = Ads.FilePath.Trim();
@@ -690,9 +691,7 @@ namespace ltkt.Admin
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
 
-            Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
-                               CommonConstants.ADD_PARAMETER +
-                               CommonConstants.REQ_PAGE + "=1");
+            Response.Redirect(CommonConstants.PAGE_ADMIN_ADS);
         }
         protected void btnClone_Click(object sender, EventArgs e)
         {
