@@ -110,13 +110,20 @@ namespace ltkt.Admin
                     }
 
                     // show data
+                    bool isOK = false;
                     if (lst != null)
                     {
-                        showAds(lst, page);
+                        if (lst.Count() > 0)
+                        {
+                            showAds(lst, page);
+                            isOK = true;
+                        }
+
                     }
-                    else
+                    if(!isOK)
                     {
                         showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        NewsTable.Visible = false;
                         return;
                     }
                 }
