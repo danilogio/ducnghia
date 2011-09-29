@@ -886,6 +886,7 @@ namespace ltktDAO
 
         public const string MSG_E_PLEASE_INPUT_DATA = "Vui lòng nhập {0}";
         public const string MSG_E_PLEASE_INPUT_RIGHT_FORMAT = "Vui lòng nhập {0} theo định dạng {1}";
+        public const string MSG_W_ADS_FROM_DATE = "Warning: Quảng cáo này có Ngày bắt đầu nhỏ hơn ngày hiện tại.";
         /// <summary>
         /// Message when error
         /// </summary>
@@ -1457,6 +1458,10 @@ namespace ltktDAO
         /// </summary>
         public const string REQ_ID = "id";
         /// <summary>
+        /// key on searching request
+        /// </summary>
+        public const string REQ_KEY = "key";
+        /// <summary>
         /// subject on request
         /// </summary>
         public const string REQ_SUBJECT = "sub";
@@ -1614,6 +1619,10 @@ namespace ltktDAO
             /// power point access
             /// </summary>
             public const string PARAM_IT_OFFICE_ACCESS = "acc";
+            /// <summary>
+            /// param is location
+            /// </summary>
+            public const string PARAM_LOCATION = "loc";
         #endregion
 
         #region Cookie (COOKIE)
@@ -1748,6 +1757,10 @@ namespace ltktDAO
         /// </summary>
         public const string TEMP_SELF_LINK = "<a href=\"{0}?page={1}\">{2}</a>";
         /// <summary>
+        /// paging link
+        /// </summary>
+        public const string TEMP_PAGING_LINK = "<a href=\"{0}?{1}\">{2}</a>";
+        /// <summary>
         /// Self Link template
         /// </summary>
         public const string TEMP_MINOR_SELF_LINK = "<a href=\"{0}?type={1}&page={2}\">{3}</a>";
@@ -1858,6 +1871,11 @@ namespace ltktDAO
         /// Action for view
         /// </summary>
         public const string ACT_VIEW = "view";
+
+        /// <summary>
+        /// Action for search
+        /// </summary>
+        public const string ACT_SEARCH = "search";
 
         /// <summary>
         /// Action for inbox

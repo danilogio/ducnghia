@@ -116,6 +116,18 @@
                     </asp:TableCell>
                 </asp:TableFooterRow>
             </asp:Table>
+            <div align="left">
+                <h3>Xem nâng cao</h3>
+                <ul>
+                    <li><a href="Advertisement.aspx?action=search&key=all&page=1">Tất cả</a></li>
+                    <li><a href="Advertisement.aspx?action=search&key=0&page=1">Chưa duyệt</a></li>
+                    <li><a href="Advertisement.aspx?action=search&key=1&page=1">Đã duyệt</a></li>
+                    <li><a href="Advertisement.aspx?action=search&key=10&page=1">Pending</a></li>
+                    <li><a href="Advertisement.aspx?action=search&key=56&page=1">Khóa</a></li>
+                    <li><a href="Advertisement.aspx?action=search&key=13&page=1">Sticky</a></li>
+                    <li><a href="Advertisement.aspx?action=search&key=98&page=1">Theo vị trí</a></li>
+                </ul>
+            </div>
         </asp:Panel>
         <asp:Panel ID="detailsPanel" runat="server" Visible="false">
             <div id="divFunction">

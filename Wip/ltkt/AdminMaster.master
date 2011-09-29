@@ -86,7 +86,7 @@
                                 <asp:HyperLink ID="HpkIt" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Informatics.aspx">Tin học</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkAds" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Advertisement.aspx">Quảng cáo</asp:HyperLink>
+                                <asp:HyperLink ID="HpkAds" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Advertisement.aspx?action=search&key=all&page=1">Quảng cáo</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkContact" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Contact.aspx">Liên hệ/góp ý</asp:HyperLink>

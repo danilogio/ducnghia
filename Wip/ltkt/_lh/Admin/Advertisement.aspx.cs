@@ -49,6 +49,12 @@ namespace ltkt.Admin
                     Response.Redirect(CommonConstants.PAGE_ADMIN_GENERAL);
                 }
             }
+            else
+            {
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
+                //Response.Redirect(CommonConstants.DOT + CommonConstants.PAGE_ADMIN_LOGIN);
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
         }
 
         private void pageLoad(object sender, EventArgs e, tblUser user)
@@ -56,78 +62,147 @@ namespace ltkt.Admin
             try
             {
                 int page = 1;
+                string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                string sPage = Request.QueryString[CommonConstants.REQ_PAGE];
+                if (BaseServices.isNullOrBlank(action))
+                {
+                    action = CommonConstants.ACT_SEARCH;
+                }
+                if (BaseServices.isNullOrBlank(sPage))
+                {
+                    sPage = CommonConstants.PAGE_NUMBER_FIRST;
+                }
 
-                if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
+                page = Convert.ToInt32(sPage);
+
+                //action is Search
+                if (action == CommonConstants.ACT_SEARCH)
                 {
                     viewPanel.Visible = true;
                     detailsPanel.Visible = false;
                     messagePanel.Visible = false;
+                    IEnumerable<tblAdvertisement> lst = null;
+                    //page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
+                    string key = Request.QueryString[CommonConstants.REQ_KEY];
+                    if (BaseServices.isNullOrBlank(key))
+                    {
+                        key = CommonConstants.ALL;
+                    }
+                    else
+                    {
+                        key = BaseServices.nullToBlank(key);
+                    }
+                    if (key == CommonConstants.ALL)
+                    {
+                       lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
+                    }
+                    else if (key == CommonConstants.STATE_UNCHECK.ToString() 
+                        || key == CommonConstants.STATE_STICKY.ToString() 
+                        || key == CommonConstants.STATE_PENDING.ToString()
+                        || key == CommonConstants.STATE_BLOCK.ToString()
+                        || key == CommonConstants.STATE_CHECKED.ToString())
+                    {
+                        lst = adsDAO.fetchAdsList(Convert.ToInt32(key), ((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
+                    }
+                    else if (key == CommonConstants.PARAM_LOCATION)
+                    {
+                        lst = adsDAO.fetchAdsListByLocation();
+                    }
 
-                    page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                    IEnumerable<tblAdvertisement> lst = adsDAO.fetchAdsList(((page - 1) * NoOfAdsPerPage), NoOfAdsPerPage);
-                    showAds(lst, page);
+                    // show data
+                    if (lst != null)
+                    {
+                        showAds(lst, page);
+                    }
+                    else
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
                 }
-                else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
+                //else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
+                //{
+                //string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                //
+
+                else if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
                 {
-                    string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                    if (Request.QueryString[CommonConstants.REQ_ID] == null)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+                    if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
                     int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    viewPanel.Visible = false;
+                    detailsPanel.Visible = true;
+                    messagePanel.Visible = false;
 
-                    if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
+                    if (ddlState.Items.Count == 0)
                     {
-                        viewPanel.Visible = false;
-                        detailsPanel.Visible = true;
-                        messagePanel.Visible = false;
+                        //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
+                        //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
+                        //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                        //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
 
-                        if (ddlState.Items.Count == 0)
-                        {
-                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_STICKY_NAME, CommonConstants.STATE_STICKY.ToString()));
-                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_PENDING_NAME, CommonConstants.STATE_PENDING.ToString()));
-                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
-                            //ddlState.Items.Insert(0, new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
-
-                            showAdsDetails(_id, action);
-                        }
-                        if (action == CommonConstants.ACT_VIEW)
-                        {
-                            btnEdit.Visible = false;
-                        }
-
-                        //showAdsDetails(_id, action);
+                        showAdsDetails(_id, action);
                     }
-                    else if (action == CommonConstants.ACT_DELETE)
+                    if (action == CommonConstants.ACT_VIEW)
                     {
-                        //tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                        //Boolean completeDelete = adsDAO.deleteAds(_id, user.Username);
-
-                        //if (completeDelete)
-                        //{
-                        //Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
-
-                        //Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
-                        //                  + CommonConstants.ADD_PARAMETER
-                        //                  + CommonConstants.REQ_PAGE
-                        //                  + CommonConstants.EQUAL
-                        //                  + "1");
-                        //}
-                        //else
-                        //{
-                        //    Response.Write(CommonConstants.ALERT_DELETE_FAIL);
-                        //}
-
-                        if (adsDAO.deleteAds(_id, user.Username))
-                        {
-                            Page_Load(sender, e);
-                        }
+                        btnEdit.Visible = false;
                     }
+
+                    //showAdsDetails(_id, action);
                 }
-                else
+                else if (action == CommonConstants.ACT_DELETE)
                 {
-                    Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
-                                              + CommonConstants.ADD_PARAMETER
-                                              + CommonConstants.REQ_PAGE
-                                              + CommonConstants.EQUAL
-                                              + "1");
+                    if (Request.QueryString[CommonConstants.REQ_ID] == null)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+                    if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+                    int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    //tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                    //Boolean completeDelete = adsDAO.deleteAds(_id, user.Username);
+
+                    //if (completeDelete)
+                    //{
+                    //Response.Write(CommonConstants.ALERT_DELETE_SUCCESSFUL);
+
+                    //Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                    //                  + CommonConstants.ADD_PARAMETER
+                    //                  + CommonConstants.REQ_PAGE
+                    //                  + CommonConstants.EQUAL
+                    //                  + "1");
+                    //}
+                    //else
+                    //{
+                    //    Response.Write(CommonConstants.ALERT_DELETE_FAIL);
+                    //}
+
+                    if (adsDAO.deleteAds(_id, user.Username))
+                    {
+                        Page_Load(sender, e);
+                    }
                 }
+                //}
+                //else
+                //{
+                //   Response.Redirect(CommonConstants.PAGE_ADMIN_ADS
+                //                              + CommonConstants.ADD_PARAMETER
+                //                              + CommonConstants.REQ_PAGE
+                //                              + CommonConstants.EQUAL
+                //                              + "1");
+                //}
             }
             catch (Exception ex)
             {
@@ -372,18 +447,30 @@ namespace ltkt.Admin
             // Creating links to previous and next pages
             if (totalPages > 1)
             {
+                string param = CommonConstants.REQ_ACTION 
+                                + CommonConstants.EQUAL 
+                                + Session[CommonConstants.REQ_ACTION]
+                                + CommonConstants.AND
+                                + CommonConstants.REQ_KEY
+                                + CommonConstants.EQUAL 
+                                + Session[CommonConstants.REQ_KEY]
+                                + CommonConstants.AND
+                                + CommonConstants.REQ_PAGE
+                                + CommonConstants.EQUAL;
+
                 if (page > 1)
                 {
-                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                    
+                    PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_PAGING_LINK,
                                                                                 CommonConstants.PAGE_ADMIN_ADS,
-                                                                                (page - 1).ToString(),
+                                                                                param + (page - 1).ToString(),
                                                                                 CommonConstants.TXT_PREVIOUS_PAGE);
                 }
                 if (page > 0 && page < totalPages)
                 {
-                    NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_SELF_LINK,
+                    NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_PAGING_LINK,
                                                                              CommonConstants.PAGE_ADMIN_ADS,
-                                                                             (page + 1).ToString(),
+                                                                             param + (page + 1).ToString(),
                                                                              CommonConstants.TXT_NEXT_PAGE);
                 }
             }
@@ -418,12 +505,6 @@ namespace ltkt.Admin
                 string _phone = txtPhone.Text;
 
                 DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
-                if (_fromDate.CompareTo(DateTime.Today) == -1)
-                {
-                    showErrorMessage(CommonConstants.MSG_E_INVALID_FROM_DATE);
-                    return;
-                }
-
                 DateTime _toDate = DateTime.Parse(txtEndDate.Text);
                 if (_toDate.CompareTo(_fromDate) == -1)
                 {
@@ -462,7 +543,14 @@ namespace ltkt.Admin
                     default:
                         break;
                 }
-
+                //if change state from UNCHECK to CHECKED
+                if (Ads.State == CommonConstants.STATE_UNCHECK && _state == CommonConstants.STATE_CHECKED)
+                {
+                    if (_fromDate.CompareTo(DateTime.Today) == -1)
+                    {
+                        showErrorMessage(CommonConstants.MSG_W_ADS_FROM_DATE);
+                    }
+                }
                 string fileSave = Ads.FilePath.Trim();
                 if (fileAds.HasFile)
                 {
@@ -490,7 +578,7 @@ namespace ltkt.Admin
                     }
                     fileSave = folder + "/" + newFileName;
                     _fileGood = true;
-                    
+
                 }
 
                 string _code = ddlLocation.SelectedValue;
@@ -522,8 +610,8 @@ namespace ltkt.Admin
                     {
                         if (!BaseServices.checkSizePattern(_size, CommonConstants.X))
                         {
-                            showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_RIGHT_FORMAT, 
-                                                                            CommonConstants.TXT_ADS_IMAGE_SIZE, 
+                            showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_RIGHT_FORMAT,
+                                                                            CommonConstants.TXT_ADS_IMAGE_SIZE,
                                                                             CommonConstants.DEFAULT_SIZE_FORMAT));
                             return;
                         }

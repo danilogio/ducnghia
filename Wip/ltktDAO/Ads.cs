@@ -326,7 +326,27 @@ namespace ltktDAO
 
             return lst;
         }
+        public IEnumerable<tblAdvertisement> fetchAdsList(int state, int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
+            IEnumerable<tblAdvertisement> lst = (from record in DB.tblAdvertisements
+                                                 where record.State == state
+                                                 orderby record.toDate, record.State descending
+                                                 select record).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblAdvertisement> fetchAdsListByLocation()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            IEnumerable<tblAdvertisement> lst = from record in DB.tblAdvertisements
+                                                 where record.Code != CommonConstants.ADS_INACTIVE
+                                                 orderby record.toDate, record.State descending
+                                                 select record;
+
+            return lst;
+        }
         public string getNameOfLocation(string _code)
         {
            
@@ -609,6 +629,7 @@ namespace ltktDAO
                             if ((DateTime)record.toDate < DateTime.Now)
                             {
                                 record.State = CommonConstants.STATE_BLOCK;
+                                record.Code = CommonConstants.ADS_INACTIVE;
                             }
                             else if ((DateTime)record.toDate >= DateTime.Now
                                         && (DateTime)record.toDate <= DateTime.Now.Subtract(TimeSpan.FromDays(7)))

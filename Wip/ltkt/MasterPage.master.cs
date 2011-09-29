@@ -88,18 +88,21 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_RIGHT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_RIGHT_BANNER);
-                        imgAdRightTop.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        HpkAdRightTop.Target = "_blank";
-                        HpkAdRightTop.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_TOP_RIGHT_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdRightTop.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            HpkAdRightTop.Target = "_blank";
+                            HpkAdRightTop.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_TOP_RIGHT_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int []size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdRightTop.Width = size[0];
-                                imgAdRightTop.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdRightTop.Width = size[0];
+                                    imgAdRightTop.Height = size[1];
+                                }
                             }
                         }
                     }
@@ -107,18 +110,21 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_RIGHT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_MIDDLE_RIGHT_BANNER);
-                        imgAdRightMiddle.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        hpkAdRightMiddle.Target = "_blank";
-                        hpkAdRightMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_MIDDLE_RIGHT_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdRightMiddle.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            hpkAdRightMiddle.Target = "_blank";
+                            hpkAdRightMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_MIDDLE_RIGHT_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdRightMiddle.Width = size[0];
-                                imgAdRightMiddle.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdRightMiddle.Width = size[0];
+                                    imgAdRightMiddle.Height = size[1];
+                                }
                             }
                         }
                     }
@@ -126,142 +132,156 @@ namespace ltkt
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_RIGHT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_RIGHT_BANNER);
-                        imgAdRightBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        HpkAdRightBottom.Target = "_blank";
-                        HpkAdRightBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_BOTTOM_RIGHT_BANNER, 
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdRightBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            HpkAdRightBottom.Target = "_blank";
+                            HpkAdRightBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_BOTTOM_RIGHT_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdRightBottom.Width = size[0];
-                                imgAdRightBottom.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdRightBottom.Width = size[0];
+                                    imgAdRightBottom.Height = size[1];
+                                }
                             }
                         }
-
                     }
                     //top left
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEFT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_LEFT_BANNER);
-                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        HpkAdLeftBottom.Target = "_blank";
-                        HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_TOP_LEFT_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            HpkAdLeftBottom.Target = "_blank";
+                            HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_TOP_LEFT_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdLeftBottom.Width = size[0];
-                                imgAdLeftBottom.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdLeftBottom.Width = size[0];
+                                    imgAdLeftBottom.Height = size[1];
+                                }
                             }
                         }
-
                     }
                     //middle left
                     if (adsDAO.isExisted(CommonConstants.ADS_MIDDLE_LEFT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_MIDDLE_LEFT_BANNER);
-                        imgAdLeftMiddle.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        HpkAdLeftMiddle.Target = "_blank";
-                        HpkAdLeftMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_MIDDLE_LEFT_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdLeftMiddle.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            HpkAdLeftMiddle.Target = "_blank";
+                            HpkAdLeftMiddle.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_MIDDLE_LEFT_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdLeftMiddle.Width = size[0];
-                                imgAdLeftMiddle.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdLeftMiddle.Width = size[0];
+                                    imgAdLeftMiddle.Height = size[1];
+                                }
                             }
                         }
-
                     }
                     //bottom left
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_LEFT_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_LEFT_BANNER);
-                        imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        HpkAdLeftBottom.Target = "_blank";
-                        HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_BOTTOM_LEFT_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdLeftBottom.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            HpkAdLeftBottom.Target = "_blank";
+                            HpkAdLeftBottom.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_BOTTOM_LEFT_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdLeftBottom.Width = size[0];
-                                imgAdLeftBottom.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdLeftBottom.Width = size[0];
+                                    imgAdLeftBottom.Height = size[1];
+                                }
                             }
                         }
-
 
                     }
                     //bottom 1 banner
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_1_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_1_BANNER);
-                        imgAdBottom1.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        hpkAdBottom1.Target = "_blank";
-                        hpkAdBottom1.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_BOTTOM_1_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdBottom1.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            hpkAdBottom1.Target = "_blank";
+                            hpkAdBottom1.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_BOTTOM_1_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdBottom1.Width = size[0];
-                                imgAdBottom1.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdBottom1.Width = size[0];
+                                    imgAdBottom1.Height = size[1];
+                                }
                             }
                         }
-
                     }
                     //bottom 2 banner
                     if (adsDAO.isExisted(CommonConstants.ADS_BOTTOM_2_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_BOTTOM_2_BANNER);
-                        imgAdBottom2.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        hpkAdBottom2.Target = "_blank";
-                        hpkAdBottom2.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_BOTTOM_2_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdBottom2.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            hpkAdBottom2.Target = "_blank";
+                            hpkAdBottom2.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_BOTTOM_2_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdBottom2.Width = size[0];
-                                imgAdBottom2.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdBottom2.Width = size[0];
+                                    imgAdBottom2.Height = size[1];
+                                }
                             }
                         }
-
                     }
                     //top
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_BANNER))
                     {
                         tblAdvertisement ads = adsDAO.getAds(CommonConstants.ADS_TOP_BANNER);
-                        imgAdTopUp.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
-                        HpkAdTopUp.Target = "_blank";
-                        HpkAdTopUp.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
-                                                                                        CommonConstants.ADS_TOP_BANNER,
-                                                                                        BaseServices.nullToBlank(ads.NavigateUrl));
-                        if (!BaseServices.isNullOrBlank(ads.Size))
+                        if (ads.State == CommonConstants.STATE_CHECKED || ads.State == CommonConstants.STATE_PENDING)
                         {
-                            if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                            imgAdTopUp.ImageUrl = BaseServices.nullToBlank(ads.FilePath);
+                            HpkAdTopUp.Target = "_blank";
+                            HpkAdTopUp.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADS_URL,
+                                                                                            CommonConstants.ADS_TOP_BANNER,
+                                                                                            BaseServices.nullToBlank(ads.NavigateUrl));
+                            if (!BaseServices.isNullOrBlank(ads.Size))
                             {
-                                int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
-                                imgAdTopUp.Width = size[0];
-                                imgAdTopUp.Height = size[1];
+                                if (ads.Size != CommonConstants.DEFAULT_ADS_IMG_SIZE)
+                                {
+                                    int[] size = BaseServices.getSizeFromPattern(ads.Size, CommonConstants.X);
+                                    imgAdTopUp.Width = size[0];
+                                    imgAdTopUp.Height = size[1];
+                                }
                             }
                         }
-
                     }
                     //top leader
                     if (adsDAO.isExisted(CommonConstants.ADS_TOP_LEADER_BANNER))

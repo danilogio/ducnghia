@@ -163,7 +163,15 @@ namespace ltktDAO
             }
             return true;
         }
-
+        public static bool isNumeric(string target)
+        {
+            if (!isNullOrBlank(target))
+            {
+                int u = 0;
+                return Int32.TryParse(target.Trim(), out u);
+            }
+            return false;
+        }
         public static int getYearFromString(string target)
         {
             if (isNullOrBlank(target) || target == CommonConstants.NOW)
