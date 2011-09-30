@@ -26,6 +26,7 @@ namespace ltktDAO
         /// first number page
         /// </summary>
         public const string PAGE_NUMBER_FIRST = "1";
+        public const string CONST_ONE = "1";
         public const string CONST_ZERO = "0";
         public const string CONST_ONE_NEGATIVE = "-1";
         /// <summary>

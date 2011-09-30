@@ -558,6 +558,7 @@ namespace ltkt.Admin
                         showErrorMessage(CommonConstants.MSG_E_INVALID_FROM_DATE);
                         return;
                     }
+                    
                 }
                 string fileSave = Ads.FilePath.Trim();
                 if (fileAds.HasFile)
@@ -664,6 +665,16 @@ namespace ltkt.Admin
                             Directory.CreateDirectory(rootFolder);
                         }
                         fileAds.SaveAs(filename);
+                    }
+                    // update statistic
+                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    if (_state == CommonConstants.STATE_UNCHECK)
+                    {
+                        statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, CommonConstants.CONST_ONE);
+                    }
+                    else if (_state == CommonConstants.STATE_CHECKED)
+                    {
+                        statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, CommonConstants.CONST_ONE_NEGATIVE);
                     }
                     Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
                 }
