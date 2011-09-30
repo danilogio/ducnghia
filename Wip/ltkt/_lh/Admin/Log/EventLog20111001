@@ -1,0 +1,18 @@
+10/1/2011 12:14:00 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.btnClone_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 763
+
+10/1/2011 12:18:20 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.btnClone_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 763
+

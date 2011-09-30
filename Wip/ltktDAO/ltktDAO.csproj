@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{360AD783-82B9-4A2B-9573-CEC3ABC7F023}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -56,6 +56,7 @@
     <Compile Include="Admin.cs" />
     <Compile Include="AdminConstants.cs" />
     <Compile Include="Ads.cs" />
+    <Compile Include="Alert.cs" />
     <Compile Include="ArticleSCO.cs" />
     <Compile Include="BaseServices.cs" />
     <Compile Include="Comments.cs" />

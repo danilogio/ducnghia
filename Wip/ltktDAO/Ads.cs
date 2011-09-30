@@ -161,6 +161,20 @@ namespace ltktDAO
             }
             return false;
         }
+        public bool isState(int _id, int _state)
+        {
+            IEnumerable<tblAdvertisement> lst = from p in DB.tblAdvertisements
+                                                where p.ID == _id
+                                                select p;
+            if (lst.Count() > 0)
+            {
+                if (lst.ElementAt(0).State == _state)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public string getImageUrl(string _code)
         {
             IEnumerable<tblAdvertisement> lst = from p in DB.tblAdvertisements
@@ -274,6 +288,67 @@ namespace ltktDAO
 
             return true;
         }
+        public int cloneAds(string _companyName,
+                                string _address,
+                                string _email,
+                                string _phone,
+                                DateTime _from,
+                                DateTime _end,
+                                string _location,
+                                string _navigateUrl,
+                                string _description)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            int id = -1;
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    tblAdvertisement record = new tblAdvertisement();
+                    record.Company = _companyName;
+                    record.Address = _address;
+                    record.Email = _email;
+                    record.Phone = _phone;
+                    record.fromDate = _from;
+                    record.toDate = _end;
+                    record.Price = 0;
+                    record.FilePath = CommonConstants.BLANK;
+                    record.Location = _location;
+                    record.Code = CommonConstants.ADS_INACTIVE;
+                    record.ClickCount = 0;
+                    record.NavigateUrl = _navigateUrl;
+                    record.FilePath = CommonConstants.BLANK;
+                    record.Description = _description;
+                    record.Size = CommonConstants.DEFAULT_ADS_IMG_SIZE;
+                    record.State = CommonConstants.STATE_UNCHECK;
+
+                    DB.tblAdvertisements.InsertOnSubmit(record);
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+
+                    id = record.ID;
+
+                    log.writeLog(DBHelper.strPathLogFile,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                    record.ID.ToString(),
+                                                                    CommonConstants.SQL_TABLE_ADVERTISEMENT));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return -1;
+            }
+
+            return id;
+        }
         public void resetState(string _code)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -346,6 +421,27 @@ namespace ltktDAO
                                                  select record).Skip(start).Take(count);
 
             return lst;
+        }
+        public int countAdsListByState(int state)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            int num = (from record in DB.tblAdvertisements
+                       where record.State == state
+                       orderby record.toDate, record.State descending
+                       select record).Count();
+
+            return num;
+        }
+         public int countAdsListByLocation()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            int num = (from record in DB.tblAdvertisements
+                       where record.Code.Trim() != CommonConstants.ADS_INACTIVE
+                       orderby record.toDate, record.State descending
+                       select record).Count();
+
+            return num;
         }
         public string getNameOfLocation(string _code)
         {

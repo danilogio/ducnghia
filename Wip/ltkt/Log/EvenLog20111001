@@ -1,0 +1,148 @@
+10/1/2011 12:14:00 AM ==>  Insert record 24 to Table tblAdvertisement successful
+10/1/2011 12:18:20 AM ==>  Insert record 25 to Table tblAdvertisement successful
+10/1/2011 12:24:39 AM ==>  Insert record 26 to Table tblAdvertisement successful
+10/1/2011 12:24:55 AM ==> [dvtrung]: Delete record 7 from Table tblAdvertisement successful
+10/1/2011 12:24:55 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:24:55 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:25:02 AM ==> [dvtrung]: Delete record 14 from Table tblAdvertisement successful
+10/1/2011 12:25:02 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:25:02 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:25:10 AM ==> [dvtrung]: Delete record 15 from Table tblAdvertisement successful
+10/1/2011 12:25:10 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:25:10 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:25:15 AM ==> [dvtrung]: Delete record 16 from Table tblAdvertisement successful
+10/1/2011 12:25:15 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:25:15 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:25:26 AM ==> [dvtrung]: Delete record 17 from Table tblAdvertisement successful
+10/1/2011 12:25:26 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:25:26 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:25:36 AM ==>  Insert record 27 to Table tblAdvertisement successful
+10/1/2011 12:31:41 AM ==> [dvtrung]: Delete record 18 from Table tblAdvertisement successful
+10/1/2011 12:31:41 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:31:41 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:32:52 AM ==> [dvtrung]: Delete record 22 from Table tblAdvertisement successful
+10/1/2011 12:32:52 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:32:52 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 12:34:42 AM ==> [dvtrung]: Delete record 23 from Table tblAdvertisement successful
+10/1/2011 12:34:42 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:34:42 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 218
+
+10/1/2011 12:35:39 AM ==> [dvtrung]: Delete record 24 from Table tblAdvertisement successful
+10/1/2011 12:35:39 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:35:39 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 218
+
+10/1/2011 12:39:20 AM ==> [dvtrung]: Delete record 25 from Table tblAdvertisement successful
+10/1/2011 12:39:20 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:39:20 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 215
+
+10/1/2011 12:39:40 AM ==> [dvtrung]: Delete record 26 from Table tblAdvertisement successful
+10/1/2011 12:39:40 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:39:40 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 215
+
+10/1/2011 12:39:48 AM ==> [dvtrung]: Delete record 13 from Table tblAdvertisement successful
+10/1/2011 12:39:48 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:39:48 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 215
+
+10/1/2011 12:48:31 AM ==>  Insert record 28 to Table tblAdvertisement successful
+10/1/2011 12:48:48 AM ==> [dvtrung]: Delete record 28 from Table tblAdvertisement successful
+10/1/2011 12:48:48 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+10/1/2011 12:48:48 AM ==> [dvtrung]:Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at ltkt.Admin.Advertisement.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\Advertisement.aspx.cs:line 216
+
+10/1/2011 1:05:50 AM ==>  Insert record 29 to Table tblAdvertisement successful
+10/1/2011 1:06:13 AM ==> [dvtrung]: Delete record 29 from Table tblAdvertisement successful
+10/1/2011 1:10:48 AM ==>  Insert record 30 to Table tblAdvertisement successful
+10/1/2011 1:11:11 AM ==>  Insert record 31 to Table tblAdvertisement successful
+10/1/2011 1:11:24 AM ==> [dvtrung]: Delete record 27 from Table tblAdvertisement successful
+10/1/2011 1:14:23 AM ==>  Insert record 32 to Table tblAdvertisement successful
+10/1/2011 1:14:33 AM ==> [dvtrung]: Delete record 32 from Table tblAdvertisement successful
+10/1/2011 1:16:35 AM ==>  Insert record 33 to Table tblAdvertisement successful

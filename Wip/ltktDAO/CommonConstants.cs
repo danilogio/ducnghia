@@ -274,6 +274,7 @@ namespace ltktDAO
             /// size img
             /// </summary>
             public const string TXT_ADS_IMAGE_SIZE = "Kích thước ảnh quảng cáo";
+            
 
         #endregion
 
@@ -888,6 +889,8 @@ namespace ltktDAO
         public const string MSG_E_PLEASE_INPUT_DATA = "Vui lòng nhập {0}";
         public const string MSG_E_PLEASE_INPUT_RIGHT_FORMAT = "Vui lòng nhập {0} theo định dạng {1}";
         public const string MSG_W_ADS_FROM_DATE = "Warning: Quảng cáo này có Ngày bắt đầu nhỏ hơn ngày hiện tại.";
+        public const string MSG_E_ACTION_FAILED = "Thao tác {0} thất bại. Vui lòng thử lại sau";
+        public const string MSG_I_ACTION_SUCCESSFUL = "Thao tác {0} đã thành công";
         /// <summary>
         /// Message when error
         /// </summary>
@@ -1902,6 +1905,11 @@ namespace ltktDAO
         /// action for admin user
         /// </summary>
         public const string ACT_ADMIN = "admin";
+
+        /// <summary>
+        /// action clone
+        /// </summary>
+        public const string ACT_CLONE = "Clone";
         #endregion
 
         #region Advertisement (ADS)

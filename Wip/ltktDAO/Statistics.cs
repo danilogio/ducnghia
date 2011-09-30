@@ -57,7 +57,10 @@ namespace ltktDAO
                     var r = DB.tblStatistics.Single(p => p.Code == _code);
                     long oldVal = long.Parse(r.Value);
                     long newVal = long.Parse(_newVal);
-                    oldVal += newVal;
+                    if (oldVal > 0 || newVal > 0)
+                    {
+                        oldVal += newVal;
+                    }
                     r.Value = oldVal.ToString();
                     DB.SubmitChanges();
                     ts.Complete();

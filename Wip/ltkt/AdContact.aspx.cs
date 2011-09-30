@@ -100,7 +100,7 @@ namespace ltkt
                     contactPanel.Visible = false;
                     messagePanel.Visible = true;
                     ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
-                    statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, "1" );
+                    statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, CommonConstants.CONST_ONE );
                     liMessage.Text = CommonConstants.MSG_I_ADVERTISEMENT_CONTACT_IS_SENT_SUCCESSFUL;
                 }
                 else

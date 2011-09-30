@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Collections;
 using ltktDAO;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ltkt.Admin
 {
@@ -18,7 +19,7 @@ namespace ltkt.Admin
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Users userDAO = new ltktDAO.Users();
 
-        public const int NoOfAdsPerPage = 1;
+        public const int NoOfAdsPerPage = 7;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -39,6 +40,13 @@ namespace ltkt.Admin
 
                     //Check state ads before show
                     adsDAO.checkAds(user.Username);
+                    hpkShowAll.Text += "(" + adsDAO.countAds()+ ")";
+                    hpkShowBlock.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_BLOCK) + ")";
+                    hpkShowChecked.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_CHECKED) + ")";
+                    hpkShowPending.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_PENDING) + ")";
+                    hpkShowSticky.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_STICKY) + ")";
+                    hpkShowUncheck.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_UNCHECK) + ")";
+                    hpkShowLoc.Text += "(" + adsDAO.countAdsListByLocation() + ")";
 
                     pageLoad(sender, e, user);
 
@@ -59,6 +67,7 @@ namespace ltkt.Admin
 
         private void pageLoad(object sender, EventArgs e, tblUser user)
         {
+            bool isDeleted = false;
             try
             {
                 int page = 1;
@@ -163,6 +172,7 @@ namespace ltkt.Admin
                         btnEdit.Visible = false;
                     }
 
+
                     //showAdsDetails(_id, action);
                 }
                 else if (action == CommonConstants.ACT_DELETE)
@@ -195,10 +205,22 @@ namespace ltkt.Admin
                     //{
                     //    Response.Write(CommonConstants.ALERT_DELETE_FAIL);
                     //}
-
+                    bool isMatch = adsDAO.isState(_id, CommonConstants.STATE_UNCHECK);
                     if (adsDAO.deleteAds(_id, user.Username))
                     {
-                        Page_Load(sender, e);
+                        if (isMatch)
+                        {
+                            ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                            statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, CommonConstants.CONST_ONE_NEGATIVE);
+                        }
+                        string mess = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
+                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + mess + "');", true);
+                        //MessageBox.Show(mess);
+                        //Response.End();
+                        ltktDAO.Alert.Show(mess);
+                        isDeleted = true;
+                        //showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE));
+                        
                     }
                 }
                 //}
@@ -227,6 +249,10 @@ namespace ltkt.Admin
                                               + CommonConstants.REQ_PAGE
                                               + CommonConstants.EQUAL
                                               + "1");
+            }
+            if (isDeleted)
+            {
+                Response.Redirect(CommonConstants.PAGE_ADMIN_ADS);
             }
         }
 
@@ -403,7 +429,7 @@ namespace ltkt.Admin
                 TableCell noCell = new TableCell();
                 noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "10px";
-                noCell.Text = Convert.ToString(idx + 1);
+                noCell.Text = Convert.ToString(idx + 1 + (page-1) * 7);
 
                 TableCell companyCell = new TableCell();
                 companyCell.CssClass = "table-cell";
@@ -706,14 +732,77 @@ namespace ltkt.Admin
         }
         protected void btnClone_Click(object sender, EventArgs e)
         {
-            //Session[CommonConstants.SES_EDIT_ADS] = null;
+            bool isOK = false;
+            int id = -1;
+            try
+            {
+                string _comName = txtCompany.Text;
+                string _address = txtAddress.Text;
+                string _email = txtEmail.Text;
+                string _phone = txtPhone.Text;
+                string _description = txtDescription.Text;
+                string _navigateUrl = txtNavigateUrl.Text;
+                DateTime _fromDate = DateTime.Parse(txtFromDate.Text);
+                DateTime _toDate = DateTime.Parse(txtEndDate.Text);
+                string _location = txtLocation.Text;
+                if (_toDate.CompareTo(_fromDate) == -1)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_INVALID_TO_DATE);
+                    return;
+                }
+                  id = adsDAO.cloneAds(_comName,
+                                        _address,
+                                        _email,
+                                        _phone,
+                                        _fromDate,
+                                        _toDate,
+                                        _location,
+                                        _navigateUrl,
+                                        _description);
+                if (id > 0)
+                {
+                    ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                    statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, CommonConstants.CONST_ONE);
+                    isOK = true;
+                }
+                else
+                {
+                    showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_CLONE));
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
-            //detailsPanel.Visible = false;
-            //viewPanel.Visible = true;
-            //Response.Redirect(CommonConstants.PAGE_ADMIN_ADS +
-            //                   CommonConstants.ADD_PARAMETER +
-            //                   CommonConstants.REQ_PAGE + "=1");
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.Source
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.StackTrace
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.HelpLink);
 
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                Session[CommonConstants.SES_USER] = null;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            if (isOK)
+            {
+                string url = CommonConstants.PAGE_ADMIN_ADS
+                                        + CommonConstants.ADD_PARAMETER
+                                        + CommonConstants.REQ_ACTION
+                                        + CommonConstants.EQUAL
+                                        + CommonConstants.ACT_EDIT
+                                        + CommonConstants.AND
+                                        + CommonConstants.REQ_ID
+                                        + CommonConstants.EQUAL
+                                        + id.ToString();
+                ltktDAO.Alert.Show(BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_CLONE));
+                
+                Response.Redirect(url);
+            }
 
         }
         private void showErrorMessage(string errorText)
