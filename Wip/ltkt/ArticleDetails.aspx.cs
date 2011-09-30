@@ -367,7 +367,7 @@ namespace ltkt
                     lblTitle.Text = BaseServices.nullToBlank(english.Title);
                     lblLiker.Text = english.Point.ToString();
 
-                    lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.English.getAuthor(id));
+                    lblAuthor.Text = BaseServices.nullToBlank(englishDAO.getAuthor(id));
                     lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(english.Posted));
                     lblChecker.Text = BaseServices.nullToBlank(english.Checker);
 

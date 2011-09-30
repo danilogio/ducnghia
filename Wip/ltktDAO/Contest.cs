@@ -1247,6 +1247,11 @@ namespace ltktDAO
             return lst.ToList();
         }
 
+        public int count()
+        {
+            return (from r in DB.tblContestForUniversities select r).Count();
+        }
+
         #endregion
     }
 }

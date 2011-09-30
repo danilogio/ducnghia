@@ -55,18 +55,18 @@ namespace ltkt.Admin
 
         private void showContest (IEnumerable <tblContestForUniversity> lst, int page, string action, string key)
         {
-            int totalAds = 0;
+            int totalContest = contestDAO.count();
             // Computing total pages
             int totalPages;
-            int mod = totalAds % NoOfContestPerPage;
+            int mod = totalContest % NoOfContestPerPage;
 
             if (mod == 0)
             {
-                totalPages = totalAds / NoOfContestPerPage;
+                totalPages = totalContest / NoOfContestPerPage;
             }
             else
             {
-                totalPages = ((totalAds - mod) / NoOfContestPerPage) + 1;
+                totalPages = ((totalContest - mod) / NoOfContestPerPage) + 1;
             }
 
             for (int idx = 0; idx < lst.Count(); ++idx)

@@ -11,6 +11,7 @@ namespace ltktDAO
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
         EventLog log = new EventLog();
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
         #region Property
         #region Get Property
@@ -19,9 +20,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getTitle(int ID)
+        public string getTitle(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
                                           where record.ID == ID
                                           select record;
@@ -39,9 +40,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getType(int ID)
+        public string getType(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
                                           where record.ID == ID
                                           select record;
@@ -77,9 +78,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getContent(int ID)
+        public string getContent(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
                                           where record.ID == ID
                                           select record;
@@ -97,9 +98,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getAuthor(int ID)
+        public string getAuthor(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
                                        join record in DB.tblEnglishes on author.Username equals record.Author
                                        where record.ID == ID
@@ -113,9 +114,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static DateTime getPosted(int ID)
+        public DateTime getPosted(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
                                           where record.ID == ID
                                           select record;
@@ -133,9 +134,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getState(int ID)
+        public string getState(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
                                           where record.ID == ID
                                           select record;
@@ -171,9 +172,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static int getPoint(int ID)
+        public int getPoint(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
                                           where record.ID == ID
                                           select record;
@@ -1190,6 +1191,11 @@ namespace ltktDAO
                                           select record;
 
             return lst.ToList();
+        }
+
+        public int count()
+        {
+            return (from r in DB.tblEnglishes select r).Count();
         }
 
         #endregion

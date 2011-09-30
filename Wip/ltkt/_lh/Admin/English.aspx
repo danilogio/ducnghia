@@ -2,7 +2,7 @@
     CodeFile="English.aspx.cs" Inherits="ltkt.Admin.English" %>
 
 <asp:Content ID="EnglishAdminHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
-    <title>Quản lý chủ đề Anh văn | Website luyện thi kinh tế</title>
+    <%--<title>Quản lý chủ đề Anh văn | Website luyện thi kinh tế</title>--%>
     <%--<link rel="stylesheet" href="styles.css" type="text/css" />
     <style type="text/css">
         body
@@ -19,6 +19,12 @@
             padding: 20px 5px;
         }
     </style>--%>
+    
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal>
+    </title>
+    
+    <link type="text/css" href="styles.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="EnglishAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div class="block_text">
@@ -39,22 +45,22 @@
                     <li><a href="Advertisement.aspx?action=search&key=loc&page=1">Theo vị trí</a></li>
                 </ul>
             </div>
-            <asp:Table ID="NewsTable" CssClass="table" runat="server">
+            <asp:Table ID="EnglishTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                                Quản lý quảng cáo
+                    <asp:TableHeaderCell CssClass="table-header" ColumnSpan="6">
+                         <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell CssClass="table-header-cell">#</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Tiêu đề</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Ngày Post</asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell">Ngày đăng</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
                 </asp:TableRow>
                 <asp:TableFooterRow>
-                    <asp:TableCell CssClass="table-footer" ColumnSpan="5">
+                    <asp:TableCell CssClass="table-footer" ColumnSpan="6">
                         <asp:Table ID="FooterTable" Width="100%" BorderWidth="0" runat="server">
                             <asp:TableRow>
                                 <asp:TableCell>
