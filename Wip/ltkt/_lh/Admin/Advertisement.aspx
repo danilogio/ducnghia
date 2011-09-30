@@ -64,6 +64,7 @@
         mywindow.document.close();
     }
     </script>
+
     <script type="text/javascript">
     function DisplayAdsImage() 
     { 
@@ -89,7 +90,8 @@
         <br />
         <asp:Panel ID="viewPanel" runat="server">
             <div align="left">
-                <h3>Xem nâng cao</h3>
+                <h3>
+                    Xem nâng cao</h3>
                 <ul>
                     <li><a href="Advertisement.aspx?action=search&key=all&page=1">Tất cả</a></li>
                     <li><a href="Advertisement.aspx?action=search&key=0&page=1">Chưa duyệt</a></li>
@@ -128,7 +130,6 @@
                     </asp:TableCell>
                 </asp:TableFooterRow>
             </asp:Table>
-            
         </asp:Panel>
         <asp:Panel ID="detailsPanel" runat="server" Visible="false">
             <div id="divFunction">
@@ -220,7 +221,8 @@
                     <%--<asp:Button ID="btnShowAdsLocation" runat="server" CssClass="formbutton"
                         OnClick="btnShowAdsLocation_Click" Text="Nhấp vào đây để xem vị trí quảng cáo"
                         Width="310px" />--%>
-                    <input type="button" onclick="DisplayAdsImage();" class="formbutton" style="width: 310px;" value="Nhấp vào đây để xem vị trí quảng cáo" />
+                    <input type="button" onclick="DisplayAdsImage();" class="formbutton" style="width: 310px;"
+                        value="Nhấp vào đây để xem vị trí quảng cáo" />
                     <%--<asp:Image ID="imgLocationImage" runat="server" Visible="false" ImageUrl="~/images/a.jpg" onclick="DisplayFullImage(this);"
                         Height="25px" Width="25px" />--%>
                 </p>

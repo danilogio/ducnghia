@@ -7,27 +7,15 @@
         <asp:Literal ID="liTitle" runat="server"></asp:Literal>
     </title>
     
-    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
-    <style type="text/css">
-        body
-        {
-            background: white;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 13px;
-            color: #444;
-        }
-        .footer-content1
-        {
-            padding: 20px 5px;
-        }
-    </style>--%>
+    
 </asp:Content>
 
 <asp:Content ID="CommentAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
-    <div id="div_content">
-        <h4>
-            Comment</h4>
+    <div id="div_content" class="block_text">
+        <asp:Panel ID="messagePanel" runat="server" Visible="false">
+            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+        </asp:Panel>
+        <asp:Panel ID="viewPanel" runat="server">
+        </asp:Panel>
     </div>
 </asp:Content>

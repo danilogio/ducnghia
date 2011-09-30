@@ -767,7 +767,7 @@ namespace ltkt
                         + "                </div>\n"
                         + "                <div class='block_details_text'>\n"
                         + "                    " + BaseServices.getNameSubjectByCode(item.Subject.Trim()) + "<br />\n"
-                        + Contest.getBranch(item.ID) + "<br/>\n"
+                        + contestDAO.getBranch(item.ID) + "<br/>\n"
                         + item.Year
                         + "                </div>\n"
                         + "            </div>\n";

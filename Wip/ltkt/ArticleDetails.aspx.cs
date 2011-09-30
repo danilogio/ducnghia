@@ -273,7 +273,7 @@ namespace ltkt
                     lblTitle.Text = BaseServices.nullToBlank(contest.Title);
                     lblLiker.Text = BaseServices.nullToBlank(contest.Point.ToString());
 
-                    lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.Contest.getAuthor(id));
+                    lblAuthor.Text = BaseServices.nullToBlank(contestDAO.getAuthor(id));
                     lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(contest.Posted));
                     lblChecker.Text = BaseServices.nullToBlank(contest.Checker);
 

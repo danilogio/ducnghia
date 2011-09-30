@@ -18,7 +18,7 @@ namespace ltkt.Admin
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Users userDAO = new ltktDAO.Users();
 
-        public const int NoOfAdsPerPage = 10;
+        public const int NoOfAdsPerPage = 1;
 
 
         protected void Page_Load(object sender, EventArgs e)

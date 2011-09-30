@@ -10,7 +10,8 @@ namespace ltktDAO
     {
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
-         EventLog log = new EventLog();
+        EventLog log = new EventLog();
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
         #region Property
         #region Get Property
@@ -19,9 +20,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getTitle(int ID)
+        public string getTitle(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -38,9 +39,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getContent(int ID)
+        public string getContent(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -57,9 +58,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getSolving(int ID)
+        public string getSolving(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -77,9 +78,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getAuthor(int ID)
+        public string getAuthor(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
                                        join record in DB.tblContestForUniversities on author.Username equals record.Author
                                        where record.ID == ID
@@ -98,9 +99,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static DateTime getPosted(int ID)
+        public DateTime getPosted(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -121,9 +122,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getState(int ID)
+        public string getState(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -159,9 +160,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getContestType(int ID)
+        public string getContestType(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -179,9 +180,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getBranch(int ID)
+        public string getBranch(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -222,9 +223,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static int getYear(int ID)
+        public int getYear(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -241,9 +242,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static int getPoint(int ID)
+        public int getPoint(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -261,9 +262,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getTag(int ID)
+        public string getTag(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == ID
                                                        select record;
@@ -685,12 +686,12 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
-                                          where p.Point == DB.tblContestForUniversities.Max(p2 => p2.Point)
-                                          orderby p.Posted descending
-                                          select p;
+                                                       where p.Point == DB.tblContestForUniversities.Max(p2 => p2.Point)
+                                                       orderby p.Posted descending
+                                                       select p;
             if (lst.Count() > 0)
             {
-                return lst.ElementAt(BaseServices.random(0,lst.Count() - 1));
+                return lst.ElementAt(BaseServices.random(0, lst.Count() - 1));
             }
             return null;
         }
@@ -786,7 +787,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
                                                         select p);
-            
+
             return lst;
 
         }
@@ -859,9 +860,9 @@ namespace ltktDAO
             try
             {
                 lst = (from p in DB.tblContestForUniversities
-                        where p.State != CommonConstants.STATE_UNCHECK && p.StickyFlg == false
-                        orderby p.Posted descending
-                        select p).Take(number);
+                       where p.State != CommonConstants.STATE_UNCHECK && p.StickyFlg == false
+                       orderby p.Posted descending
+                       select p).Take(number);
             }
             catch (Exception e)
             {
@@ -1018,10 +1019,10 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
                     ts.Complete();
-                    log.writeLog(DBHelper.strPathLogFile, 
-                                        _username, 
-                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, 
-                                                                         contest.ID.ToString(), 
+                    log.writeLog(DBHelper.strPathLogFile,
+                                        _username,
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                         contest.ID.ToString(),
                                                                          CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
                 }
             }
@@ -1106,23 +1107,23 @@ namespace ltktDAO
                     contest.Comment += "<br /><br />;";
                     DB.SubmitChanges();
                     ts.Complete();
-                    
+
                     //Cho cái này vào bị lỗi liên tục
                     //2011-09-27 16:09 tktung bỏ
                     //ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
                     //statDAO.add(CommonConstants.SF_NUM_COMMENT_A_DAY, "1");
-                    
+
                     log.writeLog(DBHelper.strPathLogFile, "insert comment for contest id=" + _id + " successfully");
                 }
             }
             catch (Exception e)
             {
-                log.writeLog(DBHelper.strPathLogFile, e.Message 
-                                                        + CommonConstants.NEWLINE 
-                                                        + e.Source 
-                                                        + CommonConstants.NEWLINE 
-                                                        + e.StackTrace 
-                                                        + CommonConstants.NEWLINE 
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
                                                         + e.HelpLink);
                 return false;
             }
