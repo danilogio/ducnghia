@@ -1248,6 +1248,79 @@ namespace ltktDAO
             return (from r in DB.tblContestForUniversities select r).Count();
         }
 
+        public IEnumerable<tblContestForUniversity> fetchArticleList(int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
+                                                 orderby record.Posted descending
+                                                 select record).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblContestForUniversity> fetchArticleList(string subject, int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
+                                                        where record.Subject == subject
+                                                        orderby record.Posted descending
+                                                        select record).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblContestForUniversity> fetchArticleList(int state, int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
+                                                        where record.State == state
+                                                        orderby record.Posted descending
+                                                        select record).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblContestForUniversity> fetchArticleList(string subject, int state, int start, int count)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
+                                                        where record.Subject == subject && record.State == state
+                                                        orderby record.Posted descending
+                                                        select record).Skip(start).Take(count);
+
+            return lst;
+        }
+        public int countArticleBySubject(string subject)
+        {
+            int num = 0;
+
+            num = (from record in DB.tblContestForUniversities
+                   where record.Subject == subject
+                   select record).Count();
+
+            return num;
+        }
+        public int countArticleBySubjectAndState(string subject, int state)
+        {
+            int num = 0;
+
+            num = (from record in DB.tblContestForUniversities
+                   where record.Subject == subject && record.State == state
+                   select record).Count();
+
+            return num;
+        }
+        public int countArticleByState(int state)
+        {
+            int num = 0;
+
+            num = (from record in DB.tblContestForUniversities
+                   where record.State == state
+                   select record).Count();
+
+            return num;
+        }
         #endregion
     }
 }

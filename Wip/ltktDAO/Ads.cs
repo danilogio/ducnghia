@@ -396,7 +396,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             IEnumerable<tblAdvertisement> lst = (from record in DB.tblAdvertisements
-                                                 orderby record.toDate, record.State descending
+                                                 orderby record.toDate descending
                                                  select record).Skip(start).Take(count);
 
             return lst;
@@ -407,7 +407,7 @@ namespace ltktDAO
 
             IEnumerable<tblAdvertisement> lst = (from record in DB.tblAdvertisements
                                                  where record.State == state
-                                                 orderby record.toDate, record.State descending
+                                                 orderby record.toDate descending
                                                  select record).Skip(start).Take(count);
 
             return lst;
@@ -417,7 +417,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblAdvertisement> lst = (from record in DB.tblAdvertisements
                                                  where record.Code.Trim() != CommonConstants.ADS_INACTIVE
-                                                 orderby record.toDate, record.State descending
+                                                 orderby record.toDate descending
                                                  select record).Skip(start).Take(count);
 
             return lst;
@@ -428,7 +428,6 @@ namespace ltktDAO
 
             int num = (from record in DB.tblAdvertisements
                        where record.State == state
-                       orderby record.toDate, record.State descending
                        select record).Count();
 
             return num;
@@ -438,7 +437,6 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             int num = (from record in DB.tblAdvertisements
                        where record.Code.Trim() != CommonConstants.ADS_INACTIVE
-                       orderby record.toDate, record.State descending
                        select record).Count();
 
             return num;

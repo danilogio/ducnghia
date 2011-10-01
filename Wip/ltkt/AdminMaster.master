@@ -77,7 +77,7 @@
                                 <asp:HyperLink ID="HpkComment" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Comment.aspx">Comment</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkUniversity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx">LTĐH</asp:HyperLink>
+                                <asp:HyperLink ID="HpkUniversity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&page=1">LTĐH</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkEnglish" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/English.aspx">Tiếng Anh</asp:HyperLink>

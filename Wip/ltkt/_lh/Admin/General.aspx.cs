@@ -44,7 +44,20 @@ namespace ltkt.Admin
                     sumDownload.Text = statisticDAO.getValue(CommonConstants.SF_NUM_DOWNLOAD_A_DAY);
                     sumUpload.Text = statisticDAO.getValue(CommonConstants.SF_NUM_UPLOAD);
                     sumCommentADay.Text = statisticDAO.getValue(CommonConstants.SF_NUM_COMMENT_A_DAY);
-                    newAdsContact.Text = statisticDAO.getValue(CommonConstants.SF_NUM_NEW_ADV_CONTACT);
+                    int numAdv = BaseServices.convertStringToInt(statisticDAO.getValue(CommonConstants.SF_NUM_NEW_ADV_CONTACT));
+                    if (numAdv > 0)
+                    {
+                        string url = CommonConstants.PAGE_ADMIN_ADS
+                                        + CommonConstants.ADD_PARAMETER
+                                        + CommonConstants.REQ_ACTION
+                                        + CommonConstants.EQUAL
+                                        + CommonConstants.ACT_SEARCH
+                                        + CommonConstants.AND
+                                        + CommonConstants.REQ_KEY
+                                        + CommonConstants.EQUAL
+                                        + CommonConstants.STATE_UNCHECK;
+                        newAdsContact.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url, numAdv.ToString());
+                    }
                 }
                 else
                 {

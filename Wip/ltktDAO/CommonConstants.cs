@@ -274,6 +274,10 @@ namespace ltktDAO
             /// size img
             /// </summary>
             public const string TXT_ADS_IMAGE_SIZE = "Kích thước ảnh quảng cáo";
+            /// <summary>
+            /// list article
+            /// </summary>
+            public const string TXT_LIST_ARTICLE = "Danh sách bài viết";
             
 
         #endregion
@@ -1469,6 +1473,10 @@ namespace ltktDAO
         /// subject on request
         /// </summary>
         public const string REQ_SUBJECT = "sub";
+        /// <summary>
+        /// subject on request
+        /// </summary>
+        public const string REQ_STATE = "state";
         /// <summary>
         /// time on request
         /// </summary>

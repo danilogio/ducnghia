@@ -432,7 +432,7 @@ namespace ltkt.Admin
                 TableCell noCell = new TableCell();
                 noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "10px";
-                noCell.Text = Convert.ToString(idx + 1 + (page-1) * 7);
+                noCell.Text = Convert.ToString(idx + 1 + (page-1) * NoOfAdsPerPage);
 
                 TableCell companyCell = new TableCell();
                 companyCell.CssClass = "table-cell";
