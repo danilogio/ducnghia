@@ -42,6 +42,18 @@ namespace ltkt
                     liFileSize.Text += control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
                     liFileSize.Text += "MB)";
 
+                    if (ddlSub.Items.Count == 0)
+                    {
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_MATHEMATICS, CommonConstants.SUB_MATHEMATICS_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_PHYSICAL, CommonConstants.SUB_PHYSICAL_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_CHEMICAL, CommonConstants.SUB_CHEMICAL_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_BIOGRAPHY, CommonConstants.SUB_BIOGRAPHY_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_LITERATURE, CommonConstants.SUB_LITERATURE_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_HISTORY, CommonConstants.SUB_HISTORY_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_GEOGRAPHY, CommonConstants.SUB_GEOGRAPHY_CODE));
+                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_ENGLISH, CommonConstants.SUB_ENGLISH_CODE));
+                    }
+
                     string selIndex = Request["selIndex"];
                     int selectedIndex;
 
@@ -131,63 +143,22 @@ namespace ltkt
 
                     try
                     {
-                        int maxSize = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
-                        maxSize = maxSize * 1024 * 1024;
-
-                        if (bs.checkFileType(fileContent.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
-                            && fileContent.PostedFile.ContentLength <= maxSize)
-                            fileContent.SaveAs(filename);
-                        else
-                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
-
-                        if (fileSolving.HasFile
-                            && bs.checkFileType(fileSolving.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
-                            && fileSolving.PostedFile.ContentLength <= maxSize)
-                        {
-                            fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
-                                Path.GetFileNameWithoutExtension(newFileName) +
-                                "_solved" + Path.GetExtension(fileSolving.FileName));
-
-                            fileSolvingSave = folder + "\\" +
-                                Path.GetFileNameWithoutExtension(fileContent.FileName) +
-                                "_solved" + Path.GetExtension(fileSolving.FileName);
-                        }
-
                         // ghi xuống db
-                        //try
-                        //{
                         switch (type)
                         {
                             case 0:
                                 {
-                                    if (fileSolvingSave != CommonConstants.BLANK)
-                                    {
-                                        contestDAO.insertContest(txtboxTitle.Text,
+                                    contestDAO.insertContest(txtboxTitle.Text,
                                                                         txtboxSummary.Text,
                                                                         user.Username,
                                                                         DateTime.Now,
                                                                         Boolean.Parse(ddlTypeContest.SelectedValue),
-                                                                        Convert.ToInt32(ddlBranch.SelectedValue),
+                                                                        ddlSub.SelectedValue,
                                                                         Convert.ToInt32(ddlYear.SelectedValue),
                                                                         fileSave,
                                                                         txtboxTag.Text,
-                                                                        true,
                                                                         fileSolvingSave);
-                                    }
-                                    else
-                                    {
-                                        contestDAO.insertContest(txtboxTitle.Text,
-                                                                           txtboxSummary.Text,
-                                                                           user.Username,
-                                                                           DateTime.Now,
-                                                                           Boolean.Parse(ddlTypeContest.SelectedValue),
-                                                                           Convert.ToInt32(ddlBranch.SelectedValue),
-                                                                           Convert.ToInt32(ddlYear.SelectedValue),
-                                                                           fileSave,
-                                                                           txtboxTag.Text,
-                                                                           false,
-                                                                           null);
-                                    }
+                                    
                                     break;
                                 }
                             case 1:
@@ -213,6 +184,30 @@ namespace ltkt
                                     break;
                                 }
                         }
+
+                        int maxSize = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
+                        maxSize = maxSize * 1024 * 1024;
+
+                        if (bs.checkFileType(fileContent.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
+                            && fileContent.PostedFile.ContentLength <= maxSize)
+                            fileContent.SaveAs(filename);
+                        else
+                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
+
+                        if (fileSolving.HasFile
+                            && bs.checkFileType(fileSolving.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
+                            && fileSolving.PostedFile.ContentLength <= maxSize)
+                        {
+                            fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
+                                Path.GetFileNameWithoutExtension(newFileName) +
+                                "_solved" + Path.GetExtension(fileSolving.FileName));
+
+                            fileSolvingSave = folder + "\\" +
+                                Path.GetFileNameWithoutExtension(fileContent.FileName) +
+                                "_solved" + Path.GetExtension(fileSolving.FileName);
+                        }
+                        else
+                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
 
                         upload.Visible = false;
                         message.Visible = true;

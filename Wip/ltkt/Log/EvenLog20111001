@@ -146,3 +146,6 @@ mscorlib
 10/1/2011 1:14:23 AM ==>  Insert record 32 to Table tblAdvertisement successful
 10/1/2011 1:14:33 AM ==> [dvtrung]: Delete record 32 from Table tblAdvertisement successful
 10/1/2011 1:16:35 AM ==>  Insert record 33 to Table tblAdvertisement successful
+01-Oct-11 01:27:04 ==> [tktung]: Delete record 10 from Table tblAdvertisement successful
+01-Oct-11 01:27:38 ==> [tktung]: Delete record 12 from Table tblAdvertisement successful
+01-Oct-11 01:28:36 ==> [tktung]: Delete record 8 from Table tblAdvertisement successful

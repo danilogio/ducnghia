@@ -11,6 +11,7 @@ namespace ltktDAO
         // Lấy đường dẫn cơ sở dữ liệu
         static string strPathDB = DBHelper.strPathDB;
         EventLog log = new EventLog();
+        LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
         #region Property
         #region Get Property
@@ -19,9 +20,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getTitle(int ID)
+        public string getTitle(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -41,7 +42,7 @@ namespace ltktDAO
         /// <returns></returns>
         public int getScore(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTEDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                           where record.ID == ID
                                           select record;
@@ -59,9 +60,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getChapeau(int ID)
+        public string getChapeau(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -79,9 +80,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getType(int ID)
+        public string getType(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -117,9 +118,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getContent(int ID)
+        public string getContent(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -137,9 +138,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getAuthor(int ID)
+        public string getAuthor(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
                                        join record in DB.tblInformatics on author.Username equals record.Author
                                        where record.ID == ID
@@ -159,9 +160,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static DateTime getPosted(int ID)
+        public DateTime getPosted(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -179,9 +180,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getState(int ID)
+        public string getState(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -217,9 +218,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static int getPoint(int ID)
+        public int getPoint(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -237,9 +238,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static string getTag(int ID)
+        public string getTag(int ID)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == ID
                                              select record;
@@ -277,9 +278,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static tblInformatic getInformatic(int _id)
+        public tblInformatic getInformatic(int _id)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
                                              where record.ID == _id
                                              select record;

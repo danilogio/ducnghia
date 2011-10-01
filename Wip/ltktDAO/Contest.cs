@@ -929,8 +929,8 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <returns></returns>
         public Boolean insertContest(string _title, string _content, string _author,
-            DateTime _posted, Boolean _isUniversity, int _branch, int _year, string _location,
-            string _tag, Boolean isSolved, string fileSolved)
+            DateTime _posted, Boolean _isUniversity, string _sub, int _year, string _location,
+            string _tag, string fileSolved)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -945,18 +945,14 @@ namespace ltktDAO
                     record.Posted = _posted;
                     record.State = CommonConstants.STATE_UNCHECK;//Chưa duyệt
                     record.isUniversity = _isUniversity;
-                    record.Branch = _branch;
+                    record.Subject = _sub;
                     record.Year = _year;
                     record.Point = 0;//điểm = số người view
                     record.Location = _location;
                     record.Tag = _tag;
                     record.StickyFlg = false;
                     record.Score = 0;//điểm của checker
-
-                    if (isSolved)
-                    {
-                        record.Solving = fileSolved;
-                    }
+                    record.Solving = fileSolved;
 
                     DB.tblContestForUniversities.InsertOnSubmit(record);
 

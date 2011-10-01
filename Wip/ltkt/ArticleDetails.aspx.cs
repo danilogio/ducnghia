@@ -445,7 +445,7 @@ namespace ltkt
         {
             try
             {
-                tblInformatic informatic = ltktDAO.Informatics.getInformatic(id);
+                tblInformatic informatic = informaticsDAO.getInformatic(id);
                 if (informatic != null)
                 {
                     liTitle.Text = BaseServices.nullToBlank(informatic.Title);
@@ -453,7 +453,7 @@ namespace ltkt
                     lblTitle.Text = BaseServices.nullToBlank(informatic.Title);
                     lblLiker.Text = BaseServices.nullToBlank(informatic.Point.ToString());
 
-                    lblAuthor.Text = BaseServices.nullToBlank(ltktDAO.Informatics.getAuthor(id));
+                    lblAuthor.Text = BaseServices.nullToBlank(informaticsDAO.getAuthor(id));
                     lblPostedDate.Text = BaseServices.nullToBlank(bs.convertDateToString(informatic.Posted));
                     lblChecker.Text = BaseServices.nullToBlank(informatic.Checker);
 

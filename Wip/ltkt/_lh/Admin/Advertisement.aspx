@@ -89,24 +89,30 @@
         </asp:Panel>
         <br />
         <asp:Panel ID="viewPanel" runat="server">
-            <div align="left">
+            <div align="left" style="float:left; width: 15%">
                 <h3>
                     Xem nâng cao</h3>
                 <ul>
                     <li>
                         <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
-                    <li><asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=0&page=1">Chưa duyệt </asp:HyperLink></li>
-                    <li><asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=1&page=1">Đã duyệt </asp:HyperLink></li>
-                    <li><asp:HyperLink ID="hpkShowPending" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=10&page=1">Pending </asp:HyperLink></li>
-                    <li><asp:HyperLink ID="hpkShowBlock" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=56&page=1">Khóa </asp:HyperLink></li>
-                    <li><asp:HyperLink ID="hpkShowSticky" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=13&page=1">Sticky </asp:HyperLink></li>
-                    <li><asp:HyperLink ID="hpkShowLoc" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=loc&page=1">Theo vị trí </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=1&page=1">Đã duyệt </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowPending" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=10&page=1">Pending </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowBlock" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=56&page=1">Khóa </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowSticky" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=13&page=1">Sticky </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowLoc" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=loc&page=1">Theo vị trí </asp:HyperLink></li>
                 </ul>
             </div>
             <asp:Table ID="NewsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                                Quản lý quảng cáo
+                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>

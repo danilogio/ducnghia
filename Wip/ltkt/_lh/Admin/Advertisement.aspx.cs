@@ -38,6 +38,8 @@ namespace ltkt.Admin
                                    + CommonConstants.SPACE
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
+                    liTableHeader.Text = CommonConstants.PAGE_ADMIN_ADS_NAME;
+
                     //Check state ads before show
                     adsDAO.checkAds(user.Username);
                     hpkShowAll.Text += "(" + adsDAO.countAds()+ ")";

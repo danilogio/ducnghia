@@ -13,24 +13,24 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
 
     <script type="text/javascript">
-//	    $(document).ready(function() {
-//	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
-//	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
+	    $(document).ready(function() {
+	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
+	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
 
-//	            if (selectedIndex == 0) {
-//	                $('#divLessonType').hide();
-//	                $('#divContest').show();
-//	            }
-//	            else {
-//	                $('#divLessonType').show();
-//	                $('#divContest').hide();
-//	            }
-//	        });
-//	    });
+	            if (selectedIndex == 0) {
+	                //$('#divLessonType').hide();
+	                $('#divContest').show();
+	            }
+	            else {
+	                //$('#divLessonType').show();
+	                $('#divContest').hide();
+	            }
+	        });
+	    });
 
 	    function init() {
 	        $('#<%= ddlSubject.ClientID%>').val(0);
-	        $('#divLessonType').hide();
+	        //$('#divLessonType').hide();
 	    }
 	    
 //	    function checkFileExtension(elem) {
@@ -137,12 +137,12 @@
                             <asp:ListItem Text="Đại học" Value="false"></asp:ListItem>
                             <asp:ListItem Text="Cao đẳng" Value="true"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:DropDownList ID="ddlBranch" runat="server" Width="15%">
-                            <asp:ListItem Text="khối A" Value="0"></asp:ListItem>
+                        <asp:DropDownList ID="ddlSub" runat="server" Width="15%">
+                            <%--<asp:ListItem Text="khối A" Value="0"></asp:ListItem>
                             <asp:ListItem Text="khối B" Value="1"></asp:ListItem>
                             <asp:ListItem Text="khối C" Value="2"></asp:ListItem>
                             <asp:ListItem Text="khối D" Value="3"></asp:ListItem>
-                            <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>
+                            <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>--%>
                         </asp:DropDownList>
                         năm
                         <asp:DropDownList ID="ddlYear" runat="server" Width="15%">
