@@ -54,6 +54,10 @@ namespace ltkt
                         ddlSub.Items.Add(new ListItem(CommonConstants.SUB_ENGLISH, CommonConstants.SUB_ENGLISH_CODE));
                     }
 
+                    if (ddlYear.Items.Count == 0)
+                        for (int idx = 2002; idx <= DateTime.Now.Year; ++idx)
+                            ddlYear.Items.Add(new ListItem(Convert.ToString(idx), Convert.ToString(idx)));
+
                     string selIndex = Request["selIndex"];
                     int selectedIndex;
 

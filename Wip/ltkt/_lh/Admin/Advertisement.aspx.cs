@@ -42,6 +42,7 @@ namespace ltkt.Admin
 
                     //Check state ads before show
                     adsDAO.checkAds(user.Username);
+
                     hpkShowAll.Text += "(" + adsDAO.countAds()+ ")";
                     hpkShowBlock.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_BLOCK) + ")";
                     hpkShowChecked.Text += "(" + adsDAO.countAdsListByState(CommonConstants.STATE_CHECKED) + ")";

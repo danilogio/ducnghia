@@ -1,37 +1,37 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Informatics.aspx.cs" Inherits="ltkt.Admin.Informatics" %>
 
-<asp:Content ID="InformacticAdminHeader" ContentPlaceHolderID="cphAdminHeader" Runat="Server">
+<asp:Content ID="InformacticAdminHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
     <title>
         <asp:Literal ID="liTitle" runat="server"></asp:Literal>
     </title>
-    
     <link type="text/css" href="styles.css" rel="stylesheet" />
 </asp:Content>
-
 <asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content" class="block_text">
         <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="viewPanel" runat="server">
-            <div align="left" style="float:left; width: 15%;">
+            <div align="left" style="float: left; width: 15%;">
                 <h3>
-                    Xem nâng cao</h3>
+                    Xem nâng cao
+                </h3>
                 <ul>
-                    <li><a href="Advertisement.aspx?action=search&key=all&page=1">Tất cả</a></li>
-                    <li><a href="Advertisement.aspx?action=search&key=0&page=1">Chưa duyệt</a></li>
-                    <li><a href="Advertisement.aspx?action=search&key=1&page=1">Đã duyệt</a></li>
-                    <li><a href="Advertisement.aspx?action=search&key=10&page=1">Pending</a></li>
-                    <li><a href="Advertisement.aspx?action=search&key=56&page=1">Khóa</a></li>
-                    <li><a href="Advertisement.aspx?action=search&key=13&page=1">Sticky</a></li>
-                    <li><a href="Advertisement.aspx?action=search&key=loc&page=1">Theo vị trí</a></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Informatics.aspx?action=search&key=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Informatics.aspx?action=search&key=1&page=1">Đã duyệt </asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="Informatics.aspx?action=search&key=2&page=1">Báo xấu </asp:HyperLink></li>
                 </ul>
             </div>
             <asp:Table ID="InformaticsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="6">
-                         <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
+                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>
@@ -58,6 +58,45 @@
                 </asp:TableFooterRow>
             </asp:Table>
         </asp:Panel>
-    </div>
+        <asp:Panel ID="detailPanel" runat="server" Visible="false">
+            <div class="form_settings">
+                <div id="divFunction">
+                    <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />
+                    <hr />
+                </div>
+                <div id="divDetail">
+                    <p>
+                        <span>Tiêu đề:</span>
+                        <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span>Tóm tắt:</span>
+                        <asp:TextBox ID="txtChapeau" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span>Tác giả:</span>
+                        <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span>Ngày đăng:</span>
+                        <asp:TextBox ID="txtPosted" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span>Điểm:</span>
+                        <asp:TextBox ID="txtPoint" runat="server"></asp:TextBox>
+                    </p>
+                    
+                    <p>
+                        <span>Tag:</span>
+                        <asp:TextBox ID="txtTag" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span>Trạng thái:</span>
+                        <asp:DropDownList ID="ddlState" runat="server">
+                        </asp:DropDownList>
+                    </p>
+                </div>
+            </div>
+        </asp:Panel>
     </div>
 </asp:Content>

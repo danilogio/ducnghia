@@ -146,7 +146,7 @@
                         </asp:DropDownList>
                         năm
                         <asp:DropDownList ID="ddlYear" runat="server" Width="15%">
-                            <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
+                            <%--<asp:ListItem Text="2002" Value="2002"></asp:ListItem>
                             <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
                             <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
                             <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
@@ -156,7 +156,7 @@
                             <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
                             <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
                             <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
-                            <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
+                            <asp:ListItem Text="2012" Value="2012"></asp:ListItem>--%>
                         </asp:DropDownList>
                     </p>
                     <p id="Solving">

@@ -96,6 +96,11 @@
             border: solid 1px white;
         }
     </style>
+
+    <script type="text/javascript">
+        
+    </script>
+
 </head>
 <body onload="init()">
     <%--<div style="width: 992px;height: 0px;">
@@ -126,7 +131,8 @@
                         <td style="width: 60%; float: left; margin-top: 40px;">
                             <%--<a href="AdContact.aspx">
                                 <img src="imagesAd/default/top-up.gif" alt="luyenthikinhte.com" /></a>--%>
-                            <asp:HyperLink ID="HpkAdTopUp" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=top" Target="_blank">
+                            <asp:HyperLink ID="HpkAdTopUp" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=top"
+                                Target="_blank">
                                 <asp:Image ID="imgAdTopUp" runat="server" ImageUrl="~/imagesAd/default/top-up.gif" /></asp:HyperLink>
                         </td>
                     </tr>
@@ -159,7 +165,8 @@
                     <asp:Literal ID="ltAnnoucement" runat="server"></asp:Literal>
                 </asp:Panel>
                 <div style="width: 100%; margin-left: 6px;">
-                    <asp:HyperLink ID="HpkAdTopLeader" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=topleader" Target="_blank">
+                    <asp:HyperLink ID="HpkAdTopLeader" runat="server" NavigateUrl="~/Ads.aspx?action=click&id=topleader"
+                        Target="_blank">
                         <asp:Image ID="imgAdTopLeader" runat="server" ImageUrl="~/imagesAd/top.gif" /></asp:HyperLink>
                 </div>
                 <br />
@@ -218,7 +225,7 @@
                                             <div>
                                                 <div style="float: left; width: 75%;">
                                                     <div id="divInfo" style="width: 100%; margin-top: 0px">
-                                                        <img src="images/user-icon-small.png" alt="" align=left width="20px" height="20px" />
+                                                        <img src="images/user-icon-small.png" alt="" align="left" width="20px" height="20px" />
                                                         <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
                                                             Font-Italic="True">
                                                             <label>
@@ -242,7 +249,6 @@
                             <h4>
                                 <%--<img src="images/search-small.png" align="bottom" alt="" width="14px" height="13px"/>--%>
                                 Tìm kiếm
-                                
                             </h4>
                             <form method="get" class="searchform" action="Home.aspx">
                             <ul style="background: white; border: 1px solid #a6c9e2;">
@@ -258,7 +264,6 @@
                                     <p>
                                         <asp:TextBox ID="txtBoxSearch" OnClick="this.value=''" runat="server">Nhập nội dung</asp:TextBox>
                                         <asp:Button ID="Btnsearch" runat="server" Text="Search" CssClass="searchsubmit formbutton" />
-                                        
                                     </p>
                                     <asp:HyperLink ID="hpkAdvanceSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm nâng cao</asp:HyperLink>
                                 </li>
@@ -328,16 +333,16 @@
                                         <a href="#">Chuyên Ngành</a></h3>
                                     <div class="dialog_link">
                                         <a href="English.aspx?class=math-eco&time=now&page=1" class="ui-state-default ui-corner-all">
-                                            <span class="ui-icon ui-icon-newwin"></span>Toán - Kinh tế&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                            <span class="ui-icon ui-icon-newwin"></span>Toán - Kinh tế&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                         <a href="English.aspx?class=chem-bio-mat&time=now&page=1" class="ui-state-default ui-corner-all">
-                                            <span class="ui-icon ui-icon-newwin"></span>Hóa - Sinh - KHVL&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                            <span class="ui-icon ui-icon-newwin"></span>Hóa - Sinh - KHVL&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                         <a href="English.aspx?class=phy-tele-it&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Lý - Viễn thông - CNTT</a><br />
                                         <br />
                                         <a href="English.aspx?class=other-mj&time=now&page=1" class="ui-state-default ui-corner-all">
-                                            <span class="ui-icon ui-icon-newwin"></span>Khác&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                            <span class="ui-icon ui-icon-newwin"></span>Khác&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                     </div>
                                 </div>
@@ -375,8 +380,8 @@
                                         <a href="Informatics.aspx?leit=excel&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Excel&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
-                                        <a href="Informatics.aspx?leit=pp&time=now&page=1" class="ui-state-default ui-corner-all"><span
-                                            class="ui-icon ui-icon-newwin"></span>PowerPoint&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
+                                        <a href="Informatics.aspx?leit=pp&time=now&page=1" class="ui-state-default ui-corner-all">
+                                            <span class="ui-icon ui-icon-newwin"></span>PowerPoint&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a><br />
                                         <br />
                                         <a href="Informatics.aspx?leit=acc&time=now&page=1" class="ui-state-default ui-corner-all">
                                             <span class="ui-icon ui-icon-newwin"></span>Access&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
@@ -412,19 +417,23 @@
                             <h4>
                                 Tài liệu được quan tâm</h4>
                             <ul style="background: white; border: 1px solid #a6c9e2;">
-                               <%=loadMaxPointArticle() %>
+                                <%=loadMaxPointArticle() %>
                             </ul>
                         </li>
                         <li>
                             <center>
-                                <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/Ads.aspx?action=click&id=bot1" runat="server" Target="_blank">
-                                    <asp:Image ID="imgAdBottom1" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" Width="275px" Height="250px"/></asp:HyperLink>
+                                <asp:HyperLink ID="hpkAdBottom1" NavigateUrl="~/Ads.aspx?action=click&id=bot1" runat="server"
+                                    Target="_blank">
+                                    <asp:Image ID="imgAdBottom1" runat="server" ImageUrl="~/imagesAd/default/bottom.gif"
+                                        Width="275px" Height="250px" /></asp:HyperLink>
                             </center>
                         </li>
                         <li>
                             <center>
-                                <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="~/Ads.aspx?action=click&id=bot2" runat="server" Target="_blank">
-                                    <asp:Image ID="imgAdBottom2" runat="server" ImageUrl="~/imagesAd/default/bottom.gif" Width="275px" Height="250px"/></asp:HyperLink>
+                                <asp:HyperLink ID="hpkAdBottom2" NavigateUrl="~/Ads.aspx?action=click&id=bot2" runat="server"
+                                    Target="_blank">
+                                    <asp:Image ID="imgAdBottom2" runat="server" ImageUrl="~/imagesAd/default/bottom.gif"
+                                        Width="275px" Height="250px" /></asp:HyperLink>
                             </center>
                         </li>
                     </ul>
@@ -486,40 +495,40 @@
                 </div></p>--%>
             <div id="divAdRight" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/Ads.aspx?action=click&id=topright" Target="_blank"
-                        runat="server">
+                    <asp:HyperLink ID="HpkAdRightTop" NavigateUrl="~/Ads.aspx?action=click&id=topright"
+                        Target="_blank" runat="server">
                         <asp:Image ID="imgAdRightTop" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
                             Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="hpkAdRightMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleright" Target="_blank"
-                        runat="server">
+                    <asp:HyperLink ID="hpkAdRightMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleright"
+                        Target="_blank" runat="server">
                         <asp:Image ID="imgAdRightMiddle" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
-                            Width="125px" Height="200px" AlternateText=""/></asp:HyperLink>
+                            Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomright" Target="_blank"
-                        runat="server">
+                    <asp:HyperLink ID="HpkAdRightBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomright"
+                        Target="_blank" runat="server">
                         <asp:Image ID="imgAdRightBottom" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
                             Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
             </div>
             <div id="divAdLeft" style="display: none; position: absolute; top: 0px">
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/Ads.aspx?action=click&id=topleft" Target="_blank"
-                        runat="server">
-                        <asp:Image ID="imgADLeftTop" runat="server" ImageUrl="~/imagesAd/default/Float.gif" 
+                    <asp:HyperLink ID="HpkAdLeftTop" NavigateUrl="~/Ads.aspx?action=click&id=topleft"
+                        Target="_blank" runat="server">
+                        <asp:Image ID="imgADLeftTop" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
                             Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleleft" Target="_blank"
-                        runat="server">
+                    <asp:HyperLink ID="HpkAdLeftMiddle" NavigateUrl="~/Ads.aspx?action=click&id=middleleft"
+                        Target="_blank" runat="server">
                         <asp:Image ID="imgAdLeftMiddle" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
                             Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>
                 <p>
-                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomleft" Target="_blank"
-                        runat="server">
+                    <asp:HyperLink ID="HpkAdLeftBottom" NavigateUrl="~/Ads.aspx?action=click&id=bottomleft"
+                        Target="_blank" runat="server">
                         <asp:Image ID="imgAdLeftBottom" runat="server" ImageUrl="~/imagesAd/default/Float.gif"
                             Width="125px" Height="200px" AlternateText="" /></asp:HyperLink>
                 </p>

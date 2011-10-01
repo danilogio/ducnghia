@@ -89,7 +89,7 @@
         </asp:Panel>
         <br />
         <asp:Panel ID="viewPanel" runat="server">
-            <div align="left" style="float:left; width: 15%">
+            <div align="left" style="float: left; width: 15%">
                 <h3>
                     Xem nâng cao</h3>
                 <ul>

@@ -44,8 +44,8 @@ namespace ltktDAO
         {
             //LTEDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
-                                          where record.ID == ID
-                                          select record;
+                                             where record.ID == ID
+                                             select record;
 
             if (lst.Count() > 0)
             {
@@ -72,7 +72,7 @@ namespace ltktDAO
                 return lst.ElementAt(0).Chapeau.Trim();
             }
 
-            return CommonConstants.BLANK ;
+            return CommonConstants.BLANK;
         }
 
         /// <summary>
@@ -307,9 +307,9 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
-                                                       where p.Point == DB.tblInformatics.Max(p2 => p2.Point)
-                                                        orderby p.Posted descending
-                                                       select p;
+                                             where p.Point == DB.tblInformatics.Max(p2 => p2.Point)
+                                             orderby p.Posted descending
+                                             select p;
             if (lst.Count() > 0)
             {
                 return lst.ElementAt(BaseServices.random(0, lst.Count()));
@@ -328,8 +328,8 @@ namespace ltktDAO
                 _numRecord = 1;
 
             IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
-                                              where p.Leitmotif >= _mintype 
-                                                    && p.Leitmotif <= _maxtype 
+                                              where p.Leitmotif >= _mintype
+                                                    && p.Leitmotif <= _maxtype
                                                     && p.State != CommonConstants.STATE_UNCHECK
                                                     && p.StickyFlg == false
                                               orderby p.Posted descending
@@ -371,7 +371,7 @@ namespace ltktDAO
                 _numRecord = 1;
 
             IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
-                                              where p.Leitmotif == _type 
+                                              where p.Leitmotif == _type
                                                     && p.State != CommonConstants.STATE_UNCHECK
                                                     && p.StickyFlg == false
                                               orderby p.Posted descending
@@ -449,8 +449,8 @@ namespace ltktDAO
                 return (from p in DB.tblInformatics
                         where p.Posted.Year <= year
                                 && p.State != CommonConstants.STATE_UNCHECK
-                            select p).Count();
-                                
+                        select p).Count();
+
             }
             if (start > 0 && end > 0 && end >= start)
             {
@@ -466,11 +466,11 @@ namespace ltktDAO
         public IEnumerable<tblInformatic> searchArticle(ArticleSCO articleSCO)
         {
             IEnumerable<tblInformatic> lst1 = null;
-            if(articleSCO.CurrentPage == 1)
+            if (articleSCO.CurrentPage == 1)
             {
                 lst1 = searchLatestStickyArticle(articleSCO);
             }
-            if(lst1 != null)
+            if (lst1 != null)
             {
                 int remain = articleSCO.NumArticleOnPage - lst1.Count();
                 articleSCO.NumArticleOnPage = remain;
@@ -494,7 +494,7 @@ namespace ltktDAO
             int start = 0;
             int end = 0;
             int year = BaseServices.getYearFromString(articleSCO.Time);
-            locateArticleIndex(articleSCO,out start, out end);
+            locateArticleIndex(articleSCO, out start, out end);
             /*if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_OFFICE)
             {
                 start = CommonConstants.AT_IT_OFFICE_START;
@@ -530,7 +530,7 @@ namespace ltktDAO
                 start = CommonConstants.AT_IT_OFFICE_ACCESS;
                 end = start;
             }*/
-            
+
             if (articleSCO.Leitmotif == CommonConstants.ALL)
             {
                 return (from p in DB.tblInformatics
@@ -640,12 +640,12 @@ namespace ltktDAO
                     DB.SubmitChanges();
 
                     ts.Complete();
-                    log.writeLog(DBHelper.strPathLogFile, record.Author, 
-                                BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE, 
-                                                                    record.ID.ToString(), 
+                    log.writeLog(DBHelper.strPathLogFile, record.Author,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
+                                                                    record.ID.ToString(),
                                                                     CommonConstants.SQL_TABLE_INFORMATICS));
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -744,11 +744,11 @@ namespace ltktDAO
 
                     DB.SubmitChanges();
                     ts.Complete();
-                    
+
                     //write log
-                    log.writeLog(DBHelper.strPathLogFile, currentUsername, 
-                                    BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, 
-                                                                    _id.ToString(), 
+                    log.writeLog(DBHelper.strPathLogFile, currentUsername,
+                                    BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                    _id.ToString(),
                                                                     CommonConstants.SQL_TABLE_INFORMATICS));
                 }
             }
@@ -771,7 +771,7 @@ namespace ltktDAO
         /// Tổng số các bài viết về chủ đề tin học
         /// </summary>
         /// <returns></returns>
-        public  int sumInformatics()
+        public int sumInformatics()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -820,7 +820,7 @@ namespace ltktDAO
             return true;
         }
 
-        public  Boolean Like(int _id)
+        public Boolean Like(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -848,7 +848,7 @@ namespace ltktDAO
             return true;
         }
 
-        public  Boolean Dislike(int _id)
+        public Boolean Dislike(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -885,7 +885,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_type"></param>
         /// <returns></returns>
-        public  IList<tblInformatic> getRelativeByType(int _type, int _numberRecords)
+        public IList<tblInformatic> getRelativeByType(int _type, int _numberRecords)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             if (_numberRecords < 1)
@@ -897,7 +897,7 @@ namespace ltktDAO
             return lst.ToList();
         }
 
-        public  IList<tblInformatic> listInformatics(string _keyword)
+        public IList<tblInformatic> listInformatics(string _keyword)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
@@ -909,6 +909,97 @@ namespace ltktDAO
             return lst.ToList();
         }
 
+        public int countInf()
+        {
+            return (from r in DB.tblInformatics select r).Count();
+        }
+
+        public int countInfListByState(int state)
+        {
+            return (from r in DB.tblInformatics
+                    where r.State == state
+                    select r).Count();
+        }
+
+        public IEnumerable<tblInformatic> fetchInfList(int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
+
+        public IEnumerable<tblInformatic> fetchInfList(int state, int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
+                                              where r.State == state
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
+
+        public bool isState(int _id, int _state)
+        {
+            IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
+                                             where p.ID == _id
+                                             select p;
+            if (lst.Count() > 0)
+            {
+                if (lst.ElementAt(0).State == _state)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool deleteInf(int _id, string _username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var inf = DB.tblInformatics.Single(a => a.ID == _id);
+
+                    DB.tblInformatics.DeleteOnSubmit(inf);
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, _username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                    _id.ToString(),
+                                                                    CommonConstants.SQL_TABLE_INFORMATICS));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                      _id.ToString(),
+                                                                      CommonConstants.SQL_TABLE_INFORMATICS));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
+
+
+
+
+
+
+        
     }
 }
