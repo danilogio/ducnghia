@@ -12,9 +12,10 @@
 <asp:Content ID="ContestForUniversityAdmin" ContentPlaceHolderID="cphAdminContent"
     runat="Server">
     <div id="div_content" class="block_text">
-        <asp:Panel ID="messagePanel" runat="server" Visible="false">
-            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+        <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
+                <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
         </asp:Panel>
+        
         <asp:Panel ID="viewPanel" runat="server">
             <div style="float: left; width: 100%">
                 <div align="left" style="float: left; width: 20%">
@@ -63,6 +64,9 @@
             </div>
             </div>
             
+            <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
+                <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+             </asp:Panel>
             <br />
             <asp:Table ID="ContestTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
@@ -95,6 +99,8 @@
                 </asp:TableFooterRow>
             </asp:Table>
         </asp:Panel>
+        
+        
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
         </asp:Panel>
     </div>

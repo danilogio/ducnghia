@@ -1751,7 +1751,11 @@ namespace ltktDAO
         /// <summary>
         /// link template for ads page
         /// </summary>
-        public const string TEMP_ADS_URL = PAGE_ADS + "?" + REQ_ACTION + "=" + ACT_CLICK + "&" + REQ_ID + "={0}&" + REQ_REDIRECT + "={1}"; 
+        public const string TEMP_ADS_URL = PAGE_ADS + "?" + REQ_ACTION + "=" + ACT_CLICK + "&" + REQ_ID + "={0}&" + REQ_REDIRECT + "={1}";
+        /// <summary>
+        /// url template for admin contest
+        /// </summary>
+        public const string TEMP_ADMIN_CONTEST_URL = "~/_lh/Admin/" + PAGE_ADMIN_UNIVERSITY +"?" + REQ_ACTION + "={0}&" + REQ_KEY +"={1}&"+ REQ_STATE +"={2}&" + REQ_PAGE +"={3}";
         /// <summary>
         /// image thumbnail for article
         /// </summary>
