@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
+using System.IO;
+using System.Windows.Forms;
 
 namespace ltktDAO
 {
@@ -962,6 +964,8 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var inf = DB.tblInformatics.Single(a => a.ID == _id);
+
+                    File.Delete(DBHelper.strCurrentPath + inf.Location);
 
                     DB.tblInformatics.DeleteOnSubmit(inf);
                     DB.SubmitChanges();

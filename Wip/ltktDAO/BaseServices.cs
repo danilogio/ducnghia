@@ -543,6 +543,22 @@ namespace ltktDAO
             }
             return res;
         }
+
+        public static bool deleteFile(string filename)
+        {
+            string fileToDelele =  + filename;
+
+            try
+            {
+                File.Delete(fileToDelele);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
     
 }

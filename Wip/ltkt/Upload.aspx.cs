@@ -137,7 +137,6 @@ namespace ltkt
                     string newFileName = bs.fileNameToSave(fileContent.FileName);
                     string filename = rootFolder + newFileName;
                     string fileSave = folder + "\\" + newFileName;
-                    
                     string fileSolvingSave = CommonConstants.BLANK;
                     // save file
                     if (!Directory.Exists(rootFolder))
