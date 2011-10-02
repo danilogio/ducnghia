@@ -15,7 +15,7 @@ namespace ltkt.Admin
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
 
-        public const int NoOfContestPerPage = 8;
+        public const int NoOfContestPerPage = 2;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -217,7 +217,7 @@ namespace ltkt.Admin
                 {
                     if (lst.Count() > 0)
                     {
-                        showContest(lst, totalRecord, page, action, key);
+                        showContest(lst, totalRecord, page, action, key, state);
                         isOK = true;
                     }
                 }
@@ -241,7 +241,7 @@ namespace ltkt.Admin
 
         }
 
-        private void showContest (IEnumerable <tblContestForUniversity> lst, int totalContest, int page, string action, string key)
+        private void showContest (IEnumerable <tblContestForUniversity> lst, int totalContest, int page, string action, string key, string state)
         {
             //int totalContest = lst.Count();
             // Computing total pages
@@ -332,10 +332,18 @@ namespace ltkt.Admin
                                 + CommonConstants.AND
                                 + CommonConstants.REQ_KEY
                                 + CommonConstants.EQUAL
-                                + key
-                                + CommonConstants.AND
-                                + CommonConstants.REQ_PAGE
-                                + CommonConstants.EQUAL;
+                                + key;
+                if (!BaseServices.isNullOrBlank(state))
+                {
+                    param += CommonConstants.AND
+                               + CommonConstants.REQ_STATE
+                               + CommonConstants.EQUAL
+                               + state;
+                }
+                param += CommonConstants.AND
+                       + CommonConstants.REQ_PAGE
+                       + CommonConstants.EQUAL;
+                
 
                 if (page > 1)
                 {
