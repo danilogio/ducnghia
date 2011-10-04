@@ -942,6 +942,24 @@ namespace ltktDAO
             return lst;
         }
 
+        public IEnumerable<tblInformatic> fetchInfListWithLeitmotif(int leitmotif, int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
+                                              where r.Leitmotif == leitmotif
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblInformatic> fetchInfList(int leitmotif, int state, int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
+                                              where r.Leitmotif == leitmotif && r.State == state
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
         public bool isState(int _id, int _state)
         {
             IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
@@ -955,6 +973,42 @@ namespace ltktDAO
                 }
             }
             return false;
+        }
+
+        public string getName(int leimotif)
+        {
+            switch (leimotif)
+            {
+                case CommonConstants.AT_IT_OFFICE_WORD:
+                    {
+                        return CommonConstants.AT_IT_OFFICE_WORD_NAME;
+                    }
+                case CommonConstants.AT_IT_OFFICE_POWERPOINT:
+                    {
+                        return CommonConstants.AT_IT_OFFICE_POWERPOINT_NAME;
+                    }
+                case CommonConstants.AT_IT_OFFICE_EXCEL:
+                    {
+                        return CommonConstants.AT_IT_OFFICE_EXCEL_NAME;
+                    }
+                case CommonConstants.AT_IT_OFFICE_ACCESS:
+                    {
+                        return CommonConstants.AT_IT_OFFICE_ACCESS_NAME;
+                    }
+                case CommonConstants.AT_IT_ADVANCE_TIP:
+                    {
+                        return CommonConstants.AT_IT_ADVANCE_TIP_NAME;
+                    }
+                case CommonConstants.AT_IT_SIMPLE_TIP:
+                    {
+                        return CommonConstants.AT_IT_SIMPLE_TIP_NAME;
+                    }
+                default:
+                    {
+                        return CommonConstants.AT_UNCLASSIFIED_NAME;
+                    }
+
+            }
         }
 
         public bool deleteInf(int _id, string _username)

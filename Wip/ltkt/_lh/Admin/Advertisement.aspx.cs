@@ -19,7 +19,7 @@ namespace ltkt.Admin
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Users userDAO = new ltktDAO.Users();
 
-        public const int NoOfAdsPerPage = 7;
+        public const int NoOfAdsPerPage = 12;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -134,7 +134,7 @@ namespace ltkt.Admin
                     }
                     if(!isOK)
                     {
-                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
                         NewsTable.Visible = false;
                         return;
                     }
@@ -355,10 +355,9 @@ namespace ltkt.Admin
             }
             else
             {
-                messagePanel.Visible = true;
                 detailsPanel.Visible = false;
 
-                liMessage.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+                showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
             }
 
             if (_action == CommonConstants.ACT_EDIT)
@@ -808,10 +807,23 @@ namespace ltkt.Admin
             }
 
         }
+        /// <summary>
+        /// use to show message information on mode SEARCH, DELETE
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showInfoMessage(string infoText)
+        {
+            liMessage.Text = infoText;
+            messagePanel.Visible = true;
+        }
+        /// <summary>
+        /// use to show message error on mode EDIT, VIEW
+        /// </summary>
+        /// <param name="errorText"></param>
         private void showErrorMessage(string errorText)
         {
-            liMessage.Text = errorText;
-            messagePanel.Visible = true;
+            liErrorMessage.Text = errorText;
+            ErrorMessagePanel.Visible = true;
         }
     }
 }

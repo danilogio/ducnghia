@@ -467,6 +467,7 @@ namespace ltktDAO
         /// Article is not classified
         /// </summary>
         public const int AT_UNCLASSIFIED = 0;
+        public const string AT_UNCLASSIFIED_NAME = "Chưa phân loại";
 
         #region University (AT_UNI)
         /// <summary>
@@ -534,25 +535,49 @@ namespace ltktDAO
         /// </summary>
         public const int AT_IT_OFFICE_EXCEL = 1;
         /// <summary>
+        /// Article IT with type Excel
+        /// </summary>
+        public const string AT_IT_OFFICE_EXCEL_NAME = "Excel";
+        /// <summary>
         /// Article IT with type Power point
         /// </summary>
         public const int AT_IT_OFFICE_POWERPOINT = 2;
+        /// <summary>
+        /// Article IT with type Power point
+        /// </summary>
+        public const string AT_IT_OFFICE_POWERPOINT_NAME = "PowerPoint";
         /// <summary>
         /// Article IT with type power point
         /// </summary>
         public const int AT_IT_OFFICE_ACCESS = 3;
         /// <summary>
+        /// Article IT with type power point
+        /// </summary>
+        public const string AT_IT_OFFICE_ACCESS_NAME = "Access";
+        /// <summary>
         /// Article IT with type word
         /// </summary>
         public const int AT_IT_OFFICE_WORD = 4;
+        /// <summary>
+        /// Article IT with type word
+        /// </summary>
+        public const string AT_IT_OFFICE_WORD_NAME = "Word";
         /// <summary>
         /// Article IT with type simple tip
         /// </summary>
         public const int AT_IT_SIMPLE_TIP = 10;
         /// <summary>
+        /// Article IT with type simple tip
+        /// </summary>
+        public const string AT_IT_SIMPLE_TIP_NAME = "Thủ thuật căn bản";
+        /// <summary>
         /// Article IT type with type advance tip
         /// </summary>
         public const int AT_IT_ADVANCE_TIP = 20;
+        /// <summary>
+        /// Article IT type with type advance tip
+        /// </summary>
+        public const string AT_IT_ADVANCE_TIP_NAME = "Thủ thuật nâng cao";
         #endregion
 
         #region English Type (AT_EL)
@@ -1756,6 +1781,11 @@ namespace ltktDAO
         /// url template for admin contest
         /// </summary>
         public const string TEMP_ADMIN_CONTEST_URL = "~/_lh/Admin/" + PAGE_ADMIN_UNIVERSITY +"?" + REQ_ACTION + "={0}&" + REQ_KEY +"={1}&"+ REQ_STATE +"={2}&" + REQ_PAGE +"={3}";
+        /// <summary>
+        /// url template for admin it
+        /// </summary>
+        public const string TEMP_ADMIN_IT_URL = "~/_lh/Admin/" + PAGE_ADMIN_INFORMATICS + "?" + REQ_ACTION + "={0}&" + REQ_KEY + "={1}&" + REQ_STATE + "={2}&" + REQ_PAGE + "={3}";
+
         /// <summary>
         /// image thumbnail for article
         /// </summary>

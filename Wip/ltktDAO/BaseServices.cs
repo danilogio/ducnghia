@@ -245,7 +245,7 @@ namespace ltktDAO
         {
             if(isNullOrBlank(code))
             {
-                return CommonConstants.BLANK;
+                return CommonConstants.AT_UNCLASSIFIED_NAME;
             }
             switch (code)
             {
@@ -299,7 +299,7 @@ namespace ltktDAO
                     }
                 default:
                     {
-                        return CommonConstants.BLANK;
+                        return CommonConstants.AT_UNCLASSIFIED_NAME;
                     }
 
             }

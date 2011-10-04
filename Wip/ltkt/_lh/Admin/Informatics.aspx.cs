@@ -16,7 +16,7 @@ namespace ltkt.Admin
         ltktDAO.Informatics infDAO = new ltktDAO.Informatics();
         ltktDAO.EventLog log = new ltktDAO.EventLog();
 
-        private const int NoOfInformacticsPerPage = 2;
+        private const int NoOfInformacticsPerPage = 8;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -118,26 +118,51 @@ namespace ltkt.Admin
                     else//key != ALL
                     {
                         //lst = infDAO.fetchInfList(Convert.ToInt32(key), ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
-                        string sub = key;
-                        if (BaseServices.isNullOrBlank(sub))
+                        int lei = -1;
+                        if (!BaseServices.isNumeric(key))
                         {
-                            sub = CommonConstants.SUB_MATHEMATICS_CODE;
+                            lei = CommonConstants.AT_IT_OFFICE_WORD;
                         }
+                        else
+                        {
+                            lei = BaseServices.convertStringToInt(key);
+                        }
+                        //change state link
+                        hpkShowAllState.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_IT_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.ALL,
+                                                                                       CommonConstants.CONST_ONE);
+                        hpkShowChecked.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_IT_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.STATE_CHECKED.ToString(),
+                                                                                       CommonConstants.CONST_ONE);
+                        hpkShowUncheck.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_IT_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.STATE_UNCHECK.ToString(),
+                                                                                       CommonConstants.CONST_ONE);
+                        hpkShowBad.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_IT_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.STATE_BAD.ToString(),
+                                                                                       CommonConstants.CONST_ONE);
                         if (state == CommonConstants.ALL)//key != ALL and state = ALL
                         {
-                            
+                            lst = infDAO.fetchInfListWithLeitmotif(lei, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);  
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())//key != ALL and state = UNCHECK
                         {
-                            
+                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())//key != ALL and state = CHECKED
                         {
-                          
+                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())//key != ALL and state = BAD
                         {
-                           
+                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else
                         {
@@ -158,7 +183,7 @@ namespace ltkt.Admin
                     }
                     if (!isOK)
                     {
-                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
                         InformaticsTable.Visible = false;
                         return;
                     }
@@ -274,7 +299,11 @@ namespace ltkt.Admin
                                                                   CommonConstants.ACT_VIEW,
                                                                   Convert.ToString(inf.ID),
                                                                   inf.Title);
-
+                TableCell leimotifCell = new TableCell();
+                leimotifCell.CssClass = "table-cell";
+                leimotifCell.Style["width"] = "80px";
+                leimotifCell.Text = infDAO.getName(inf.Leitmotif);
+                
                 TableCell postedCell = new TableCell();
                 postedCell.CssClass = "table-cell";
                 postedCell.Style["width"] = "80px";
@@ -283,7 +312,7 @@ namespace ltkt.Admin
                 TableCell authorCell = new TableCell();
                 authorCell.CssClass = "table-cell";
                 authorCell.Style["width"] = "60px";
-                authorCell.Text = infDAO.getAuthor(inf.ID);
+                authorCell.Text = inf.Author;
 
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
@@ -311,6 +340,7 @@ namespace ltkt.Admin
                 infRow.Cells.Add(noCell);
                 infRow.Cells.Add(titleCell);
                 infRow.Cells.Add(postedCell);
+                infRow.Cells.Add(leimotifCell);
                 infRow.Cells.Add(authorCell);
                 infRow.Cells.Add(stateCell);
                 infRow.Cells.Add(actionCell);

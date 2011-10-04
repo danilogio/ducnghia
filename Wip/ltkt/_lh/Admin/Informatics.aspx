@@ -19,15 +19,15 @@
                         Chủ đề</h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowMath" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=4&page=1">Word </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowWord" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=4&page=1">Word </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowPhy" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=1&page=1">Excel </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowExcel" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=1&page=1">Excel </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowChem" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=2&page=1">Power Point </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowPP" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=2&page=1">Power Point </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=3&page=1">Access </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowAccess" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=3&page=1">Access </asp:HyperLink></li>
                     </ul>
                 </div>
                 <div align="left" style="float: left; width: 50%">
@@ -35,9 +35,9 @@
                         &nbsp&nbsp&nbsp&nbsp</h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="hpkShowLit" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=10&page=1">Thủ thuật căn bản </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowSimTip" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=10&page=1">Thủ thuật căn bản </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowHis" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=20&page=1">Thủ thuật nâng cao </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowAdvTip" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=20&page=1">Thủ thuật nâng cao </asp:HyperLink></li>
                     </ul>
                 </div>
                 <div align="left" style="float: left; width: 30%;">
@@ -46,13 +46,13 @@
                     </h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Informatics.aspx?action=search&key=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Informatics.aspx?action=search&key=1&page=1">Đã duyệt </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="Informatics.aspx?action=search&key=2&page=1">Báo xấu </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <br />
             <asp:Table ID="InformaticsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell CssClass="table-header" ColumnSpan="6">
+                    <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
                         <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
@@ -70,12 +70,13 @@
                     <asp:TableCell CssClass="table-header-cell">#</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Tiêu đề</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Ngày đăng</asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell">Chủ đề</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
                     <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
                 </asp:TableRow>
                 <asp:TableFooterRow>
-                    <asp:TableCell CssClass="table-footer" ColumnSpan="6">
+                    <asp:TableCell CssClass="table-footer" ColumnSpan="7">
                         <asp:Table ID="FooterTable" Width="100%" BorderWidth="0" runat="server">
                             <asp:TableRow>
                                 <asp:TableCell>
