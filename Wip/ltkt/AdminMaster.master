@@ -80,10 +80,10 @@
                                 <asp:HyperLink ID="HpkUniversity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&page=1">LTĐH</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkEnglish" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/English.aspx">Tiếng Anh</asp:HyperLink>
+                                <asp:HyperLink ID="HpkEnglish" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&page=1">Tiếng Anh</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkIt" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Informatics.aspx">Tin học</asp:HyperLink>
+                                <asp:HyperLink ID="HpkIt" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=all&page=1">Tin học</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkAds" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Advertisement.aspx?action=search&key=all&page=1">Quảng cáo</asp:HyperLink>

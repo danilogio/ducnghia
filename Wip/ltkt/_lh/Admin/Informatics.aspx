@@ -9,25 +9,57 @@
 </asp:Content>
 <asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content" class="block_text">
-        <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
-            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+        <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
+            <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="viewPanel" runat="server">
-            <div align="left" style="float: left; width: 15%;">
-                <h3>
-                    Xem nâng cao
-                </h3>
-                <ul>
-                    <li>
-                        <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
-                    <li>
-                        <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Informatics.aspx?action=search&key=0&page=1">Chưa duyệt </asp:HyperLink></li>
-                    <li>
-                        <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Informatics.aspx?action=search&key=1&page=1">Đã duyệt </asp:HyperLink></li>
-                    <li>
-                        <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="Informatics.aspx?action=search&key=2&page=1">Báo xấu </asp:HyperLink></li>
-                </ul>
+            <div style="float: left; width: 100%">
+                <div align="left" style="float: left; width: 20%">
+                    <h3>
+                        Chủ đề</h3>
+                    <ul>
+                        <li>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowMath" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=4&page=1">Word </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowPhy" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=1&page=1">Excel </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowChem" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=2&page=1">Power Point </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=3&page=1">Access </asp:HyperLink></li>
+                    </ul>
+                </div>
+                <div align="left" style="float: left; width: 50%">
+                    <h3>
+                        &nbsp&nbsp&nbsp&nbsp</h3>
+                    <ul>
+                        <li>
+                            <asp:HyperLink ID="hpkShowLit" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=10&page=1">Thủ thuật căn bản </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowHis" runat="server" NavigateUrl="~/_lh/Admin/Informatics.aspx?action=search&key=20&page=1">Thủ thuật nâng cao </asp:HyperLink></li>
+                    </ul>
+                </div>
+                <div align="left" style="float: left; width: 30%;">
+                    <h3>
+                        Trạng thái
+                    </h3>
+                    <ul>
+                        <li>
+                            <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Informatics.aspx?action=search&key=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Informatics.aspx?action=search&key=1&page=1">Đã duyệt </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="Informatics.aspx?action=search&key=2&page=1">Báo xấu </asp:HyperLink></li>
+                    </ul>
+                </div>
             </div>
+            <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
+                <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+            </asp:Panel>
+            <br />
             <asp:Table ID="InformaticsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="6">
@@ -85,7 +117,6 @@
                         <span>Điểm:</span>
                         <asp:TextBox ID="txtPoint" runat="server"></asp:TextBox>
                     </p>
-                    
                     <p>
                         <span>Tag:</span>
                         <asp:TextBox ID="txtTag" runat="server"></asp:TextBox>

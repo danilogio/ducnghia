@@ -13,9 +13,8 @@
     runat="Server">
     <div id="div_content" class="block_text">
         <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
-                <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
+            <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
         </asp:Panel>
-        
         <asp:Panel ID="viewPanel" runat="server">
             <div style="float: left; width: 100%">
                 <div align="left" style="float: left; width: 20%">
@@ -48,25 +47,24 @@
                             <asp:HyperLink ID="hpkShowEng" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=el&page=1">Môn Anh </asp:HyperLink></li>
                     </ul>
                 </div>
-                <div align="left" style="float:left; width: 30%">
-                <h3>
-                    Trạng thái</h3>
-                <ul>
-                    <li>
-                        <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
-                    <li>
-                        <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
-                    <li>
-                        <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
-                    <li>
-                        <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
-                </ul>
+                <div align="left" style="float: left; width: 30%">
+                    <h3>
+                        Trạng thái</h3>
+                    <ul>
+                        <li>
+                            <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="~/_lh/Admin/ContestUniversity.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
+                    </ul>
+                </div>
             </div>
-            </div>
-            
             <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
                 <asp:Literal ID="liMessage" runat="server"></asp:Literal>
-             </asp:Panel>
+            </asp:Panel>
             <br />
             <asp:Table ID="ContestTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
@@ -99,8 +97,6 @@
                 </asp:TableFooterRow>
             </asp:Table>
         </asp:Panel>
-        
-        
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
         </asp:Panel>
     </div>

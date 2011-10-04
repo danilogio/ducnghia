@@ -16,7 +16,7 @@ namespace ltkt.Admin
         ltktDAO.Informatics infDAO = new ltktDAO.Informatics();
         ltktDAO.EventLog log = new ltktDAO.EventLog();
 
-        private const int NoOfInformacticsPerPage = 7;
+        private const int NoOfInformacticsPerPage = 2;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,12 +35,12 @@ namespace ltkt.Admin
                                    + CommonConstants.SPACE
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
-                    liTableHeader.Text = CommonConstants.PAGE_ADMIN_INFORMATICS_NAME;
+                    liTableHeader.Text = CommonConstants.TXT_LIST_ARTICLE;
 
-                    hpkShowAll.Text += "(" + infDAO.countInf() + ")";
-                    hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
-                    hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
-                    hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
+                    //hpkShowAll.Text += "(" + infDAO.countInf() + ")";
+                   // hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
+                    //hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
+                    //hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
 
                     pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
@@ -62,6 +62,7 @@ namespace ltkt.Admin
                 int page = 1;
                 string action = Request.QueryString[CommonConstants.REQ_ACTION];
                 string sPage = Request.QueryString[CommonConstants.REQ_PAGE];
+                string state = Request.QueryString[CommonConstants.REQ_STATE];
                 if (BaseServices.isNullOrBlank(action))
                 {
                     action = CommonConstants.ACT_SEARCH;
@@ -70,7 +71,10 @@ namespace ltkt.Admin
                 {
                     sPage = CommonConstants.PAGE_NUMBER_FIRST;
                 }
-
+                if (BaseServices.isNullOrBlank(state))
+                {
+                    state = CommonConstants.ALL;
+                }
                 page = Convert.ToInt32(sPage);
 
 
@@ -93,13 +97,52 @@ namespace ltkt.Admin
                     }
                     if (key == CommonConstants.ALL)
                     {
-                        lst = infDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                        //lst = infDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                        if (state == CommonConstants.ALL)// key = ALL and state = ALL
+                        {
+                            lst = infDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
+                        {
+                            lst = infDAO.fetchInfList(CommonConstants.STATE_UNCHECK ,((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
+                        {
+                            lst = infDAO.fetchInfList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
+                        {
+                            lst = infDAO.fetchInfList(CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                        }
                     }
-                    else if (key == CommonConstants.STATE_UNCHECK.ToString()
-                        || key == CommonConstants.STATE_CHECKED.ToString()
-                        || key == CommonConstants.STATE_BAD.ToString())
+                    else//key != ALL
                     {
-                        lst = infDAO.fetchInfList(Convert.ToInt32(key), ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                        //lst = infDAO.fetchInfList(Convert.ToInt32(key), ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                        string sub = key;
+                        if (BaseServices.isNullOrBlank(sub))
+                        {
+                            sub = CommonConstants.SUB_MATHEMATICS_CODE;
+                        }
+                        if (state == CommonConstants.ALL)//key != ALL and state = ALL
+                        {
+                            
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())//key != ALL and state = UNCHECK
+                        {
+                            
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())//key != ALL and state = CHECKED
+                        {
+                          
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())//key != ALL and state = BAD
+                        {
+                           
+                        }
+                        else
+                        {
+
+                        }
                     }
 
                     // show data
@@ -306,14 +349,29 @@ namespace ltkt.Admin
                 }
             }
         }
-
-        private void showErrorMessage(string errorText)
-        {
-            liMessage.Text = errorText;
-            messagePanel.Visible = true;
-        }
-
         protected void btnEdit_Click(object sender, EventArgs e)
         { }
+        /// <summary>
+        /// use to show message information on mode SEARCH, DELETE
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showInfoMessage(string infoText)
+        {
+            liMessage.Text = infoText;
+            messagePanel.Visible = true;
+        }
+        /// <summary>
+        /// use to show message error on mode EDIT, VIEW
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showErrorMessage(string errorText)
+        {
+            liErrorMessage.Text = errorText;
+            ErrorMessagePanel.Visible = true;
+        }
+        private void changeViewState(string linkID)
+        {
+
+        }
     }
 }
