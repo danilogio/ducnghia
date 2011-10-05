@@ -405,7 +405,10 @@ li ol, li ul
 	margin-left: 5px;
 	border-color: #a6c9e2;
 }
-
+#div_Admin.block_text
+{
+	height: 925px;
+}
 #mailbox.block_text
 {
 	height: 500px;
@@ -637,4 +640,10 @@ div.block_details_text
 {
 	color:Red;
 	text-align:center;
+}
+.multiline
+{
+	background:white;
+	margin-top:10px;
+	margin-bottom:10px;
 }
