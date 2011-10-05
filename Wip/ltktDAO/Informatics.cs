@@ -915,14 +915,32 @@ namespace ltktDAO
         {
             return (from r in DB.tblInformatics select r).Count();
         }
-
         public int countInfListByState(int state)
         {
-            return (from r in DB.tblInformatics
-                    where r.State == state
-                    select r).Count();
+            int num = 0;
+            num = (from r in DB.tblInformatics
+                   where r.State == state
+                   select r).Count();
+
+            return num;
+        }
+        public int countInfByLeitmotif(int leitmotif)
+        {
+            int num = (from r in DB.tblInformatics
+                       where r.Leitmotif == leitmotif
+                       select r).Count();
+
+            return num;
         }
 
+        public int countInfListByStateAndLeimotif(int leitmotif, int state)
+        {
+            int num = (from r in DB.tblInformatics
+                       where r.Leitmotif == leitmotif && r.State == state
+                       select r).Count();
+
+            return num;
+        }
         public IEnumerable<tblInformatic> fetchInfList(int start, int count)
         {
             IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics

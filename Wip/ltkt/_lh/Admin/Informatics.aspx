@@ -67,13 +67,13 @@
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>
-                    <asp:TableCell CssClass="table-header-cell">#</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Tiêu đề</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Ngày đăng</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Chủ đề</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
-                    <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell" VerticalAlign="Middle"><center>#</center></asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell"><center>Tiêu đề</center></asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell"><center>Ngày đăng</center></asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell"><center>Chủ đề</center></asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell"><center>Người gửi</center></asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell"><center>Trạng thái</center></asp:TableCell>
+                    <asp:TableCell CssClass="table-header-cell"><center>Thao tác</center></asp:TableCell>
                 </asp:TableRow>
                 <asp:TableFooterRow>
                     <asp:TableCell CssClass="table-footer" ColumnSpan="7">

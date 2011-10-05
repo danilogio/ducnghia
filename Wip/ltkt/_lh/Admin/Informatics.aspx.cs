@@ -81,12 +81,21 @@ namespace ltkt.Admin
                 //action is Search
                 if (action == CommonConstants.ACT_SEARCH)
                 {
+                    hpkShowAccess.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_ACCESS) + ")";
+                    hpkShowAdvTip.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_ADVANCE_TIP) + ")";
+                    hpkShowAll.Text += "(" + infDAO.countInf() + ")";
+                    hpkShowSimTip.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_SIMPLE_TIP) + ")";
+                    hpkShowExcel.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_EXCEL) + ")";
+                    hpkShowPP.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_POWERPOINT) + ")";
+                    hpkShowWord.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_WORD) + ")"; 
+                    
                     viewPanel.Visible = true;
                     detailPanel.Visible = false;
                     messagePanel.Visible = false;
                     IEnumerable<tblInformatic> lst = null;
                     //page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
                     string key = Request.QueryString[CommonConstants.REQ_KEY];
+                    int totalRecord = 0;
                     if (BaseServices.isNullOrBlank(key))
                     {
                         key = CommonConstants.ALL;
@@ -95,24 +104,56 @@ namespace ltkt.Admin
                     {
                         key = BaseServices.nullToBlank(key);
                     }
+                    changeViewState(key);
                     if (key == CommonConstants.ALL)
                     {
                         //lst = infDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
                         if (state == CommonConstants.ALL)// key = ALL and state = ALL
                         {
-                            lst = infDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            totalRecord = infDAO.countInf();
+                            string txt = hpkShowAllState.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
-                            lst = infDAO.fetchInfList(CommonConstants.STATE_UNCHECK ,((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(CommonConstants.STATE_UNCHECK ,((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            totalRecord = infDAO.countInfListByState(CommonConstants.STATE_UNCHECK);
+
+                            hpkShowAllState.Text += "(" + infDAO.countInf() + ")";
+                            string txt = hpkShowUncheck.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
                         {
-                            lst = infDAO.fetchInfList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            totalRecord = infDAO.countInfListByState(CommonConstants.STATE_CHECKED);
+
+                            hpkShowAllState.Text += "(" + infDAO.countInf() + ")";
+                            hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
+                            string txt = hpkShowChecked.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
                         {
-                            lst = infDAO.fetchInfList(CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            totalRecord = infDAO.countInfListByState(CommonConstants.STATE_BAD);
+
+                            hpkShowAllState.Text += "(" + infDAO.countInf() + ")";
+                            hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
+                            string txt = hpkShowBad.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
                         }
                     }
                     else//key != ALL
@@ -125,7 +166,7 @@ namespace ltkt.Admin
                         }
                         else
                         {
-                            lei = BaseServices.convertStringToInt(key);
+                            lei = BaseServices.convertStringToInt(key.Trim());
                         }
                         //change state link
                         hpkShowAllState.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_IT_URL,
@@ -150,19 +191,49 @@ namespace ltkt.Admin
                                                                                        CommonConstants.CONST_ONE);
                         if (state == CommonConstants.ALL)//key != ALL and state = ALL
                         {
-                            lst = infDAO.fetchInfListWithLeitmotif(lei, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);  
+                            lst = infDAO.fetchInfListWithLeitmotif(lei, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+
+                            totalRecord = infDAO.countInfByLeitmotif(lei);
+                            hpkShowUncheck.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_BAD) + ")";
+                            string txt = hpkShowAllState.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())//key != ALL and state = UNCHECK
                         {
-                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            
+                            totalRecord = infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_UNCHECK);
+                            hpkShowAllState.Text += "(" + infDAO.countInfByLeitmotif(lei) + ")";
+                            hpkShowChecked.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_BAD) + ")";
+                            string txt = hpkShowUncheck.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())//key != ALL and state = CHECKED
                         {
-                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            totalRecord = infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_CHECKED);
+                            hpkShowAllState.Text += "(" + infDAO.countInfByLeitmotif(lei) + ")";
+                            hpkShowUncheck.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_UNCHECK) + ")";
+                            string txt = hpkShowChecked.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowBad.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_BAD) + ")";
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())//key != ALL and state = BAD
                         {
-                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = infDAO.fetchInfList(lei, CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            totalRecord = infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_BAD);
+                            hpkShowAllState.Text += "(" + infDAO.countInfByLeitmotif(lei) + ")";
+                            hpkShowUncheck.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + infDAO.countInfListByStateAndLeimotif(lei, CommonConstants.STATE_CHECKED) + ")";
+                            string txt = hpkShowBad.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
                         }
                         else
                         {
@@ -176,7 +247,7 @@ namespace ltkt.Admin
                     {
                         if (lst.Count() > 0)
                         {
-                            showInformactics(lst, page, action, key);
+                            showInformactics(lst, totalRecord, page, action, key, state);
                             isOK = true;
                         }
 
@@ -266,9 +337,9 @@ namespace ltkt.Admin
             } 
         }
 
-        private void showInformactics(IEnumerable<tblInformatic> lst, int page, string action, string key)
+        private void showInformactics(IEnumerable<tblInformatic> lst, int totalInformactic, int page, string action, string key, string state)
         {
-            int totalInformactic = 0;
+            //int totalInformactic = 0;
             // Computing total pages
             int totalPages;
             int mod = totalInformactic % NoOfInformacticsPerPage;
@@ -357,10 +428,18 @@ namespace ltkt.Admin
                                 + CommonConstants.AND
                                 + CommonConstants.REQ_KEY
                                 + CommonConstants.EQUAL
-                                + key
-                                + CommonConstants.AND
-                                + CommonConstants.REQ_PAGE
-                                + CommonConstants.EQUAL;
+                                + key;
+                if (!BaseServices.isNullOrBlank(state))
+                {
+                    param += CommonConstants.AND
+                               + CommonConstants.REQ_STATE
+                               + CommonConstants.EQUAL
+                               + state;
+                }
+                param += CommonConstants.AND
+                       + CommonConstants.REQ_PAGE
+                       + CommonConstants.EQUAL;
+
 
                 if (page > 1)
                 {
@@ -401,7 +480,56 @@ namespace ltkt.Admin
         }
         private void changeViewState(string linkID)
         {
+            if (linkID == CommonConstants.ALL)
+            {
+                hpkShowAll.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAll.Text);
+            }
+            else
+            {
+                int lei = -1;
+                if (!BaseServices.isNumeric(linkID))
+                {
+                    lei = CommonConstants.AT_IT_OFFICE_WORD;
 
+                }
+                else
+                {
+                    lei = BaseServices.convertStringToInt(linkID.Trim());
+                }
+                switch (lei)
+                {
+                    case CommonConstants.AT_IT_OFFICE_WORD:
+                        {
+                            hpkShowWord.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowWord.Text);
+                            break;
+                        }
+                    case CommonConstants.AT_IT_OFFICE_POWERPOINT:
+                        {
+                            hpkShowPP.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowPP.Text);
+                            break;
+                        }
+                    case CommonConstants.AT_IT_OFFICE_EXCEL:
+                        {
+                            hpkShowExcel.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowExcel.Text);
+                            break;
+                        }
+                    case CommonConstants.AT_IT_OFFICE_ACCESS:
+                        {
+                            hpkShowAccess.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAccess.Text);
+                            break;
+                        }
+                    case CommonConstants.AT_IT_ADVANCE_TIP:
+                        {
+                            hpkShowAdvTip.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAdvTip.Text);
+                            break;
+                        }
+                    case CommonConstants.AT_IT_SIMPLE_TIP:
+                        {
+                            hpkShowSimTip.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowSimTip.Text);
+                            break;
+                        }
+                }
+            }
         }
     }
 }
