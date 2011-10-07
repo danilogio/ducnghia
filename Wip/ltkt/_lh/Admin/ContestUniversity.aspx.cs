@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
+using System.IO;
 
 namespace ltkt.Admin
 {
@@ -53,6 +54,7 @@ namespace ltkt.Admin
         {
             string action = Request.QueryString[CommonConstants.REQ_ACTION];
             string sPage = Request.QueryString[CommonConstants.REQ_PAGE];
+            //bool isDeleted = false;
             if (BaseServices.isNullOrBlank(action))
             {
                 action = CommonConstants.ACT_SEARCH;
@@ -250,15 +252,249 @@ namespace ltkt.Admin
             }
             else if (action == CommonConstants.ACT_EDIT || action == CommonConstants.ACT_VIEW)
             {
-                string id = Request.QueryString[CommonConstants.REQ_ID];
+                viewPanel.Visible = false;
+                detailPanel.Visible = true;
+                messagePanel.Visible = false;
+
+                int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
+                if (Request.QueryString[CommonConstants.REQ_ID] == null)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                    return;
+                }
+                if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
+                {
+                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                    return;
+                }
+                int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                
+                viewPanel.Visible = false;
+                detailPanel.Visible = true;
+                messagePanel.Visible = false;
+
+                if (ddlState.Items.Count == 0)
+                {
+                    showContestDetails(_id, action);
+                }
+                
+                if (action == CommonConstants.ACT_VIEW)
+                {
+                    btnEdit.Visible = false;
+                }
 
             }
             else if (action == CommonConstants.ACT_DELETE)
             {
-                string id = Request.QueryString[CommonConstants.REQ_ID];
+                if (Request.QueryString[CommonConstants.REQ_ID] == null)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                    return;
+                }
+                if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
+                {
+                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                    return;
+                }
+                
+                int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
+                bool isMatch = contestDAO.isState(id, CommonConstants.STATE_UNCHECK);
+                if (contestDAO.deleteArticle(id, user.Username))
+                {
+                    if (isMatch)
+                    {
+                        ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                        statDAO.add(CommonConstants.SF_NUM_ARTICLE_ON_UNI, CommonConstants.CONST_ONE_NEGATIVE);
+                    }
+                    string mess = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
+
+                    ltktDAO.Alert.Show(mess);
+                    //isDeleted = true;
+                }
 
             }
 
+        }
+
+        private void showContestDetails(int _id, string action)
+        {
+            tblContestForUniversity cont = contestDAO.getContest(_id);
+            if (cont != null)
+            {
+                txtTitle.Text = cont.Title.Trim();
+                txtAuthor.Text = cont.tblUser.Username.Trim();
+                txtPosted.Text = cont.Posted.ToString("HH:mm:ss 'ngày' dd/M/yyyy");
+                showState(cont.State);
+                showSticky(cont.StickyFlg);
+                showContestType(cont.isUniversity);
+                showBranch(cont.Branch);
+                showSubject(cont.Subject);
+                showYear(cont.Year);
+                txtContent.Text = cont.Contents.Trim();
+                txtTag.Text = cont.Tag.Trim();
+                txtPoint.Text = Convert.ToString(cont.Point);
+                txtScore.Text = Convert.ToString(cont.Score);
+                showFileContent(cont.Location);
+                showFileSolving(cont.Solving);
+                showThumbnail(cont.Thumbnail);
+                txtHtmlEmbed.Text = BaseServices.nullToBlank(cont.HtmlEmbedLink);
+                txtHtmlPreview.Text = BaseServices.nullToBlank(cont.HtmlPreview);
+            }
+            else
+            {
+                detailPanel.Visible = false;
+                showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+            }
+
+            //enable or disable for edit
+            if (action == CommonConstants.ACT_VIEW)
+            {                
+                disableEdit();
+            }
+            else if (action == CommonConstants.ACT_EDIT)
+            {
+                enableEdit();
+            }
+        }
+
+        private void showFileContent(string location)
+        {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liContent.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('" + location.Replace("\"","/") + "')\"/>";
+            }
+            else
+                liContent.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+        }
+
+        private void showFileSolving(string location)
+        {
+        }
+
+        private void showThumbnail(string location)
+        {
+        }
+
+        private void showYear(int year)
+        {
+            if (ddlYear.Items.Count == 0)
+                for (int idx = 2002; idx <= DateTime.Now.Year; ++idx)
+                    ddlYear.Items.Add(new ListItem(Convert.ToString(idx), Convert.ToString(idx)));
+
+            if (ddlYear.Items.Count > 0)
+                ddlYear.SelectedValue = Convert.ToString(year);
+        }
+
+        private void showSubject(string sub)
+        {
+            if (ddlSubject.Items.Count == 0)
+            {
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_MATHEMATICS, CommonConstants.SUB_MATHEMATICS_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_PHYSICAL, CommonConstants.SUB_PHYSICAL_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_CHEMICAL, CommonConstants.SUB_CHEMICAL_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_BIOGRAPHY, CommonConstants.SUB_BIOGRAPHY_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_LITERATURE, CommonConstants.SUB_LITERATURE_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_HISTORY, CommonConstants.SUB_HISTORY_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_GEOGRAPHY, CommonConstants.SUB_GEOGRAPHY_CODE));
+                ddlSubject.Items.Add(new ListItem(CommonConstants.SUB_ENGLISH, CommonConstants.SUB_ENGLISH_CODE));
+            }
+
+            if (ddlSubject.Items.Count > 0)
+                ddlSubject.SelectedValue = sub;
+        }
+
+        private void showBranch(int branch)
+        {
+            if (ddlBranch.Items.Count == 0)
+            {
+                ddlBranch.Items.Add(new ListItem("Khối A", "0"));
+                ddlBranch.Items.Add(new ListItem("Khối B", "1"));
+                ddlBranch.Items.Add(new ListItem("Khối C", "2"));
+                ddlBranch.Items.Add(new ListItem("Khối D", "3"));
+            }
+
+            if (ddlBranch.Items.Count > 0)
+                ddlBranch.SelectedValue = Convert.ToString(branch);
+        }
+
+        private void showContestType(bool isUniversity)
+        {
+            if (ddlType.Items.Count == 0)
+            {
+                ddlType.Items.Add(new ListItem("Đại học", "True"));
+                ddlType.Items.Add(new ListItem("Cao đẳng", "False"));
+            }
+            if (ddlType.Items.Count > 0)
+                ddlType.SelectedValue = Convert.ToString(isUniversity);
+        }
+
+        private void showSticky(bool sticky)
+        {
+            if (ddlSticky.Items.Count == 0)
+            {
+                ddlSticky.Items.Add(new ListItem("Có", "True"));
+                ddlSticky.Items.Add(new ListItem("Không", "False"));
+            }
+
+            if (ddlSticky.Items.Count > 0)
+            {
+                ddlSticky.SelectedValue = Convert.ToString(sticky);
+            }
+        }
+
+        private void showState(int state)
+        {
+            if (ddlState.Items.Count == 0)
+            {
+                ddlState.Items.Add(new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+                ddlState.Items.Add(new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+                ddlState.Items.Add(new ListItem(CommonConstants.STATE_BAD_NAME, CommonConstants.STATE_BAD.ToString()));
+            }
+
+            if (ddlState.Items.Count > 0)
+            {
+                ddlState.SelectedValue = state.ToString();
+            }
+        }
+
+        private void disableEdit()
+        {
+            txtTitle.ReadOnly = true;
+            txtAuthor.ReadOnly = true;
+            txtPosted.ReadOnly = true;
+            ddlState.Enabled = false;
+            ddlSticky.Enabled = false;
+            ddlType.Enabled = false;
+            ddlBranch.Enabled = false;
+            ddlSubject.Enabled = false;
+            ddlYear.Enabled = false;
+            txtContent.ReadOnly = true;
+            txtTag.ReadOnly = true;
+            txtPoint.ReadOnly = true;
+            txtScore.ReadOnly = true;
+            liContent.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+            txtHtmlEmbed.ReadOnly = true;
+            txtHtmlPreview.ReadOnly = true;
+        }
+
+        private void enableEdit()
+        {
+            txtTitle.ReadOnly = false;
+            txtAuthor.ReadOnly = false;
+            txtPosted.ReadOnly = false;
+            ddlState.Enabled = true;
+            ddlSticky.Enabled = true;
+            ddlType.Enabled = true;
+            ddlBranch.Enabled = true;
+            ddlSubject.Enabled = true;
+            ddlYear.Enabled = true;
+            txtContent.ReadOnly = false;
+            txtTag.ReadOnly = false;
+            txtPoint.ReadOnly = false;
+            txtScore.ReadOnly = false;
+            liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+            txtHtmlEmbed.ReadOnly = false;
+            txtHtmlPreview.ReadOnly = false;   
         }
 
         private void showContest (IEnumerable <tblContestForUniversity> lst, int totalContest, int page, string action, string key, string state)
@@ -382,6 +618,7 @@ namespace ltkt.Admin
                 }
             }
         }
+        
         private void changeViewState(string subject)
         {
             switch (subject)
@@ -433,6 +670,7 @@ namespace ltkt.Admin
                     }
             }
         }
+        
         /// <summary>
         /// use to show message information on mode SEARCH, DELETE
         /// </summary>
@@ -442,6 +680,7 @@ namespace ltkt.Admin
             liMessage.Text = infoText;
             messagePanel.Visible = true;
         }
+        
         /// <summary>
         /// use to show message error on mode EDIT, VIEW
         /// </summary>

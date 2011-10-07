@@ -8,6 +8,58 @@
         <asp:Literal ID="liTitle" runat="server"></asp:Literal>
     </title>
     <link type="text/css" href="styles.css" rel="stylesheet" />
+    
+    <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+
+    
+    <script type="text/javascript">
+	    function init() {
+	        $('#uploadContent').hide();
+	        $('#uploadSolving').hide();
+	        $('#uploadThumbnail').hide();
+	    }
+	    
+	    function uploadContent()
+	    {
+	        $('#uploadContent').show();
+	    }
+	    
+	    function uploadSolving()
+	    {
+	        $('#uploadSolving').show();
+	    }
+	    
+	    function uploadThumbnail()
+	    {
+	        $('#uploadThumbnail').show();
+	    }
+	    
+    </script>
+    
+    <script type="text/javascript">
+        function DisplayFullImage(srcImg) 
+        { 
+            txtCode = "<HTML><HEAD>" 
+            +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
+            + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage " 
+            + "onload='window.resizeTo(document.FullImage.width+50,document.FullImage.height+75)'>"  
+            + "</CENTER>"   
+            + "</BODY></HTML>"; 
+            mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 
+            mywindow.document.open(); 
+            mywindow.document.write(txtCode); 
+            mywindow.document.close();
+        }
+        
+        function openFile(file)
+        {
+            //startoff()
+	        window.open(file)
+        }
+    </script>
+    
 </asp:Content>
 <asp:Content ID="ContestForUniversityAdmin" ContentPlaceHolderID="cphAdminContent"
     runat="Server">
@@ -98,6 +150,96 @@
             </asp:Table>
         </asp:Panel>
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
+            <div id="function">
+                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton"/>
+                <hr />
+            </div>
+            <div class="form_settings">
+                <p>
+                    <span>Tiêu đề</span>
+                    <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Tác giả</span>
+                    <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Ngày gửi</span>
+                    <asp:TextBox ID="txtPosted" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Trạng thái</span>
+                    <asp:DropDownList ID="ddlState" runat="server"></asp:DropDownList>
+                </p>
+                <p>
+                    <span>Đánh dấu sticky</span>
+                    <asp:DropDownList ID="ddlSticky" runat="server"></asp:DropDownList>
+                </p>
+                <p>
+                    <span>Đề thi</span>
+                    <asp:DropDownList ID="ddlType" runat="server"></asp:DropDownList>
+                </p>
+                <p>
+                    <span>Khối thi</span>
+                    <asp:DropDownList ID="ddlBranch" runat="server"></asp:DropDownList>
+                </p>
+                <p>
+                    <span>Môn thi</span>
+                    <asp:DropDownList ID="ddlSubject" runat="server"></asp:DropDownList>
+                </p>
+                <p>
+                    <span>Đề thi năm</span>
+                    <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList>
+                </p>
+                <p>
+                    <span>Tóm tắt</span>
+                    <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Tag</span>   
+                    <asp:TextBox ID="txtTag" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Điểm bài viết</span>
+                    <asp:TextBox ID="txtPoint" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Đánh giá mức độ</span>
+                    <asp:TextBox ID="txtScore" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Tập tin nội dung:</span>
+                    <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal>
+                </p>
+                <p id="uploadContent">
+                    <span>Tải tập tin nội dung</span>
+                    <asp:FileUpload ID="fileContent" runat="server" />
+                </p>
+                <p>
+                    <span>Tập tin hướng dẫn giải:</span>
+                    <asp:Literal ID="liSolving" runat="server" Text="ad"></asp:Literal>
+                </p>
+                <p id="uploadSolving">
+                    <span>Tải tập tin hướng dẫn</span>
+                    <asp:FileUpload ID="fileSolving" runat="server" />
+                </p>
+                <p>
+                    <span>Hình thu nhỏ</span>
+                    <asp:Literal ID="liThumbnail" runat="server" Text="a"></asp:Literal>
+                </p>
+                <p id="uploadThumbnail">
+                    <span>Tải tập tin hình thu nhỏ</span>
+                    <asp:FileUpload ID="fileThumbnail" runat="server" />
+                </p>
+                <p>
+                    <span>Mã html preview</span>
+                    <asp:TextBox ID="txtHtmlPreview" runat="server" TextMode="MultiLine"></asp:TextBox>
+                </p>
+                <p>
+                    <span>Mã html embed</span>
+                    <asp:TextBox ID="txtHtmlEmbed" runat="server" TextMode="MultiLine"></asp:TextBox>
+                </p>
+            </div>
         </asp:Panel>
     </div>
 </asp:Content>

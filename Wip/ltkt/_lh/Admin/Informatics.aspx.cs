@@ -297,7 +297,7 @@ namespace ltkt.Admin
                         showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
                         return;
                     }
-                    int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                    int _id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
 
                     bool isMatch = infDAO.isState(_id, CommonConstants.STATE_UNCHECK);
                     if (infDAO.deleteInf(_id, user.Username))

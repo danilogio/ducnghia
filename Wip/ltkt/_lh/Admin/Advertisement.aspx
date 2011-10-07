@@ -109,7 +109,7 @@
                         <asp:HyperLink ID="hpkShowLoc" runat="server" NavigateUrl="Advertisement.aspx?action=search&key=loc&page=1">Theo vị trí </asp:HyperLink></li>
                 </ul>
             </div>
-             <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
+            <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
                 <asp:Literal ID="liMessage" runat="server"></asp:Literal>
             </asp:Panel>
             <asp:Table ID="NewsTable" CssClass="table" runat="server">

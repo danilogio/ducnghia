@@ -265,7 +265,7 @@ namespace ltkt
         {
             try
             {
-                tblContestForUniversity contest = ltktDAO.Contest.getContest(id);
+                tblContestForUniversity contest = contestDAO.getContest(id);
                 if (contest != null)
                 {
                     liTitle.Text = BaseServices.nullToBlank(contest.Title);

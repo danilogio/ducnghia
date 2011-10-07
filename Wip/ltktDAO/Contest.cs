@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
+using System.IO;
 
 namespace ltktDAO
 {
@@ -316,9 +317,9 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public static tblContestForUniversity getContest(int _id)
+        public tblContestForUniversity getContest(int _id)
         {
-            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.ID == _id
                                                        select record;
@@ -1321,6 +1322,72 @@ namespace ltktDAO
 
             return num;
         }
+
+        /// <summary>
+        /// delete a article of contest of university
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool deleteArticle(int id, string username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var cont = DB.tblContestForUniversities.Single(a => a.ID == id);
+
+                    File.Delete(DBHelper.strCurrentPath + cont.Location);
+                    if (File.Exists(DBHelper.strCurrentPath + cont.Solving))
+                        File.Delete(DBHelper.strCurrentPath + cont.Solving);
+
+                    DB.tblContestForUniversities.DeleteOnSubmit(cont);
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                    Convert.ToString (id),
+                                                                    CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                      Convert.ToString(id),
+                                                                      CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                log.writeLog(DBHelper.strPathLogFile, username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false;
+            }
+            return true;
+        }
+
+        public bool isState(int id, int state)
+        {
+            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                             where p.ID == id
+                                             select p;
+            if (lst.Count() > 0)
+            {
+                if (lst.ElementAt(0).State == state)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
+
+
+
+        
     }
 }
