@@ -121,7 +121,7 @@ namespace ltkt.Admin
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_LINK_ERROR);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_E_LINK_INVALID);
                 log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message);
                 //Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_LINK_ERROR;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_USERS

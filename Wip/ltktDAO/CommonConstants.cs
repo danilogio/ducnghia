@@ -278,6 +278,10 @@ namespace ltktDAO
             /// list article
             /// </summary>
             public const string TXT_LIST_ARTICLE = "Danh sách bài viết";
+            /// <summary>
+            /// reason
+            /// </summary>
+            public const string TXT_REASON = "Lý do";
             
 
         #endregion
@@ -928,9 +932,7 @@ namespace ltktDAO
         /// <summary>
         /// Message when link error
         /// </summary>
-        public const string MSG_LINK_ERROR = "Đường dẫn không đúng, xin vui lòng kiểm tra lại";
-
-        
+        public const string MSG_E_LINK_INVALID = "Đường dẫn không đúng, xin vui lòng kiểm tra lại";
         #endregion
 
         #region Administrator Function (AF)
@@ -938,87 +940,109 @@ namespace ltktDAO
         /// Bật/Tắt thông báo
         /// </summary>
         public const string AF_ANNOUCEMENT = "ANNOUCEMENT";
+
+        public const string AF_ANNOUCEMENT_NAME = "Thông báo";
         /// <summary>
         /// Bật/Tắt chức năng upload
         /// </summary>
         public const string AF_UPLOAD = "UPLOAD";
+        public const string AF_UPLOAD_NAME = "Upload";
         /// <summary>
         /// Bật/Tắt chức năng đăng ký
         /// </summary>
         public const string AF_REGISTRY = "REGISTRY";
+        public const string AF_REGISTRY_NAME = "Đăng ký thành viên";
         /// <summary>
         /// Bật/tắt chức năng login
         /// </summary>
         public const string AF_LOGIN = "LOGIN";
+        public const string AF_LOGIN_NAME = "Đăng nhập thành viên";
         /// <summary>
         /// Bật/Tắt chức năng download
         /// </summary>
         public const string AF_DOWNLOAD = "DOWNLOAD";
+        public const string AF_DOWNLOAD_NAME = "Download";
         /// <summary>
         /// Bật/Tắt chức năng Comment
         /// </summary>
         public const string AF_COMMENT = "COMMENT";
+        public const string AF_COMMENT_NAME = "Comment";
         /// <summary>
         /// Bật/Tắt chức năng Comment không cần đăng nhập
         /// </summary>
         public const string AF_COMMENT_EASY = "COMMENT_EASY";
+        public const string AF_COMMENT_EASY_NAME = "Comment không cần duyệt";
         /// <summary>
         /// Bật/Tắt chức năng đăng ký quảng cáo
         /// </summary>
         public const string AF_ADS = "ADS";
+        public const string AF_ADS_NAME = " Đăng ký Quảng cáo";
         /// <summary>
         /// Bật/Tắt chức năng upload tại trang LTDH
         /// </summary>
         public const string AF_UPLOAD_UNI = "UPLOAD_UNI";
+        public const string AF_UPLOAD_UNI_NAME = "Upload trang LTĐH";
         /// <summary>
         /// Bật/Tắt chức năng Download tại trang LTDH
         /// </summary>
         public const string AF_DOWNLOAD_UNI = "DOWNLOAD_UNI";
+        public const string AF_DOWNLOAD_UNI_NAME = "Download trang LTĐH";
         /// <summary>
         /// Bật/Tắt chức năng Upload tiếng anh
         /// </summary>
         public const string AF_UPLOAD_EL = "UPLOAD_EL";
+        public const string AF_UPLOAD_EL_NAME = "Upload trang Anh văn";
         /// <summary>
         /// Bật/Tắt chức năng Download Tiếng anh
         /// </summary>
         public const string AF_DOWNLOAD_EL = "DOWNLOAD_EL";
+        public const string AF_DOWNLOAD_EL_NAME = "Download trang Anh văn";
         /// <summary>
         /// Bật/Tắt chức năng Upload IT
         /// </summary>
         public const string AF_UPLOAD_IT = "UPLOAD_IT";
+        public const string AF_UPLOAD_IT_NAME = "Upload trang Tin học";
         /// <summary>
         /// Bật/Tắt chức năng Download IT
         /// </summary>
         public const string AF_DOWNLOAD_IT = "DOWNLOAD_IT";
+        public const string AF_DOWNLOAD_IT_NAME = "Download trang Tin học";
         /// <summary>
         /// Bật/Tắt chức năng Xem tin tức
         /// </summary>
         public const string AF_NEWS_VIEW = "NEWS_VIEW";
+        public const string AF_NEWS_VIEW_NAME = "Xem tin tức";
         /// <summary>
         /// Bật/Tắt chức năng Post tin tức
         /// </summary>
         public const string AF_NEWS_POST = "NEWS_POST";
+        public const string AF_NEWS_POST_NAME = "Gửi tin tức";
         /// <summary>
         /// Bật/Tắt chức năng Search
         /// </summary>
         public const string AF_SEARCH = "SEARCH";
+        public const string AF_SEARCH_NAME = "Tìm kiếm";
         /// <summary>
         /// Bật/Tắt chức năng Liên hệ
         /// </summary>
         public const string AF_CONTACT = "CONTACT";
+        public const string AF_CONTACT_NAME = "Liên hệ";
         /// <summary>
         /// Bật/Tắt chế độ Underconstruction
         /// </summary>
         public const string AF_UNDERCONTRUCTION = "UNDERCONS";
+        public const string AF_UNDERCONTRUCTION_NAME = "Bật/tắt website";
         /// <summary>
         /// Bật/Tắt chức năng gửi email
         /// </summary>
         public const string AF_EMAIL_SEND = "EMAIL_SEND";
+        public const string AF_EMAIL_SEND_NAME = "Gửi email";
 
         /// <summary>
         /// Bật/tắt xem trước
         /// </summary>
         public const string AF_PREVIEW_ARTICLE = "PREVIEW_ARTICLE";
+        public const string AF_PREVIEW_ARTICLE_NAME = "Xem trước";
         #endregion
 
         #region Statistic Function (SF)

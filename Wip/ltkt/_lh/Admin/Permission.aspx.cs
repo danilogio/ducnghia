@@ -95,7 +95,7 @@ namespace ltkt.Admin
             }
             catch (Exception ex)
             {
-                log.writeLog(DBHelper.strPathLogFile, userAdmin.Username, CommonConstants.MSG_LINK_ERROR);
+                log.writeLog(DBHelper.strPathLogFile, userAdmin.Username, CommonConstants.MSG_E_LINK_INVALID);
                 log.writeLog(DBHelper.strPathLogFile, userAdmin.Username, ex.Message);
 
                 Response.Redirect(CommonConstants.PAGE_ADMIN_PERMISSION);
