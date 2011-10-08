@@ -135,6 +135,35 @@ namespace ltktDAO
         /// </summary>
         public const string FOLDER_IMG_ADS = "imagesAd";
 
+        public const string FOLDER_DATA = "Data";
+
+        public const string FOLDER_UNI = "Data/University";
+
+        public const string FOLDER_EL = "Data/English";
+
+        public const string FOLDER_IT = "Data/Informatics";
+
+        public const string FOLDER_MATH = "ToanHoc";
+
+        public const string FOLDER_PHYS = "VatLy";
+
+        public const string FOLDER_CHEM = "HoaHoc";
+
+        public const string FOLDER_BIO = "SinhHoc";
+
+        public const string FOLDER_LIT = "VanHoc";
+
+        public const string FOLDER_HIS = "LichSu";
+
+        public const string FOLDER_GEO = "DiaLy";
+
+        public const string FOLDER_ENG = "AnhVan";
+
+        public const string FOLDER_OTH = "Other";
+
+        public const string FOLDER_DEFAULT_IMG = "DefaultImages";
+
+
         /// <summary>
         /// user system
         /// </summary>
@@ -1503,6 +1532,11 @@ namespace ltktDAO
         /// </summary>
         public const string SES_PERMISSION_EDIT = "permission_Edit";
 
+        /// <summary>
+        /// Session for edit contest
+        /// </summary>
+        public const string SES_EDIT_CONTEST = "editContest";
+
         #endregion
 
         #region Request Constants (REQ)
@@ -1619,50 +1653,127 @@ namespace ltktDAO
             /// </summary>
             public const string PARAM_EL_CLASS_1_TO_9 = "1-9";
             /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_1_TO_9_NAME = "Lớp 1-9";
+            /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_10 = "10";
+            /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_10_NAME = "Lớp 10";
+            /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_11 = "11";
+            /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_11_NAME = "Lớp 11";
+            /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_12 = "12";
+            /// <summary>
+            /// Class 1 to 9
+            /// </summary>
+            public const string PARAM_EL_CLASS_12_NAME = "Lớp 12";
+            /// <summary>
             /// Mathematics and Economic
             /// </summary>
             public const string PARAM_EL_MATH_ECO = "math-eco";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_MATH_ECO_NAME = "Toán - Kinh tế";
             /// <summary>
             /// Chemical - Biography - Material
             /// </summary>
             public const string PARAM_EL_CHEM_BIO_MAT = "chem-bio-mat";
             /// <summary>
+            /// Chemical - Biography - Material
+            /// </summary>
+            public const string PARAM_EL_CHEM_BIO_MAT_NAME = "Hóa - Sinh - KHVL";
+            /// <summary>
             /// Physical - Telecom - IT
             /// </summary>
             public const string PARAM_EL_PHY_TELE_IT = "phy-tele-it";
+            /// <summary>
+            /// Physical - Telecom - IT
+            /// </summary>
+            public const string PARAM_EL_PHY_TELE_IT_NAME = "Lý - Viễn thông - CNTT";
             /// <summary>
             /// other major
             /// </summary>
             public const string PARAM_EL_OTHER_MJ = "other-mj";
             /// <summary>
+            /// other major
+            /// </summary>
+            public const string PARAM_EL_OTHER_MJ_NAME = "Khác";
+            /// <summary>
             /// TOEFL
             /// </summary>
             public const string PARAM_EL_TOEFL = "toefl";
+            /// <summary>
+            /// TOEFL
+            /// </summary>
+            public const string PARAM_EL_TOEFL_NAME = "TOEFL";
             /// <summary>
             /// TOEIC
             /// </summary>
             public const string PARAM_EL_TOEIC = "toeic";
             /// <summary>
+            /// TOEIC
+            /// </summary>
+            public const string PARAM_EL_TOEIC_NAME = "TOEIC";
+            /// <summary>
             /// IELTS
             /// </summary>
             public const string PARAM_EL_IELTS = "ielts";
+            /// <summary>
+            /// IELTS
+            /// </summary>
+            public const string PARAM_EL_IELTS_NAME = "IELTS";
             /// <summary>
             /// A-B-C
             /// </summary>
             public const string PARAM_EL_ABC = "abc";
             /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_ABC_NAME = "A-B-C";
+            
+        
+            /// <summary>
             /// THVP
             /// </summary>
             public const string PARAM_IT_OFFICE = "off";
+
+            /// <summary>
+            /// THVP
+            /// </summary>
+            public const string PARAM_IT_OFFICE_NAME = "Văn phòng";
+
+            /// <summary>
+            /// THVP
+            /// </summary>
+            public const string PARAM_IT_TIP = "tip";
+
+            /// <summary>
+            /// THVP
+            /// </summary>
+            public const string PARAM_IT_TIP_NAME = "Thủ thuật";
             
             /// <summary>
             /// Thủ thuật căn bản
             /// </summary>
-            public const string PARAM_IT_SIMPLE = "simp";
+            public const string PARAM_IT_TIP_SIMPLE = "simp";
             /// <summary>
             /// Thủ thuật nâng cao
             /// </summary>
-            public const string PARAM_IT_ADVANCE = "adv";
+            public const string PARAM_IT_TIP_ADVANCE = "adv";
             
             /// <summary>
             /// office word

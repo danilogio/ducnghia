@@ -18,19 +18,48 @@
 	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
 
 	            if (selectedIndex == 0) {
-	                //$('#divLessonType').hide();
 	                $('#divContest').show();
+	                $('#divEnglish').hide();
+	                $('#divInf').hide();
 	            }
-	            else {
-	                //$('#divLessonType').show();
+	            else if (selectedIndex == 1){
+	                $('#divInf').show();
 	                $('#divContest').hide();
+	                $('#divEnglish').hide();
+	            } 
+	            else if (selectedIndex == 2){
+	                $('#divEnglish').show();
+	                $('#divContest').hide();
+	                $('#divInf').hide();
+	            }
+	        });
+	        
+	        $('#<%= ddlEnglishType.ClientID %>').change(function(e) {
+	            var selectedIndex = $('#<%= ddlEnglishType.ClientID%>').get(0).selectedIndex;
+
+	            if (selectedIndex == 0) {
+	                $('#<%= ddlEnglishCommon.ClientID %>').show();
+	                $('#<%= ddlEnglishMajor.ClientID %>').hide();
+	                $('#<%= ddlEnglishCert.ClientID %>').hide();
+	            }
+	            else if (selectedIndex == 1){
+	                $('#<%= ddlEnglishMajor.ClientID %>').show();
+	                $('#<%= ddlEnglishCommon.ClientID %>').hide();
+	                $('#<%= ddlEnglishCert.ClientID %>').hide();
+	            } 
+	            else if (selectedIndex == 2){
+	                $('#<%= ddlEnglishCert.ClientID %>').show();
+	                $('#<%= ddlEnglishCommon.ClientID %>').hide();
+	                $('#<%= ddlEnglishMajor.ClientID %>').hide();
 	            }
 	        });
 	    });
 
 	    function init() {
 	        $('#<%= ddlSubject.ClientID%>').val(0);
-	        //$('#divLessonType').hide();
+	        $('#divContest').show();
+	        $('#divEnglish').hide();
+	        $('#divInf').hide();
 	    }
 	    
 //	    function checkFileExtension(elem) {
@@ -57,31 +86,6 @@
 
 </asp:Content>
 <asp:Content ID="Upload" ContentPlaceHolderID="cphContent" runat="Server">
-    <%--<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-
-    <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
-
-    <script type="text/javascript">
-	    $(document).ready(function() {
-	        $('#<%= ddlSubject.ClientID %>').change(function(e) {
-	            var selectedIndex = $('#<%= ddlSubject.ClientID%>').get(0).selectedIndex;
-
-	            if (selectedIndex == 0) {
-	                $('#divLessonType').hide();
-	                $('#divContest').show();
-	            }
-	            else {
-	                $('#divLessonType').show();
-	                $('#divContest').hide();
-	            }
-	        });
-	    });
-
-	    function init() {
-	        $('#<%= ddlSubject.ClientID%>').val(0);
-	        $('#divLessonType').hide();
-	    }
-    </script>--%>
     <div id="divContact" class="block_text">
         <h2>
             Gửi bài</h2>
@@ -89,7 +93,7 @@
         <asp:Panel ID="message" runat="server" Visible="false">
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
-        <asp:Panel ID="upload" runat="server">
+        <asp:Panel ID="uploadPanel" runat="server">
             <div class="form_settings">
                 <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
                 <p>
@@ -138,30 +142,31 @@
                             <asp:ListItem Text="Cao đẳng" Value="true"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:DropDownList ID="ddlSub" runat="server" Width="15%">
-                            <%--<asp:ListItem Text="khối A" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="khối B" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="khối C" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="khối D" Value="3"></asp:ListItem>
-                            <asp:ListItem Text="khối khác" Value="4"></asp:ListItem>--%>
                         </asp:DropDownList>
                         năm
                         <asp:DropDownList ID="ddlYear" runat="server" Width="15%">
-                            <%--<asp:ListItem Text="2002" Value="2002"></asp:ListItem>
-                            <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
-                            <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
-                            <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
-                            <asp:ListItem Text="2006" Value="2006"></asp:ListItem>
-                            <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
-                            <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
-                            <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
-                            <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
-                            <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
-                            <asp:ListItem Text="2012" Value="2012"></asp:ListItem>--%>
                         </asp:DropDownList>
                     </p>
                     <p id="Solving">
                         <span>Hướng dẫn giải (nếu có):</span><asp:FileUpload ID="fileSolving" runat="server"
                             CssClass="contact"></asp:FileUpload></p>
+                </div>
+                <div id="divEnglish">
+                    <p>
+                        <span>Anh văn</span>
+                        <asp:DropDownList ID="ddlEnglishType" runat="server" Width="20%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishCommon" runat="server" Width="30%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishMajor" runat="server" Width="30%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishCert" runat="server" Width="30%"></asp:DropDownList>
+                    </p>
+                </div>
+                <div id="divInf">
+                    <p>
+                        <span>Tin học</span>
+                        <asp:DropDownList ID="ddlInfType" runat="server" Width="20%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlInfOffice" runat="server" Width="30%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlInfTip" runat="server" Width="30%"></asp:DropDownList>
+                    </p>
                 </div>
                 <%--Chung--%>
                 <p>
@@ -172,10 +177,12 @@
                         <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6Le4WccSAAAAAPNrmUGzjeAUMyH_iXso4kipQqrQ "
                             PrivateKey="6Le4WccSAAAAAPovqPf4ymPe2E4dI9k7JD3qhnan" />
                     </div>
-                </p>
-                <p style="padding-top: 15px">
-                    <span>&nbsp;</span><asp:Button ID="btnSubmitUpload" runat="server" Text="Gửi" CssClass="submit"
-                        OnClick="btnSubmitUpload_Click" />
+                    <p>
+                    </p>
+                    <p style="padding-top: 15px">
+                        <span>&nbsp;</span><asp:Button ID="btnSubmitUpload" runat="server" CssClass="submit" 
+                            OnClick="btnSubmitUpload_Click" Text="Gửi" />
+                    </p>
                 </p>
             </div>
         </asp:Panel>

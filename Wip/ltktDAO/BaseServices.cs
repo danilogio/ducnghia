@@ -509,8 +509,8 @@ namespace ltktDAO
         {
             if (File.Exists(fileName))
             {
-                return Path.GetFileNameWithoutExtension(fileName)
-                              + "_2" + Path.GetExtension(fileName);
+                string newFileName = fileName.Substring(0, fileName.LastIndexOf("."));
+                return newFileName + "_2" + Path.GetExtension(fileName);
             }
 
             return fileName;

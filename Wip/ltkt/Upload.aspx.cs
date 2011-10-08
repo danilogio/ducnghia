@@ -27,6 +27,8 @@ namespace ltkt
                                + CommonConstants.SPACE + CommonConstants.HLINE
                                + CommonConstants.SPACE
                                + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+            bool isOK = true;
             try
             {
                 //if (Session[CommonConstants.SES_USER] == null)
@@ -41,6 +43,23 @@ namespace ltkt
                     liFileSize.Text = "(<=";
                     liFileSize.Text += control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
                     liFileSize.Text += "MB)";
+
+                    if (ddlEnglishType.Items.Count == 0)
+                    {
+                        ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_COMMON_NAME, CommonConstants.PARAM_EL_COMMON));
+                        ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_MAJOR_NAME, CommonConstants.PARAM_EL_MAJOR));
+                        ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_CERT_NAME, CommonConstants.PARAM_EL_CERT));
+                    }
+
+                    initEnglishCommon();
+                    initEnglishMajor();
+                    initEnglishCert();
+
+                    if (ddlInfType.Items.Count == 0)
+                    {
+                        ddlInfType.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_NAME, CommonConstants.PARAM_IT_OFFICE));
+                        ddlInfType.Items.Add(new ListItem(CommonConstants.PARAM_IT_TIP_NAME, CommonConstants.PARAM_IT_TIP));
+                    }
 
                     if (ddlSub.Items.Count == 0)
                     {
@@ -82,6 +101,10 @@ namespace ltkt
                         Response.End();
                     }
                 }
+                else
+                {
+                    isOK = false;
+                }
             }
             catch (Exception ex)
             {
@@ -97,6 +120,9 @@ namespace ltkt
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                 Response.Redirect(CommonConstants.PAGE_LOGIN);
             }
+
+            if (!isOK)
+                Response.Redirect(CommonConstants.PAGE_LOGIN);
         }
 
         public void btnSubmitUpload_Click(object sender, EventArgs e)
@@ -106,7 +132,7 @@ namespace ltkt
             {
                 if (fileContent.HasFile)
                 {
-                    string folder = "Data";
+                    string folder = CommonConstants.BLANK;
                     // 0 - ltdh
                     // 1 - english
                     // 2 - tin học
@@ -115,28 +141,28 @@ namespace ltkt
                     {
                         case 0:
                             {
-                                folder += "\\University\\";
+                                folder = CommonConstants.FOLDER_UNI;
                                 folder += Convert.ToString(ddlYear.SelectedValue);
+
                                 break;
                             }
                         case 1:
                             {
-                                folder += "\\Informatics\\";
+                                folder = CommonConstants.FOLDER_IT;
                                 folder += Convert.ToString(DateTime.Now.Year);
                                 break;
                             }
                         case 2:
                             {
-                                folder += "\\English\\";
+                                folder = CommonConstants.FOLDER_EL;
                                 folder += Convert.ToString(DateTime.Now.Year);
                                 break;
                             }
                     }
 
-                    string rootFolder = Server.MapPath("~") + "\\" + folder + "\\";
-                    string newFileName = bs.fileNameToSave(fileContent.FileName);
-                    string filename = rootFolder + newFileName;
-                    string fileSave = folder + "\\" + newFileName;
+                    string rootFolder = Server.MapPath("~") + "/" + folder + "/";
+                    string filename = bs.fileNameToSave(rootFolder + fileContent.FileName);
+                    string fileSave = filename.Substring(filename.LastIndexOf(CommonConstants.FOLDER_DATA));
                     string fileSolvingSave = CommonConstants.BLANK;
                     // save file
                     if (!Directory.Exists(rootFolder))
@@ -161,7 +187,7 @@ namespace ltkt
                                                                         fileSave,
                                                                         txtboxTag.Text,
                                                                         fileSolvingSave);
-                                    
+
                                     break;
                                 }
                             case 1:
@@ -201,18 +227,18 @@ namespace ltkt
                             && bs.checkFileType(fileSolving.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
                             && fileSolving.PostedFile.ContentLength <= maxSize)
                         {
-                            fileSolving.SaveAs(Server.MapPath("~") + "\\" + folder + "\\" +
-                                Path.GetFileNameWithoutExtension(newFileName) +
-                                "_solved" + Path.GetExtension(fileSolving.FileName));
+                            //fileSolving.SaveAs(Server.MapPath("~") + "/" + folder + "/" +
+                            //    Path.GetFileNameWithoutExtension(newFileName) +
+                            //    "_solved" + Path.GetExtension(fileSolving.FileName));
 
-                            fileSolvingSave = folder + "\\" +
-                                Path.GetFileNameWithoutExtension(fileContent.FileName) +
-                                "_solved" + Path.GetExtension(fileSolving.FileName);
+                            //fileSolvingSave = folder + "/" +
+                            //    Path.GetFileNameWithoutExtension(fileContent.FileName) +
+                            //    "_solved" + Path.GetExtension(fileSolving.FileName);
                         }
                         else
                             throw new Exception(CommonConstants.MSG_E_UPLOAD);
 
-                        upload.Visible = false;
+                        uploadPanel.Visible = false;
                         message.Visible = true;
                         liMessage.Text = CommonConstants.MSG_I_UPLOAD_SUCCESSFUL;
                         liMessage.Text += CommonConstants.MSG_I_THANKS_FOR_UPLOADING;
@@ -221,7 +247,7 @@ namespace ltkt
                     }
                     catch (Exception ex)
                     {
-                        upload.Visible = false;
+                        uploadPanel.Visible = false;
                         message.Visible = true;
                         liMessage.Text = CommonConstants.MSG_I_THANKS_FOR_UPLOADING;
                         liMessage.Text += "<br />";
@@ -247,6 +273,44 @@ namespace ltkt
             }
         }
 
-        
+
+
+        private void initEnglishCommon()
+        {
+            if (ddlEnglishCommon.Items.Count == 0)
+            {
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_1_TO_9_NAME, CommonConstants.PARAM_EL_CLASS_1_TO_9));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_10_NAME, CommonConstants.PARAM_EL_CLASS_10));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_11_NAME, CommonConstants.PARAM_EL_CLASS_11));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_12_NAME, CommonConstants.PARAM_EL_CLASS_12));
+            }
+        }
+
+        private void initEnglishMajor()
+        {
+            if (ddlEnglishMajor.Items.Count == 0)
+            {
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_MATH_ECO_NAME, CommonConstants.PARAM_EL_MATH_ECO));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_CHEM_BIO_MAT_NAME, CommonConstants.PARAM_EL_CHEM_BIO_MAT));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_PHY_TELE_IT_NAME, CommonConstants.PARAM_EL_PHY_TELE_IT));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_OTHER_MJ_NAME, CommonConstants.PARAM_EL_OTHER_MJ));
+            }
+        }
+
+        private void initEnglishCert()
+        {
+            if (ddlEnglishCert.Items.Count == 0)
+            {
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_TOEFL_NAME, CommonConstants.PARAM_EL_TOEFL));
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_TOEIC_NAME, CommonConstants.PARAM_EL_TOEIC));
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_IELTS_NAME, CommonConstants.PARAM_EL_IELTS));
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_ABC_NAME, CommonConstants.PARAM_EL_ABC));
+            }
+        }
+
+        protected void ddlInfType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -531,7 +531,6 @@ namespace ltkt.Admin
 
             try
             {
-
                 tblAdvertisement Ads = (tblAdvertisement)Session[CommonConstants.SES_EDIT_ADS];
 
                 string _company = txtCompany.Text;

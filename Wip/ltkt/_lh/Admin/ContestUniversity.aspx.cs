@@ -15,6 +15,7 @@ namespace ltkt.Admin
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
+        ltktDAO.EventLog log = new EventLog();
 
         public const int NoOfContestPerPage = 8;
 
@@ -37,7 +38,7 @@ namespace ltkt.Admin
 
                     liTableHeader.Text = CommonConstants.TXT_LIST_ARTICLE;
 
-                    
+
                     pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
                 }
@@ -148,7 +149,7 @@ namespace ltkt.Admin
                         txt += "(" + totalRecord + ")";
                         hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
                     }
-                    
+
                 }
                 else //key != ALL
                 {
@@ -159,9 +160,9 @@ namespace ltkt.Admin
                     }
                     //change state link
                     hpkShowAllState.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_CONTEST_URL,
-                                                                                   CommonConstants.ACT_SEARCH, 
-                                                                                   key, 
-                                                                                   CommonConstants.ALL, 
+                                                                                   CommonConstants.ACT_SEARCH,
+                                                                                   key,
+                                                                                   CommonConstants.ALL,
                                                                                    CommonConstants.CONST_ONE);
                     hpkShowChecked.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_CONTEST_URL,
                                                                                    CommonConstants.ACT_SEARCH,
@@ -184,7 +185,7 @@ namespace ltkt.Admin
                         lst = contestDAO.fetchArticleList(sub.Trim(), (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
                         totalRecord = contestDAO.countArticleBySubject(sub.Trim());
 
-                        
+
                         hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
                         hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
                         hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
@@ -195,9 +196,9 @@ namespace ltkt.Admin
                     else if (state == CommonConstants.STATE_UNCHECK.ToString())//key != ALL and state = UNCHECK
                     {
                         lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_UNCHECK, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(),CommonConstants.STATE_UNCHECK);
+                        totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK);
                         hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
-                       
+
                         hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
                         hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
                         string txt = hpkShowUncheck.Text;
@@ -229,9 +230,9 @@ namespace ltkt.Admin
                     }
                     else
                     {
-                        
+
                     }
-                   
+
                 }
                 //show data
                 bool isOK = false;
@@ -268,7 +269,7 @@ namespace ltkt.Admin
                     return;
                 }
                 int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
-                
+
                 viewPanel.Visible = false;
                 detailPanel.Visible = true;
                 messagePanel.Visible = false;
@@ -277,7 +278,7 @@ namespace ltkt.Admin
                 {
                     showContestDetails(_id, action);
                 }
-                
+
                 if (action == CommonConstants.ACT_VIEW)
                 {
                     btnEdit.Visible = false;
@@ -296,7 +297,7 @@ namespace ltkt.Admin
                     showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
                     return;
                 }
-                
+
                 int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
                 bool isMatch = contestDAO.isState(id, CommonConstants.STATE_UNCHECK);
                 if (contestDAO.deleteArticle(id, user.Username))
@@ -330,8 +331,8 @@ namespace ltkt.Admin
                 showBranch(cont.Branch);
                 showSubject(cont.Subject);
                 showYear(cont.Year);
-                txtContent.Text = cont.Contents.Trim();
-                txtTag.Text = cont.Tag.Trim();
+                txtContent.Text = BaseServices.nullToBlank(cont.Contents);
+                txtTag.Text = BaseServices.nullToBlank(cont.Tag);
                 txtPoint.Text = Convert.ToString(cont.Point);
                 txtScore.Text = Convert.ToString(cont.Score);
                 showFileContent(cont.Location);
@@ -348,11 +349,13 @@ namespace ltkt.Admin
 
             //enable or disable for edit
             if (action == CommonConstants.ACT_VIEW)
-            {                
+            {
+                Session[CommonConstants.SES_EDIT_CONTEST] = null;
                 disableEdit();
             }
             else if (action == CommonConstants.ACT_EDIT)
             {
+                Session[CommonConstants.SES_EDIT_CONTEST] = cont;
                 enableEdit();
             }
         }
@@ -361,7 +364,7 @@ namespace ltkt.Admin
         {
             if (File.Exists(DBHelper.strCurrentPath + location))
             {
-                liContent.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('" + location.Replace("\"","/") + "')\"/>";
+                liContent.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
             }
             else
                 liContent.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
@@ -369,10 +372,22 @@ namespace ltkt.Admin
 
         private void showFileSolving(string location)
         {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liSolving.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
+            }
+            else
+                liSolving.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
         }
 
         private void showThumbnail(string location)
         {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liThumbnail.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + location.Replace("\\", "/") + "')\"/>";
+            }
+            else
+                liThumbnail.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
         }
 
         private void showYear(int year)
@@ -473,6 +488,8 @@ namespace ltkt.Admin
             txtPoint.ReadOnly = true;
             txtScore.ReadOnly = true;
             liContent.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+            liSolving.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải tập tin hướng dẫn\" class=\"formbutton\" onclick=\"uploadSolving()\" />";
+            liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
             txtHtmlEmbed.ReadOnly = true;
             txtHtmlPreview.ReadOnly = true;
         }
@@ -480,8 +497,8 @@ namespace ltkt.Admin
         private void enableEdit()
         {
             txtTitle.ReadOnly = false;
-            txtAuthor.ReadOnly = false;
-            txtPosted.ReadOnly = false;
+            //txtAuthor.ReadOnly = false;
+            //txtPosted.ReadOnly = false;
             ddlState.Enabled = true;
             ddlSticky.Enabled = true;
             ddlType.Enabled = true;
@@ -490,14 +507,16 @@ namespace ltkt.Admin
             ddlYear.Enabled = true;
             txtContent.ReadOnly = false;
             txtTag.ReadOnly = false;
-            txtPoint.ReadOnly = false;
+            //txtPoint.ReadOnly = false;
             txtScore.ReadOnly = false;
             liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+            liSolving.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin hướng dẫn\" class=\"formbutton\" onclick=\"uploadSolving()\" />";
+            liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
             txtHtmlEmbed.ReadOnly = false;
-            txtHtmlPreview.ReadOnly = false;   
+            txtHtmlPreview.ReadOnly = false;
         }
 
-        private void showContest (IEnumerable <tblContestForUniversity> lst, int totalContest, int page, string action, string key, string state)
+        private void showContest(IEnumerable<tblContestForUniversity> lst, int totalContest, int page, string action, string key, string state)
         {
             //int totalContest = lst.Count();
             // Computing total pages
@@ -528,7 +547,7 @@ namespace ltkt.Admin
                 titleCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
                                                                   CommonConstants.PAGE_ADMIN_UNIVERSITY,
                                                                   CommonConstants.ACT_VIEW,
-                                                                  Convert.ToString (contest.ID),
+                                                                  Convert.ToString(contest.ID),
                                                                   contest.Title);
 
                 TableCell postedCell = new TableCell();
@@ -557,7 +576,7 @@ namespace ltkt.Admin
                 actionCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
                                                                      CommonConstants.PAGE_ADMIN_UNIVERSITY,
                                                                      CommonConstants.ACT_EDIT,
-                                                                     Convert.ToString (contest.ID),
+                                                                     Convert.ToString(contest.ID),
                                                                      CommonConstants.HTML_EDIT_ADMIN);
 
                 actionCell.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
@@ -575,7 +594,7 @@ namespace ltkt.Admin
                 contestRow.Cells.Add(authorCell);
                 contestRow.Cells.Add(stateCell);
                 contestRow.Cells.Add(actionCell);
-                
+
                 ContestTable.Rows.AddAt(2 + idx, contestRow);
             }
 
@@ -599,7 +618,7 @@ namespace ltkt.Admin
                 param += CommonConstants.AND
                        + CommonConstants.REQ_PAGE
                        + CommonConstants.EQUAL;
-                
+
 
                 if (page > 1)
                 {
@@ -618,7 +637,7 @@ namespace ltkt.Admin
                 }
             }
         }
-        
+
         private void changeViewState(string subject)
         {
             switch (subject)
@@ -670,7 +689,7 @@ namespace ltkt.Admin
                     }
             }
         }
-        
+
         /// <summary>
         /// use to show message information on mode SEARCH, DELETE
         /// </summary>
@@ -680,7 +699,7 @@ namespace ltkt.Admin
             liMessage.Text = infoText;
             messagePanel.Visible = true;
         }
-        
+
         /// <summary>
         /// use to show message error on mode EDIT, VIEW
         /// </summary>
@@ -689,6 +708,278 @@ namespace ltkt.Admin
         {
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
+        }
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tblContestForUniversity cont = (tblContestForUniversity)Session[CommonConstants.SES_EDIT_CONTEST];
+
+                string _title = txtTitle.Text;
+                int _state = int.Parse(ddlState.SelectedValue);
+                bool _isSticky = bool.Parse(ddlSticky.SelectedValue);
+                bool _isUniversity = bool.Parse(ddlType.SelectedValue);
+                int _branch = int.Parse(ddlBranch.SelectedValue);
+                string _sub = ddlSubject.SelectedValue;
+                int _year = int.Parse(ddlYear.SelectedValue);
+                string _content = txtContent.Text;
+                string _tag = txtTag.Text;
+                int _score = int.Parse(txtScore.Text);
+                string _htmlPreview = txtHtmlPreview.Text;
+                string _htmlEmbed = txtHtmlEmbed.Text;
+                string _fileContentSave = BaseServices.nullToBlank(cont.Location);
+                string _fileSolvingSave = BaseServices.nullToBlank(cont.Solving);
+                string _fileThumbnailSave = BaseServices.nullToBlank(cont.Thumbnail);
+                
+                string _fileContent = CommonConstants.BLANK;
+                string _fileSolving = CommonConstants.BLANK;
+                string _fileThumbnail = CommonConstants.BLANK;
+
+                string rootFolder = Server.MapPath("~") + "/" + CommonConstants.FOLDER_UNI + "/" + _year;
+                switch (_sub)
+                {
+                    case CommonConstants.SUB_MATHEMATICS_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_MATH;
+                        break;
+                    case CommonConstants.SUB_PHYSICAL_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_PHYS;
+                        break;
+                    case CommonConstants.SUB_CHEMICAL_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_CHEM;
+                        break;
+                    case CommonConstants.SUB_BIOGRAPHY_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_BIO;
+                        break;
+                    case CommonConstants.SUB_LITERATURE_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_LIT;
+                        break;
+                    case CommonConstants.SUB_HISTORY_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_HIS;
+                        break;
+                    case CommonConstants.SUB_GEOGRAPHY_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_GEO;
+                        break;
+                    case CommonConstants.SUB_ENGLISH_CODE:
+                        rootFolder += "/" + CommonConstants.FOLDER_ENG;
+                        break;
+                    default:
+                        rootFolder += "/" + CommonConstants.FOLDER_OTH;
+                        break;
+                }
+
+                bool _fileContentGood = false;
+                bool _fileSolvingGood = false;
+                bool _fileThumbnailGood = false;
+                //string newFileName = CommonConstants.BLANK;
+                string fileTypes = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+                
+                //size in MB
+                int fileSizeMax = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE); ;
+                fileSizeMax = 1024 * 1024 * fileSizeMax;
+
+                if (fileContent.HasFile)
+                {
+                    //check file existed: keep both
+                    _fileContent = bs.fileNameToSave(rootFolder + "/" + fileContent.FileName);
+                    //filename = newFileName;
+
+                    //check filetype
+                    // fileTypes = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+                    if (!bs.checkFileType(fileContent.FileName, fileTypes))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                        return;
+                    }
+                    //check filesize max (MB)
+                    //fileSizeMax = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
+                    //fileSizeMax = 1024 * 1024* fileSizeMax;
+                    if (fileContent.PostedFile.ContentLength > fileSizeMax)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+                        return;
+                    }
+                    _fileContentSave = _fileContent.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    _fileContentGood = true;
+                }
+                else
+                {
+                    if (_fileContentSave.LastIndexOf("/") >0)
+                        _fileContent = rootFolder + _fileContentSave.Substring(_fileContentSave.LastIndexOf("/"));
+                    else
+                        _fileContent = rootFolder + _fileContentSave.Substring(_fileContentSave.LastIndexOf("\\"));
+                    
+                    if (!File.Exists(_fileContent))
+                    {
+                        string src = Server.MapPath("~") + "/" + _fileContentSave;
+                        File.Copy(src, _fileContent);
+                        File.Delete(src);
+                        _fileContentSave = _fileContent.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    }
+                }
+
+                if (fileSolving.HasFile)
+                {
+                    //check file existed: keep both
+                    _fileSolving = Path.GetFileNameWithoutExtension(_fileContentSave) +
+                                "_solved" + Path.GetExtension(fileSolving.FileName);
+
+                    _fileSolving = bs.fileNameToSave(rootFolder + "/" + _fileSolving);
+                    //filename = rootFolder + newFileName;
+
+                    //check filetype
+                    // fileTypes = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+                    if (!bs.checkFileType(fileSolving.FileName, fileTypes))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                        return;
+                    }
+                    //check filesize max (MB)
+                    //fileSizeMax = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
+                    //fileSizeMax = 1024 * 1024 * fileSizeMax;
+                    if (fileSolving.PostedFile.ContentLength > fileSizeMax)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+                        return;
+                    }
+                    _fileSolvingSave = _fileSolving.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    _fileSolvingGood = true;
+                }
+                else if (_fileSolvingSave != CommonConstants.BLANK)
+                {
+                    if (_fileSolvingSave.LastIndexOf("/") > 0)
+                        _fileSolving = rootFolder + _fileSolvingSave.Substring(_fileSolvingSave.LastIndexOf("/"));
+                    else
+                        _fileSolving = rootFolder + _fileSolvingSave.Substring(_fileSolvingSave.LastIndexOf("\\"));
+
+                    if (!File.Exists(_fileSolving))
+                    {
+                        string src = Server.MapPath("~") + "/" + _fileSolvingSave;
+                        File.Copy(src, _fileSolving);
+                        File.Delete(src);
+                        _fileSolvingSave = _fileSolving.Substring(_fileSolving.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    }
+                }
+
+                if (fileThumbnail.HasFile)
+                {
+                    //check file existed: keep both
+                    _fileThumbnail = Path.GetFileNameWithoutExtension(_fileContentSave) +
+                                "_thumbnail" + Path.GetExtension(fileThumbnail.FileName);
+
+                    _fileThumbnail = bs.fileNameToSave(rootFolder + "/" + _fileThumbnail);
+                    //filename = rootFolder + newFileName;
+
+                    //check filetype
+                    fileTypes = control.getValueString(CommonConstants.CF_IMG_FILE_TYPE_ALLOW);
+                    if (!bs.checkFileType(fileThumbnail.FileName, fileTypes))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                        return;
+                    }
+                    //check filesize max (KB)
+                    fileSizeMax = control.getValueByInt(CommonConstants.CF_IMG_FILE_SIZE_MAX);
+                    fileSizeMax = 1024 * fileSizeMax;
+                    if (fileThumbnail.PostedFile.ContentLength > fileSizeMax)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+                        return;
+                    }
+                    _fileThumbnailSave = _fileThumbnail.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    _fileThumbnailGood = true;
+                }
+                else if (_fileThumbnailSave != CommonConstants.BLANK)
+                {
+                    if (!_fileThumbnailSave.Contains(CommonConstants.FOLDER_DEFAULT_IMG))
+                    {
+                        if (_fileThumbnailSave.LastIndexOf("/") > 0)
+                            _fileThumbnail = rootFolder + _fileThumbnailSave.Substring(_fileThumbnailSave.LastIndexOf("/"));
+                        else
+                            _fileThumbnail = rootFolder + _fileThumbnailSave.Substring(_fileThumbnailSave.LastIndexOf("\\"));
+
+                        if (!File.Exists(_fileThumbnail))
+                        {
+                            string src = Server.MapPath("~") + "/" + _fileThumbnailSave;
+                            File.Copy(src, _fileThumbnail);
+                            File.Delete(src);
+                            _fileThumbnailSave = _fileThumbnail.Substring(_fileThumbnail.LastIndexOf(CommonConstants.FOLDER_DATA));
+                        }
+                    }
+                }
+
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                bool isOK = contestDAO.updateContest(cont.ID, user.Username,
+                                                        _title,
+                                                        _state,
+                                                        _isSticky,
+                                                        _isUniversity,
+                                                        _branch,
+                                                        _sub,
+                                                        _year,
+                                                        _content,
+                                                        _tag,
+                                                        _score,
+                                                        _fileContentSave,
+                                                        _fileSolvingSave,
+                                                        _fileThumbnailSave,
+                                                        _htmlPreview,
+                                                        _htmlEmbed);
+
+                if (isOK)
+                {
+
+                    if (_fileContentGood)
+                    {
+                        string folder = Path.GetDirectoryName (_fileContent);
+                        if(!Directory.Exists (folder))
+                            Directory.CreateDirectory (folder);
+
+                        fileContent.SaveAs (_fileContent);
+                    }
+
+                    if (_fileSolvingGood)
+                    {
+                        string folder = Path.GetDirectoryName(_fileSolving);
+                        if (!Directory.Exists(folder))
+                            Directory.CreateDirectory(folder);
+
+                        fileSolving.SaveAs(_fileSolving);
+                    }
+
+                    if (_fileThumbnailGood)
+                    {
+                        string folder = Path.GetDirectoryName(_fileThumbnail);
+                        if (!Directory.Exists(folder))
+                            Directory.CreateDirectory(folder);
+
+                        fileThumbnail.SaveAs(_fileThumbnail);
+                    }
+                }
+                else
+                {
+                    
+                }
+
+                Session[CommonConstants.SES_EDIT_CONTEST] = null;
+
+            }
+            catch (Exception ex)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+
+                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.Source
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.StackTrace
+                                                                                        + CommonConstants.NEWLINE
+                                                                                        + ex.HelpLink);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
+            }
+
+            Response.Redirect(CommonConstants.PAGE_ADMIN_UNIVERSITY);
         }
     }
 }

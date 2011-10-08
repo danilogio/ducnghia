@@ -151,7 +151,8 @@
         </asp:Panel>
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
             <div id="function">
-                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton"/>
+                <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" 
+                    onclick="btnEdit_Click"/>
                 <hr />
             </div>
             <div class="form_settings">

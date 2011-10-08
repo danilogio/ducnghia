@@ -1384,7 +1384,62 @@ namespace ltktDAO
             }
             return false;
         }
+
+        public bool updateContest(int id, string userAdmin, string _title, int _state, bool _isSticky, bool _isUniversity, int _branch, string _sub, int _year, string _content, string _tag, int _score, string _fileContent, string _fileSolving, string _fileThumbnail, string _htmlPreview, string _htmlEmbed)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var cont = DB.tblContestForUniversities.Single(u => u.ID == id);
+
+                    cont.Title = _title;
+                    cont.Contents = _content;
+                    cont.State = _state;
+                    cont.isUniversity = _isUniversity;
+                    cont.Branch = _branch;
+                    cont.Year = _year;
+                    cont.Score = _score;
+                    cont.Tag = _tag;
+                    cont.Subject = _sub;
+                    cont.StickyFlg = _isSticky;
+                    cont.Location = _fileContent;
+                    cont.Solving = _fileSolving;
+                    cont.Thumbnail = _fileThumbnail;
+                    cont.HtmlPreview = _htmlPreview;
+                    cont.HtmlEmbedLink = _htmlEmbed;
+                    cont.Checker = userAdmin;
+
+                    DB.SubmitChanges();
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, userAdmin,
+                                        BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
+                                                                         Convert.ToString (id),
+                                                                         CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, userAdmin,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_FAILED_TEMPLATE,
+                                                                      Convert.ToString(id),
+                                                                      CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                log.writeLog(DBHelper.strPathLogFile, userAdmin, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false;
+            }
+            
+            return true;
+        }
         #endregion
+
+
 
 
 

@@ -593,12 +593,12 @@ namespace ltktDAO
                 start = CommonConstants.AT_IT_OFFICE_START;
                 end = CommonConstants.AT_IT_OFFICE_END;
             }
-            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_SIMPLE)
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_TIP_SIMPLE)
             {
                 start = CommonConstants.AT_IT_SIMPLE_TIP_START;
                 end = CommonConstants.AT_IT_SIMPLE_TIP_END;
             }
-            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_ADVANCE)
+            else if (articleSCO.Leitmotif == CommonConstants.PARAM_IT_TIP_ADVANCE)
             {
                 start = CommonConstants.AT_IT_ADVANCE_TIP_START;
                 end = CommonConstants.AT_IT_ADVANCE_TIP_END;

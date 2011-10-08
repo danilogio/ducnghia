@@ -232,7 +232,7 @@ namespace ltkt
                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
                                                            CommonConstants.CSS_REFERLINK,
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
-                                                                                           CommonConstants.PARAM_IT_SIMPLE,
+                                                                                           CommonConstants.PARAM_IT_TIP_SIMPLE,
                                                                                            CommonConstants.NOW,
                                                                                            CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
@@ -295,7 +295,7 @@ namespace ltkt
                        + BaseServices.createMsgByTemplate(CommonConstants.TEMP_DIV_TAG_WITH_CLASS,
                                                            CommonConstants.CSS_REFERLINK,
                                                            BaseServices.createMsgByTemplate(CommonConstants.TEMP_INFORMATICS_LINK,
-                                                                                           CommonConstants.PARAM_IT_ADVANCE,
+                                                                                           CommonConstants.PARAM_IT_TIP_ADVANCE,
                                                                                            CommonConstants.NOW,
                                                                                            CommonConstants.PAGE_NUMBER_FIRST,
                                                                                            CommonConstants.TXT_VIEW_MORE));
