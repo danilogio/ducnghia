@@ -532,6 +532,7 @@ namespace ltktDAO
             }
             return false;
         }
+        
         public static int[] getSizeFromPattern(string pattern, string splitter)
         {
             int[] res = new int[2] { 0, 0 };
@@ -544,7 +545,43 @@ namespace ltktDAO
             return res;
         }
 
-        
+        public string getSubjectFolder(string codeSub)
+        {
+            string folder = CommonConstants.BLANK;
+
+            switch (codeSub)
+            {
+                case CommonConstants.SUB_MATHEMATICS_CODE:
+                    folder =  CommonConstants.FOLDER_MATH;
+                    break;
+                case CommonConstants.SUB_PHYSICAL_CODE:
+                    folder =  CommonConstants.FOLDER_PHYS;
+                    break;
+                case CommonConstants.SUB_CHEMICAL_CODE:
+                    folder =  CommonConstants.FOLDER_CHEM;
+                    break;
+                case CommonConstants.SUB_BIOGRAPHY_CODE:
+                    folder =  CommonConstants.FOLDER_BIO;
+                    break;
+                case CommonConstants.SUB_LITERATURE_CODE:
+                    folder =  CommonConstants.FOLDER_LIT;
+                    break;
+                case CommonConstants.SUB_HISTORY_CODE:
+                    folder =  CommonConstants.FOLDER_HIS;
+                    break;
+                case CommonConstants.SUB_GEOGRAPHY_CODE:
+                    folder =  CommonConstants.FOLDER_GEO;
+                    break;
+                case CommonConstants.SUB_ENGLISH_CODE:
+                    folder =  CommonConstants.FOLDER_ENG;
+                    break;
+                default:
+                    folder =  CommonConstants.FOLDER_OTH;
+                    break;
+            }
+
+            return folder;
+        }
     }
     
 }

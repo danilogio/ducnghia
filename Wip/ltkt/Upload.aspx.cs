@@ -44,38 +44,23 @@ namespace ltkt
                     liFileSize.Text += control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
                     liFileSize.Text += "MB)";
 
-                    if (ddlEnglishType.Items.Count == 0)
-                    {
-                        ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_COMMON_NAME, CommonConstants.PARAM_EL_COMMON));
-                        ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_MAJOR_NAME, CommonConstants.PARAM_EL_MAJOR));
-                        ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_CERT_NAME, CommonConstants.PARAM_EL_CERT));
-                    }
-
+                    
+                    initEnglishType();
                     initEnglishCommon();
                     initEnglishMajor();
                     initEnglishCert();
 
-                    if (ddlInfType.Items.Count == 0)
-                    {
-                        ddlInfType.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_NAME, CommonConstants.PARAM_IT_OFFICE));
-                        ddlInfType.Items.Add(new ListItem(CommonConstants.PARAM_IT_TIP_NAME, CommonConstants.PARAM_IT_TIP));
-                    }
+                    initInfType();
+                    initITOffice();
+                    initITTip();
 
-                    if (ddlSub.Items.Count == 0)
-                    {
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_MATHEMATICS, CommonConstants.SUB_MATHEMATICS_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_PHYSICAL, CommonConstants.SUB_PHYSICAL_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_CHEMICAL, CommonConstants.SUB_CHEMICAL_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_BIOGRAPHY, CommonConstants.SUB_BIOGRAPHY_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_LITERATURE, CommonConstants.SUB_LITERATURE_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_HISTORY, CommonConstants.SUB_HISTORY_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_GEOGRAPHY, CommonConstants.SUB_GEOGRAPHY_CODE));
-                        ddlSub.Items.Add(new ListItem(CommonConstants.SUB_ENGLISH, CommonConstants.SUB_ENGLISH_CODE));
-                    }
+                    initContestSubject();
+                    
 
                     if (ddlYear.Items.Count == 0)
                         for (int idx = 2002; idx <= DateTime.Now.Year; ++idx)
                             ddlYear.Items.Add(new ListItem(Convert.ToString(idx), Convert.ToString(idx)));
+
 
                     string selIndex = Request["selIndex"];
                     int selectedIndex;
@@ -142,8 +127,8 @@ namespace ltkt
                         case 0:
                             {
                                 folder = CommonConstants.FOLDER_UNI;
-                                folder += Convert.ToString(ddlYear.SelectedValue);
-
+                                folder += "/" + Convert.ToString(ddlYear.SelectedValue);
+                                folder += "/" + bs.getSubjectFolder(ddlSub.SelectedValue);
                                 break;
                             }
                         case 1:
@@ -163,21 +148,49 @@ namespace ltkt
                     string rootFolder = Server.MapPath("~") + "/" + folder + "/";
                     string filename = bs.fileNameToSave(rootFolder + fileContent.FileName);
                     string fileSave = filename.Substring(filename.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    bool fileContentGood = false;
+                    bool fileSolvingGood = false;
                     string fileSolvingSave = CommonConstants.BLANK;
-                    // save file
-                    if (!Directory.Exists(rootFolder))
-                    {
-                        Directory.CreateDirectory(rootFolder);
-                    }
+                    string _fileSolving = CommonConstants.BLANK;
+                    string fileTypes = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+                    int maxSize = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
+                    maxSize = maxSize * 1024 * 1024;
+
 
                     try
                     {
+                        if (fileSolving.HasFile
+                            && bs.checkFileType(fileSolving.FileName, fileTypes)
+                            && fileSolving.PostedFile.ContentLength <= maxSize)
+                        {
+                            _fileSolving = filename.Substring(0, filename.LastIndexOf(".")) + "_solved" + Path.GetExtension(fileSolving.FileName);
+                            _fileSolving = bs.fileNameToSave(_fileSolving);
+                            fileSolvingGood = true;
+                        }
+                        else
+                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
+
+                        //fileContent.SaveAs(filename);
+                        if (bs.checkFileType(fileContent.FileName, fileTypes)
+                            && fileContent.PostedFile.ContentLength <= maxSize)
+                            fileContentGood = true;
+                        else
+                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
+
+
+                        // save file
+                        if (!Directory.Exists(rootFolder))
+                        {
+                            Directory.CreateDirectory(rootFolder);
+                        }
+
+                        bool isOK = false;
                         // ghi xuống db
                         switch (type)
                         {
                             case 0:
                                 {
-                                    contestDAO.insertContest(txtboxTitle.Text,
+                                    isOK = contestDAO.insertContest(txtboxTitle.Text,
                                                                         txtboxSummary.Text,
                                                                         user.Username,
                                                                         DateTime.Now,
@@ -192,51 +205,42 @@ namespace ltkt
                                 }
                             case 1:
                                 {
-                                    informaticsDAO.insertInformatic(txtboxTitle.Text,
-                                        0,
-                                        txtboxSummary.Text,
-                                        user.Username,
-                                        DateTime.Now,
-                                        fileSave,
-                                        txtboxTag.Text);
+                                    isOK = informaticsDAO.insertInformatic(txtboxTitle.Text,
+                                                                            0,
+                                                                            txtboxSummary.Text,
+                                                                            user.Username,
+                                                                            DateTime.Now,
+                                                                            fileSave,
+                                                                            txtboxTag.Text);
                                     break;
                                 }
                             case 2:
                                 {
-                                    englishDAO.insertEnglish(txtboxTitle.Text,
-                                        0,
-                                        txtboxSummary.Text,
-                                        user.Username,
-                                        DateTime.Now,
-                                        fileSave,
-                                        txtboxTag.Text);
+                                    isOK = englishDAO.insertEnglish(txtboxTitle.Text,
+                                                                    0,
+                                                                    txtboxSummary.Text,
+                                                                    user.Username,
+                                                                    DateTime.Now,
+                                                                    fileSave,
+                                                                    txtboxTag.Text);
                                     break;
                                 }
                         }
 
-                        int maxSize = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
-                        maxSize = maxSize * 1024 * 1024;
 
-                        if (bs.checkFileType(fileContent.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
-                            && fileContent.PostedFile.ContentLength <= maxSize)
-                            fileContent.SaveAs(filename);
-                        else
-                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
-
-                        if (fileSolving.HasFile
-                            && bs.checkFileType(fileSolving.FileName, control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW))
-                            && fileSolving.PostedFile.ContentLength <= maxSize)
+                        if (isOK)
                         {
-                            //fileSolving.SaveAs(Server.MapPath("~") + "/" + folder + "/" +
-                            //    Path.GetFileNameWithoutExtension(newFileName) +
-                            //    "_solved" + Path.GetExtension(fileSolving.FileName));
-
-                            //fileSolvingSave = folder + "/" +
-                            //    Path.GetFileNameWithoutExtension(fileContent.FileName) +
-                            //    "_solved" + Path.GetExtension(fileSolving.FileName);
+                            if (fileContentGood)
+                            {
+                                fileContent.SaveAs(filename);
+                            }
+                            if (fileSolvingGood)
+                            {
+                                fileSolving.SaveAs(_fileSolving);
+                            }
                         }
                         else
-                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
+                            throw new Exception(CommonConstants.MSG_E_COMMON_ERROR_TEXT);
 
                         uploadPanel.Visible = false;
                         message.Visible = true;
@@ -273,7 +277,24 @@ namespace ltkt
             }
         }
 
+        private void initEnglishType()
+        {
+            if (ddlEnglishType.Items.Count == 0)
+            {
+                ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_COMMON_NAME, CommonConstants.PARAM_EL_COMMON));
+                ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_MAJOR_NAME, CommonConstants.PARAM_EL_MAJOR));
+                ddlEnglishType.Items.Add(new ListItem(CommonConstants.PARAM_EL_CERT_NAME, CommonConstants.PARAM_EL_CERT));
+            }
+        }
 
+        private void initInfType()
+        {
+            if (ddlInfType.Items.Count == 0)
+            {
+                ddlInfType.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_NAME, CommonConstants.PARAM_IT_OFFICE));
+                ddlInfType.Items.Add(new ListItem(CommonConstants.PARAM_IT_TIP_NAME, CommonConstants.PARAM_IT_TIP));
+            }
+        }
 
         private void initEnglishCommon()
         {
@@ -308,9 +329,40 @@ namespace ltkt
             }
         }
 
-        protected void ddlInfType_SelectedIndexChanged(object sender, EventArgs e)
+        private void initITOffice()
         {
-
+            if (ddlInfOffice.Items.Count == 0)
+            {
+                ddlInfOffice.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_WORD_NAME, CommonConstants.PARAM_IT_OFFICE_WORD));
+                ddlInfOffice.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_EXCEL_NAME, CommonConstants.PARAM_IT_OFFICE_EXCEL));
+                ddlInfOffice.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_PP_NAME, CommonConstants.PARAM_IT_OFFICE_PP));
+                ddlInfOffice.Items.Add(new ListItem(CommonConstants.PARAM_IT_OFFICE_ACCESS_NAME, CommonConstants.PARAM_IT_OFFICE_ACCESS));
+            }
         }
+
+        private void initITTip()
+        {
+            if (ddlInfTip.Items.Count == 0)
+            {
+                ddlInfTip.Items.Add(new ListItem(CommonConstants.PARAM_IT_TIP_SIMPLE_NAME, CommonConstants.PARAM_IT_TIP_SIMPLE));
+                ddlInfTip.Items.Add(new ListItem(CommonConstants.PARAM_IT_TIP_ADVANCE_NAME, CommonConstants.PARAM_IT_TIP_ADVANCE));
+            }
+        }
+
+        private void initContestSubject()
+        {
+            if (ddlSub.Items.Count == 0)
+            {
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_MATHEMATICS, CommonConstants.SUB_MATHEMATICS_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_PHYSICAL, CommonConstants.SUB_PHYSICAL_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_CHEMICAL, CommonConstants.SUB_CHEMICAL_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_BIOGRAPHY, CommonConstants.SUB_BIOGRAPHY_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_LITERATURE, CommonConstants.SUB_LITERATURE_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_HISTORY, CommonConstants.SUB_HISTORY_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_GEOGRAPHY, CommonConstants.SUB_GEOGRAPHY_CODE));
+                ddlSub.Items.Add(new ListItem(CommonConstants.SUB_ENGLISH, CommonConstants.SUB_ENGLISH_CODE));
+            }
+        }
+
     }
 }

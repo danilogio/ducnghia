@@ -737,36 +737,8 @@ namespace ltkt.Admin
                 string _fileThumbnail = CommonConstants.BLANK;
 
                 string rootFolder = Server.MapPath("~") + "/" + CommonConstants.FOLDER_UNI + "/" + _year;
-                switch (_sub)
-                {
-                    case CommonConstants.SUB_MATHEMATICS_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_MATH;
-                        break;
-                    case CommonConstants.SUB_PHYSICAL_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_PHYS;
-                        break;
-                    case CommonConstants.SUB_CHEMICAL_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_CHEM;
-                        break;
-                    case CommonConstants.SUB_BIOGRAPHY_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_BIO;
-                        break;
-                    case CommonConstants.SUB_LITERATURE_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_LIT;
-                        break;
-                    case CommonConstants.SUB_HISTORY_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_HIS;
-                        break;
-                    case CommonConstants.SUB_GEOGRAPHY_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_GEO;
-                        break;
-                    case CommonConstants.SUB_ENGLISH_CODE:
-                        rootFolder += "/" + CommonConstants.FOLDER_ENG;
-                        break;
-                    default:
-                        rootFolder += "/" + CommonConstants.FOLDER_OTH;
-                        break;
-                }
+                rootFolder += "/" + bs.getSubjectFolder(_sub);
+
 
                 bool _fileContentGood = false;
                 bool _fileSolvingGood = false;

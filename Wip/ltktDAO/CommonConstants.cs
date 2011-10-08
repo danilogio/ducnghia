@@ -1770,27 +1770,52 @@ namespace ltktDAO
             /// Thủ thuật căn bản
             /// </summary>
             public const string PARAM_IT_TIP_SIMPLE = "simp";
+
+            /// <summary>
+            /// Thủ thuật căn bản
+            /// </summary>
+            public const string PARAM_IT_TIP_SIMPLE_NAME = "Cơ bản";
             /// <summary>
             /// Thủ thuật nâng cao
             /// </summary>
             public const string PARAM_IT_TIP_ADVANCE = "adv";
+            /// <summary>
+            /// Thủ thuật nâng cao
+            /// </summary>
+            public const string PARAM_IT_TIP_ADVANCE_NAME = "Nâng cao";
             
             /// <summary>
             /// office word
             /// </summary>
             public const string PARAM_IT_OFFICE_WORD = "word";
             /// <summary>
+            /// office word
+            /// </summary>
+            public const string PARAM_IT_OFFICE_WORD_NAME = "Word";
+            /// <summary>
             /// office excel
             /// </summary>
             public const string PARAM_IT_OFFICE_EXCEL = "excel";
+            /// <summary>
+            /// office excel
+            /// </summary>
+            public const string PARAM_IT_OFFICE_EXCEL_NAME = "Excel";
             /// <summary>
             /// office powerpoint
             /// </summary>
             public const string PARAM_IT_OFFICE_PP = "pp";
             /// <summary>
+            /// office powerpoint
+            /// </summary>
+            public const string PARAM_IT_OFFICE_PP_NAME = "PowerPoint";
+            /// <summary>
             /// power point access
             /// </summary>
             public const string PARAM_IT_OFFICE_ACCESS = "acc";
+            /// <summary>
+            /// power point access
+            /// </summary>
+            public const string PARAM_IT_OFFICE_ACCESS_NAME = "Access";
             /// <summary>
             /// param is location
             /// </summary>

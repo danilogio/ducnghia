@@ -45,13 +45,26 @@
 	            else if (selectedIndex == 1){
 	                $('#<%= ddlEnglishMajor.ClientID %>').show();
 	                $('#<%= ddlEnglishCommon.ClientID %>').hide();
-	                $('#<%= ddlEnglishCert.ClientID %>').hide();
+	                $('#<%= ddlEnglishCert.ClientID %>').hide();           	                
 	            } 
 	            else if (selectedIndex == 2){
 	                $('#<%= ddlEnglishCert.ClientID %>').show();
 	                $('#<%= ddlEnglishCommon.ClientID %>').hide();
 	                $('#<%= ddlEnglishMajor.ClientID %>').hide();
 	            }
+	        });
+	        
+	        $('#<%= ddlInfType.ClientID %>').change(function(e) {
+	            var selectedIndex = $('#<%= ddlInfType.ClientID%>').get(0).selectedIndex;
+
+	            if (selectedIndex == 0) {
+	                $('#<%= ddlInfOffice.ClientID %>').show();
+	                $('#<%= ddlInfTip.ClientID %>').hide();
+	            }
+	            else {
+	                $('#<%= ddlInfOffice.ClientID %>').hide();
+	                $('#<%= ddlInfTip.ClientID %>').show(); 	                
+	            } 
 	        });
 	    });
 
@@ -60,6 +73,13 @@
 	        $('#divContest').show();
 	        $('#divEnglish').hide();
 	        $('#divInf').hide();
+	        
+	        $('#<%= ddlEnglishCommon.ClientID %>').show();
+	        $('#<%= ddlEnglishCert.ClientID %>').hide();
+            $('#<%= ddlEnglishMajor.ClientID %>').hide();
+            
+            $('#<%= ddlInfOffice.ClientID %>').show();
+	        $('#<%= ddlInfTip.ClientID %>').hide();
 	    }
 	    
 //	    function checkFileExtension(elem) {
@@ -154,18 +174,25 @@
                 <div id="divEnglish">
                     <p>
                         <span>Anh văn</span>
-                        <asp:DropDownList ID="ddlEnglishType" runat="server" Width="20%"></asp:DropDownList>
-                        <asp:DropDownList ID="ddlEnglishCommon" runat="server" Width="30%"></asp:DropDownList>
-                        <asp:DropDownList ID="ddlEnglishMajor" runat="server" Width="30%"></asp:DropDownList>
-                        <asp:DropDownList ID="ddlEnglishCert" runat="server" Width="30%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishType" runat="server" Width="20%">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishCommon" runat="server" Width="30%">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishMajor" runat="server" Width="30%">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlEnglishCert" runat="server" Width="30%">
+                        </asp:DropDownList>
                     </p>
                 </div>
                 <div id="divInf">
                     <p>
                         <span>Tin học</span>
-                        <asp:DropDownList ID="ddlInfType" runat="server" Width="20%"></asp:DropDownList>
-                        <asp:DropDownList ID="ddlInfOffice" runat="server" Width="30%"></asp:DropDownList>
-                        <asp:DropDownList ID="ddlInfTip" runat="server" Width="30%"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlInfType" runat="server" Width="20%">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlInfOffice" runat="server" Width="30%">
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlInfTip" runat="server" Width="30%">
+                        </asp:DropDownList>
                     </p>
                 </div>
                 <%--Chung--%>
@@ -180,7 +207,7 @@
                     <p>
                     </p>
                     <p style="padding-top: 15px">
-                        <span>&nbsp;</span><asp:Button ID="btnSubmitUpload" runat="server" CssClass="submit" 
+                        <span>&nbsp;</span><asp:Button ID="btnSubmitUpload" runat="server" CssClass="submit"
                             OnClick="btnSubmitUpload_Click" Text="Gửi" />
                     </p>
                 </p>
