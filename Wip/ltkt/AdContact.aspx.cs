@@ -18,6 +18,7 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            bool isError = false;
             try
             {
                 if (adminDAO.isON(CommonConstants.AF_ADS))
@@ -34,7 +35,8 @@ namespace ltkt
                     {
                         Session[CommonConstants.SES_ERROR] = reason;
                     }
-                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                    isError = true;
+                    
                 }
             }
             catch (Exception ex)
@@ -50,6 +52,10 @@ namespace ltkt
                                                                             + ex.HelpLink);
 
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
+            if (isError)
+            {
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }

@@ -33,61 +33,60 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $(".calendar").datepicker({
-            dateFormat: 'mm/dd/yy'
+                dateFormat: 'mm/dd/yy'
             });
         }); 
     </script>
 
     <script type="text/javascript">
-	    function init() {
-	        $('#upload').hide();
-	    }
-	    
-	    function upload()
-	    {
-	        $('#upload').show();
-	    }
+        function init() {
+            $('#upload').hide();
+        }
+
+        function upload() {
+            $('#upload').show();
+        }
     </script>
 
     <script type="text/javascript">
-    function DisplayFullImage(srcImg) 
-    { 
-        txtCode = "<HTML><HEAD>" 
-        +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
-        + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage " 
-        + "onload='window.resizeTo(document.FullImage.width+50,document.FullImage.height+75)'>"  
-        + "</CENTER>"   
-        + "</BODY></HTML>"; 
-        mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 
-        mywindow.document.open(); 
-        mywindow.document.write(txtCode); 
-        mywindow.document.close();
-    }
+        function DisplayFullImage(srcImg) {
+            txtCode = "<HTML><HEAD>"
+        + "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"
+        + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage "
+        + "onload='window.resizeTo(document.FullImage.width+50,document.FullImage.height+75)'>"
+        + "</CENTER>"
+        + "</BODY></HTML>";
+            mywindow = window.open('', 'image', 'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1');
+            mywindow.document.open();
+            mywindow.document.write(txtCode);
+            mywindow.document.close();
+        }
     </script>
 
     <script type="text/javascript">
-    function DisplayAdsImage() 
-    { 
-        txtCode = "<HTML><HEAD>" 
-        +  "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"   
-        + "<IMG src='" + "../../images/Ads.jpg" + "' BORDER=0 NAME=FullImage " 
-        + "onload='window.resizeTo(document.FullImage.width+50,700)'>"  
-        + "</CENTER>"   
-        + "</BODY></HTML>"; 
-        mywindow= window.open  ('','image',  'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1'); 
-        mywindow.document.open(); 
-        mywindow.document.write(txtCode); 
-        mywindow.document.close();
-    }
+        function DisplayAdsImage() {
+            txtCode = "<HTML><HEAD>"
+        + "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"
+        + "<IMG src='" + "../../images/Ads.jpg" + "' BORDER=0 NAME=FullImage "
+        + "onload='window.resizeTo(document.FullImage.width+50,700)'>"
+        + "</CENTER>"
+        + "</BODY></HTML>";
+            mywindow = window.open('', 'image', 'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1');
+            mywindow.document.open();
+            mywindow.document.write(txtCode);
+            mywindow.document.close();
+        }
     </script>
 
 </asp:Content>
 <asp:Content ID="AdvertisementAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
+    <asp:Panel ID="statusMessagePanel" runat="server" Visible="false" CssClass="alert">
+        <asp:Literal ID="liStatusMessage" runat="server"></asp:Literal>
+    </asp:Panel>
     <div class="block_text">
         <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
             <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
         </asp:Panel>
-        <br />
         <asp:Panel ID="viewPanel" runat="server">
             <div align="left" style="float: left; width: 15%">
                 <h3>
@@ -112,6 +111,8 @@
             <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
                 <asp:Literal ID="liMessage" runat="server"></asp:Literal>
             </asp:Panel>
+            <br />
+            <br />
             <asp:Table ID="NewsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">

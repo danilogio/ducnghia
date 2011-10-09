@@ -63,6 +63,25 @@ namespace ltktDAO
             }
             return res;
         }
+        public void setReason(string _code, string _reason)
+        {
+            try
+            {
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+                    var record = DB.tblAdmins.Single(p => p.Code == _code);
+                    record.Reason = _reason.Trim();
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+        }
         /// <summary>
         /// check function is ON
         /// </summary>
@@ -85,7 +104,7 @@ namespace ltktDAO
         /// <param name="_code"></param>
         /// <param name="_username"></param>
         /// <returns></returns>
-        public bool changeStateON(string _code, string _username)
+        public bool changeStateON(string _code, string _reason, string _username)
         {
             try
             {
@@ -95,6 +114,7 @@ namespace ltktDAO
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
                     var record = DB.tblAdmins.Single(p => p.Code == _code);
                     record.State = true;
+                    record.Reason = _reason.Trim();
                     DB.SubmitChanges();
                     ts.Complete();
                     log.writeLog(DBHelper.strPathLogFile, 
@@ -117,7 +137,7 @@ namespace ltktDAO
         /// <param name="_code"></param>
         /// <param name="_username"></param>
         /// <returns></returns>
-        public bool changeStateOFF(string _code, string _username)
+        public bool changeStateOFF(string _code, string _reason, string _username)
         {
             try
             {
@@ -126,6 +146,7 @@ namespace ltktDAO
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
                     var record = DB.tblAdmins.Single(p => p.Code == _code);
                     record.State = false;
+                    record.Reason = _reason.Trim();
                     DB.SubmitChanges();
                     ts.Complete();
                     log.writeLog(DBHelper.strPathLogFile,

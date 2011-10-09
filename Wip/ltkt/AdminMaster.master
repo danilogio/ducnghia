@@ -68,7 +68,7 @@
                                 <asp:HyperLink ID="HpkPermisson" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Permission.aspx">Phân quyền</asp:HyperLink>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HpkSecurity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Security.aspx">Bảo mật</asp:HyperLink>
+                                <asp:HyperLink ID="HpkSecurity" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Security.aspx?state=new">Bảo mật</asp:HyperLink>
                             </li>
                             <li>
                                 <asp:HyperLink ID="HpkControl" runat="server" Visible="false" NavigateUrl="~/_lh/Admin/Control.aspx">Điều khiển</asp:HyperLink>

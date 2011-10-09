@@ -18,6 +18,7 @@ namespace ltkt.Admin
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.Users userDAO = new ltktDAO.Users();
+        ltktDAO.Admin adminDAO = new ltktDAO.Admin();
 
         public const int NoOfAdsPerPage = 12;
 
@@ -39,7 +40,11 @@ namespace ltkt.Admin
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
                     liTableHeader.Text = CommonConstants.PAGE_ADMIN_ADS_NAME;
-
+                    string status = adminDAO.getReason(CommonConstants.AF_ADS);
+                    if (!BaseServices.isNullOrBlank(status))
+                    {
+                        showStatusMessage(status);
+                    }
                     //Check state ads before show
                     adsDAO.checkAds(user.Username);
 
@@ -823,6 +828,16 @@ namespace ltkt.Admin
         {
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
+        }
+        private void showStatusMessage(string message)
+        {
+            liStatusMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
+                                                                    CommonConstants.CS_ANNOUCEMENT_BGCOLOR,
+                                                                    CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR,
+                                                                   CommonConstants.TXT_INFORM + CommonConstants.SPACE + message);
+           // liStatusMessage.Text += CommonConstants.BAR;
+            //liStatusMessage.Text += message;
+            statusMessagePanel.Visible = true;
         }
     }
 }

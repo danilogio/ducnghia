@@ -719,9 +719,11 @@ namespace ltktDAO
             return true;
         }
 
-        public Boolean insertInformatic(string _title, int _type, string _content,
-            string _author, DateTime _posted, string _location, string _tag)
-        {
+        //public Boolean insertInformatic(string _title, int _type, string _content,
+        //    string _author, DateTime _posted, string _location, string _tag)
+        //{
+        //    return false;
+        //}
 
         /// <summary>
         /// Cập nhật bài viết

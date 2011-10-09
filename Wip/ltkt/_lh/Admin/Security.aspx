@@ -17,12 +17,13 @@
         </div>
         <br />
         <div id="left" align="left" style="float: left; width: 50%;">
-            <!-- checkbox -->
+           
+             <!-- checkbox -->
             <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkAds" Text="Bật/tắt chức năng quảng cáo" runat="server" /></div>
+                <asp:CheckBox ID="chkUndercontruction" Text="Bật/Tắt Website" runat="server" /></div>
             <div style="background: white;">
                 <span title="Lý do">
-                    <asp:TextBox ID="txtAdsReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
+                    <asp:TextBox ID="txtUndercontructionReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
                         CssClass="multiline"></asp:TextBox></span></div>
             <!-- checkbox -->
             <div style="float: left; width: 100%;">
@@ -138,13 +139,12 @@
                 <span title="Lý do">
                     <asp:TextBox ID="txtSearchReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
                         CssClass="multiline"></asp:TextBox></span></div>
-            
             <!-- checkbox -->
             <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUndercontruction" Text="Bật/Tắt Website" runat="server" /></div>
+                <asp:CheckBox ID="chkAds" Text="Bật/tắt chức năng quảng cáo" runat="server"/></div>
             <div style="background: white;">
                 <span title="Lý do">
-                    <asp:TextBox ID="txtUndercontructionReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
+                    <asp:TextBox ID="txtAdsReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
                         CssClass="multiline"></asp:TextBox></span></div>
             
             <!-- checkbox -->

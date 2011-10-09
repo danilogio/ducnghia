@@ -311,7 +311,7 @@ namespace ltktDAO
             /// reason
             /// </summary>
             public const string TXT_REASON = "Lý do";
-            
+            public const string TXT_INFORM = "BQT Thông báo:";
 
         #endregion
 
@@ -914,7 +914,7 @@ namespace ltktDAO
         /// <summary>
         /// website is under construction.
         /// </summary>
-        public const string MSG_I_UNDERCONSTRUCTION = "Website is under construction!";
+        public const string MSG_I_UNDERCONSTRUCTION = "Trang web hiện đang được bảo trì";
         /// <summary>
         /// file zise is too large
         /// </summary>
@@ -1536,6 +1536,12 @@ namespace ltktDAO
         /// Session for edit contest
         /// </summary>
         public const string SES_EDIT_CONTEST = "editContest";
+        /// <summary>
+        /// session for security admin vo / security admin vo list
+        /// </summary>
+        public const string SES_SECURITY_ADMIN_VO = "saVO";
+
+        public const string SES_FIRST_LOAD = "first_load";
 
         #endregion
 
@@ -1594,6 +1600,8 @@ namespace ltktDAO
         /// request redirect 
         /// </summary>
         public const string REQ_REDIRECT = "red";
+
+        
         #endregion
 
         #region Section Uni,It,EL (SEC)
@@ -1820,6 +1828,8 @@ namespace ltktDAO
             /// param is location
             /// </summary>
             public const string PARAM_LOCATION = "loc";
+            public const string PARAM_NEW = "new";
+            public const string PARAM_RESET = "reset";
         #endregion
 
         #region Cookie (COOKIE)

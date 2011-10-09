@@ -18,6 +18,7 @@ namespace ltkt.Admin
         ltktDAO.Users userDAO = new ltktDAO.Users();
         ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
         ltktDAO.Permission permitDAO = new ltktDAO.Permission();
+        ltktDAO.Admin adminDAO = new ltktDAO.Admin();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -57,6 +58,19 @@ namespace ltkt.Admin
                                         + CommonConstants.EQUAL
                                         + CommonConstants.STATE_UNCHECK;
                         newAdsContact.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url, numAdv.ToString());
+                    }
+                    if (adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION))
+                    {
+                        string message = adminDAO.getReason(CommonConstants.AF_UNDERCONTRUCTION);
+                        if (BaseServices.isNullOrBlank(message))
+                        {
+                            message = CommonConstants.MSG_I_UNDERCONSTRUCTION;
+                        }
+                        liStatusMessage.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_MARQUEE_TAG,
+                                                                   CommonConstants.CS_ANNOUCEMENT_BGCOLOR,
+                                                                   CommonConstants.CS_ANNOUCEMENT_TEXTCOLOR,
+                                                                  CommonConstants.TXT_INFORM + CommonConstants.SPACE + message);
+                        statusMessagePanel.Visible = true;
                     }
                 }
                 else
