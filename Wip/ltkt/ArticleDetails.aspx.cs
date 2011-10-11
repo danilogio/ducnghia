@@ -30,10 +30,22 @@ namespace ltkt
 
             //Turn on or off preview button
             if (adminDAO.isON(CommonConstants.AF_PREVIEW_ARTICLE))
+            {
                 btnPreview.Visible = true;
+            }
             else
+            {
                 btnPreview.Visible = false;
-
+            }
+            // check comment is allowed
+            if (!adminDAO.isON(CommonConstants.AF_COMMENT))
+            {
+                commentPanel.Visible = false;
+            }
+            else
+            {
+                commentPanel.Visible = true;
+            }
 
             try
             {

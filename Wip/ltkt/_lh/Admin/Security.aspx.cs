@@ -19,6 +19,8 @@ namespace ltkt.Admin
         private ltktDAO.Users userDAO = new ltktDAO.Users();
         private EventLog log = new EventLog();
         ltktDAO.Admin adminDAO = new ltktDAO.Admin();
+        ltktDAO.Control controlDAO = new ltktDAO.Control();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             tblUser user = (tblUser)Session[CommonConstants.SES_USER];
@@ -130,31 +132,100 @@ namespace ltkt.Admin
                     adminDAO.changeStateOFF(CommonConstants.AF_UNDERCONTRUCTION, txtUndercontructionReason.Text, getCurrentUserName());
                 }
 
-                if (isError)
-                {
-                    resetInputData();
-                    return;
-                }
 
-                isError = false;
-                //Ads
-                if (!chkAds.Checked)
+
+                if (!isError)
                 {
-                    //need message when off
-                    if (BaseServices.isNullOrBlank(txtAdsReason.Text))
+                    //Ads
+                    if (!chkAds.Checked)
                     {
-                        showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
-                            CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_ADS_NAME));
-                        isError = true;   
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtAdsReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_ADS_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_ADS, txtAdsReason.Text, getCurrentUserName());
+                        }
                     }
                     else
                     {
-                        adminDAO.changeStateOFF(CommonConstants.AF_ADS, txtAdsReason.Text, getCurrentUserName());
+                        adminDAO.changeStateON(CommonConstants.AF_ADS, txtAdsReason.Text, getCurrentUserName());
                     }
                 }
-                else
+
+                //Annoucement
+                if (!isError)
                 {
-                    adminDAO.changeStateOFF(CommonConstants.AF_ADS, txtAdsReason.Text, getCurrentUserName());
+                    if (chkAnnoucement.Checked)
+                    {
+                        //need message when on
+                        if (BaseServices.isNullOrBlank(txtAnnoucementMessage.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_ANNOUCEMENT_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateON(CommonConstants.AF_ANNOUCEMENT, txtAnnoucementMessage.Text, getCurrentUserName());
+                            controlDAO.setValue(CommonConstants.CF_ANNOUCEMENT, txtAnnoucementMessage.Text);
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateOFF(CommonConstants.AF_ANNOUCEMENT, txtAnnoucementMessage.Text, getCurrentUserName());
+                        controlDAO.setValue(CommonConstants.CF_ANNOUCEMENT, txtAnnoucementMessage.Text);
+                    }
+                }
+
+                //Comment
+                if (!isError)
+                {
+                    if (!chkComment.Checked)
+                    {
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtCommentReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_COMMENT_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_COMMENT, txtCommentReason.Text, getCurrentUserName());
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateON(CommonConstants.AF_COMMENT, txtCommentReason.Text, getCurrentUserName());
+                    }
+                }
+
+                //Contact
+                if (!isError)
+                {
+                    if (!chkContact.Checked)
+                    {
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtContactReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_CONTACT_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_CONTACT, txtContactReason.Text, getCurrentUserName());
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateON(CommonConstants.AF_CONTACT, txtContactReason.Text, getCurrentUserName());
+                    }
                 }
 
                 if (isError)
@@ -162,9 +233,6 @@ namespace ltkt.Admin
                     resetInputData();
                     return;
                 }
-
-                isError = false;
-                //
             }
             catch (Exception ex)
             {
@@ -201,8 +269,24 @@ namespace ltkt.Admin
             AdsItem.SMessage = chkAds.Text;
             AdsItem.SReason = txtAdsReason.Text;
             arraySAVO.Add(AdsItem);
-            
-            
+            //Annoucement
+            SecurityAdminVO AnnItem = new SecurityAdminVO();
+            AnnItem.Ischecked = chkAnnoucement.Checked;
+            AnnItem.SMessage = chkAnnoucement.Text;
+            AnnItem.SReason = txtAnnoucementMessage.Text;
+            arraySAVO.Add(AnnItem);
+            //Comment
+            SecurityAdminVO CommentItem = new SecurityAdminVO();
+            CommentItem.Ischecked = chkComment.Checked;
+            CommentItem.SMessage = chkComment.Text;
+            CommentItem.SReason = txtCommentReason.Text;
+            arraySAVO.Add(CommentItem);
+            //Contact
+            SecurityAdminVO ContactItem = new SecurityAdminVO();
+            ContactItem.Ischecked = chkContact.Checked;
+            ContactItem.SMessage = chkContact.Text;
+            ContactItem.SReason = txtContactReason.Text;
+            arraySAVO.Add(ContactItem);
 
             Session[CommonConstants.SES_SECURITY_ADMIN_VO] = arraySAVO;
 
@@ -223,7 +307,22 @@ namespace ltkt.Admin
                     saVO = (SecurityAdminVO)arraySAVO[1];
                     chkAds.Checked = saVO.Ischecked;
                     txtAdsReason.Text = saVO.SReason;
+
+                    //Annoucement
+                    saVO = (SecurityAdminVO)arraySAVO[2];
+                    chkAnnoucement.Checked = saVO.Ischecked;
+                    txtAnnoucementMessage.Text = saVO.SReason;
                     
+                    //Comment
+                    saVO = (SecurityAdminVO)arraySAVO[3];
+                    chkComment.Checked = saVO.Ischecked;
+                    txtCommentReason.Text = saVO.SReason;
+
+                    //Contact
+                    saVO = (SecurityAdminVO)arraySAVO[4];
+                    chkContact.Checked = saVO.Ischecked;
+                    txtContactReason.Text = saVO.SReason;
+
                     Session[CommonConstants.SES_SECURITY_ADMIN_VO] = null;
                 }
             }

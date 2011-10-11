@@ -16,6 +16,7 @@ namespace ltkt
         EventLog log = new EventLog();
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.Contact contactDAO = new ltktDAO.Contact();
+        ltktDAO.Admin admiDAO = new ltktDAO.Admin();
 
         public const string Host = "pop.gmail.com";
         public const int Port = 995;
@@ -26,30 +27,41 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (admiDAO.isON(CommonConstants.AF_CONTACT))
             {
-                if (Session[CommonConstants.SES_USER] != null)
+                try
                 {
-                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    txtboxContactName.Text = user.DisplayName;
-                    txtboxContactEmail.Text = user.Email.Trim();
-                }
 
-                liTitle.Text = CommonConstants.PAGE_CONTACT_NAME
-                               + CommonConstants.SPACE + CommonConstants.HLINE
-                               + CommonConstants.SPACE
-                               + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                    if (Session[CommonConstants.SES_USER] != null)
+                    {
+                        tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                        txtboxContactName.Text = user.DisplayName;
+                        txtboxContactEmail.Text = user.Email.Trim();
+                    }
+
+                    liTitle.Text = CommonConstants.PAGE_CONTACT_NAME
+                                   + CommonConstants.SPACE + CommonConstants.HLINE
+                                   + CommonConstants.SPACE
+                                   + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+
+                }
+                catch (Exception ex)
+                {
+                    log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
+                                                                                + CommonConstants.NEWLINE
+                                                                                + ex.Source
+                                                                                + CommonConstants.NEWLINE
+                                                                                + ex.StackTrace
+                                                                                + CommonConstants.NEWLINE
+                                                                                + ex.HelpLink);
+                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), ex.Message
-                                                                            + CommonConstants.NEWLINE
-                                                                            + ex.Source
-                                                                            + CommonConstants.NEWLINE
-                                                                            + ex.StackTrace
-                                                                            + CommonConstants.NEWLINE
-                                                                            + ex.HelpLink);
-                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                string sReason = admiDAO.getReason(CommonConstants.AF_CONTACT);
+                Session[CommonConstants.SES_ERROR] = sReason;
                 Response.Redirect(CommonConstants.PAGE_ERROR);
             }
         }

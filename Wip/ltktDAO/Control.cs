@@ -49,7 +49,28 @@ namespace ltktDAO
             }
             return CommonConstants.BLANK;
         }
-        
+        public void setValue(string _code, string _value)
+        {
+            try
+            {
+                if (_value.Length >= 500)
+                {
+                    _value = _value.Substring(0, 499);
+                }
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var r = DB.tblControls.Single(p => p.Code == _code);
+                    r.Value = _value.Trim() ;
+                    DB.SubmitChanges();
+                    ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile, BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, r.Code, CommonConstants.SQL_TABLE_CONTROL));
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+        }
         public string getNameString(string _code)
         {
             tblControl r = getRecord(_code);

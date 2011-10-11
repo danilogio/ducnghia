@@ -108,7 +108,10 @@ namespace ltktDAO
         {
             try
             {
-                
+                if (_reason.Length >= 500)
+                {
+                    _reason = _reason.Substring(0, 499);
+                }
                 using (TransactionScope ts = new TransactionScope())
                 {
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -141,6 +144,10 @@ namespace ltktDAO
         {
             try
             {
+                if (_reason.Length >= 500)
+                {
+                    _reason = _reason.Substring(0, 499);
+                }
                 using (TransactionScope ts = new TransactionScope())
                 {
                     LTDHDataContext DB = new LTDHDataContext(@strPathDB);

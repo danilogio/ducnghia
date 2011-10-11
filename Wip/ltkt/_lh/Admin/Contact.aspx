@@ -23,8 +23,15 @@
 </asp:Content>
 
 <asp:Content ID="ContactAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
-    <div id="div_content">
-        <h4>
-            Liên hệ</h4>
+    <asp:Panel ID="statusMessagePanel" runat="server" Visible="false" CssClass="alert">
+        <asp:Literal ID="liStatusMessage" runat="server"></asp:Literal>
+    </asp:Panel>
+    <div id="div_content" class="block_text">
+        <asp:Panel ID="messagePanel" runat="server" Visible="false">
+            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+        </asp:Panel>
+        <asp:Panel ID="viewPanel" runat="server">
+        
+        </asp:Panel>
     </div>
 </asp:Content>
