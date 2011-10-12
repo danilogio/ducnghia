@@ -47,6 +47,16 @@ namespace ltkt
                 commentPanel.Visible = true;
             }
 
+            //check download
+            if (adminDAO.isON(CommonConstants.AF_DOWNLOAD))
+            {
+                checkDownloadPermission(sender, e);
+            }
+            else
+            {
+                downloadPanel.Visible = false;
+            }
+
             try
             {
                 pageLoad(sender, e);
@@ -162,7 +172,54 @@ namespace ltkt
             //}
 
         }
-
+        private void checkDownloadPermission(object sender, EventArgs e)
+        {
+            if (Request.QueryString[CommonConstants.REQ_SECTION] != null)
+            {
+                string sec = Request.QueryString[CommonConstants.REQ_SECTION];
+                switch (sec)
+                {
+                    case CommonConstants.SEC_UNIVERSITY_CODE:
+                        {
+                            if (!adminDAO.isON(CommonConstants.AF_DOWNLOAD_UNI))
+                            {
+                                downloadPanel.Visible = false;
+                            }
+                            else
+                            {
+                                downloadPanel.Visible = true;
+                            }
+                            break;
+                        }
+                    case CommonConstants.SEC_ENGLISH_CODE:
+                        {
+                            if (!adminDAO.isON(CommonConstants.SEC_ENGLISH_CODE))
+                            {
+                                downloadPanel.Visible = false;
+                            }
+                            else
+                            {
+                                downloadPanel.Visible = true;
+                            }
+                            break;
+                        }
+                    case CommonConstants.SEC_INFORMATICS_CODE:
+                        {
+                            if (!adminDAO.isON(CommonConstants.SEC_INFORMATICS_CODE))
+                            {
+                                downloadPanel.Visible = false;
+                            }
+                            else
+                            {
+                                downloadPanel.Visible = true;
+                            }
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
         private void pageLoad(object sender, EventArgs e)
         {
             if (Request.QueryString[CommonConstants.REQ_SECTION] != null)

@@ -20,21 +20,21 @@
            
              <!-- checkbox -->
             <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUndercontruction" Text="Bật/Tắt Website" runat="server" /></div>
+                <asp:CheckBox ID="chkUndercontruction" Text="1.Bật/Tắt Website" runat="server" /></div>
             <div style="background: white;">
                 <span title="Lý do">
                     <asp:TextBox ID="txtUndercontructionReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
                         CssClass="multiline"></asp:TextBox></span></div>
             <!-- checkbox -->
             <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkAnnoucement" Text="Bật/Tắt hiện thông báo" runat="server" /></div>
+                <asp:CheckBox ID="chkAnnoucement" Text="2.Bật/Tắt hiện thông báo" runat="server" /></div>
             <div style="background: white;">
                 <span title="Nội dung thông báo">
                     <asp:TextBox ID="txtAnnoucementMessage" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
                         CssClass="multiline"></asp:TextBox></span></div>
              <!-- checkbox -->
             <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkComment" Text="Bật/Tắt Comment bài viết" runat="server" /></div>
+                <asp:CheckBox ID="chkComment" Text="3.Bật/Tắt Comment bài viết" runat="server" /></div>
             <div style="background: white;">
                 <span title="Nội dung thông báo">
                     <asp:TextBox ID="txtCommentReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"

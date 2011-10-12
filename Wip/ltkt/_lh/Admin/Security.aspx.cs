@@ -228,6 +228,96 @@ namespace ltkt.Admin
                     }
                 }
 
+                //download website
+                if (!isError)
+                {
+                    if (!chkDownloadAll.Checked)
+                    {
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtDownloadAllReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_DOWNLOAD_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_DOWNLOAD, txtDownloadAllReason.Text, getCurrentUserName());
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateON(CommonConstants.AF_DOWNLOAD, txtDownloadAllReason.Text, getCurrentUserName());
+                    }
+                }
+                //Download Uni
+                if (!isError)
+                {
+                    if (!chkDownloadUni.Checked)
+                    {
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtDownloadUniReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_DOWNLOAD_UNI_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_DOWNLOAD_UNI, txtDownloadUniReason.Text, getCurrentUserName());
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateON(CommonConstants.AF_DOWNLOAD_UNI, txtDownloadUniReason.Text, getCurrentUserName());
+                    }
+                }
+                //Download IT
+                if (!isError)
+                {
+                    if (!chkDownloadIT.Checked)
+                    {
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtDownloadITReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_DOWNLOAD_IT_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_DOWNLOAD_IT, txtDownloadITReason.Text, getCurrentUserName());
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateON(CommonConstants.AF_DOWNLOAD_IT, txtDownloadITReason.Text, getCurrentUserName());
+                    }
+                }
+                //Download EL
+                if (!isError)
+                {
+                    if (!chkDownloadEnglish.Checked)
+                    {
+                        //need message when off
+                        if (BaseServices.isNullOrBlank(txtDownloadEnglishReason.Text))
+                        {
+                            showMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA,
+                                CommonConstants.TXT_REASON + CommonConstants.SPACE + CommonConstants.AF_DOWNLOAD_EL_NAME));
+                            isError = true;
+                        }
+                        else
+                        {
+                            adminDAO.changeStateOFF(CommonConstants.AF_DOWNLOAD_EL, txtDownloadEnglishReason.Text, getCurrentUserName());
+                        }
+                    }
+                    else
+                    {
+                        adminDAO.changeStateON(CommonConstants.AF_DOWNLOAD_EL, txtDownloadEnglishReason.Text, getCurrentUserName());
+                    }
+                }
+                
+
                 if (isError)
                 {
                     resetInputData();
@@ -257,36 +347,60 @@ namespace ltkt.Admin
         {
             ArrayList arraySAVO = new ArrayList();
             
-            //Under contruction
+            //Under contruction[0]
             SecurityAdminVO UnderItem = new SecurityAdminVO();
             UnderItem.Ischecked = chkUndercontruction.Checked;
             UnderItem.SMessage = chkUndercontruction.Text;
             UnderItem.SReason = txtUndercontructionReason.Text;
             arraySAVO.Add(UnderItem);
-            //Ads
+            //Ads[1]
             SecurityAdminVO AdsItem = new SecurityAdminVO();
             AdsItem.Ischecked = chkAds.Checked;
             AdsItem.SMessage = chkAds.Text;
             AdsItem.SReason = txtAdsReason.Text;
             arraySAVO.Add(AdsItem);
-            //Annoucement
+            //Annoucement[2]
             SecurityAdminVO AnnItem = new SecurityAdminVO();
             AnnItem.Ischecked = chkAnnoucement.Checked;
             AnnItem.SMessage = chkAnnoucement.Text;
             AnnItem.SReason = txtAnnoucementMessage.Text;
             arraySAVO.Add(AnnItem);
-            //Comment
+            //Comment[3]
             SecurityAdminVO CommentItem = new SecurityAdminVO();
             CommentItem.Ischecked = chkComment.Checked;
             CommentItem.SMessage = chkComment.Text;
             CommentItem.SReason = txtCommentReason.Text;
             arraySAVO.Add(CommentItem);
-            //Contact
+            //Contact[4]
             SecurityAdminVO ContactItem = new SecurityAdminVO();
             ContactItem.Ischecked = chkContact.Checked;
             ContactItem.SMessage = chkContact.Text;
             ContactItem.SReason = txtContactReason.Text;
             arraySAVO.Add(ContactItem);
+            //Download all[5]
+            SecurityAdminVO DownloadItem = new SecurityAdminVO();
+            DownloadItem.Ischecked = chkDownloadAll.Checked;
+            DownloadItem.SMessage = chkDownloadAll.Text;
+            DownloadItem.SReason = txtDownloadAllReason.Text;
+            arraySAVO.Add(DownloadItem);
+            //Download Uni[6]
+            SecurityAdminVO DownloadUniItem = new SecurityAdminVO();
+            DownloadUniItem.Ischecked = chkDownloadUni.Checked;
+            DownloadUniItem.SMessage = chkDownloadUni.Text;
+            DownloadUniItem.SReason = txtDownloadUniReason.Text;
+            arraySAVO.Add(DownloadUniItem);
+            //Download IT[7]
+            SecurityAdminVO DownloadITItem = new SecurityAdminVO();
+            DownloadITItem.Ischecked = chkDownloadIT.Checked;
+            DownloadITItem.SMessage = chkDownloadIT.Text;
+            DownloadITItem.SReason = txtDownloadITReason.Text;
+            arraySAVO.Add(DownloadITItem);
+            //Download English[8]
+            SecurityAdminVO DownloadEngItem = new SecurityAdminVO();
+            DownloadEngItem.Ischecked = chkDownloadEnglish.Checked;
+            DownloadEngItem.SMessage = chkDownloadEnglish.Text;
+            DownloadEngItem.SReason = txtDownloadEnglishReason.Text;
+            arraySAVO.Add(DownloadEngItem);
 
             Session[CommonConstants.SES_SECURITY_ADMIN_VO] = arraySAVO;
 
@@ -323,118 +437,93 @@ namespace ltkt.Admin
                     chkContact.Checked = saVO.Ischecked;
                     txtContactReason.Text = saVO.SReason;
 
+                    //Download all
+                    saVO = (SecurityAdminVO)arraySAVO[5];
+                    chkDownloadAll.Checked = saVO.Ischecked;
+                    txtDownloadAllReason.Text = saVO.SReason;
+                    
+                    //Download Uni
+                    saVO = (SecurityAdminVO)arraySAVO[6];
+                    chkDownloadUni.Checked = saVO.Ischecked;
+                    txtDownloadUniReason.Text = saVO.SReason;
+
+                    //Download IT
+                    saVO = (SecurityAdminVO)arraySAVO[7];
+                    chkDownloadIT.Checked = saVO.Ischecked;
+                    txtDownloadITReason.Text = saVO.SReason;
+                    //Download English
+                    saVO = (SecurityAdminVO)arraySAVO[8];
+                    chkDownloadEnglish.Checked = saVO.Ischecked;
+                    txtDownloadEnglishReason.Text = saVO.SReason;
+
                     Session[CommonConstants.SES_SECURITY_ADMIN_VO] = null;
                 }
             }
         }
         private void loadData()
         {
-            if (adminDAO.isON(CommonConstants.AF_ADS))
-            {
-                chkAds.Checked = true;
-                txtAdsReason.Text = adminDAO.getReason(CommonConstants.AF_ADS);
-            }
-            if (adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
-            {
-                chkAnnoucement.Checked = true;
-                ltktDAO.Control controlDAO = new ltktDAO.Control();
-                txtAnnoucementMessage.Text = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
-            }
-            if (adminDAO.isON(CommonConstants.AF_COMMENT))
-            {
-                chkComment.Checked = true;
-                txtCommentReason.Text = adminDAO.getReason(CommonConstants.AF_COMMENT);
-            }
-            if (adminDAO.isON(CommonConstants.AF_COMMENT_EASY))
-            {
-                chkCommentEasy.Checked = true;
-                txtCommentEasyReason.Text = adminDAO.getReason(CommonConstants.AF_COMMENT_EASY);
-            }
-            if (adminDAO.isON(CommonConstants.AF_CONTACT))
-            {
-                chkContact.Checked = true;
-                txtContactReason.Text = adminDAO.getReason(CommonConstants.AF_CONTACT);
-            }
-            if (adminDAO.isON(CommonConstants.AF_DOWNLOAD))
-            {
-                chkDownloadAll.Checked = true;
-                txtDownloadAllReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD);
-            }
-            if (adminDAO.isON(CommonConstants.AF_DOWNLOAD_EL))
-            {
-                chkDownloadEnglish.Checked = true;
-                txtDownloadEnglishReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD_EL);
-            }
-            if (adminDAO.isON(CommonConstants.AF_DOWNLOAD_IT))
-            {
-                chkDownloadIT.Checked = true;
-                txtDownloadITReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD_IT);
-            }
-            if (adminDAO.isON(CommonConstants.AF_DOWNLOAD_UNI))
-            {
-                chkDownloadUni.Checked = true;
-                txtDownloadUniReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD_UNI);
-            }
-            if (adminDAO.isON(CommonConstants.AF_EMAIL_SEND))
-            {
-                chkEmailSending.Checked = true;
-                txtEmailSendReason.Text = adminDAO.getReason(CommonConstants.AF_EMAIL_SEND);
-            }
-            if (adminDAO.isON(CommonConstants.AF_LOGIN))
-            {
-                chkLogin.Checked = true;
-                txtLoginReason.Text = adminDAO.getReason(CommonConstants.AF_LOGIN);
-            }
-            if (adminDAO.isON(CommonConstants.AF_NEWS_POST))
-            {
-                chkNewsPost.Checked = true;
-                txtNewsPostReason.Text = adminDAO.getReason(CommonConstants.AF_NEWS_POST);
-            }
-            if (adminDAO.isON(CommonConstants.AF_NEWS_VIEW))
-            {
-                chkNewsView.Checked = true;
-                txtNewsViewReason.Text = adminDAO.getReason(CommonConstants.AF_NEWS_VIEW);
-            }
-            if (adminDAO.isON(CommonConstants.AF_PREVIEW_ARTICLE))
-            {
-                chkPreview.Checked = true;
-                txtPreviewReason.Text = adminDAO.getReason(CommonConstants.AF_PREVIEW_ARTICLE);
-            }
-            if (adminDAO.isON(CommonConstants.AF_REGISTRY))
-            {
-                chkRegistry.Checked = true;
-                txtRegistryReason.Text = adminDAO.getReason(CommonConstants.AF_REGISTRY);
-            }
-            if (adminDAO.isON(CommonConstants.AF_SEARCH))
-            {
-                chkSearch.Checked = true;
-                txtSearchReason.Text = adminDAO.getReason(CommonConstants.AF_SEARCH);
-            }
-            if (adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION))
-            {
-                chkUndercontruction.Checked = true;
-                txtUndercontructionReason.Text = adminDAO.getReason(CommonConstants.AF_UNDERCONTRUCTION);
-            }
-            if (adminDAO.isON(CommonConstants.AF_UPLOAD))
-            {
-                chkUploadAll.Checked = true;
-                txtUploadAllReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD);
-            }
-            if (adminDAO.isON(CommonConstants.AF_UPLOAD_EL))
-            {
-                chkUploadEnglish.Checked = true;
-                txtUploadEnglishReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD_EL);
-            }
-            if (adminDAO.isON(CommonConstants.AF_UPLOAD_IT))
-            {
-                chkUploadIT.Checked = true;
-                txtUploadITReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD_UNI);
-            }
-            if (adminDAO.isON(CommonConstants.AF_UPLOAD_UNI))
-            {
-                chkUploadUni.Checked = true;
-                txtUploadUniReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD_UNI);
-            }
+            txtAdsReason.Text = adminDAO.getReason(CommonConstants.AF_ADS);
+            chkAds.Checked = adminDAO.isON(CommonConstants.AF_ADS);
+            chkAnnoucement.Checked = adminDAO.isON(CommonConstants.AF_ANNOUCEMENT);
+
+            ltktDAO.Control controlDAO = new ltktDAO.Control();
+            txtAnnoucementMessage.Text = controlDAO.getValueString(CommonConstants.CF_ANNOUCEMENT);
+
+            chkComment.Checked = adminDAO.isON(CommonConstants.AF_COMMENT);
+            txtCommentReason.Text = adminDAO.getReason(CommonConstants.AF_COMMENT);
+
+            chkCommentEasy.Checked = adminDAO.isON(CommonConstants.AF_COMMENT_EASY);
+            txtCommentEasyReason.Text = adminDAO.getReason(CommonConstants.AF_COMMENT_EASY);
+
+            chkContact.Checked = adminDAO.isON(CommonConstants.AF_CONTACT);
+            txtContactReason.Text = adminDAO.getReason(CommonConstants.AF_CONTACT);
+
+            chkDownloadAll.Checked = adminDAO.isON(CommonConstants.AF_DOWNLOAD);
+            txtDownloadAllReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD);
+
+            chkDownloadEnglish.Checked = adminDAO.isON(CommonConstants.AF_DOWNLOAD_EL);
+            txtDownloadEnglishReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD_EL);
+
+            chkDownloadIT.Checked = adminDAO.isON(CommonConstants.AF_DOWNLOAD_IT);
+            txtDownloadITReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD_IT);
+
+            chkDownloadUni.Checked = adminDAO.isON(CommonConstants.AF_DOWNLOAD_UNI);
+            txtDownloadUniReason.Text = adminDAO.getReason(CommonConstants.AF_DOWNLOAD_UNI);
+
+            chkEmailSending.Checked = adminDAO.isON(CommonConstants.AF_EMAIL_SEND);
+            txtEmailSendReason.Text = adminDAO.getReason(CommonConstants.AF_EMAIL_SEND);
+
+            chkLogin.Checked = adminDAO.isON(CommonConstants.AF_LOGIN);
+            txtLoginReason.Text = adminDAO.getReason(CommonConstants.AF_LOGIN);
+
+            chkNewsPost.Checked = adminDAO.isON(CommonConstants.AF_NEWS_POST);
+            txtNewsPostReason.Text = adminDAO.getReason(CommonConstants.AF_NEWS_POST);
+
+            chkNewsView.Checked = adminDAO.isON(CommonConstants.AF_NEWS_VIEW);
+            txtNewsViewReason.Text = adminDAO.getReason(CommonConstants.AF_NEWS_VIEW);
+
+            chkPreview.Checked = adminDAO.isON(CommonConstants.AF_PREVIEW_ARTICLE);
+            txtPreviewReason.Text = adminDAO.getReason(CommonConstants.AF_PREVIEW_ARTICLE);
+
+            chkRegistry.Checked = adminDAO.isON(CommonConstants.AF_REGISTRY);
+            txtRegistryReason.Text = adminDAO.getReason(CommonConstants.AF_REGISTRY);
+
+            chkSearch.Checked = adminDAO.isON(CommonConstants.AF_SEARCH);
+            txtSearchReason.Text = adminDAO.getReason(CommonConstants.AF_SEARCH);
+
+            chkUndercontruction.Checked = adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION);
+            txtUndercontructionReason.Text = adminDAO.getReason(CommonConstants.AF_UNDERCONTRUCTION);
+
+            chkUploadAll.Checked = adminDAO.isON(CommonConstants.AF_UPLOAD);
+            txtUploadAllReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD);
+
+            chkUploadEnglish.Checked = adminDAO.isON(CommonConstants.AF_UPLOAD_EL);
+            txtUploadEnglishReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD_EL);
+
+            chkUploadIT.Checked = adminDAO.isON(CommonConstants.AF_UPLOAD_IT);
+            txtUploadITReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD_UNI);
+            chkUploadUni.Checked = adminDAO.isON(CommonConstants.AF_UPLOAD_UNI);
+            txtUploadUniReason.Text = adminDAO.getReason(CommonConstants.AF_UPLOAD_UNI);
         }
         private void loadMessageForCheckbox()
         {
