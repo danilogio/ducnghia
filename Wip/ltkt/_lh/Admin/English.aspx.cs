@@ -14,6 +14,8 @@ namespace ltkt.Admin
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.English englishDAO = new ltktDAO.English();
+        EventLog log = new EventLog();
+        private const int NoOfInformacticsPerPage = 8;
 
         private const int NoOfEnglishPerPage = 10;
 
@@ -35,7 +37,7 @@ namespace ltkt.Admin
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
                     liTableHeader.Text = CommonConstants.PAGE_ADMIN_ENGLISH_NAME;
-
+                    pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
                 }
             }
@@ -48,10 +50,125 @@ namespace ltkt.Admin
 
         }
 
-
-        private void showEnglishs(IEnumerable<tblEnglish> lst, int page, string action, string key)
+        private void pageLoad(object sender, EventArgs e, tblUser user)
         {
-            int totalEnglish = 0;
+            bool isDeleted = false;
+            try
+            {
+                int page = 1;
+                string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                string sPage = Request.QueryString[CommonConstants.REQ_PAGE];
+                string state = Request.QueryString[CommonConstants.REQ_STATE];
+                if (BaseServices.isNullOrBlank(action))
+                {
+                    action = CommonConstants.ACT_SEARCH;
+                }
+                if (BaseServices.isNullOrBlank(sPage))
+                {
+                    sPage = CommonConstants.PAGE_NUMBER_FIRST;
+                }
+                if (BaseServices.isNullOrBlank(state))
+                {
+                    state = CommonConstants.ALL;
+                }
+                page = Convert.ToInt32(sPage);
+                 //action is Search
+                if (action == CommonConstants.ACT_SEARCH)
+                {
+                    viewPanel.Visible = true;
+                    detailPanel.Visible = false;
+                    messagePanel.Visible = false;
+                    IEnumerable<tblEnglish> lst = null;
+                    string key = Request.QueryString[CommonConstants.REQ_KEY];
+                    int totalRecord = 0;
+                    if (BaseServices.isNullOrBlank(key))
+                    {
+                        key = CommonConstants.ALL;
+                    }
+                    else
+                    {
+                        key = BaseServices.nullToBlank(key);
+                    }
+                    if (key == CommonConstants.ALL)
+                    {
+                        if (state == CommonConstants.ALL)// key = ALL and state = ALL
+                        {
+                            lst = englishDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
+                        {
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
+                        {
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
+                        {
+                        }
+                    }
+                    else
+                    {
+                        if (state == CommonConstants.ALL)// key = ALL and state = ALL
+                        {
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
+                        {
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
+                        {
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
+                        {
+                        }
+                    }
+                    // show data
+                    bool isOK = false;
+                    if (lst != null)
+                    {
+                        if (lst.Count() > 0)
+                        {
+                            showEnglishs(lst, totalRecord, page, action, key, state);
+                            isOK = true;
+                        }
+
+                    }
+                    if (!isOK)
+                    {
+                        showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        EnglishTable.Visible = false;
+                        return;
+                    }
+                }
+                else if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
+                {
+                }
+                else if (action == CommonConstants.ACT_DELETE)
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_E_LINK_INVALID);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.HelpLink);
+
+                Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL
+                                              + "1");
+            }
+            if (isDeleted)
+            {
+                Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS);
+            } 
+        }
+        private void showEnglishs(IEnumerable<tblEnglish> lst, int totalEnglish, int page, string action, string key, string state)
+        {
             // Computing total pages
             int totalPages;
             int mod = totalEnglish % NoOfEnglishPerPage;
@@ -88,6 +205,11 @@ namespace ltkt.Admin
                 postedCell.Style["width"] = "80px";
                 postedCell.Text = bs.convertDateToString(english.Posted);
 
+                TableCell classCell = new TableCell();
+                classCell.CssClass = "table-cell";
+                classCell.Style["width"] = "80px";
+                classCell.Text = "Unknown";
+
                 TableCell authorCell = new TableCell();
                 authorCell.CssClass = "table-cell";
                 authorCell.Style["width"] = "60px";
@@ -119,6 +241,7 @@ namespace ltkt.Admin
                 englishRow.Cells.Add(noCell);
                 englishRow.Cells.Add(titleCell);
                 englishRow.Cells.Add(postedCell);
+                englishRow.Cells.Add(classCell);
                 englishRow.Cells.Add(authorCell);
                 englishRow.Cells.Add(stateCell);
                 englishRow.Cells.Add(actionCell);
@@ -156,6 +279,26 @@ namespace ltkt.Admin
                                                                              CommonConstants.TXT_NEXT_PAGE);
                 }
             }
+        }
+        protected void btnEdit_Click(object sender, EventArgs e)
+        { }
+        /// <summary>
+        /// use to show message information on mode SEARCH, DELETE
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showInfoMessage(string infoText)
+        {
+            liMessage.Text = infoText;
+            messagePanel.Visible = true;
+        }
+        /// <summary>
+        /// use to show message error on mode EDIT, VIEW
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showErrorMessage(string errorText)
+        {
+            liErrorMessage.Text = errorText;
+            ErrorMessagePanel.Visible = true;
         }
     }
 }

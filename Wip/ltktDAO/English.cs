@@ -834,6 +834,15 @@ namespace ltktDAO
                                            select p).Take(numberRecord);
             return lst;
         }
+
+        public IEnumerable<tblEnglish>  fetchInfList(int start, int count)
+        {
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
         public IEnumerable<tblEnglish> searchArticleByClassAndTime(ArticleSCO articleSCO)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);

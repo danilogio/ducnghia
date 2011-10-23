@@ -280,10 +280,6 @@ namespace ltkt.Admin
                     {
                         btnEdit.Visible = false;
                     }
-
-
-
-
                 }
                 else if (action == CommonConstants.ACT_DELETE)
                 {
