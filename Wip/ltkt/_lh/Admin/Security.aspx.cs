@@ -328,10 +328,11 @@ namespace ltkt.Admin
             {
                 writeException(ex);
             }
+
             //reload data when finish
             try
             {
-                Session[CommonConstants.SES_FIRST_LOAD] = false;
+                Session[CommonConstants.SES_FIRST_LOAD] = true;
                 loadData();
                 loadMessageForCheckbox();
                 turnOffMessage();
@@ -441,7 +442,7 @@ namespace ltkt.Admin
                     saVO = (SecurityAdminVO)arraySAVO[5];
                     chkDownloadAll.Checked = saVO.Ischecked;
                     txtDownloadAllReason.Text = saVO.SReason;
-                    
+
                     //Download Uni
                     saVO = (SecurityAdminVO)arraySAVO[6];
                     chkDownloadUni.Checked = saVO.Ischecked;
