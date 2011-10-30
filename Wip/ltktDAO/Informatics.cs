@@ -674,7 +674,7 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <returns></returns>
         public Boolean insertInformatic(string _title, int _type, string _content,
-            string _author, DateTime _posted, string _location, string _tag)
+            string _author, DateTime _posted, int _leitmotif, string _location, string _tag)
         {
 
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -687,6 +687,7 @@ namespace ltktDAO
                     record.Title = _title;
                     record.Type = _type;
                     record.Contents = _content;
+                    record.Leitmotif = _leitmotif;
                     record.Author = _author;
                     record.Posted = _posted;
                     record.Point = 0;

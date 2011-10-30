@@ -658,7 +658,7 @@ namespace ltktDAO
         /// <param name="_tag"></param>
         /// <returns></returns>
         public Boolean insertEnglish(string _title, int _type, string _content,
-            string _author, DateTime _posted, string _location, string _tag)
+            string _author, DateTime _posted, int _class, string _location, string _tag)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -672,6 +672,7 @@ namespace ltktDAO
                     record.Contents = _content;
                     record.Author = _author;
                     record.Posted = _posted;
+                    record.Class = _class;
                     record.Location = _location;
                     record.State = 0;
                     record.Point = 0;

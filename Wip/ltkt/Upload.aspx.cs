@@ -118,10 +118,14 @@ namespace ltkt
                 if (fileContent.HasFile)
                 {
                     string folder = CommonConstants.BLANK;
+                    
                     // 0 - ltdh
                     // 1 - english
                     // 2 - tin học
                     int type = ddlSubject.SelectedIndex;
+                    int _leitmotif = 0;
+                    int _class = 0;
+
                     switch (type)
                     {
                         case 0:
@@ -135,12 +139,14 @@ namespace ltkt
                             {
                                 folder = CommonConstants.FOLDER_IT;
                                 folder += Convert.ToString(DateTime.Now.Year);
+                                _leitmotif = bs.getLeitmotif(ddlInfType.SelectedValue, ddlInfOffice.SelectedValue, ddlInfTip.SelectedValue);
                                 break;
                             }
                         case 2:
                             {
                                 folder = CommonConstants.FOLDER_EL;
                                 folder += Convert.ToString(DateTime.Now.Year);
+                                _class = bs.getClassEng(ddlEnglishType.SelectedValue, ddlEnglishCommon.SelectedValue, ddlEnglishMajor.SelectedValue, ddlEnglishCert.SelectedValue);
                                 break;
                             }
                     }
@@ -210,6 +216,7 @@ namespace ltkt
                                                                             txtboxSummary.Text,
                                                                             user.Username,
                                                                             DateTime.Now,
+                                                                            _leitmotif,
                                                                             fileSave,
                                                                             txtboxTag.Text);
                                     break;
@@ -221,6 +228,7 @@ namespace ltkt
                                                                     txtboxSummary.Text,
                                                                     user.Username,
                                                                     DateTime.Now,
+                                                                    _class,
                                                                     fileSave,
                                                                     txtboxTag.Text);
                                     break;
@@ -300,7 +308,15 @@ namespace ltkt
         {
             if (ddlEnglishCommon.Items.Count == 0)
             {
-                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_1_TO_9_NAME, CommonConstants.PARAM_EL_CLASS_1_TO_9));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_1_NAME, CommonConstants.PARAM_EL_CLASS_1));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_2_NAME, CommonConstants.PARAM_EL_CLASS_2));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_3_NAME, CommonConstants.PARAM_EL_CLASS_3));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_4_NAME, CommonConstants.PARAM_EL_CLASS_4));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_5_NAME, CommonConstants.PARAM_EL_CLASS_5));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_6_NAME, CommonConstants.PARAM_EL_CLASS_6));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_7_NAME, CommonConstants.PARAM_EL_CLASS_7));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_8_NAME, CommonConstants.PARAM_EL_CLASS_8));
+                ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_9_NAME, CommonConstants.PARAM_EL_CLASS_9));
                 ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_10_NAME, CommonConstants.PARAM_EL_CLASS_10));
                 ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_11_NAME, CommonConstants.PARAM_EL_CLASS_11));
                 ddlEnglishCommon.Items.Add(new ListItem(CommonConstants.PARAM_EL_CLASS_12_NAME, CommonConstants.PARAM_EL_CLASS_12));
@@ -311,10 +327,14 @@ namespace ltkt
         {
             if (ddlEnglishMajor.Items.Count == 0)
             {
-                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_MATH_ECO_NAME, CommonConstants.PARAM_EL_MATH_ECO));
-                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_CHEM_BIO_MAT_NAME, CommonConstants.PARAM_EL_CHEM_BIO_MAT));
-                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_PHY_TELE_IT_NAME, CommonConstants.PARAM_EL_PHY_TELE_IT));
-                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_OTHER_MJ_NAME, CommonConstants.PARAM_EL_OTHER_MJ));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_MATH_NAME, CommonConstants.PARAM_EL_MATH));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_ECO_NAME, CommonConstants.PARAM_EL_ECO));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_CHEM_NAME, CommonConstants.PARAM_EL_CHEM));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_BIO_NAME, CommonConstants.PARAM_EL_BIO));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_MAT_NAME, CommonConstants.PARAM_EL_MAT));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_PHY_NAME, CommonConstants.PARAM_EL_PHY));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_TELE_NAME, CommonConstants.PARAM_EL_TELE));
+                ddlEnglishMajor.Items.Add(new ListItem(CommonConstants.PARAM_EL_IT_NAME, CommonConstants.PARAM_EL_IT));
             }
         }
 
@@ -325,7 +345,9 @@ namespace ltkt
                 ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_TOEFL_NAME, CommonConstants.PARAM_EL_TOEFL));
                 ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_TOEIC_NAME, CommonConstants.PARAM_EL_TOEIC));
                 ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_IELTS_NAME, CommonConstants.PARAM_EL_IELTS));
-                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_ABC_NAME, CommonConstants.PARAM_EL_ABC));
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_A_NAME, CommonConstants.PARAM_EL_A));
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_B_NAME, CommonConstants.PARAM_EL_B));
+                ddlEnglishCert.Items.Add(new ListItem(CommonConstants.PARAM_EL_C_NAME, CommonConstants.PARAM_EL_C));
             }
         }
 

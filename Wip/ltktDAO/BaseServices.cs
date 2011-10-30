@@ -582,6 +582,163 @@ namespace ltktDAO
 
             return folder;
         }
+
+        public int getLeitmotif(string type, string office, string tip)
+        {
+            int _leitmotif = 0;
+            switch (type)
+            {
+                case CommonConstants.PARAM_IT_OFFICE:
+                    switch (office)
+                    {
+                        case CommonConstants.PARAM_IT_OFFICE_EXCEL:
+                            _leitmotif = 1;
+                            break;
+                        case CommonConstants.PARAM_IT_OFFICE_PP:
+                            _leitmotif = 2;
+                            break;
+                        case CommonConstants.PARAM_IT_OFFICE_ACCESS:
+                            _leitmotif = 3;
+                            break;
+                        case CommonConstants.PARAM_IT_OFFICE_WORD:
+                            _leitmotif = 4;
+                            break;
+                        default:
+                            _leitmotif = 0;
+                            break;
+                    }
+                    break;
+                case CommonConstants.PARAM_IT_TIP:
+                    switch (tip)
+                    {
+                        case CommonConstants.PARAM_IT_TIP_SIMPLE:
+                            _leitmotif = 10;
+                            break;
+                        case CommonConstants.PARAM_IT_TIP_ADVANCE:
+                            _leitmotif = 20;
+                            break;
+                        default:
+                            _leitmotif = 0;
+                            break;
+                    }
+                    break;
+            }
+
+            return _leitmotif;
+        }
+
+        public int getClassEng(string type, string common, string major, string cert)
+        {
+            int _class = 0;
+
+            switch (type)
+            {
+                case CommonConstants.PARAM_EL_COMMON:
+                    switch (common)
+                    {
+                        case CommonConstants.PARAM_EL_CLASS_1:
+                            _class = 1;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_2:
+                            _class = 2;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_3:
+                            _class = 3;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_4:
+                            _class = 4;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_5:
+                            _class = 5;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_6:
+                            _class = 6;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_7:
+                            _class = 7;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_8:
+                            _class = 8;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_9:
+                            _class = 9;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_10:
+                            _class = 10;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_11:
+                            _class = 11;
+                            break;
+                        case CommonConstants.PARAM_EL_CLASS_12:
+                            _class = 12;
+                            break;
+                        default:
+                            _class = 0;
+                            break;
+                    }
+                    break;
+                case CommonConstants.PARAM_EL_MAJOR:
+                    switch (major)
+                    {
+                        case CommonConstants.PARAM_EL_MATH:
+                            _class = 20;
+                            break;
+                        case CommonConstants.PARAM_EL_ECO:
+                            _class = 21;
+                            break;
+                        case CommonConstants.PARAM_EL_CHEM:
+                            _class = 22;
+                            break;
+                        case CommonConstants.PARAM_EL_BIO:
+                            _class = 23;
+                            break;
+                        case CommonConstants.PARAM_EL_MAT:
+                            _class = 24;
+                            break;
+                        case CommonConstants.PARAM_EL_PHY:
+                            _class = 25;
+                            break;
+                        case CommonConstants.PARAM_EL_TELE:
+                            _class = 26;
+                            break;
+                        case CommonConstants.PARAM_EL_IT:
+                            _class = 27;
+                            break;
+                        default:
+                            _class = 0;
+                            break;
+                    }
+                    break;
+                case CommonConstants.PARAM_EL_CERT:
+                    switch (cert)
+                    {
+                        case CommonConstants.PARAM_EL_TOEFL:
+                            _class = 30;
+                            break;
+                        case CommonConstants.PARAM_EL_TOEIC:
+                            _class = 40;
+                            break;
+                        case CommonConstants.PARAM_EL_IELTS:
+                            _class = 50;
+                            break;
+                        case CommonConstants.PARAM_EL_A:
+                            _class = 60;
+                            break;
+                        case CommonConstants.PARAM_EL_B:
+                            _class = 61;
+                            break;
+                        case CommonConstants.PARAM_EL_C:
+                            _class = 62;
+                            break;
+                        default:
+                            _class = 0;
+                            break;
+                    }
+                    break;
+            }
+
+            return _class;
+        }
     }
     
 }

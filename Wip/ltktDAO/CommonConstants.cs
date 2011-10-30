@@ -1657,13 +1657,85 @@ namespace ltktDAO
             /// </summary>
             public const string PARAM_EL_CERT_NAME = "Chứng chỉ";
             /// <summary>
-            /// Class 1 to 9
+            /// Class 1
             /// </summary>
             public const string PARAM_EL_CLASS_1_TO_9 = "1-9";
             /// <summary>
-            /// Class 1 to 9
+            /// Class 1
             /// </summary>
-            public const string PARAM_EL_CLASS_1_TO_9_NAME = "Lớp 1-9";
+            public const string PARAM_EL_CLASS_1_TO_9_NAME = "Lớp 1";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_1 = "1";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_1_NAME = "Lớp 1";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_2 = "2";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_2_NAME = "Lớp 2";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_3 = "3";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_3_NAME = "Lớp 3";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_4 = "4";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_4_NAME = "Lớp 4";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_5 = "5";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_5_NAME = "Lớp 5";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_6 = "6";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_6_NAME = "Lớp 6";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_7 = "7";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_7_NAME = "Lớp 7";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_8 = "8";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_8_NAME = "Lớp 8";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_9 = "9";
+            /// <summary>
+            /// Class 1
+            /// </summary>
+            public const string PARAM_EL_CLASS_9_NAME = "Lớp 9";
             /// <summary>
             /// Class 1 to 9
             /// </summary>
@@ -1688,30 +1760,76 @@ namespace ltktDAO
             /// Class 1 to 9
             /// </summary>
             public const string PARAM_EL_CLASS_12_NAME = "Lớp 12";
-            /// <summary>
-            /// Mathematics and Economic
-            /// </summary>
+
             public const string PARAM_EL_MATH_ECO = "math-eco";
-            /// <summary>
-            /// Mathematics and Economic
-            /// </summary>
-            public const string PARAM_EL_MATH_ECO_NAME = "Toán - Kinh tế";
-            /// <summary>
-            /// Chemical - Biography - Material
-            /// </summary>
+
             public const string PARAM_EL_CHEM_BIO_MAT = "chem-bio-mat";
-            /// <summary>
-            /// Chemical - Biography - Material
-            /// </summary>
-            public const string PARAM_EL_CHEM_BIO_MAT_NAME = "Hóa - Sinh - KHVL";
-            /// <summary>
-            /// Physical - Telecom - IT
-            /// </summary>
+
             public const string PARAM_EL_PHY_TELE_IT = "phy-tele-it";
             /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_MATH = "math";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_MATH_NAME = "Toán";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_ECO = "eco";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_ECO_NAME = "Kinh tế";
+            /// <summary>
+            /// Chemical - Biography - Material
+            /// </summary>
+            public const string PARAM_EL_CHEM = "chem";
+            /// <summary>
+            /// Chemical - Biography - Material
+            /// </summary>
+            public const string PARAM_EL_CHEM_NAME = "Hóa";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_BIO = "bio";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_BIO_NAME = "Sinh học";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_MAT = "mat";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_MAT_NAME = "Khoa học vật liệu";
+            /// <summary>
             /// Physical - Telecom - IT
             /// </summary>
-            public const string PARAM_EL_PHY_TELE_IT_NAME = "Lý - Viễn thông - CNTT";
+            public const string PARAM_EL_PHY = "phy";
+            /// <summary>
+            /// Physical - Telecom - IT
+            /// </summary>
+            public const string PARAM_EL_PHY_NAME = "Vật lý";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_TELE = "tele";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_TELE_NAME = "Viễn thông";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_IT = "it";
+            /// <summary>
+            /// Mathematics and Economic
+            /// </summary>
+            public const string PARAM_EL_IT_NAME = "Công nghệ thông tin";
             /// <summary>
             /// other major
             /// </summary>
@@ -1752,6 +1870,30 @@ namespace ltktDAO
             /// A-B-C
             /// </summary>
             public const string PARAM_EL_ABC_NAME = "A-B-C";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_A = "a";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_A_NAME = "Chứng chỉ A";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_B = "b";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_B_NAME = "Chứng chỉ B";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_C = "c";
+            /// <summary>
+            /// A-B-C
+            /// </summary>
+            public const string PARAM_EL_C_NAME = "Chứng chỉ C";
             
         
             /// <summary>
