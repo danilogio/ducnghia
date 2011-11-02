@@ -93,31 +93,60 @@ namespace ltkt.Admin
                     {
                         if (state == CommonConstants.ALL)// key = ALL and state = ALL
                         {
-                            lst = englishDAO.fetchInfList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            lst = englishDAO.fetchEnglishList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
+                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
                         {
+                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
                         {
+                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                     }
                     else
                     {
-                        if (state == CommonConstants.ALL)// key = ALL and state = ALL
+                        //change state link
+                        hpkShowAllState.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_EL_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.ALL,
+                                                                                       CommonConstants.CONST_ONE);
+                        hpkShowChecked.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_EL_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.STATE_CHECKED.ToString(),
+                                                                                       CommonConstants.CONST_ONE);
+                        hpkShowUncheck.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_EL_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.STATE_UNCHECK.ToString(),
+                                                                                       CommonConstants.CONST_ONE);
+                        hpkShowBad.NavigateUrl = BaseServices.createMsgByTemplate(CommonConstants.TEMP_ADMIN_EL_URL,
+                                                                                       CommonConstants.ACT_SEARCH,
+                                                                                       key,
+                                                                                       CommonConstants.STATE_BAD.ToString(),
+                                                                                       CommonConstants.CONST_ONE);
+
+                        if (state == CommonConstants.ALL)// key != ALL and state = ALL
                         {
+                            lst = englishDAO.fetchEnglishListWithClass(key, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
+                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
                         {
+                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
                         {
+                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
                         }
                     }
                     // show data
@@ -208,12 +237,12 @@ namespace ltkt.Admin
                 TableCell classCell = new TableCell();
                 classCell.CssClass = "table-cell";
                 classCell.Style["width"] = "80px";
-                classCell.Text = "Unknown";
+                classCell.Text = englishDAO.getClassName(english.Class);
 
                 TableCell authorCell = new TableCell();
                 authorCell.CssClass = "table-cell";
                 authorCell.Style["width"] = "60px";
-                authorCell.Text = englishDAO.getAuthor(english.ID);
+                authorCell.Text = english.Author;
 
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";

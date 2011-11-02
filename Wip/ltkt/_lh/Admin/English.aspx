@@ -38,13 +38,13 @@
                         <li>
                             <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShow19" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=4&page=1">Lớp 1->9 </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShow19" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=19&page=1">Lớp 1->9 </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShow10" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=1&page=1">Lớp 10 </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShow10" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=10&page=1">Lớp 10 </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShow11" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=2&page=1">Lớp 11 </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShow11" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=11&page=1">Lớp 11 </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShow12" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">Lớp 12 </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShow12" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=12&page=1">Lớp 12 </asp:HyperLink></li>
                     </ul>
                 </div>
                 
@@ -53,13 +53,13 @@
                         &nbsp&nbsp&nbsp&nbsp</h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="hpkShowMath" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=10&page=1">CN Toán </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowMath" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=20&page=1">CN Toán </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowEco" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=20&page=1">CN Kinh tế </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowEco" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=21&page=1">CN Kinh tế </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowChem" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">CN Hóa </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowChem" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=22&page=1">CN Hóa </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowBio" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">CN Sinh </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowBio" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=23&page=1">CN Sinh </asp:HyperLink></li>
                     </ul>
                 </div>
                 <div align="left" style="float: left; width: 20%">
@@ -67,13 +67,13 @@
                         &nbsp&nbsp&nbsp&nbsp</h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="hpkShowMat" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">CN KHVL </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowMat" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=24&page=1">CN KHVL </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowPhy" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">CN Vật lý </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowPhy" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=25&page=1">CN Vật lý </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowCom" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">CN Viễn thông </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowCom" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=26&page=1">CN Viễn thông </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowIT" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">CN CNTT </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowIT" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=27&page=1">CN CNTT </asp:HyperLink></li>
                     </ul>
                 </div>
                 <div align="left" style="float: left; width: 20%">
@@ -81,13 +81,13 @@
                         &nbsp&nbsp&nbsp&nbsp</h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="hpkShowToeic" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">TOEIC </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowToeic" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=4049&page=1">TOEIC </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowToefl" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">TOEFL </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowToefl" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3039&page=1">TOEFL </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowIelts" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">IELTS </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowIelts" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=5059&page=1">IELTS </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowABC" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3&page=1">Chứng Chỉ ABC </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowABC" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=abc&page=1">Chứng Chỉ ABC </asp:HyperLink></li>
                     </ul>
                 </div>
                 <div align="left" style="float: left; width: 20%;">
@@ -96,13 +96,13 @@
                     </h3>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
                         <li>
-                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="Informatics.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
+                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
                     </ul>
                 </div>
             </div>

@@ -646,6 +646,11 @@ namespace ltktDAO
         public const int AT_EL_CERT_IELTS_END = 59;
         public const int AT_EL_CERT_ABC_START = 60;
         public const int AT_EL_CERT_ABC_END = 69;
+        public const string AT_EL_CLASS_1_TO_9 = "19";
+        public const string AT_EL_CERT_TOEIC = "4049";
+        public const string AT_EL_CERT_TOEFL = "3039";
+        public const string AT_EL_CERT_IELTS = "5059";
+        public const string AT_EL_ABC = "abc";
         /// <summary>
         /// Anh văn lớp 1
         /// </summary>
@@ -654,6 +659,7 @@ namespace ltktDAO
         /// Anh văn lớp 1
         /// </summary>
         public const string AT_EL_CLASS_1_CODE = "1";
+        public const string AT_EL_CLASS_1_NAME = "Lớp 1";
         /// <summary>
         /// Anh văn lớp 2
         /// </summary>
@@ -662,6 +668,7 @@ namespace ltktDAO
         /// Anh văn lớp 2
         /// </summary>
         public const string AT_EL_CLASS_2_CODE = "2";
+        public const string AT_EL_CLASS_2_NAME = "Lớp 2";
         /// <summary>
         /// Anh văn lớp 3
         /// </summary>
@@ -670,6 +677,7 @@ namespace ltktDAO
         /// Anh văn lớp 3
         /// </summary>
         public const string AT_EL_CLASS_3_CODE = "3";
+        public const string AT_EL_CLASS_3_NAME = "Lớp 3";
         /// <summary>
         /// Anh văn lớp 4
         /// </summary>
@@ -678,6 +686,7 @@ namespace ltktDAO
         /// Anh văn lớp 4
         /// </summary>
         public const string AT_EL_CLASS_4_CODE = "4";
+        public const string AT_EL_CLASS_4_NAME = "Lớp 4";
         /// <summary>
         /// Anh văn lớp 5
         /// </summary>
@@ -686,6 +695,7 @@ namespace ltktDAO
         /// Anh văn lớp 5
         /// </summary>
         public const string AT_EL_CLASS_5_CODE = "5";
+        public const string AT_EL_CLASS_5_NAME = "Lớp 5";
         /// <summary>
         /// Anh văn lớp 6
         /// </summary>
@@ -694,6 +704,7 @@ namespace ltktDAO
         /// Anh văn lớp 6
         /// </summary>
         public const string AT_EL_CLASS_6_CODE = "6";
+        public const string AT_EL_CLASS_6_NAME = "Lớp 6";
         /// <summary>
         /// Anh văn lớp 7
         /// </summary>
@@ -702,6 +713,7 @@ namespace ltktDAO
         /// Anh văn lớp 7
         /// </summary>
         public const string AT_EL_CLASS_7_CODE = "7";
+        public const string AT_EL_CLASS_7_NAME = "Lớp 7";
         /// <summary>
         /// Anh văn lớp 8
         /// </summary>
@@ -710,6 +722,7 @@ namespace ltktDAO
         /// anh văn lớp 8
         /// </summary>
         public const string AT_EL_CLASS_8_CODE = "8";
+        public const string AT_EL_CLASS_8_NAME = "Lớp 8";
         /// <summary>
         /// Anh văn lớp 9
         /// </summary>
@@ -718,6 +731,7 @@ namespace ltktDAO
         /// Anh văn lớp 9
         /// </summary>
         public const string AT_EL_CLASS_9_CODE = "9";
+        public const string AT_EL_CLASS_9_NAME = "Lớp 9";
         /// <summary>
         /// Anh văn lớp 10
         /// </summary>
@@ -726,6 +740,7 @@ namespace ltktDAO
         /// Anh văn lớp 10
         /// </summary>
         public const string AT_EL_CLASS_10_CODE = "10";
+        public const string AT_EL_CLASS_10_NAME = "Lớp 10";
         /// <summary>
         /// Anh văn lớp 11
         /// </summary>
@@ -734,6 +749,7 @@ namespace ltktDAO
         /// Anh văn 11
         /// </summary>
         public const string AT_EL_CLASS_11_CODE = "11";
+        public const string AT_EL_CLASS_11_NAME = "Lớp 11";
         /// <summary>
         /// Anh văn lớp 12
         /// </summary>
@@ -742,86 +758,107 @@ namespace ltktDAO
         /// Anh văn 12
         /// </summary>
         public const string AT_EL_CLASS_12_CODE = "12";
+        public const string AT_EL_CLASS_12_NAME = "Lớp 12";
         /// <summary>
         /// CN Toán
         /// </summary>
         public const int AT_EL_MJ_MATH = 20;
+        public const string AT_EL_MJ_MATH_NAME = "CN Toán";
         /// <summary>
         /// CN Kinh tế
         /// </summary>
         public const int AT_EL_MJ_ECO = 21;
+        public const string AT_EL_MJ_ECO_NAME = "CN Kinh tế";
         /// <summary>
         /// CN Hóa
         /// </summary>
         public const int AT_EL_MJ_CHEM = 22;
+        public const string AT_EL_MJ_CHEM_NAME = "CN Hóa";
         /// <summary>
         /// CN Sinh
         /// </summary>
         public const int AT_EL_MJ_BIO = 23;
+        public const string AT_EL_MJ_BIO_NAME = "CN Sinh";
         /// <summary>
         /// CN Khoa học vật liệu
         /// </summary>
         public const int AT_EL_MJ_MATERIAL = 24;
+        public const string AT_EL_MJ_MATERIAL_NAME = "CN KHVL";
         /// <summary>
         /// CN Lý
         /// </summary>
         public const int AT_EL_MJ_PHY = 25;
+        public const string AT_EL_MJ_PHY_NAME = "CN Vật lý";
         /// <summary>
         /// CN viễn thông
         /// </summary>
         public const int AT_EL_MJ_TELE = 26;
+        public const string AT_EL_MJ_TELE_NAME = "CN Viễn thông";
         /// <summary>
         /// CN CNTT
         /// </summary>
         public const int AT_EL_MJ_IT = 27;
+        public const string AT_EL_MJ_IT_NAME = "CN CNTT";
         /// <summary>
         /// TOEIC 300
         /// </summary>
         public const int AT_EL_TOEIC_300 = 40;
+        public const string AT_EL_TOEIC_300_NAME = "TOEIC 300";
         /// <summary>
         /// TOEIC 400
         /// </summary>
         public const int AT_EL_TOEIC_400 = 41;
+        public const string AT_EL_TOEIC_400_NAME = "TOEIC 400";
         /// <summary>
         /// TOEIC 500
         /// </summary>
         public const int AT_EL_TOEIC_500 = 42;
+        public const string AT_EL_TOEIC_500_NAME = "TOEIC 500";
         /// <summary>
         /// TOEIC 600
         /// </summary>
         public const int AT_EL_TOEIC_600 = 43;
+        public const string AT_EL_TOEIC_600_NAME = "TOEIC 600";
         /// <summary>
         /// TOEIC 700
         /// </summary>
         public const int AT_EL_TOEIC_700 = 44;
+        public const string AT_EL_TOEIC_700_NAME = "TOEIC 700";
         /// <summary>
         /// TOEIC 800
         /// </summary>
         public const int AT_EL_TOEIC_800 = 45;
+        public const string AT_EL_TOEIC_800_NAME = "TOEIC 800";
         /// <summary>
         /// TOEIC 900
         /// </summary>
         public const int AT_EL_TOEIC_900 = 46;
+        public const string AT_EL_TOEIC_900_NAME = "TOEIC 900";
         /// <summary>
         /// Chứng chỉ A
         /// </summary>
         public const int AT_EL_CERT_A = 60;
+        public const string AT_EL_CERT_A_NAME = "Chứng chỉ A";
         /// <summary>
         /// Chứng chỉ B
         /// </summary>
         public const int AT_EL_CERT_B = 61;
+        public const string AT_EL_CERT_B_NAME = "Chứng chỉ B";
         /// <summary>
         /// Chứng chỉ C
         /// </summary>
         public const int AT_EL_CERT_C = 62;
+        public const string AT_EL_CERT_C_NAME = "Chứng chỉ C";
         /// <summary>
         /// TOEFL
         /// </summary>
         public const int AT_EL_TOEFL = 30;
+        public const string AT_EL_TOEFL_NAME = "TOEFL";
         /// <summary>
         /// IELTS
         /// </summary>
         public const int AT_EL_IELTS = 50;
+        public const string AT_EL_IELTS_NAME = "IELTS";
         #endregion
 
         #endregion
@@ -2097,7 +2134,10 @@ namespace ltktDAO
         /// url template for admin it
         /// </summary>
         public const string TEMP_ADMIN_IT_URL = "~/_lh/Admin/" + PAGE_ADMIN_INFORMATICS + "?" + REQ_ACTION + "={0}&" + REQ_KEY + "={1}&" + REQ_STATE + "={2}&" + REQ_PAGE + "={3}";
-
+        /// <summary>
+        /// url template for admin english
+        /// </summary>
+        public const string TEMP_ADMIN_EL_URL = "~/_lh/Admin/" + PAGE_ADMIN_ENGLISH + "?" + REQ_ACTION + "={0}&" + REQ_KEY + "={1}&" + REQ_STATE + "={2}&" + REQ_PAGE + "={3}";
         /// <summary>
         /// image thumbnail for article
         /// </summary>

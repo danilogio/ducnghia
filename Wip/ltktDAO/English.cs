@@ -836,13 +836,96 @@ namespace ltktDAO
             return lst;
         }
 
-        public IEnumerable<tblEnglish>  fetchInfList(int start, int count)
+        public IEnumerable<tblEnglish>  fetchEnglishList(int start, int count)
         {
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
             return lst;
+        }
+        public IEnumerable<tblEnglish> fetchEnglishList(int state, int start, int count)
+        {
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                              where r.State == state
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblEnglish> fetchEnglishListWithClass(string _class, int start, int count)
+        {
+            int startIdx = 0;
+            int endIdx = 0;
+            findIndex(_class, out startIdx, out endIdx);
+            if (startIdx == -1)
+                return null;
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                           where r.Class >= startIdx && r.Class <= endIdx
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblEnglish> fetchEnglishList(string _class, int state, int start, int count)
+        {
+            int startIdx = 0;
+            int endIdx = 0;
+            findIndex(_class, out startIdx, out endIdx);
+            if (startIdx == -1)
+                return null;
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                           where r.Class >= startIdx && r.Class <= endIdx 
+                                           && r.State == state
+                                              orderby r.Posted descending
+                                              select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        private void findIndex(string _class, out int start, out int end)
+        {
+            start = 0;
+            end = 0;
+            if (BaseServices.isNullOrBlank(_class))
+            {
+                start = -1;
+                end = -1;
+            }
+            if (_class.Length > 5)
+            {
+                start = -1;
+                end = -1;
+            }
+            if (_class == CommonConstants.AT_EL_CLASS_1_TO_9)
+            {
+                start = CommonConstants.AT_EL_CLASS_START;
+                end = CommonConstants.AT_EL_CLASS_9;
+            }
+            else if (_class == CommonConstants.AT_EL_CERT_TOEIC)
+            {
+                start = CommonConstants.AT_EL_CERT_TOEIC_START;
+                end = CommonConstants.AT_EL_CERT_TOEIC_END;
+            }
+            else if (_class == CommonConstants.AT_EL_ABC)
+            {
+                start = CommonConstants.AT_EL_CERT_ABC_START;
+                end = CommonConstants.AT_EL_CERT_ABC_END;
+            }
+            else if (_class == CommonConstants.AT_EL_CERT_IELTS)
+            {
+                start = CommonConstants.AT_EL_CERT_IELTS_START;
+                end = CommonConstants.AT_EL_CERT_IELTS_END;
+            }
+            else if (_class == CommonConstants.AT_EL_CERT_TOEFL)
+            {
+                start = CommonConstants.AT_EL_CERT_TOEFL_START;
+                end = CommonConstants.AT_EL_CERT_TOEFL_END;
+            }
+            else
+            {
+                start = BaseServices.convertStringToInt(_class);
+                end = start;
+            }
         }
         public IEnumerable<tblEnglish> searchArticleByClassAndTime(ArticleSCO articleSCO)
         {
@@ -1208,6 +1291,117 @@ namespace ltktDAO
             return (from r in DB.tblEnglishes select r).Count();
         }
 
+        public string getClassName(int _code)
+        {
+            switch (_code)
+            {
+                case CommonConstants.AT_EL_CLASS_1:
+                    {
+                        return CommonConstants.AT_EL_CLASS_1_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_2:
+                    {
+                        return CommonConstants.AT_EL_CLASS_2_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_3:
+                    {
+                        return CommonConstants.AT_EL_CLASS_3_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_4:
+                    {
+                        return CommonConstants.AT_EL_CLASS_4_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_5:
+                    {
+                        return CommonConstants.AT_EL_CLASS_5_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_6:
+                    {
+                        return CommonConstants.AT_EL_CLASS_6_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_7:
+                    {
+                        return CommonConstants.AT_EL_CLASS_7_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_8:
+                    {
+                        return CommonConstants.AT_EL_CLASS_8_NAME;
+                    }
+                case CommonConstants.AT_EL_CLASS_9:
+                    {
+                        return CommonConstants.AT_EL_CLASS_9_NAME;
+                    }
+                case CommonConstants.AT_EL_IELTS:
+                    {
+                        return CommonConstants.AT_EL_IELTS_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_BIO:
+                    {
+                        return CommonConstants.AT_EL_MJ_BIO_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_CHEM:
+                    {
+                        return CommonConstants.AT_EL_MJ_CHEM_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_ECO:
+                    {
+                        return CommonConstants.AT_EL_MJ_ECO_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_IT:
+                    {
+                        return CommonConstants.AT_EL_MJ_IT_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_MATERIAL:
+                    {
+                        return CommonConstants.AT_EL_MJ_MATERIAL_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_MATH:
+                    {
+                        return CommonConstants.AT_EL_MJ_MATH_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_PHY:
+                    {
+                        return CommonConstants.AT_EL_MJ_PHY_NAME;
+                    }
+                case CommonConstants.AT_EL_MJ_TELE:
+                    {
+                        return CommonConstants.AT_EL_MJ_TELE_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEFL:
+                    {
+                        return CommonConstants.AT_EL_TOEFL_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_300:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_300_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_400:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_400_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_500:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_500_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_600:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_600_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_700:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_700_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_800:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_800_NAME;
+                    }
+                case CommonConstants.AT_EL_TOEIC_900:
+                    {
+                        return CommonConstants.AT_EL_TOEIC_900_NAME;
+                    }
+            }
+            return CommonConstants.AT_UNCLASSIFIED_NAME;
+        }
         #endregion
     }
 }
