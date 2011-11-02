@@ -15,9 +15,8 @@ namespace ltkt.Admin
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.English englishDAO = new ltktDAO.English();
         EventLog log = new EventLog();
-        private const int NoOfInformacticsPerPage = 8;
 
-        private const int NoOfEnglishPerPage = 10;
+        private const int NoOfEnglishPerPage = 8;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,7 +35,7 @@ namespace ltkt.Admin
                                    + CommonConstants.SPACE
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
-                    liTableHeader.Text = CommonConstants.PAGE_ADMIN_ENGLISH_NAME;
+                    liTableHeader.Text = CommonConstants.TXT_LIST_ARTICLE;
                     pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
                 }
@@ -81,6 +80,25 @@ namespace ltkt.Admin
                     IEnumerable<tblEnglish> lst = null;
                     string key = Request.QueryString[CommonConstants.REQ_KEY];
                     int totalRecord = 0;
+
+                    hpkShowAll.Text += "(" + englishDAO.count() + ")";
+                    hpkShow19.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CLASS_1_TO_9) +")";
+                    hpkShow10.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CLASS_10_CODE) + ")";
+                    hpkShow11.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CLASS_11_CODE) + ")";
+                    hpkShow12.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CLASS_12_CODE) + ")";
+                    hpkShowMath.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_MATH.ToString()) + ")";
+                    hpkShowPhy.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_PHY.ToString()) + ")";
+                    hpkShowChem.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_CHEM.ToString()) + ")";
+                    hpkShowBio.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_BIO.ToString()) + ")";
+                    hpkShowCom.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_TELE.ToString()) + ")";
+                    hpkShowEco.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_ECO.ToString()) + ")";
+                    hpkShowMat.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_MATERIAL.ToString()) + ")";
+                    hpkShowToefl.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CERT_TOEFL) + ")";
+                    hpkShowToeic.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CERT_TOEIC) + ")";
+                    hpkShowIelts.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_CERT_IELTS) + ")";
+                    hpkShowIT.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_MJ_IT.ToString()) + ")";
+                    hpkShowABC.Text += "(" + englishDAO.countEnglishListWithClass(CommonConstants.AT_EL_ABC) + ")";
+                    
                     if (BaseServices.isNullOrBlank(key))
                     {
                         key = CommonConstants.ALL;
@@ -89,23 +107,46 @@ namespace ltkt.Admin
                     {
                         key = BaseServices.nullToBlank(key);
                     }
+                    changeViewState(key);
                     if (key == CommonConstants.ALL)
                     {
                         if (state == CommonConstants.ALL)// key = ALL and state = ALL
                         {
-                            lst = englishDAO.fetchEnglishList(((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage);
+                            lst = englishDAO.fetchEnglishList(((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.count();
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAllState.Text+ "(" + totalRecord + ")");
+                            hpkShowBad.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_BAD) + ")";
+                            hpkShowChecked.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_UNCHECK) + ")";
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
-                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishList(CommonConstants.STATE_UNCHECK);
+                            hpkShowAllState.Text += "(" + englishDAO.count() +")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowUncheck.Text + "(" + totalRecord + ")");
+                            hpkShowChecked.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_BAD) + ")";
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
                         {
-                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishList(CommonConstants.STATE_CHECKED);
+                            hpkShowAllState.Text += "(" + englishDAO.count() + ")";
+                            hpkShowBad.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_BAD) + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowChecked.Text + "(" + totalRecord + ")");
+                            hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_UNCHECK) + ")";
+
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
                         {
-                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishList(CommonConstants.STATE_BAD, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishList(CommonConstants.STATE_BAD);
+                            hpkShowAllState.Text += "(" + englishDAO.count() + ")";
+                            hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowBad.Text + "(" + totalRecord + ")");
+
                         }
                     }
                     else
@@ -134,19 +175,42 @@ namespace ltkt.Admin
 
                         if (state == CommonConstants.ALL)// key != ALL and state = ALL
                         {
-                            lst = englishDAO.fetchEnglishListWithClass(key, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishListWithClass(key, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishListWithClass(key);
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAllState.Text + "(" + totalRecord + ")");
+                            hpkShowBad.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_BAD) + ")";
+                            hpkShowChecked.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_UNCHECK) + ")";
+
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
-                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishList(key, CommonConstants.STATE_UNCHECK);
+                            hpkShowAllState.Text += "(" + englishDAO.countEnglishListWithClass(key) + ")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowUncheck.Text + "(" + totalRecord + ")");
+                            hpkShowChecked.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_BAD) + ")";
                         }
                         else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
                         {
-                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_CHECKED, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_CHECKED, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishList(key, CommonConstants.STATE_CHECKED);
+                            hpkShowAllState.Text += "(" + englishDAO.countEnglishListWithClass(key) + ")";
+                            hpkShowBad.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_BAD) + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowChecked.Text + "(" + totalRecord + ")");
+                            hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_UNCHECK) + ")";
+
                         }
                         else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
                         {
-                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_BAD, ((page - 1) * NoOfInformacticsPerPage), NoOfInformacticsPerPage); 
+                            lst = englishDAO.fetchEnglishList(key, CommonConstants.STATE_BAD, ((page - 1) * NoOfEnglishPerPage), NoOfEnglishPerPage);
+                            totalRecord = englishDAO.countEnglishList(key, CommonConstants.STATE_BAD);
+                            hpkShowAllState.Text += "(" + englishDAO.countEnglishListWithClass(key) + ")";
+                            hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + englishDAO.countEnglishList(key, CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowBad.Text + "(" + totalRecord + ")");
+
                         }
                     }
                     // show data
@@ -218,7 +282,7 @@ namespace ltkt.Admin
                 TableCell noCell = new TableCell();
                 noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "10px";
-                noCell.Text = Convert.ToString(idx + 1);
+                noCell.Text = Convert.ToString(idx + 1 + (page - 1) * NoOfEnglishPerPage);
 
                 TableCell titleCell = new TableCell();
                 titleCell.CssClass = "table-cell";
@@ -287,23 +351,31 @@ namespace ltkt.Admin
                                 + CommonConstants.AND
                                 + CommonConstants.REQ_KEY
                                 + CommonConstants.EQUAL
-                                + key
-                                + CommonConstants.AND
-                                + CommonConstants.REQ_PAGE
-                                + CommonConstants.EQUAL;
+                                + key;
+                if (!BaseServices.isNullOrBlank(state))
+                {
+                    param += CommonConstants.AND
+                               + CommonConstants.REQ_STATE
+                               + CommonConstants.EQUAL
+                               + state;
+                }
+                param += CommonConstants.AND
+                       + CommonConstants.REQ_PAGE
+                       + CommonConstants.EQUAL;
+
 
                 if (page > 1)
                 {
 
                     PreviousPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_PAGING_LINK,
-                                                                                CommonConstants.PAGE_ADMIN_ADS,
+                                                                                CommonConstants.PAGE_ADMIN_ENGLISH,
                                                                                 param + (page - 1).ToString(),
                                                                                 CommonConstants.TXT_PREVIOUS_PAGE);
                 }
                 if (page > 0 && page < totalPages)
                 {
                     NextPageLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_PAGING_LINK,
-                                                                             CommonConstants.PAGE_ADMIN_ADS,
+                                                                             CommonConstants.PAGE_ADMIN_ENGLISH,
                                                                              param + (page + 1).ToString(),
                                                                              CommonConstants.TXT_NEXT_PAGE);
                 }
@@ -328,6 +400,98 @@ namespace ltkt.Admin
         {
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
+        }
+        /// <summary>
+        /// change text of hyperlink
+        /// </summary>
+        /// <param name="linkID"></param>
+        private void changeViewState(string _class)
+        {
+            if (_class == CommonConstants.AT_EL_CLASS_1_TO_9)
+            {
+                hpkShow19.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShow19.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_CLASS_10_CODE)
+            {
+                hpkShow10.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShow10.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_CLASS_11_CODE)
+            {
+                hpkShow11.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShow11.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_CLASS_12_CODE)
+            {
+                hpkShow12.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShow12.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_CERT_TOEIC)
+            {
+                hpkShowToeic.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowToeic.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_ABC)
+            {
+                hpkShowABC.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowABC.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_CERT_IELTS)
+            {
+                hpkShowIelts.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowIelts.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_CERT_TOEFL)
+            {
+                hpkShowToefl.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowToefl.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_BIO.ToString())
+            {
+                hpkShowBio.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowBio.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_CHEM.ToString())
+            {
+                hpkShowChem.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowChem.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_PHY.ToString())
+            {
+                hpkShowPhy.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowPhy.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_MATH.ToString())
+            {
+                hpkShowMath.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowMath.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_MATERIAL.ToString())
+            {
+                hpkShowMat.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowMat.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_TELE.ToString())
+            {
+                hpkShowCom.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowCom.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_IT.ToString())
+            {
+                hpkShowIT.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowIT.Text);
+                return;
+            }
+            else if (_class == CommonConstants.AT_EL_MJ_ECO.ToString())
+            {
+                hpkShowEco.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowEco.Text);
+                return;
+            }
+            else if (_class == CommonConstants.ALL)
+            {
+                hpkShowAll.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAll.Text);
+                return;
+            }
         }
     }
 }

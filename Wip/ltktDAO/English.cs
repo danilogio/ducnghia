@@ -867,6 +867,59 @@ namespace ltktDAO
 
             return lst;
         }
+        /// <summary>
+        /// count english article with class
+        /// </summary>
+        /// <param name="_class"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public int countEnglishListWithClass(string _class)
+        {
+            int startIdx = 0;
+            int endIdx = 0;
+            findIndex(_class, out startIdx, out endIdx);
+            if (startIdx == -1)
+                return 0;
+            int num = (from r in DB.tblEnglishes
+                       where r.Class >= startIdx && r.Class <= endIdx
+                       select r).Count();
+
+            return num;
+        }
+        /// <summary>
+        /// count all article
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public int countEnglishList(int state)
+        {
+            int num = (from r in DB.tblEnglishes
+                       where r.State == state
+                       select r).Count();
+
+            return num;
+        }
+        /// <summary>
+        /// count article with class and state
+        /// </summary>
+        /// <param name="_class"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public int countEnglishList(string _class, int state)
+        {
+            int startIdx = 0;
+            int endIdx = 0;
+            findIndex(_class, out startIdx, out endIdx);
+            if (startIdx == -1)
+                return 0;
+            int num = (from r in DB.tblEnglishes
+                                           where r.Class >= startIdx && r.Class <= endIdx
+                                           && r.State == state
+                                           select r).Count();
+
+            return num;
+        }
         public IEnumerable<tblEnglish> fetchEnglishList(string _class, int state, int start, int count)
         {
             int startIdx = 0;
