@@ -33,7 +33,24 @@ namespace ltktDAO
             }
             return str.Trim();
         }
-
+        public static string formatDateTimeString(DateTime datetime)
+        {
+            if (datetime == null)
+                return CommonConstants.BLANK;
+            StringBuilder str = new StringBuilder();
+            str.Append(datetime.Day);
+            str.Append(CommonConstants.SPLASH);
+            str.Append(datetime.Month);
+            str.Append(CommonConstants.SPLASH);
+            str.Append(datetime.Year);
+            str.Append(CommonConstants.SPACE);
+            str.Append(datetime.Hour);
+            str.Append(CommonConstants.HYPHEN);
+            str.Append(datetime.Minute);
+            str.Append(CommonConstants.HYPHEN);
+            str.Append(datetime.Second);
+            return str.ToString();
+        }
         public string getExtension(string location)
         {
             FileInfo f = new FileInfo(location);

@@ -52,6 +52,7 @@ namespace ltkt.Admin
         private void pageLoad(object sender, EventArgs e, tblUser user)
         {
             bool isDeleted = false;
+            bool isEditError = false;
             try
             {
                 int page = 1;
@@ -233,6 +234,53 @@ namespace ltkt.Admin
                 }
                 else if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
                 {
+                    detailPanel.Visible = true;
+                    viewPanel.Visible = false;
+                    if (Request.QueryString[CommonConstants.REQ_ID] != null)
+                    {
+                        int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID].ToString());
+                        tblEnglish article = englishDAO.getArticle(id);
+                        if (article != null)
+                        {
+                            initial();
+
+                            txtTitle.Text = BaseServices.nullToBlank(article.Title);
+                            txtChapeau.Text = BaseServices.nullToBlank(article.Contents);
+                            txtAuthor.Text = BaseServices.nullToBlank(article.Author);
+                            txtPosted.Text = BaseServices.formatDateTimeString(article.Posted);
+                            txtTag.Text = BaseServices.nullToBlank(article.Tag);
+                            txtPoint.Text = article.Point.ToString();
+                            txtChecker.Text = BaseServices.nullToBlank(article.Checker);
+                            ddlState.SelectedValue = article.State.ToString();
+                            if (article.StickyFlg)
+                            {
+                                ddlSticky.SelectedValue = CommonConstants.CONST_ONE;
+                            }
+                            ddlType.SelectedValue = article.Type.ToString();
+                            ddlClass.SelectedValue = article.Class.ToString();
+                            ddlScore.SelectedValue = article.Score.ToString();
+                            
+                            if (action == CommonConstants.ACT_VIEW)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            isEditError = true;
+                        }
+
+                    }
+                    else
+                    {
+                        isEditError = true;
+                    }
+                   
+
                 }
                 else if (action == CommonConstants.ACT_DELETE)
                 {
@@ -258,7 +306,14 @@ namespace ltkt.Admin
             if (isDeleted)
             {
                 Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS);
-            } 
+            }
+            if (isEditError)
+            {
+                detailPanel.Visible = false;
+                viewPanel.Visible = false;
+                showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                
+            }
         }
         private void showEnglishs(IEnumerable<tblEnglish> lst, int totalEnglish, int page, string action, string key, string state)
         {
@@ -318,13 +373,13 @@ namespace ltkt.Admin
                 actionCell.CssClass = "table-cell";
                 actionCell.Style["width"] = "40px";
                 actionCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
-                                                                     CommonConstants.PAGE_ADMIN_UNIVERSITY,
+                                                                     CommonConstants.PAGE_ADMIN_ENGLISH,
                                                                      CommonConstants.ACT_EDIT,
                                                                      Convert.ToString(english.ID),
                                                                      CommonConstants.HTML_EDIT_ADMIN);
 
                 actionCell.Text += BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
-                                                                     CommonConstants.PAGE_ADMIN_UNIVERSITY,
+                                                                     CommonConstants.PAGE_ADMIN_ENGLISH,
                                                                      CommonConstants.ACT_DELETE,
                                                                      Convert.ToString(english.ID),
                                                                      CommonConstants.HTML_DELETE_ADMIN);
@@ -400,6 +455,71 @@ namespace ltkt.Admin
         {
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
+        }
+        private void initial()
+        {
+            ddlState.Items.Add(new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+            ddlState.Items.Add(new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+            ddlState.Items.Add(new ListItem(CommonConstants.STATE_BAD_NAME, CommonConstants.STATE_BAD.ToString()));
+            //Sticky
+            ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_UNSTICKY, CommonConstants.CONST_ZERO));
+            ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_STICKY, CommonConstants.CONST_ONE));
+            //Type
+            ddlType.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ONE_NEGATIVE));
+            ddlType.Items.Add(new ListItem(CommonConstants.AT_LECTURE_NAME.ToString(), CommonConstants.AT_LECTURE.ToString()));
+            ddlType.Items.Add(new ListItem(CommonConstants.AT_PRACTISE_NAME, CommonConstants.AT_PRACTISE.ToString()));
+            ddlType.Items.Add(new ListItem(CommonConstants.AT_EXAM_NAME, CommonConstants.AT_EXAM.ToString()));
+            //
+            ddlScore.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ZERO));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_ONE, CommonConstants.CONST_ONE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_TWO, CommonConstants.CONST_TWO));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_THREE, CommonConstants.CONST_THREE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_FOUR, CommonConstants.CONST_FOUR));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_FIVE, CommonConstants.CONST_FIVE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_SIX, CommonConstants.CONST_SIX));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_SEVEN, CommonConstants.CONST_SEVEN));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_EIGHT, CommonConstants.CONST_EIGHT));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_NINE, CommonConstants.CONST_NINE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_TEN, CommonConstants.CONST_TEN));
+            //Class
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_UNCLASSIFIED_NAME, CommonConstants.AT_UNCLASSIFIED.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_1_NAME, CommonConstants.AT_EL_CLASS_1_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_2_NAME, CommonConstants.AT_EL_CLASS_2_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_3_NAME, CommonConstants.AT_EL_CLASS_3_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_4_NAME, CommonConstants.AT_EL_CLASS_4_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_5_NAME, CommonConstants.AT_EL_CLASS_5_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_6_NAME, CommonConstants.AT_EL_CLASS_6_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_7_NAME, CommonConstants.AT_EL_CLASS_7_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_8_NAME, CommonConstants.AT_EL_CLASS_8_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_9_NAME, CommonConstants.AT_EL_CLASS_9_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_10_NAME, CommonConstants.AT_EL_CLASS_10_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_11_NAME, CommonConstants.AT_EL_CLASS_11_CODE));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CLASS_12_NAME, CommonConstants.AT_EL_CLASS_12_CODE));
+
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_MATH_NAME, CommonConstants.AT_EL_MJ_MATH.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_PHY_NAME, CommonConstants.AT_EL_MJ_PHY.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_CHEM_NAME, CommonConstants.AT_EL_MJ_CHEM.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_BIO_NAME, CommonConstants.AT_EL_MJ_BIO.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_MATERIAL_NAME, CommonConstants.AT_EL_MJ_MATERIAL.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_TELE_NAME, CommonConstants.AT_EL_MJ_TELE.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_IT_NAME, CommonConstants.AT_EL_MJ_IT.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_MJ_ECO_NAME, CommonConstants.AT_EL_MJ_ECO.ToString()));
+
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEFL_NAME, CommonConstants.AT_EL_TOEFL.ToString()));
+
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_300_NAME, CommonConstants.AT_EL_TOEIC_300.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_400_NAME, CommonConstants.AT_EL_TOEIC_400.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_500_NAME, CommonConstants.AT_EL_TOEIC_500.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_600_NAME, CommonConstants.AT_EL_TOEIC_600.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_700_NAME, CommonConstants.AT_EL_TOEIC_700.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_800_NAME, CommonConstants.AT_EL_TOEIC_800.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_TOEIC_900_NAME, CommonConstants.AT_EL_TOEIC_900.ToString()));
+
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_IELTS_NAME, CommonConstants.AT_EL_IELTS.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CERT_A_NAME, CommonConstants.AT_EL_CERT_A.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CERT_B_NAME, CommonConstants.AT_EL_CERT_B.ToString()));
+            ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CERT_C_NAME, CommonConstants.AT_EL_CERT_C.ToString()));
+
         }
         /// <summary>
         /// change text of hyperlink

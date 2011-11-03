@@ -27,6 +27,15 @@ namespace ltktDAO
         /// </summary>
         public const string PAGE_NUMBER_FIRST = "1";
         public const string CONST_ONE = "1";
+        public const string CONST_TWO = "2";
+        public const string CONST_THREE = "3";
+        public const string CONST_FOUR = "4";
+        public const string CONST_FIVE = "5";
+        public const string CONST_SIX = "6";
+        public const string CONST_SEVEN = "7";
+        public const string CONST_EIGHT = "8";
+        public const string CONST_NINE = "9";
+        public const string CONST_TEN = "10";
         public const string CONST_ZERO = "0";
         public const string CONST_ONE_NEGATIVE = "-1";
         /// <summary>
@@ -130,6 +139,10 @@ namespace ltktDAO
         /// &
         /// </summary>
         public const string AND = "&";
+        /// <summary>
+        /// :
+        /// </summary>
+        public const string HYPHEN = ":";
         /// <summary>
         /// folder containt images of ads
         /// </summary>
@@ -307,6 +320,11 @@ namespace ltktDAO
             /// list article
             /// </summary>
             public const string TXT_LIST_ARTICLE = "Danh sách bài viết";
+            /// <summary>
+            /// sticky
+            /// </summary>
+            public const string TXT_STICKY = "Sticky";
+            public const string TXT_UNSTICKY = "Không Sticky";
             /// <summary>
             /// reason
             /// </summary>
@@ -2501,3 +2519,4 @@ namespace ltktDAO
 
     }
 }
+

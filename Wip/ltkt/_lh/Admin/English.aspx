@@ -47,7 +47,6 @@
                             <asp:HyperLink ID="hpkShow12" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=12&page=1">Lớp 12 </asp:HyperLink></li>
                     </ul>
                 </div>
-                
                 <div align="left" style="float: left; width: 20%">
                     <h3>
                         &nbsp&nbsp&nbsp&nbsp</h3>
@@ -147,33 +146,79 @@
                     <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />
                     <hr />
                 </div>
-                <div id="divDetail">
+                <div id="divDetail" style="float: left; width: 50%; margin-left:20px">
+                    <br />
                     <p>
-                        <span>Tiêu đề:</span>
+                        <span><b>Tiêu đề:</b></span>
                         <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Tóm tắt:</span>
-                        <asp:TextBox ID="txtChapeau" runat="server"></asp:TextBox>
+                        <span><b>Tóm tắt:</b></span>
+                        <asp:TextBox ID="txtChapeau" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Tác giả:</span>
-                        <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                        <span><b>Tác giả</b>:</span>
+                        <asp:TextBox ID="txtAuthor" runat="server" Enabled="false"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Ngày đăng:</span>
+                        <span><b>Ngày đăng:</b></span>
                         <asp:TextBox ID="txtPosted" runat="server"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Điểm:</span>
+                        <span><b>Số người quan tâm:</b></span>
                         <asp:TextBox ID="txtPoint" runat="server"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Tag:</span>
+                        <span><b>Tag:</b></span>
                         <asp:TextBox ID="txtTag" runat="server"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Trạng thái:</span>
+                        <span><b>Location:</b></span>
+                        <asp:TextBox ID="txtLocation" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span><b>Người đánh giá:</b></span>
+                        <asp:TextBox ID="txtChecker" runat="server"></asp:TextBox>
+                    </p>
+                </div>
+                <div id="divRight" style="float: left; width: 48%">
+                    <br />
+                    
+                    <p>
+                        <span><b>Thumbnail:</b></span>
+                        <asp:TextBox ID="txtThumbnail" runat="server"></asp:TextBox>
+                    </p>
+                    
+                    <p>
+                        <span><b>Mã nhúng Html:</b></span>
+                        <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4"  runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span><b>Link xem trước:</b></span>
+                        <asp:TextBox ID="txtHtmlPreviewLink" runat="server"></asp:TextBox>
+                    </p>
+                    <p>
+                        <span><b>Chủ đề:</b></span>
+                        <asp:DropDownList ID="ddlClass" runat="server">
+                        </asp:DropDownList>
+                    </p>
+                     <p>
+                        <span><b>Loại:</b></span>
+                        <asp:DropDownList ID="ddlType" runat="server">
+                        </asp:DropDownList>
+                    </p>
+                    <p>
+                        <span><b>Điểm đánh giá:</b></span>
+                        <asp:DropDownList ID="ddlScore" runat="server">
+                        </asp:DropDownList>
+                    </p>
+                    <p>
+                        <span><b>Đánh giấu Sticky:</b></span>
+                        <asp:DropDownList ID="ddlSticky" runat="server">
+                        </asp:DropDownList>
+                    </p>
+                    <p>
+                        <span><b>Trạng thái:</b></span>
                         <asp:DropDownList ID="ddlState" runat="server">
                         </asp:DropDownList>
                     </p>

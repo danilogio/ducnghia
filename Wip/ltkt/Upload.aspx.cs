@@ -224,7 +224,8 @@ namespace ltkt
                             case 2:
                                 {
                                     isOK = englishDAO.insertEnglish(txtboxTitle.Text,
-                                                                    0,
+                                                                    0
+                                                                    -1,
                                                                     txtboxSummary.Text,
                                                                     user.Username,
                                                                     DateTime.Now,

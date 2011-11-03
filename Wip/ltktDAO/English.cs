@@ -676,6 +676,7 @@ namespace ltktDAO
                     record.Location = _location;
                     record.State = 0;
                     record.Point = 0;
+                    record.Score = 0;
                     record.Tag = _tag;
                     record.StickyFlg = false;
                     record.Class = CommonConstants.AT_UNCLASSIFIED;
@@ -1343,7 +1344,22 @@ namespace ltktDAO
         {
             return (from r in DB.tblEnglishes select r).Count();
         }
-
+        /// <summary>
+        /// get one article with ID
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns></returns>
+        public tblEnglish getArticle(int _id)
+        {
+            IEnumerable<tblEnglish> lst = from p in DB.tblEnglishes
+                                          where p.ID == _id
+                                          select p;
+            if (lst.Count() > 0)
+            {
+                return lst.ElementAt(0);
+            }
+            return null;
+        }
         public string getClassName(int _code)
         {
             switch (_code)
