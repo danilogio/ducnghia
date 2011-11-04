@@ -14,12 +14,15 @@ namespace ltkt.Admin
         ltktDAO.Control control = new ltktDAO.Control();
         ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
         ltktDAO.English englishDAO = new ltktDAO.English();
+        ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+
         EventLog log = new EventLog();
 
         private const int NoOfEnglishPerPage = 8;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             tblUser user = (tblUser)Session[CommonConstants.SES_USER];
             if (user != null)
             {
@@ -234,11 +237,16 @@ namespace ltkt.Admin
                 }
                 else if (action == CommonConstants.ACT_VIEW || action == CommonConstants.ACT_EDIT)
                 {
+                    if (Page.IsPostBack)
+                    {
+                        return;
+                    }
                     detailPanel.Visible = true;
                     viewPanel.Visible = false;
                     if (Request.QueryString[CommonConstants.REQ_ID] != null)
                     {
                         int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID].ToString());
+                        Session[CommonConstants.SES_ID] = id;
                         tblEnglish article = englishDAO.getArticle(id);
                         if (article != null)
                         {
@@ -251,6 +259,13 @@ namespace ltkt.Admin
                             txtTag.Text = BaseServices.nullToBlank(article.Tag);
                             txtPoint.Text = article.Point.ToString();
                             txtChecker.Text = BaseServices.nullToBlank(article.Checker);
+                            txtHtmlEmbbed.Text = BaseServices.nullToBlank(article.HtmlPreview);
+                            txtHtmlPreviewLink.Text = BaseServices.nullToBlank(article.HtmlEmbedLink);
+                            txtLocation.Text = BaseServices.nullToBlank(article.Location);
+                            txtChecker.Text = BaseServices.nullToBlank(article.Checker);
+                            txtThumbnail.Text = BaseServices.nullToBlank(article.Thumbnail);
+                            txtComment.Text = BaseServices.nullToBlank(article.Comment);
+
                             ddlState.SelectedValue = article.State.ToString();
                             if (article.StickyFlg)
                             {
@@ -262,11 +277,12 @@ namespace ltkt.Admin
                             
                             if (action == CommonConstants.ACT_VIEW)
                             {
-
+                                btnEdit.Visible = false;
+                                changeState(false);
                             }
                             else
                             {
-
+                                changeState(true);
                             }
                         }
                         else
@@ -343,7 +359,7 @@ namespace ltkt.Admin
                 titleCell.CssClass = "table-cell";
                 titleCell.Style["width"] = "200px";
                 titleCell.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_DISPLAY_LINK,
-                                                                  CommonConstants.PAGE_ADMIN_UNIVERSITY,
+                                                                  CommonConstants.PAGE_ADMIN_ENGLISH,
                                                                   CommonConstants.ACT_VIEW,
                                                                   Convert.ToString(english.ID),
                                                                   english.Title);
@@ -437,7 +453,156 @@ namespace ltkt.Admin
             }
         }
         protected void btnEdit_Click(object sender, EventArgs e)
-        { }
+        {
+            string sError = validateForm();
+            if (!BaseServices.isNullOrBlank(sError))
+            {
+                showErrorMessage(sError);
+                return;
+            }
+            tblEnglish item = new tblEnglish();
+            item.Contents = txtChapeau.Text.Trim();
+            item.Posted = BaseServices.getDateTimeFromString(txtPosted.Text) ;
+            item.Title = txtTitle.Text.Trim();
+            item.Tag = txtTag.Text.Trim();
+            item.Location = txtLocation.Text.Trim();
+            int score = BaseServices.convertStringToInt( ddlScore.SelectedValue);
+            item.Score = score;
+            //get checker when score > 0.
+            if (score != 0)
+            {
+                if (BaseServices.isNullOrBlank(txtChecker.Text))
+                {
+                    item.Checker = getCurrentUser();
+                }
+                else
+                {
+                    item.Checker = txtChecker.Text.Trim();
+                }
+            }
+            item.Comment = txtComment.Text.Trim();
+            item.Thumbnail = txtThumbnail.Text.Trim();
+            item.HtmlEmbedLink = txtHtmlEmbbed.Text.Trim();
+            item.HtmlPreview = txtHtmlPreviewLink.Text.Trim();
+            int type = BaseServices.convertStringToInt(ddlType.SelectedValue.ToString());
+            item.Type = type;
+            item.Class = BaseServices.convertStringToInt(ddlClass.SelectedValue.ToString());
+            //sticky item
+            if (ddlSticky.SelectedValue.ToString() == CommonConstants.CONST_ZERO)
+            {
+                item.StickyFlg = false;
+            }
+            else
+            {
+                int stickied = englishDAO.countStickyArticle();
+                int noOfEnglishOnPage = control.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_EL);
+                if (stickied > noOfEnglishOnPage / 2)
+                {
+                    showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_OVER_NUMBER, 
+                        CommonConstants.TXT_STICKY, 
+                        stickied.ToString(), 
+                        CommonConstants.TXT_ONE_HALF + 
+                        CommonConstants.SPACE + 
+                        CommonConstants.CF_NUM_ARTICLE_ON_EL_NAME,
+                        noOfEnglishOnPage.ToString()));
+                    return;
+                }
+                item.StickyFlg = true;
+            }
+            //state
+            item.State = BaseServices.convertStringToInt(ddlState.SelectedValue.ToString());
+            if (Session[CommonConstants.SES_ID] == null)
+            {
+                string message = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+                message += CommonConstants.TEMP_BR_TAG;
+                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
+                showErrorMessage(message);
+                return;
+            }
+            int id = (Int32)Session[CommonConstants.SES_ID];
+            bool isOk = false;
+            try
+            {
+                isOk = englishDAO.updateEnglish(id, item);
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+            }
+
+            Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
+            
+        }
+        private string validateForm()
+        {
+            string sError = CommonConstants.BLANK;
+            if (BaseServices.isNullOrBlank(txtPosted.Text))
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_POSTED_DATE);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            else
+            {
+                if (!BaseServices.isDateTime(txtPosted.Text))
+                {
+                    sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_RIGHT_FORMAT, 
+                        CommonConstants.TXT_POSTED_DATE, CommonConstants.DEFAULT_DATE_FORMAT);
+                    sError += CommonConstants.TEMP_BR_TAG;
+                }
+            }
+            if (BaseServices.isNullOrBlank(txtTitle.Text))
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_TITLE);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            else
+            {
+                if (txtTitle.Text.Trim().Length > 254)
+                {
+                    sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH, 
+                        CommonConstants.TXT_TITLE, CommonConstants.BLANK + 254);
+                    sError += CommonConstants.TEMP_BR_TAG;
+                }
+            }
+            if (BaseServices.isNullOrBlank(txtLocation.Text))
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_LOCATION);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            if (txtThumbnail.Text.Trim().Length > 254)
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_THUMBNAIL, CommonConstants.BLANK + 254);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            if (txtTag.Text.Trim().Length > 254)
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_TAG, CommonConstants.BLANK + 254);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            if (txtLocation.Text.Trim().Length > 200)
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_LOCATION, CommonConstants.BLANK + 200);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            
+            return sError;
+        }
+        /// <summary>
+        /// get current username
+        /// </summary>
+        /// <returns></returns>
+        private string getCurrentUser()
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                return user.Username;
+            }
+            return CommonConstants.BLANK;
+        }
         /// <summary>
         /// use to show message information on mode SEARCH, DELETE
         /// </summary>
@@ -469,7 +634,7 @@ namespace ltkt.Admin
             ddlType.Items.Add(new ListItem(CommonConstants.AT_LECTURE_NAME.ToString(), CommonConstants.AT_LECTURE.ToString()));
             ddlType.Items.Add(new ListItem(CommonConstants.AT_PRACTISE_NAME, CommonConstants.AT_PRACTISE.ToString()));
             ddlType.Items.Add(new ListItem(CommonConstants.AT_EXAM_NAME, CommonConstants.AT_EXAM.ToString()));
-            //
+            //Score
             ddlScore.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ZERO));
             ddlScore.Items.Add(new ListItem(CommonConstants.CONST_ONE, CommonConstants.CONST_ONE));
             ddlScore.Items.Add(new ListItem(CommonConstants.CONST_TWO, CommonConstants.CONST_TWO));
@@ -520,6 +685,46 @@ namespace ltkt.Admin
             ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CERT_B_NAME, CommonConstants.AT_EL_CERT_B.ToString()));
             ddlClass.Items.Add(new ListItem(CommonConstants.AT_EL_CERT_C_NAME, CommonConstants.AT_EL_CERT_C.ToString()));
 
+        }
+        /// <summary>
+        /// change state of control
+        /// </summary>
+        /// <param name="state"></param>
+        private void changeState(bool state)
+        {
+            txtTitle.Enabled = state;
+            txtChapeau.Enabled = state;
+            txtPosted.Enabled = state;
+            txtTag.Enabled = state;
+            txtChecker.Enabled = state;
+            ddlState.Enabled = state;
+            ddlSticky.Enabled = state;
+            ddlType.Enabled = state;
+            ddlClass.Enabled = state;
+            ddlScore.Enabled = state;
+            txtHtmlEmbbed.Enabled = state;
+            txtHtmlPreviewLink.Enabled = state;
+            txtLocation.Enabled = state;
+            txtChecker.Enabled = state;
+            txtThumbnail.Enabled = state;
+        }
+        /// <summary>
+        /// write exception to log file
+        /// </summary>
+        /// <param name="ex"></param>
+        private void writeException(Exception ex)
+        {
+            string username = getCurrentUser();
+            if (username == CommonConstants.BLANK)
+                username = CommonConstants.USER_GUEST;
+            log.writeLog(DBHelper.strPathLogFile, username, ex.Message
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.Source
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.StackTrace
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.HelpLink);
+            return;
         }
         /// <summary>
         /// change text of hyperlink

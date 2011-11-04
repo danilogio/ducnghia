@@ -579,7 +579,10 @@ div.block_details_text
 	border: 0;
 	background: none;
 }
-
+.block_text #divEnglishDetail
+{
+	height: 800px;
+}
 #EnglishLesson a, #ItLesson a, #ExamLesson a, #other_news a
 {
 	color: #1962A5;

@@ -213,6 +213,7 @@ namespace ltktDAO
         /// default size format
         /// </summary>
         public const string DEFAULT_SIZE_FORMAT = "WxH";
+        public const string DEFAULT_DATE_FORMAT = "mm/dd/yyyy hh:MM:ss";
         /// <summary>
         /// character X;
         /// </summary>
@@ -330,6 +331,19 @@ namespace ltktDAO
             /// </summary>
             public const string TXT_REASON = "Lý do";
             public const string TXT_INFORM = "BQT Thông báo:";
+            /// <summary>
+            /// posted date
+            /// </summary>
+            public const string TXT_POSTED_DATE = "Ngày đăng bài";
+            /// <summary>
+            /// title
+            /// </summary>
+            public const string TXT_TITLE = "Tiêu đề";
+            public const string TXT_THUMBNAIL = "Hình thumbnail";
+            public const string TXT_TAG = "Tag";
+            public const string TXT_LOCATION = "Nơi lưu bài";
+            public const string TXT_ONE_HALF = "1/2";
+            
 
         #endregion
 
@@ -1008,6 +1022,8 @@ namespace ltktDAO
         public const string MSG_W_ADS_FROM_DATE = "Warning: Quảng cáo này có Ngày bắt đầu nhỏ hơn ngày hiện tại.";
         public const string MSG_E_ACTION_FAILED = "Thao tác {0} thất bại. Vui lòng thử lại sau";
         public const string MSG_I_ACTION_SUCCESSFUL = "Thao tác {0} đã thành công";
+        public const string MSG_E_MAX_LENGTH = "Chiều dài của {0} tối đa là {1}";
+        public const string MSG_E_OVER_NUMBER = "Tổng số {0} là {1} đã vượt quá {2} là {3}";
         /// <summary>
         /// Message when error
         /// </summary>
@@ -1194,6 +1210,18 @@ namespace ltktDAO
         /// Số đăng ký quảng cáo mới
         /// </summary>
         public const string SF_NUM_NEW_ADV_CONTACT = "NUM_NEW_ADV_CONTACT";
+        /// <summary>
+        /// Số bài Anh văn đã được sticky
+        /// </summary>
+        public const string SF_NUM_STICKED_ON_EL = "NUM_STICKED_ON_EL";
+        /// <summary>
+        /// Số bài LTDH đã được sticky
+        /// </summary>
+        public const string SF_NUM_STICKED_ON_UNI = "NUM_STICKED_ON_UNI";
+        /// <summary>
+        /// Số bài IT đã được sticky
+        /// </summary>
+        public const string SF_NUM_STICKED_ON_IT = "NUM_STICKED_ON_IT";
         #endregion
 
         #region Control Function (CF)
@@ -1229,6 +1257,7 @@ namespace ltktDAO
         /// TỔng số bài hiển thị trong trang English
         /// </summary>
         public const string CF_NUM_ARTICLE_ON_EL = "NUM_ARTICLE_ON_EL";
+        public const string CF_NUM_ARTICLE_ON_EL_NAME = "số bài hiển thị trong trang English";
         /// <summary>
         /// Tổng số bài hiển thị trong trang IT
         /// </summary>
@@ -1597,6 +1626,10 @@ namespace ltktDAO
         public const string SES_SECURITY_ADMIN_VO = "saVO";
 
         public const string SES_FIRST_LOAD = "first_load";
+        /// <summary>
+        /// save id
+        /// </summary>
+        public const string SES_ID = "ID";
 
         #endregion
 

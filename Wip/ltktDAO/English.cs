@@ -480,7 +480,18 @@ namespace ltktDAO
         #endregion
 
         #region Method
-
+        /// <summary>
+        /// count stickied article
+        /// </summary>
+        /// <returns></returns>
+        public int countStickyArticle()
+        {
+            int num = 0;
+            num = (from p in DB.tblEnglishes
+                   where p.StickyFlg == true
+                   select p).Count();
+            return num;
+        }
         public int countTotalArticles(ArticleSCO articleSCO)
         {
             int num = 0;
@@ -726,7 +737,13 @@ namespace ltktDAO
                     english.Tag = update.Tag;
                     english.HtmlEmbedLink = update.HtmlEmbedLink;
                     english.HtmlPreview = update.HtmlPreview;
-                    english.StickyFlg = english.StickyFlg;
+                    english.StickyFlg = update.StickyFlg;
+                    english.Checker = update.Checker;
+                    english.Score = update.Score;
+                    english.Thumbnail = update.Thumbnail;
+                    english.Class = update.Class;
+                    english.Location = update.Location;
+                    english.Comment = update.Comment;
 
                     DB.SubmitChanges();
                     ts.Complete();

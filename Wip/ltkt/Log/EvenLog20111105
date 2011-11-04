@@ -1,0 +1,24 @@
+11/5/2011 1:50:33 AM ==> [dvtrung]:Object reference not set to an instance of an object.
+ltktDAO
+   at ltktDAO.EventLog.writeLog(String pathLog, String username, String sErrMsg) in E:\Data\Projects\ducnghia\Wip\ltktDAO\EventLog.cs:line 61
+   at ltktDAO.English.insertEnglish(tblEnglish record) in E:\Data\Projects\ducnghia\Wip\ltktDAO\English.cs:line 648
+   at ltkt.Admin.English.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\English.aspx.cs:line 516
+
+11/5/2011 1:52:31 AM ==> [dvtrung]:Object reference not set to an instance of an object.
+ltktDAO
+   at ltktDAO.EventLog.writeLog(String pathLog, String username, String sErrMsg) in E:\Data\Projects\ducnghia\Wip\ltktDAO\EventLog.cs:line 61
+   at ltktDAO.English.insertEnglish(tblEnglish record) in E:\Data\Projects\ducnghia\Wip\ltktDAO\English.cs:line 648
+   at ltkt.Admin.English.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\English.aspx.cs:line 516
+
+11/5/2011 1:53:10 AM ==> [dvtrung]:Object reference not set to an instance of an object.
+ltktDAO
+   at ltktDAO.EventLog.writeLog(String pathLog, String username, String sErrMsg) in E:\Data\Projects\ducnghia\Wip\ltktDAO\EventLog.cs:line 61
+   at ltktDAO.English.insertEnglish(tblEnglish record) in E:\Data\Projects\ducnghia\Wip\ltktDAO\English.cs:line 648
+   at ltkt.Admin.English.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\English.aspx.cs:line 516
+
+11/5/2011 2:08:59 AM ==> [dvtrung]:Object reference not set to an instance of an object.
+ltktDAO
+   at ltktDAO.EventLog.writeLog(String pathLog, String username, String sErrMsg) in E:\Data\Projects\ducnghia\Wip\ltktDAO\EventLog.cs:line 61
+   at ltktDAO.English.updateEnglish(Int32 _id, tblEnglish update) in E:\Data\Projects\ducnghia\Wip\ltktDAO\English.cs:line 754
+   at ltkt.Admin.English.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\English.aspx.cs:line 526
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Collections;
 
 namespace ltktDAO
 {
@@ -33,14 +34,103 @@ namespace ltktDAO
             }
             return str.Trim();
         }
+        /// <summary>
+        /// string is right date and time?
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static bool isDateTime(string target)
+        {
+            if (target == null)
+            {
+                return false;
+            }
+            if (target == CommonConstants.BLANK)
+            {
+                return false;
+            }
+            target = target.Trim();
+            ArrayList items = removeEmptyItem(target.Split(' '));
+            if (items.Count != 2)
+            {
+                return false;
+            }
+            string date = (string)items[0];
+            string time = (string)items[1];
+
+            DateTime tmp = new DateTime();
+            if (!DateTime.TryParse(date, out tmp))
+            {
+                return false;
+            }
+            ArrayList itemsTime = removeEmptyItem(time.Split(CommonConstants.HYPHEN[0]));
+            if (itemsTime.Count != 3)
+            {
+                return false;
+            }
+            else
+            {
+                foreach (var t in itemsTime)
+                {
+                    if (!isNumeric(t.ToString()))
+                    {
+                        return false;
+                    }
+                }
+                int hour = convertStringToInt(itemsTime[0].ToString());
+                int min = convertStringToInt(itemsTime[1].ToString());
+                int sec = convertStringToInt(itemsTime[2].ToString());
+                if (hour > 24 || hour < 0) return false;
+                if (min > 59 || min < 0) return false;
+                if (sec > 59 || sec < 0) return false;
+            }
+            return true;
+        }
+        public static ArrayList removeEmptyItem(string[] input)
+        {
+            ArrayList res = new ArrayList();
+            int n = input.Length;
+            for (int i = 0; i < n; i++)
+            {
+                if (input[i] != null && input[i] != CommonConstants.BLANK)
+                {
+                    res.Add(input[i]);
+                }
+            }
+            return res;
+        }
+        /// <summary>
+        /// get time from string
+        /// requried: string has format : mm/dd/yyyy hh:MM:ss
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static DateTime getDateTimeFromString(string target)
+        {
+            DateTime res = new DateTime();
+            //date
+            ArrayList items = removeEmptyItem(target.Split(' '));
+            res = DateTime.Parse(items[0].ToString());
+            //time
+            ArrayList itemsTime = removeEmptyItem(items[1].ToString().Split(CommonConstants.HYPHEN[0]));
+            int hour = convertStringToInt(itemsTime[0].ToString());
+            int min = convertStringToInt(itemsTime[1].ToString());
+            int sec = convertStringToInt(itemsTime[2].ToString());
+
+            res.AddHours(hour);
+            res.AddMinutes(min);
+            res.AddSeconds(sec);
+
+            return res;
+        }
         public static string formatDateTimeString(DateTime datetime)
         {
             if (datetime == null)
                 return CommonConstants.BLANK;
             StringBuilder str = new StringBuilder();
-            str.Append(datetime.Day);
-            str.Append(CommonConstants.SPLASH);
             str.Append(datetime.Month);
+            str.Append(CommonConstants.SPLASH);
+            str.Append(datetime.Day);
             str.Append(CommonConstants.SPLASH);
             str.Append(datetime.Year);
             str.Append(CommonConstants.SPACE);
