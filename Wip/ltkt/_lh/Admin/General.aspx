@@ -59,21 +59,39 @@
                 </div>
                 <div>
                     <div style="float: left; width: 30%">
-                        <span>Tổng số đề thi đại học/cao đẳng:</span></div>
+                        <span>Tổng số đề thi Đại học/cao đẳng:</span></div>
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="sumContest" runat="server"></asp:Literal></div>
                 </div>
                 <div>
                     <div style="float: left; width: 30%">
-                        <span>Tổng số bài viết anh văn:</span></div>
+                        <span>Tổng số bài viết Anh văn:</span></div>
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="sumEnglish" runat="server"></asp:Literal></div>
                 </div>
                 <div>
                     <div style="float: left; width: 30%">
-                        <span>Tổng số bài viết tin học:</span></div>
+                        <span>Tổng số bài viết Tin học:</span></div>
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="sumInformatics" runat="server"></asp:Literal></div>
+                </div>
+                 <div>
+                    <div style="float: left; width: 30%">
+                        <span>Số bài viết Đại học/cao đẳng được sticky:</span></div>
+                    <div style="float: left; width: 69%">
+                        <asp:Literal ID="sumStickyUni" runat="server" Text="None"></asp:Literal></div>
+                </div>
+                 <div>
+                    <div style="float: left; width: 30%">
+                        <span>Số bài viết Tin hoc được sticky:</span></div>
+                    <div style="float: left; width: 69%">
+                        <asp:Literal ID="sumStickyIT" runat="server" Text="None"></asp:Literal></div>
+                </div>
+                <div>
+                    <div style="float: left; width: 30%">
+                        <span>Số bài viết Anh văn được sticky:</span></div>
+                    <div style="float: left; width: 69%">
+                        <asp:Literal ID="sumStickyEL" runat="server" Text="None"></asp:Literal></div>
                 </div>
                 <div>
                     <div style="float: left; width: 30%">
@@ -117,6 +135,7 @@
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="newAdsContact" runat="server" Text="None"></asp:Literal></div>
                 </div>
+                
             </div>
         </div>
     </div>

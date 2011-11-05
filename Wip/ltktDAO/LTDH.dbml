@@ -88,6 +88,7 @@
       <Column Name="HtmlPreview" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="HtmlEmbedLink" Type="System.String" DbType="NChar(254)" CanBeNull="true" />
       <Column Name="StickyFlg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteFlg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="tblUser_tblContestForUniversity" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
       <Association Name="tblUser_tblContestForUniversity1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
@@ -120,6 +121,7 @@
       <Column Name="Class" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StickyFlg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="FolderID" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteFlg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="tblUser_tblEnglish" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
       <Association Name="tblUser_tblEnglish1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>
@@ -146,6 +148,7 @@
       <Column Name="HtmlEmbedLink" Type="System.String" DbType="NChar(254)" CanBeNull="true" />
       <Column Name="StickyFlg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="FolderID" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteFlg" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="tblUser_tblInformatic" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
       <Association Name="tblUser_tblInformatic1" Member="tblUser1" ThisKey="Checker" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>

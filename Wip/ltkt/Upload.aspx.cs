@@ -119,7 +119,7 @@ namespace ltkt
                 {
                     string folder = CommonConstants.BLANK;
                     string folderId = CommonConstants.BLANK;
-                    int totalRecord = 0;
+                    long keyCode = 0;
                     // 0 - ltdh
                     // 1 - english
                     // 2 - tin học
@@ -145,18 +145,24 @@ namespace ltkt
                             }
                         case 2:
                             {
-                                totalRecord = englishDAO.count();
-                                
+                                //totalRecord = englishDAO.count();
+                                keyCode = control.getValueByLong(CommonConstants.CF_KEY_CODE_EL);
                                 folder = CommonConstants.FOLDER_EL;
-                                folder += "/" + Convert.ToString(DateTime.Now.Year);
+                                //folder += "/" + Convert.ToString(DateTime.Now.Year);
+                                folderId += "/" + Convert.ToString(DateTime.Now.Year);
+
                                 _class = bs.getClassEng(ddlEnglishType.SelectedValue, ddlEnglishCommon.SelectedValue, ddlEnglishMajor.SelectedValue, ddlEnglishCert.SelectedValue);
 
                                 break;
                             }
                     }
-                    folderId = BaseServices.getProperlyFolderID(totalRecord);
+                    folderId += "/" + BaseServices.getProperlyFolderID(keyCode);
                     folder += "/" + folderId;
                     string rootFolder = Server.MapPath("~") + "/" + folder + "/";
+                    while(BaseServices.isFolderExisted(rootFolder))
+                    {
+                        rootFolder += BaseServices.random(0, 1000);
+                    }
                     string filename = bs.fileNameToSave(rootFolder + fileContent.FileName);
                     string fileSave = filename.Substring(filename.LastIndexOf(CommonConstants.FOLDER_DATA));
                     bool fileContentGood = false;

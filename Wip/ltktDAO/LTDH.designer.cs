@@ -1561,6 +1561,8 @@ namespace ltktDAO
 		
 		private bool _StickyFlg;
 		
+		private bool _DeleteFlg;
+		
 		private EntityRef<tblUser> _tblUser;
 		
 		private EntityRef<tblUser> _tblUser1;
@@ -1611,6 +1613,8 @@ namespace ltktDAO
     partial void OnHtmlEmbedLinkChanged();
     partial void OnStickyFlgChanging(bool value);
     partial void OnStickyFlgChanged();
+    partial void OnDeleteFlgChanging(bool value);
+    partial void OnDeleteFlgChanged();
     #endregion
 		
 		public tblContestForUniversity()
@@ -2048,6 +2052,26 @@ namespace ltktDAO
 			}
 		}
 		
+		[Column(Storage="_DeleteFlg", DbType="Bit NOT NULL")]
+		public bool DeleteFlg
+		{
+			get
+			{
+				return this._DeleteFlg;
+			}
+			set
+			{
+				if ((this._DeleteFlg != value))
+				{
+					this.OnDeleteFlgChanging(value);
+					this.SendPropertyChanging();
+					this._DeleteFlg = value;
+					this.SendPropertyChanged("DeleteFlg");
+					this.OnDeleteFlgChanged();
+				}
+			}
+		}
+		
 		[Association(Name="tblUser_tblContestForUniversity", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
@@ -2291,6 +2315,8 @@ namespace ltktDAO
 		
 		private string _FolderID;
 		
+		private bool _DeleteFlg;
+		
 		private EntityRef<tblUser> _tblUser;
 		
 		private EntityRef<tblUser> _tblUser1;
@@ -2337,6 +2363,8 @@ namespace ltktDAO
     partial void OnStickyFlgChanged();
     partial void OnFolderIDChanging(string value);
     partial void OnFolderIDChanged();
+    partial void OnDeleteFlgChanging(bool value);
+    partial void OnDeleteFlgChanged();
     #endregion
 		
 		public tblEnglish()
@@ -2734,6 +2762,26 @@ namespace ltktDAO
 			}
 		}
 		
+		[Column(Storage="_DeleteFlg", DbType="Bit NOT NULL")]
+		public bool DeleteFlg
+		{
+			get
+			{
+				return this._DeleteFlg;
+			}
+			set
+			{
+				if ((this._DeleteFlg != value))
+				{
+					this.OnDeleteFlgChanging(value);
+					this.SendPropertyChanging();
+					this._DeleteFlg = value;
+					this.SendPropertyChanged("DeleteFlg");
+					this.OnDeleteFlgChanged();
+				}
+			}
+		}
+		
 		[Association(Name="tblUser_tblEnglish", Storage="_tblUser", ThisKey="Author", OtherKey="Username", IsForeignKey=true)]
 		public tblUser tblUser
 		{
@@ -2869,6 +2917,8 @@ namespace ltktDAO
 		
 		private string _FolderID;
 		
+		private bool _DeleteFlg;
+		
 		private EntityRef<tblUser> _tblUser;
 		
 		private EntityRef<tblUser> _tblUser1;
@@ -2917,6 +2967,8 @@ namespace ltktDAO
     partial void OnStickyFlgChanged();
     partial void OnFolderIDChanging(string value);
     partial void OnFolderIDChanged();
+    partial void OnDeleteFlgChanging(bool value);
+    partial void OnDeleteFlgChanged();
     #endregion
 		
 		public tblInformatic()
@@ -3330,6 +3382,26 @@ namespace ltktDAO
 					this._FolderID = value;
 					this.SendPropertyChanged("FolderID");
 					this.OnFolderIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DeleteFlg", DbType="Bit NOT NULL")]
+		public bool DeleteFlg
+		{
+			get
+			{
+				return this._DeleteFlg;
+			}
+			set
+			{
+				if ((this._DeleteFlg != value))
+				{
+					this.OnDeleteFlgChanging(value);
+					this.SendPropertyChanging();
+					this._DeleteFlg = value;
+					this.SendPropertyChanged("DeleteFlg");
+					this.OnDeleteFlgChanged();
 				}
 			}
 		}

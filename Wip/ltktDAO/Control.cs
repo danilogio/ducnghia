@@ -98,6 +98,24 @@ namespace ltktDAO
             }
             return 0;
         }
+        /// <summary>
+        /// convert value to long type
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <returns></returns>
+        public long getValueByLong(string _code)
+        {
+            tblControl r = getRecord(_code);
+            long num = 0;
+            if (r != null)
+            {
+                if (long.TryParse(r.Value.Trim(), out num))
+                {
+                    return num;
+                }
+            }
+            return 0;
+        }
 
         /// <summary>
         /// update new value

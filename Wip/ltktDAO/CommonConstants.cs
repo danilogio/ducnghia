@@ -349,6 +349,7 @@ namespace ltktDAO
             public const string TXT_TAG = "Tag";
             public const string TXT_LOCATION = "Nơi lưu bài";
             public const string TXT_ONE_HALF = "1/2";
+            public const string TXT_CLEAR_DATA = "Xóa dữ liệu";
             
 
         #endregion
@@ -1036,6 +1037,7 @@ namespace ltktDAO
         public const string MSG_I_ACTION_SUCCESSFUL = "Thao tác {0} đã thành công";
         public const string MSG_E_MAX_LENGTH = "Chiều dài của {0} tối đa là {1}";
         public const string MSG_E_OVER_NUMBER = "Tổng số {0} là {1} đã vượt quá {2} là {3}";
+        public const string MSG_I_ACTION_DETAIL = "Đã {0} được {1} {2}";
         /// <summary>
         /// Message when error
         /// </summary>
@@ -1310,6 +1312,18 @@ namespace ltktDAO
         /// File type allowed of image
         /// </summary>
         public const string CF_IMG_FILE_TYPE_ALLOW = "IMG_FILE_TYPE_ALLOW";
+        /// <summary>
+        /// Key code of English page
+        /// </summary>
+        public const string CF_KEY_CODE_EL = "KEY_CODE_EL";
+        /// <summary>
+        /// keycode of IT page
+        /// </summary>
+        public const string CF_KEY_CODE_IT = "KEY_CODE_IT";
+        /// <summary>
+        /// keycode of Uni page
+        /// </summary>
+        public const string CF_KEY_CODE_UNI = "KEY_CODE_UNI";
         #endregion
 
         #region Pages Name (PAGE)

@@ -738,11 +738,51 @@ namespace ltktDAO
         /// </summary>
         /// <param name="totalRecord"></param>
         /// <returns></returns>
-        public static string getProperlyFolderID(int totalRecord)
+        public static string getProperlyFolderID(long keyCode)
         {
             string folderID = CommonConstants.BLANK;
-            folderID = "F" + (totalRecord + 1).ToString();
+            if (keyCode == long.MaxValue)
+            {
+                return keyCode.ToString() ;
+            }
+            folderID = "F" + (keyCode + 1).ToString();
             return folderID;
+        }
+        /// <summary>
+        /// directory is existed or not?
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool isFolderExisted(string path)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+            return dir.Exists;
+        }
+        /// <summary>
+        /// delete folder, subfolder and all files
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool deleteFolder(string path)
+        {
+            if (isNullOrBlank(path))
+            {
+                return false;
+            }
+            DirectoryInfo dir = new DirectoryInfo(path);
+            if (!dir.Exists)
+            {
+                return true;
+            }
+            try
+            {
+                dir.Delete(true);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
         public int getClassEng(string type, string common, string major, string cert)
         {

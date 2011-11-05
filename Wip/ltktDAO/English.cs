@@ -488,7 +488,7 @@ namespace ltktDAO
         {
             int num = 0;
             num = (from p in DB.tblEnglishes
-                   where p.StickyFlg == true
+                   where p.StickyFlg == true && p.DeleteFlg == false
                    select p).Count();
             return num;
         }
@@ -507,7 +507,7 @@ namespace ltktDAO
                 {
                     num = (from p in DB.tblEnglishes
                            where p.State != CommonConstants.STATE_UNCHECK
-                                 && p.Posted.Year < year
+                                 && p.Posted.Year < year && p.DeleteFlg == false
                            select p).Count();
                 }
                 if (start > 0 && end > 0 && end >= start)
@@ -515,12 +515,34 @@ namespace ltktDAO
                     return (from p in DB.tblEnglishes
                             where p.State != CommonConstants.STATE_UNCHECK
                                     && p.Posted.Year <= year
-                                    && p.Class >= start && p.Class <= end
+                                    && p.Class >= start && p.Class <= end && p.DeleteFlg == false
                             select p).Count();
                 }
                 
             }
             return num;
+        }
+        /// <summary>
+        /// count all article is deleted
+        /// </summary>
+        /// <returns></returns>
+        public int countDeletedArticles()
+        {
+            int num = (from p in DB.tblEnglishes
+                       where p.DeleteFlg == true
+                       select p).Count();
+            return num;
+        }
+        /// <summary>
+        /// get all deleted article
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<tblEnglish> getDeletedArticleList()
+        {
+            IEnumerable<tblEnglish> lst = from p in DB.tblEnglishes
+                                          where p.DeleteFlg == true
+                                          select p;
+            return lst;
         }
         private void locateArticleIndex(ArticleSCO articleSCO,out int start, out int end)
         {
@@ -614,7 +636,8 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from p in DB.tblEnglishes
-                             where p.Point == DB.tblEnglishes.Max(p2=>p2.Point)
+                                          where p.Point == DB.tblEnglishes.Max(p2 => p2.Point) 
+                                          && p.DeleteFlg == false
                              orderby p.Posted descending
                              select p;
             if (lst.Count() > 0)
@@ -642,6 +665,10 @@ namespace ltktDAO
 
                     ts.Complete();
                 }
+                ltktDAO.Control controlDao = new ltktDAO.Control();
+                long keyCode = controlDao.getValueByLong(CommonConstants.CF_KEY_CODE_EL);
+                controlDao.setValue(CommonConstants.CF_KEY_CODE_EL, (keyCode + 1).ToString());
+
             }
             catch (Exception e)
             {
@@ -692,11 +719,17 @@ namespace ltktDAO
                     record.StickyFlg = false;
                     record.Class = _class;
                     record.FolderID = folderId;
+                    record.DeleteFlg = false;
 
                     DB.tblEnglishes.InsertOnSubmit(record);
                     DB.SubmitChanges();
                     ts.Complete();
                 }
+
+                ltktDAO.Control controlDao = new ltktDAO.Control();
+                long keyCode = controlDao.getValueByLong(CommonConstants.CF_KEY_CODE_EL);
+                controlDao.setValue(CommonConstants.CF_KEY_CODE_EL, (keyCode + 1).ToString());
+
             }
             catch (Exception e)
             {
@@ -709,6 +742,8 @@ namespace ltktDAO
                                                         + e.HelpLink);
                 return false;
             }
+
+            
             return true;
         }
        
@@ -772,11 +807,12 @@ namespace ltktDAO
         public int sumEnglish()
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
-            return (from english in DB.tblEnglishes
+            return (from english in DB.tblEnglishes 
+                    where english.DeleteFlg == false
                     select english).Count();
 
         }
-        public bool deleteArticle(int _id)
+        public bool setDeleteFlagArticle(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             try
@@ -784,7 +820,34 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var english = DB.tblEnglishes.Single(e => e.ID == _id);
-                    DB.tblEnglishes.DeleteOnSubmit(english);
+                    english.DeleteFlg = true;
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// delete article
+        /// </summary>
+        /// <param name="deletedList"></param>
+        /// <returns></returns>
+        public bool deleteArticles()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    IEnumerable<tblEnglish> deletedList = from p in DB.tblEnglishes
+                                                  where p.DeleteFlg == true
+                                                  select p;
+                    DB.tblEnglishes.DeleteAllOnSubmit(deletedList);
                     DB.SubmitChanges();
                     ts.Complete();
                 }
@@ -872,7 +935,8 @@ namespace ltktDAO
             if (numberRecord <= 0)
                 numberRecord = 1;
             IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
-                                           where p.Class == _class && p.StickyFlg == false
+                                           where p.Class == _class && p.StickyFlg == false 
+                                           && p.DeleteFlg == false
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             return lst;
@@ -881,7 +945,8 @@ namespace ltktDAO
         public IEnumerable<tblEnglish>  fetchEnglishList(int start, int count)
         {
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                              orderby r.Posted descending
+                                              where r.DeleteFlg == false
+                                              orderby r.Posted descending 
                                               select r).Skip(start).Take(count);
 
             return lst;
@@ -889,7 +954,7 @@ namespace ltktDAO
         public IEnumerable<tblEnglish> fetchEnglishList(int state, int start, int count)
         {
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                              where r.State == state
+                                              where r.State == state && r.DeleteFlg == false
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
@@ -903,7 +968,8 @@ namespace ltktDAO
             if (startIdx == -1)
                 return null;
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                           where r.Class >= startIdx && r.Class <= endIdx
+                                           where r.Class >= startIdx && r.Class <= endIdx 
+                                           && r.DeleteFlg == false
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
@@ -912,7 +978,8 @@ namespace ltktDAO
         public IEnumerable<tblEnglish> fetchStickyEnglishList(int start, int count)
         {
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                           where r.StickyFlg == true
+                                           where r.StickyFlg == true 
+                                           && r.DeleteFlg == false
                                            orderby r.Posted descending
                                            select r).Skip(start).Take(count);
 
@@ -921,7 +988,9 @@ namespace ltktDAO
         public IEnumerable<tblEnglish> fetchStickyEnglishList(int state, int start, int count)
         {
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                           where r.StickyFlg == true && r.State == state
+                                           where r.StickyFlg == true 
+                                           && r.State == state 
+                                           && r.DeleteFlg == false
                                            orderby r.Posted descending
                                            select r).Skip(start).Take(count);
 
@@ -930,7 +999,8 @@ namespace ltktDAO
         public IEnumerable<tblEnglish> searchArticles(string keyword, int start, int count)
         {
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                           where r.Title.Contains(keyword) || r.Tag.Contains(keyword)
+                                           where (r.Title.Contains(keyword) || r.Tag.Contains(keyword)) 
+                                           && r.DeleteFlg == false
                                            orderby r.Posted descending
                                            select r).Skip(start).Take(count);
 
@@ -939,7 +1009,8 @@ namespace ltktDAO
         public int countArticles(string keyword)
         {
             int num = (from r in DB.tblEnglishes
-                       where r.Title.Contains(keyword) || r.Tag.Contains(keyword)
+                       where (r.Title.Contains(keyword) || r.Tag.Contains(keyword)) 
+                       && r.DeleteFlg == false
                        orderby r.Posted descending
                        select r).Count();
 
@@ -948,8 +1019,10 @@ namespace ltktDAO
         public int countStickyEnglishList(int state)
         {
             int num = (from r in DB.tblEnglishes
-                                           where r.StickyFlg == true && r.State == state
-                                           select r).Count();
+                       where r.StickyFlg == true 
+                       && r.State == state 
+                       && r.DeleteFlg == false
+                       select r).Count();
 
             return num;
         }
@@ -968,7 +1041,9 @@ namespace ltktDAO
             if (startIdx == -1)
                 return 0;
             int num = (from r in DB.tblEnglishes
-                       where r.Class >= startIdx && r.Class <= endIdx
+                       where r.Class >= startIdx 
+                       && r.Class <= endIdx 
+                       && r.DeleteFlg == false
                        select r).Count();
 
             return num;
@@ -981,7 +1056,8 @@ namespace ltktDAO
         public int countEnglishList(int state)
         {
             int num = (from r in DB.tblEnglishes
-                       where r.State == state
+                       where r.State == state 
+                       && r.DeleteFlg == false
                        select r).Count();
 
             return num;
@@ -1000,8 +1076,10 @@ namespace ltktDAO
             if (startIdx == -1)
                 return 0;
             int num = (from r in DB.tblEnglishes
-                                           where r.Class >= startIdx && r.Class <= endIdx
-                                           && r.State == state
+                                           where r.Class >= startIdx 
+                                           && r.Class <= endIdx
+                                           && r.State == state 
+                                           && r.DeleteFlg == false
                                            select r).Count();
 
             return num;
@@ -1014,10 +1092,12 @@ namespace ltktDAO
             if (startIdx == -1)
                 return null;
             IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
-                                           where r.Class >= startIdx && r.Class <= endIdx 
+                                           where r.Class >= startIdx
+                                           && r.Class <= endIdx
                                            && r.State == state
-                                              orderby r.Posted descending
-                                              select r).Skip(start).Take(count);
+                                           && r.DeleteFlg == false
+                                           orderby r.Posted descending
+                                           select r).Skip(start).Take(count);
 
             return lst;
         }
@@ -1143,7 +1223,9 @@ namespace ltktDAO
                                                where p.Posted.Year <= year
                                                      && p.State != CommonConstants.STATE_UNCHECK
                                                      && p.StickyFlg == false
-                                                     && p.Class >= start && p.Class <= end
+                                                     && p.Class >= start 
+                                                     && p.Class <= end 
+                                                     && p.DeleteFlg == false
                                                orderby p.Posted descending
                                                select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
@@ -1152,7 +1234,8 @@ namespace ltktDAO
                  lst = (from p in DB.tblEnglishes
                        where p.Posted.Year <= year
                              && p.State != CommonConstants.STATE_UNCHECK
-                             && p.StickyFlg == false
+                             && p.StickyFlg == false 
+                             && p.DeleteFlg == false
                        orderby p.Posted descending
                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
@@ -1235,7 +1318,9 @@ namespace ltktDAO
                       where p.Posted.Year <= year
                             && p.State != CommonConstants.STATE_UNCHECK
                             && p.StickyFlg == true
-                            && p.Class >= start && p.Class <= end
+                            && p.Class >= start 
+                            && p.Class <= end 
+                            && p.DeleteFlg == false
                       orderby p.Posted descending
                       select p;
             }
@@ -1244,7 +1329,8 @@ namespace ltktDAO
                 lst = from p in DB.tblEnglishes
                       where p.Posted.Year <= year
                             && p.State != CommonConstants.STATE_UNCHECK
-                            && p.StickyFlg == true
+                            && p.StickyFlg == true 
+                            && p.DeleteFlg == false
                       orderby p.Posted descending
                       select p;
             }
@@ -1312,7 +1398,9 @@ namespace ltktDAO
             if (numberRecord <= 0)
                 numberRecord = 1;
             IEnumerable<tblEnglish> lst = (from p in DB.tblEnglishes
-                                           where p.Class == _class && p.StickyFlg == true
+                                           where p.Class == _class 
+                                           && p.StickyFlg == true 
+                                           && p.DeleteFlg == false
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             
@@ -1334,7 +1422,8 @@ namespace ltktDAO
                                            where p.Class >= _startClass 
                                            && p.Class <= _endClass 
                                            && p.StickyFlg == false
-                                           && p.State != CommonConstants.STATE_UNCHECK
+                                           && p.State != CommonConstants.STATE_UNCHECK 
+                                           && p.DeleteFlg == false
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             return lst;
@@ -1356,6 +1445,7 @@ namespace ltktDAO
                                            && p.Class <= _endClass 
                                            && p.StickyFlg == true
                                            && p.State != CommonConstants.STATE_UNCHECK
+                                           && p.DeleteFlg == false
                                            orderby p.Posted descending
                                            select p).Take(numberRecord);
             return lst;
@@ -1407,7 +1497,8 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = (from record in DB.tblEnglishes
-                                           where record.Type == _type
+                                           where record.Type == _type 
+                                           && record.DeleteFlg == false
                                            select record).Take(_numberRecords);
 
             return lst.ToList();
@@ -1417,9 +1508,10 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblEnglish> lst = from record in DB.tblEnglishes
-                                          where record.Title.Contains(_keyword) ||
+                                          where (record.Title.Contains(_keyword) ||
                                                       record.Tag.Contains(_keyword) ||
-                                                      record.Contents.Contains(_keyword)
+                                                      record.Contents.Contains(_keyword))
+                                                      && record.DeleteFlg == false
                                           select record;
 
             return lst.ToList();
@@ -1427,7 +1519,7 @@ namespace ltktDAO
 
         public int count()
         {
-            return (from r in DB.tblEnglishes select r).Count();
+            return (from r in DB.tblEnglishes where r.DeleteFlg == false select r).Count();
         }
         /// <summary>
         /// get one article with ID
@@ -1437,7 +1529,8 @@ namespace ltktDAO
         public tblEnglish getArticle(int _id)
         {
             IEnumerable<tblEnglish> lst = from p in DB.tblEnglishes
-                                          where p.ID == _id
+                                          where p.ID == _id 
+                                          && p.DeleteFlg == false
                                           select p;
             if (lst.Count() > 0)
             {

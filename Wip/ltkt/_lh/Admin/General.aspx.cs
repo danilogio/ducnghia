@@ -45,6 +45,9 @@ namespace ltkt.Admin
                     sumDownload.Text = statisticDAO.getValue(CommonConstants.SF_NUM_DOWNLOAD_A_DAY);
                     sumUpload.Text = statisticDAO.getValue(CommonConstants.SF_NUM_UPLOAD);
                     sumCommentADay.Text = statisticDAO.getValue(CommonConstants.SF_NUM_COMMENT_A_DAY);
+                    sumStickyEL.Text = statisticDAO.getValue(CommonConstants.SF_NUM_STICKED_ON_EL);
+                    sumStickyIT.Text = statisticDAO.getValue(CommonConstants.SF_NUM_STICKED_ON_IT);
+                    sumStickyUni.Text = statisticDAO.getValue(CommonConstants.SF_NUM_STICKED_ON_UNI);
                     int numAdv = BaseServices.convertStringToInt(statisticDAO.getValue(CommonConstants.SF_NUM_NEW_ADV_CONTACT));
                     if (numAdv > 0)
                     {

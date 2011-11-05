@@ -77,6 +77,35 @@ namespace ltktDAO
                                                         + e.HelpLink);
             }
         }
+        /// <summary>
+        /// set new value
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <param name="_value"></param>
+        public void setValue(string _code, string _value)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var r = DB.tblStatistics.Single(p => p.Code == _code);
+                    r.Value = _value;
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+            }
+        }
         public void resetToDefault(string _code)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);

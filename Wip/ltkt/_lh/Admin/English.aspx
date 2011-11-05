@@ -31,98 +31,105 @@
         </asp:Panel>
         <asp:Panel ID="viewPanel" runat="server">
             <div style="float: left; width: 100%">
-                
-                <div>
-                    <div align="left" style="float: left; width: 16%">
-                        <h3>
-                            Chủ đề</h3>
-                        <ul>
-                            <li>
-                                <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShow19" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=19&page=1">Lớp 1->9 </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShow10" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=10&page=1">Lớp 10 </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShow11" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=11&page=1">Lớp 11 </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShow12" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=12&page=1">Lớp 12 </asp:HyperLink></li>
-                        </ul>
+                <div style="float: left; width: 80%; border-right: 1px solid #a6c9e2; margin-bottom: 10px;">
+                    <div style="float: left; width: 100%;">
+                        <div align="left" style="float: left; width: 20%">
+                            <h3>
+                                Chủ đề</h3>
+                            <ul>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowAll" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&page=1">Tất cả </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShow19" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=19&page=1">Lớp 1->9 </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShow10" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=10&page=1">Lớp 10 </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShow11" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=11&page=1">Lớp 11 </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShow12" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=12&page=1">Lớp 12 </asp:HyperLink></li>
+                            </ul>
+                        </div>
+                        <div align="left" style="float: left; width: 20%">
+                            <h3>
+                                &nbsp&nbsp&nbsp&nbsp</h3>
+                            <ul>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowMath" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=20&page=1">CN Toán </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowEco" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=21&page=1">CN Kinh tế </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowChem" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=22&page=1">CN Hóa </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowBio" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=23&page=1">CN Sinh </asp:HyperLink></li>
+                            </ul>
+                        </div>
+                        <div align="left" style="float: left; width: 20%">
+                            <h3>
+                                &nbsp&nbsp&nbsp&nbsp</h3>
+                            <ul>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowMat" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=24&page=1">CN KHVL </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowPhy" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=25&page=1">CN Vật lý </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowCom" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=26&page=1">CN Viễn thông </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowIT" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=27&page=1">CN CNTT </asp:HyperLink></li>
+                            </ul>
+                        </div>
+                        <div align="left" style="float: left; width: 20%">
+                            <h3>
+                                &nbsp&nbsp&nbsp&nbsp</h3>
+                            <ul>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowToeic" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=4049&page=1">TOEIC </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowToefl" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3039&page=1">TOEFL </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowIelts" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=5059&page=1">IELTS </asp:HyperLink></li>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowABC" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=abc&page=1">Chứng Chỉ ABC </asp:HyperLink></li>
+                            </ul>
+                        </div>
+                        <div align="left" style="float: left; width: 20%;">
+                            <h3>
+                                Xem thêm
+                            </h3>
+                            <ul>
+                                <li>
+                                    <asp:HyperLink ID="hpkShowSticky" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=sticky&state=all&page=1">Sticky </asp:HyperLink></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div align="left" style="float: left; width: 16%">
-                        <h3>
-                            &nbsp&nbsp&nbsp&nbsp</h3>
-                        <ul>
-                            <li>
-                                <asp:HyperLink ID="hpkShowMath" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=20&page=1">CN Toán </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowEco" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=21&page=1">CN Kinh tế </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowChem" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=22&page=1">CN Hóa </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowBio" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=23&page=1">CN Sinh </asp:HyperLink></li>
-                        </ul>
+                    <div class="form_settings" align="center" style="float: left; width: 100%; margin-top: 5px;">
+                        <p>
+                            <asp:TextBox ID="txtKeyword" MaxLength="254" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnSearch" runat="server" CssClass="formbutton" OnClick="btnSearch_Click"
+                                Text="Tìm" />
+                        </p>
                     </div>
-                    <div align="left" style="float: left; width: 16%">
+                </div>
+                <div align="left" style="float: left; width: 19%; padding: 2px">
+                    <div style="float: left; width: 100%; height: 170px;">
                         <h3>
-                            &nbsp&nbsp&nbsp&nbsp</h3>
-                        <ul>
-                            <li>
-                                <asp:HyperLink ID="hpkShowMat" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=24&page=1">CN KHVL </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowPhy" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=25&page=1">CN Vật lý </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowCom" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=26&page=1">CN Viễn thông </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowIT" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=27&page=1">CN CNTT </asp:HyperLink></li>
-                        </ul>
-                    </div>
-                    <div align="left" style="float: left; width: 16%">
-                        <h3>
-                            &nbsp&nbsp&nbsp&nbsp</h3>
-                        <ul>
-                            <li>
-                                <asp:HyperLink ID="hpkShowToeic" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=4049&page=1">TOEIC </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowToefl" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=3039&page=1">TOEFL </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowIelts" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=5059&page=1">IELTS </asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="hpkShowABC" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=abc&page=1">Chứng Chỉ ABC </asp:HyperLink></li>
-                        </ul>
-                    </div>
-                    <div align="left" style="float: left; width: 16%;">
-                        <h3>
-                            Xem thêm
+                            Trạng thái
                         </h3>
                         <ul>
                             <li>
-                                <asp:HyperLink ID="hpkShowSticky" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=sticky&state=all&page=1">Sticky </asp:HyperLink></li>
+                                <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
                         </ul>
                     </div>
-                </div>
-                <div align="left" style="float: left; width: 16%; border-left: 1px solid #a6c9e2;
-                    padding: 2px;">
-                    <h3>
-                        Trạng thái
-                    </h3>
-                    <ul>
-                        <li>
-                            <asp:HyperLink ID="hpkShowAllState" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=all&page=1">Tất cả </asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="hpkShowUncheck" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=0&page=1">Chưa duyệt </asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="hpkShowChecked" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=1&page=1">Đã duyệt </asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="hpkShowBad" runat="server" NavigateUrl="~/_lh/Admin/English.aspx?action=search&key=all&state=2&page=1">Báo xấu </asp:HyperLink></li>
-                    </ul>
-                </div>
-                <div class="form_settings" >
-                    <p>
-                        <asp:TextBox ID="txtKeyword" MaxLength="254" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnSearch" runat="server" CssClass="formbutton" OnClick="btnSearch_Click"
-                            Text="Tìm" />
-                    </p>
+                    <div class="form_settings" style="float: left; width: 100%; margin-top: 5px;" align="center">
+                        <asp:Button ID="btnClear" runat="server" CssClass="formbutton" OnClick="btnClear_Click"
+                            OnClientClick="return confirm('Bạn có thật sự muốn xóa?\nChức năng này sẽ xóa bài cùng với các dữ liệu kèm theo.\nBạn có thể phải đăng nhập lại sau khi quá trình xóa hoàn tất.')"
+                            Text="Xóa dữ liệu" />
+                    </div>
                 </div>
             </div>
             <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">

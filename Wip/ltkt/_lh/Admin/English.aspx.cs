@@ -5,16 +5,17 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
+using System.Collections;
 
 namespace ltkt.Admin
 {
     public partial class English : System.Web.UI.Page
     {
         private ltktDAO.Users userDAO = new ltktDAO.Users();
-        ltktDAO.Control control = new ltktDAO.Control();
-        ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
-        ltktDAO.English englishDAO = new ltktDAO.English();
-        ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+        private ltktDAO.Control control = new ltktDAO.Control();
+        private ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
+        private ltktDAO.English englishDAO = new ltktDAO.English();
+        private ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
 
         EventLog log = new EventLog();
 
@@ -24,6 +25,7 @@ namespace ltkt.Admin
         {
            
             tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+            
             if (user != null)
             {
                 if (userDAO.isAllow(user.Permission, CommonConstants.P_A_ENGLISH)
@@ -39,6 +41,18 @@ namespace ltkt.Admin
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
                     liTableHeader.Text = CommonConstants.TXT_LIST_ARTICLE;
+                    int numDeletedFile = englishDAO.countDeletedArticles();
+                    if (numDeletedFile > 0)
+                    {
+                        btnClear.Text = CommonConstants.TXT_CLEAR_DATA;
+                        btnClear.Text += CommonConstants.SPACE;
+                        btnClear.Text += "(" + numDeletedFile + ")";
+                        btnClear.Visible = true;
+                    }
+                    else
+                    {
+                        btnClear.Visible = false;
+                    }
                     pageLoad(sender, e, user);
                     string inform = (string)Session[CommonConstants.SES_INFORM];
                     if (!BaseServices.isNullOrBlank(inform))
@@ -46,6 +60,7 @@ namespace ltkt.Admin
                         showErrorMessage(inform);
                         Session[CommonConstants.SES_INFORM] = null;
                     }
+                    
                     //////////////////////////////////////////////////
                 }
             }
@@ -64,6 +79,7 @@ namespace ltkt.Admin
             bool isEditError = false;
             bool isDeletedSuccessful = false;
             bool isSearchFreeNOK = false;
+            tblUser savedUser = null;
             try
             {
                 int page = 1;
@@ -349,8 +365,11 @@ namespace ltkt.Admin
                 {
                     if (Request.QueryString[CommonConstants.REQ_ID] != null)
                     {
-                        int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID].ToString());
-                        isDeletedSuccessful = englishDAO.deleteArticle(id);
+                        savedUser = (tblUser)Session[CommonConstants.SES_USER];
+                        int id = BaseServices.convertStringToInt((string)Request.QueryString[CommonConstants.REQ_ID]); 
+
+                        isDeletedSuccessful = englishDAO.setDeleteFlagArticle(id);
+
                         isDeleted = true;
                     }
                 }
@@ -370,7 +389,7 @@ namespace ltkt.Admin
                                               + CommonConstants.ADD_PARAMETER
                                               + CommonConstants.REQ_PAGE
                                               + CommonConstants.EQUAL
-                                              + "1");
+                                              + CommonConstants.PAGE_NUMBER_FIRST);
             }
             if (isDeleted)
             {
@@ -379,12 +398,14 @@ namespace ltkt.Admin
                 {
                     Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
                     statDAO.add(CommonConstants.SF_NUM_ARTICLE_ON_EL, CommonConstants.CONST_ONE_NEGATIVE);
+                    Session[CommonConstants.SES_USER] = savedUser;
                 }
                 else
                 {
                     Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_DELETE);
                 }
                 Response.Redirect(Request.UrlReferrer.ToString());
+                //Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
             }
             if (isSearchFreeNOK)
             {
@@ -647,6 +668,9 @@ namespace ltkt.Admin
 
             if (isOk)
             {
+
+                int stickiedArticle = englishDAO.countStickyArticle();
+                statDAO.setValue(CommonConstants.SF_NUM_STICKED_ON_EL, stickiedArticle.ToString());
                 Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_EDIT);
             }
             else
@@ -665,6 +689,60 @@ namespace ltkt.Admin
             else
             {
                 Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
+            }
+        }
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            IEnumerable<tblEnglish> lst = englishDAO.getDeletedArticleList();
+            string path = CommonConstants.BLANK;
+            bool fileDeleted = false;
+            int totalFileDeleted = 0;
+            bool deleteSuccessful = false;
+
+            //build list path to delete
+            ArrayList strPathList = new ArrayList();
+            foreach (var item in lst)
+            {
+                strPathList.Add(item.FolderID.Trim());
+            }
+            try
+            {
+                if (lst != null)
+                {
+                    deleteSuccessful = englishDAO.deleteArticles();
+                    if (deleteSuccessful)
+                    {
+                        foreach (var item in strPathList)
+                        {
+                            path = DBHelper.strCurrentPath;
+                            path += CommonConstants.FOLDER_EL;
+                            path += item;
+                            fileDeleted = BaseServices.deleteFolder(path);
+                            if (fileDeleted)
+                            {
+                                totalFileDeleted++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+            }
+            if (deleteSuccessful)
+            {
+                string message = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, 
+                    CommonConstants.ACT_DELETE);
+                message += CommonConstants.TEMP_BR_TAG;
+                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_DETAIL, 
+                                                            CommonConstants.ACT_DELETE, 
+                                                            totalFileDeleted.ToString(), 
+                                                            CommonConstants.TXT_ARTICLE_NAME);
+                EnglishTable.Visible = false;
+                showErrorMessage(message);
+                return;
+                
             }
         }
         private string validateForm()
