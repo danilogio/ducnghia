@@ -87,6 +87,7 @@ namespace ltktDAO
         /// all
         /// </summary>
         public const string ALL = "all";
+        
         /// <summary>
         /// dot dtring (.)
         /// </summary>
@@ -265,6 +266,7 @@ namespace ltktDAO
             /// view all
             /// </summary>
             public const string TXT_VIEW_ALL = "Xem tất cả";
+            public const string TXT_ALL = "Tất cả";
             /// <summary>
             /// login text
             /// </summary>
@@ -326,6 +328,10 @@ namespace ltktDAO
             /// </summary>
             public const string TXT_STICKY = "Sticky";
             public const string TXT_UNSTICKY = "Không Sticky";
+            /// <summary>
+            /// Chủ đề
+            /// </summary>
+            public const string TXT_SUBJECT = "Chủ đề";
             /// <summary>
             /// reason
             /// </summary>
@@ -679,10 +685,12 @@ namespace ltktDAO
         public const int AT_EL_CERT_ABC_START = 60;
         public const int AT_EL_CERT_ABC_END = 69;
         public const string AT_EL_CLASS_1_TO_9 = "19";
+        public const string AT_EL_CLASS_1_TO_9_NAME = "Lớp 1->9";
         public const string AT_EL_CERT_TOEIC = "4049";
         public const string AT_EL_CERT_TOEFL = "3039";
         public const string AT_EL_CERT_IELTS = "5059";
         public const string AT_EL_ABC = "abc";
+        public const string AT_EL_ABC_NAME = "Chứng Chỉ ABC";
         /// <summary>
         /// Anh văn lớp 1
         /// </summary>
@@ -831,6 +839,10 @@ namespace ltktDAO
         /// </summary>
         public const int AT_EL_MJ_IT = 27;
         public const string AT_EL_MJ_IT_NAME = "CN CNTT";
+        /// <summary>
+        /// TOEIC name
+        /// </summary>
+        public const string AT_EL_TOEIC_NAME = "TOEIC";
         /// <summary>
         /// TOEIC 300
         /// </summary>
@@ -1033,6 +1045,7 @@ namespace ltktDAO
         /// Message when link error
         /// </summary>
         public const string MSG_E_LINK_INVALID = "Đường dẫn không đúng, xin vui lòng kiểm tra lại";
+        public const string MSG_I_NUM_SEARCHED_RECORD = "Có tổng cộng {0} bài viết được tìm thấy";
         #endregion
 
         #region Administrator Function (AF)
@@ -1630,6 +1643,14 @@ namespace ltktDAO
         /// save id
         /// </summary>
         public const string SES_ID = "ID";
+        /// <summary>
+        /// message inform
+        /// </summary>
+        public const string SES_INFORM = "INFORM";
+        /// <summary>
+        /// url of old page
+        /// </summary>
+        public const string SES_OLD_PAGE = "OLD_PAGE";
 
         #endregion
 
@@ -2325,6 +2346,10 @@ namespace ltktDAO
         /// Action for search
         /// </summary>
         public const string ACT_SEARCH = "search";
+        /// <summary>
+        /// search with any keyword
+        /// </summary>
+        public const string ACT_SEARCH_FREE = "search_free";
 
         /// <summary>
         /// Action for inbox

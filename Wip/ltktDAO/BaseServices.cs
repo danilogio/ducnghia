@@ -733,7 +733,17 @@ namespace ltktDAO
 
             return _leitmotif;
         }
-
+        /// <summary>
+        /// return folder ID
+        /// </summary>
+        /// <param name="totalRecord"></param>
+        /// <returns></returns>
+        public static string getProperlyFolderID(int totalRecord)
+        {
+            string folderID = CommonConstants.BLANK;
+            folderID = "F" + (totalRecord + 1).ToString();
+            return folderID;
+        }
         public int getClassEng(string type, string common, string major, string cert)
         {
             int _class = 0;

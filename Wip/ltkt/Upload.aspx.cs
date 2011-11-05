@@ -118,7 +118,8 @@ namespace ltkt
                 if (fileContent.HasFile)
                 {
                     string folder = CommonConstants.BLANK;
-                    
+                    string folderId = CommonConstants.BLANK;
+                    int totalRecord = 0;
                     // 0 - ltdh
                     // 1 - english
                     // 2 - tin học
@@ -138,19 +139,23 @@ namespace ltkt
                         case 1:
                             {
                                 folder = CommonConstants.FOLDER_IT;
-                                folder += Convert.ToString(DateTime.Now.Year);
+                                folder += "/" + Convert.ToString(DateTime.Now.Year);
                                 _leitmotif = bs.getLeitmotif(ddlInfType.SelectedValue, ddlInfOffice.SelectedValue, ddlInfTip.SelectedValue);
                                 break;
                             }
                         case 2:
                             {
+                                totalRecord = englishDAO.count();
+                                
                                 folder = CommonConstants.FOLDER_EL;
-                                folder += Convert.ToString(DateTime.Now.Year);
+                                folder += "/" + Convert.ToString(DateTime.Now.Year);
                                 _class = bs.getClassEng(ddlEnglishType.SelectedValue, ddlEnglishCommon.SelectedValue, ddlEnglishMajor.SelectedValue, ddlEnglishCert.SelectedValue);
+
                                 break;
                             }
                     }
-
+                    folderId = BaseServices.getProperlyFolderID(totalRecord);
+                    folder += "/" + folderId;
                     string rootFolder = Server.MapPath("~") + "/" + folder + "/";
                     string filename = bs.fileNameToSave(rootFolder + fileContent.FileName);
                     string fileSave = filename.Substring(filename.LastIndexOf(CommonConstants.FOLDER_DATA));
@@ -165,16 +170,19 @@ namespace ltkt
 
                     try
                     {
-                        if (fileSolving.HasFile
-                            && bs.checkFileType(fileSolving.FileName, fileTypes)
-                            && fileSolving.PostedFile.ContentLength <= maxSize)
+                        if (fileSolving.HasFile)
                         {
-                            _fileSolving = filename.Substring(0, filename.LastIndexOf(".")) + "_solved" + Path.GetExtension(fileSolving.FileName);
-                            _fileSolving = bs.fileNameToSave(_fileSolving);
-                            fileSolvingGood = true;
+                            if (bs.checkFileType(fileSolving.FileName, fileTypes)
+                                && fileSolving.PostedFile.ContentLength <= maxSize)
+                            {
+                                _fileSolving = filename.Substring(0, filename.LastIndexOf(".")) + "_solved" + Path.GetExtension(fileSolving.FileName);
+                                _fileSolving = bs.fileNameToSave(_fileSolving);
+                                fileSolvingGood = true;
+                            }
+                            else
+                                throw new Exception(CommonConstants.MSG_E_UPLOAD);
                         }
-                        else
-                            throw new Exception(CommonConstants.MSG_E_UPLOAD);
+                        
 
                         //fileContent.SaveAs(filename);
                         if (bs.checkFileType(fileContent.FileName, fileTypes)
@@ -223,6 +231,7 @@ namespace ltkt
                                 }
                             case 2:
                                 {
+                                   
                                     isOK = englishDAO.insertEnglish(txtboxTitle.Text,
                                                                     0
                                                                     -1,
@@ -231,7 +240,7 @@ namespace ltkt
                                                                     DateTime.Now,
                                                                     _class,
                                                                     fileSave,
-                                                                    txtboxTag.Text);
+                                                                    txtboxTag.Text, folderId);
                                     break;
                                 }
                         }

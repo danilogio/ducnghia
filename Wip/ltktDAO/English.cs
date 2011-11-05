@@ -669,7 +669,7 @@ namespace ltktDAO
         /// <param name="_tag"></param>
         /// <returns></returns>
         public Boolean insertEnglish(string _title, int _type, string _content,
-            string _author, DateTime _posted, int _class, string _location, string _tag)
+            string _author, DateTime _posted, int _class, string _location, string _tag, string folderId)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -690,7 +690,8 @@ namespace ltktDAO
                     record.Score = 0;
                     record.Tag = _tag;
                     record.StickyFlg = false;
-                    record.Class = CommonConstants.AT_UNCLASSIFIED;
+                    record.Class = _class;
+                    record.FolderID = folderId;
 
                     DB.tblEnglishes.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -710,7 +711,7 @@ namespace ltktDAO
             }
             return true;
         }
-
+       
         /// <summary>
         /// Cập nhật bài viết
         /// </summary>
@@ -744,6 +745,7 @@ namespace ltktDAO
                     english.Class = update.Class;
                     english.Location = update.Location;
                     english.Comment = update.Comment;
+                    english.FolderID = update.FolderID;
 
                     DB.SubmitChanges();
                     ts.Complete();
@@ -774,7 +776,26 @@ namespace ltktDAO
                     select english).Count();
 
         }
-
+        public bool deleteArticle(int _id)
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var english = DB.tblEnglishes.Single(e => e.ID == _id);
+                    DB.tblEnglishes.DeleteOnSubmit(english);
+                    DB.SubmitChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+                return false;
+            }
+            return true;
+        }
         public Boolean insertComment(int _id, string _newComment)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -796,19 +817,22 @@ namespace ltktDAO
                 }
             }
             catch (Exception e) {
-                log.writeLog(DBHelper.strPathLogFile, e.Message
+                writeException(e);
+                return false; 
+            }
+
+            return true;
+        }
+        private void writeException(Exception e)
+        {
+            log.writeLog(DBHelper.strPathLogFile, e.Message
                                                         + CommonConstants.NEWLINE
                                                         + e.Source
                                                         + CommonConstants.NEWLINE
                                                         + e.StackTrace
                                                         + CommonConstants.NEWLINE
                                                         + e.HelpLink);
-                return false; 
-            }
-
-            return true;
         }
-
         public Boolean Like(int _id)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -884,6 +908,50 @@ namespace ltktDAO
                                               select r).Skip(start).Take(count);
 
             return lst;
+        }
+        public IEnumerable<tblEnglish> fetchStickyEnglishList(int start, int count)
+        {
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                           where r.StickyFlg == true
+                                           orderby r.Posted descending
+                                           select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblEnglish> fetchStickyEnglishList(int state, int start, int count)
+        {
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                           where r.StickyFlg == true && r.State == state
+                                           orderby r.Posted descending
+                                           select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblEnglish> searchArticles(string keyword, int start, int count)
+        {
+            IEnumerable<tblEnglish> lst = (from r in DB.tblEnglishes
+                                           where r.Title.Contains(keyword) || r.Tag.Contains(keyword)
+                                           orderby r.Posted descending
+                                           select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public int countArticles(string keyword)
+        {
+            int num = (from r in DB.tblEnglishes
+                       where r.Title.Contains(keyword) || r.Tag.Contains(keyword)
+                       orderby r.Posted descending
+                       select r).Count();
+
+            return num;
+        }
+        public int countStickyEnglishList(int state)
+        {
+            int num = (from r in DB.tblEnglishes
+                                           where r.StickyFlg == true && r.State == state
+                                           select r).Count();
+
+            return num;
         }
         /// <summary>
         /// count english article with class
