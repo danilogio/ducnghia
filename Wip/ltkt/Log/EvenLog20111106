@@ -27,3 +27,31 @@ System.Data.Linq
 
 11/6/2011 1:38:55 AM ==>  Update record KEY_CODE_EL to Table tblControl successful
 11/6/2011 1:39:31 AM ==>  Update record KEY_CODE_EL to Table tblControl successful
+11/6/2011 3:07:22 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+11/6/2011 3:07:22 PM ==> [dvtrung]:Thread was being aborted.
+11/6/2011 4:15:31 PM ==> [dvtrung]: Insert record 21 to Table tblContestForUniversity successful
+11/6/2011 4:17:30 PM ==>  Update record KEY_CODE_EL to Table tblControl successful
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code UNDERCONS of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code ADS of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code ANNOUCEMENT of tblAdmin is ON
+11/6/2011 4:27:55 PM ==>  Update record ANNOUCEMENT to Table tblControl successful
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code COMMENT of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code CONTACT of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD_UNI of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD_IT of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD_EL of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code UNDERCONS of tblAdmin is OFF
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code ADS of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code ANNOUCEMENT of tblAdmin is ON
+11/6/2011 4:28:30 PM ==>  Update record ANNOUCEMENT to Table tblControl successful
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code COMMENT of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code CONTACT of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD_UNI of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD_IT of tblAdmin is ON
+11/6/2011 4:26:28 PM ==> [dvtrung]: Change code DOWNLOAD_EL of tblAdmin is ON
+11/6/2011 4:34:57 PM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+11/6/2011 4:34:57 PM ==> [dvtrung]:Thread was being aborted.
+11/6/2011 4:39:59 PM ==> [dvtrung]: Update record 1 to Table tblAdvertisement successful
+11/6/2011 4:40:56 PM ==> [dvtrung]: Update record 1 to Table tblAdvertisement successful

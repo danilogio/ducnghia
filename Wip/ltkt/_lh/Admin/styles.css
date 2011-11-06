@@ -579,7 +579,7 @@ div.block_details_text
 	border: 0;
 	background: none;
 }
-.block_text #divEnglishDetail
+.block_text #divEnglishDetail, #divInfoDetail
 {
 	height: 800px;
 }

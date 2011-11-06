@@ -564,15 +564,17 @@ namespace ltkt.Admin
                 }
                 else
                 {
-                    Session[CommonConstants.SES_INFORM] = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
-                    Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
+                    //Session[CommonConstants.SES_INFORM] = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+                    //Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
+                    showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                    EnglishTable.Visible = false;
+                    return;
                 }
             }
             else
             {
                 Response.Redirect(Request.UrlReferrer.ToString());
             }
-
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
@@ -906,7 +908,6 @@ namespace ltkt.Admin
         {
             txtTitle.Enabled = state;
             txtChapeau.Enabled = state;
-            txtPosted.Enabled = state;
             txtTag.Enabled = state;
             txtChecker.Enabled = state;
             ddlState.Enabled = state;

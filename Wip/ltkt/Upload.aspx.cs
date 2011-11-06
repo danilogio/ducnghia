@@ -132,6 +132,7 @@ namespace ltkt
                         case 0:
                             {
                                 folder = CommonConstants.FOLDER_UNI;
+                                keyCode = control.getValueByLong(CommonConstants.CF_KEY_CODE_UNI);
                                 folder += "/" + Convert.ToString(ddlYear.SelectedValue);
                                 folder += "/" + bs.getSubjectFolder(ddlSub.SelectedValue);
                                 break;
@@ -139,6 +140,7 @@ namespace ltkt
                         case 1:
                             {
                                 folder = CommonConstants.FOLDER_IT;
+                                keyCode = control.getValueByLong(CommonConstants.CF_KEY_CODE_IT);
                                 folder += "/" + Convert.ToString(DateTime.Now.Year);
                                 _leitmotif = bs.getLeitmotif(ddlInfType.SelectedValue, ddlInfOffice.SelectedValue, ddlInfTip.SelectedValue);
                                 break;

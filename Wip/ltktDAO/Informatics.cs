@@ -309,7 +309,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
-                                             where p.Point == DB.tblInformatics.Max(p2 => p2.Point)
+                                             where p.Point == DB.tblInformatics.Max(p2 => p2.Point) && p.DeleteFlg == true
                                              orderby p.Posted descending
                                              select p;
             if (lst.Count() > 0)
@@ -334,6 +334,7 @@ namespace ltktDAO
                                                     && p.Leitmotif <= _maxtype
                                                     && p.State != CommonConstants.STATE_UNCHECK
                                                     && p.StickyFlg == false
+                                                    && p.DeleteFlg == false
                                               orderby p.Posted descending
                                               select p).Take(_numRecord);
             return lst;
@@ -355,6 +356,7 @@ namespace ltktDAO
                                                     && p.Leitmotif <= _maxtype
                                                     && p.State != CommonConstants.STATE_UNCHECK
                                                     && p.StickyFlg == true
+                                                    && p.DeleteFlg == false
                                               orderby p.Posted descending
                                               select p).Take(_numRecord);
             return lst;
@@ -376,6 +378,7 @@ namespace ltktDAO
                                               where p.Leitmotif == _type
                                                     && p.State != CommonConstants.STATE_UNCHECK
                                                     && p.StickyFlg == false
+                                                    && p.DeleteFlg == false
                                               orderby p.Posted descending
                                               select p).Take(_numRecord);
             return lst;
@@ -397,6 +400,7 @@ namespace ltktDAO
                                               where p.Leitmotif == _type
                                                     && p.State != CommonConstants.STATE_UNCHECK
                                                     && p.StickyFlg == true
+                                                    && p.DeleteFlg == false
                                               orderby p.Posted descending
                                               select p).Take(_numRecord);
             return lst;
@@ -451,6 +455,7 @@ namespace ltktDAO
                 return (from p in DB.tblInformatics
                         where p.Posted.Year <= year
                                 && p.State != CommonConstants.STATE_UNCHECK
+                                && p.DeleteFlg == false
                         select p).Count();
 
             }
@@ -461,6 +466,7 @@ namespace ltktDAO
                          && p.State != CommonConstants.STATE_UNCHECK
                          && p.Leitmotif >= start
                          && p.Leitmotif <= end
+                         && p.DeleteFlg == false
                        select p).Count();
             }
             return num;
@@ -539,6 +545,7 @@ namespace ltktDAO
                         where p.Posted.Year <= year
                                 && p.State != CommonConstants.STATE_UNCHECK
                                 && p.StickyFlg == false
+                                && p.DeleteFlg == false
                         select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
 
             }
@@ -550,6 +557,7 @@ namespace ltktDAO
                          && p.Leitmotif >= start
                          && p.Leitmotif <= end
                          && p.StickyFlg == false
+                         && p.DeleteFlg == false
                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
             return lst;
@@ -569,6 +577,7 @@ namespace ltktDAO
                         where p.Posted.Year <= year
                                 && p.State != CommonConstants.STATE_UNCHECK
                                 && p.StickyFlg == true
+                                && p.DeleteFlg == false
                         select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
 
             }
@@ -580,6 +589,7 @@ namespace ltktDAO
                          && p.Leitmotif >= start
                          && p.Leitmotif <= end
                          && p.StickyFlg == true
+                         && p.DeleteFlg == false
                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
             return lst;
@@ -696,6 +706,7 @@ namespace ltktDAO
                     record.Tag = _tag;
                     record.StickyFlg = false;
                     record.Score = 0;
+                    record.DeleteFlg = false;
 
                     DB.tblInformatics.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -750,6 +761,8 @@ namespace ltktDAO
                     informatic.Tag = update.Tag;
                     informatic.HtmlEmbedLink = update.HtmlEmbedLink;
                     informatic.HtmlPreview = update.HtmlPreview;
+                    informatic.DeleteFlg = false;
+                    informatic.Checker = update.Checker;
 
                     DB.SubmitChanges();
                     ts.Complete();
@@ -785,6 +798,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             return (from informatics in DB.tblInformatics
+                    where informatics.DeleteFlg == false
                     select informatics).Count();
         }
 
@@ -900,7 +914,7 @@ namespace ltktDAO
             if (_numberRecords < 1)
                 _numberRecords = CommonConstants.DEFAULT_NUMBER_RECORD_RELATIVE;
             IEnumerable<tblInformatic> lst = (from record in DB.tblInformatics
-                                              where record.Type == _type
+                                              where record.Type == _type && record.DeleteFlg == false
                                               select record).Take(_numberRecords);
 
             return lst.ToList();
@@ -910,9 +924,10 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
-                                             where record.Title.Contains(_keyword) ||
+                                             where (record.Title.Contains(_keyword) ||
                                                          record.Tag.Contains(_keyword) ||
-                                                         record.Contents.Contains(_keyword)
+                                                         record.Contents.Contains(_keyword))
+                                                         && record.DeleteFlg == false
                                              select record;
 
             return lst.ToList();
@@ -920,13 +935,14 @@ namespace ltktDAO
 
         public int countInf()
         {
-            return (from r in DB.tblInformatics select r).Count();
+            return (from r in DB.tblInformatics where r.DeleteFlg == false select r).Count();
         }
         public int countInfListByState(int state)
         {
             int num = 0;
             num = (from r in DB.tblInformatics
                    where r.State == state
+                   && r.DeleteFlg == false
                    select r).Count();
 
             return num;
@@ -935,6 +951,7 @@ namespace ltktDAO
         {
             int num = (from r in DB.tblInformatics
                        where r.Leitmotif == leitmotif
+                       && r.DeleteFlg == false
                        select r).Count();
 
             return num;
@@ -943,14 +960,100 @@ namespace ltktDAO
         public int countInfListByStateAndLeimotif(int leitmotif, int state)
         {
             int num = (from r in DB.tblInformatics
-                       where r.Leitmotif == leitmotif && r.State == state
+                       where r.Leitmotif == leitmotif 
+                       && r.State == state
+                       && r.DeleteFlg == false
                        select r).Count();
 
             return num;
         }
+        /// <summary>
+        /// count sticky article
+        /// </summary>
+        /// <returns></returns>
+        public int countStickyInfArticle()
+        {
+            int num = (from p in DB.tblInformatics
+                      where p.DeleteFlg == false
+                      && p.StickyFlg == true
+                      select p).Count();
+            return num;
+        }
+        /// <summary>
+        /// count sticky informatics article
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public int countStickyInfArticleByState(int state)
+        {
+            int num = (from p in DB.tblInformatics
+                       where p.DeleteFlg == false
+                       && p.State == state
+                       && p.StickyFlg == true
+                       select p).Count();
+            return num;
+        }
+        /// <summary>
+        /// count article matching with keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public int countArticles(string keyword)
+        {
+            int num = (from p in DB.tblInformatics
+                       where p.DeleteFlg == false
+                       && (p.Title.Contains(keyword) || p.Tag.Contains(keyword))
+                       select p).Count();
+            return num;
+        }
+        /// <summary>
+        /// search article is matched with keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public IEnumerable<tblInformatic> searchArticles(string keyword, int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
+                       where p.DeleteFlg == false
+                       && (p.Title.Contains(keyword) || p.Tag.Contains(keyword))
+                       select p).Skip(start).Take(count);
+            return lst;
+        }
+        /// <summary>
+        /// get all sticky article
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<tblInformatic> getStickyArticles(int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
+                                             where p.DeleteFlg == false
+                                             && p.StickyFlg == true
+                                             orderby p.Posted descending
+                                             select p).Skip(start).Take(count);
+            return lst;
+        }
+        /// <summary>
+        /// get sticky article by state
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public IEnumerable<tblInformatic> getStickyArticlesByState(int state, int start, int count)
+        {
+            IEnumerable<tblInformatic> lst = (from p in DB.tblInformatics
+                                              where p.DeleteFlg == false
+                                              && p.StickyFlg == true
+                                              && p.State == state
+                                              orderby p.Posted descending
+                                              select p).Skip(start).Take(count);
+            return lst;
+        }
         public IEnumerable<tblInformatic> fetchInfList(int start, int count)
         {
             IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
+                                              where r.DeleteFlg == false
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
@@ -960,7 +1063,8 @@ namespace ltktDAO
         public IEnumerable<tblInformatic> fetchInfList(int state, int start, int count)
         {
             IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
-                                              where r.State == state
+                                              where r.State == state 
+                                              && r.DeleteFlg == false
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
@@ -971,6 +1075,7 @@ namespace ltktDAO
         {
             IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
                                               where r.Leitmotif == leitmotif
+                                              && r.DeleteFlg == false
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
@@ -979,7 +1084,9 @@ namespace ltktDAO
         public IEnumerable<tblInformatic> fetchInfList(int leitmotif, int state, int start, int count)
         {
             IEnumerable<tblInformatic> lst = (from r in DB.tblInformatics
-                                              where r.Leitmotif == leitmotif && r.State == state
+                                              where r.Leitmotif == leitmotif 
+                                              && r.State == state
+                                              && r.DeleteFlg == false
                                               orderby r.Posted descending
                                               select r).Skip(start).Take(count);
 
@@ -1035,25 +1142,62 @@ namespace ltktDAO
 
             }
         }
-
-        public bool deleteInf(int _id, string _username)
+        /// <summary>
+        /// set delete Flag is true
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <param name="_username"></param>
+        public void setDeleteFlag(int _id, string _username)
         {
             try
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var inf = DB.tblInformatics.Single(a => a.ID == _id);
+                    inf.DeleteFlg = true;
+                    DB.SubmitChanges();
 
-                    File.Delete(DBHelper.strCurrentPath + inf.Location);
+                    ts.Complete();
+                }
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                    _id.ToString(),
+                                                                    CommonConstants.SQL_TABLE_INFORMATICS));
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                      _id.ToString(),
+                                                                      CommonConstants.SQL_TABLE_INFORMATICS));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+            }
+        }
+        public bool deleteInf(string _username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
+                                                     where p.DeleteFlg == true
+                                                     select p;
+                    //File.Delete(DBHelper.strCurrentPath + inf.Location);
 
-                    DB.tblInformatics.DeleteOnSubmit(inf);
+                    DB.tblInformatics.DeleteAllOnSubmit(lst);
                     DB.SubmitChanges();
 
                     ts.Complete();
 
                     log.writeLog(DBHelper.strPathLogFile, _username,
                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
-                                                                    _id.ToString(),
+                                                                    "all deleted Article",
                                                                     CommonConstants.SQL_TABLE_INFORMATICS));
                 }
             }
@@ -1061,7 +1205,7 @@ namespace ltktDAO
             {
                 log.writeLog(DBHelper.strPathLogFile, _username,
                                   BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
-                                                                      _id.ToString(),
+                                                                      "all deleted Article",
                                                                       CommonConstants.SQL_TABLE_INFORMATICS));
                 log.writeLog(DBHelper.strPathLogFile, _username, e.Message
                                                         + CommonConstants.NEWLINE
