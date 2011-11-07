@@ -11,10 +11,11 @@ namespace ltkt.Admin
     public partial class Informatics : System.Web.UI.Page
     {
         private ltktDAO.Users userDAO = new ltktDAO.Users();
-        ltktDAO.Control control = new ltktDAO.Control();
-        ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
-        ltktDAO.Informatics infDAO = new ltktDAO.Informatics();
-        ltktDAO.EventLog log = new ltktDAO.EventLog();
+        private ltktDAO.Control control = new ltktDAO.Control();
+        private ltktDAO.BaseServices bs = new ltktDAO.BaseServices();
+        private ltktDAO.Informatics infDAO = new ltktDAO.Informatics();
+        private ltktDAO.EventLog log = new ltktDAO.EventLog();
+        private ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
 
         private const int NoOfInformacticsPerPage = 8;
 
@@ -41,8 +42,25 @@ namespace ltkt.Admin
                     // hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
                     //hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
                     //hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
-
+                    int numDeletedFile = infDAO.countDeletedArticles();
+                    if (numDeletedFile > 0)
+                    {
+                        btnClear.Text = CommonConstants.TXT_CLEAR_DATA;
+                        btnClear.Text += CommonConstants.SPACE;
+                        btnClear.Text += "(" + numDeletedFile + ")";
+                        btnClear.Visible = true;
+                    }
+                    else
+                    {
+                        btnClear.Visible = false;
+                    }
                     pageLoad(sender, e, user);
+                    string inform = (string)Session[CommonConstants.SES_INFORM];
+                    if (!BaseServices.isNullOrBlank(inform))
+                    {
+                        showErrorMessage(inform);
+                        Session[CommonConstants.SES_INFORM] = null;
+                    }
                     //////////////////////////////////////////////////
                 }
             }
@@ -57,6 +75,7 @@ namespace ltkt.Admin
         private void pageLoad(object sender, EventArgs e, tblUser user)
         {
             bool isDeleted = false;
+            bool isEditError = false;
             try
             {
                 int page = 1;
@@ -116,6 +135,7 @@ namespace ltkt.Admin
                             hpkShowUncheck.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_UNCHECK) + ")";
                             hpkShowChecked.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_CHECKED) + ")";
                             hpkShowBad.Text += "(" + infDAO.countInfListByState(CommonConstants.STATE_BAD) + ")";
+                            statDAO.setValue(CommonConstants.SF_NUM_ARTICLE_ON_IT, totalRecord.ToString());
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
@@ -318,7 +338,7 @@ namespace ltkt.Admin
                     {
                         //initilize combobox
                         initial();
-
+                        Session[CommonConstants.SES_ID] = _id;
                         txtTitle.Text = BaseServices.nullToBlank(article.Title);
                         txtChapeau.Text = BaseServices.nullToBlank(article.Contents);
                         txtAuthor.Text = BaseServices.nullToBlank(article.Author);
@@ -343,6 +363,10 @@ namespace ltkt.Admin
                         ddlLeitmotif.SelectedValue = article.Leitmotif.ToString();
                         ddlScore.SelectedValue = article.Score.ToString();
 
+                    }
+                    else
+                    {
+                        isEditError = true;
                     }
 
                     if (action == CommonConstants.ACT_VIEW)
@@ -400,11 +424,18 @@ namespace ltkt.Admin
                                               + CommonConstants.ADD_PARAMETER
                                               + CommonConstants.REQ_PAGE
                                               + CommonConstants.EQUAL
-                                              + "1");
+                                              + CommonConstants.PAGE_NUMBER_FIRST);
             }
             if (isDeleted)
             {
                 Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS);
+            }
+            if (isEditError)
+            {
+                detailPanel.Visible = false;
+                viewPanel.Visible = false;
+                showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+
             }
         }
 
@@ -548,7 +579,110 @@ namespace ltkt.Admin
 
         }
         protected void btnEdit_Click(object sender, EventArgs e)
-        { }
+        {
+            if (Session[CommonConstants.SES_ID] == null)
+            {
+                string message = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+                message += CommonConstants.TEMP_BR_TAG;
+                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
+                showErrorMessage(message);
+                return;
+            }
+            string sError = validateForm();
+            if (!BaseServices.isNullOrBlank(sError))
+            {
+                showErrorMessage(sError);
+                return;
+            }
+            tblInformatic item = new tblInformatic();
+            item.Contents = txtChapeau.Text.Trim();
+            item.Posted = BaseServices.getDateTimeFromString(txtPosted.Text);
+            item.Title = txtTitle.Text.Trim();
+            item.Tag = txtTag.Text.Trim();
+            item.Location = txtLocation.Text.Trim();
+            item.Author = txtAuthor.Text;
+            int score = BaseServices.convertStringToInt(ddlScore.SelectedValue);
+            item.Score = score;
+            //get checker when score > 0.
+            if (score != 0)
+            {
+                if (BaseServices.isNullOrBlank(txtChecker.Text))
+                {
+                    item.Checker = getCurrentUser();
+                }
+                else
+                {
+                    item.Checker = txtChecker.Text.Trim();
+                }
+            }
+            else
+            {
+                item.Checker = null;
+            }
+            item.Comment = txtComment.Text.Trim();
+            item.Thumbnail = txtThumbnail.Text.Trim();
+            item.HtmlEmbedLink = txtHtmlEmbbed.Text.Trim();
+            item.HtmlPreview = txtHtmlPreviewLink.Text.Trim();
+            int type = BaseServices.convertStringToInt(ddlType.SelectedValue.ToString());
+            item.Type = type;
+            item.Leitmotif = BaseServices.convertStringToInt(ddlLeitmotif.SelectedValue.ToString());
+            item.FolderID = txtFolderId.Text.Trim();
+            //sticky item
+            if (ddlSticky.SelectedValue.ToString() == CommonConstants.CONST_ZERO)
+            {
+                item.StickyFlg = false;
+            }
+            else
+            {
+                int stickied = infDAO.countStickyInfArticle();
+                int noOfInfoOnPage = control.getValueByInt(CommonConstants.CF_NUM_ARTICLE_ON_IT);
+                if (stickied > noOfInfoOnPage / 2)
+                {
+                    showErrorMessage(BaseServices.createMsgByTemplate(CommonConstants.MSG_E_OVER_NUMBER,
+                        CommonConstants.TXT_STICKY,
+                        stickied.ToString(),
+                        CommonConstants.TXT_ONE_HALF +
+                        CommonConstants.SPACE +
+                        CommonConstants.CF_NUM_ARTICLE_ON_IT_NAME,
+                        noOfInfoOnPage.ToString()));
+                    return;
+                }
+                item.StickyFlg = true;
+            }
+            //state
+            string sState = ddlState.SelectedValue.ToString();
+            int iState = BaseServices.convertStringToInt(sState);
+            if (iState == CommonConstants.STATE_CHECKED && item.Leitmotif == CommonConstants.AT_UNCLASSIFIED)
+            {
+                string message = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_SUBJECT);
+                showErrorMessage(message);
+                return;
+            }
+            item.State = iState;
+            int id = (Int32)Session[CommonConstants.SES_ID];
+            bool isOk = false;
+            try
+            {
+                isOk = infDAO.updateInformatic(id, item, getCurrentUser());
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+            }
+            if (isOk)
+            {
+
+                int stickiedArticle = infDAO.countStickyInfArticle();
+                statDAO.setValue(CommonConstants.SF_NUM_STICKED_ON_IT, stickiedArticle.ToString());
+                Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_EDIT);
+            }
+            else
+            {
+                Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
+            }
+            Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS);
+            
+        }
         protected void btnClear_Click(object sender, EventArgs e)
         {
 
@@ -584,6 +718,65 @@ namespace ltkt.Admin
             {
                 Response.Redirect(Request.UrlReferrer.ToString());
             }
+        }
+        /// <summary>
+        /// validate input
+        /// </summary>
+        /// <returns></returns>
+        private string validateForm()
+        {
+            string sError = CommonConstants.BLANK;
+            if (BaseServices.isNullOrBlank(txtTitle.Text))
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_TITLE);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            else
+            {
+                if (txtTitle.Text.Trim().Length > 254)
+                {
+                    sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_TITLE, CommonConstants.BLANK + 254);
+                    sError += CommonConstants.TEMP_BR_TAG;
+                }
+            }
+            if (BaseServices.isNullOrBlank(txtLocation.Text))
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_LOCATION);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            if (txtThumbnail.Text.Trim().Length > 254)
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_THUMBNAIL, CommonConstants.BLANK + 254);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            if (txtTag.Text.Trim().Length > 254)
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_TAG, CommonConstants.BLANK + 254);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            if (txtLocation.Text.Trim().Length > 200)
+            {
+                sError += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_MAX_LENGTH,
+                        CommonConstants.TXT_LOCATION, CommonConstants.BLANK + 200);
+                sError += CommonConstants.TEMP_BR_TAG;
+            }
+            return sError;
+        }
+        /// <summary>
+        /// get current username
+        /// </summary>
+        /// <returns></returns>
+        private string getCurrentUser()
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                return user.Username;
+            }
+            return CommonConstants.BLANK;
         }
         /// <summary>
         /// count by state
@@ -673,14 +866,21 @@ namespace ltkt.Admin
         }
         private void showCountingArticle()
         {
-            hpkShowAccess.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_ACCESS) + ")";
-            hpkShowAdvTip.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_ADVANCE_TIP) + ")";
-            hpkShowAll.Text += "(" + infDAO.countInf() + ")";
-            hpkShowSimTip.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_SIMPLE_TIP) + ")";
-            hpkShowExcel.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_EXCEL) + ")";
-            hpkShowPP.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_POWERPOINT) + ")";
-            hpkShowWord.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_WORD) + ")";
-            hpkShowSticky.Text += "(" + infDAO.countStickyInfArticle() + ")";
+            try
+            {
+                hpkShowAccess.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_ACCESS) + ")";
+                hpkShowAdvTip.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_ADVANCE_TIP) + ")";
+                hpkShowAll.Text += "(" + infDAO.countInf() + ")";
+                hpkShowSimTip.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_SIMPLE_TIP) + ")";
+                hpkShowExcel.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_EXCEL) + ")";
+                hpkShowPP.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_POWERPOINT) + ")";
+                hpkShowWord.Text += "(" + infDAO.countInfByLeitmotif(CommonConstants.AT_IT_OFFICE_WORD) + ")";
+                hpkShowSticky.Text += "(" + infDAO.countStickyInfArticle() + ")";
+            }
+            catch (Exception e)
+            {
+                writeException(e);
+            }
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
@@ -749,6 +949,24 @@ namespace ltkt.Admin
                         }
                 }
             }
+        }
+        /// <summary>
+        /// write exception to log file
+        /// </summary>
+        /// <param name="ex"></param>
+        private void writeException(Exception ex)
+        {
+            string username = getCurrentUser();
+            if (username == CommonConstants.BLANK)
+                username = CommonConstants.USER_GUEST;
+            log.writeLog(DBHelper.strPathLogFile, username, ex.Message
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.Source
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.StackTrace
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.HelpLink);
+            return;
         }
         /// <summary>
         /// change state of control

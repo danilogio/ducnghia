@@ -1277,10 +1277,12 @@ namespace ltktDAO
         /// Tổng số bài hiển thị trong trang IT
         /// </summary>
         public const string CF_NUM_ARTICLE_ON_IT = "NUM_ARTICLE_ON_IT";
+        public const string CF_NUM_ARTICLE_ON_IT_NAME = "số bài hiển thị trong trang Tin học";
         /// <summary>
         /// Tổng số bài hiển thị trong trang LTDH
         /// </summary>
         public const string CF_NUM_ARTICLE_ON_UNI = "NUM_ARTICLE_ON_UNI";
+        public const string CF_NUM_ARTICLE_ON_UNI_NAME = "số bài hiển thị trong trang LTĐH";
         /// <summary>
         /// Tổng số bài hiển thị trong 1 tab tại trang chủ
         /// </summary>

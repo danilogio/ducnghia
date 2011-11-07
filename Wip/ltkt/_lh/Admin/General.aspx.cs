@@ -84,5 +84,10 @@ namespace ltkt.Admin
                 }
             }
         }
+        public void btnStatistic_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+    
 }

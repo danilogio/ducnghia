@@ -75,13 +75,13 @@
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="sumInformatics" runat="server"></asp:Literal></div>
                 </div>
-                 <div>
+                <div>
                     <div style="float: left; width: 30%">
                         <span>Số bài viết Đại học/cao đẳng được sticky:</span></div>
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="sumStickyUni" runat="server" Text="None"></asp:Literal></div>
                 </div>
-                 <div>
+                <div>
                     <div style="float: left; width: 30%">
                         <span>Số bài viết Tin hoc được sticky:</span></div>
                     <div style="float: left; width: 69%">
@@ -135,8 +135,15 @@
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="newAdsContact" runat="server" Text="None"></asp:Literal></div>
                 </div>
-                
             </div>
+            
+            <br />
+             <div class="form_settings" style="float: left; width: 100%; margin-top: 130px; margin-left: 5px;"
+            align="left">
+            <asp:Button ID="btnStatistic" runat="server" CssClass="formbutton" OnClick="btnStatistic_Click"
+                Text="Thống kê" />
         </div>
+        </div>
+       
     </div>
 </asp:Content>

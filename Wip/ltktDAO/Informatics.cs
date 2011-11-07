@@ -750,21 +750,27 @@ namespace ltktDAO
                 using (TransactionScope ts = new TransactionScope())
                 {
                     var informatic = DB.tblInformatics.Single(info => info.ID == _id);
-                    informatic.Title = update.Title;
-                    informatic.Type = update.Type;
-                    informatic.Chapeau = update.Chapeau;
-                    informatic.Contents = update.Contents;
-                    informatic.Author = update.Author;
-                    informatic.Posted = update.Posted;
-                    informatic.State = update.State;
-                    informatic.Point = update.Point;
-                    informatic.Tag = update.Tag;
-                    informatic.HtmlEmbedLink = update.HtmlEmbedLink;
-                    informatic.HtmlPreview = update.HtmlPreview;
-                    informatic.DeleteFlg = false;
-                    informatic.Checker = update.Checker;
+                    if (informatic != null)
+                    {
+                        informatic.Title = update.Title;
+                        informatic.Type = update.Type;
+                        informatic.Chapeau = update.Chapeau;
+                        informatic.Contents = update.Contents;
+                        informatic.Author = update.Author;
+                        informatic.Posted = update.Posted;
+                        informatic.State = update.State;
+                        informatic.Point = update.Point;
+                        informatic.Tag = update.Tag;
+                        informatic.HtmlEmbedLink = update.HtmlEmbedLink;
+                        informatic.HtmlPreview = update.HtmlPreview;
+                        //informatic.DeleteFlg = false;
+                        informatic.Checker = update.Checker;
+                        informatic.Leitmotif = update.Leitmotif;
+                        informatic.StickyFlg = update.StickyFlg;
+                        informatic.Comment = update.Comment;
 
-                    DB.SubmitChanges();
+                        DB.SubmitChanges();
+                    }
                     ts.Complete();
 
                     //write log
@@ -1178,6 +1184,17 @@ namespace ltktDAO
                                                         + CommonConstants.NEWLINE
                                                         + e.HelpLink);
             }
+        }
+        /// <summary>
+        /// count number of article is deleted
+        /// </summary>
+        /// <returns></returns>
+        public int countDeletedArticles()
+        {
+            int num = (from p in DB.tblInformatics
+                      where p.DeleteFlg == true
+                      select p).Count();
+            return num;
         }
         public bool deleteInf(string _username)
         {

@@ -135,6 +135,7 @@ namespace ltkt.Admin
                             hpkShowBad.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_BAD) + ")";
                             hpkShowChecked.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_CHECKED) + ")";
                             hpkShowUncheck.Text += "(" + englishDAO.countEnglishList(CommonConstants.STATE_UNCHECK) + ")";
+                            statDAO.setValue(CommonConstants.SF_NUM_ARTICLE_ON_EL, totalRecord.ToString());
                         }
                         else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
                         {
@@ -578,6 +579,14 @@ namespace ltkt.Admin
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
+            if (Session[CommonConstants.SES_ID] == null)
+            {
+                string message = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+                message += CommonConstants.TEMP_BR_TAG;
+                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
+                showErrorMessage(message);
+                return;
+            }
             string sError = validateForm();
             if (!BaseServices.isNullOrBlank(sError))
             {
@@ -649,14 +658,7 @@ namespace ltkt.Admin
                 return;
             }
             item.State = iState;
-            if (Session[CommonConstants.SES_ID] == null)
-            {
-                string message = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
-                message += CommonConstants.TEMP_BR_TAG;
-                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
-                showErrorMessage(message);
-                return;
-            }
+            
             int id = (Int32)Session[CommonConstants.SES_ID];
             bool isOk = false;
             try
