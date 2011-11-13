@@ -178,8 +178,8 @@
                         <asp:Button ID="btnBack" runat="server" Text="Quay lại" CssClass="formbutton" OnClick="btnBack_Click" />
                         <hr />
                     </div>
-                    <div>
-                        <div id="divDetail" style="float: left; width: 50%; margin-left: 20px">
+                    <div id="divDetail">
+                        <div id="divLeft" style="float: left; width: 50%; margin-left: 20px">
                             <br />
                             <p>
                                 <span><b>Tiêu đề(*):</b></span>
@@ -218,7 +218,7 @@
                                 <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
                             </p>
                         </div>
-                        <div id="divRight" style="float: left; width: 48%">
+                        <div id="divRight" style="float: left; width: 40%">
                             <br />
                             <p>
                                 <span><b>Folder gốc:</b></span>

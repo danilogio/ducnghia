@@ -123,98 +123,98 @@
         </asp:Panel>
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
             <div class="form_settings">
-            <div id="divInfoDetail">
-                <div id="divFunction">
-                    <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />
-                    <asp:Button ID="btnBack" runat="server" Text="Quay lại" CssClass="formbutton" OnClick="btnBack_Click" />
-                    <hr />
-                </div>
-                <div>
-                    <div id="divDetail" style="float: left; width: 50%; margin-left: 20px">
-                        <br />
-                        <p>
-                            <span><b>Tiêu đề(*):</b></span>
-                            <asp:TextBox ID="txtTitle" MaxLength="254" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Tóm tắt:</b></span>
-                            <asp:TextBox ID="txtChapeau" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Tác giả:</b></span>
-                            <asp:TextBox ID="txtAuthor" runat="server" Enabled="false"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Ngày đăng(*):</b></span>
-                            <asp:TextBox ID="txtPosted" runat="server" Enabled="false"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Số người quan tâm:</b></span>
-                            <asp:TextBox ID="txtPoint" runat="server" Enabled="false"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Tag:</b></span>
-                            <asp:TextBox ID="txtTag" MaxLength="254" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Nơi lưu bài(*):</b></span>
-                            <asp:TextBox ID="txtLocation" MaxLength="200" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span title="Để trống nếu người đánh giá là bạn"><b>Người đánh giá:</b></span>
-                            <asp:TextBox ID="txtChecker" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Comment:</b></span>
-                            <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
-                        </p>
+                <div id="divInfoDetail">
+                    <div id="divFunction">
+                        <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />
+                        <asp:Button ID="btnBack" runat="server" Text="Quay lại" CssClass="formbutton" OnClick="btnBack_Click" />
+                        <hr />
                     </div>
-                    <div id="divRight" style="float: left; width: 48%">
-                        <br />
-                        <p>
-                            <span><b>Folder gốc:</b></span>
-                            <asp:TextBox ID="txtFolderId" Enabled="false" MaxLength="20" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Thumbnail:</b></span>
-                            <asp:TextBox ID="txtThumbnail" MaxLength="254" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Mã nhúng Html:</b></span>
-                            <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Link xem trước:</b></span>
-                            <asp:TextBox ID="txtHtmlPreviewLink" MaxLength="254" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span><b>Chủ đề:</b></span>
-                            <asp:DropDownList ID="ddlLeitmotif" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span><b>Loại:</b></span>
-                            <asp:DropDownList ID="ddlType" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span><b>Điểm đánh giá:</b></span>
-                            <asp:DropDownList ID="ddlScore" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span><b>Đánh giấu Sticky:</b></span>
-                            <asp:DropDownList ID="ddlSticky" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span><b>Trạng thái:</b></span>
-                            <asp:DropDownList ID="ddlState" runat="server">
-                            </asp:DropDownList>
-                        </p>
+                    <div id="divDetail">
+                        <div id="divLeft" style="float: left; width: 50%; margin-left: 20px">
+                            <br />
+                            <p>
+                                <span><b>Tiêu đề(*):</b></span>
+                                <asp:TextBox ID="txtTitle" MaxLength="254" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Tóm tắt:</b></span>
+                                <asp:TextBox ID="txtChapeau" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Tác giả:</b></span>
+                                <asp:TextBox ID="txtAuthor" runat="server" Enabled="false"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Ngày đăng(*):</b></span>
+                                <asp:TextBox ID="txtPosted" runat="server" Enabled="false"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Số người quan tâm:</b></span>
+                                <asp:TextBox ID="txtPoint" runat="server" Enabled="false"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Tag:</b></span>
+                                <asp:TextBox ID="txtTag" MaxLength="254" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Nơi lưu bài(*):</b></span>
+                                <asp:TextBox ID="txtLocation" MaxLength="200" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span title="Để trống nếu người đánh giá là bạn"><b>Người đánh giá:</b></span>
+                                <asp:TextBox ID="txtChecker" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Comment:</b></span>
+                                <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                            </p>
+                        </div>
+                        <div id="divRight" style="float: left; width: 40%">
+                            <br />
+                            <p>
+                                <span><b>Folder gốc:</b></span>
+                                <asp:TextBox ID="txtFolderId" Enabled="false" MaxLength="20" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Thumbnail:</b></span>
+                                <asp:TextBox ID="txtThumbnail" MaxLength="254" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Mã nhúng Html:</b></span>
+                                <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Link xem trước:</b></span>
+                                <asp:TextBox ID="txtHtmlPreviewLink" MaxLength="254" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Chủ đề:</b></span>
+                                <asp:DropDownList ID="ddlLeitmotif" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Loại:</b></span>
+                                <asp:DropDownList ID="ddlType" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Điểm đánh giá:</b></span>
+                                <asp:DropDownList ID="ddlScore" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Đánh giấu Sticky:</b></span>
+                                <asp:DropDownList ID="ddlSticky" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Trạng thái:</b></span>
+                                <asp:DropDownList ID="ddlState" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </asp:Panel>
     </div>
