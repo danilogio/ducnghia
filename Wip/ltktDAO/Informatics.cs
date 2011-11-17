@@ -309,7 +309,8 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
-                                             where p.Point == DB.tblInformatics.Max(p2 => p2.Point) && p.DeleteFlg == true
+                                             where p.Point == DB.tblInformatics.Max(p2 => p2.Point) 
+                                             && p.DeleteFlg == false
                                              orderby p.Posted descending
                                              select p;
             if (lst.Count() > 0)
@@ -405,6 +406,20 @@ namespace ltktDAO
                                               select p).Take(_numRecord);
             return lst;
         }
+        /// <summary>
+        /// get all article has delete flag is true
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<tblInformatic> getDeletedArticle()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblInformatic> lst = from p in DB.tblInformatics
+                                              where  p.DeleteFlg == true
+                                              select p;
+            return lst;
+        }
+
         public int countTotalRecord(ArticleSCO articleSCO)
         {
             int num = 0;
@@ -684,7 +699,7 @@ namespace ltktDAO
         /// <param name="_location"></param>
         /// <returns></returns>
         public Boolean insertInformatic(string _title, int _type, string _content,
-            string _author, DateTime _posted, int _leitmotif, string _location, string _tag)
+            string _author, DateTime _posted, int _leitmotif, string _location, string _tag, string _folderID)
         {
 
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
@@ -707,6 +722,7 @@ namespace ltktDAO
                     record.StickyFlg = false;
                     record.Score = 0;
                     record.DeleteFlg = false;
+                    record.FolderID = _folderID;
 
                     DB.tblInformatics.InsertOnSubmit(record);
                     DB.SubmitChanges();
@@ -1153,7 +1169,7 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_id"></param>
         /// <param name="_username"></param>
-        public void setDeleteFlag(int _id, string _username)
+        public bool setDeleteFlag(int _id, string _username)
         {
             try
             {
@@ -1169,6 +1185,7 @@ namespace ltktDAO
                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
                                                                     _id.ToString(),
                                                                     CommonConstants.SQL_TABLE_INFORMATICS));
+                
             }
             catch (Exception e)
             {
@@ -1183,7 +1200,9 @@ namespace ltktDAO
                                                         + e.StackTrace
                                                         + CommonConstants.NEWLINE
                                                         + e.HelpLink);
+                return false;
             }
+            return true;
         }
         /// <summary>
         /// count number of article is deleted

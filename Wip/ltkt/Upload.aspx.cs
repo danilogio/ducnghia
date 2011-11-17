@@ -222,6 +222,10 @@ namespace ltkt
                                                                         fileSave,
                                                                         txtboxTag.Text,
                                                                         fileSolvingSave);
+                                    if (isOK)
+                                    {
+                                        control.add(CommonConstants.CF_KEY_CODE_UNI, CommonConstants.CONST_ONE);
+                                    }
 
                                     break;
                                 }
@@ -234,7 +238,11 @@ namespace ltkt
                                                                             DateTime.Now,
                                                                             _leitmotif,
                                                                             fileSave,
-                                                                            txtboxTag.Text);
+                                                                            txtboxTag.Text, folderId);
+                                    if (isOK)
+                                    {
+                                        control.add(CommonConstants.CF_KEY_CODE_IT, CommonConstants.CONST_ONE);
+                                    }
                                     break;
                                 }
                             case 2:
@@ -249,6 +257,11 @@ namespace ltkt
                                                                     _class,
                                                                     fileSave,
                                                                     txtboxTag.Text, folderId);
+                                    if (isOK)
+                                    {
+                                        control.add(CommonConstants.CF_KEY_CODE_EL, CommonConstants.CONST_ONE);
+                                    }
+
                                     break;
                                 }
                         }

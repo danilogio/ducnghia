@@ -46,15 +46,15 @@ namespace ltktDAO
         /// <summary>
         /// path of event log
         /// </summary>
-        public const string PATH_LOG_FILE = "Log\\EventLog";
+        public const string PATH_LOG_FILE = "Data\\Log\\EventLog";
         /// <summary>
         /// active icon
         /// </summary>
-        public const string PATH_ACTIVE_RATING_ICON = "images/star-y.png";
+        public const string PATH_ACTIVE_RATING_ICON = "Data/images/star-y.png";
         /// <summary>
         /// inactive rating icon
         /// </summary>
-        public const string PATH_INACTIVE_RATING_ICON = "images/star-g.png";
+        public const string PATH_INACTIVE_RATING_ICON = "Data/images/star-g.png";
         /// <summary>
         /// html for edit icon on admin page
         /// </summary>

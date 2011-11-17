@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
+using System.Collections;
 
 namespace ltkt.Admin
 {
@@ -395,7 +396,7 @@ namespace ltkt.Admin
                     int _id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
 
                     bool isMatch = infDAO.isState(_id, CommonConstants.STATE_UNCHECK);
-                    if (infDAO.deleteInf(user.Username))
+                    if (infDAO.setDeleteFlag(_id, user.Username))
                     {
                         if (isMatch)
                         {
@@ -404,8 +405,13 @@ namespace ltkt.Admin
                         }
                         string mess = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
 
-                        ltktDAO.Alert.Show(mess);
+                        //ltktDAO.Alert.Show(mess);
                         isDeleted = true;
+                        Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
+                    }
+                    else
+                    {
+                        Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_DELETE);
                     }
                 }
             }
@@ -685,7 +691,57 @@ namespace ltkt.Admin
         }
         protected void btnClear_Click(object sender, EventArgs e)
         {
+            IEnumerable<tblInformatic> lst = infDAO.getDeletedArticle();
+            string path = CommonConstants.BLANK;
+            bool fileDeleted = false;
+            int totalFileDeleted = 0;
+            bool deleteSuccessful = false;
 
+            //build list path to delete
+            System.Collections.ArrayList strPathList = new ArrayList();
+            foreach (var item in lst)
+            {
+                strPathList.Add(item.FolderID.Trim());
+            }
+            try
+            {
+                if (lst != null)
+                {
+                    deleteSuccessful = infDAO.deleteInf(getCurrentUser());
+                    if (deleteSuccessful)
+                    {
+                        foreach (var item in strPathList)
+                        {
+                            path = DBHelper.strCurrentPath;
+                            path += CommonConstants.FOLDER_EL;
+                            path += item;
+                            fileDeleted = BaseServices.deleteFolder(path);
+                            if (fileDeleted)
+                            {
+                                totalFileDeleted++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+            }
+            if (deleteSuccessful)
+            {
+                string message = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL,
+                    CommonConstants.ACT_DELETE);
+                message += CommonConstants.TEMP_BR_TAG;
+                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_DETAIL,
+                                                            CommonConstants.ACT_DELETE,
+                                                            totalFileDeleted.ToString(),
+                                                            CommonConstants.TXT_ARTICLE_NAME);
+                InformaticsTable.Visible = false;
+                showErrorMessage(message);
+                return;
+
+            }
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {

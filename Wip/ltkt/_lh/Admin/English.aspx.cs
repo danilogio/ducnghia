@@ -405,8 +405,8 @@ namespace ltkt.Admin
                 {
                     Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_DELETE);
                 }
-                Response.Redirect(Request.UrlReferrer.ToString());
-                //Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
+                //Response.Redirect(Request.UrlReferrer.ToString());
+                Response.Redirect(CommonConstants.PAGE_ADMIN_ENGLISH);
             }
             if (isSearchFreeNOK)
             {

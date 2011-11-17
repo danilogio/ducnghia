@@ -49,6 +49,39 @@ namespace ltktDAO
             }
             return CommonConstants.BLANK;
         }
+        /// <summary>
+        /// add value 
+        /// </summary>
+        /// <param name="_code"></param>
+        /// <param name="_newValue"></param>
+        public void add(string _code, string _newValue)
+        {
+            try
+            {
+                if (_newValue.Length > 32)
+                {
+                    _newValue = CommonConstants.CONST_ZERO;
+                }
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var r = DB.tblControls.Single(p => p.Code == _code);
+                    long oldVal = long.Parse(r.Value);
+                    long newVal = long.Parse(_newValue);
+                    if (oldVal > 0 || newVal > 0)
+                    {
+                        oldVal += newVal;
+                    }
+                    r.Value = oldVal.ToString();
+                    DB.SubmitChanges();
+                    ts.Complete();
+                    log.writeLog(DBHelper.strPathLogFile, BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE, r.Code, CommonConstants.SQL_TABLE_CONTROL));
+                }
+            }
+            catch (Exception ex)
+            {
+                log.writeLog(DBHelper.strPathLogFile, ex.Message);
+            }
+        }
         public void setValue(string _code, string _value)
         {
             try
