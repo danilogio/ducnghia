@@ -554,6 +554,7 @@ div.block_details_text
 	padding: 2px 0 3px 0;
 	cursor: pointer;
 	background: #0b519a;
+	font-weight: bold;
 	color: #FFF;
 }
 
@@ -692,4 +693,16 @@ ul#icons span.ui-icon
 .alert
 {
 	color:Red;
+}
+input.formbutton:hover
+{
+	background-color:silver;
+	color:navy;
+	cursor:hand;
+}
+input.submit:hover
+{
+	background-color:silver;
+	color:navy;
+	cursor:hand;
 }

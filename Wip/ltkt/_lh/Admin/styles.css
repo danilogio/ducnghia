@@ -77,6 +77,12 @@ form #leftMailbox input.formbutton
 	width: 110px;
 }
 
+input.formbutton:hover
+{
+	background-color:silver;
+	color:navy;
+	cursor:hand;
+}
 form #leftUsers input.formbutton
 {
 	width: 180px;

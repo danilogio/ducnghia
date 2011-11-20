@@ -253,10 +253,14 @@ namespace ltkt.Admin
             }
             else if (action == CommonConstants.ACT_EDIT || action == CommonConstants.ACT_VIEW)
             {
+                if (Page.IsPostBack)
+                {
+                    return;
+                }
                 viewPanel.Visible = false;
                 detailPanel.Visible = true;
                 messagePanel.Visible = false;
-
+                Session[CommonConstants.SES_OLD_PAGE] = Request.UrlReferrer.ToString();
                 int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
                 if (Request.QueryString[CommonConstants.REQ_ID] == null)
                 {
@@ -364,7 +368,7 @@ namespace ltkt.Admin
         {
             if (File.Exists(DBHelper.strCurrentPath + location))
             {
-                liContent.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
+                liContent.Text = "&nbsp;&nbsp;<br/><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
             }
             else
                 liContent.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
@@ -374,7 +378,7 @@ namespace ltkt.Admin
         {
             if (File.Exists(DBHelper.strCurrentPath + location))
             {
-                liSolving.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
+                liSolving.Text = "&nbsp;&nbsp;<br /><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
             }
             else
                 liSolving.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
@@ -384,7 +388,7 @@ namespace ltkt.Admin
         {
             if (File.Exists(DBHelper.strCurrentPath + location))
             {
-                liThumbnail.Text = "&nbsp;&nbsp;<input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + location.Replace("\\", "/") + "')\"/>";
+                liThumbnail.Text = "&nbsp;&nbsp;<br /><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + location.Replace("\\", "/") + "')\"/>";
             }
             else
                 liThumbnail.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
@@ -596,6 +600,8 @@ namespace ltkt.Admin
                 contestRow.Cells.Add(actionCell);
 
                 ContestTable.Rows.AddAt(2 + idx, contestRow);
+                string totatRecord = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, totalContest.ToString());
+                NumRecordLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_NUM_SEARCHED_RECORD, totatRecord);
             }
 
             // Creating links to previous and next pages
@@ -709,7 +715,23 @@ namespace ltkt.Admin
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
         }
-
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+        }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+        }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            if (Session[CommonConstants.SES_OLD_PAGE] != null)
+            {
+                Response.Redirect((string)Session[CommonConstants.SES_OLD_PAGE]);
+            }
+            else
+            {
+                Response.Redirect(CommonConstants.PAGE_ADMIN_UNIVERSITY);
+            }
+        }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             try
