@@ -45,6 +45,15 @@ namespace ltkt.Admin
                     {
                         showStatusMessage(status);
                     }
+                    if (Session[CommonConstants.SES_INFORM] != null)
+                    {
+                        showErrorMessage((string)Session[CommonConstants.SES_INFORM]);
+                        Session[CommonConstants.SES_INFORM] = null;
+                    }
+                    else
+                    {
+                        ErrorMessagePanel.Visible = false;
+                    }
                     //Check state ads before show
                     adsDAO.checkAds(user.Username);
 
@@ -708,11 +717,13 @@ namespace ltkt.Admin
                     {
                         statDAO.add(CommonConstants.SF_NUM_NEW_ADV_CONTACT, CommonConstants.CONST_ONE_NEGATIVE);
                     }
-                    Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
+                    Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_EDIT);
+                    //Response.Write(CommonConstants.ALERT_UPDATE_SUCCESSFUL);
                 }
                 else
                 {
-                    Response.Write(CommonConstants.ALERT_UPDATE_FAIL);
+                    Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
+                    //Response.Write(CommonConstants.ALERT_UPDATE_FAIL);
                 }
 
                 Session[CommonConstants.SES_EDIT_ADS] = null;

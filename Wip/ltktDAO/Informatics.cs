@@ -284,7 +284,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblInformatic> lst = from record in DB.tblInformatics
-                                             where record.ID == _id
+                                             where record.ID == _id && record.DeleteFlg == false
                                              select record;
 
             if (lst.Count() > 0)

@@ -1,0 +1,45 @@
+11/20/2011 9:04:29 AM ==> [dvtrung]: Insert record 222222 to Table tblInformatics successful
+11/20/2011 9:04:29 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 9:07:05 AM ==> [dvtrung]: Insert record 55555 to Table tblInformatics successful
+11/20/2011 9:07:05 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 9:16:46 AM ==> [dvtrung]: Update record 12 to Table tblInformatics successful
+11/20/2011 9:19:27 AM ==> [dvtrung]: Delete record 11 from Table tblInformatics successful
+11/20/2011 9:20:28 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 9:21:15 AM ==> [dvtrung]: Delete record 12 from Table tblInformatics successful
+11/20/2011 9:21:30 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:20:34 AM ==> [dvtrung]: Insert record 44444444444 to Table tblInformatics successful
+11/20/2011 10:20:34 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 10:21:16 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:21:25 AM ==> [dvtrung]: Delete record 13 from Table tblInformatics successful
+11/20/2011 10:21:47 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:23:31 AM ==> [dvtrung]: Insert record 1111111111111 to Table tblInformatics successful
+11/20/2011 10:23:31 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 10:24:23 AM ==> [dvtrung]: Delete record 14 from Table tblInformatics successful
+11/20/2011 10:24:31 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:26:29 AM ==> [dvtrung]: Insert record 111 to Table tblInformatics successful
+11/20/2011 10:26:29 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 10:26:53 AM ==> [dvtrung]: Delete record 15 from Table tblInformatics successful
+11/20/2011 10:26:56 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:27:45 AM ==> [dvtrung]: Insert record 1111 to Table tblInformatics successful
+11/20/2011 10:27:45 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 10:28:12 AM ==> [dvtrung]: Delete record 16 from Table tblInformatics successful
+11/20/2011 10:28:19 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:31:19 AM ==> [dvtrung]: Insert record 44444444444444 to Table tblInformatics successful
+11/20/2011 10:31:19 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 10:31:35 AM ==> [dvtrung]: Delete record 17 from Table tblInformatics successful
+11/20/2011 10:31:43 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 10:34:02 AM ==> [dvtrung]: Insert record 222222222222 to Table tblInformatics successful
+11/20/2011 10:34:02 AM ==>  Update record KEY_CODE_IT to Table tblControl successful
+11/20/2011 10:34:17 AM ==> [dvtrung]: Delete record 18 from Table tblInformatics successful
+11/20/2011 10:34:23 AM ==> [dvtrung]: Delete record all deleted Article from Table tblInformatics successful
+11/20/2011 11:08:36 AM ==> [dvtrung]: Update record 38 to Table tblAdvertisement successful
+11/20/2011 11:13:44 AM ==> [dvtrung]: Update record 38 to Table tblAdvertisement successful
+11/20/2011 11:14:48 AM ==> [dvtrung]: Update record 38 to Table tblAdvertisement successful
+11/20/2011 11:32:16 AM ==> [dvtrung]:Đường dẫn không đúng, xin vui lòng kiểm tra lại
+11/20/2011 11:32:16 AM ==> [dvtrung]:Input string was not in a correct format.
+mscorlib
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at ltkt.Admin.English.pageLoad(Object sender, EventArgs e, tblUser user) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\English.aspx.cs:line 101
+

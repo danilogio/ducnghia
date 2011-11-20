@@ -113,6 +113,9 @@
         <asp:Panel ID="message" runat="server" Visible="false">
             <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
+        <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
+            <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
+        </asp:Panel>
         <asp:Panel ID="uploadPanel" runat="server">
             <div class="form_settings">
                 <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />

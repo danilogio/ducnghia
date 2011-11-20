@@ -139,8 +139,10 @@
             <asp:Table ID="EnglishTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
-                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
+                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>&nbsp-&nbsp 
+                        <asp:Literal ID="NumRecordLiteral" runat="server" />
                     </asp:TableHeaderCell>
+                   
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell CssClass="table-header-cell" VerticalAlign="Middle"><center>#</center></asp:TableCell>
@@ -159,7 +161,7 @@
                                     <asp:Literal ID="PreviousPageLiteral" runat="server" />
                                 </asp:TableCell>
                                 <asp:TableCell HorizontalAlign="Center">
-                                    <asp:Literal ID="NumRecordLiteral" runat="server" />
+                                    <asp:Literal ID="pagingLink" runat="server" />
                                 </asp:TableCell>
                                 <asp:TableCell HorizontalAlign="Right">
                                     <asp:Literal ID="NextPageLiteral" runat="server" />

@@ -50,11 +50,15 @@ namespace ltktDAO
         /// <summary>
         /// active icon
         /// </summary>
-        public const string PATH_ACTIVE_RATING_ICON = "Data/images/star-y.png";
+        public const string PATH_ACTIVE_RATING_ICON = "images/star-y.png";
         /// <summary>
         /// inactive rating icon
         /// </summary>
-        public const string PATH_INACTIVE_RATING_ICON = "Data/images/star-g.png";
+        public const string PATH_INACTIVE_RATING_ICON = "images/star-g.png";
+        /// <summary>
+        /// new link icon
+        /// </summary>
+        public const string PATH_NEW_LINK_ICON = "images/linknew.gif";
         /// <summary>
         /// html for edit icon on admin page
         /// </summary>
@@ -147,7 +151,7 @@ namespace ltktDAO
         /// <summary>
         /// folder containt images of ads
         /// </summary>
-        public const string FOLDER_IMG_ADS = "imagesAd";
+        public const string FOLDER_IMG_ADS = FOLDER_DATA + "/" + "imagesAd";
 
         public const string FOLDER_DATA = "Data";
 
@@ -350,7 +354,7 @@ namespace ltktDAO
             public const string TXT_LOCATION = "Nơi lưu bài";
             public const string TXT_ONE_HALF = "1/2";
             public const string TXT_CLEAR_DATA = "Xóa dữ liệu";
-            
+            public const string TXT_FILE_CONTENT = "tập tin nội dung(kích thước > 0 Byte)";
 
         #endregion
 
@@ -1436,7 +1440,7 @@ namespace ltktDAO
         /// upload page name
         /// </summary>
         public const string PAGE_UPLOAD_NAME = "Gửi bài viết";
-        
+        public const string PAGE_UPLOAD = "Upload.aspx";
         /// <summary>
         /// Admin login page
         /// </summary>
@@ -2238,6 +2242,10 @@ namespace ltktDAO
         /// image rating
         /// </summary>
         public const string TEMP_IMG_RATING = "<img src='{0}' alt='' width='15px' height='15px'/>";
+        /// <summary>
+        /// image for new links
+        /// </summary>
+        public const string TEMP_IMG_NEW_LINK = "<img src='{0}' alt=''/>";
         /// <summary>
         /// Self Link template
         /// </summary>

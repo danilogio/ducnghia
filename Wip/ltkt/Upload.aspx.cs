@@ -29,6 +29,16 @@ namespace ltkt
                                + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
             bool isOK = true;
+            if (Session[CommonConstants.SES_INFORM] != null)
+            {
+                ErrorMessagePanel.Visible = true;
+                liErrorMessage.Text = (string)Session[CommonConstants.SES_INFORM];
+                Session[CommonConstants.SES_INFORM] = null;
+            }
+            else
+            {
+                ErrorMessagePanel.Visible = false;
+            }
             try
             {
                 //if (Session[CommonConstants.SES_USER] == null)
@@ -141,7 +151,8 @@ namespace ltkt
                             {
                                 folder = CommonConstants.FOLDER_IT;
                                 keyCode = control.getValueByLong(CommonConstants.CF_KEY_CODE_IT);
-                                folder += "/" + Convert.ToString(DateTime.Now.Year);
+                                //folder += "/" + Convert.ToString(DateTime.Now.Year);
+                                folderId += "/" + Convert.ToString(DateTime.Now.Year);
                                 _leitmotif = bs.getLeitmotif(ddlInfType.SelectedValue, ddlInfOffice.SelectedValue, ddlInfTip.SelectedValue);
                                 break;
                             }
@@ -161,9 +172,10 @@ namespace ltkt
                     folderId += "/" + BaseServices.getProperlyFolderID(keyCode);
                     folder += "/" + folderId;
                     string rootFolder = Server.MapPath("~") + "/" + folder + "/";
-                    while(BaseServices.isFolderExisted(rootFolder))
+                    while (BaseServices.isFolderExisted(rootFolder))
                     {
                         rootFolder += BaseServices.random(0, 1000);
+                        rootFolder += "/";
                     }
                     string filename = bs.fileNameToSave(rootFolder + fileContent.FileName);
                     string fileSave = filename.Substring(filename.LastIndexOf(CommonConstants.FOLDER_DATA));
@@ -190,7 +202,7 @@ namespace ltkt
                             else
                                 throw new Exception(CommonConstants.MSG_E_UPLOAD);
                         }
-                        
+
 
                         //fileContent.SaveAs(filename);
                         if (bs.checkFileType(fileContent.FileName, fileTypes)
@@ -247,10 +259,10 @@ namespace ltkt
                                 }
                             case 2:
                                 {
-                                   
+
                                     isOK = englishDAO.insertEnglish(txtboxTitle.Text,
                                                                     0
-                                                                    -1,
+                                                                    - 1,
                                                                     txtboxSummary.Text,
                                                                     user.Username,
                                                                     DateTime.Now,
@@ -307,6 +319,15 @@ namespace ltkt
 
                         Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
                         //Response.Redirect(CommonConstants.PAGE_ERROR);
+                    }
+                }
+                else
+                {
+                    if (fileContent.PostedFile.ContentLength == 0)
+                    {
+                        Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(
+                            CommonConstants.MSG_E_PLEASE_INPUT_DATA, CommonConstants.TXT_FILE_CONTENT);
+                        Response.Redirect(CommonConstants.PAGE_UPLOAD);
                     }
                 }
             }

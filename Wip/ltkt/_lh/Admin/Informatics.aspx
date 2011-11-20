@@ -90,7 +90,8 @@
             <asp:Table ID="InformaticsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
-                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>
+                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>&nbsp-&nbsp 
+                        <asp:Literal ID="NumRecordLiteral" runat="server" />
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>
@@ -108,9 +109,6 @@
                             <asp:TableRow>
                                 <asp:TableCell>
                                     <asp:Literal ID="PreviousPageLiteral" runat="server" />
-                                </asp:TableCell>
-                                <asp:TableCell HorizontalAlign="Center">
-                                    <asp:Literal ID="NumRecordLiteral" runat="server" />
                                 </asp:TableCell>
                                 <asp:TableCell HorizontalAlign="Right">
                                     <asp:Literal ID="NextPageLiteral" runat="server" />
@@ -158,27 +156,29 @@
                             </p>
                             <p>
                                 <span><b>Nơi lưu bài(*):</b></span>
-                                <asp:TextBox ID="txtLocation" MaxLength="200" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtLocation" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="4" Enabled="false" runat="server"></asp:TextBox>
                             </p>
                             <p>
                                 <span title="Để trống nếu người đánh giá là bạn"><b>Người đánh giá:</b></span>
                                 <asp:TextBox ID="txtChecker" runat="server"></asp:TextBox>
                             </p>
+                            
                             <p>
-                                <span><b>Comment:</b></span>
-                                <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                                <span><b>Folder gốc:</b></span>
+                                <asp:TextBox ID="txtFolderId" Enabled="false" MaxLength="20" runat="server"></asp:TextBox>
                             </p>
                         </div>
                         <div id="divRight" style="float: left; width: 40%">
                             <br />
                             <p>
-                                <span><b>Folder gốc:</b></span>
-                                <asp:TextBox ID="txtFolderId" Enabled="false" MaxLength="20" runat="server"></asp:TextBox>
-                            </p>
-                            <p>
                                 <span><b>Thumbnail:</b></span>
                                 <asp:TextBox ID="txtThumbnail" MaxLength="254" runat="server"></asp:TextBox>
                             </p>
+                            <p>
+                                <span><b>Comment:</b></span>
+                                <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                            </p>
+                            
                             <p>
                                 <span><b>Mã nhúng Html:</b></span>
                                 <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>

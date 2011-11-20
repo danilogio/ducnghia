@@ -590,7 +590,12 @@ namespace ltkt
             try
             {
                 data += "<h3>\n";
-                data += "                " + item.Title + "</h3>\n";
+                data += "                " + item.Title + "";
+                if (DateTime.Today.DayOfYear - item.Posted.Value.DayOfYear <= 4)
+                {
+                    data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_NEW_LINK, CommonConstants.PATH_NEW_LINK_ICON);
+                }
+                data += "</h3>\n";
                 data += "            <h5>\n";
                 data += "                Post ngày " + item.Posted + " bởi <b>" + item.tblUser.DisplayName.Trim() + "</b></h5>\n";
                 data += "            <p>\n";
@@ -622,8 +627,12 @@ namespace ltkt
                 for (int i = 1; i < items.Count; i++)
                 {
                     data += "                <li>";
-                    data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, items[i].ID.ToString(), items[i].Title.Trim()) + "<div";
-                    data += "                        class='date'>";
+                    data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, items[i].ID.ToString(), items[i].Title.Trim());
+                    if (DateTime.Today.DayOfYear - items[i].Posted.Value.DayOfYear <= 4)
+                    {
+                        data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_NEW_LINK, CommonConstants.PATH_NEW_LINK_ICON);
+                    }
+                    data += "                        <div class='date'>";
                     data += "                        (" + items[i].Posted + ")</div>";
                     data += "                </li>";
 

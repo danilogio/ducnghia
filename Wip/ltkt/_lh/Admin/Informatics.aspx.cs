@@ -713,7 +713,7 @@ namespace ltkt.Admin
                         foreach (var item in strPathList)
                         {
                             path = DBHelper.strCurrentPath;
-                            path += CommonConstants.FOLDER_EL;
+                            path += CommonConstants.FOLDER_IT;
                             path += item;
                             fileDeleted = BaseServices.deleteFolder(path);
                             if (fileDeleted)
@@ -1041,7 +1041,6 @@ namespace ltkt.Admin
             ddlScore.Enabled = state;
             txtHtmlEmbbed.Enabled = state;
             txtHtmlPreviewLink.Enabled = state;
-            txtLocation.Enabled = state;
             txtChecker.Enabled = state;
             txtThumbnail.Enabled = state;
         }

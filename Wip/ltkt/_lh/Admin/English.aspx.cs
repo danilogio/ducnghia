@@ -526,7 +526,6 @@ namespace ltkt.Admin
                        + CommonConstants.REQ_PAGE
                        + CommonConstants.EQUAL;
 
-
                 if (page > 1)
                 {
 
@@ -542,6 +541,9 @@ namespace ltkt.Admin
                                                                              param + (page + 1).ToString(),
                                                                              CommonConstants.TXT_NEXT_PAGE);
                 }
+                //pagingLink.Text = BaseServices.createPagingLink(CommonConstants.PAGE_ADMIN_ENGLISH + CommonConstants.ADD_PARAMETER + param, 
+                //                                                page, 
+                //                                                totalPages);
             }
         }
         protected void btnSearch_Click(object sender, EventArgs e)
