@@ -589,6 +589,10 @@ div.block_details_text
 {
 	height: 820px;
 }
+.block_text  #divUniInfo
+{
+	height:1100px;
+}
 #EnglishLesson a, #ItLesson a, #ExamLesson a, #other_news a
 {
 	color: #1962A5;

@@ -1537,6 +1537,8 @@ namespace ltktDAO
 		
 		private int _Year;
 		
+		private string _FolderID;
+		
 		private string _Thumbnail;
 		
 		private string _Solving;
@@ -1589,6 +1591,8 @@ namespace ltktDAO
     partial void OnBranchChanged();
     partial void OnYearChanging(int value);
     partial void OnYearChanged();
+    partial void OnFolderIDChanging(string value);
+    partial void OnFolderIDChanged();
     partial void OnThumbnailChanging(string value);
     partial void OnThumbnailChanged();
     partial void OnSolvingChanging(string value);
@@ -1804,6 +1808,26 @@ namespace ltktDAO
 					this._Year = value;
 					this.SendPropertyChanged("Year");
 					this.OnYearChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FolderID", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string FolderID
+		{
+			get
+			{
+				return this._FolderID;
+			}
+			set
+			{
+				if ((this._FolderID != value))
+				{
+					this.OnFolderIDChanging(value);
+					this.SendPropertyChanging();
+					this._FolderID = value;
+					this.SendPropertyChanged("FolderID");
+					this.OnFolderIDChanged();
 				}
 			}
 		}

@@ -257,6 +257,7 @@ namespace ltkt.Admin
                 {
                     return;
                 }
+                initial();
                 viewPanel.Visible = false;
                 detailPanel.Visible = true;
                 messagePanel.Visible = false;
@@ -338,7 +339,7 @@ namespace ltkt.Admin
                 txtContent.Text = BaseServices.nullToBlank(cont.Contents);
                 txtTag.Text = BaseServices.nullToBlank(cont.Tag);
                 txtPoint.Text = Convert.ToString(cont.Point);
-                txtScore.Text = Convert.ToString(cont.Score);
+                //txtScore.Text = Convert.ToString(cont.Score);
                 showFileContent(cont.Location);
                 showFileSolving(cont.Solving);
                 showThumbnail(cont.Thumbnail);
@@ -490,7 +491,7 @@ namespace ltkt.Admin
             txtContent.ReadOnly = true;
             txtTag.ReadOnly = true;
             txtPoint.ReadOnly = true;
-            txtScore.ReadOnly = true;
+            //txtScore.ReadOnly = true;
             liContent.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
             liSolving.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải tập tin hướng dẫn\" class=\"formbutton\" onclick=\"uploadSolving()\" />";
             liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
@@ -512,14 +513,39 @@ namespace ltkt.Admin
             txtContent.ReadOnly = false;
             txtTag.ReadOnly = false;
             //txtPoint.ReadOnly = false;
-            txtScore.ReadOnly = false;
+            //txtScore.ReadOnly = false;
             liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
             liSolving.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin hướng dẫn\" class=\"formbutton\" onclick=\"uploadSolving()\" />";
             liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
             txtHtmlEmbed.ReadOnly = false;
             txtHtmlPreview.ReadOnly = false;
         }
-
+        private void initial()
+        {
+            //ddlState.Items.Add(new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
+            //ddlState.Items.Add(new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
+            //ddlState.Items.Add(new ListItem(CommonConstants.STATE_BAD_NAME, CommonConstants.STATE_BAD.ToString()));
+            //Sticky
+            ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_UNSTICKY, CommonConstants.CONST_ZERO));
+            ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_STICKY, CommonConstants.CONST_ONE));
+            //Type
+            //ddlType.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ONE_NEGATIVE));
+            //ddlType.Items.Add(new ListItem(CommonConstants.AT_LECTURE_NAME.ToString(), CommonConstants.AT_LECTURE.ToString()));
+            //ddlType.Items.Add(new ListItem(CommonConstants.AT_PRACTISE_NAME, CommonConstants.AT_PRACTISE.ToString()));
+            //ddlType.Items.Add(new ListItem(CommonConstants.AT_EXAM_NAME, CommonConstants.AT_EXAM.ToString()));
+            //Score
+            ddlScore.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ZERO));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_ONE, CommonConstants.CONST_ONE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_TWO, CommonConstants.CONST_TWO));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_THREE, CommonConstants.CONST_THREE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_FOUR, CommonConstants.CONST_FOUR));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_FIVE, CommonConstants.CONST_FIVE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_SIX, CommonConstants.CONST_SIX));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_SEVEN, CommonConstants.CONST_SEVEN));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_EIGHT, CommonConstants.CONST_EIGHT));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_NINE, CommonConstants.CONST_NINE));
+            ddlScore.Items.Add(new ListItem(CommonConstants.CONST_TEN, CommonConstants.CONST_TEN));
+        }
         private void showContest(IEnumerable<tblContestForUniversity> lst, int totalContest, int page, string action, string key, string state)
         {
             //int totalContest = lst.Count();
@@ -747,7 +773,24 @@ namespace ltkt.Admin
                 int _year = int.Parse(ddlYear.SelectedValue);
                 string _content = txtContent.Text;
                 string _tag = txtTag.Text;
-                int _score = int.Parse(txtScore.Text);
+                int _score = BaseServices.convertStringToInt(ddlScore.SelectedValue);
+                string checker = CommonConstants.BLANK;
+                //get checker when score > 0.
+                if (_score != 0)
+                {
+                    if (BaseServices.isNullOrBlank(txtChecker.Text))
+                    {
+                        checker = getCurrentUser();
+                    }
+                    else
+                    {
+                        checker = txtChecker.Text.Trim();
+                    }
+                }
+                else
+                {
+                    checker = null;
+                }
                 string _htmlPreview = txtHtmlPreview.Text;
                 string _htmlEmbed = txtHtmlEmbed.Text;
                 string _fileContentSave = BaseServices.nullToBlank(cont.Location);
@@ -917,7 +960,8 @@ namespace ltkt.Admin
                                                         _fileSolvingSave,
                                                         _fileThumbnailSave,
                                                         _htmlPreview,
-                                                        _htmlEmbed);
+                                                        _htmlEmbed,
+                                                        checker);
 
                 if (isOK)
                 {
@@ -974,6 +1018,19 @@ namespace ltkt.Admin
             }
 
             Response.Redirect(CommonConstants.PAGE_ADMIN_UNIVERSITY);
+        }
+        /// <summary>
+        /// get current username
+        /// </summary>
+        /// <returns></returns>
+        private string getCurrentUser()
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                return user.Username;
+            }
+            return CommonConstants.BLANK;
         }
     }
 }

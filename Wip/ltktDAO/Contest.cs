@@ -711,6 +711,7 @@ namespace ltktDAO
                        where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                        && p.State != CommonConstants.STATE_UNCHECK
                        && p.StickyFlg == false
+                       && p.DeleteFlg == false
                        orderby p.Year descending
                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
@@ -720,6 +721,7 @@ namespace ltktDAO
                        where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                        && p.State != CommonConstants.STATE_UNCHECK
                        && p.StickyFlg == false
+                       && p.DeleteFlg == false
                        orderby p.Year descending
                        select p).Skip(articleSCO.FirstRecord).Take(articleSCO.NumArticleOnPage);
             }
@@ -736,6 +738,7 @@ namespace ltktDAO
                       where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                       && p.State != CommonConstants.STATE_UNCHECK
                       && p.StickyFlg == true
+                      && p.DeleteFlg == false
                       orderby p.Year descending
                       select p;
             }
@@ -745,6 +748,7 @@ namespace ltktDAO
                       where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                       && p.State != CommonConstants.STATE_UNCHECK
                       && p.StickyFlg == true
+                      && p.DeleteFlg == false
                       orderby p.Year descending
                       select p;
             }
@@ -759,6 +763,7 @@ namespace ltktDAO
                 num = (from p in DB.tblContestForUniversities
                        where p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                        && p.State != CommonConstants.STATE_UNCHECK
+                       && p.DeleteFlg == false
                        orderby p.Year descending
                        select p).Count();
             }
@@ -767,6 +772,7 @@ namespace ltktDAO
                 num = (from p in DB.tblContestForUniversities
                        where p.Subject == articleSCO.Subject && p.Year <= BaseServices.getYearFromString(articleSCO.Time)
                        && p.State != CommonConstants.STATE_UNCHECK
+                       && p.DeleteFlg == false
                        orderby p.Year descending
                        select p).Count();
             }
@@ -780,6 +786,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                                       where p.DeleteFlg == false
                                                        select p;
             return lst;
         }
@@ -787,6 +794,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
+                                                        where p.DeleteFlg == false
                                                         select p);
 
             return lst;
@@ -812,7 +820,7 @@ namespace ltktDAO
                 numberRecord = 1;
             }
             IEnumerable<tblContestForUniversity> lst = (from p in DB.tblContestForUniversities
-                                                        where p.Posted == date
+                                                        where p.Posted == date && p.DeleteFlg == false
                                                         select p).Take(numberRecord);
             return lst;
 
@@ -832,6 +840,7 @@ namespace ltktDAO
             {
                 lst = (from p in DB.tblContestForUniversities
                        where p.StickyFlg == true
+                       && p.DeleteFlg == false
                        orderby p.Posted descending
                        select p).Take(number);
             }
@@ -861,7 +870,9 @@ namespace ltktDAO
             try
             {
                 lst = (from p in DB.tblContestForUniversities
-                       where p.State != CommonConstants.STATE_UNCHECK && p.StickyFlg == false
+                       where p.State != CommonConstants.STATE_UNCHECK
+                       && p.StickyFlg == false
+                       && p.DeleteFlg == false
                        orderby p.Posted descending
                        select p).Take(number);
             }
@@ -931,7 +942,7 @@ namespace ltktDAO
         /// <returns></returns>
         public Boolean insertContest(string _title, string _content, string _author,
             DateTime _posted, Boolean _isUniversity, string _sub, int _year, string _location,
-            string _tag, string fileSolved)
+            string _tag, string fileSolved, string _folderID)
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
@@ -954,6 +965,7 @@ namespace ltktDAO
                     record.StickyFlg = false;
                     record.Score = 0;//điểm của checker
                     record.Solving = fileSolved;
+                    record.FolderID = _folderID;
 
                     DB.tblContestForUniversities.InsertOnSubmit(record);
 
@@ -1046,6 +1058,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             return (from contest in DB.tblContestForUniversities
+                    where contest.DeleteFlg == false
                     select contest).Count();
         }
 
@@ -1210,6 +1223,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
                                                         where record.Year == _year
+                                                        && record.DeleteFlg == false
                                                         select record).Take(_numberRecords);
 
             return lst.ToList();
@@ -1226,6 +1240,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
                                                        where record.isUniversity == _isUniversity
+                                                       && record.DeleteFlg == false
                                                        && record.Year == _year
                                                        select record;
 
@@ -1236,9 +1251,10 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.Title.Contains(_keyword) ||
+                                                       where (record.Title.Contains(_keyword) ||
                                                        record.Tag.Contains(_keyword) ||
-                                                       record.Contents.Contains(_keyword)
+                                                       record.Contents.Contains(_keyword))
+                                                       && record.DeleteFlg == false
                                                        select record;
 
             return lst.ToList();
@@ -1254,8 +1270,9 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
 
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
-                                                 orderby record.Posted descending
-                                                 select record).Skip(start).Take(count);
+                                                        where record.DeleteFlg == false
+                                                        orderby record.Posted descending
+                                                        select record).Skip(start).Take(count);
 
             return lst;
         }
@@ -1265,6 +1282,7 @@ namespace ltktDAO
 
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
                                                         where record.Subject == subject
+                                                        && record.DeleteFlg == false
                                                         orderby record.Posted descending
                                                         select record).Skip(start).Take(count);
 
@@ -1276,6 +1294,7 @@ namespace ltktDAO
 
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
                                                         where record.State == state
+                                                        && record.DeleteFlg == false
                                                         orderby record.Posted descending
                                                         select record).Skip(start).Take(count);
 
@@ -1287,6 +1306,7 @@ namespace ltktDAO
 
             IEnumerable<tblContestForUniversity> lst = (from record in DB.tblContestForUniversities
                                                         where record.Subject == subject && record.State == state
+                                                        && record.DeleteFlg == false
                                                         orderby record.Posted descending
                                                         select record).Skip(start).Take(count);
 
@@ -1297,7 +1317,7 @@ namespace ltktDAO
             int num = 0;
 
             num = (from record in DB.tblContestForUniversities
-                   where record.Subject == subject
+                   where record.Subject == subject && record.DeleteFlg == false
                    select record).Count();
 
             return num;
@@ -1307,7 +1327,9 @@ namespace ltktDAO
             int num = 0;
 
             num = (from record in DB.tblContestForUniversities
-                   where record.Subject == subject && record.State == state
+                   where record.Subject == subject
+                   && record.State == state
+                   && record.DeleteFlg == false
                    select record).Count();
 
             return num;
@@ -1318,6 +1340,7 @@ namespace ltktDAO
 
             num = (from record in DB.tblContestForUniversities
                    where record.State == state
+                   && record.DeleteFlg == false
                    select record).Count();
 
             return num;
@@ -1348,7 +1371,7 @@ namespace ltktDAO
 
                     log.writeLog(DBHelper.strPathLogFile, username,
                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
-                                                                    Convert.ToString (id),
+                                                                    Convert.ToString(id),
                                                                     CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
                 }
             }
@@ -1373,8 +1396,8 @@ namespace ltktDAO
         public bool isState(int id, int state)
         {
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
-                                             where p.ID == id
-                                             select p;
+                                                       where p.ID == id && p.DeleteFlg == false
+                                                       select p;
             if (lst.Count() > 0)
             {
                 if (lst.ElementAt(0).State == state)
@@ -1385,7 +1408,24 @@ namespace ltktDAO
             return false;
         }
 
-        public bool updateContest(int id, string userAdmin, string _title, int _state, bool _isSticky, bool _isUniversity, int _branch, string _sub, int _year, string _content, string _tag, int _score, string _fileContent, string _fileSolving, string _fileThumbnail, string _htmlPreview, string _htmlEmbed)
+        public bool updateContest(int id,
+                                string userAdmin,
+                                string _title,
+                                int _state,
+                                bool _isSticky,
+                                bool _isUniversity,
+                                int _branch,
+                                string _sub,
+                                int _year,
+                                string _content,
+                                string _tag,
+                                int _score,
+                                string _fileContent,
+                                string _fileSolving,
+                                string _fileThumbnail,
+                                string _htmlPreview,
+                                string _htmlEmbed,
+                                string _checker)
         {
             try
             {
@@ -1408,14 +1448,14 @@ namespace ltktDAO
                     cont.Thumbnail = _fileThumbnail;
                     cont.HtmlPreview = _htmlPreview;
                     cont.HtmlEmbedLink = _htmlEmbed;
-                    cont.Checker = userAdmin;
+                    cont.Checker = _checker;
 
                     DB.SubmitChanges();
                     ts.Complete();
 
                     log.writeLog(DBHelper.strPathLogFile, userAdmin,
                                         BaseServices.createMsgByTemplate(CommonConstants.SQL_UPDATE_SUCCESSFUL_TEMPLATE,
-                                                                         Convert.ToString (id),
+                                                                         Convert.ToString(id),
                                                                          CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
                 }
             }
@@ -1434,15 +1474,8 @@ namespace ltktDAO
                                                         + e.HelpLink);
                 return false;
             }
-            
             return true;
         }
         #endregion
-
-
-
-
-
-        
     }
 }

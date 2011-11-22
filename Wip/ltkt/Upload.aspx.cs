@@ -143,8 +143,9 @@ namespace ltkt
                             {
                                 folder = CommonConstants.FOLDER_UNI;
                                 keyCode = control.getValueByLong(CommonConstants.CF_KEY_CODE_UNI);
-                                folder += "/" + Convert.ToString(ddlYear.SelectedValue);
-                                folder += "/" + bs.getSubjectFolder(ddlSub.SelectedValue);
+                                //folder += "/" + Convert.ToString(ddlYear.SelectedValue);
+                                //folder += "/" + bs.getSubjectFolder(ddlSub.SelectedValue);
+                                folderId += "/" + Convert.ToString(DateTime.Now.Year);
                                 break;
                             }
                         case 1:
@@ -170,7 +171,7 @@ namespace ltkt
                             }
                     }
                     folderId += "/" + BaseServices.getProperlyFolderID(keyCode);
-                    folder += "/" + folderId;
+                    folder += folderId;
                     string rootFolder = Server.MapPath("~") + "/" + folder + "/";
                     while (BaseServices.isFolderExisted(rootFolder))
                     {
@@ -233,7 +234,8 @@ namespace ltkt
                                                                         Convert.ToInt32(ddlYear.SelectedValue),
                                                                         fileSave,
                                                                         txtboxTag.Text,
-                                                                        fileSolvingSave);
+                                                                        fileSolvingSave
+                                                                        ,folderId);
                                     if (isOK)
                                     {
                                         control.add(CommonConstants.CF_KEY_CODE_UNI, CommonConstants.CONST_ONE);

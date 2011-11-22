@@ -71,6 +71,7 @@
 
         function openFile(file) {
             //startoff()
+            alert(file);
             window.open(file)
         }
     </script>
@@ -194,107 +195,123 @@
         </asp:Panel>
         <asp:Panel ID="detailPanel" runat="server" Visible="false">
             <div class="form_settings">
-                <div id="function">
+                <div id="divUniInfo">
                     <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />
                     <asp:Button ID="btnBack" runat="server" Text="Quay lại" CssClass="formbutton" OnClick="btnBack_Click" />
                     <hr />
-                </div>
-                <div id="divDetail">
-                    <div id="divLeft" style="float: left; width: 45%; margin-left: 20px">
-                        <p>
-                            <span>Tiêu đề</span>
-                            <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Tác giả</span>
-                            <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Ngày gửi</span>
-                            <asp:TextBox ID="txtPosted" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Trạng thái</span>
-                            <asp:DropDownList ID="ddlState" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span>Đánh dấu sticky</span>
-                            <asp:DropDownList ID="ddlSticky" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span>Đề thi</span>
-                            <asp:DropDownList ID="ddlType" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span>Khối thi</span>
-                            <asp:DropDownList ID="ddlBranch" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span>Môn thi</span>
-                            <asp:DropDownList ID="ddlSubject" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span>Đề thi năm</span>
-                            <asp:DropDownList ID="ddlYear" runat="server">
-                            </asp:DropDownList>
-                        </p>
-                        <p>
-                            <span>Tóm tắt</span>
-                            <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
-                        </p>
-                    </div>
-                    <div id="divRight" style="float: left; width: 49%">
-                        <p>
-                            <span>Tag</span>
-                            <asp:TextBox ID="txtTag" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Điểm bài viết</span>
-                            <asp:TextBox ID="txtPoint" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Đánh giá mức độ</span>
-                            <asp:TextBox ID="txtScore" runat="server"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Tập tin nội dung:</span>
-                            <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal><br />
-                        </p>
-                        <p id="uploadContent">
-                            <span>Tải tập tin nội dung</span>
-                            <asp:FileUpload ID="fileContent" runat="server" />
-                        </p>
-                        <p>
-                            <span>Tập tin hướng dẫn giải:</span><br />
-                            <asp:Literal ID="liSolving" runat="server" Text="ad"></asp:Literal>
-                        </p>
-                        <br />
-                        <p id="uploadSolving">
-                            <span>Tải tập tin hướng dẫn</span>
-                            <asp:FileUpload ID="fileSolving" runat="server" />
-                        </p>
-                        <p>
-                            <span>Hình thu nhỏ</span><br />
-                            <asp:Literal ID="liThumbnail" runat="server" Text="a"></asp:Literal>
+                    <br />
+                    <div id="divDetail">
+                        <div id="divLeft" style="float: left; width: 45%; margin-left: 20px">
+                            <p>
+                                <span><b>Tiêu đề(*)</b></span>
+                                <asp:TextBox ID="txtTitle" runat="server" MaxLength="254"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Tác giả(*)</b></span>
+                                <asp:TextBox ID="txtAuthor" ReadOnly="true" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Ngày gửi(*)</b></span>
+                                <asp:TextBox ID="txtPosted" ReadOnly="true" runat="server"></asp:TextBox>
+                            </p>
                             
-                        </p>
-                        <p id="uploadThumbnail">
-                            <span>Tải tập tin hình thu nhỏ</span>
-                            <asp:FileUpload ID="fileThumbnail" runat="server" />
-                        </p>
-                        <p>
-                            <span>Mã html preview</span>
-                            <asp:TextBox ID="txtHtmlPreview" runat="server" TextMode="MultiLine"></asp:TextBox>
-                        </p>
-                        <p>
-                            <span>Mã html embed</span>
-                            <asp:TextBox ID="txtHtmlEmbed" runat="server" TextMode="MultiLine"></asp:TextBox>
-                        </p>
+                            <p>
+                                <span><b>Tag</b></span>
+                                <asp:TextBox ID="txtTag" runat="server" MaxLength="254"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Số người quan tâm</b></span>
+                                <asp:TextBox ID="txtPoint" runat="server" ReadOnly="true"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span title="Để trống nếu người đánh giá là bạn"><b>Người đánh giá:</b></span>
+                                <asp:TextBox ID="txtChecker" runat="server" MaxLength="20"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Folder gốc(*)</b></span>
+                                <asp:TextBox ID="txtFolderId" ReadOnly="true" Wrap="true" Rows="4" MaxLength="20" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Nơi lưu bài(*)</b></span>
+                                <asp:TextBox ID="txtLocation" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="4"
+                                    ReadOnly="true" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Tóm tắt</b></span>
+                                <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Mã html Preview</b></span>
+                                <asp:TextBox ID="txtHtmlPreview" Rows="4" runat="server" TextMode="MultiLine"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Link html embed</b></span>
+                                <asp:TextBox ID="txtHtmlEmbed" runat="server" TextMode="MultiLine" Rows="4" MaxLength="254"></asp:TextBox>
+                            </p>
+                        </div>
+                        <div id="divRight" style="float: left; width: 49%">
+                            
+                            <p>
+                                <span><b>Tập tin nội dung</b></span>
+                                <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal><br />
+                            </p>
+                            <p id="uploadContent">
+                                <span><b>Tải tập tin nội dung</b></span>
+                                <asp:FileUpload ID="fileContent" runat="server" />
+                            </p>
+                            <p>
+                                <span><b>Tập tin hướng dẫn giải</b></span><br />
+                                <asp:Literal ID="liSolving" runat="server" Text="ad"></asp:Literal>
+                            </p>
+                            <br />
+                            <p id="uploadSolving">
+                                <span><b>Tải tập tin hướng dẫn</b></span>
+                                <asp:FileUpload ID="fileSolving" runat="server" />
+                            </p>
+                            <p>
+                                <span><b>Hình thu nhỏ</b></span><br />
+                                <asp:Literal ID="liThumbnail" runat="server" Text="a"></asp:Literal>
+                            </p>
+                            <p id="uploadThumbnail">
+                                <span><b>Tải tập tin hình thu nhỏ</b></span>
+                                <asp:FileUpload ID="fileThumbnail" runat="server" />
+                            </p>
+                            <p>
+                                <span><b>Điểm đánh giá:</b></span>
+                                <asp:DropDownList ID="ddlScore" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Trạng thái</b></span>
+                                <asp:DropDownList ID="ddlState" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Đánh dấu sticky</b></span>
+                                <asp:DropDownList ID="ddlSticky" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Đề thi</b></span>
+                                <asp:DropDownList ID="ddlType" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Khối thi</b></span>
+                                <asp:DropDownList ID="ddlBranch" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Môn thi</b></span>
+                                <asp:DropDownList ID="ddlSubject" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                            <p>
+                                <span><b>Năm ra đề</b></span>
+                                <asp:DropDownList ID="ddlYear" runat="server">
+                                </asp:DropDownList>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
