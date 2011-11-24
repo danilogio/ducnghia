@@ -1,8 +1,0 @@
-9/25/2011 10:36:10 AM ==> [Guest]:String was not recognized as a valid DateTime.
-   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
-   at System.DateTime.Parse(String s)
-   at ltkt.AdContact.btnSubmitContact_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\AdContact.aspx.cs:line 65
-9/25/2011 10:56:38 AM ==> [Guest]:String was not recognized as a valid DateTime.
-   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
-   at System.DateTime.Parse(String s)
-   at ltkt.AdContact.btnSubmitContact_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\AdContact.aspx.cs:line 65

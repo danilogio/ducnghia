@@ -1,9 +1,0 @@
-11/6/2011 4:28:00 PM ==> Thread was being aborted.
-mscorlib
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
-   at System.Web.HttpResponse.Redirect(String url)
-   at ltkt.MasterPage.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\MasterPage.master.cs:line 313
-
