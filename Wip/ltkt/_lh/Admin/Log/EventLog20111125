@@ -1,0 +1,5 @@
+11/25/2011 1:12:28 AM ==> [dvtrung]:String was not recognized as a valid Boolean.
+mscorlib
+   at System.Boolean.Parse(String value)
+   at ltkt.Admin.ContestUniversity.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\ContestUniversity.aspx.cs:line 774
+

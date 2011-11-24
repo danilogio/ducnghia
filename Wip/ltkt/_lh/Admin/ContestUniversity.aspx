@@ -214,7 +214,6 @@
                                 <span><b>Ngày gửi(*)</b></span>
                                 <asp:TextBox ID="txtPosted" ReadOnly="true" runat="server"></asp:TextBox>
                             </p>
-                            
                             <p>
                                 <span><b>Tag</b></span>
                                 <asp:TextBox ID="txtTag" runat="server" MaxLength="254"></asp:TextBox>
@@ -229,30 +228,35 @@
                             </p>
                             <p>
                                 <span><b>Folder gốc(*)</b></span>
-                                <asp:TextBox ID="txtFolderId" ReadOnly="true" Wrap="true" Rows="4" MaxLength="20" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtFolderId" ReadOnly="true" Wrap="true" Rows="4" MaxLength="20"
+                                    runat="server"></asp:TextBox>
                             </p>
-                            <p>
-                                <span><b>Nơi lưu bài(*)</b></span>
-                                <asp:TextBox ID="txtLocation" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="4"
-                                    ReadOnly="true" runat="server"></asp:TextBox>
-                            </p>
+                            
                             <p>
                                 <span><b>Tóm tắt</b></span>
                                 <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Link html embed</b></span>
+                                <asp:TextBox ID="txtHtmlEmbed" runat="server" TextMode="MultiLine" Rows="2" MaxLength="254"></asp:TextBox>
                             </p>
                             <p>
                                 <span><b>Mã html Preview</b></span>
                                 <asp:TextBox ID="txtHtmlPreview" Rows="4" runat="server" TextMode="MultiLine"></asp:TextBox>
                             </p>
                             <p>
-                                <span><b>Link html embed</b></span>
-                                <asp:TextBox ID="txtHtmlEmbed" runat="server" TextMode="MultiLine" Rows="4" MaxLength="254"></asp:TextBox>
+                                <span><b>Comment:</b></span>
+                                <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
                             </p>
                         </div>
                         <div id="divRight" style="float: left; width: 49%">
-                            
                             <p>
-                                <span><b>Tập tin nội dung</b></span>
+                                <span><b>Nơi lưu tập tin nội dung(*)</b></span>
+                                <asp:TextBox ID="txtLocation" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="2"
+                                    ReadOnly="true" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Chi tiết tập tin nội dung</b></span>
                                 <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal><br />
                             </p>
                             <p id="uploadContent">
@@ -260,7 +264,12 @@
                                 <asp:FileUpload ID="fileContent" runat="server" />
                             </p>
                             <p>
-                                <span><b>Tập tin hướng dẫn giải</b></span><br />
+                                <span><b>Nơi lưu hướng dẫn giải</b></span>
+                                <asp:TextBox ID="txtSolve" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="2"
+                                    ReadOnly="true" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Chi tiết tập tin hướng dẫn giải</b></span>
                                 <asp:Literal ID="liSolving" runat="server" Text="ad"></asp:Literal>
                             </p>
                             <br />

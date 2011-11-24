@@ -330,6 +330,10 @@ namespace ltkt.Admin
                 txtTitle.Text = cont.Title.Trim();
                 txtAuthor.Text = cont.tblUser.Username.Trim();
                 txtPosted.Text = cont.Posted.ToString("HH:mm:ss 'ngày' dd/M/yyyy");
+                txtFolderId.Text = cont.FolderID;
+                txtLocation.Text = cont.Location;
+                txtSolve.Text = cont.Solving;
+                txtComment.Text = cont.Comment;
                 showState(cont.State);
                 showSticky(cont.StickyFlg);
                 showContestType(cont.isUniversity);
@@ -339,12 +343,14 @@ namespace ltkt.Admin
                 txtContent.Text = BaseServices.nullToBlank(cont.Contents);
                 txtTag.Text = BaseServices.nullToBlank(cont.Tag);
                 txtPoint.Text = Convert.ToString(cont.Point);
+                ddlScore.SelectedValue = cont.Score.ToString();
                 //txtScore.Text = Convert.ToString(cont.Score);
                 showFileContent(cont.Location);
                 showFileSolving(cont.Solving);
                 showThumbnail(cont.Thumbnail);
                 txtHtmlEmbed.Text = BaseServices.nullToBlank(cont.HtmlEmbedLink);
                 txtHtmlPreview.Text = BaseServices.nullToBlank(cont.HtmlPreview);
+                txtChecker.Text = cont.Checker;
             }
             else
             {
@@ -526,8 +532,8 @@ namespace ltkt.Admin
             //ddlState.Items.Add(new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
             //ddlState.Items.Add(new ListItem(CommonConstants.STATE_BAD_NAME, CommonConstants.STATE_BAD.ToString()));
             //Sticky
-            ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_UNSTICKY, CommonConstants.CONST_ZERO));
-            ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_STICKY, CommonConstants.CONST_ONE));
+            //ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_UNSTICKY, CommonConstants.CONST_ZERO));
+            //ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_STICKY, CommonConstants.CONST_ONE));
             //Type
             //ddlType.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ONE_NEGATIVE));
             //ddlType.Items.Add(new ListItem(CommonConstants.AT_LECTURE_NAME.ToString(), CommonConstants.AT_LECTURE.ToString()));
@@ -1005,7 +1011,7 @@ namespace ltkt.Admin
             {
                 tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
-                log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message
+                log.writeLog(Server.MapPath(CommonConstants.PATH_ADMIN_LOG_FILE), user.Username, ex.Message
                                                                                         + CommonConstants.NEWLINE
                                                                                         + ex.Source
                                                                                         + CommonConstants.NEWLINE

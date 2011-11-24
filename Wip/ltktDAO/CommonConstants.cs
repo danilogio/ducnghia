@@ -47,6 +47,7 @@ namespace ltktDAO
         /// path of event log
         /// </summary>
         public const string PATH_LOG_FILE = "Data\\Log\\EventLog";
+        public const string PATH_ADMIN_LOG_FILE = "Log\\EventLog";
         /// <summary>
         /// active icon
         /// </summary>

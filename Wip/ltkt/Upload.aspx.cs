@@ -187,7 +187,7 @@ namespace ltkt
                     string fileTypes = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
                     int maxSize = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE);
                     maxSize = maxSize * 1024 * 1024;
-
+                    
 
                     try
                     {
@@ -198,6 +198,7 @@ namespace ltkt
                             {
                                 _fileSolving = filename.Substring(0, filename.LastIndexOf(".")) + "_solved" + Path.GetExtension(fileSolving.FileName);
                                 _fileSolving = bs.fileNameToSave(_fileSolving);
+                                fileSolvingSave = _fileSolving.Substring(_fileSolving.LastIndexOf(CommonConstants.FOLDER_DATA));
                                 fileSolvingGood = true;
                             }
                             else
