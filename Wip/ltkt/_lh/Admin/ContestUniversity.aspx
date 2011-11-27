@@ -260,7 +260,7 @@
                                 <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal><br />
                             </p>
                             <p id="uploadContent">
-                                <span><b>Tải tập tin nội dung</b></span>
+                                <span><b>Tải tập tin nội dung mới</b></span>
                                 <asp:FileUpload ID="fileContent" runat="server" />
                             </p>
                             <p>
@@ -274,7 +274,7 @@
                             </p>
                             <br />
                             <p id="uploadSolving">
-                                <span><b>Tải tập tin hướng dẫn</b></span>
+                                <span><b>Tải tập tin hướng dẫn mới</b></span>
                                 <asp:FileUpload ID="fileSolving" runat="server" />
                             </p>
                             <p>
