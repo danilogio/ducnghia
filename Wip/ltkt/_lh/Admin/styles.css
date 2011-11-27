@@ -556,6 +556,7 @@ div.block_details_text
 	padding: 2px 0 3px 0;
 	cursor: pointer;
 	background: #0b519a;
+	font-weight: bold;
 	color: #FFF;
 }
 
@@ -659,4 +660,10 @@ div.block_details_text
 	background:white;
 	margin-top:10px;
 	margin-bottom:10px;
+}
+input.submit:hover
+{
+	background-color:silver;
+	color:navy;
+	cursor:hand;
 }

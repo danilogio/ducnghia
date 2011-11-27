@@ -25,7 +25,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -44,7 +44,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -63,7 +63,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -84,7 +84,7 @@ namespace ltktDAO
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblUser> lst = from author in DB.tblUsers
                                        join record in DB.tblContestForUniversities on author.Username equals record.Author
-                                       where record.ID == ID
+                                       where record.ID == ID && record.DeleteFlg == false
                                        select author;
 
             if (lst.Count() > 0)
@@ -104,7 +104,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -127,7 +127,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             int state = lst.ElementAt(0).State;
@@ -165,7 +165,7 @@ namespace ltktDAO
         {
 
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.ElementAt(0).isUniversity == false)
@@ -185,7 +185,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             int branch = lst.ElementAt(0).Branch;
@@ -228,7 +228,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -247,7 +247,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -267,7 +267,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -282,7 +282,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == ID
+                                                       where record.ID == ID && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -301,7 +301,7 @@ namespace ltktDAO
         {
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == _id
+                                                       where record.ID == _id && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -321,7 +321,7 @@ namespace ltktDAO
         {
             //LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from record in DB.tblContestForUniversities
-                                                       where record.ID == _id
+                                                       where record.ID == _id && record.DeleteFlg == false
                                                        select record;
 
             if (lst.Count() > 0)
@@ -688,6 +688,7 @@ namespace ltktDAO
             LTDHDataContext DB = new LTDHDataContext(@strPathDB);
             IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
                                                        where p.Point == DB.tblContestForUniversities.Max(p2 => p2.Point)
+                                                       && p.DeleteFlg == false
                                                        orderby p.Posted descending
                                                        select p;
             if (lst.Count() > 0)
@@ -1312,6 +1313,62 @@ namespace ltktDAO
 
             return lst;
         }
+        public IEnumerable<tblContestForUniversity> fetchStickyContestList(int start, int count)
+        {
+            IEnumerable<tblContestForUniversity> lst = (from r in DB.tblContestForUniversities
+                                                        where r.StickyFlg == true
+                                                        && r.DeleteFlg == false
+                                                        orderby r.Posted descending
+                                                        select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblContestForUniversity> fetchStickyContestList(int state, int start, int count)
+        {
+            IEnumerable<tblContestForUniversity> lst = (from r in DB.tblContestForUniversities
+                                                        where r.StickyFlg == true
+                                                        && r.State == state
+                                                        && r.DeleteFlg == false
+                                                        orderby r.Posted descending
+                                                        select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public IEnumerable<tblContestForUniversity> searchArticles(string keyword, int start, int count)
+        {
+            IEnumerable<tblContestForUniversity> lst = (from r in DB.tblContestForUniversities
+                                                        where (r.Title.Contains(keyword) || r.Tag.Contains(keyword))
+                                                        && r.DeleteFlg == false
+                                                        orderby r.Posted descending
+                                                        select r).Skip(start).Take(count);
+
+            return lst;
+        }
+        public int countStickyContestList(int state)
+        {
+            int num = (from r in DB.tblContestForUniversities
+                       where r.StickyFlg == true
+                       && r.State == state
+                       && r.DeleteFlg == false
+                       select r).Count();
+
+            return num;
+        }
+        /// <summary>
+        /// count article by keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public int countArticles(string keyword)
+        {
+            int num = (from r in DB.tblContestForUniversities
+                       where (r.Title.Contains(keyword) || r.Tag.Contains(keyword))
+                       && r.DeleteFlg == false
+                       orderby r.Posted descending
+                       select r).Count();
+
+            return num;
+        }
         public int countArticleBySubject(string subject)
         {
             int num = 0;
@@ -1345,7 +1402,21 @@ namespace ltktDAO
 
             return num;
         }
+        /// <summary>
+        /// count all article is stikied
+        /// </summary>
+        /// <returns></returns>
+        public int countStickyArticle()
+        {
+            int num = 0;
 
+            num = (from record in DB.tblContestForUniversities
+                   where record.StickyFlg == true
+                   && record.DeleteFlg == false
+                   select record).Count();
+
+            return num;
+        }
         /// <summary>
         /// delete a article of contest of university
         /// </summary>

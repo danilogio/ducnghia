@@ -332,6 +332,10 @@ namespace ltktDAO
             /// sticky
             /// </summary>
             public const string TXT_STICKY = "Sticky";
+            /// <summary>
+            /// Sticky tolower for Uni admin page - use for this page only
+            /// </summary>
+            public const string TXT_STICKY_TOLOWER = "sticky";
             public const string TXT_UNSTICKY = "Không Sticky";
             /// <summary>
             /// Chủ đề
