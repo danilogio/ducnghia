@@ -140,24 +140,30 @@
             </div>
             <div id="nav">
                 <div id="center-ul">
-                    <ul>
-                        <li>
-                            <asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/News.aspx">Tin tức</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="HpkUpload" runat="server" NavigateUrl="~/Upload.aspx" Visible="false">Gửi bài</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="HpkSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="~/_lh/Login.aspx" Visible="false">Admin</asp:HyperLink></li>
-                        <li>
-                            <%--<asp:Menu ID="Menu1" runat="server">
-                            </asp:Menu>--%>
-                            <%--<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Liên kết</asp:HyperLink>--%></li>
-                        <li>
-                            <asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
-                    </ul>
+                    <div id="divContainer">
+                        <ul>
+                            <li>
+                                <asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/News.aspx">Tin tức</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="HpkUpload" runat="server" NavigateUrl="~/Upload.aspx" Visible="false">Gửi bài</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="HpkSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="~/_lh/Login.aspx" Visible="false">Admin</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="hpkLink" runat="server" NavigateUrl="#">Liên kết</asp:HyperLink>
+                                <ul>
+                                    <li><a href="#">Photoshop</a></li>
+                                    <li><a href="#">Gallery</a></li>
+                                    <li><a href="#">Members</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div id="body">

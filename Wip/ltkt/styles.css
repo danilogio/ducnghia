@@ -273,6 +273,7 @@ li ol, li ul
 	width: 950px;
 	margin: 8px 15px;
 	display: block;
+	margin-left:100px;
 }
 
 #nav ul
@@ -299,6 +300,7 @@ li ol, li ul
 	font-size: 14px;
 	padding: 22px 20px 21px;
 	text-decoration: none;
+	font-weight:bold;
 }
 
 #nav ul li a:hover
@@ -705,4 +707,51 @@ input.submit:hover
 	background-color:silver;
 	color:navy;
 	cursor:hand;
+}
+
+/*/////////////*/
+#divContainer {
+float: left;
+
+}
+
+#divContainer ul {
+float: left;
+list-style: none;
+
+}
+
+#divContainer ul li {
+position: relative;
+float: left;
+}
+
+#divContainer li a {
+display: block;
+color: #292929;
+font-weight: bold;
+text-decoration: none;
+padding: .3em 9px;
+}
+
+#divContainer li a:hover {
+color: yellow;
+background: orange;
+}
+
+#divContainer li ul{
+background: gray;
+position: absolute;
+display: none;
+width: 10em;
+padding-left:3em
+}
+
+
+#divContainer li:hover ul{
+display: block;
+}
+
+#divContainer ul li ul li {
+	width: 100%;
 }
