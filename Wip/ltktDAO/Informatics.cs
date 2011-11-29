@@ -727,6 +727,10 @@ namespace ltktDAO
                     DB.tblInformatics.InsertOnSubmit(record);
                     DB.SubmitChanges();
                     ts.Complete();
+
+                    ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
+                    statisticDAO.add(CommonConstants.SF_NUM_UPLOAD, CommonConstants.CONST_ONE);
+
                     log.writeLog(DBHelper.strPathLogFile, record.Author,
                                 BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
                                                                     _title,

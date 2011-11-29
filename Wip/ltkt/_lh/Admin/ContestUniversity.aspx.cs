@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
 using System.IO;
+using System.Collections;
 
 namespace ltkt.Admin
 {
@@ -37,7 +38,18 @@ namespace ltkt.Admin
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
                     liTableHeader.Text = CommonConstants.TXT_LIST_ARTICLE;
-
+                    int numDeletedFile = contestDAO.countDeletedArticles();
+                    if (numDeletedFile > 0)
+                    {
+                        btnClear.Text = CommonConstants.TXT_CLEAR_DATA;
+                        btnClear.Text += CommonConstants.SPACE;
+                        btnClear.Text += "(" + numDeletedFile + ")";
+                        btnClear.Visible = true;
+                    }
+                    else
+                    {
+                        btnClear.Visible = false;
+                    }
 
                     pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
@@ -55,287 +67,317 @@ namespace ltkt.Admin
         {
             string action = Request.QueryString[CommonConstants.REQ_ACTION];
             string sPage = Request.QueryString[CommonConstants.REQ_PAGE];
-            //bool isDeleted = false;
-            if (BaseServices.isNullOrBlank(action))
+            bool isDeleted = false;
+            try
             {
-                action = CommonConstants.ACT_SEARCH;
-            }
-            if (BaseServices.isNullOrBlank(sPage))
-            {
-                sPage = CommonConstants.PAGE_NUMBER_FIRST;
-            }
-
-            int page = Convert.ToInt32(sPage);
-            if (action == CommonConstants.ACT_SEARCH)
-            {
-                if (Page.IsPostBack)
+                //bool isDeleted = false;
+                if (BaseServices.isNullOrBlank(action))
                 {
-                    return;
+                    action = CommonConstants.ACT_SEARCH;
                 }
-                showCountingArticle();
-
-                string key = Request.QueryString[CommonConstants.REQ_KEY];
-                string state = Request.QueryString[CommonConstants.REQ_STATE];
-                int totalRecord = 0;
-                viewPanel.Visible = true;
-                detailPanel.Visible = false;
-                messagePanel.Visible = false;
-                IEnumerable<tblContestForUniversity> lst = null;
-
-                if (BaseServices.isNullOrBlank(key))
+                if (BaseServices.isNullOrBlank(sPage))
                 {
-                    key = CommonConstants.ALL;
+                    sPage = CommonConstants.PAGE_NUMBER_FIRST;
                 }
-                else
+
+                int page = Convert.ToInt32(sPage);
+                if (action == CommonConstants.ACT_SEARCH)
                 {
-                    key = BaseServices.nullToBlank(key);
-                }
-                if (BaseServices.isNullOrBlank(state))
-                {
-                    state = CommonConstants.ALL;
-                }
-                changeViewState(key);
-                if (key == CommonConstants.ALL)
-                {
-                    if (state == CommonConstants.ALL)// key = ALL and state = ALL
+                    if (Page.IsPostBack)
                     {
-                        lst = contestDAO.fetchArticleList((page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.count();
-                        string txt = hpkShowAllState.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                        hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
-                        hpkShowChecked.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowBad.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_BAD) + ")";
+                        return;
                     }
-                    else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
-                    {
-                        lst = contestDAO.fetchArticleList(CommonConstants.STATE_UNCHECK, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK);
+                    showCountingArticle();
 
-                        hpkShowAllState.Text += "(" + contestDAO.count() + ")";
-                        string txt = hpkShowUncheck.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                        hpkShowChecked.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowBad.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_BAD) + ")";
-                    }
-                    else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
-                    {
-                        lst = contestDAO.fetchArticleList(CommonConstants.STATE_CHECKED, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleByState(CommonConstants.STATE_CHECKED);
+                    string key = Request.QueryString[CommonConstants.REQ_KEY];
+                    string state = Request.QueryString[CommonConstants.REQ_STATE];
+                    int totalRecord = 0;
+                    viewPanel.Visible = true;
+                    detailPanel.Visible = false;
+                    messagePanel.Visible = false;
+                    IEnumerable<tblContestForUniversity> lst = null;
 
-                        hpkShowAllState.Text += "(" + contestDAO.count() + ")";
-                        hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
-                        string txt = hpkShowChecked.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                        hpkShowBad.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_BAD) + ")";
-                    }
-                    else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
+                    if (BaseServices.isNullOrBlank(key))
                     {
-                        lst = contestDAO.fetchArticleList(CommonConstants.STATE_BAD, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleByState(CommonConstants.STATE_BAD);
-
-                        hpkShowAllState.Text += "(" + contestDAO.count() + ")";
-                        hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
-                        hpkShowChecked.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_CHECKED) + ")";
-                        string txt = hpkShowBad.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                    }
-
-                }
-                else if (key == CommonConstants.TXT_STICKY.ToLower())
-                {
-                    changeStateLink(key);
-                    if (state == CommonConstants.ALL)// key == sticky and state = ALL
-                    {
-                        lst = contestDAO.fetchStickyContestList(((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
-                        totalRecord = contestDAO.countStickyArticle();
-                        hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAllState.Text + "(" + totalRecord + ")");
-                        hpkShowBad.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_BAD) + ")";
-                        hpkShowChecked.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowUncheck.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK) + ")";
-
-                    }
-                    else if (state == CommonConstants.STATE_UNCHECK.ToString())// key == sticky and state = UNCHECk
-                    {
-                        lst = contestDAO.fetchStickyContestList(CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
-                        totalRecord = contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK);
-                        hpkShowAllState.Text += "(" + contestDAO.countStickyArticle() + ")";
-                        hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowUncheck.Text + "(" + totalRecord + ")");
-                        hpkShowChecked.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowBad.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_BAD) + ")";
-                    }
-                    else if (state == CommonConstants.STATE_CHECKED.ToString())// key = sticky and state = CHECKED
-                    {
-                        lst = contestDAO.fetchStickyContestList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
-                        totalRecord = contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED);
-                        hpkShowAllState.Text += "(" + contestDAO.countStickyArticle() + ")";
-                        hpkShowBad.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_BAD) + ")";
-                        hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowChecked.Text + "(" + totalRecord + ")");
-                        hpkShowUncheck.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK) + ")";
-
-                    }
-                    else if (state == CommonConstants.STATE_BAD.ToString())// key = sticky and state = BAD
-                    {
-                        lst = contestDAO.fetchStickyContestList(CommonConstants.STATE_BAD, ((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
-                        totalRecord = contestDAO.countStickyContestList(CommonConstants.STATE_BAD);
-                        hpkShowAllState.Text += "(" + contestDAO.countStickyArticle() + ")";
-                        hpkShowUncheck.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK) + ")";
-                        hpkShowChecked.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowBad.Text + "(" + totalRecord + ")");
-
-                    }
-                }
-                else //key != ALL
-                {
-                    changeStateLink(key);
-                    string sub = key;
-                    if (BaseServices.isNullOrBlank(sub))
-                    {
-                        sub = CommonConstants.SUB_MATHEMATICS_CODE;
-                    }
-                    
-                    if (state == CommonConstants.ALL)//key != ALL and state = ALL
-                    {
-                        lst = contestDAO.fetchArticleList(sub.Trim(), (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleBySubject(sub.Trim());
-
-
-                        hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
-                        hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
-                        string txt = hpkShowAllState.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                    }
-                    else if (state == CommonConstants.STATE_UNCHECK.ToString())//key != ALL and state = UNCHECK
-                    {
-                        lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_UNCHECK, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK);
-                        hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
-
-                        hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
-                        hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
-                        string txt = hpkShowUncheck.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                    }
-                    else if (state == CommonConstants.STATE_CHECKED.ToString())//key != ALL and state = CHECKED
-                    {
-                        lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_CHECKED, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED);
-                        hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
-                        hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
-                        string txt = hpkShowChecked.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
-                        hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
-                    }
-                    else if (state == CommonConstants.STATE_BAD.ToString())//key != ALL and state = BAD
-                    {
-                        lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_BAD, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
-                        totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD);
-
-                        hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
-                        hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
-                        hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
-                        string txt = hpkShowBad.Text;
-                        txt += "(" + totalRecord + ")";
-                        hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                        key = CommonConstants.ALL;
                     }
                     else
                     {
-
+                        key = BaseServices.nullToBlank(key);
                     }
-
-                }
-                //show data
-                bool isOK = false;
-                if (lst != null)
-                {
-                    if (lst.Count() > 0)
+                    if (BaseServices.isNullOrBlank(state))
                     {
-                        showContest(lst, totalRecord, page, action, key, state);
-                        isOK = true;
+                        state = CommonConstants.ALL;
+                    }
+                    changeViewState(key);
+                    if (key == CommonConstants.ALL)
+                    {
+                        if (state == CommonConstants.ALL)// key = ALL and state = ALL
+                        {
+                            lst = contestDAO.fetchArticleList((page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.count();
+                            string txt = hpkShowAllState.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_BAD) + ")";
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())// key = ALL and state = UNCHECk
+                        {
+                            lst = contestDAO.fetchArticleList(CommonConstants.STATE_UNCHECK, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK);
+
+                            hpkShowAllState.Text += "(" + contestDAO.count() + ")";
+                            string txt = hpkShowUncheck.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowChecked.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_BAD) + ")";
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())// key = ALL and state = CHECKED
+                        {
+                            lst = contestDAO.fetchArticleList(CommonConstants.STATE_CHECKED, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleByState(CommonConstants.STATE_CHECKED);
+
+                            hpkShowAllState.Text += "(" + contestDAO.count() + ")";
+                            hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
+                            string txt = hpkShowChecked.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowBad.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_BAD) + ")";
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())// key = ALL and state = BAD
+                        {
+                            lst = contestDAO.fetchArticleList(CommonConstants.STATE_BAD, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleByState(CommonConstants.STATE_BAD);
+
+                            hpkShowAllState.Text += "(" + contestDAO.count() + ")";
+                            hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_CHECKED) + ")";
+                            string txt = hpkShowBad.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                        }
+
+                    }
+                    else if (key == CommonConstants.TXT_STICKY.ToLower())
+                    {
+                        changeStateLink(key);
+                        if (state == CommonConstants.ALL)// key == sticky and state = ALL
+                        {
+                            lst = contestDAO.fetchStickyContestList(((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
+                            totalRecord = contestDAO.countStickyArticle();
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowAllState.Text + "(" + totalRecord + ")");
+                            hpkShowBad.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_BAD) + ")";
+                            hpkShowChecked.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowUncheck.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK) + ")";
+
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())// key == sticky and state = UNCHECk
+                        {
+                            lst = contestDAO.fetchStickyContestList(CommonConstants.STATE_UNCHECK, ((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
+                            totalRecord = contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK);
+                            hpkShowAllState.Text += "(" + contestDAO.countStickyArticle() + ")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowUncheck.Text + "(" + totalRecord + ")");
+                            hpkShowChecked.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_BAD) + ")";
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())// key = sticky and state = CHECKED
+                        {
+                            lst = contestDAO.fetchStickyContestList(CommonConstants.STATE_CHECKED, ((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
+                            totalRecord = contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED);
+                            hpkShowAllState.Text += "(" + contestDAO.countStickyArticle() + ")";
+                            hpkShowBad.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_BAD) + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowChecked.Text + "(" + totalRecord + ")");
+                            hpkShowUncheck.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK) + ")";
+
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())// key = sticky and state = BAD
+                        {
+                            lst = contestDAO.fetchStickyContestList(CommonConstants.STATE_BAD, ((page - 1) * NoOfContestPerPage), NoOfContestPerPage);
+                            totalRecord = contestDAO.countStickyContestList(CommonConstants.STATE_BAD);
+                            hpkShowAllState.Text += "(" + contestDAO.countStickyArticle() + ")";
+                            hpkShowUncheck.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + contestDAO.countStickyContestList(CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, hpkShowBad.Text + "(" + totalRecord + ")");
+
+                        }
+                    }
+                    else //key != ALL
+                    {
+                        changeStateLink(key);
+                        string sub = key;
+                        if (BaseServices.isNullOrBlank(sub))
+                        {
+                            sub = CommonConstants.SUB_MATHEMATICS_CODE;
+                        }
+
+                        if (state == CommonConstants.ALL)//key != ALL and state = ALL
+                        {
+                            lst = contestDAO.fetchArticleList(sub.Trim(), (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleBySubject(sub.Trim());
+
+
+                            hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
+                            string txt = hpkShowAllState.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowAllState.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                        }
+                        else if (state == CommonConstants.STATE_UNCHECK.ToString())//key != ALL and state = UNCHECK
+                        {
+                            lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_UNCHECK, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK);
+                            hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
+
+                            hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
+                            hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
+                            string txt = hpkShowUncheck.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowUncheck.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                        }
+                        else if (state == CommonConstants.STATE_CHECKED.ToString())//key != ALL and state = CHECKED
+                        {
+                            lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_CHECKED, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED);
+                            hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
+                            hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
+                            string txt = hpkShowChecked.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowChecked.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                            hpkShowBad.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD) + ")";
+                        }
+                        else if (state == CommonConstants.STATE_BAD.ToString())//key != ALL and state = BAD
+                        {
+                            lst = contestDAO.fetchArticleList(sub.Trim(), CommonConstants.STATE_BAD, (page - 1) * NoOfContestPerPage, NoOfContestPerPage);
+                            totalRecord = contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_BAD);
+
+                            hpkShowAllState.Text += "(" + contestDAO.countArticleBySubject(sub.Trim()) + ")";
+                            hpkShowUncheck.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_UNCHECK) + ")";
+                            hpkShowChecked.Text += "(" + contestDAO.countArticleBySubjectAndState(sub.Trim(), CommonConstants.STATE_CHECKED) + ")";
+                            string txt = hpkShowBad.Text;
+                            txt += "(" + totalRecord + ")";
+                            hpkShowBad.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, txt);
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                    //show data
+                    bool isOK = false;
+                    if (lst != null)
+                    {
+                        if (lst.Count() > 0)
+                        {
+                            showContest(lst, totalRecord, page, action, key, state);
+                            isOK = true;
+                        }
+                    }
+                    if (!isOK)
+                    {
+                        showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        ContestTable.Visible = false;
+                        return;
                     }
                 }
-                if (!isOK)
+                else if (action == CommonConstants.ACT_EDIT || action == CommonConstants.ACT_VIEW)
                 {
-                    showInfoMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
-                    ContestTable.Visible = false;
-                    return;
+                    if (Page.IsPostBack)
+                    {
+                        return;
+                    }
+                    initial();
+                    viewPanel.Visible = false;
+                    detailPanel.Visible = true;
+                    messagePanel.Visible = false;
+                    Session[CommonConstants.SES_OLD_PAGE] = Request.UrlReferrer.ToString();
+                    int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
+                    if (Request.QueryString[CommonConstants.REQ_ID] == null)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+                    if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+                    int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+
+                    viewPanel.Visible = false;
+                    detailPanel.Visible = true;
+                    messagePanel.Visible = false;
+
+                    if (ddlState.Items.Count == 0)
+                    {
+                        showContestDetails(_id, action);
+                    }
+
+                    if (action == CommonConstants.ACT_VIEW)
+                    {
+                        btnEdit.Visible = false;
+                    }
+
+                }
+                else if (action == CommonConstants.ACT_DELETE)
+                {
+                    if (Request.QueryString[CommonConstants.REQ_ID] == null)
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+                    if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
+                    {
+                        showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
+                        return;
+                    }
+
+                    int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
+                    bool isMatch = contestDAO.isState(id, CommonConstants.STATE_UNCHECK);
+                    if (contestDAO.setDeleteFlag(id, user.Username))
+                    {
+                        if (isMatch)
+                        {
+                            ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
+                            statDAO.add(CommonConstants.SF_NUM_ARTICLE_ON_UNI, CommonConstants.CONST_ONE_NEGATIVE);
+                        }
+                        string mess = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
+
+                        //ltktDAO.Alert.Show(mess);
+                        isDeleted = true;
+                        Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
+                    }
+                    else
+                    {
+                        Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_DELETE);
+                    }
+
                 }
             }
-            else if (action == CommonConstants.ACT_EDIT || action == CommonConstants.ACT_VIEW)
+            catch (Exception ex)
             {
-                if (Page.IsPostBack)
-                {
-                    return;
-                }
-                initial();
-                viewPanel.Visible = false;
-                detailPanel.Visible = true;
-                messagePanel.Visible = false;
-                Session[CommonConstants.SES_OLD_PAGE] = Request.UrlReferrer.ToString();
-                int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
-                if (Request.QueryString[CommonConstants.REQ_ID] == null)
-                {
-                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
-                    return;
-                }
-                if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
-                {
-                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
-                    return;
-                }
-                int _id = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, CommonConstants.MSG_E_LINK_INVALID);
+                log.writeLog(DBHelper.strPathLogFile, user.Username, ex.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + ex.HelpLink);
 
-                viewPanel.Visible = false;
-                detailPanel.Visible = true;
-                messagePanel.Visible = false;
-
-                if (ddlState.Items.Count == 0)
-                {
-                    showContestDetails(_id, action);
-                }
-
-                if (action == CommonConstants.ACT_VIEW)
-                {
-                    btnEdit.Visible = false;
-                }
-
+                Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL
+                                              + CommonConstants.PAGE_NUMBER_FIRST);
             }
-            else if (action == CommonConstants.ACT_DELETE)
+            if (isDeleted)
             {
-                if (Request.QueryString[CommonConstants.REQ_ID] == null)
-                {
-                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
-                    return;
-                }
-                if (!BaseServices.isNumeric(Request.QueryString[CommonConstants.REQ_ID]))
-                {
-                    showErrorMessage(CommonConstants.MSG_E_RESOURCE_NOT_FOUND);
-                    return;
-                }
-
-                int id = BaseServices.convertStringToInt(Request.QueryString[CommonConstants.REQ_ID]);
-                bool isMatch = contestDAO.isState(id, CommonConstants.STATE_UNCHECK);
-                if (contestDAO.deleteArticle(id, user.Username))
-                {
-                    if (isMatch)
-                    {
-                        ltktDAO.Statistics statDAO = new ltktDAO.Statistics();
-                        statDAO.add(CommonConstants.SF_NUM_ARTICLE_ON_UNI, CommonConstants.CONST_ONE_NEGATIVE);
-                    }
-                    string mess = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_DELETE);
-
-                    ltktDAO.Alert.Show(mess);
-                    //isDeleted = true;
-                }
-
+                Response.Redirect(CommonConstants.PAGE_ADMIN_UNIVERSITY);
             }
 
         }
@@ -521,6 +563,11 @@ namespace ltkt.Admin
             liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" disabled=\"disabled\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
             txtHtmlEmbed.ReadOnly = true;
             txtHtmlPreview.ReadOnly = true;
+            txtComment.ReadOnly = true;
+            txtChecker.ReadOnly = true;
+            txtLocation.ReadOnly = true;
+            txtSolve.ReadOnly = true;
+            ddlScore.Enabled = true;
         }
 
         private void enableEdit()
@@ -543,21 +590,14 @@ namespace ltkt.Admin
             liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
             txtHtmlEmbed.ReadOnly = false;
             txtHtmlPreview.ReadOnly = false;
+            txtComment.ReadOnly = false;
+            txtChecker.ReadOnly = false;
+            txtLocation.ReadOnly = false;
+            txtSolve.ReadOnly = false;
+            ddlScore.Enabled = false;
         }
         private void initial()
         {
-            //ddlState.Items.Add(new ListItem(CommonConstants.STATE_UNCHECK_NAME, CommonConstants.STATE_UNCHECK.ToString()));
-            //ddlState.Items.Add(new ListItem(CommonConstants.STATE_CHECKED_NAME, CommonConstants.STATE_CHECKED.ToString()));
-            //ddlState.Items.Add(new ListItem(CommonConstants.STATE_BAD_NAME, CommonConstants.STATE_BAD.ToString()));
-            //Sticky
-            //ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_UNSTICKY, CommonConstants.CONST_ZERO));
-            //ddlSticky.Items.Add(new ListItem(CommonConstants.TXT_STICKY, CommonConstants.CONST_ONE));
-            //Type
-            //ddlType.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ONE_NEGATIVE));
-            //ddlType.Items.Add(new ListItem(CommonConstants.AT_LECTURE_NAME.ToString(), CommonConstants.AT_LECTURE.ToString()));
-            //ddlType.Items.Add(new ListItem(CommonConstants.AT_PRACTISE_NAME, CommonConstants.AT_PRACTISE.ToString()));
-            //ddlType.Items.Add(new ListItem(CommonConstants.AT_EXAM_NAME, CommonConstants.AT_EXAM.ToString()));
-            //Score
             ddlScore.Items.Add(new ListItem(CommonConstants.TXT_PLEASE_SELECT, CommonConstants.CONST_ZERO));
             ddlScore.Items.Add(new ListItem(CommonConstants.CONST_ONE, CommonConstants.CONST_ONE));
             ddlScore.Items.Add(new ListItem(CommonConstants.CONST_TWO, CommonConstants.CONST_TWO));
@@ -572,7 +612,7 @@ namespace ltkt.Admin
         }
         private void showContest(IEnumerable<tblContestForUniversity> lst, int totalContest, int page, string action, string key, string state)
         {
-            //int totalContest = lst.Count();
+           
             // Computing total pages
             int totalPages;
             int mod = totalContest % NoOfContestPerPage;
@@ -771,8 +811,64 @@ namespace ltkt.Admin
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
         }
+        /// <summary>
+        /// click clear button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnClear_Click(object sender, EventArgs e)
         {
+            IEnumerable<tblContestForUniversity> lst = contestDAO.getDeletedArticle();
+            string path = CommonConstants.BLANK;
+            bool fileDeleted = false;
+            int totalFileDeleted = 0;
+            bool deleteSuccessful = false;
+
+            //build list path to delete
+            System.Collections.ArrayList strPathList = new ArrayList();
+            foreach (var item in lst)
+            {
+                strPathList.Add(item.FolderID.Trim());
+            }
+            try
+            {
+                if (lst != null)
+                {
+                    deleteSuccessful = contestDAO.deleteContest(getCurrentUser());
+                    if (deleteSuccessful)
+                    {
+                        foreach (var item in strPathList)
+                        {
+                            path = DBHelper.strCurrentPath;
+                            path += CommonConstants.FOLDER_UNI;
+                            path += item;
+                            fileDeleted = BaseServices.deleteFolder(path);
+                            if (fileDeleted)
+                            {
+                                totalFileDeleted++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                writeException(ex);
+            }
+            if (deleteSuccessful)
+            {
+                string message = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL,
+                    CommonConstants.ACT_DELETE);
+                message += CommonConstants.TEMP_BR_TAG;
+                message += BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_DETAIL,
+                                                            CommonConstants.ACT_DELETE,
+                                                            totalFileDeleted.ToString(),
+                                                            CommonConstants.TXT_ARTICLE_NAME);
+                ContestTable.Visible = false;
+                showErrorMessage(message);
+                return;
+
+            }
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
@@ -1164,5 +1260,24 @@ namespace ltkt.Admin
             hpkShowUncheck.Text += "(" + contestDAO.countArticleByState(CommonConstants.STATE_UNCHECK) + ")";
 
         }
+        /// <summary>
+        /// write exception to log file
+        /// </summary>
+        /// <param name="ex"></param>
+        private void writeException(Exception ex)
+        {
+            string username = getCurrentUser();
+            if (username == CommonConstants.BLANK)
+                username = CommonConstants.USER_GUEST;
+            log.writeLog(DBHelper.strPathLogFile, username, ex.Message
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.Source
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.StackTrace
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.HelpLink);
+            return;
+        }
+        /// <summary>
     }
 }

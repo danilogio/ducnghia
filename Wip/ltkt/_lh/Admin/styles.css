@@ -667,3 +667,9 @@ input.submit:hover
 	color:navy;
 	cursor:hand;
 }
+input.formbutton:hover
+{
+	background-color:silver;
+	color:navy;
+	cursor:hand;
+}

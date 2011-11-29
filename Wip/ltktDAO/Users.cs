@@ -1209,7 +1209,16 @@ namespace ltktDAO
                     where record.Type == false
                     select record).Count();
         }
-
+        /// <summary>
+        /// count all users is new registry
+        /// </summary>
+        /// <returns></returns>
+        public int sumNewRegisterUser()
+        {
+            return (from r in DB.tblUsers
+                    where r.State == CommonConstants.STATE_NON_ACTIVE
+                    select r).Count();
+        }
         public IEnumerable<tblUser> fetchUsesList(string normalOrAdminOrKIA, int start, int count)
         {
             IEnumerable<tblUser> lst = null;

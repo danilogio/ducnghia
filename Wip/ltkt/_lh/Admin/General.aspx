@@ -101,7 +101,7 @@
                 </div>
                 <div>
                     <div style="float: left; width: 30%">
-                        <span>Lượt truy cập:</span></div>
+                        <span>Tổng lượt truy cập:</span></div>
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="pageView" runat="server" Text="None"></asp:Literal></div>
                 </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div>
                     <div style="float: left; width: 30%">
-                        <span>Số comment trong ngày:</span></div>
+                        <span>Số comment chưa duyệt:</span></div>
                     <div style="float: left; width: 69%">
                         <asp:Literal ID="sumCommentADay" runat="server" Text="None"></asp:Literal></div>
                 </div>
@@ -141,7 +141,7 @@
              <div class="form_settings" style="float: left; width: 100%; margin-top: 130px; margin-left: 5px;"
             align="left">
             <asp:Button ID="btnStatistic" runat="server" CssClass="formbutton" OnClick="btnStatistic_Click"
-                Text="Thống kê" />
+                Text="Cập nhật thống kê" />
         </div>
         </div>
        

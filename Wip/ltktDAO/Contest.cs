@@ -779,6 +779,33 @@ namespace ltktDAO
             }
             return num;
         }
+
+        /// <summary>
+        /// count all article is deleted
+        /// </summary>
+        /// <returns></returns>
+        public int countDeletedArticles()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+            int num = 0;
+            num = (from p in DB.tblContestForUniversities
+                   where p.DeleteFlg == true
+                   select p).Count();
+            return num;
+        }
+        /// <summary>
+        /// get all article has deleted flag is true
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<tblContestForUniversity> getDeletedArticle()
+        {
+            LTDHDataContext DB = new LTDHDataContext(@strPathDB);
+
+            IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                                       where p.DeleteFlg == true
+                                                       select p;
+            return lst;
+        }
         /// <summary>
         /// get all records of Contest
         /// </summary>
@@ -926,6 +953,7 @@ namespace ltktDAO
                                                         + e.HelpLink);
                 return false;
             }
+            
             return true;
         }
 
@@ -974,6 +1002,9 @@ namespace ltktDAO
 
                     ts.Complete();
 
+                    ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
+                    statisticDAO.add(CommonConstants.SF_NUM_UPLOAD, CommonConstants.CONST_ONE);
+
                     log.writeLog(DBHelper.strPathLogFile,
                                         _author,
                                         BaseServices.createMsgByTemplate(CommonConstants.SQL_INSERT_SUCCESSFUL_TEMPLATE,
@@ -992,6 +1023,7 @@ namespace ltktDAO
                                                         + e.HelpLink);
                 return false;
             }
+            
             return true;
         }
 
@@ -1418,6 +1450,46 @@ namespace ltktDAO
             return num;
         }
         /// <summary>
+        /// set delete Flag is true
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <param name="_username"></param>
+        public bool setDeleteFlag(int _id, string _username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var inf = DB.tblContestForUniversities.Single(a => a.ID == _id);
+                    inf.DeleteFlg = true;
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+                }
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                    _id.ToString(),
+                                                                    CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                      _id.ToString(),
+                                                                      CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
         /// delete a article of contest of university
         /// </summary>
         /// <param name="id"></param>
@@ -1545,6 +1617,46 @@ namespace ltktDAO
                                                         + e.HelpLink);
                 return false;
             }
+            return true;
+        }
+        public bool deleteContest(string _username)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    IEnumerable<tblContestForUniversity> lst = from p in DB.tblContestForUniversities
+                                                               where p.DeleteFlg == true
+                                                               select p;
+                    //File.Delete(DBHelper.strCurrentPath + inf.Location);
+
+                    DB.tblContestForUniversities.DeleteAllOnSubmit(lst);
+                    DB.SubmitChanges();
+
+                    ts.Complete();
+
+                    log.writeLog(DBHelper.strPathLogFile, _username,
+                                BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_SUCCESSFUL_TEMPLATE,
+                                                                    "ALL DELETED ARTICLES",
+                                                                    CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                }
+            }
+            catch (Exception e)
+            {
+                log.writeLog(DBHelper.strPathLogFile, _username,
+                                  BaseServices.createMsgByTemplate(CommonConstants.SQL_DELETE_FAILED_TEMPLATE,
+                                                                      "ALL DELETED ARTICLES",
+                                                                      CommonConstants.SQL_TABLE_CONTEST_UNIVERSITY));
+                log.writeLog(DBHelper.strPathLogFile, _username, e.Message
+                                                        + CommonConstants.NEWLINE
+                                                        + e.Source
+                                                        + CommonConstants.NEWLINE
+                                                        + e.StackTrace
+                                                        + CommonConstants.NEWLINE
+                                                        + e.HelpLink);
+                return false;
+            }
+
             return true;
         }
         #endregion

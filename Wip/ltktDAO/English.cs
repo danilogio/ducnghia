@@ -726,10 +726,8 @@ namespace ltktDAO
                     ts.Complete();
                 }
 
-                ltktDAO.Control controlDao = new ltktDAO.Control();
-                long keyCode = controlDao.getValueByLong(CommonConstants.CF_KEY_CODE_EL);
-                controlDao.setValue(CommonConstants.CF_KEY_CODE_EL, (keyCode + 1).ToString());
-
+                ltktDAO.Statistics statisticDAO = new ltktDAO.Statistics();
+                statisticDAO.add(CommonConstants.SF_NUM_UPLOAD, CommonConstants.CONST_ONE);
             }
             catch (Exception e)
             {

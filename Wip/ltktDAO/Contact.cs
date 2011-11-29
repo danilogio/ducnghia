@@ -286,6 +286,10 @@ namespace ltktDAO
             IEnumerable<tblContact> lst = from record in DB.tblContacts
                                           where record.isRead == false
                                           select record;
+            if (lst == null)
+            {
+                return 0;
+            }
             return lst.Count();
         }
 
