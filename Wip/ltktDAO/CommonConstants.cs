@@ -360,6 +360,7 @@ namespace ltktDAO
             public const string TXT_ONE_HALF = "1/2";
             public const string TXT_CLEAR_DATA = "Xóa dữ liệu";
             public const string TXT_FILE_CONTENT = "tập tin nội dung(kích thước > 0 Byte)";
+            public const string TXT_RESET_PASSWORD = "Password được reset và gửi tới email của thành viên.";
 
         #endregion
 
@@ -1057,6 +1058,7 @@ namespace ltktDAO
         /// </summary>
         public const string MSG_E_LINK_INVALID = "Đường dẫn không đúng, xin vui lòng kiểm tra lại";
         public const string MSG_I_NUM_SEARCHED_RECORD = "Có tổng cộng {0} bài viết được tìm thấy";
+        public const string MSG_I_NUM_SEARCHED_USER = "Có tổng cộng {0} User được tìm thấy";
         #endregion
 
         #region Administrator Function (AF)
@@ -2291,7 +2293,7 @@ namespace ltktDAO
         /// Templte b tag
         /// </summary>
         public const string TEMP_B_TAG = "<b>{0}</b>";
-
+        public const string TEMP_BAR = "-{0}-";
         /// <summary>
         /// Template strong tag, 1 param
         /// </summary>

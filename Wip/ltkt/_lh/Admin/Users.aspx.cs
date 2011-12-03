@@ -38,10 +38,16 @@ namespace ltkt.Admin
                                    + CommonConstants.SPACE
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
-                    if (!IsPostBack)
+                    if (Session[CommonConstants.SES_INFORM] != null)
+                    {
+                        showInfoMessage((String)Session[CommonConstants.SES_INFORM]);
+                        Session[CommonConstants.SES_INFORM] = null;
+                    }
+                    if (IsPostBack)
                     {
                         //gvUsers.DataSource = ltktDAO.Users.getAll();
                         //gvUsers.DataBind();
+                        return;
                     }
 
                     pageLoad(sender, e, user);
@@ -82,12 +88,15 @@ namespace ltkt.Admin
                     {
                         case CommonConstants.ACT_NORMAL:
                             showUsers(CommonConstants.ACT_NORMAL, page);
+                            btnNormal.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_BAR, btnNormal.Text);
                             break;
                         case CommonConstants.ACT_KIA:
                             showUsers(CommonConstants.ACT_KIA, page);
+                            btnKIA.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_BAR, btnKIA.Text);
                             break;
                         case CommonConstants.ACT_ADMIN:
                             showUsers(CommonConstants.ACT_ADMIN, page);
+                            btnAdmin.Text = BaseServices.createMsgByTemplate(CommonConstants.TEMP_BAR, btnAdmin.Text);
                             break;
                         default: break;
                     }
@@ -349,7 +358,7 @@ namespace ltkt.Admin
                 TableCell noCell = new TableCell();
                 noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "20px";
-                noCell.Text = Convert.ToString(user.ID);
+                noCell.Text = Convert.ToString(idx + 1 + (page - 1) * NoOfUsesPerPage);
 
                 TableCell userCell = new TableCell();
                 userCell.CssClass = "table-cell";
@@ -393,6 +402,9 @@ namespace ltkt.Admin
                 normalUserRow.Cells.Add(actionCell);
 
                 listUsers.Rows.AddAt(2 + idx, normalUserRow);
+                string totatRecord = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, totalUsers.ToString());
+                NumRecordLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_NUM_SEARCHED_USER, totatRecord);
+
             }
 
             // Creating links to previous and next pages
@@ -414,59 +426,6 @@ namespace ltkt.Admin
             }
 
         }
-        /*
-        protected void gvUsers_RowUpdating(object sender, EventArgs e)
-        {
-        }
-        protected void gvUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvUsers.EditIndex = -1;
-            DataBindGrid();
-        }
-        protected void gvUsers_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gvUsers.EditIndex = e.NewEditIndex;
-            DataBindGrid();
-        }
-
-
-        protected void AddNewUser(object sender, EventArgs e)
-        {
-
-        }
-        protected void DeleteUser(object sender, EventArgs e)
-        {
-            LinkButton lklDelete = sender as LinkButton;
-
-            // string strId = lklDelete.CommandArgument;
-            // //HttpContext.Current.Response.Write(
-            // ASCIIEncoding encoding = new ASCIIEncoding();
-            // string postData = "id=" + strId;
-            // byte[] data = encoding.GetBytes(postData);
-
-            //// Response.
-            // // Prepare web request...
-            // HttpWebRequest myRequest =
-            //   (HttpWebRequest)WebRequest.Create("~/Users/Edit.aspx");
-            // myRequest.Method = "POST";
-            // myRequest.ContentType = "application/x-www-form-urlencoded";
-            // myRequest.ContentLength = data.Length;
-            // Stream newStream = myRequest.GetRequestStream();
-            // // Send the data.
-            // newStream.Write(data, 0, data.Length);
-            // newStream.Close();
-            Server.Transfer("./Users/Edit.aspx");
-        }
-        protected void gvUsers_PageIndexChanging(object sender, EventArgs e)
-        {
-        }
-        private void DataBindGrid()
-        {
-            this.gvUsers.DataSource = ltktDAO.Users.getAll();
-            this.gvUsers.DataBind();
-        }
-        */
-
 
 
         protected void btnNormal_Click(object sender, EventArgs e)
@@ -627,6 +586,9 @@ namespace ltkt.Admin
                         userDAO.sendNewPassword(userEdit.Username.Trim(), strNewPassword, userEdit.Email.Trim());
 
                         Session[CommonConstants.SES_EDIT_USER] = null;
+                        Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_EDIT);
+                        Session[CommonConstants.SES_INFORM] += CommonConstants.TEMP_BR_TAG;
+                        Session[CommonConstants.SES_INFORM] += CommonConstants.TXT_RESET_PASSWORD;
                         Page_Load(sender, e);
                         
                     }
@@ -667,6 +629,15 @@ namespace ltkt.Admin
             {
                 lblResult.Text = CommonConstants.MSG_I_SEARCH_NOT_FOUND;
             }
+        }
+        /// <summary>
+        /// use to show message information on mode SEARCH, DELETE
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showInfoMessage(string infoText)
+        {
+            liMessage.Text = infoText;
+            messagePanel.Visible = true;
         }
     }
 }

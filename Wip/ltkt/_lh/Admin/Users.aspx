@@ -41,19 +41,18 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $(".calendar").datepicker({
-                dateFormat : 'dd-mm-yy'
+                dateFormat: 'dd-mm-yy'
             });
         }); 
     </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
-	        $('#<%= ddlState.ClientID %>').change(function(e) {
-	            var selectedIndex = $('#<%= ddlState.ClientID%>').get(0).selectedIndex;
-	            //var selectedValue = $('#<%= ddlState.ClientID%>').get(0).selectedValue;
+            $('#<%= ddlState.ClientID %>').change(function(e) {
+                var selectedIndex = $('#<%= ddlState.ClientID%>').get(0).selectedIndex;
+                //var selectedValue = $('#<%= ddlState.ClientID%>').get(0).selectedValue;
 
-                switch (selectedIndex)
-                {
+                switch (selectedIndex) {
                     case 0:
                     case 1:
                     case 2:
@@ -68,43 +67,42 @@
                         $('#KIADate').show();
                         break;
                 }
-	        });
-	    });
-	    
-	    function init() {
-	        //$('#KIADate').hide();
-	        var selectedIndex = $('#<%= ddlState.ClientID%>').get(0).selectedIndex;
-	            //var selectedValue = $('#<%= ddlState.ClientID%>').get(0).selectedValue;
+            });
+        });
 
-                switch (selectedIndex)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 8:
-                        $('#KIADate').hide();
-                        break;
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        $('#KIADate').show();
-                        break;
-                }
-	    }
+        function init() {
+            //$('#KIADate').hide();
+            var selectedIndex = $('#<%= ddlState.ClientID%>').get(0).selectedIndex;
+            //var selectedValue = $('#<%= ddlState.ClientID%>').get(0).selectedValue;
+
+            switch (selectedIndex) {
+                case 0:
+                case 1:
+                case 2:
+                case 8:
+                    $('#KIADate').hide();
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    $('#KIADate').show();
+                    break;
+            }
+        }
     </script>
 
 </asp:Content>
 <asp:Content ID="UsersAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <%--<div id="divUsers" class="block_text">--%>
     <%--<form id="form1">--%>
-    <asp:Panel ID="messagePanel" runat="server" Visible="false">
-        <div class="block_text">
-            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
-        </div>
-    </asp:Panel>
     <asp:Panel ID="viewPanel" runat="server" Visible="false">
+        <asp:Panel ID="messagePanel" runat="server" Visible="false" CssClass="alert">
+            <div class="block_text">
+                <asp:Literal ID="liMessage" runat="server"></asp:Literal>
+            </div>
+        </asp:Panel>
         <div id="divUsers" class="block_text">
             <%--<h4>
                     Danh sách thành viên
@@ -141,7 +139,8 @@
                     <asp:Table ID="listUsers" runat="server" CssClass="table" Width="620px">
                         <asp:TableHeaderRow>
                             <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                                <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>
+                                <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>&nbsp-&nbsp
+                                <asp:Literal ID="NumRecordLiteral" runat="server" />
                             </asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                         <asp:TableRow>
