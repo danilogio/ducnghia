@@ -586,11 +586,11 @@ div.block_details_text
 	border: 0;
 	background: none;
 }
-.block_text #divEnglishDetail, #divInfoDetail
+.block_text #divInfoDetail
 {
 	height: 820px;
 }
-.block_text  #divUniInfo
+.block_text  #divUniInfo, #divEnglishDetail
 {
 	height:1100px;
 }

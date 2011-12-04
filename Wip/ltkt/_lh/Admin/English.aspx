@@ -2,23 +2,55 @@
     CodeFile="English.aspx.cs" Inherits="ltkt.Admin.English" %>
 
 <asp:Content ID="EnglishAdminHeader" ContentPlaceHolderID="cphAdminHeader" runat="Server">
-    <%--<title>Quản lý chủ đề Anh văn | Website luyện thi kinh tế</title>--%>
-    <%--<link rel="stylesheet" href="styles.css" type="text/css" />
-    <style type="text/css">
-        body
-        {
-            background: white;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 13px;
-            color: #444;
+    <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+    <script type="text/javascript">
+        var uploadContentState = false;
+        var uploadThumbnailState = false;
+        function init() {
+            $('#uploadContent').hide();
+            $('#uploadThumbnail').hide();
         }
-        .footer-content1
-        {
-            padding: 20px 5px;
+
+        function uploadContent() {
+            if (uploadContentState == false) {
+                $('#uploadContent').show();
+                uploadContentState = true;
+            } else {
+                $('#uploadContent').hide();
+                uploadContentState = false;
+            }
         }
-    </style>--%>
+
+        function uploadThumbnail() {
+            if (uploadThumbnailState == false) {
+                $('#uploadThumbnail').show();
+                uploadThumbnailState = true;
+            } else {
+                $('#uploadThumbnail').hide();
+                uploadThumbnailState = false;
+            }
+        }
+        function DisplayFullImage(srcImg) {
+            txtCode = "<HTML><HEAD>"
+            + "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"
+            + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage "
+            + "onload='window.resizeTo(document.FullImage.width+50,document.FullImage.height+75)'>"
+            + "</CENTER>"
+            + "</BODY></HTML>";
+            mywindow = window.open('', 'image', 'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1');
+            mywindow.document.open();
+            mywindow.document.write(txtCode);
+            mywindow.document.close();
+        }
+
+        function openFile(file) {
+            alert(file);
+            window.open(file)
+        }
+    </script>
+
     <title>
         <asp:Literal ID="liTitle" runat="server"></asp:Literal>
     </title>
@@ -139,10 +171,9 @@
             <asp:Table ID="EnglishTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
-                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>&nbsp-&nbsp 
+                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>&nbsp-&nbsp
                         <asp:Literal ID="NumRecordLiteral" runat="server" />
                     </asp:TableHeaderCell>
-                   
                 </asp:TableHeaderRow>
                 <asp:TableRow>
                     <asp:TableCell CssClass="table-header-cell" VerticalAlign="Middle"><center>#</center></asp:TableCell>
@@ -207,10 +238,7 @@
                                 <span><b>Tag:</b></span>
                                 <asp:TextBox ID="txtTag" MaxLength="254" runat="server"></asp:TextBox>
                             </p>
-                            <p>
-                                <span><b>Nơi lưu bài(*):</b></span>
-                                <asp:TextBox ID="txtLocation" MaxLength="200" runat="server"></asp:TextBox>
-                            </p>
+                           
                             <p>
                                 <span title="Để trống nếu người đánh giá là bạn"><b>Người đánh giá:</b></span>
                                 <asp:TextBox ID="txtChecker" runat="server"></asp:TextBox>
@@ -218,6 +246,14 @@
                             <p>
                                 <span><b>Comment:</b></span>
                                 <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Mã nhúng Html:</b></span>
+                                <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Link xem trước:</b></span>
+                                <asp:TextBox ID="txtHtmlPreviewLink" MaxLength="254" runat="server"></asp:TextBox>
                             </p>
                         </div>
                         <div id="divRight" style="float: left; width: 40%">
@@ -231,12 +267,24 @@
                                 <asp:TextBox ID="txtThumbnail" MaxLength="254" runat="server"></asp:TextBox>
                             </p>
                             <p>
-                                <span><b>Mã nhúng Html:</b></span>
-                                <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                                <span><b>Chi tiết Thumbnail</b></span><br />
+                                <asp:Literal ID="liThumbnail" runat="server" Text="a"></asp:Literal>
+                            </p>
+                            <p id="uploadThumbnail">
+                                <span><b>Tải tập tin hình thu nhỏ</b></span>
+                                <asp:FileUpload ID="fileThumbnail" runat="server" />
+                            </p>
+                             <p>
+                                <span><b>Nơi lưu tập tin nội dung(*):</b></span>
+                                <asp:TextBox ID="txtLocation" MaxLength="200" runat="server"></asp:TextBox>
                             </p>
                             <p>
-                                <span><b>Link xem trước:</b></span>
-                                <asp:TextBox ID="txtHtmlPreviewLink" MaxLength="254" runat="server"></asp:TextBox>
+                                <span><b>Chi tiết tập tin nội dung</b></span>
+                                <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal><br />
+                            </p>
+                            <p id="uploadContent">
+                                <span><b>Tải tập tin nội dung mới</b></span>
+                                <asp:FileUpload ID="fileContent" runat="server" />
                             </p>
                             <p>
                                 <span><b>Chủ đề:</b></span>

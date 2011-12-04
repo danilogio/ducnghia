@@ -18,7 +18,7 @@ namespace ltkt.Admin
         EventLog log = new EventLog();
         ltktDAO.Permission permitDAO = new ltktDAO.Permission();
 
-        public const int NoOfUsesPerPage = 6;
+        public const int NoOfUsesPerPage = 40;
 
         protected void Page_Load(object sender, EventArgs e)
         {

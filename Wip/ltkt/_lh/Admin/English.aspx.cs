@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
 using System.Collections;
+using System.IO;
 
 namespace ltkt.Admin
 {
@@ -329,7 +330,8 @@ namespace ltkt.Admin
                             txtThumbnail.Text = BaseServices.nullToBlank(article.Thumbnail);
                             txtComment.Text = BaseServices.nullToBlank(article.Comment);
                             txtFolderId.Text = BaseServices.nullToBlank(article.FolderID);
-
+                            showFileContent(article.Location);
+                            showThumbnail(article.Thumbnail);
                             ddlState.SelectedValue = article.State.ToString();
                             if (article.StickyFlg)
                             {
@@ -838,6 +840,24 @@ namespace ltkt.Admin
         {
             liErrorMessage.Text = errorText;
             ErrorMessagePanel.Visible = true;
+        }
+        private void showFileContent(string location)
+        {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liContent.Text = "&nbsp;&nbsp;<br/><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
+            }
+            else
+                liContent.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+        }
+        private void showThumbnail(string location)
+        {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liThumbnail.Text = "&nbsp;&nbsp;<br /><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + location.Replace("\\", "/") + "')\"/>";
+            }
+            else
+                liThumbnail.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
         }
         private void initial()
         {
