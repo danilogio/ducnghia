@@ -345,10 +345,14 @@ namespace ltkt.Admin
                             {
                                 btnEdit.Visible = false;
                                 changeState(false);
+                                liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+                                liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
                             }
                             else
                             {
                                 changeState(true);
+                                liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+                                liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
                             }
                         }
                         else
