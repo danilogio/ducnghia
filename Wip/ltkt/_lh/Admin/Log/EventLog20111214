@@ -1,0 +1,14 @@
+12/14/2011 10:59:53 PM ==> [dvtrung]:Could not find a part of the path 'E:\Data\Projects\ducnghia\Wip\ltkt/Data/University//2011/F3/Do_Viet_Trung.doc'.
+mscorlib
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite)
+   at System.IO.File.Copy(String sourceFileName, String destFileName)
+   at ltkt.Admin.ContestUniversity.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\ContestUniversity.aspx.cs:line 1009
+
+12/14/2011 11:04:14 PM ==> [dvtrung]:Could not find a part of the path 'E:\Data\Projects\ducnghia\Wip\ltkt/Data/University//2011/F3/Do_Viet_Trung.doc'.
+mscorlib
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite)
+   at System.IO.File.Copy(String sourceFileName, String destFileName)
+   at ltkt.Admin.ContestUniversity.btnEdit_Click(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\_lh\Admin\ContestUniversity.aspx.cs:line 1009
+

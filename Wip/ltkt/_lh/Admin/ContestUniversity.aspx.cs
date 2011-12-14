@@ -50,7 +50,12 @@ namespace ltkt.Admin
                     {
                         btnClear.Visible = false;
                     }
-
+                    string inform = (string)Session[CommonConstants.SES_INFORM];
+                    if (!BaseServices.isNullOrBlank(inform))
+                    {
+                        showErrorMessage(inform);
+                        Session[CommonConstants.SES_INFORM] = null;
+                    }
                     pageLoad(sender, e, user);
                     //////////////////////////////////////////////////
                 }
@@ -948,6 +953,8 @@ namespace ltkt.Admin
                 }
                 string _htmlPreview = txtHtmlPreview.Text;
                 string _htmlEmbed = txtHtmlEmbed.Text;
+                string _folderID = txtFolderId.Text.Trim();
+
                 string _fileContentSave = BaseServices.nullToBlank(cont.Location);
                 string _fileSolvingSave = BaseServices.nullToBlank(cont.Solving);
                 string _fileThumbnailSave = BaseServices.nullToBlank(cont.Thumbnail);
@@ -956,8 +963,8 @@ namespace ltkt.Admin
                 string _fileSolving = CommonConstants.BLANK;
                 string _fileThumbnail = CommonConstants.BLANK;
 
-                string rootFolder = Server.MapPath("~") + "/" + CommonConstants.FOLDER_UNI + "/" + _year;
-                rootFolder += "/" + bs.getSubjectFolder(_sub);
+                string rootFolder = Server.MapPath("~") + "/" + CommonConstants.FOLDER_UNI + _folderID;
+                //rootFolder += "/" + bs.getSubjectFolder(_sub);
 
 
                 bool _fileContentGood = false;
@@ -1147,10 +1154,11 @@ namespace ltkt.Admin
 
                         fileThumbnail.SaveAs(_fileThumbnail);
                     }
+                    Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_EDIT);
                 }
                 else
                 {
-                    
+                    Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_E_ACTION_FAILED, CommonConstants.ACT_EDIT);
                 }
 
                 Session[CommonConstants.SES_EDIT_CONTEST] = null;
