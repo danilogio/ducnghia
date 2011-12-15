@@ -6,6 +6,57 @@
         <asp:Literal ID="liTitle" runat="server"></asp:Literal>
     </title>
     <link type="text/css" href="styles.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../../js/jquery-1.5.1.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+
+    <script type="text/javascript">
+        var uploadContentState = false;
+        var uploadThumbnailState = false;
+        function init() {
+            $('#uploadContent').hide();
+            $('#uploadThumbnail').hide();
+        }
+
+        function uploadContent() {
+            if (uploadContentState == false) {
+                $('#uploadContent').show();
+                uploadContentState = true;
+            } else {
+                $('#uploadContent').hide();
+                uploadContentState = false;
+            }
+        }
+
+        function uploadThumbnail() {
+            if (uploadThumbnailState == false) {
+                $('#uploadThumbnail').show();
+                uploadThumbnailState = true;
+            } else {
+                $('#uploadThumbnail').hide();
+                uploadThumbnailState = false;
+            }
+        }
+        function DisplayFullImage(srcImg) {
+            txtCode = "<HTML><HEAD>"
+            + "</HEAD><BODY TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"
+            + "<IMG src='" + srcImg + "' BORDER=0 NAME=FullImage "
+            + "onload='window.resizeTo(document.FullImage.width+50,document.FullImage.height+75)'>"
+            + "</CENTER>"
+            + "</BODY></HTML>";
+            mywindow = window.open('', 'image', 'toolbar=0,location=0,menuBar=0,scrollbars=1,resizable=0,width=1,height=1');
+            mywindow.document.open();
+            mywindow.document.write(txtCode);
+            mywindow.document.close();
+        }
+
+        function openFile(file) {
+            alert(file);
+            window.open(file)
+        }
+    </script>
+
 </asp:Content>
 <asp:Content ID="InformaticsAdmin" ContentPlaceHolderID="cphAdminContent" runat="Server">
     <div id="div_content" class="block_text">
@@ -90,7 +141,7 @@
             <asp:Table ID="InformaticsTable" CssClass="table" runat="server">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
-                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>&nbsp-&nbsp 
+                        <asp:Literal ID="liTableHeader" runat="server"></asp:Literal>&nbsp-&nbsp
                         <asp:Literal ID="NumRecordLiteral" runat="server" />
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>
@@ -140,45 +191,28 @@
                             </p>
                             <p>
                                 <span><b>Tác giả:</b></span>
-                                <asp:TextBox ID="txtAuthor" runat="server" Enabled="false"></asp:TextBox>
+                                <asp:TextBox ID="txtAuthor" runat="server" ReadOnly="true"></asp:TextBox>
                             </p>
                             <p>
                                 <span><b>Ngày đăng(*):</b></span>
-                                <asp:TextBox ID="txtPosted" runat="server" Enabled="false"></asp:TextBox>
+                                <asp:TextBox ID="txtPosted" runat="server" ReadOnly="true"></asp:TextBox>
                             </p>
                             <p>
                                 <span><b>Số người quan tâm:</b></span>
-                                <asp:TextBox ID="txtPoint" runat="server" Enabled="false"></asp:TextBox>
+                                <asp:TextBox ID="txtPoint" runat="server" ReadOnly="true"></asp:TextBox>
                             </p>
                             <p>
                                 <span><b>Tag:</b></span>
                                 <asp:TextBox ID="txtTag" MaxLength="254" runat="server"></asp:TextBox>
                             </p>
                             <p>
-                                <span><b>Nơi lưu bài(*):</b></span>
-                                <asp:TextBox ID="txtLocation" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="4" Enabled="false" runat="server"></asp:TextBox>
-                            </p>
-                            <p>
                                 <span title="Để trống nếu người đánh giá là bạn"><b>Người đánh giá:</b></span>
                                 <asp:TextBox ID="txtChecker" runat="server"></asp:TextBox>
-                            </p>
-                            
-                            <p>
-                                <span><b>Folder gốc:</b></span>
-                                <asp:TextBox ID="txtFolderId" Enabled="false" MaxLength="20" runat="server"></asp:TextBox>
-                            </p>
-                        </div>
-                        <div id="divRight" style="float: left; width: 40%">
-                            <br />
-                            <p>
-                                <span><b>Thumbnail:</b></span>
-                                <asp:TextBox ID="txtThumbnail" MaxLength="254" runat="server"></asp:TextBox>
                             </p>
                             <p>
                                 <span><b>Comment:</b></span>
                                 <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
                             </p>
-                            
                             <p>
                                 <span><b>Mã nhúng Html:</b></span>
                                 <asp:TextBox ID="txtHtmlEmbbed" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
@@ -186,6 +220,38 @@
                             <p>
                                 <span><b>Link xem trước:</b></span>
                                 <asp:TextBox ID="txtHtmlPreviewLink" MaxLength="254" runat="server"></asp:TextBox>
+                            </p>
+                        </div>
+                        <div id="divRight" style="float: left; width: 40%">
+                            <br />
+                            <p>
+                                <span><b>Folder gốc:</b></span>
+                                <asp:TextBox ID="txtFolderId" ReadOnly="true" MaxLength="20" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Thumbnail:</b></span>
+                                <asp:TextBox ID="txtThumbnail" MaxLength="254" runat="server" ReadOnly="true"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Chi tiết Thumbnail</b></span><br />
+                                <asp:Literal ID="liThumbnail" runat="server" Text="a"></asp:Literal>
+                            </p>
+                            <p id="uploadThumbnail">
+                                <span><b>Tải tập tin hình thu nhỏ</b></span>
+                                <asp:FileUpload ID="fileThumbnail" runat="server" />
+                            </p>
+                            <p>
+                                <span><b>Nơi lưu tập tin nội dung(*):</b></span>
+                                <asp:TextBox ID="txtLocation" MaxLength="200" Wrap="true" TextMode="MultiLine" Rows="4"
+                                    ReadOnly="true" runat="server"></asp:TextBox>
+                            </p>
+                            <p>
+                                <span><b>Chi tiết tập tin nội dung</b></span>
+                                <asp:Literal ID="liContent" runat="server" Text="ad"></asp:Literal><br />
+                            </p>
+                            <p id="uploadContent">
+                                <span><b>Tải tập tin nội dung mới</b></span>
+                                <asp:FileUpload ID="fileContent" runat="server" />
                             </p>
                             <p>
                                 <span><b>Chủ đề:</b></span>

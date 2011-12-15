@@ -588,11 +588,11 @@ div.block_details_text
 }
 .block_text #divInfoDetail
 {
-	height: 820px;
+	height: 1200px;
 }
 .block_text  #divUniInfo, #divEnglishDetail
 {
-	height:1100px;
+	height:1200px;
 }
 #EnglishLesson a, #ItLesson a, #ExamLesson a, #other_news a
 {

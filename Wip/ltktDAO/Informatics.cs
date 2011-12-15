@@ -779,7 +779,6 @@ namespace ltktDAO
                         informatic.Author = update.Author;
                         informatic.Posted = update.Posted;
                         informatic.State = update.State;
-                        informatic.Point = update.Point;
                         informatic.Tag = update.Tag;
                         informatic.HtmlEmbedLink = update.HtmlEmbedLink;
                         informatic.HtmlPreview = update.HtmlPreview;
@@ -788,6 +787,8 @@ namespace ltktDAO
                         informatic.Leitmotif = update.Leitmotif;
                         informatic.StickyFlg = update.StickyFlg;
                         informatic.Comment = update.Comment;
+                        informatic.Thumbnail = update.Thumbnail;
+                        informatic.Location = update.Location;
 
                         DB.SubmitChanges();
                     }

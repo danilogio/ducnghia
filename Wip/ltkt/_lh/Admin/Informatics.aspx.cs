@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ltktDAO;
 using System.Collections;
+using System.IO;
 
 namespace ltkt.Admin
 {
@@ -354,7 +355,8 @@ namespace ltkt.Admin
                         txtThumbnail.Text = BaseServices.nullToBlank(article.Thumbnail);
                         txtComment.Text = BaseServices.nullToBlank(article.Comment);
                         txtFolderId.Text = BaseServices.nullToBlank(article.FolderID);
-
+                        showFileContent(article.Location);
+                        showThumbnail(article.Thumbnail);
                         ddlState.SelectedValue = article.State.ToString();
                         if (article.StickyFlg)
                         {
@@ -374,10 +376,14 @@ namespace ltkt.Admin
                     {
                         btnEdit.Visible = false;
                         changeState(false);
+                        liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+                        liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
                     }
                     else
                     {
                         changeState(true);
+                        liContent.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải tập tin nội dung\" class=\"formbutton\" onclick=\"uploadContent()\" />";
+                        liThumbnail.Text += "&nbsp;&nbsp;<input type=\"button\" value=\"Tải hình thu nhỏ\" class=\"formbutton\" onclick=\"uploadThumbnail()\" />";
                     }
                     
                 }
@@ -666,6 +672,112 @@ namespace ltkt.Admin
             }
             item.State = iState;
             int id = (Int32)Session[CommonConstants.SES_ID];
+            //upload file
+            string _fileContentSave = BaseServices.nullToBlank(txtLocation.Text);
+            string _fileThumbnailSave = BaseServices.nullToBlank(txtThumbnail.Text);
+            string _fileContent = CommonConstants.BLANK;
+            string _fileThumbnail = CommonConstants.BLANK;
+            string _folderID = txtFolderId.Text.Trim();
+            bool _fileContentGood = false;
+            bool _fileThumbnailGood = false;
+            //root folder
+            string rootFolder = Server.MapPath("~") + "/" + CommonConstants.FOLDER_IT + _folderID;
+            //file type allow
+            string fileTypes = control.getValueString(CommonConstants.CF_FILE_TYPE_ALLOW);
+
+            //size in MB
+            int fileSizeMax = control.getValueByInt(CommonConstants.CF_MAX_FILE_SIZE); ;
+            fileSizeMax = 1024 * 1024 * fileSizeMax;
+
+            //upload file content
+            if (fileContent.HasFile)
+            {
+                //check file existed: keep both
+                _fileContent = bs.fileNameToSave(rootFolder + "/" + fileContent.FileName);
+                //filename = newFileName;
+
+                //check filetype
+                if (!bs.checkFileType(fileContent.FileName, fileTypes))
+                {
+                    showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                    return;
+                }
+                //check filesize max (MB)
+                if (fileContent.PostedFile.ContentLength > fileSizeMax)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+                    return;
+                }
+                _fileContentSave = _fileContent.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                _fileContentGood = true;
+                item.Location = _fileContentSave;
+            }
+            else
+            {
+                if (_fileContentSave.LastIndexOf("/") > 0)
+                    _fileContent = rootFolder + _fileContentSave.Substring(_fileContentSave.LastIndexOf("/"));
+                else
+                    _fileContent = rootFolder + _fileContentSave.Substring(_fileContentSave.LastIndexOf("\\"));
+
+                if (!File.Exists(_fileContent))
+                {
+                    string src = Server.MapPath("~") + "/" + _fileContentSave;
+                    File.Copy(src, _fileContent);
+                    File.Delete(src);
+                    _fileContentSave = _fileContent.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                    item.Location = _fileContentSave;
+                }
+            }
+
+            //upload thumbnail
+            if (fileThumbnail.HasFile)
+            {
+                //check file existed: keep both
+                _fileThumbnail = Path.GetFileNameWithoutExtension(_fileContentSave) +
+                            "_thumbnail" + Path.GetExtension(fileThumbnail.FileName);
+
+                _fileThumbnail = bs.fileNameToSave(rootFolder + "/" + _fileThumbnail);
+                //filename = rootFolder + newFileName;
+
+                //check filetype
+                fileTypes = control.getValueString(CommonConstants.CF_IMG_FILE_TYPE_ALLOW);
+                if (!bs.checkFileType(fileThumbnail.FileName, fileTypes))
+                {
+                    showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_NOT_ALLOW);
+                    return;
+                }
+                //check filesize max (KB)
+                fileSizeMax = control.getValueByInt(CommonConstants.CF_IMG_FILE_SIZE_MAX);
+                fileSizeMax = 1024 * fileSizeMax;
+                if (fileThumbnail.PostedFile.ContentLength > fileSizeMax)
+                {
+                    showErrorMessage(CommonConstants.MSG_E_FILE_SIZE_IS_TOO_LARGE);
+                    return;
+                }
+                _fileThumbnailSave = _fileThumbnail.Substring(_fileContent.LastIndexOf(CommonConstants.FOLDER_DATA));
+                _fileThumbnailGood = true;
+                item.Thumbnail = _fileThumbnailSave;
+            }
+            else if (_fileThumbnailSave != CommonConstants.BLANK)
+            {
+                if (!_fileThumbnailSave.Contains(CommonConstants.FOLDER_DEFAULT_IMG))
+                {
+                    if (_fileThumbnailSave.LastIndexOf("/") > 0)
+                        _fileThumbnail = rootFolder + _fileThumbnailSave.Substring(_fileThumbnailSave.LastIndexOf("/"));
+                    else
+                        _fileThumbnail = rootFolder + _fileThumbnailSave.Substring(_fileThumbnailSave.LastIndexOf("\\"));
+
+                    if (!File.Exists(_fileThumbnail))
+                    {
+                        string src = Server.MapPath("~") + "/" + _fileThumbnailSave;
+                        File.Copy(src, _fileThumbnail);
+                        File.Delete(src);
+                        _fileThumbnailSave = _fileThumbnail.Substring(_fileThumbnail.LastIndexOf(CommonConstants.FOLDER_DATA));
+                        item.Thumbnail = _fileThumbnailSave;
+                    }
+                }
+            }
+
             bool isOk = false;
             try
             {
@@ -677,6 +789,23 @@ namespace ltkt.Admin
             }
             if (isOk)
             {
+                if (_fileContentGood)
+                {
+                    string folder = Path.GetDirectoryName(_fileContent);
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+
+                    fileContent.SaveAs(_fileContent);
+                }
+                if (_fileThumbnailGood)
+                {
+                    string folder = Path.GetDirectoryName(_fileThumbnail);
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+
+                    fileThumbnail.SaveAs(_fileThumbnail);
+                }
+
 
                 int stickiedArticle = infDAO.countStickyInfArticle();
                 statDAO.setValue(CommonConstants.SF_NUM_STICKED_ON_IT, stickiedArticle.ToString());
@@ -688,6 +817,24 @@ namespace ltkt.Admin
             }
             Response.Redirect(CommonConstants.PAGE_ADMIN_INFORMATICS);
             
+        }
+        private void showFileContent(string location)
+        {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liContent.Text = "&nbsp;&nbsp;<br/><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"openFile('../../" + location.Replace("\\", "/") + "')\"/>";
+            }
+            else
+                liContent.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
+        }
+        private void showThumbnail(string location)
+        {
+            if (File.Exists(DBHelper.strCurrentPath + location))
+            {
+                liThumbnail.Text = "&nbsp;&nbsp;<br /><input type=\"button\" value=\"Mở\" class=\"formbutton\" onclick=\"DisplayFullImage('../../" + location.Replace("\\", "/") + "')\"/>";
+            }
+            else
+                liThumbnail.Text = CommonConstants.MSG_E_RESOURCE_NOT_FOUND;
         }
         protected void btnClear_Click(object sender, EventArgs e)
         {
@@ -1042,7 +1189,6 @@ namespace ltkt.Admin
             txtHtmlEmbbed.Enabled = state;
             txtHtmlPreviewLink.Enabled = state;
             txtChecker.Enabled = state;
-            txtThumbnail.Enabled = state;
         }
     }
 }
