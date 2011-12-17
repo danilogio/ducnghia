@@ -23,6 +23,10 @@ namespace ltkt
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Page.IsPostBack)
+            {
+                return;
+            }
             // Title on header
             liTitle.Text += CommonConstants.SPACE + CommonConstants.HLINE
                                     + CommonConstants.SPACE

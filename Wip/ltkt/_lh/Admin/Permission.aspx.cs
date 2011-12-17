@@ -51,6 +51,10 @@ namespace ltkt.Admin
 
         private void pageLoad(object sender, EventArgs e, tblUser userAdmin)
         {
+            if (Page.IsPostBack)
+            {
+                return;
+            }
             try
             {
                 if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
@@ -283,7 +287,10 @@ namespace ltkt.Admin
             //                       + CommonConstants.EQUAL
             //                       + Convert.ToInt32(Request.QueryString[CommonConstants.REQ_ID]));
             //}
-
+            if (Page.IsPostBack)
+            {
+                return;
+            }
             try
             {
                 tblUser userAdmin = (tblUser)Session[CommonConstants.SES_USER];
@@ -329,7 +336,10 @@ namespace ltkt.Admin
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             //Session[CommonConstants.SES_EDIT_USER] = null;
-
+            if (Page.IsPostBack)
+            {
+                return;
+            }
             switch (btnContinue.Text)
             {
                 case "Tiếp tục":

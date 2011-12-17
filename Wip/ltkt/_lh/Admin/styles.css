@@ -528,7 +528,6 @@ div.block_details_text
 {
 	width: 600px;
 }
-
 .form_settings #to input, .form_settings #to input
 {
 	width: 600px;
@@ -593,6 +592,10 @@ div.block_details_text
 .block_text  #divUniInfo, #divEnglishDetail
 {
 	height:1200px;
+}
+.block_text #divControlDetail
+{
+	height:1000px;
 }
 #EnglishLesson a, #ItLesson a, #ExamLesson a, #other_news a
 {

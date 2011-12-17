@@ -374,6 +374,17 @@ namespace ltkt.Admin
                 displayCell.Style["width"] = "180px";
                 displayCell.Text = user.DisplayName.Trim();
 
+                TableCell emailCell = new TableCell();
+                emailCell.CssClass = "table-cell";
+                emailCell.Style["width"] = "180px";
+                emailCell.Text = user.Email;
+
+                BaseServices bs = new BaseServices();
+                TableCell registerDayCell = new TableCell();
+                registerDayCell.CssClass = "table-cell";
+                registerDayCell.Style["width"] = "250px";
+                registerDayCell.Text = bs.convertDateToString(user.RegisterDate);
+
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
                 stateCell.Style["width"] = "80px";
@@ -398,6 +409,8 @@ namespace ltkt.Admin
                 normalUserRow.Cells.Add(noCell);
                 normalUserRow.Cells.Add(userCell);
                 normalUserRow.Cells.Add(displayCell);
+                normalUserRow.Cells.Add(emailCell);
+                normalUserRow.Cells.Add(registerDayCell);
                 normalUserRow.Cells.Add(stateCell);
                 normalUserRow.Cells.Add(actionCell);
 
@@ -589,8 +602,6 @@ namespace ltkt.Admin
                         Session[CommonConstants.SES_INFORM] = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_ACTION_SUCCESSFUL, CommonConstants.ACT_EDIT);
                         Session[CommonConstants.SES_INFORM] += CommonConstants.TEMP_BR_TAG;
                         Session[CommonConstants.SES_INFORM] += CommonConstants.TXT_RESET_PASSWORD;
-                        Page_Load(sender, e);
-                        
                     }
                 }
                 catch (Exception ex)
@@ -604,6 +615,7 @@ namespace ltkt.Admin
                 Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_ACCESS_DENIED;
                 Response.Redirect(CommonConstants.PAGE_ADMIN_LOGIN);
             }
+            Response.Redirect(CommonConstants.PAGE_ADMIN_USERS);
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {

@@ -123,49 +123,81 @@
             </div>
             <br />
             <div>
-                <div id="leftUsers" style="float: left; width: 25%;">
-                    <br />
-                    <asp:Button ID="btnNormal" runat="server" Text="Thành viên" CssClass="formbutton"
-                        OnClick="btnNormal_Click" />
-                    <br />
-                    <br />
-                    <asp:Button ID="btnKIA" runat="server" Text="Thành viên bị khóa" CssClass="formbutton"
-                        OnClick="btnKIA_Click" />
-                    <br />
-                    <br />
-                    <asp:Button ID="btnAdmin" runat="server" Text="Admin" CssClass="formbutton" OnClick="btnAdmin_Click" />
-                </div>
-                <div id="right" style="float: left; width: 74%;">
-                    <asp:Table ID="listUsers" runat="server" CssClass="table" Width="620px">
-                        <asp:TableHeaderRow>
-                            <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
-                                <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>&nbsp-&nbsp
-                                <asp:Literal ID="NumRecordLiteral" runat="server" />
-                            </asp:TableHeaderCell>
-                        </asp:TableHeaderRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
-                            <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
-                            <asp:TableCell CssClass="table-header-cell">Tên hiển thị</asp:TableCell>
-                            <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
-                            <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableFooterRow>
-                            <asp:TableCell CssClass="table-footer" ColumnSpan="5">
-                                <asp:Table ID="normalFooter" Width="100%" BorderWidth="0" runat="server">
-                                    <asp:TableRow>
-                                        <asp:TableCell>
-                                            <asp:Literal ID="liNormalPre" runat="server" />
-                                        </asp:TableCell>
-                                        <asp:TableCell HorizontalAlign="Right">
-                                            <asp:Literal ID="liNormalNext" runat="server" />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                </asp:Table>
-                            </asp:TableCell>
-                        </asp:TableFooterRow>
-                    </asp:Table>
-                </div>
+                <center>
+                    <div id="leftUsers" style="float: left; width: 100%;">
+                        <br />
+                        <asp:Button ID="btnNormal" runat="server" Text="Thành viên" CssClass="formbutton"
+                            OnClick="btnNormal_Click" />
+                        <asp:Button ID="btnKIA" runat="server" Text="Thành viên bị khóa" CssClass="formbutton"
+                            OnClick="btnKIA_Click" />
+                        <asp:Button ID="btnAdmin" runat="server" Text="Admin" CssClass="formbutton" OnClick="btnAdmin_Click" />
+                    </div>
+                </center>
+                <center>
+                    <div id="middle" style="float: left; width: 100%; margin-top: 15px;">
+                        <asp:HyperLink ID="hpkA" runat="server" NavigateUrl="#">A</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkB" runat="server" NavigateUrl="#">B</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkC" runat="server" NavigateUrl="#">C</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkD" runat="server" NavigateUrl="#">D</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkE" runat="server" NavigateUrl="#">E</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkF" runat="server" NavigateUrl="#">F</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkG" runat="server" NavigateUrl="#">G</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkH" runat="server" NavigateUrl="#">H</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkI" runat="server" NavigateUrl="#">I</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkJ" runat="server" NavigateUrl="#">J</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkK" runat="server" NavigateUrl="#">K</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkL" runat="server" NavigateUrl="#">L</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkM" runat="server" NavigateUrl="#">M</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkN" runat="server" NavigateUrl="#">N</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkO" runat="server" NavigateUrl="#">O</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkP" runat="server" NavigateUrl="#">P</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkQ" runat="server" NavigateUrl="#">Q</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkR" runat="server" NavigateUrl="#">R</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkS" runat="server" NavigateUrl="#">S</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkT" runat="server" NavigateUrl="#">T</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkU" runat="server" NavigateUrl="#">U</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkV" runat="server" NavigateUrl="#">V</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkX" runat="server" NavigateUrl="#">X</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkY" runat="server" NavigateUrl="#">Y</asp:HyperLink>&nbsp;|
+                        <asp:HyperLink ID="hpkZ" runat="server" NavigateUrl="#">Z</asp:HyperLink>
+                    </div>
+                </center>
+                <br />
+                <center>
+                    <div id="right" style="float: left; width: 100%; margin-top: 15px;">
+                        <asp:Table ID="listUsers" runat="server" CssClass="table" Width="850px">
+                            <asp:TableHeaderRow>
+                                <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
+                                    <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>&nbsp-&nbsp
+                                    <asp:Literal ID="NumRecordLiteral" runat="server" />
+                                </asp:TableHeaderCell>
+                            </asp:TableHeaderRow>
+                            <asp:TableRow>
+                                <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Username</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Tên hiển thị</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Email</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Ngày đăng ký</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableFooterRow>
+                                <asp:TableCell CssClass="table-footer" ColumnSpan="7">
+                                    <asp:Table ID="normalFooter" Width="100%" BorderWidth="0" runat="server">
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                                <asp:Literal ID="liNormalPre" runat="server" />
+                                            </asp:TableCell>
+                                            <asp:TableCell HorizontalAlign="Right">
+                                                <asp:Literal ID="liNormalNext" runat="server" />
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+                                </asp:TableCell>
+                            </asp:TableFooterRow>
+                        </asp:Table>
+                    </div>
+                </center>
             </div>
             <%--<div class="form_settings">
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -248,7 +280,7 @@
                 </p>
                 <p>
                     <span>Mật khẩu:</span>
-                    <asp:Button ID="btnResetPassword" Text="Đổi mật khẩu" runat="server" CssClass="formbutton"
+                    <asp:Button ID="btnResetPassword" Text="Reset mật khẩu" runat="server" CssClass="formbutton"
                         Enabled="false" OnClick="btnResetPassword_Click" />
                 </p>
                 <p>
