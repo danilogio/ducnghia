@@ -1004,6 +1004,10 @@ namespace ltktDAO
         /// </summary>
         public const string MSG_E_RESOURCE_NOT_FOUND = "Tài nguyên không có hoặc đã bị xóa!";
         /// <summary>
+        /// User is not found
+        /// </summary>
+        public const string MSG_E_USER_NOT_FOUND = "Người dùng không tồn tại trong hệ thống. Vui lòng thử lại.";
+        /// <summary>
         /// website is under construction.
         /// </summary>
         public const string MSG_I_UNDERCONSTRUCTION = "Trang web hiện đang được bảo trì";
@@ -1427,6 +1431,10 @@ namespace ltktDAO
         /// profile page name
         /// </summary>
         public const string PAGE_PROFILE_NAME = "Hồ sơ cá nhân";
+        /// <summary>
+        /// profile page
+        /// </summary>
+        public const string PAGE_PROFILE = "Profile.aspx";
         /// <summary>
         /// news page name
         /// </summary>
@@ -2213,6 +2221,10 @@ namespace ltktDAO
         /// link template for informatics page
         /// </summary>
         public const string TEMP_INFORMATICS_LINK = "<a href='" + TEMP_INFORMATICS_URL + "&" + REQ_PAGE + "={2}'>{3}</a>";
+        /// <summary>
+        /// link template for profile page
+        /// </summary>
+        public const string TEMP_PROFILE_LINK = "<a href='" + PAGE_PROFILE + ADD_PARAMETER + REQ_ACTION + "=" + ACT_VIEW + "&" + REQ_ID + "={0}'>{1}</a>";
         /// <summary>
         /// url template of informatics page
         /// </summary>

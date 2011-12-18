@@ -516,7 +516,7 @@ namespace ltktDAO
                     preLink += CommonConstants.SPACE;
                 }
                 k = min(totalPage, currentPage + 4);
-                for (int i = 0; i < k; i++)
+                for (int i = currentPage; i < k; i++)
                 {
                     sufLink += BaseServices.createMsgByTemplate(CommonConstants.TEMP_A_TAG, url
                                                                 + CommonConstants.AND + CommonConstants.REQ_PAGE + CommonConstants.EQUAL + (i + 1).ToString(),

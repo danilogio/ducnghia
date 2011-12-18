@@ -26,19 +26,55 @@ namespace ltkt
                                + CommonConstants.SPACE + CommonConstants.HLINE
                                + CommonConstants.SPACE
                                + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-
+            if (Page.IsPostBack)
+            {
+                return;
+            }
             if (Session[CommonConstants.SES_USER] != null)
             {
-                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                string action = Request.QueryString[CommonConstants.REQ_ACTION];
+                if (BaseServices.isNullOrBlank(action))
+                {
+                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
 
-                lLogonUser.Text = user.Username;
-                lDisplayName.Text = user.DisplayName;
-                lSex.Text = (user.Sex == false ? "Nam" : "Nữ");
-                lEmail.Text = user.Email;
-                lNumberOfArticles.Text = user.NumberOfArticles.ToString();
+                    lLogonUser.Text = user.Username;
+                    lDisplayName.Text = user.DisplayName;
+                    lSex.Text = (user.Sex == false ? "Nam" : "Nữ");
+                    lEmail.Text = user.Email;
+                    lNumberOfArticles.Text = user.NumberOfArticles.ToString();
 
-                txtboxDisplayName.Text = user.DisplayName;
-                txtboxEmail.Text = user.Email;
+                    txtboxDisplayName.Text = user.DisplayName;
+                    txtboxEmail.Text = user.Email;
+                }
+                else if(action == CommonConstants.ACT_VIEW)
+                {
+                    bool isOK = false;
+                    string id = Request.QueryString[CommonConstants.REQ_ID];
+                    if(!BaseServices.isNullOrBlank(id)) {
+                        UserInfoVO info = userDAO.getUserInfo(id);
+                        if (info != null)
+                        {
+                            lDisplayName.Text = info.DisplayName;
+                            lLogonUser.Text = id;
+                            lSex.Text = (info.Sex == false ? "Nam":"Nữ");
+                            lNumberOfArticles.Text = info.NumArticle.ToString();
+                            changePasswordPanel.Visible = false;
+                            editPanel.Visible = false;
+                            btnChangePassword.Visible = false;
+                            btnUpdateProfile.Visible = false;
+                            emailPanel.Visible = false;
+                            isOK = true;
+                        }
+                    }
+                    if (!isOK)
+                    {
+                        showInfoMessage(CommonConstants.MSG_E_USER_NOT_FOUND);
+                        viewPanel.Visible = false;
+
+                        return;
+                    }
+
+                }
             }
             else
             {
@@ -46,7 +82,15 @@ namespace ltkt
             }
 
         }
-
+        /// <summary>
+        /// use to show message information
+        /// </summary>
+        /// <param name="errorText"></param>
+        private void showInfoMessage(string infoText)
+        {
+            liMessage.Text = infoText;
+            messagePanel.Visible = true;
+        }
         protected void btnSubmitChangePassword_Click(object sender, EventArgs e)
         {
             try
@@ -67,9 +111,9 @@ namespace ltkt
                     // Thành công
                     if (isOK)
                     {
-                        lMessage.Text = CommonConstants.MSG_I_CHANGE_PASSWORD_SUCCESSFUL;
-                        lMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
-                        lMessage.Visible = true;
+                        liMessage.Text = CommonConstants.MSG_I_CHANGE_PASSWORD_SUCCESSFUL;
+                        liMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
+                        liMessage.Visible = true;
 
                         messagePanel.Visible = true;
                         changePasswordPanel.Visible = false;
@@ -77,8 +121,8 @@ namespace ltkt
                 }
                 else
                 {
-                    lMessage.Text = CommonConstants.MSG_E_PASSWORD_REQUIRED_WRONG;
-                    lMessage.Visible = true;
+                    liMessage.Text = CommonConstants.MSG_E_PASSWORD_REQUIRED_WRONG;
+                    liMessage.Visible = true;
 
                     messagePanel.Visible = true;
                 }
@@ -132,9 +176,9 @@ namespace ltkt
                 bool isOK = userDAO.updateUser(user.Username, user);
                 if (isOK)
                 {
-                    lMessage.Text = CommonConstants.MSG_I_UPDATE_PROFILE_SUCCESSFUL;
-                    lMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
-                    lMessage.Visible = true;
+                    liMessage.Text = CommonConstants.MSG_I_UPDATE_PROFILE_SUCCESSFUL;
+                    liMessage.Text += CommonConstants.MSG_I_BACK_TO_HOME;
+                    liMessage.Visible = true;
 
                     messagePanel.Visible = true;
                     editPanel.Visible = false;

@@ -641,7 +641,7 @@ namespace ltkt
                 //newComment += "<br />";
                 //newComment += comment;
                 //newComment += "</span>";
-
+                author = BaseServices.createMsgByTemplate(CommonConstants.TEMP_PROFILE_LINK, currentUser, author);
                 newComment = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, author);
                 newComment += " (" + date + ")";
                 newComment += CommonConstants.TEMP_BR_TAG;

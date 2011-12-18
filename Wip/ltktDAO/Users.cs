@@ -442,6 +442,23 @@ namespace ltktDAO
                   select u;
             return lst;
         }
+        public UserInfoVO getUserInfo(string _username)
+        {
+            UserInfoVO info = null;
+            LTDHDataContext DB = new LTDHDataContext(strPathDB);
+            IEnumerable<tblUser> lst = from p in DB.tblUsers
+                                       where p.Username==_username
+                                       select p;
+            if(lst!= null && lst.Count()>0)
+            {
+                info = new UserInfoVO();
+                info.DisplayName = lst.ElementAt(0).DisplayName;
+                //info.Email = lst.ElementAt(0).Email;
+                info.NumArticle = lst.ElementAt(0).NumberOfArticles;
+                info.Sex = lst.ElementAt(0).Sex;
+            }
+            return info;
+        }
         /// <summary>
         /// Thêm một user mới
         /// </summary>

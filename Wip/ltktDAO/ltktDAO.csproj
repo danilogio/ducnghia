@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="SecurityAdminVO.cs" />
     <Compile Include="Statistics.cs" />
+    <Compile Include="UserInfoVO.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

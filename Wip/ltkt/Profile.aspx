@@ -5,7 +5,8 @@
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="ProfileHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <%--<title>Hồ sơ cá nhân | Website luyện thi kinh tế</title>--%>
-    <title><asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
+    <title>
+        <asp:Literal ID="liTitle" runat="server"></asp:Literal></title>
 </asp:Content>
 <asp:Content ID="Profile" ContentPlaceHolderID="cphContent" runat="Server">
     <div id="loginForm" class="block_text">
@@ -17,7 +18,7 @@
             <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
         </p>
         <asp:Panel ID="messagePanel" runat="server" Visible="false">
-            <asp:Literal ID="lMessage" runat="server"></asp:Literal>
+            <asp:Literal ID="liMessage" runat="server"></asp:Literal>
         </asp:Panel>
         <asp:Panel ID="viewPanel" runat="server" Visible="true">
             <div class="form_settings">
@@ -28,9 +29,11 @@
                 <br />
                 <br />
                 <span>Giới tính:</span><asp:Literal ID="lSex" runat="server" Text="Giới tính"></asp:Literal>
-                <br />
-                <br />
-                <span>Email:</span><asp:Literal ID="lEmail" runat="server" Text="Email"></asp:Literal>
+                <asp:Panel ID="emailPanel" runat="server" Visible="true">
+                    <br />
+                    <br />
+                    <span>Email:</span><asp:Literal ID="lEmail" runat="server" Text="Email"></asp:Literal>
+                </asp:Panel>
                 <br />
                 <br />
                 <span>Số bài viết:</span><asp:Literal ID="lNumberOfArticles" runat="server" Text="Số bài viết"></asp:Literal>
