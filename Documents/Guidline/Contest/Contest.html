@@ -1,0 +1,295 @@
+﻿<html>
+	<head>
+		<title>
+			Chức năng quản lý chủ đề luyện thi đại học
+		</title>
+		<style type="text/css">
+			.blue_text {
+				color:blue;
+				font-weight:bold;
+			}
+			.red_text {
+				color:red;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			<center>
+				<b>
+					<div class="blue_text">
+						Chức năng quản lý chủ đề luyện thi đại học
+					</div>	
+				</b>
+			</center>
+		</h1>
+			<center>(hình 1)</center>
+			Đây là chức năng cho phép quản lý các bài viết trong chuyên mục <span class="blue_text">LTĐH</span>. 
+				Cho phép <span class="blue_text">BQT</span> xem, xóa, sửa các bài viết trong phần này.
+				Chức năng này gồm 4 phần chính.
+		<ul>
+				
+			<li>
+				<span class="blue_text"><b>1. Tìm kiếm:</b></span>
+				<center></br>(hình 2></center>
+				<ul>
+					<li>
+						Cho phép tìm kiếm và hiển thị danh sách các bài viết 
+						theo một tiêu chí tìm kiếm hoặc một từ khóa.
+					</li>
+					<li>
+						Phần tìm theo tiêu chí bao gồm các mục như hình bên dưới
+						<center></br>(hình 3)</center>
+						<ul>
+							<li>
+								Mỗi một tiêu chí bao gồm các trạng thái như hình bên dưới
+								<center></br>(hình 4)</center>
+							</li>
+							<li>
+								VD: khi bạn muốn tìm các bài thuộc chủ đề <span class="blue_text"><b>Môn Toán</b></span>.
+								Bạn hãy chọn <span class="blue_text"><b>Môn Toán</b></span> trong phần Môn, lúc này phần trạng thái sẽ 
+								là các trạng thái của <span class="blue_text"><b>Môn Toán</b></span>. Con số trong ngoặc hiển thị 
+								số bài tìm thấy ứng với tiêu chí ấy. Như vậy khi chọn 
+								vào link <span class="blue_text"><b>Môn Toán</b></span>(16) có nghĩa là có tất cả 16 bài của <span class="blue_text"><b>Môn Toán</b></span>, 
+								các bài này sẽ thuộc 1 trong 3 trạng thái : Chưa duyệt, Đã duyệt, Báo xấu.
+								<ul>
+									<li>
+										 <span class="blue_text"><b>Chưa duyệt:</b></span> các bài mới được gửi chưa được BQT duyệt, 
+										 chưa được hiển thị cho người xem.
+									</li>
+									<li>
+										 <span class="blue_text"><b>Đã duyệt:</b></span> các bài đã duyệt và cho phép người dùng xem và download.
+									</li>
+									<li>
+										 <span class="blue_text"><b>Báo xấu:</b></span> các bài đã duyệt nhưng bị người dùng cảnh báo nội dung không phù hợp.
+									</li>
+									<li>
+										 <span class="blue_text"><b>Tất cả:</b></span> tất cả các bài ở tất cả trạng thái trên
+									</li>
+								</ul>
+							</li>
+							<li>
+								Ngoài ra còn có các bài viết thuộc dạng sticky (đánh dấu) là đáng xem.
+							</li>
+								
+							</li>
+						</ul>
+					</li>
+					<li>
+						Phần tìm theo từ khóa
+						<ul>
+							<li>
+								Nếu bạn chưa muốn tìm các bài viết có tiêu đề, Tag, nội dung có chứa 1 cụm từ nào đó.
+								Bạn có thể nhập nội dung tìm kiếm vào ô <span class="blue_text"><b>tìm kiếm</b></span> và nhấn nút <span class="blue_text"><b>Tìm</b></span>
+								<center></br>(hình 5)</center>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Với 2 cách tìm trên. Nội dung tiềm kiếm được sẽ hiển thị tại danh sách bên dưới.
+						<center></br>(hình 6)</center>
+						<ul>
+							<li>
+								Trên tiêu đề sẽ là tổng số bài tìm thấy được
+							</li>
+							<li>
+								Các bài được sắp xếp theo ngày đăng giảm dần
+								<ul>
+									<li>
+										<span class="blue_text"><b>Cột tiêu đề:</b></span> tiêu đề bài viết
+									</li>
+									<li>
+										<span class="blue_text"><b>Cột Ngày đăng:</b></span> ngày đăng của bài viết
+									</li>
+									<li>
+										<span class="blue_text"><b>Cột Môn:</b></span> bài viết thuộc môn
+									</li>
+									<li>
+										<span class="blue_text"><b>Cột Người gửi:</b></span> người gửi bài
+									</li>
+									<li>
+										<span class="blue_text"><b>Cột Trạng thái:</b></span> trạng thái của bài viết chưa duyệt, đã duyệt, báo xấu.
+									</li>
+									<li>
+										<span class="blue_text"><b>Cột Thao tác:</b></span> gồm thao tác xóa và sửa đối với bài viết
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Bài viết được hiển thị theo trang nếu quá nhiều. nhấp vào link <span class="blue_text"><b>trang sau</b></span> để tiếp theo.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text"><b>2. Phần xem bài viết:</b></span>
+				<ul>
+					<li>
+						Khi muốn xem thông tin chi tiết bài viết. hãy click vào link như bên dưới
+						<center></br>(hình 7)</center>
+					</li>
+					<li>
+						Và thông tin sẽ hiển thị dạng Read only như hình bên dưới. Người xem sẽ không thể sửa được
+						<center></br>(hình 8)</center>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text"><b>3. Phần sửa bài viết:</b></span>
+				<ul>
+					<li>
+						Khi muốn sửa nội dung bài viết, hãy nhấn vào biểu tượng sửa của bài viết đó
+						<center></br>(hình 10)</center>
+					</li>
+					<li>
+						Chi tiết bài sẽ hiển thị như bên dưới
+						<center></br>(hình 11)</center>
+						<ul>
+							<li>
+								Những phần có dấu <span class="red_text">(*)</span> là bắt buộc phải có giá trị.
+							</li>
+							<li>
+								<span class="blue_text"><b>Tiêu đề:</b></span> tiêu đề bài viết dài tối đa là 254 chữ.
+							</li>
+							<li>
+								<span class="blue_text"><b>Tác giả:</b></span> tên người gửi Read only
+							</li>
+							<li>
+								<span class="blue_text"><b>Ngày gửi:</b></span> ngày đăng bài Read only.
+							</li>
+							<li>
+								<span class="blue_text"><b>Tag:</b></span> các tag, ghi chú, phục vụ cho việc tìm kiếm nhanh chóng hơn, 
+								các tag cách nhau bằng dấu phẩy hoặc dấu chấm phẩy.
+							</li>
+							<li>
+								<span class="blue_text"><b>Số người quan tâm:</b></span> số người đã xem và download bài viết Read only.
+							</li>
+							<li>
+								<span class="blue_text"><b>Người đánh giá:</b></span> tên người đã chấm điểm bài viết, để trống nếu đó là bạn.
+							</li>
+							<li>
+								<span class="blue_text"><b>Folder gốc:</b></span> folder gốc chứa toàn bộ tài nguyên bài viết Read only
+							</li>
+							<li>
+								<span class="blue_text"><b>Tóm tắt:</b></span> tóm tắt nội dung bài viết.
+							</li>
+							<li>
+								<span class="blue_text"><b>Link html embed:</b></span> link chứa trang xem trước của bài viết (google docs)
+							</li>
+							<li>
+								<span class="blue_text"><b>Mã html Preview:</b></span> mã nhưng của phần xem trước.
+							</li>
+							<li>
+								<span class="blue_text"><b>Comment:</b></span> toàn bộ comment mà người dùng đã post cho bài viết này.
+								Các comment phân cách nhau bằng dấu <font color="red"><b>;</b></font><br/>
+								Các comment bắt đầu bằng dấu <font color="red"><b>*</b></font> là chưa duyệt.
+							</li>
+							<li>
+								<span class="blue_text"><b>Nơi lưu tập tin nội dung:</b></span> nơi chứa tập tin nội dung của bài.
+							</li>
+							<li>
+								<span class="blue_text"><b>Chi tiết tập tin nội dung:</b></span> nếu như bài viết có tập tin nội dung đi kèm 
+								thì sẽ có nút <span class="blue_text">Mở</span> cho phép xem nội dung bên trong tập tin đó. 
+								Kèm theo nút <span class="blue_text">Tải</span> tập tin nội dung để tải tập tin khác thay thế,
+								khi click vào nút này sẽ hiển thị như bên dưới.
+								<center></br>(hình 12)</center>
+								</br>Nhấn nút <span class="blue_text">Choose File</span> để chọn tập tin
+								<center></br>(hình 13)</center>
+							</li>
+							<li>
+								<span class="blue_text"><b>Nơi lưu hướng dẫn giải:</b></span> nơi lưu đáp án (nếu có) của bài viết
+							</li>
+							<li>
+								<span class="blue_text"><b>Chi tiết tập tin hướng dẫn giải:
+								</b></span> nhấn nút <span class="blue_text"><b>Mở</b></span> để 
+								xem nội dung của tập tin 
+								đáp án và nhấn nút <span class="blue_text">Tải</span> tập tin hướng dẫn để tải tập tin thay thế.
+								<center></br>(hình 14)</center>
+								</br>Nhấn nút <span class="blue_text">Choose File</span> dể chọn tập tin
+							</li>
+							<li>
+								<span class="blue_text"><b>Hình thu nhỏ:</b></span>
+								<ul>
+									<li>
+										Khi hiển thỉ bài viết ngoài trang web cần có một hình thu nhỏ,
+										nếu bạn không muốn dùng một hình mặc định của hệ thống, 
+										thì bạn có thể tải một hình khác thay thế bằng cách 
+										nhấn nút <span class="blue_text"><b>Tải hình thu nhỏ</b></span> 
+										để chọn một tập tin hình ảnh: jpg, png, gif,…
+										<center></br>(hình 16)</center>
+									</li>
+									<li>
+										Mặc định nếu không tải hình, hệ thống sẽ dùng hình mặc định của hệ thống.
+									</li>
+								</ul>
+							</li>
+							<li>
+								<span class="blue_text"><b>Điểm đánh giá:</b></span> điểm đánh giá của người đánh giá từ 0 tới 10.
+							</li>
+							<li>
+								<span class="blue_text"><b>Trạng thái:</b></span> thay đổi trạng thái cho bài viết: chưa duyệt->đã duyệt->báo xấu.
+							</li>
+							<li>
+								<span class="blue_text"><b>Đánh dấu sticky:</b></span> đánh dấu bài viết là đáng xem. Các bài viết này 
+								sẽ hiển thị trên cùng của phần chuyên mục <span class="blue_text"><b>LTĐH</b></span> và không bị đẩy 
+								xuống trang sau trong mục này. 
+								Số bài viết Sticky không được vượt quá ½ số bài của trang.
+								</br>VD: 1 trang có 16 bài thì chỉ tối đa 8 bài được đánh dấu là sticky
+							</li>
+							<li>
+								<span class="blue_text"><b>Đề thi:</b></span> lĩnh vực của bài viết: Đai học, Cao đẳng.
+							</li>
+							<li>
+								<span class="blue_text"><b>Khối thi:</b></span> bao gồm các khối A, B, C, D.
+							</li>
+							<li>
+								<span class="blue_text"><b>Môn thi:</b></span> môn của bài viết.
+							</li>
+							<li>
+								<span class="blue_text"><b>Năm ra đề:</b></span> năm bài viết được đưa ra, khác với ngày đăng:
+								</br>VD: đề thi Toán năm 2003, được đăng vào năm 2001
+							</li>
+						</ul>
+					</li>
+					<li>
+						Sau khi sửa xong, nhấn nút <span class="blue_text">Sửa</span> để cập nhật thông tin cần sửa vào hệ thống
+					</li>
+					<li>
+						Nút <span class="blue_text">quay lại</span> để quay lại trang trước
+					</li>
+					<li>
+						Nếu quá trình sửa thành công, hệ thống sẽ hiện thông báo như sau:
+						<center></br>(hình 18)</center>
+					</li>
+					<li>
+						Nếu thất bại
+						<center></br>(hình 19)</center>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text"><b>4. Chức năng xóa bài:</b></span>
+				<ul>
+					<li>
+						Khi muốn xóa bài, bạn click biểu tượng xóa như  hình dưới
+						<center></br>(hình 20)</center>
+					</li>
+					<li>
+						Một thông báo hiện ra, nhấn <span class="blue_text">OK</span> nếu muốn tiếp tục.
+					</li>
+					<li>
+						Bước này sẽ đưa bài viết ra khỏi hệ thống, bài viết sẽ không hiển thị
+						trên trang web, nhưng tập tin nội dung bài viết thì vẫn còn.
+						Và hệ thống sẽ hiển thị các bài viết ở trạng thái Xóa trong nút <span class="blue_text">Xóa dữ liệu</span>.
+						<center></br>(hình 21)</center>
+					</li>
+					<li>
+						Nếu muốn xóa bài viết ra khỏi hệ thống, bạn hãy click nút này và làm theo hướng dẫn:
+						<center></br>(hình 22)</center>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
