@@ -165,9 +165,9 @@
                 <br />
                 <center>
                     <div id="right" style="float: left; width: 100%; margin-top: 15px;">
-                        <asp:Table ID="listUsers" runat="server" CssClass="table" Width="850px">
+                        <asp:Table ID="listUsers" runat="server" CssClass="table" Width="860px">
                             <asp:TableHeaderRow>
-                                <asp:TableHeaderCell CssClass="table-header" ColumnSpan="7">
+                                <asp:TableHeaderCell CssClass="table-header" ColumnSpan="8">
                                     <asp:Literal ID="liListTitle" runat="server" Text="Danh sách thành viên"></asp:Literal>&nbsp-&nbsp
                                     <asp:Literal ID="NumRecordLiteral" runat="server" />
                                 </asp:TableHeaderCell>
@@ -178,11 +178,12 @@
                                 <asp:TableCell CssClass="table-header-cell">Tên hiển thị</asp:TableCell>
                                 <asp:TableCell CssClass="table-header-cell">Email</asp:TableCell>
                                 <asp:TableCell CssClass="table-header-cell">Ngày đăng ký</asp:TableCell>
+                                <asp:TableCell CssClass="table-header-cell">Số bài</asp:TableCell>
                                 <asp:TableCell CssClass="table-header-cell">Trạng thái</asp:TableCell>
                                 <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
                             </asp:TableRow>
                             <asp:TableFooterRow>
-                                <asp:TableCell CssClass="table-footer" ColumnSpan="7">
+                                <asp:TableCell CssClass="table-footer" ColumnSpan="8">
                                     <asp:Table ID="normalFooter" Width="100%" BorderWidth="0" runat="server">
                                         <asp:TableRow>
                                             <asp:TableCell>

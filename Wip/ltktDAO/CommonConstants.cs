@@ -181,6 +181,7 @@ namespace ltktDAO
         public const string FOLDER_OTH = "Other";
 
         public const string FOLDER_DEFAULT_IMG = "DefaultImages";
+        public const string FOLDER_IMAGES = "images";
 
 
         /// <summary>

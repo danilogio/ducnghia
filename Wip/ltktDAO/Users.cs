@@ -442,6 +442,32 @@ namespace ltktDAO
                   select u;
             return lst;
         }
+        public void addNumberOfArticle(string _username)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                var user = DB.tblUsers.Single(u => u.Username == _username);
+
+                user.NumberOfArticles = user.NumberOfArticles + 1;
+
+                DB.SubmitChanges();
+                ts.Complete();
+            }
+
+        }
+        public void subNumberOfArticle(string _username)
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                var user = DB.tblUsers.Single(u => u.Username == _username);
+
+                user.NumberOfArticles = user.NumberOfArticles - 1;
+
+                DB.SubmitChanges();
+                ts.Complete();
+            }
+
+        }
         public UserInfoVO getUserInfo(string _username)
         {
             UserInfoVO info = null;
@@ -459,6 +485,7 @@ namespace ltktDAO
             }
             return info;
         }
+
         /// <summary>
         /// Thêm một user mới
         /// </summary>

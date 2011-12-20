@@ -766,6 +766,17 @@ namespace ltktDAO
                     english.Contents = update.Contents;
                     english.Author = update.Author;
                     english.Posted = update.Posted;
+                    ltktDAO.Users userDao = new ltktDAO.Users();
+                    if (english.State == CommonConstants.STATE_UNCHECK
+                    && update.State == CommonConstants.STATE_CHECKED)
+                    {
+                        userDao.addNumberOfArticle(english.Author.Trim());
+                    }
+                    else if (english.State == CommonConstants.STATE_CHECKED
+                    && update.State == CommonConstants.STATE_UNCHECK)
+                    {
+                        userDao.subNumberOfArticle(english.Author.Trim());
+                    }
                     english.State = update.State;
                     english.Point = update.Point;
                     english.Tag = update.Tag;
@@ -819,6 +830,11 @@ namespace ltktDAO
                 {
                     var english = DB.tblEnglishes.Single(e => e.ID == _id);
                     english.DeleteFlg = true;
+                    if (english.State == CommonConstants.STATE_CHECKED)
+                    {
+                        ltktDAO.Users userDao = new ltktDAO.Users();
+                        userDao.subNumberOfArticle(english.Author.Trim());
+                    }
                     DB.SubmitChanges();
                     ts.Complete();
                 }

@@ -1462,6 +1462,11 @@ namespace ltktDAO
                 {
                     var inf = DB.tblContestForUniversities.Single(a => a.ID == _id);
                     inf.DeleteFlg = true;
+                    if (inf.State == CommonConstants.STATE_CHECKED)
+                    {
+                        ltktDAO.Users userDao = new ltktDAO.Users();
+                        userDao.subNumberOfArticle(inf.Author.Trim());
+                    }
                     DB.SubmitChanges();
 
                     ts.Complete();
@@ -1578,6 +1583,17 @@ namespace ltktDAO
 
                     cont.Title = _title;
                     cont.Contents = _content;
+                    ltktDAO.Users userDao = new ltktDAO.Users();
+                    if (cont.State == CommonConstants.STATE_UNCHECK 
+                        && _state == CommonConstants.STATE_CHECKED)
+                    {
+                        userDao.addNumberOfArticle(cont.Author.Trim());
+                    }
+                    else if (cont.State == CommonConstants.STATE_CHECKED
+                        && _state == CommonConstants.STATE_UNCHECK)
+                    {
+                        userDao.subNumberOfArticle(cont.Author.Trim());
+                    }
                     cont.State = _state;
                     cont.isUniversity = _isUniversity;
                     cont.Branch = _branch;

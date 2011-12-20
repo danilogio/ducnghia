@@ -338,6 +338,12 @@ namespace ltkt.Admin
                     }
             }
 
+            showUsers(lst, totalUsers, page, null, null, null, type);
+
+        }
+
+        private void showUsers(IEnumerable<tblUser> lst, int totalUsers, int page, string action, string key, string state, string type)
+        {
             // Computing total pages
             int totalPages;
             int mod = totalUsers % NoOfUsesPerPage;
@@ -379,6 +385,11 @@ namespace ltkt.Admin
                 emailCell.Style["width"] = "180px";
                 emailCell.Text = user.Email;
 
+                TableCell numArtCell = new TableCell();
+                numArtCell.CssClass = "table-cell";
+                numArtCell.Style["width"] = "80px";
+                numArtCell.Text = user.NumberOfArticles.ToString();
+
                 BaseServices bs = new BaseServices();
                 TableCell registerDayCell = new TableCell();
                 registerDayCell.CssClass = "table-cell";
@@ -387,7 +398,7 @@ namespace ltkt.Admin
 
                 TableCell stateCell = new TableCell();
                 stateCell.CssClass = "table-cell";
-                stateCell.Style["width"] = "80px";
+                stateCell.Style["width"] = "120px";
                 stateCell.Text = userDAO.getState(user.State);
 
                 TableCell actionCell = new TableCell();
@@ -411,6 +422,7 @@ namespace ltkt.Admin
                 normalUserRow.Cells.Add(displayCell);
                 normalUserRow.Cells.Add(emailCell);
                 normalUserRow.Cells.Add(registerDayCell);
+                normalUserRow.Cells.Add(numArtCell);
                 normalUserRow.Cells.Add(stateCell);
                 normalUserRow.Cells.Add(actionCell);
 
@@ -439,8 +451,6 @@ namespace ltkt.Admin
             }
 
         }
-
-
         protected void btnNormal_Click(object sender, EventArgs e)
         {
             Response.Redirect(CommonConstants.PAGE_ADMIN_USERS

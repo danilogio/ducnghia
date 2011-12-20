@@ -778,6 +778,17 @@ namespace ltktDAO
                         informatic.Contents = update.Contents;
                         informatic.Author = update.Author;
                         informatic.Posted = update.Posted;
+                        ltktDAO.Users userDao = new ltktDAO.Users();
+                        if (informatic.State == CommonConstants.STATE_UNCHECK
+                        && update.State == CommonConstants.STATE_CHECKED)
+                        {
+                            userDao.addNumberOfArticle(informatic.Author.Trim());
+                        }
+                        else if (informatic.State == CommonConstants.STATE_CHECKED
+                        && update.State == CommonConstants.STATE_UNCHECK)
+                        {
+                            userDao.subNumberOfArticle(informatic.Author.Trim());
+                        }
                         informatic.State = update.State;
                         informatic.Tag = update.Tag;
                         informatic.HtmlEmbedLink = update.HtmlEmbedLink;
@@ -1182,6 +1193,11 @@ namespace ltktDAO
                 {
                     var inf = DB.tblInformatics.Single(a => a.ID == _id);
                     inf.DeleteFlg = true;
+                    if (inf.State == CommonConstants.STATE_CHECKED)
+                    {
+                        ltktDAO.Users userDao = new ltktDAO.Users();
+                        userDao.subNumberOfArticle(inf.Author.Trim());
+                    }
                     DB.SubmitChanges();
 
                     ts.Complete();
