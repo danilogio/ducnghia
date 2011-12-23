@@ -1,0 +1,237 @@
+﻿<html>
+	<head>
+		<title>
+			Quản lý người dùng
+		</title>	
+		<style type="text/css">
+			.blue_text {
+				color:blue;
+				font-weight:bold;
+				}
+			.red_text {
+				color:red;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			<center>
+				<b>
+					<div class="blue_text">
+						Quản lý người dùng
+					</div>	
+				</b>
+			</center>
+		</h1>
+		Chức năng quản lý người dùng cho phép ban theo dõi số lượng
+		thành viên trong hệ thống xóa, sửa thông tin thành viên.
+		<ul>
+			<li>
+				<span class="blue_text">1. Tìm kiếm thành viên</span>
+				<ul>
+					<li>
+						Chức năng tìm kiếm thành viên cho phép 
+						liệt kê danh sách theo tên và vai trò.
+						<center>(hình 1)</center>
+					</li>
+					<li>
+						Chức năng này bao gồm 2 phần: phần tìm kiếm và phần hiển thị
+					</li>
+					<li>
+						<span class="blue_text">Phần tìm kiếm:</span> có 3 cách để tìm kiếm
+						<ul>
+							<li>
+								<span class="blue_text">Tìm theo họ tên bất kỳ:</span> Nhập chuỗi tìm kiếm váo ô
+								<span class="blue_text">Tìm kiếm</span>. Nhấn nút <span class="blue_text">Tìm</span>
+								để hiển thị các thành viên tìm được.
+								<center>(hình 2)</center>
+							</li>
+							<li>
+								<span class="blue_text">Tìm theo vai trò:</span> Trong hệ thống có 2 vai trò chính
+								<ul>
+									<li>
+										<span class="blue_text">Thành viên:</span> là các thành viên thường, 
+										không bao gồm <span class="blue_text">BQT</span> và
+										<span class="blue_text">admin</span> hệ thống
+									</li>
+									<li>
+										<span class="blue_text">Admin:</span> bao gồm <span class="blue_text">admin</span>
+										và các thành viên <span class="blue_text">BQT</span>
+										có quyền điều hành website
+									</li>
+									<li>
+										Ngoài ra còn có <span class="blue_text">thành viên bị khóa:</span>
+										bao gồm các thành viên <span class="blue_text">admin</span>
+										hoặc thành viên <span class="blue_text">thường</span> ở trạng thái bị khóa.
+										<center>(hình 3)</center>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<span class="blue_text">Tìm theo chữ cái:</span>
+								Hệ thống cho phép tìm thành viên dựa theo chữ cái đầu 
+								trong username của thành viên đó.
+								<center>(hình 4)</center>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<span class="blue_text">Phần hiển thị:</span> hiển thị danh sách
+						các thành viên tìm được bao gồm các thông tin sau:
+						<center>(hình 5)</center>
+						<ul>
+							<li>
+								<span class="blue_text">Username:</span> Username dùng để đăng nhập hệ thống
+							</li>
+							<li>
+								<span class="blue_text">Tên hiển thị:</span> Tên người dùng hiển thị
+								trong phần <span class="blue_text">Hồ sơ</span>.
+							</li>
+							<li>
+								<span class="blue_text">Email:</span> email của user.
+							</li>
+							<li>
+								<span class="blue_text">Ngày đăng ký:</span> Ngày thành viên tham gia hệ thống.
+							</li>
+							<li>
+								<span class="blue_text">Số bài:</span> là số bài mà thành viên đó đã gửi lên hệ thống.
+							</li>
+							<li>
+								<span class="blue_text">Trạng thái:</span> thành viên trong hệ thống bao gồm các trạng thái sau:
+								<ul>
+									<li>
+										<span class="blue_text">Chưa kích hoạt:</span>
+										là thành viên mới đăng ký hệ thống nhưng chưa được kích hoạt.
+									</li>
+									<li>
+										<span class="blue_text">Đang hoạt động:</span> là thành viên
+										đang hoạt động và có thể tham gia tải bài, gửi bài lên hệ thống.
+									</li>
+									<li>
+										<span class="blue_text">Cảnh cáo:</span> là các thành viên 
+										có hành vi sai trái và bị cảnh cáo.
+									</li>
+									<li>
+										<span class="blue_text">KIA:</span> các thành viên đã cảnh cáo nhưng
+										tiếp tục sai phạm sẽ bị khóa tài khoản, tùy theo mức độ vi phạm.
+										<ul>
+											<li>
+												3 ngày
+											</li>
+											<li>
+												1 tuần
+											</li>
+											<li>
+												2 tuần
+											</li>
+											<li>
+												3 tuần
+											</li>
+											<li>
+												1 tháng.
+											</li>
+										</ul>
+									</li>
+									<li>
+										<span class="blue_text">Đã xóa:</span> các thành viên 
+										đã bị xáo tài khoản.
+										<center>(hình 6)</center>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">2. Xem thông tin thành viên:</span>
+				<ul>
+					<li>
+						Ở danh sách thành viên, khi nhấn vào tên đăng nhập của thành viên
+						sẽ thấy được thông tin của thành viên đó <span class="red_text">(readonly)</span>
+						<center>(hình 7)</center>
+					</li>
+					<li>
+						Các thông tin được hiển thị như bên dưới và không thể được sửa.
+						<center>(hình 8)</center>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">3. Sửa thông tin thành viên:</span>
+				<ul>
+					<li>
+						Ở danh sách thành viên, khi nhấn vào biểu tượng <span class="blue_text">Edit</span>, 
+						thông tin thành viên sẽ được hiển thị và có thể sửa.
+						<center>(hình 9)</center>
+					</li>
+					<li>
+						Các thông tin bao gồm:
+						<center>(hình 10)</center>
+						<ul>
+							<li>
+								<span class="blue_text">Tài khoản:</span> Tên đăng nhập thành viên, 
+								<span class="red_text">readonly</span>.
+							</li>
+							<li>
+								<span class="blue_text">Tên hiển thị:</span> Tên hiển thị trên website
+							</li>
+							<li>
+								<span class="blue_text">Giới tính:</span> Nam hoặc Nữ
+							</li>
+							<li>
+								<span class="blue_text">Reset mật khẩu:</span> tính năng tạo lại mật khẩu 
+								cho thành viên, mật khẩu ngẫu nhiên tạo ra sẽ gửi tới email của thành viên đó.
+							</li>
+							<li>
+								<span class="blue_text">Email:</span> là email của thành viên dùng để 
+								đăng ký tài khoản. Mỗi thành viên chỉ có một email.
+							</li>
+							<li>
+								<span class="blue_text">Quyền:</span> vai trò hiện tại của thành viên đó, 
+								<span class="red_text">readonly</span>.
+							</li>
+							<li>
+								<span class="blue_text">Ngày đăng ký:</span> Ngày thành viên đăng ký vào hệ thống,
+								<span class="red_text">readonly</span>.
+							</li>
+							<li>
+								<span class="blue_text">Trạng thái:</span> trạng thái của thành viên hiện tại
+							</li>
+							<li>
+								<span class="blue_text">Số bài viết:</span> là số bài thành viên đó gửi lên
+								hệ thống và được <span class="blue_text">BQT</span> cho phép đăng lên website
+							</li>
+							<li>
+								<span class="blue_text">Ghi chú:</span> bao gồm các thông tin
+								ghi chú về thành viên đó.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Sau khi sửa thông tin, nhấn nút <span class="blue_text">Sửa</span>
+						để cập nhật thay đổi vào hệ thống.
+					</li>
+					<li>
+						Nhấn nút <span class="blue_text">Quay về</span> để trở lại màn hình trước.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">4. Xóa thành viên:</span>
+				<ul>
+					<li>
+						Ở danh sách thành viên, nhấn biểu tượng <span class="blue_text">Xóa</span> để xóa đi thành viên đó.
+						<center>(hình 11)</center>
+					</li>
+					<li>
+						Khi nhấn, một thông báo xác nhận sẽ hiện ra và 
+						nhấn <span class="blue_text">OK</span> nếu muốn tiếp tục xóa
+						<center>(hình 12)</center>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
