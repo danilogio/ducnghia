@@ -55,17 +55,19 @@
             <div id="viewNews">
                 <asp:Table ID="NewsTable" CssClass="table" runat="server">
                     <asp:TableHeaderRow>
-                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="3">
+                        <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
                                 Quản lý tin tức
                         </asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
-                        <asp:TableCell CssClass="table-header-cell">ID</asp:TableCell>
-                        <asp:TableCell CssClass="table-header-cell">Title</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">#</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Tiêu đề</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Ngày đăng</asp:TableCell>
+                        <asp:TableCell CssClass="table-header-cell">Người gửi</asp:TableCell>
                         <asp:TableCell CssClass="table-header-cell">Thao tác</asp:TableCell>
                     </asp:TableRow>
                     <asp:TableFooterRow>
-                        <asp:TableCell CssClass="table-footer" ColumnSpan="4">
+                        <asp:TableCell CssClass="table-footer" ColumnSpan="5">
                             <asp:Table ID="FooterTable" Width="100%" BorderWidth="0" runat="server">
                                 <asp:TableRow>
                                     <asp:TableCell>
@@ -85,10 +87,12 @@
             <div id="addNews" class="form_settings">
                 <%--<asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />--%>
                 <div id="composeFunction">
-                    <asp:Button ID="btnSave" runat="server" Text="Thêm tin tức" CssClass="formbutton"
+                    <asp:Button ID="btnSave" runat="server" Text="Thêm" CssClass="formbutton"
                         OnClick="btnSave_Click" />&nbsp;
+                     <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton"
+                        OnClick="btnEdit_Click" />
                     <asp:Button ID="btnSticky" runat="server" Text="Sticky" CssClass="formbutton" Visible="false" />&nbsp;
-                    <asp:Button ID="btnCancel" runat="server" Text="Hủy" CssClass="formbutton" OnClick="btnCancel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btnCancel" runat="server" Text="Quay lại" CssClass="formbutton" OnClick="btnCancel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
                     <br />
                     <br />
@@ -102,7 +106,7 @@
                     </p>
                     <p>
                         <span>Tóm tắt:</span>
-                        <asp:TextBox ID="txtChapeau" runat="server" TextMode="MultiLine" Rows="3" CssClass="NoEditor"></asp:TextBox>
+                        <asp:TextBox ID="txtChapeau" runat="server" TextMode="MultiLine" Rows="5" CssClass="NoEditor"></asp:TextBox>
                     </p>
                 </div>
                 <div id="composeContent">

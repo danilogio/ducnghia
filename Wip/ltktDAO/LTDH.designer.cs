@@ -3533,7 +3533,7 @@ namespace ltktDAO
 		
 		private string _Contents;
 		
-		private System.Nullable<System.DateTime> _Posted;
+		private System.DateTime _Posted;
 		
 		private string _Author;
 		
@@ -3551,7 +3551,7 @@ namespace ltktDAO
     partial void OnChapaeuChanged();
     partial void OnContentsChanging(string value);
     partial void OnContentsChanged();
-    partial void OnPostedChanging(System.Nullable<System.DateTime> value);
+    partial void OnPostedChanging(System.DateTime value);
     partial void OnPostedChanged();
     partial void OnAuthorChanging(string value);
     partial void OnAuthorChanged();
@@ -3603,7 +3603,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Chapaeu", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Chapaeu", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Chapaeu
 		{
 			get
@@ -3623,7 +3623,7 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Contents", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Contents", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Contents
 		{
 			get
@@ -3643,8 +3643,8 @@ namespace ltktDAO
 			}
 		}
 		
-		[Column(Storage="_Posted", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Posted
+		[Column(Storage="_Posted", DbType="DateTime NOT NULL")]
+		public System.DateTime Posted
 		{
 			get
 			{

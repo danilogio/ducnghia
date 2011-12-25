@@ -158,9 +158,9 @@
     <Type Name="tblNew">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(254) NOT NULL" CanBeNull="false" />
-      <Column Name="Chapaeu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Contents" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Posted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Chapaeu" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Contents" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Posted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Author" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="tblUser_tblNew" Member="tblUser" ThisKey="Author" OtherKey="Username" Type="tblUser" IsForeignKey="true" />
     </Type>

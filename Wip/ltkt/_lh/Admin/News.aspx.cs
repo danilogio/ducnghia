@@ -36,7 +36,10 @@ namespace ltkt.Admin
                                    + CommonConstants.SPACE + CommonConstants.HLINE
                                    + CommonConstants.SPACE
                                    + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-
+                    if (Page.IsPostBack)
+                    {
+                        return;
+                    }
                     int page = 1;
 
                     if (Request.QueryString[CommonConstants.REQ_PAGE] != null)
@@ -45,7 +48,7 @@ namespace ltkt.Admin
                         addPanel.Visible = false;
 
                         page = Convert.ToInt32(Request.QueryString[CommonConstants.REQ_PAGE]);
-                        btnSave.Text = "Thêm tin tức";
+                        //btnSave.Text = "Thêm tin tức";
                         showNews(page);
                     }
                     else if (Request.QueryString[CommonConstants.REQ_ACTION] != null)
@@ -112,7 +115,7 @@ namespace ltkt.Admin
             {
                 totalPages = ((totalNews - mod) / NoOfNewsPerPage) + 1;
             }
-
+            BaseServices bs = new BaseServices();
             for (int idx = 0; idx < lst.Count(); ++idx)
             {
                 tblNew news = lst.ElementAt(idx);
@@ -120,12 +123,23 @@ namespace ltkt.Admin
                 TableCell noCell = new TableCell();
                 noCell.CssClass = "table-cell";
                 noCell.Style["width"] = "20px";
-                noCell.Text = Convert.ToString(news.ID);
+                noCell.Text = Convert.ToString(idx + 1 + (page - 1) * NoOfNewsPerPage);
+
 
                 TableCell titleCell = new TableCell();
                 titleCell.CssClass = "table-cell";
                 //titleCell.Style["width"] = "300px";
                 titleCell.Text = String.Format(DisplayNewsLink, news.ID, news.Title);
+
+                TableCell postedCell = new TableCell();
+                postedCell.CssClass = "table-cell";
+                postedCell.Style["width"] = "80px";
+                postedCell.Text = bs.convertDateToString(news.Posted);
+
+                TableCell authorCell = new TableCell();
+                authorCell.CssClass = "table-cell";
+                authorCell.Style["width"] = "80px";
+                authorCell.Text = news.Author;
 
                 TableCell actionCell = new TableCell();
                 actionCell.CssClass = "table-cell";
@@ -145,6 +159,8 @@ namespace ltkt.Admin
                 TableRow newsRow = new TableRow();
                 newsRow.Cells.Add(noCell);
                 newsRow.Cells.Add(titleCell);
+                newsRow.Cells.Add(postedCell);
+                newsRow.Cells.Add(authorCell);
                 newsRow.Cells.Add(actionCell);
 
                 NewsTable.Rows.AddAt(2 + idx, newsRow);
@@ -172,6 +188,8 @@ namespace ltkt.Admin
             viewPanel.Visible = false;
             addPanel.Visible = true;
             btnAddNews.Text = "Thêm bài viết";
+            btnEdit.Visible = false;
+            btnSave.Visible = true;
             btnSticky.Visible = false;
             Session[CommonConstants.SES_EDIT_NEWS] = null;
         }
@@ -183,7 +201,8 @@ namespace ltkt.Admin
                 tblNew editNews = newsDAO.getNews(newsID);
                 Session[CommonConstants.SES_EDIT_NEWS] = editNews;
 
-                btnSave.Text = "Sửa";
+                btnSave.Visible = false;
+                btnEdit.Visible = true;
                 btnSticky.Visible = true;
                 addPanel.Visible = true;
 
@@ -192,8 +211,19 @@ namespace ltkt.Admin
                 txtContent.Text = editNews.Contents;
             }
         }
+        private tblNew getData(object sender, EventArgs e)
+        {
+            tblNew item = new tblNew();
+            item.Chapaeu = txtChapeau.Text;
+            item.Contents = txtContent.Text;
+            
+            return item;
+        }
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
 
-
+        }
+        
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (Session[CommonConstants.SES_USER] != null)

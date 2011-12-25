@@ -591,7 +591,7 @@ namespace ltkt
             {
                 data += "<h3>\n";
                 data += "                " + item.Title + "";
-                if (DateTime.Today.DayOfYear - item.Posted.Value.DayOfYear <= 4)
+                if (DateTime.Today.DayOfYear - item.Posted.DayOfYear <= 4)
                 {
                     data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_NEW_LINK, CommonConstants.PATH_NEW_LINK_ICON);
                 }
@@ -628,7 +628,7 @@ namespace ltkt
                 {
                     data += "                <li>";
                     data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, items[i].ID.ToString(), items[i].Title.Trim());
-                    if (DateTime.Today.DayOfYear - items[i].Posted.Value.DayOfYear <= 4)
+                    if (DateTime.Today.DayOfYear - items[i].Posted.DayOfYear <= 4)
                     {
                         data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_NEW_LINK, CommonConstants.PATH_NEW_LINK_ICON);
                     }
