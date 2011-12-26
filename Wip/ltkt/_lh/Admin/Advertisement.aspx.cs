@@ -187,6 +187,7 @@ namespace ltkt.Admin
                     if (action == CommonConstants.ACT_VIEW)
                     {
                         btnEdit.Visible = false;
+                        btnClone.Visible = false;
                     }
 
 

@@ -589,9 +589,18 @@ div.block_details_text
 {
 	height: 1200px;
 }
-.block_text  #divUniInfo, #divEnglishDetail
+.block_text #divUniInfo
 {
-	height:1200px;
+	height:1205px;
+}
+
+.block_text #divEnglishDetail
+{
+	height:1205px;
+}
+.block_text #divItemDetail
+{
+	height:1185px;
 }
 .block_text #divControlDetail
 {
