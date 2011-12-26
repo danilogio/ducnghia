@@ -1,0 +1,163 @@
+﻿<html>
+	<head>
+		<title>
+			Chức năng quản lý tin tức
+		</title>	
+		<style type="text/css">
+			.blue_text {
+				color:blue;
+				font-weight:bold;
+				}
+			.red_text {
+				color:red;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			<center>
+				<b>
+					<div class="blue_text">
+						Chức năng quản lý tin tức
+					</div>	
+				</b>
+			</center>
+		</h1>
+		Đây là chức năng cho phép quản lý thêm, xóa, sửa tin tức 
+		tại trang tin tức của website. Chức năng tin tức chỉ dành 
+		cho admin, thành viên thường sẽ không thể tham gia.
+		Chức năng này bao gồm:
+		<ul>
+			<li>
+				<span class="blue_text">1. Hiển thị tin tức:</span>
+				<ul>
+					<li>
+						Hiển thị danh sách các tin tức đã được gửi lên
+						hệ thống. Các tin tức hiển thị theo thứ tự thời gian
+						gửi giảm dần.
+						<center>(hình 1)</center>
+						<ul>
+							<li>
+								<span class="blue_text">Tiêu đề:</span> tiêu đề tin tức,
+								dài tối đa 254 ký tự.
+							</li>
+							<li>
+								<span class="blue_text">Thao tác:</span> các thao tác như xóa,
+								sửa đối với tin tức đó.
+							</li>
+							<li>
+								<span class="blue_text">Ngày gửi:</span> ngày tin tức được gửi lên hệ thống.
+							</li>
+							<li>
+								<span class="blue_text">Người gửi:</span>
+								thành viên <span class="blue_text">BQT</span> gửi tin tới.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">2. Xem tin tức:</span>
+				<ul>
+					<li>
+						Trong danh sách tin tức, khi nhấn vào <span class="blue_text">Tiêu đề</span>
+						của tin tức
+						<center>(hình 2)</center>
+					</li>
+					<li>
+						Nội dung tin tức sẽ hiện ra tại phần tin tức của trang web.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">3. Thêm tin tức:</span>
+				<ul>
+					<li>
+						Nhấn vào nút <span class="blue_text">Thêm tin tức</span> để thêm một tin tức mới.
+						<center>(hình 3)</center>
+					</li>
+					<li>
+						Một tin tức mới sẽ bao gồm các phần sau:
+						<center>(hình 4)</center>
+						<ul>
+							<li>
+								<span class="blue_text">Tiêu đề:</span> tiêu đề của tin tức.
+							</li>
+							<li>
+								<span class="blue_text">Tóm tắt:</span> phần tóm tắt của tin tức,
+								sẽ hiển thị dưới dạng link thu gọn
+								<center>(hình 5)</center>
+							</li>
+							<li>
+								<span class="blue_text">Nội dung:</span> nội dung chính của tin tức,
+								có thể soạn thảo như một trang văn bản word.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Sau khi điền đầy đủ thông tin, nhấn nút <span class="blue_text">Thêm tin tức</span>
+						để thêm một tin tức mới.
+					</li>
+					<li>
+						Nhấn nút <span class="blue_text">Quay lại</span> để dừng việc thêm tin tức.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">4. Sửa tin tức:</span>
+				<ul>
+					<li>
+						Khi nhấn vào biểu tượng <span class="blue_text">Sửa tin tức</span>
+						thì cho phép thay đổi nội dung của tin tức
+						<center>(hình 6)</center>
+					</li>
+					<li>
+						Các thông tin bao gồm:
+						<center>(hình 7)</center>
+						<ul>
+							<li>
+								<span class="blue_text">Tiêu đề:</span> tiêu đề của tin tức tối đa 254 ký tự.
+							</li>
+							<li>
+								<span class="blue_text">Tóm tắt:</span> tóm tắt tin tức.
+							</li>
+							<li>
+								<span class="blue_text">Tác giả:</span> Người gửi tin tức,
+								<span class="red_text">readonly</span>.
+							</li>
+							<li>
+								<span class="blue_text">Ngày gửi:</span> ngày tin tức được gửi.
+							</li>
+							<li>
+								<span class="blue_text">Nội dung:</span> nội dung chính của tin tức.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Sau khi sửa, nhấn nút <span class="blue_text">Sửa</span> để lưu lại.
+					</li>
+					<li>
+						Nếu muốn tin tức được đánh dấu là dáng xem thì
+						nhấn nút <span class="blue_text">Sticky</span>.
+					</li>
+					<li>
+						Nhấn nút <span class="blue_text">Quay lại</span> để dừng việc sửa.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">5. Xóa tin tức:</span>
+				<ul>
+					<li>
+						Khi muốn xóa một tin tức thì nhấn nút <span class="blue_text">Xóa tin tức</span> đó.
+						<center>(hình 8)</center>
+					</li>
+					<li>
+						Một thông báo hiện ra, nhấn nút <span class="blue_text">OK</span> để tiếp tục.
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
