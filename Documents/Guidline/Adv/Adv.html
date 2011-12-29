@@ -1,0 +1,242 @@
+﻿<html>
+	<head>
+		<title>
+			Quản lý Quảng cáo
+		</title>	
+		<style type="text/css">
+			.blue_text {
+				color:blue;
+				font-weight:bold;
+				}
+			.red_text {
+				color:red;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			<center>
+				<b>
+					<div class="blue_text">
+						Quản lý Quảng cáo
+					</div>	
+				</b>
+			</center>
+		</h1>
+		Chức năng quản lý Quảng cáo cung cấp tác vụ xem, sửa, xóa các
+		đăng ký quảng cáo trên website. Chức năng này bao gồm các phần chính:
+		<ul>
+			<li>
+				<span class="blue_text">1. Xem quảng cáo:</span>
+				<center>(hình 1)</center>
+				<ul>
+					<li>
+					Các trạng thái có thể xem bao gồm:
+						<ul>
+							<li>
+								<span class="blue_text">Tất cả:</span> bao gồm các quảng cáo
+								ở tất cả các trạng thái.
+							</li>
+							<li>
+								<span class="blue_text">Chưa duyệt:</span> các đăng ký quảng cáo
+								chưa được <span class="blue_text">BQT</span> duyệt.
+							</li>
+							<li>
+								<span class="blue_text">Đã duyệt:</span> các đăng ký quảng cáo 
+								đã được <span class="blue_text">BQT</span> duyệt. Một quảng cáo được
+								coi là đã duyệt khi nó được chuyển trạng thái là đã duyệt
+								và có một vị trí hiển thị trên trang web.
+							</li>
+							<li>
+								<span class="blue_text">Pending:</span> các đăng ký quảng cáo 
+								sắp hết hạn, trong thời hạn một tuần
+								cho tới ngày kết thúc quảng cáo, các quảng cáo này sẽ 
+								ở trạng thái pending để chờ <span class="blue_text">BQT</span>
+								liên lạc lại với người đặt quảng cáo và gia hạn thêm thời gian nếu có thể.
+							</li>
+							<li>
+								<span class="blue_text">Khóa:</span> các đăng ký quảng cáo 
+								đã hết hạn sẽ tự động chuyển sang
+								trạng thái khóa hoặc được chuyển sang bởi người Quản trị.
+							</li>
+							<li>
+								<span class="blue_text">Sticky:</span> các đăng ký quảng cáo
+								được đánh dấu là đáng lưu ý.
+							</li>
+							<li>
+								<span class="blue_text">Theo vị trí:</span> liệt kê các đăng ký
+								quảng cáo theo các vị trí hiện có trên trang web
+							</li>
+						</ul>
+					</li>
+					<li>
+						Hiển thị danh sách quảng cáo hiện có:
+						<center>(hình 2)</center>
+					</li>
+					<li>
+						Các thông tin hiển thị bao gồm:
+						<ul>
+							<li>
+								<span class="blue_text">Tên công ty/cá nhân:</span> Họ tên công ty,
+								tổ chức hoặc cá nhân xin đăng ký quảng cáo.
+							</li>
+							<li>
+								<span class="blue_text">Ngày hết hạn:</span> Ngày đăng ký quảng cáo
+								sẽ hết hạn và không xuất hiện trên trang web nữa.
+							</li>
+							<li>
+								<span class="blue_text">Trạng thái:</span> Trạng thái hiện tại của 
+								tin quảng cáo.
+							</li>
+							<li>
+								<span class="blue_text">Thao tác:</span> Các thao tác sửa, xóa 
+								đối với quảng cáo.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">2. Xem chi tiết quảng cáo:</span>
+				<ul>
+					<li>
+						Trong danh sách các tin quảng cáo, 
+						nhấn vào <span class="blue_text">tên của công ty/cá nhân</span>
+						để xem chi tiết về quảng cáo đó.
+						<center>(hình 3)</center>
+					</li>
+					<li>
+						Các thông tin hiển thị bao gồm: chỉ có thể xem, 
+						<span class="red_text">readonly</span>.
+						<center>(hình 4)</center>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">3. Chức năng sửa đăng ký quảng cáo:</span>
+				<ul>
+					<li>
+						Trong danh sách các tin quảng cáo, nhấn vào biểu tượng
+						<span class="blue_text">Sửa</span> để sửa thông tin của đăng ký quảng cáo đó.
+						<center>(hình 5)</center>
+					</li>
+					<li>
+						Trang hiển thị sẽ bao gồm các thông tin sau:
+						<center>(hình 6)</center>
+						<ul>
+							<li>
+								<span class="blue_text">Tên công ty/cá nhân:</span>
+								Tên công ty, cá nhân, tổ chức đăng ký đặt quảng cáo.
+							</li>
+							<li>
+								<span class="blue_text">Địa chỉ:</span> Địa chỉ liên lạc của công ty/cá nhân.
+							</li>
+							<li>
+								<span class="blue_text">Email:</span> Email của công ty/cá nhân.
+							</li>
+							<li>
+								<span class="blue_text">Điện thoại:</span> Điện thoại liên lạc 
+								của công ty/cá nhân.
+							</li>
+							<li>
+								<span class="blue_text">Bắt đầu quảng cáo từ ngày:</span>
+								Ngày tin quảng cáo bắt đầu xuất hiện trên website.
+							</li>
+							<li>
+								<span class="blue_text">Kết thúc quảng cáo vào ngày:</span>
+								Ngày tin quảng cáo kết thúc hiệu lực và không xuất hiện trên website.
+							</li>
+							<li>
+								<span class="blue_text">Giá:</span> Giá tiền quảng cáo.
+							</li>
+							<li>
+								<span class="blue_text">Trang web công ty/cá nhân:</span>
+								Là địa chỉ website của công ty/cá nhân mà khi
+								nhấn vào <span class="blue_text">hình quảng cáo</span>
+								, trình duyệt sẽ mở trang web đó, 
+								để dấu <span class="red_text">#</span> nếu không có.
+							</li>
+							<li>
+								<span class="blue_text">Số lần click:</span> Số lượng người dùng
+								click vào trang <span class="blue_text">Quảng cáo</span> trên website.
+							</li>
+							<li>
+								<span class="blue_text">Tập tin quảng cáo:</span> Là tập tin hình ảnh
+								được hiển thị trên website. Quản trị viên
+								có thể nhấn vào nút <span class="blue_text">Xem</span> để xem tập tin 
+								hiện tại, hoặc nhấn nút <span class="blue_text">Tải hình</span>
+								để tải tập tin khác thay thế.
+							</li>
+							<li>
+								<span class="blue_text">Kích thước:</span> Kích thước hiển thị
+								của hình quảng cáo, to, nhỏ phù hợp với bố cục của website. 
+								Để <span class="red_text">0x0</span> nếu dùng giá trị mặc định của website.
+								
+							</li>
+							<li>
+								<span class="blue_text">Ghi chú:</span> Các ghi chú của quảng cáo.
+							</li>
+							<li>
+								<span class="blue_text">Vị trí:</span> Xem tất cả các vị trí 
+								quảng cáo hiện có
+							</li>
+							<li>
+								<span class="blue_text">Vị trí đăng ký:</span> Là vị trí mà 
+								công ty/cá nhân đăng ký quảng cáo.
+							</li>
+							<li>
+								<span class="blue_text">Vị trí quảng cáo chính thức:</span>
+								Là vị trí hiện tại mà tin quảng cáo được đăng.
+							</li>
+							<li>
+								<span class="blue_text">Trạng thái:</span> Bao gồm các trạng thái
+								chưa duyệt, đã duyệt, sticky, khóa
+								<ul>
+									<li>
+										<span class="blue_text">Quy tắc chuyển trạng thái:</span>
+										một đăng ký quảng cáo mới luôn có trạng thái là chưa duyệt 
+										và quy tắc chuyển như sau.
+									</li>
+									<li>
+										Từ chưa duyệt có thể chuyển sang đã duyệt, hoặc sticky.
+									</li>
+									<li>
+										Từ đã duyệt có thể chuyển sang trạng thái khóa.
+									</li>
+									<li>
+										Từ sticky có thể chuyển sang trạng thái đã duyệt
+									</li>
+									<li>
+										Từ khóa có thể chuyển sang trạng thái chưa duyệt.
+									</li>
+									<li>
+										Muốn chuyển sang đã duyệt thì bắt buộc người quản trị phải 
+										chọn một vị trí hiển thị cho quảng cáo đó.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Sau khi sửa xong chi tiết, nhấn nút <span class="blue_text">Sửa</span>
+						để cập nhật thay đổi.
+					</li>
+					<li>
+						Nếu như một công ty/cá nhân muốn đăng ký hai vị trí quảng cáo trở lên
+						Quản trị viên nhấn nút <span class="blue_text">Clone</span>
+						để nhân bản quảng cáo hiện tại thành một quảng cáo mới và gán vị trí khác.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="blue_text">4. Chức năng xóa:</span>
+				<ul>
+					Khi nhấn vào biểu tượng <span class="blue_text">Xóa</span> tại danh sách quảng cáo, 
+					đăng ký quảng cáo đó sẽ được xóa. Một thông báo hiện ra.
+					Nhấn nút <span class="blue_text">OK</span> nếu muốn tiếp tục.
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
