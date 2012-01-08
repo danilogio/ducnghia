@@ -1,183 +1,78 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/AdminMaster.master" AutoEventWireup="true"
     CodeFile="Security.aspx.cs" Inherits="ltkt.Admin.Security" Title="Untitled Page" %>
 
-<asp:Content ID="SecurityHead" ContentPlaceHolderID="cphAdminHeader" runat="Server">
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
+<asp:Content ID="SecurityHead" ContentPlaceHolderID="cphAdminHeader" runat="server">
     <title>Quản lý bảo mật | Website luyện thi kinh tế</title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Security" ContentPlaceHolderID="cphAdminContent" runat="Server">
+    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="Server" />
     <div id="div_Admin" class="block_text">
-        <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
-            <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
+        <asp:Panel ID="detailPanel" runat="server" Visible="true">
+            <div class="form_settings">
+                <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
+                    <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
+                </asp:Panel>
+                <div id="divFunction">
+                    <asp:Button ID="btnUpdate" runat="server" Text="Lưu" CssClass="formbutton" OnClick="btnUpdate_Click" />&nbsp;&nbsp;
+                    <hr />
+                </div>
+                <br />
+                <div id="divDetail" style="margin-left: 300px;">
+                    <p>
+                        <span><b>Thao tác</b></span><br />
+                        <asp:DropDownList ID="ddlAction" runat="server" AutoPostBack="true" OnSelectedIndexChanged="btnSelectedChange_Click">
+                            <asp:ListItem Text="---Please select---" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Bảo trì Website" Value="UNDERCONS"></asp:ListItem>
+                            <asp:ListItem Text="Thông báo" Value="ANOUNCEMENT"></asp:ListItem>
+                            <asp:ListItem Text="Comment" Value="COMMENT"></asp:ListItem>
+                            <asp:ListItem Text="Comment nhanh" Value="COMMENT_EASY"></asp:ListItem>
+                            <asp:ListItem Text="Liên hệ" Value="CONTACT"></asp:ListItem>
+                            <asp:ListItem Text="Download all" Value="DOWNLOAD"></asp:ListItem>
+                            <asp:ListItem Text="Download EL" Value="DOWNLOAD_EL"></asp:ListItem>
+                            <asp:ListItem Text="Download IT" Value="DOWNLOAD_IT"></asp:ListItem>
+                            <asp:ListItem Text="Download Uni" Value="DOWNLOAD_UNI"></asp:ListItem>
+                            <asp:ListItem Text="Upload" Value="UPLOAD"></asp:ListItem>
+                            <asp:ListItem Text="Upload EL" Value="UPLOAD_EL"></asp:ListItem>
+                            <asp:ListItem Text="Upload IT" Value="UPLOAD_IT"></asp:ListItem>
+                            <asp:ListItem Text="Upload Uni" Value="UPLOAD_UNI"></asp:ListItem>
+                            <asp:ListItem Text="Gửi email" Value="EMAIL_SEND"></asp:ListItem>
+                            <asp:ListItem Text="Đăng nhập" Value="LOGIN"></asp:ListItem>
+                            <asp:ListItem Text="Gửi Tin tức" Value="NEWS_POST"></asp:ListItem>
+                            <asp:ListItem Text="Xem Tin tức" Value="NEWS_VIEW"></asp:ListItem>
+                            <asp:ListItem Text="Xem trước" Value="PREVIEW_ARTICLE"></asp:ListItem>
+                            <asp:ListItem Text="Đăng ký tài khoản" Value="REGISTRY"></asp:ListItem>
+                            <asp:ListItem Text="Tìm kiếm" Value="SEARCH"></asp:ListItem>
+                            <asp:ListItem Text="Quảng cáo" Value="ADS"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
+                    <p>
+                        <span><b>Trạng thái</b></span><br />
+                        <asp:DropDownList ID="ddlState" runat="server">
+                            <asp:ListItem Text="Bật" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Tắt" Value="1"></asp:ListItem>
+                        </asp:DropDownList>
+                    </p>
+                    <p>
+                        <span><b>Message</b></span><br />
+                        <span title="Lý do">
+                            <asp:TextBox ID="txtReason" runat="server" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                        </span>
+                    </p>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <p>
+                        <span><b>Chỉ dẫn</b></span><br />
+                        <span title="Ý nghĩa chức năng">
+                            <asp:TextBox ID="txtGuidline" runat="server" Rows="5" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
+                        </span>
+                    </p>
+                </div>
+            </div>
         </asp:Panel>
-        
-        <div id="divFunction">
-            <asp:Button ID="btnUpdate" runat="server" Text="Cập nhật" CssClass="formbutton" OnClick="btnUpdate_Click" />&nbsp;&nbsp;
-            <hr />
-        </div>
-        <br />
-        <div id="left" align="left" style="float: left; width: 50%;">
-           
-             <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUndercontruction" Text="1.Bật/Tắt Website" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtUndercontructionReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkAnnoucement" Text="2.Bật/Tắt hiện thông báo" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Nội dung thông báo">
-                    <asp:TextBox ID="txtAnnoucementMessage" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-             <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkComment" Text="3.Bật/Tắt Comment bài viết" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Nội dung thông báo">
-                    <asp:TextBox ID="txtCommentReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkCommentEasy" Text="Bật/Tắt chức năng Comment không cần duyệt" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtCommentEasyReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-             <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkContact" Text="Bật/Tắt chức năng liên hệ" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtContactReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-             <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkDownloadAll" Text="Bật/Tắt Download toàn Website" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtDownloadAllReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-             <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkDownloadEnglish" Text="Bật/Tắt Download cho trang English" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtDownloadEnglishReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkDownloadIT" Text="Bật/Tắt Download cho trang IT" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtDownloadITReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkDownloadUni" Text="Bật/Tắt Download cho trang Uni" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtDownloadUniReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-             <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkEmailSending" Text="Bật/Tắt chức năng gửi email" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtEmailSendReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-        </div>
-        
-        <div id="right" align="left" style="float: left; width: 50%;">
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkLogin" Text="Bật/Tắtchức năng Đăng nhập" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtLoginReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkNewsPost" Text="Bật/Tắtchức năng gửi tin tức" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtNewsPostReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkNewsView" Text="Bật/Tắtchức năng xem tin tức" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtNewsViewReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkPreview" Text="Bật/Tắt Xem trước" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtPreviewReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkRegistry" Text="Bật/Tắt Đăng ký thành viên" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtRegistryReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkSearch" Text="Bật/Tắt chức năng tìm kiếm" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtSearchReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkAds" Text="Bật/tắt chức năng quảng cáo" runat="server"/></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtAdsReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUploadAll" Text="Bật/Tắt chức năng Upload" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtUploadAllReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUploadEnglish" Text="Bật/Tắt Upload cho trang English" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtUploadEnglishReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-           
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUploadIT" Text="Bật/Tắt Upload cho trang IT" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtUploadITReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-            
-            <!-- checkbox -->
-            <div style="float: left; width: 100%;">
-                <asp:CheckBox ID="chkUploadUni" Text="Bật/Tắt Upload cho trang Uni" runat="server" /></div>
-            <div style="background: white;">
-                <span title="Lý do">
-                    <asp:TextBox ID="txtUploadUniReason" runat="server" Rows="2" Columns="55" TextMode="MultiLine"
-                        CssClass="multiline"></asp:TextBox></span></div>
-        </div>
     </div>
 </asp:Content>

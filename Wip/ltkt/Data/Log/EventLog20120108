@@ -1,0 +1,29 @@
+1/8/2012 11:07:55 AM ==> [dvtrung]: Change code UNDERCONS of tblAdmin is OFF
+1/8/2012 11:07:55 AM ==> [dvtrung]: Change code UNDERCONS of tblAdmin is ON
+1/8/2012 11:52:52 AM ==> Thread was being aborted.
+mscorlib
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ltkt.MasterPage.Page_Load(Object sender, EventArgs e) in e:\Data\Projects\ducnghia\Wip\ltkt\MasterPage.master.cs:line 313
+
+1/8/2012 11:07:55 AM ==> [dvtrung]: Change code UNDERCONS of tblAdmin is OFF
+1/8/2012 11:07:55 AM ==> [dvtrung]: Change code UNDERCONS of tblAdmin is OFF
+1/8/2012 11:58:09 AM ==>  Update record WELCOME_TEXT to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record TITLE_ON_HEADER to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record TITLE_ON_FOOTER to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record MAX_FILE_SIZE to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record FILE_TYPE_ALLOW to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record IMG_FILE_TYPE_ALLOW to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record IMG_FILE_SIZE_MAX to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record ANNOUCEMENT to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record EMAIL_CONFIG to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record NUM_ARTICLE_ON_UNI to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record NUM_ARTICLE_ON_EL to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record NUM_ARTICLE_ON_IT to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record NUM_ARTICLE_ON_TAB to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record NUM_ARTICLE_STICKY to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record NUM_RECORD_RELATIVE to Table tblControl successful
+1/8/2012 11:58:09 AM ==>  Update record ADDRESS to Table tblControl successful

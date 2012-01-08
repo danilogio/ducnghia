@@ -74,7 +74,7 @@
                             <asp:TableCell CssClass="table-header-cell">
                                 <asp:Literal ID="liFromTo" runat="server"></asp:Literal>
                             </asp:TableCell>
-                            <asp:TableCell CssClass="table-header-cell">Chủ đề</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell">Tiêu đề</asp:TableCell>
                             <asp:TableCell CssClass="table-header-cell">Ngày gửi</asp:TableCell>
                             <asp:TableCell CssClass="table-header-cell">Xóa</asp:TableCell>
                         </asp:TableRow>
@@ -112,7 +112,7 @@
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell CssClass="table-header-cell" Width="80px">Chủ đề</asp:TableCell>
+                            <asp:TableCell CssClass="table-header-cell" Width="80px">Tiêu đề</asp:TableCell>
                             <asp:TableCell CssClass="table-cell">
                                 <asp:Literal ID="SubjectLiteral" runat="server" />
                             </asp:TableCell>
@@ -143,7 +143,7 @@
                         <asp:TextBox ID="txtTo" runat="server"></asp:TextBox>
                     </p>
                     <p>
-                        <span>Chủ đề:</span>
+                        <span>Tiêu đề:</span>
                         <asp:TextBox ID="txtSubject" runat="server"></asp:TextBox>
                     </p>
                 </div>
@@ -185,7 +185,7 @@
                     <asp:TextBox ID="txtSmtpPort" runat="server"></asp:TextBox>
                 </p>
                 <p style="padding-left: 350px">
-                    <asp:Button ID="btnSubmitConfig" runat="server" CssClass="formbutton" Text="Cấu hình"
+                    <asp:Button ID="btnSubmitConfig" runat="server" CssClass="formbutton" Text="Lưu Cấu hình"
                         OnClick="btnSubmitConfig_Click" />
                     <asp:Button ID="btnCancelConfig" runat="server" CssClass="formbutton" Text="Trở về"
                         OnClick="btnCancelConfig_Click" />
