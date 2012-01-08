@@ -544,7 +544,7 @@ namespace ltkt
             string data = CommonConstants.BLANK;
             try
             {
-                IEnumerable<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB);
+                IEnumerable<tblNew> lst = newsDAO.getLatestNewsByDate(CommonConstants.DEFAULT_NUMBER_RECORD_ON_TAB, -1);
                 IList<tblNew> items = lst.ToList();
                 if (items.Count > 0)
                 {
@@ -591,7 +591,7 @@ namespace ltkt
             {
                 data += "<h3>\n";
                 data += "                " + item.Title + "";
-                if (DateTime.Today.DayOfYear - item.Posted.DayOfYear <= 4)
+                if (DateTime.Today.Year == item.Posted.Year && DateTime.Today.DayOfYear - item.Posted.DayOfYear <= 4)
                 {
                     data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_NEW_LINK, CommonConstants.PATH_NEW_LINK_ICON);
                 }
@@ -628,7 +628,7 @@ namespace ltkt
                 {
                     data += "                <li>";
                     data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_NEWS_LINK, items[i].ID.ToString(), items[i].Title.Trim());
-                    if (DateTime.Today.DayOfYear - items[i].Posted.DayOfYear <= 4)
+                    if (DateTime.Today.Year == items[i].Posted.Year && DateTime.Today.DayOfYear - items[i].Posted.DayOfYear <= 4)
                     {
                         data += BaseServices.createMsgByTemplate(CommonConstants.TEMP_IMG_NEW_LINK, CommonConstants.PATH_NEW_LINK_ICON);
                     }

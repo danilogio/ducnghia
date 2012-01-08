@@ -61,6 +61,7 @@ namespace ltkt
                         loginPanel.Visible = false;
                         userPanel.Visible = true;
                         HpkUpload.Visible = true;
+                        updateAccount(user);
                     }
                     //display annoucement
                     if (adminDAO.isON(CommonConstants.AF_ANNOUCEMENT))
@@ -348,6 +349,7 @@ namespace ltkt
             if (_user.Type == false)
             {
                 HpkAdmin.Visible = true;
+                HpkContact.Visible = false;
             }
             statisticDAO.addLatestLoginUser(_user.Username);
         }

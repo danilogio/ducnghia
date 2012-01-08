@@ -32,7 +32,9 @@
             $("#EnglishSection").accordion({ header: "h3" });
             $("#ItSection").accordion({ header: "h3" });
         });
-
+        $(window).resize(function() {
+            ShowAdDiv();
+        });
         function FloatTopDiv() {
             startLX = ((document.body.clientWidth - MainContentW) / 2) - LeftBannerW - LeftAdjust, startLY = TopAdjust + 80;
             startRX = ((document.body.clientWidth - MainContentW) / 2) + MainContentW + RightAdjust, startRY = TopAdjust + 0;
@@ -85,7 +87,7 @@
     </script>
 
     <script type="text/javascript">
-        document.write("<script type='text/javascript' language='javascript'>MainContentW = 1000;LeftBannerW = 125;RightBannerW = 125;LeftAdjust = 5;RightAdjust = 5;TopAdjust = 10;ShowAdDiv();window.onresize=ShowAdDiv;;<\/script>"); 
+        document.write("<script type='text/javascript' language='javascript'>MainContentW = 1000;LeftBannerW = 125;RightBannerW = 125;LeftAdjust = 5;RightAdjust = 5;TopAdjust = 10;ShowAdDiv();<\/script>"); 
     </script>
 
     <style type="text/css">
@@ -96,11 +98,6 @@
             border: solid 1px white;
         }
     </style>
-
-    <script type="text/javascript">
-        
-    </script>
-
 </head>
 <body onload="init()">
     <%--<div style="width: 992px;height: 0px;">
@@ -140,19 +137,18 @@
             </div>
             <div id="nav">
                 <div id="center-ul">
-                    
-                        <ul>
-                            <li>
-                                <asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/News.aspx">Tin tức</asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="HpkUpload" runat="server" NavigateUrl="~/Upload.aspx" Visible="false">Gửi bài</asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="HpkSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
-                            <li>
-                                <asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="~/_lh/Login.aspx" Visible="false">Admin</asp:HyperLink></li>
-                            <%--<li>
+                    <ul>
+                        <li>
+                            <asp:HyperLink ID="HpkHome" runat="server" NavigateUrl="~/Home.aspx">Trang chủ</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HpkNews" runat="server" NavigateUrl="~/News.aspx">Tin tức</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HpkUpload" runat="server" NavigateUrl="~/Upload.aspx" Visible="false">Gửi bài</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HpkSearch" runat="server" NavigateUrl="~/Search.aspx">Tìm kiếm</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HpkAdmin" runat="server" NavigateUrl="~/_lh/Login.aspx" Target="~/_lh/Login.aspx" Visible="false">Admin</asp:HyperLink></li>
+                        <%--<li>
                                 <asp:HyperLink ID="hpkLink" runat="server" NavigateUrl="#">Liên kết</asp:HyperLink>
                                 <%--<ul>
                                     <li><a href="#">Photoshop</a></li>
@@ -160,10 +156,9 @@
                                     <li><a href="#">Members</a></li>
                                 </ul>
                             </li>--%>
-                            <li>
-                                <asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
-                        </ul>
-                   
+                        <li>
+                            <asp:HyperLink ID="HpkContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
+                    </ul>
                 </div>
             </div>
             <div id="body">
@@ -190,23 +185,25 @@
                             <ul>
                                 <li id="idlogin" style="background: white; border: 1px solid #a6c9e2;">
                                     <asp:Panel ID="loginPanel" runat="server" Visible="true">
-                                        <div id="divUsername" style="display: table-row">
-                                            <div id="divUsernameLabel" style="float: left; width: 40%">
-                                                <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:"></asp:Label>
+                                        <div style="float:left; width:100%;">
+                                            <div id="divUsername" style="float:left;width:100%;">
+                                                <div id="divUsernameLabel" style="float: left; width: 40%">
+                                                    <asp:Label ID="lblUsername" runat="server" Text="Tên đăng nhập:"></asp:Label>
+                                                </div>
+                                                <div id="divUsernameDetails" style="float: left; width: 50%">
+                                                    <asp:TextBox ID="txtUsername" runat="server" Width="140px"></asp:TextBox>
+                                                </div>
                                             </div>
-                                            <div id="divUsernameDetails" style="float: left; width: 59%">
-                                                <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
+                                            <div id="divPassword" style="float:left;width:100%;margin-top:5px;">
+                                                <div id="divPasswordLabel" style="float: left; width: 40%">
+                                                    <asp:Label ID="lblPassword" runat="server" Text="Mật khẩu:"></asp:Label>
+                                                </div>
+                                                <div id="divPasswordDetails" style="float: left; width: 50%">
+                                                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="140px"></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div id="divPassword" style="display: table-row">
-                                            <div id="divPasswordLabel" style="float: left; width: 40%">
-                                                <asp:Label ID="lblPassword" runat="server" Text="Mật khẩu:"></asp:Label>
-                                            </div>
-                                            <div id="divPasswordDetails" style="float: left; width: 59%">
-                                                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                        <div id="divLogin">
+                                        <div id="divLogin" style="float:left; width:100%;margin-top:7px;">
                                             <div id="divRemember" style="float: left; width: 56%">
                                                 <asp:CheckBox ID="chxRemember" runat="server" />
                                                 <asp:Label ID="lblRemember" runat="server" Text="Lưu thông tin"></asp:Label>
@@ -216,7 +213,7 @@
                                                     CssClass="searchsubmit formbutton" />
                                             </div>
                                         </div>
-                                        <div id="divUlitiesLogin">
+                                        <div id="divUlitiesLogin" style="float:left; width:100%;margin-top:7px;">
                                             <div style="float: left; padding-left: 5px; width: 49%">
                                                 <asp:HyperLink ID="hpkForgotPassword" NavigateUrl="~/ResetPassword.aspx" runat="server"
                                                     Font-Underline="False">Quên mật khẩu?</asp:HyperLink>
@@ -226,18 +223,14 @@
                                             </div>
                                         </div>
                                     </asp:Panel>
-                                    <div style="display: block; text-align: center; clear: both;">
+                                    <div style="display: block;text-align: center; clear: both;">
                                         <asp:Panel ID="userPanel" runat="server" Visible="false">
                                             <div>
                                                 <div style="float: left; width: 75%;">
                                                     <div id="divInfo" style="width: 100%; margin-top: 0px">
                                                         <img src="images/user-icon-small.png" alt="" align="left" width="20px" height="20px" />
                                                         <asp:HyperLink ID="hplProfile" NavigateUrl="~/Profile.aspx" runat="server" Font-Underline="False"
-                                                            Font-Italic="True">
-                                                            <label>
-                                                                Xin chào
-                                                            </label>
-                                                            <span class="activeText">
+                                                            Font-Italic="True">Xin chào<span class="activeText">
                                                                 <asp:Literal ID="loginUser" runat="server"></asp:Literal></span></asp:HyperLink>
                                                     </div>
                                                 </div>
@@ -486,7 +479,8 @@
                 <div class="footer-content">
                     <p>
                         <asp:Label ID="lblFooterTitle" runat="server" Text="www.luyenthikinhte.com"></asp:Label>
-                        <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a>| <a href="#header">Đầu
+                        <a href="#">Sơ đồ Web</a> | <a href="#">Quy định bảo mật</a>| <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink>
+                         |<a href="#header">Đầu
                             Trang</a></p>
                     <p>
                         <asp:Label ID="lblAddress" runat="server" Text=""></asp:Label></p>
