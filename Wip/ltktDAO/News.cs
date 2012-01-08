@@ -240,9 +240,10 @@ namespace ltktDAO
         /// </summary>
         /// <param name="_numNews"></param>
         /// <returns></returns>
-        public IEnumerable<tblNew> getLatestNewsByDate(int _numNews)
+        public IEnumerable<tblNew> getLatestNewsByDate(int _numNews, int exceptId)
         {
             IEnumerable<tblNew> lst = (from p in DB.tblNews
+                                       where p.ID != exceptId
                                       orderby p.Posted descending
                                        select p).Take(_numNews);
             return lst;

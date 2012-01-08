@@ -36,9 +36,9 @@
             theme_advanced_buttons1: "bold,italic,underline,strikethrough,formatselect,fontselect,fontsizeselect,forecolor,backcolor,link,image,bullist,numlist,justifyleft,justifycenter,justifyright,justifyfull",
             theme_advanced_buttons2: "",
             theme_advanced_buttons3: "",
-            
+
             theme_advanced_toolbar_location: "top",
-            theme_advanced_toolbar_align: "center"  
+            theme_advanced_toolbar_align: "center"
 
         });
     </script>
@@ -84,13 +84,14 @@
             </div>
         </asp:Panel>
         <asp:Panel ID="addPanel" runat="server">
+            <p>
+                <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
+            </p>
             <div id="addNews" class="form_settings">
                 <%--<asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />--%>
                 <div id="composeFunction">
-                    <asp:Button ID="btnSave" runat="server" Text="Thêm" CssClass="formbutton"
-                        OnClick="btnSave_Click" />&nbsp;
-                     <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton"
-                        OnClick="btnEdit_Click" />
+                    <asp:Button ID="btnSave" runat="server" Text="Thêm" CssClass="formbutton" OnClick="btnSave_Click" />&nbsp;
+                    <asp:Button ID="btnEdit" runat="server" Text="Sửa" CssClass="formbutton" OnClick="btnEdit_Click" />
                     <asp:Button ID="btnSticky" runat="server" Text="Sticky" CssClass="formbutton" Visible="false" />&nbsp;
                     <asp:Button ID="btnCancel" runat="server" Text="Quay lại" CssClass="formbutton" OnClick="btnCancel_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Literal ID="liMessage" runat="server" Text="" Visible="False"></asp:Literal>
@@ -101,17 +102,26 @@
                 <div id="titleHeader">
                     <br />
                     <p>
-                        <span>Tiêu đề:</span>
+                        <span>Tiêu đề</span>
                         <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="reqTitle" runat="server" ErrorMessage="Vui lòng nhập Tiêu đề"
+                            ControlToValidate="txtTitle" Display="None">
+                        </asp:RequiredFieldValidator>
                     </p>
                     <p>
-                        <span>Tóm tắt:</span>
+                        <span>Tóm tắt</span>
                         <asp:TextBox ID="txtChapeau" runat="server" TextMode="MultiLine" Rows="5" CssClass="NoEditor"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Vui lòng nhập Tóm tắt"
+                            ControlToValidate="txtChapeau" Display="None">
+                        </asp:RequiredFieldValidator>
                     </p>
                 </div>
                 <div id="composeContent">
                     <p>
                         <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="12"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Vui lòng nhập Nội dung tin tức"
+                            ControlToValidate="txtContent" Display="None">
+                        </asp:RequiredFieldValidator>
                     </p>
                 </div>
             </div>
