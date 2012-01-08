@@ -345,7 +345,7 @@ namespace ltktDAO
             /// <summary>
             /// reason
             /// </summary>
-            public const string TXT_REASON = "Lý do";
+            public const string TXT_REASON = "Lý do cho";
             public const string TXT_INFORM = "BQT Thông báo:";
             /// <summary>
             /// posted date

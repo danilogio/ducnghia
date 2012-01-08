@@ -26,6 +26,10 @@ namespace ltkt
                 if (!adminDAO.isON(CommonConstants.AF_UNDERCONTRUCTION))
                 {
                     ltsItem.Width = 240;
+                    lblFooterTitle.Text = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_FOOTER);
+                    string va = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
+                    lblAddress.Text = controlDAO.getValueString(CommonConstants.CF_ADDRESS);
+                    imgLogo.ImageUrl = controlDAO.getValueString(CommonConstants.CF_LOGO);
                     string[] sInformation = readInformation();
                     //get cookie successful
                     if (sInformation != null)
@@ -40,10 +44,7 @@ namespace ltkt
                                 updateAccount(user);
                             }
                         }
-                        lblFooterTitle.Text = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_FOOTER);
-                        string va = controlDAO.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
-                        lblAddress.Text = controlDAO.getValueString(CommonConstants.CF_ADDRESS);
-                        imgLogo.ImageUrl = controlDAO.getValueString(CommonConstants.CF_LOGO);
+                        
                     }
 
                     if (Session[CommonConstants.SES_USER] == null)

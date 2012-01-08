@@ -125,7 +125,7 @@
                     <tr>
                         <td style="width: 30%; float: left; margin-top: 40px;">
                             <a href="Home.aspx">
-                                <asp:Image ID="imgLogo" Height="88px" runat="server" ImageUrl="images/logp.png" Width="100px"
+                                <asp:Image ID="imgLogo" Height="88px" runat="server" ImageUrl="images/logo.png" Width="270px"
                                     AlternateText="www.luyenthikinhte.com" /></a>
                         </td>
                         <td style="width: 60%; float: left; margin-top: 40px;">

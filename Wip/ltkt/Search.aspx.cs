@@ -15,6 +15,7 @@ namespace ltkt
         ltktDAO.English englishDAO = new ltktDAO.English();
         ltktDAO.Contest contestDAO = new ltktDAO.Contest();
         ltktDAO.Control control = new ltktDAO.Control();
+        ltktDAO.Admin adminDao = new ltktDAO.Admin();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,8 +25,27 @@ namespace ltkt
                                + control.getValueString(CommonConstants.CF_TITLE_ON_HEADER);
 
             resultPanel.Visible = false;
+            if (!adminDao.isON(CommonConstants.AF_SEARCH))
+            {
+                searchPanel.Visible = false;
+                liErrorMessage.Text = adminDao.getReason(CommonConstants.AF_SEARCH);
+                ErrorMessagePanel.Visible = true;
+                return;
+            }
+            if (Page.IsPostBack)
+            {
+                return;
+            }
+            init();
         }
-
+        private void init()
+        {
+            int now = DateTime.Today.Year;
+            for (int i = now; i >= now - 12; i--)
+            {
+                ddlYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
+            }
+        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string keyWords = txtboxSearch.Text;

@@ -158,6 +158,54 @@ namespace ltkt.Admin
                         actionName = CommonConstants.AF_UPLOAD_UNI_NAME;
                         break;
                     }
+                case CommonConstants.AF_EMAIL_SEND:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_EMAIL_SEND_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_LOGIN:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_LOGIN_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_NEWS_POST:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_NEWS_POST_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_NEWS_VIEW:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_NEWS_VIEW_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_PREVIEW_ARTICLE:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_PREVIEW_ARTICLE_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_REGISTRY:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_REGISTRY_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_SEARCH:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_SEARCH_NAME;
+                        break;
+                    }
+                case CommonConstants.AF_ADS:
+                    {
+                        needMessageFlg = false;
+                        actionName = CommonConstants.AF_ADS_NAME;
+                        break;
+                    }
                 default:
                     {
                         isOk = false;

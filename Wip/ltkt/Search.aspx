@@ -4,7 +4,8 @@
 <%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 <asp:Content ID="SearchHeader" ContentPlaceHolderID="cphMasterHearder" runat="Server">
     <%--<title>Tìm kiếm | Website luyện thi kinh tế</title>--%>
-    <title><asp:Literal ID="liTitleHeader" runat="server"></asp:Literal></title>
+    <title>
+        <asp:Literal ID="liTitleHeader" runat="server"></asp:Literal></title>
 
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
@@ -24,16 +25,16 @@
                     $('#divContest').hide();
                 }
             });
-            
+
             $('#<%= ddlSearchingType.ClientID %>').change(function(e) {
                 var selectedIndex = $('#<%= ddlSearchingType.ClientID%>').get(0).selectedIndex;
-                if (selectedIndex == 0) { 
+                if (selectedIndex == 0) {
                     $('#Contest').hide();
-                    $('#Keyword').show();
+                    //$('#Keyword').show();
                 }
                 else {
                     $('#Contest').show();
-                    $('#Keyword').hide();
+                    //$('#Keyword').hide();
                 }
             });
         });
@@ -54,6 +55,9 @@
         </h2>
         <hr />
         <%-- <form method="post">--%>
+        <asp:Panel ID="ErrorMessagePanel" runat="server" Visible="false" CssClass="alert">
+            <asp:Literal ID="liErrorMessage" runat="server"></asp:Literal>
+        </asp:Panel>
         <asp:Panel ID="searchPanel" runat="server">
             <p>
                 <asp:ValidationSummary ID="valSummary" runat="server" ShowSummary="true" HeaderText="Lỗi" />
@@ -129,17 +133,6 @@
                         </asp:DropDownList>--%>
                         &nbsp;&nbsp;&nbsp;năm&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList ID="ddlYear" runat="server" Width="15%" ToolTip="Tìm kiếm trong khoảng từ +3 năm tới -3 năm">
-                            <asp:ListItem Text="2002" Value="2002"></asp:ListItem>
-                            <asp:ListItem Text="2003" Value="2003"></asp:ListItem>
-                            <asp:ListItem Text="2004" Value="2004"></asp:ListItem>
-                            <asp:ListItem Text="2005" Value="2005"></asp:ListItem>
-                            <asp:ListItem Text="2006" Value="2006"></asp:ListItem>
-                            <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
-                            <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
-                            <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
-                            <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
-                            <asp:ListItem Text="2011" Value="2011"></asp:ListItem>
-                            <asp:ListItem Text="2012" Value="2012"></asp:ListItem>
                         </asp:DropDownList>
                     </p>
                 </div>
