@@ -164,6 +164,8 @@ namespace ltkt.Admin
                 newsRow.Cells.Add(actionCell);
 
                 NewsTable.Rows.AddAt(2 + idx, newsRow);
+                string totatRecord = BaseServices.createMsgByTemplate(CommonConstants.TEMP_B_TAG, totalNews.ToString());
+                NumRecordLiteral.Text = BaseServices.createMsgByTemplate(CommonConstants.MSG_I_NUM_SEARCHED_RECORD, totatRecord);
             }
 
             // Creating links to previous and next pages
@@ -191,6 +193,7 @@ namespace ltkt.Admin
             btnEdit.Visible = false;
             btnSave.Visible = true;
             btnSticky.Visible = false;
+            btnCancel.Visible = false;
             Session[CommonConstants.SES_EDIT_NEWS] = null;
         }
 
@@ -221,56 +224,93 @@ namespace ltkt.Admin
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-
-        }
-        
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            if (Session[CommonConstants.SES_USER] != null)
+            string strTitlte = txtTitle.Text;
+            string strChapeau = txtChapeau.Text;
+            string strContent = Server.HtmlDecode(txtContent.Text);
+            tblNew editNews = (tblNew)Session[CommonConstants.SES_EDIT_NEWS];
+            if (editNews != null)
             {
-                tblUser author = (tblUser)Session[CommonConstants.SES_USER];
-
-                string strTitlte = txtTitle.Text;
-                string strChapeau = txtChapeau.Text;
-                string strContent = Server.HtmlDecode(txtContent.Text);
-
                 try
                 {
-                    tblNew editNews = (tblNew)Session[CommonConstants.SES_EDIT_NEWS];
-                    if (editNews == null)//thêm mới
-                    {
-                        newsDAO.insertNews(author.Username, strTitlte, strChapeau, strContent);
-                        Page_Load(sender, e);
-                    }
-                    else//edit
-                    {
-                        newsDAO.updateNews(editNews.ID, author.Username, strTitlte, strChapeau, strContent);
-                        Session[CommonConstants.SES_EDIT_NEWS] = null;
-                        Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
-                                                  + CommonConstants.ADD_PARAMETER
-                                                  + CommonConstants.REQ_PAGE
-                                                  + CommonConstants.EQUAL + "1");
-                    }
+                    newsDAO.updateNews(editNews.ID, editNews.Author, strTitlte, strChapeau, strContent);
+                    Session[CommonConstants.SES_EDIT_NEWS] = null;
+                    Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
+                                              + CommonConstants.ADD_PARAMETER
+                                              + CommonConstants.REQ_PAGE
+                                              + CommonConstants.EQUAL + "1");
                 }
                 catch (Exception ex)
                 {
-                    //liMessage.Text = "Vui lòng kiểm tra tiêu đề, nội dung!";
-                    liMessage.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
-                    liMessage.Visible = true;
-
-                    tblUser user = (tblUser)Session[CommonConstants.SES_USER];
-                    log.writeLog(Server.MapPath(CommonConstants.PATH_LOG_FILE), user.Username, ex.Message);
-
-                    Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
-                    Response.Redirect(CommonConstants.PAGE_ERROR);
+                    writeException(ex);
                 }
             }
             else
             {
-                Response.Redirect("../Login.aspx");
+                liMessage.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                liMessage.Visible = true;
             }
         }
+        
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            string strTitlte = txtTitle.Text;
+            string strChapeau = txtChapeau.Text;
+            string strContent = Server.HtmlDecode(txtContent.Text);
+            bool isOk = false;
+            try
+            {
+                isOk = newsDAO.insertNews(getCurrentUser(), strTitlte, strChapeau, strContent);
+            }
+            catch (Exception ex)
+            {
+                liMessage.Text = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                liMessage.Visible = true;
 
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                writeException(ex);
+
+                Session[CommonConstants.SES_ERROR] = CommonConstants.MSG_E_COMMON_ERROR_TEXT;
+                Response.Redirect(CommonConstants.PAGE_ERROR);
+            }
+            if (isOk)
+            {
+                Response.Redirect(CommonConstants.PAGE_ADMIN_NEWS
+                                                 + CommonConstants.ADD_PARAMETER
+                                                 + CommonConstants.REQ_PAGE
+                                                 + CommonConstants.EQUAL + CommonConstants.PAGE_NUMBER_FIRST);
+            }
+        }
+        /// <summary>
+        /// write exception to log file
+        /// </summary>
+        /// <param name="ex"></param>
+        private void writeException(Exception ex)
+        {
+            string username = getCurrentUser();
+            if (username == CommonConstants.BLANK)
+                username = CommonConstants.USER_GUEST;
+            log.writeLog(DBHelper.strPathLogFile, username, ex.Message
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.Source
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.StackTrace
+                                                    + CommonConstants.NEWLINE
+                                                    + ex.HelpLink);
+            return;
+        }
+        /// <summary>
+        /// get current username
+        /// </summary>
+        /// <returns></returns>
+        private string getCurrentUser()
+        {
+            if (Session[CommonConstants.SES_USER] != null)
+            {
+                tblUser user = (tblUser)Session[CommonConstants.SES_USER];
+                return user.Username;
+            }
+            return CommonConstants.BLANK;
+        }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             tblNew editNews = (tblNew)Session[CommonConstants.SES_EDIT_NEWS];

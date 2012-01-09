@@ -57,6 +57,8 @@
                     <asp:TableHeaderRow>
                         <asp:TableHeaderCell CssClass="table-header" ColumnSpan="5">
                                 Quản lý tin tức
+                                &nbsp-&nbsp
+                        <asp:Literal ID="NumRecordLiteral" runat="server" />
                         </asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow>
@@ -118,7 +120,7 @@
                 </div>
                 <div id="composeContent">
                     <p>
-                        <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="12"></asp:TextBox>
+                        <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="12" MaxLength="5000"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Vui lòng nhập Nội dung tin tức"
                             ControlToValidate="txtContent" Display="None">
                         </asp:RequiredFieldValidator>

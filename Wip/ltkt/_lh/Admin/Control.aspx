@@ -52,7 +52,6 @@
         }
 
         function openFile(file) {
-            alert(file);
             window.open(file)
         }
     </script>
